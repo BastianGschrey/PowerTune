@@ -41,6 +41,7 @@ public:
     ~SerialSetting();
 
 private slots:
+    void apply();
 
 private:
     void fillPortsParameters();
