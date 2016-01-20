@@ -18,8 +18,8 @@ SerialSetting::SerialSetting(QWidget *parent) :
     intValidator = new QIntValidator(0, 4000000, this);
 
     ui->cboBaudRate->setInsertPolicy(QComboBox::NoInsert);
-    connect(ui->btnApply, SIGNAL(clicked()), this, SLOT(apply()));
-    this->fillPortsParameters();
+
+    fillPortsParameters();
 }
 
 SerialSetting::~SerialSetting()

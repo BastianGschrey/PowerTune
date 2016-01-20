@@ -51,6 +51,7 @@ private:
     Ui::SerialSetting *ui;
     Settings currentSettings;
     QIntValidator *intValidator;
+
 };
 
 #endif // SERIALSETTING_H
