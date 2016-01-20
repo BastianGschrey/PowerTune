@@ -17,6 +17,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btnSerialSettings_clicked()
 {
+    //Call windows for Serial settings
     wndwSerial = new SerialSetting();
     wndwSerial->show();
 }
