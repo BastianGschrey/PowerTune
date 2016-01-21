@@ -19,20 +19,11 @@ class SerialSetting : public QWidget
 
 public:
     struct Settings {
-        QString name;
+        QString portName;
         qint32 baudRate;
-        QString stringBaudRate;
-        QSerialPort::DataBits dataBits;
-        QString stringDataBits;
-        QSerialPort::Parity parity;
-        QString stringParity;
-        QSerialPort::StopBits stopBits;
-        QString stringStopBits;
-        QSerialPort::FlowControl flowControl;
-        QString stringFlowControl;
-        bool localEchoEnabled;
     };
 
+    Settings settings() const;
 
 
 
@@ -52,6 +43,7 @@ private:
     Ui::SerialSetting *ui;
     Settings currentSettings;
     QIntValidator *intValidator;
+
 
 };
 
