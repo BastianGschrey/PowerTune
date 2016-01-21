@@ -55,7 +55,7 @@ SerialSetting::currentSettings.baudRate = ui->cboBaudRate->currentText().toInt()
 hide();
 }
 
-SerialSetting::Settings SerialSetting::settings() const
+SerialSetting::Settings SerialSetting::settings()
 {
     return SerialSetting::currentSettings;
 }

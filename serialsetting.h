@@ -23,7 +23,7 @@ public:
         qint32 baudRate;
     };
 
-    Settings settings() const;
+    Settings settings();
 
 
 

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <serialsetting.h>
+#include <serial.h>
 
 namespace Ui {
 class MainWindow;
@@ -18,6 +19,9 @@ public:
 
 private slots:
     void on_btnSerialSettings_clicked();
+
+
+    void on_btnConnect_clicked();
 
 private:
     Ui::MainWindow *ui;

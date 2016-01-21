@@ -11,12 +11,11 @@
  * No warranty is made or implied. You use this program at your own risk.
  */
 
-/*!
-  \file raspexi/powerfc.h
+/*
+  \file serial.h
   \brief Raspexi Viewer Power FC related functions
-  \author Suriyan Laohaprapanon & Jacob Donley
+  \author Suriyan Laohaprapanon & Jacob Donley & Bastian Gschrey
  */
-
 
 
 #ifndef SERIAL_H
@@ -25,6 +24,7 @@
 #include <QObject>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
+#include <serialsetting.h>
 
 
 class serial : public QObject
@@ -118,7 +118,7 @@ public:
     #define ANALOG_INFO_MAX_ELEMENTS	4
     #define EXTRA_INFO_MAX_ELEMENTS		7
     #define MISC_INFO_MAX_ELEMENTS		1		// Miscellaneous
-    #define MAP_ELEMENTS
+    #define MAP_ELEMENTS	FC_ADV_INFO_MAX_ELEMENTS + FC_AUX_INFO_MAX_ELEMENTS + ANALOG_INFO_MAX_ELEMENTS + EXTRA_INFO_MAX_ELEMENTS + MISC_INFO_MAX_ELEMENTS
 
     /*
     *Advanced Information :
@@ -148,10 +148,16 @@ public:
     bool powerfc_process_extra(void);
     bool powerfc_process_misc(void);
 
+    void read() const;
+
+
+
 
 
 public:
     explicit serial(QObject *parent = 0);
+
+    void openConnection(SerialSetting::Settings *p) const; //open serial connection with settings
 
 private:
 QSerialPort *serialport;

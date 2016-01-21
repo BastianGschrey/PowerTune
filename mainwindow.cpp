@@ -21,3 +21,8 @@ void MainWindow::on_btnSerialSettings_clicked()
     wndwSerial = new SerialSetting();
     wndwSerial->show();
 }
+
+void MainWindow::on_btnConnect_clicked()
+{
+
+}
