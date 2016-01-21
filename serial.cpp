@@ -43,26 +43,17 @@ static QString map[] = {"RPM", "Intakepress", "PressureV",
 //static double rtv[MAP_ELEMENTS];
 
 
-/*!
-    \brief Wrapper function that does a nonblocking select()/read loop .
-    \param fd is the serial port filedescriptor
-    \param buf is the pointer to where to stick the data
-    \param count is how many bytes to read
-    \param len is the pointer to length read
-    \returns TRUE on success, FALSE otherwise
-    */
-
 void serial::read() const
 {
 
 }
 
 //function to open serial port
-void serial::openConnection(SerialSetting::Settings *p)
+void serial::openConnection()
 {
-serialport->setBaudRate(p->baudRate);
-serialport->setPortName(p->portName);
-serialport->setParity(serialport->EvenParity);
-serialport->setRequestToSend(true);
-serialport->open(QIODevice::ReadWrite);
+//serialport->setBaudRate(p->baudRate);
+//serialport->setPortName(p->portName);
+//serialport->setParity(serialport->EvenParity);
+//serialport->setRequestToSend(true);
+//serialport->open(QIODevice::ReadWrite);
 }

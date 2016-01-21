@@ -18,9 +18,9 @@ class SerialSetting : public QWidget
     Q_OBJECT
 
 public:
-    struct Settings {
-        QString portName;
-        qint32 baudRate;
+    struct  Settings {
+            QString portName;
+            qint32 baudRate;
     };
 
     Settings settings();

@@ -157,7 +157,7 @@ public:
 public:
     explicit serial(QObject *parent = 0);
 
-    void openConnection(SerialSetting::Settings *p); //open serial connection with settings
+    void openConnection(void); //open serial connection with settings
 
 private:
 QSerialPort *serialport;
