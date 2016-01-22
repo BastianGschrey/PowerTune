@@ -51,9 +51,10 @@ void Serial::read() const
 //function to open serial port
 void Serial::openConnection(SerialSetting::Settings p)
 {
-//serialport->setBaudRate(p->baudRate);
-//serialport->setPortName(p->portName);
-//serialport->setParity(serialport->EvenParity);
-//serialport->setRequestToSend(true);
-//serialport->open(QIODevice::ReadWrite);
+
+serialport->setBaudRate(p.baudRate);
+serialport->setPortName(p.portName);
+serialport->setParity(serialport->EvenParity);
+serialport->setRequestToSend(true);
+serialport->open(QIODevice::ReadWrite);
 }

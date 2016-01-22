@@ -8,10 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-   //connect(Calculate, SIGNAL(clicked()), this, SLOT(addAB()));
      wndwSerial = new SerialSetting();
      serial = new Serial();
-
 
 }
 
