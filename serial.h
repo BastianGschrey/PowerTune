@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Markus Ippy, Bastian Gschrey
+ * Copyright (C) 2016 Markus Ippy, Bastian Gschrey, Jan
  *
  * Digital Gauges for Apexi Power FC for RX7 on Raspberry Pi
  *
