@@ -23,6 +23,7 @@ private slots:
 
 
 
+
 private:
     Ui::MainWindow *ui;
     SerialSetting *wndwSerial;

@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
      wndwSerial = new SerialSetting();
      serial = new Serial();
+     //ui->btnConnect->setDisabled(true);
 
 }
 

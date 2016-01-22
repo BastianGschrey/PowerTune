@@ -53,6 +53,12 @@ void SerialSetting::apply(){ //Slot when apply button is clicked, stores selecte
 SerialSetting::currentSettings.portName = ui->cboComport->currentText();
 SerialSetting::currentSettings.baudRate = ui->cboBaudRate->currentText().toInt();
 hide();
+
+/*if(!(this->ui->cboComport->currentText().isEmpty()) && !(this->ui->cboBaudRate->currentText().isEmpty()))
+{
+
+}*/
+
 }
 
 SerialSetting::Settings SerialSetting::settings()
