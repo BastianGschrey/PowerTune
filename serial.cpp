@@ -19,10 +19,10 @@
  */
 
 
-#include "serial.h"
+#include "Serial.h"
 
 
-serial::serial(QObject *parent) : QObject(parent)
+Serial::Serial(QObject *parent) : QObject(parent)
 {
 serialport = new QSerialPort(this);
 }
@@ -43,13 +43,13 @@ static QString map[] = {"RPM", "Intakepress", "PressureV",
 //static double rtv[MAP_ELEMENTS];
 
 
-void serial::read() const
+void Serial::read() const
 {
 
 }
 
 //function to open serial port
-void serial::openConnection()
+void Serial::openConnection(SerialSetting::Settings p)
 {
 //serialport->setBaudRate(p->baudRate);
 //serialport->setPortName(p->portName);

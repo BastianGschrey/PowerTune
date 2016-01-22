@@ -8,6 +8,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+   //connect(Calculate, SIGNAL(clicked()), this, SLOT(addAB()));
+     wndwSerial = new SerialSetting();
+     serial = new Serial();
 
 
 }
@@ -20,11 +23,11 @@ MainWindow::~MainWindow()
 void MainWindow::on_btnSerialSettings_clicked()
 {
     //Call windows for Serial settings
-    wndwSerial = new SerialSetting();
+
     wndwSerial->show();
 }
 
 void MainWindow::on_btnConnect_clicked()
 {
-
+serial->openConnection(wndwSerial->settings());
 }

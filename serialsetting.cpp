@@ -60,3 +60,8 @@ SerialSetting::Settings SerialSetting::settings()
     return SerialSetting::currentSettings;
 }
 
+
+void SerialSetting::on_btnApply_clicked()
+{
+
+}

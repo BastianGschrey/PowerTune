@@ -34,6 +34,8 @@ public:
 private slots:
     void apply();
 
+    void on_btnApply_clicked();
+
 private:
     void fillPortsParameters();
     void fillPortsInfo();

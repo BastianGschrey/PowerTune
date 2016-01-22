@@ -19,13 +19,14 @@ public:
 
 private slots:
     void on_btnSerialSettings_clicked();
-
-
     void on_btnConnect_clicked();
+
+
 
 private:
     Ui::MainWindow *ui;
     SerialSetting *wndwSerial;
+    Serial *serial;
 };
 
 #endif // MAINWINDOW_H

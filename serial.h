@@ -27,7 +27,7 @@
 #include <serialsetting.h>
 
 
-class serial : public QObject
+class Serial : public QObject
 {
     Q_OBJECT
 
@@ -155,9 +155,9 @@ public:
 
 
 public:
-    explicit serial(QObject *parent = 0);
+    explicit Serial(QObject *parent = 0);
 
-    void openConnection(void); //open serial connection with settings
+    void openConnection(SerialSetting::Settings); //open serial connection with settings
 
 private:
 QSerialPort *serialport;
