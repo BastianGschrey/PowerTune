@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent) :
      serial = new Serial();
      //ui->btnConnect->setDisabled(true);
 
+     //connect(ui->btnApply, SIGNAL(clicked()),this, SLOT(apply()));
+
 }
 
 MainWindow::~MainWindow()
@@ -28,5 +30,12 @@ void MainWindow::on_btnSerialSettings_clicked()
 
 void MainWindow::on_btnConnect_clicked()
 {
-serial->openConnection(wndwSerial->settings());
+    SerialSetting::Settings p;
+    p = wndwSerial->settings();
+    if(!p.portName.isEmpty() || p.baudRate == false)
+    {
+        serial->openConnection(wndwSerial->settings());
+        this->ui->btnConnect->setDisabled(true);
+    }
 }
+

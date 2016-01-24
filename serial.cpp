@@ -20,14 +20,13 @@
 
 
 #include "Serial.h"
+#include <QDebug>
 
 
 Serial::Serial(QObject *parent) : QObject(parent)
 {
 serialport = new QSerialPort(this);
 }
-
-
 
 // FD3S map
 static QString map[] = {"RPM", "Intakepress", "PressureV",
@@ -42,137 +41,19 @@ static QString map[] = {"RPM", "Intakepress", "PressureV",
 
 //static double rtv[MAP_ELEMENTS];
 
-
 void Serial::read() const
 {
 
 }
 
 //function to open serial port
-void Serial::openConnection(SerialSetting::Settings p)
+    void Serial::openConnection(SerialSetting::Settings p)
 {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 serialport->setBaudRate(p.baudRate);
 serialport->setPortName(p.portName);
 serialport->setParity(serialport->EvenParity);
 serialport->setRequestToSend(true);
 serialport->open(QIODevice::ReadWrite);
+qDebug() << "Baudrate: " << p.baudRate;
+qDebug() << "Portname: " << p.portName;
 }

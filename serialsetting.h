@@ -41,6 +41,7 @@ private:
     void fillPortsInfo();
     void updateSettings();
 
+
 private:
     Ui::SerialSetting *ui;
     Settings currentSettings;

@@ -22,9 +22,6 @@ SerialSetting::SerialSetting(QWidget *parent) :
     fillPortsParameters(); //call function to fill comboboxes
 
     connect(ui->btnApply, SIGNAL(clicked()),this, SLOT(apply()));
-
-
-    //Settings settings; //create variable of struct Settings defined in header
 }
 
 SerialSetting::~SerialSetting()
@@ -38,8 +35,8 @@ void SerialSetting::fillPortsParameters()
 //fill cboBaudRate with baudrates
 ui->cboBaudRate->addItem(QStringLiteral("19200"), QSerialPort::Baud19200);
 ui->cboBaudRate->addItem(QStringLiteral("38400"), QSerialPort::Baud38400);
-ui->cboBaudRate->addItem(QStringLiteral("57600"),QSerialPort::Baud57600);
-ui->cboBaudRate->addItem(QStringLiteral("115200"),QSerialPort::Baud115200);
+ui->cboBaudRate->addItem(QStringLiteral("57600"), QSerialPort::Baud57600);
+ui->cboBaudRate->addItem(QStringLiteral("115200"), QSerialPort::Baud115200);
 
 //fill cboComport with all available comports
 foreach(const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
@@ -49,16 +46,11 @@ foreach(const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
 
 }
 
-void SerialSetting::apply(){ //Slot when apply button is clicked, stores selected settings
-SerialSetting::currentSettings.portName = ui->cboComport->currentText();
-SerialSetting::currentSettings.baudRate = ui->cboBaudRate->currentText().toInt();
-hide();
-
-/*if(!(this->ui->cboComport->currentText().isEmpty()) && !(this->ui->cboBaudRate->currentText().isEmpty()))
-{
-
-}*/
-
+void SerialSetting::apply()
+{ //Slot when apply button is clicked, stores selected settings
+    SerialSetting::currentSettings.portName = ui->cboComport->currentText();
+    SerialSetting::currentSettings.baudRate = ui->cboBaudRate->currentText().toInt();
+    hide();
 }
 
 SerialSetting::Settings SerialSetting::settings()
@@ -71,3 +63,5 @@ void SerialSetting::on_btnApply_clicked()
 {
 
 }
+
+
