@@ -24,6 +24,8 @@ private slots:
 
 
 
+    void on_btnDisconnect_clicked();
+
 private:
     Ui::MainWindow *ui;
     SerialSetting *wndwSerial;

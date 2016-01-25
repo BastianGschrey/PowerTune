@@ -42,12 +42,25 @@
      <rect>
       <x>10</x>
       <y>230</y>
-      <width>95</width>
+      <width>91</width>
       <height>30</height>
      </rect>
     </property>
     <property name="text">
      <string>Connect</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnDisconnect">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>230</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Disconnect</string>
     </property>
    </widget>
   </widget>
@@ -57,7 +70,7 @@
      <x>0</x>
      <y>0</y>
      <width>543</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

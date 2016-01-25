@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QDebug>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -10,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
      wndwSerial = new SerialSetting();
      serial = new Serial();
+     ui->btnDisconnect->setDisabled(true);
      //ui->btnConnect->setDisabled(true);
 
      //connect(ui->btnApply, SIGNAL(clicked()),this, SLOT(apply()));
@@ -32,10 +34,22 @@ void MainWindow::on_btnConnect_clicked()
 {
     SerialSetting::Settings p;
     p = wndwSerial->settings();
-    if(!p.portName.isEmpty() || p.baudRate == false)
+    if(p.portName == "")
+    {
+        return;
+    }
+    else
     {
         serial->openConnection(wndwSerial->settings());
         this->ui->btnConnect->setDisabled(true);
+        qDebug() << "Serialport opened";
+        this->ui->btnDisconnect->setDisabled(false);
     }
 }
 
+void MainWindow::on_btnDisconnect_clicked()
+{
+    serial->closeConnection();
+    ui->btnDisconnect->setDisabled(true);
+    ui->btnConnect->setDisabled(false);
+}

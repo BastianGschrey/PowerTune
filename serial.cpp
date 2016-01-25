@@ -57,3 +57,8 @@ serialport->open(QIODevice::ReadWrite);
 qDebug() << "Baudrate: " << p.baudRate;
 qDebug() << "Portname: " << p.portName;
 }
+
+void Serial::closeConnection()
+{
+serialport->close();
+}
