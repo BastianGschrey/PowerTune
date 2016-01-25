@@ -36,6 +36,9 @@ void MainWindow::on_btnConnect_clicked()
     p = wndwSerial->settings();
     if(p.portName == "")
     {
+        QMessageBox msgBox;
+        //msgBox.setText("No serialport selected");
+        msgBox.warning(this,"Warning","\n No serialport selected. \n",QMessageBox::Ok);
         return;
     }
     else

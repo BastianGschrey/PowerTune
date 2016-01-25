@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <serialsetting.h>
 #include <serial.h>
+#include <QMessageBox>
 
 namespace Ui {
 class MainWindow;
