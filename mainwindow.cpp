@@ -45,7 +45,6 @@ void MainWindow::on_btnConnect_clicked()
     {
         serial->openConnection(wndwSerial->settings());
         this->ui->btnConnect->setDisabled(true);
-        qDebug() << "Serialport opened";
         this->ui->btnDisconnect->setDisabled(false);
     }
 }

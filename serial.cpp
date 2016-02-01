@@ -19,9 +19,8 @@
  */
 
 
-#include "Serial.h"
+#include "serial.h"
 #include <QDebug>
-
 
 Serial::Serial(QObject *parent) : QObject(parent)
 {
@@ -50,14 +49,23 @@ void Serial::read() const
 //function to open serial port
     void Serial::openConnection(SerialSetting::Settings p)
 {
+qDebug() << "Enter openConnection function";
 serialport->setBaudRate(p.baudRate);
 serialport->setPortName(p.portName);
 serialport->setParity(serialport->EvenParity);
-//serialport->setRequestToSend(true);
+
 serialport->setDataBits(QSerialPort::Data8);
-serialport->open(QIODevice::ReadWrite);
+serialport->setStopBits(QSerialPort::OneStop);
+serialport->setFlowControl(QSerialPort::NoFlowControl);
+qDebug() << "Try to open SerialPort:";
+//serialport->setRequestToSend(true);
+qDebug() << serialport->open(QIODevice::ReadWrite);
+qDebug() << serialport->errorString();
+
 qDebug() << "Baudrate: " << p.baudRate;
 qDebug() << "Portname: " << p.portName;
+
+Serial::getAdvData();
 }
 
 void Serial::closeConnection()
@@ -67,5 +75,6 @@ serialport->close();
 
 void Serial::getAdvData()
 {
-    serialport->write((QByteArray::fromHex("F0020D")));
+    qDebug() << "Enter getAdvData function";
+    serialport->write(QByteArray::fromHex("F0020D"));
 }
