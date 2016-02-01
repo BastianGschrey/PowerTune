@@ -114,10 +114,6 @@ public:
 
     void read() const;
 
-
-
-
-
 public:
     explicit Serial(QObject *parent = 0);
 
@@ -129,6 +125,7 @@ private:
 QSerialPort *serialport;
 
 signals:
+void advRequested();
 
 public slots:
 };

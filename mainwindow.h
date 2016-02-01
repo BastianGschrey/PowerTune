@@ -21,12 +21,8 @@ public:
 private slots:
     void on_btnSerialSettings_clicked();
     void on_btnConnect_clicked();
-
-
-
-
     void on_btnDisconnect_clicked();
-
+    void advRequested();
 private:
     Ui::MainWindow *ui;
     SerialSetting *wndwSerial;

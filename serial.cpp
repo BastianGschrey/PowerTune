@@ -59,8 +59,10 @@ serialport->setStopBits(QSerialPort::OneStop);
 serialport->setFlowControl(QSerialPort::NoFlowControl);
 qDebug() << "Try to open SerialPort:";
 //serialport->setRequestToSend(true);
-qDebug() << serialport->open(QIODevice::ReadWrite);
+if(serialport->open(QIODevice::ReadWrite) == false)
+{
 qDebug() << serialport->errorString();
+}
 
 qDebug() << "Baudrate: " << p.baudRate;
 qDebug() << "Portname: " << p.portName;
@@ -77,4 +79,5 @@ void Serial::getAdvData()
 {
     qDebug() << "Enter getAdvData function";
     serialport->write(QByteArray::fromHex("F0020D"));
+    emit advRequested();
 }

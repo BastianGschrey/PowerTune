@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
      //connect(ui->btnApply, SIGNAL(clicked()),this, SLOT(apply()));
 
+
 }
 
 MainWindow::~MainWindow()
@@ -46,6 +47,7 @@ void MainWindow::on_btnConnect_clicked()
         serial->openConnection(wndwSerial->settings());
         this->ui->btnConnect->setDisabled(true);
         this->ui->btnDisconnect->setDisabled(false);
+        //this->ui->txtConsole->append("Request sended.");
     }
 }
 
@@ -54,4 +56,9 @@ void MainWindow::on_btnDisconnect_clicked()
     serial->closeConnection();
     ui->btnDisconnect->setDisabled(true);
     ui->btnConnect->setDisabled(false);
+}
+
+void advRequested()
+{
+ qDebug() << "signal";
 }
