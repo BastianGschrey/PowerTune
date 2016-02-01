@@ -6,28 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>248</width>
+    <height>133</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QComboBox" name="cboBaudRate">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>70</y>
-     <width>101</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="btnApply">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>260</y>
+     <y>80</y>
      <width>95</width>
      <height>30</height>
     </rect>
@@ -44,19 +34,6 @@
      <width>101</width>
      <height>31</height>
     </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>70</y>
-     <width>67</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Baudrate:</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">

@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
      //ui->btnConnect->setDisabled(true);
 
      //connect(ui->btnApply, SIGNAL(clicked()),this, SLOT(apply()));
+    connect(serial,SIGNAL(advRequested()),this,SLOT(advRequested()));
 
 
 }
@@ -58,7 +59,8 @@ void MainWindow::on_btnDisconnect_clicked()
     ui->btnConnect->setDisabled(false);
 }
 
-void advRequested()
+void MainWindow::advRequested()
 {
- qDebug() << "signal";
+ qDebug() << "signal received from serial.";
+ ui->txtConsole->append("Data requested...");
 }

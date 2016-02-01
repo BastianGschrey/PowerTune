@@ -50,21 +50,18 @@ void Serial::read() const
     void Serial::openConnection(SerialSetting::Settings p)
 {
 qDebug() << "Enter openConnection function";
-serialport->setBaudRate(p.baudRate);
+serialport->setBaudRate(QSerialPort::Baud57600);
 serialport->setPortName(p.portName);
-serialport->setParity(serialport->EvenParity);
+serialport->setParity(serialport->NoParity);
 
 serialport->setDataBits(QSerialPort::Data8);
 serialport->setStopBits(QSerialPort::OneStop);
 serialport->setFlowControl(QSerialPort::NoFlowControl);
 qDebug() << "Try to open SerialPort:";
-//serialport->setRequestToSend(true);
 if(serialport->open(QIODevice::ReadWrite) == false)
 {
 qDebug() << serialport->errorString();
 }
-
-qDebug() << "Baudrate: " << p.baudRate;
 qDebug() << "Portname: " << p.portName;
 
 Serial::getAdvData();
