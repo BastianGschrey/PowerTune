@@ -26,6 +26,7 @@
 Serial::Serial(QObject *parent) : QObject(parent)
 {
 serialport = new QSerialPort(this);
+
 }
 
 // FD3S map
@@ -52,7 +53,8 @@ void Serial::read() const
 serialport->setBaudRate(p.baudRate);
 serialport->setPortName(p.portName);
 serialport->setParity(serialport->EvenParity);
-serialport->setRequestToSend(true);
+//serialport->setRequestToSend(true);
+serialport->setDataBits(QSerialPort::Data8);
 serialport->open(QIODevice::ReadWrite);
 qDebug() << "Baudrate: " << p.baudRate;
 qDebug() << "Portname: " << p.portName;
@@ -61,4 +63,9 @@ qDebug() << "Portname: " << p.portName;
 void Serial::closeConnection()
 {
 serialport->close();
+}
+
+void Serial::getAdvData()
+{
+    serialport->write((QByteArray::fromHex("F0020D")));
 }

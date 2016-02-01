@@ -33,41 +33,10 @@ class Serial : public QObject
 
 public:
 
-    /*
-     * Source: http://www.rx7.org/public/PowerFC-DataLogIt.htm
-     * ------------------
-     * "Advanced" Information (Cooked Averages?)
-     * ------------------
-     * 0xF0
-     * ------------------
-     * short word : rpm (just as a short word, not worked over)
-     * short word : pim (don't know... FCEdit just displays it as a short word)
-     * short word : pim voltage * 1000.0f (divide by 1000.0f to get the voltage)
-     * short word : tps voltage * 1000.0f (divide by 1000.0f to get the voltage)
-     * short word : InjFP ms (short float)
-     * short word : INJ (inj what? dunno... FCEdit shows it as a short word...)
-     * byte : IGL (byte degree)
-     * byte : IGT (byte degree)
-     * byte : Fuel Temperature (as byte temperature)
-     * byte : oil (FCEdit displays as just a byte...)
-     * byte : Precontrol % (FCEdit calls it a %, but looks like it's just displaying the byte)
-     * byte : Wastegate % (FCEdit calls it a %, but looks like it's just displaying the byte)
-     * byte : water temperature (as byte temperature)
-     * byte : air temperature (as byte temperature)
-     * byte : knock
-     * byte : battery voltage * 10.0f (divide by 10.0f to get voltage)
-     *
-     * NOTE: From here, FCEdit is unsure of what's what... Consequently, I'm unsure of what's what.
-     *
-     * short word : kph (don't know the units yet)
-     * short word : unknown
-     * byte : O2
-     * byte : unknown
-     * short word : InjFS (ms)
-     */
+    char* FC_REQ_ADV_INFO[2];
 
     /*
-    *Structure for FD3S information :
+    *Structure for FD3S infrmation :
     */
 
     typedef struct {
@@ -121,12 +90,7 @@ public:
     #define MAP_ELEMENTS	FC_ADV_INFO_MAX_ELEMENTS + FC_AUX_INFO_MAX_ELEMENTS + ANALOG_INFO_MAX_ELEMENTS + EXTRA_INFO_MAX_ELEMENTS + MISC_INFO_MAX_ELEMENTS
 
     /*
-    *Advanced Information :
-    */
-    #define FC_ADV_INFO_LEN		(0x20)
-    #define FC_REQ_ADV_INFO		{0xF0, 0x02, 0x0D}
 
-    /*
     * Auxiliary Information
     */
     #define FC_REQ_AUX_INFO		{0x00, 0x02, 0xFD}
@@ -159,6 +123,7 @@ public:
 
     void openConnection(SerialSetting::Settings); //open serial connection with settings
     void closeConnection();
+    void getAdvData();
 
 private:
 QSerialPort *serialport;
