@@ -12,9 +12,9 @@ MainWindow::MainWindow(QWidget *parent) :
      wndwSerial = new SerialSetting();
      serial = new Serial();
      ui->btnDisconnect->setDisabled(true);
-     //ui->btnConnect->setDisabled(true);
 
-     //connect(ui->btnApply, SIGNAL(clicked()),this, SLOT(apply()));
+//connect signals to slots:
+   // connect(serial->serialport,SIGNAL(readyRead()), this, SLOT(readData()));
     connect(serial,SIGNAL(advRequested()),this,SLOT(advRequested()));
 
 
@@ -63,4 +63,10 @@ void MainWindow::advRequested()
 {
  qDebug() << "signal received from serial.";
  ui->txtConsole->append("Data requested...");
+}
+
+void MainWindow::readData()
+{
+    serial->read();
+
 }

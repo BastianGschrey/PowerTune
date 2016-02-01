@@ -27,6 +27,7 @@ private:
     Ui::MainWindow *ui;
     SerialSetting *wndwSerial;
     Serial *serial;
+    void readData();
 };
 
 #endif // MAINWINDOW_H
