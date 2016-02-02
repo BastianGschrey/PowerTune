@@ -112,7 +112,7 @@ public:
     bool powerfc_process_extra(void);
     bool powerfc_process_misc(void);
 
-    void read() const;
+    QByteArray read() const;
 
 public:
     explicit Serial(QObject *parent = 0);
@@ -121,11 +121,15 @@ public:
     void closeConnection();
     void getAdvData();
 
+private slots:
+    void readyToRead();
+
 private:
 QSerialPort *serialport;
 
 signals:
 void advRequested();
+void readyRead();
 
 public slots:
 };

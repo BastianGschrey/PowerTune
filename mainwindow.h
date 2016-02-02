@@ -23,11 +23,12 @@ private slots:
     void on_btnConnect_clicked();
     void on_btnDisconnect_clicked();
     void advRequested();
+    void readData();
 private:
     Ui::MainWindow *ui;
     SerialSetting *wndwSerial;
     Serial *serial;
-    void readData();
+
 };
 
 #endif // MAINWINDOW_H

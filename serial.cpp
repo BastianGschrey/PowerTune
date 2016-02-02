@@ -25,6 +25,9 @@
 Serial::Serial(QObject *parent) : QObject(parent)
 {
 serialport = new QSerialPort(this);
+//connect(serial,SIGNAL(advRequested()),this,SLOT(advRequested()));
+connect(this->serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
+
 
 }
 
@@ -41,9 +44,9 @@ static QString map[] = {"RPM", "Intakepress", "PressureV",
 
 //static double rtv[MAP_ELEMENTS];
 
-void Serial::read() const
+QByteArray Serial::read() const
 {
-
+    return serialport->readAll();
 }
 
 //function to open serial port
@@ -77,4 +80,10 @@ void Serial::getAdvData()
     qDebug() << "Enter getAdvData function";
     serialport->write(QByteArray::fromHex("F0020D"));
     emit advRequested();
+}
+
+void Serial::readyToRead()
+{
+    qDebug() <<"Signal readyRead fired be QSerialPort.";
+    emit readyRead();
 }

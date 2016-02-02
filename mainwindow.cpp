@@ -14,7 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
      ui->btnDisconnect->setDisabled(true);
 
 //connect signals to slots:
-   // connect(serial->serialport,SIGNAL(readyRead()), this, SLOT(readData()));
+    connect(serial,SIGNAL(readyRead()), this, SLOT(readData()));
+
     connect(serial,SIGNAL(advRequested()),this,SLOT(advRequested()));
 
 
@@ -61,12 +62,14 @@ void MainWindow::on_btnDisconnect_clicked()
 
 void MainWindow::advRequested()
 {
- qDebug() << "signal received from serial.";
+ qDebug() << "signal received from serial getAdvData().";
  ui->txtConsole->append("Data requested...");
 }
 
 void MainWindow::readData()
 {
-    serial->read();
+    QByteArray serialdata = serial->read();
+    ui->txtConsole->append("Data received: " + serialdata);
+    //ui->txtConsole->append(QByteArray);
 
 }
