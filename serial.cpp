@@ -55,7 +55,7 @@ QByteArray Serial::read() const
 qDebug() << "Enter openConnection function";
 serialport->setBaudRate(QSerialPort::Baud57600);
 serialport->setPortName(p.portName);
-serialport->setParity(serialport->NoParity);
+serialport->setParity(serialport->EvenParity);
 
 serialport->setDataBits(QSerialPort::Data8);
 serialport->setStopBits(QSerialPort::OneStop);
