@@ -63,13 +63,19 @@ void MainWindow::on_btnDisconnect_clicked()
 void MainWindow::advRequested()
 {
  qDebug() << "signal received from serial getAdvData().";
- ui->txtConsole->append("Data requested...");
 }
 
 void MainWindow::readData()
 {
     QByteArray serialdata = serial->read();
-    ui->txtConsole->append("Data received: " + serialdata);
-    //ui->txtConsole->append(QByteArray);
+    QByteArray serialByteData = QByteArray::fromHex(serialdata);
 
+    qDebug() << serialdata.length();
+
+    if(serialdata.length() == 33)
+    {
+        ui->txtConsole->append("Data received: " + serialdata + " -> " + QString::number(serialdata.length()) + " bytes length");
+        //ui->txtConsole->append(QString::number(serialdata.length()));
+    }
+    serial->getAdvData();
 }
