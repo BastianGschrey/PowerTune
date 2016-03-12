@@ -76,6 +76,10 @@ void MainWindow::readData()
     {
         ui->txtConsole->append("Data received: " + serialdata + " -> " + QString::number(serialdata.length()) + " bytes length");
         //ui->txtConsole->append(QString::number(serialdata.length()));
+
+    fc_adv_info_t *info;
+    //info = (fc_adv_info_t *)&serialdata[2];
+
     }
     serial->getAdvData();
 }
