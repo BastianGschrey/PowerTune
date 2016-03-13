@@ -49,6 +49,11 @@ QByteArray Serial::read() const
     return serialport->readAll();
 }
 
+void Serial::clear() const
+{
+    serialport->clear();
+}
+
 //function to open serial port
     void Serial::openConnection(SerialSetting::Settings p)
 {

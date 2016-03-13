@@ -71,15 +71,6 @@ public:
     */
     #define FC_REQ_AUX_INFO		{0x00, 0x02, 0xFD}
 
-    /*
-    *Calculation to display KG/cm2 for Boost
-    *
-    */
-    // FD3S
-    #define FC_ADV_INFO_MUL		{1, 0.0001, 1, 1, 1.0/256, 1.0/256, 1, 1, 1, 212.0/256, 0.4, 0.4, 1, 1, 1, 0.1, 1, 0.1, 0.02, 1, 1.0/256, 1}
-    #define FC_ADV_INFO_ADD		{0,-1.0332, 0, 0, 0, 0, -25, -25, -80, 0, 0, 0, -80, -80, 0, 0, 0, 0, 0, 0, 0, 0}
-
-
 
     double powerfc_get_current_value(QChar *);
 
@@ -89,6 +80,7 @@ public:
     bool powerfc_process_misc(void);
 
     QByteArray read() const;
+    void clear() const;
 
 public:
     explicit Serial(QObject *parent = 0);
