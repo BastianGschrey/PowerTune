@@ -22,28 +22,30 @@ public:
     double rtv[33];
 
     struct fc_adv_info_t{
-        quint16 RPM;             //0
-        quint16 Intakepress;     //1
-        quint16 PressureV;       //2
-        quint16 ThrottleV;       //3
-        quint16 Primaryinp;      //4
-        quint16 Fuelc;           //5
-        quint8 Leadingign;       //6
-        quint8 Trailingign;      //7
-        quint8 Fueltemp;         //8
-        quint8 Moilp;            //9
-        quint8 Boosttp;          //10
-        quint8 Boostwg;          //11
-        quint8 Watertemp;        //12
-        quint8 Intaketemp;       //13
-        quint8 Knock;            //14
-        quint8 BatteryV;         //15
-        quint16 Speed;           //16
-        quint16 Iscvduty;        //17
-        quint8 O2volt;           //18
-        quint8 na1;              //19
-        quint16 Secinjpulse;     //20
-        quint8 na2;              //21
+        quint16 requesttype;
+        quint16 RPM;
+        quint16 Intakepress;
+        quint16 PressureV;
+        quint16 ThrottleV;
+        quint16 Primaryinp;
+        quint16 Fuelc;
+        quint8 Leadingign;
+        quint8 Trailingign;
+        quint8 Fueltemp;
+        quint8 Moilp;
+        quint8 Boosttp;
+        quint8 Boostwg;
+        quint8 Watertemp;
+        quint8 Intaketemp;
+        quint8 Knock;
+        quint8 BatteryV;
+        quint16 Speed;
+        quint16 Iscvduty;
+        quint8 O2volt;
+        quint8 na1;
+        quint16 Secinjpulse;
+        quint8 na2;
+        quint8 checksum;
         fc_adv_info_t parse(const QByteArray &);
     };
 

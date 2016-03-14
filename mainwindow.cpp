@@ -90,16 +90,17 @@ void MainWindow::readData()
 
 
     QByteArray serialdata = serial->read();
-    serial->clear();
 
-    QByteArray serialByteData = QByteArray::fromHex(serialdata);
+
+    //QByteArray serialByteData = QByteArray::fromHex(serialdata);
 
 
     qDebug() << serialdata.length();
 
     if(serialdata.length() == 33)
     {
-         fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialByteData.data());
+
+        fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialdata.data());
          rtv[0] = mul[0] * info->RPM + add[0];
          // previousRev_rpm[buf_currentIndex] = rtv[0];
          rtv[1] = mul[1] * info->Intakepress + add[1];
@@ -127,6 +128,7 @@ void MainWindow::readData()
          rtv[21] = mul[21] * info->na2 + add[21];
 
          ui->txtConsole->clear();
+
          ui->txtConsole->append("Data received: " + serialdata + " -> " + QString::number(serialdata.length()) + " bytes length");
          ui->txtConsole->append(map[0] + " " + QString::number(info->RPM));
          ui->txtConsole->append(map[1] + " " + QString::number(info->Intakepress));
@@ -150,7 +152,16 @@ void MainWindow::readData()
          ui->txtConsole->append(map[19] + " " + QString::number(rtv[19]));
          ui->txtConsole->append(map[20] + " " + QString::number(rtv[20]));
          ui->txtConsole->append(map[21] + " " + QString::number(rtv[21]));
-         QThread::msleep(2000);
+
+        /*
+        ui->txtConsole->append(QString::number(serialdata[0]));
+        ui->txtConsole->append(QString::number(serialdata[1]));
+        ui->txtConsole->append(QString::number(serialdata[2]));
+        ui->txtConsole->append(QString::number(serialdata[3]));
+        ui->txtConsole->append(QString::number(serialdata[4]));
+        */
+
+         QThread::msleep(200);
     }
     serial->getAdvData();
 }
