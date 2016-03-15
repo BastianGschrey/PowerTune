@@ -33,10 +33,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 //connect signals to slots:
     connect(serial,SIGNAL(readyRead()), this, SLOT(readData()));
-
-    connect(serial,SIGNAL(advRequested()),this,SLOT(advRequested()));
-
-
 }
 
 MainWindow::~MainWindow()
@@ -76,11 +72,6 @@ void MainWindow::on_btnDisconnect_clicked()
     serial->closeConnection();
     ui->btnDisconnect->setDisabled(true);
     ui->btnConnect->setDisabled(false);
-}
-
-void MainWindow::advRequested()
-{
- qDebug() << "signal received from serial getAdvData().";
 }
 
 void MainWindow::readData()
@@ -130,8 +121,8 @@ void MainWindow::readData()
          ui->txtConsole->clear();
 
          ui->txtConsole->append("Data received: " + serialdata + " -> " + QString::number(serialdata.length()) + " bytes length");
-         ui->txtConsole->append(map[0] + " " + QString::number(info->RPM));
-         ui->txtConsole->append(map[1] + " " + QString::number(info->Intakepress));
+         ui->txtConsole->append(map[0] + " " + QString::number(rtv[0]));
+         ui->txtConsole->append(map[1] + " " + QString::number(rtv[1]));
          ui->txtConsole->append(map[2] + " " + QString::number(rtv[2]));
          ui->txtConsole->append(map[3] + " " + QString::number(rtv[3]));
          ui->txtConsole->append(map[4] + " " + QString::number(rtv[4]));
@@ -153,15 +144,7 @@ void MainWindow::readData()
          ui->txtConsole->append(map[20] + " " + QString::number(rtv[20]));
          ui->txtConsole->append(map[21] + " " + QString::number(rtv[21]));
 
-        /*
-        ui->txtConsole->append(QString::number(serialdata[0]));
-        ui->txtConsole->append(QString::number(serialdata[1]));
-        ui->txtConsole->append(QString::number(serialdata[2]));
-        ui->txtConsole->append(QString::number(serialdata[3]));
-        ui->txtConsole->append(QString::number(serialdata[4]));
-        */
-
-         QThread::msleep(200);
+         QThread::msleep(20);
     }
     serial->getAdvData();
 }

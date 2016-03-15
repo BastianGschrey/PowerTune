@@ -45,8 +45,19 @@ public:
         quint8 na1;
         quint16 Secinjpulse;
         quint8 na2;
-        quint8 checksum;
+        //quint8 checksum;
         fc_adv_info_t parse(const QByteArray &);
+    };
+
+    struct  fc_aux_info_t{
+        unsigned char AUX1;
+        unsigned char AUX2;
+        unsigned char AUX3;
+        unsigned char AUX4;
+        unsigned char AUX5;
+        unsigned char AUX6;
+        unsigned char AUX7;
+        unsigned char AUX8;
     };
 
 
@@ -61,8 +72,8 @@ private slots:
     void on_btnSerialSettings_clicked();
     void on_btnConnect_clicked();
     void on_btnDisconnect_clicked();
-    void advRequested();
     void readData();
+
 private:
     Ui::MainWindow *ui;
     SerialSetting *wndwSerial;

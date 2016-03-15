@@ -15,7 +15,8 @@
 /*!
   \file serial.cpp
   \brief Raspexi Viewer Power FC related functions
-  \author Suriyan Laohaprapanon & Jacob Donley & Bastian Gschrey
+  \author Bastian Gschrey
+  \credits to Suriyan Laohaprapanon & Jacob Donley
  */
 
 
@@ -25,24 +26,10 @@
 Serial::Serial(QObject *parent) : QObject(parent)
 {
 serialport = new QSerialPort(this);
-//connect(serial,SIGNAL(advRequested()),this,SLOT(advRequested()));
 connect(this->serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
 
 
 }
-
-// FD3S map
-static QString map[] = {"RPM", "Intakepress", "PressureV",
-                       "ThrottleV", "Primaryinp", "Fuelc", "Leadingign", "Trailingign",
-                       "Fueltemp", "Moilp", "Boosttp", "Boostwg", "Watertemp", "Intaketemp", "Knock", "BatteryV",
-                       "Speed", "Iscvduty", "O2volt", "na1", "Secinjpulse",
-                       "na2",
-                       "AUX1", "AUX2", "AUX3", "AUX4", "AUX5", "AUX6", "AUX7", "AUX8",
-                       "Analog1", "Analog2", "Analog3", "Analog4",
-                       "Power", "Accel", "GForce", "ForceN", "Gear", "PrimaryInjD", "AccelTimer",
-                       "Rec" };
-
-//static double rtv[MAP_ELEMENTS];
 
 QByteArray Serial::read() const
 {
@@ -84,7 +71,6 @@ void Serial::getAdvData()
 {
     qDebug() << "Enter getAdvData function";
     serialport->write(QByteArray::fromHex("F0020D"));
-    emit advRequested();
 }
 
 void Serial::readyToRead()

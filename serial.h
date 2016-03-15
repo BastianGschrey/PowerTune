@@ -33,45 +33,6 @@ class Serial : public QObject
 
 public:
 
-    char* FC_REQ_ADV_INFO[2];
-
-    /*
-    *Structure for FD3S infrmation :
-    */
-
-
-    /*
-    *Structure for Auxiliary information :
-    */
-    typedef struct {
-        unsigned char AUX1;
-        unsigned char AUX2;
-        unsigned char AUX3;
-        unsigned char AUX4;
-        unsigned char AUX5;
-        unsigned char AUX6;
-        unsigned char AUX7;
-        unsigned char AUX8;
-    } fc_aux_info_t;
-
-
-    /*
-    * Maximum number of elements in the above structs
-    */
-    #define FC_ADV_INFO_MAX_ELEMENTS	21 + 1  // Plus one is for the last unavailable item (e.g. na2, na1)
-    #define FC_AUX_INFO_MAX_ELEMENTS	8
-    #define ANALOG_INFO_MAX_ELEMENTS	4
-    #define EXTRA_INFO_MAX_ELEMENTS		7
-    #define MISC_INFO_MAX_ELEMENTS		1		// Miscellaneous
-    #define MAP_ELEMENTS	FC_ADV_INFO_MAX_ELEMENTS + FC_AUX_INFO_MAX_ELEMENTS + ANALOG_INFO_MAX_ELEMENTS + EXTRA_INFO_MAX_ELEMENTS + MISC_INFO_MAX_ELEMENTS
-
-    /*
-
-    * Auxiliary Information
-    */
-    #define FC_REQ_AUX_INFO		{0x00, 0x02, 0xFD}
-
-
     double powerfc_get_current_value(QChar *);
 
     bool powerfc_process_advanced(void);
