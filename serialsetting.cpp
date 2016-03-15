@@ -32,12 +32,6 @@ SerialSetting::~SerialSetting()
 void SerialSetting::fillPortsParameters()
 {
 
-//fill cboBaudRate with baudrates
-//ui->cboBaudRate->addItem(QStringLiteral("19200"), QSerialPort::Baud19200);
-//ui->cboBaudRate->addItem(QStringLiteral("38400"), QSerialPort::Baud38400);
-//ui->cboBaudRate->addItem(QStringLiteral("57600"), QSerialPort::Baud57600);
-//ui->cboBaudRate->addItem(QStringLiteral("115200"), QSerialPort::Baud115200);
-
 //fill cboComport with all available comports
 foreach(const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
     {
@@ -58,10 +52,7 @@ SerialSetting::Settings SerialSetting::settings()
     return SerialSetting::currentSettings;
 }
 
-
 void SerialSetting::on_btnApply_clicked()
 {
 
 }
-
-

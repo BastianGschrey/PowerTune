@@ -33,13 +33,6 @@ class Serial : public QObject
 
 public:
 
-    double powerfc_get_current_value(QChar *);
-
-    bool powerfc_process_advanced(void);
-    bool powerfc_process_auxiliary(void);
-    bool powerfc_process_extra(void);
-    bool powerfc_process_misc(void);
-
     QByteArray read() const;
     void clear() const;
 

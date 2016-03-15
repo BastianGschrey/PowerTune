@@ -36,13 +36,14 @@ QByteArray Serial::read() const
     return serialport->readAll();
 }
 
+//function for flushing all serial buffers
 void Serial::clear() const
 {
     serialport->clear();
 }
 
 //function to open serial port
-    void Serial::openConnection(SerialSetting::Settings p)
+void Serial::openConnection(SerialSetting::Settings p)
 {
 qDebug() << "Enter openConnection function";
 serialport->setBaudRate(QSerialPort::Baud57600);

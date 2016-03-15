@@ -16,11 +16,6 @@ static QString map[] = {"RPM", "Intakepress", "PressureV",
                        "Power", "Accel", "GForce", "ForceN", "Gear", "PrimaryInjD", "AccelTimer",
                        "Rec" };
 
-
-
-
-
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -79,12 +74,7 @@ void MainWindow::readData()
     double mul[] = FC_ADV_INFO_MUL;  // required values for calculation from raw to readable values
     double add[] = FC_ADV_INFO_ADD;
 
-
     QByteArray serialdata = serial->read();
-
-
-    //QByteArray serialByteData = QByteArray::fromHex(serialdata);
-
 
     qDebug() << serialdata.length();
 
@@ -148,5 +138,3 @@ void MainWindow::readData()
     }
     serial->getAdvData();
 }
-
-
