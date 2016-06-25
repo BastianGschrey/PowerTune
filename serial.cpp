@@ -60,7 +60,9 @@ qDebug() << serialport->errorString();
 }
 qDebug() << "Portname: " << p.portName;
 
-Serial::getAdvData();
+//Serial::getAdvData();
+
+Serial::getAux();
 }
 
 void Serial::closeConnection()
@@ -72,6 +74,24 @@ void Serial::getAdvData()
 {
     qDebug() << "Enter getAdvData function";
     serialport->write(QByteArray::fromHex("F0020D"));
+}
+
+void Serial::getSensorData()
+{
+    qDebug() << "Enter getSensorData function";
+    serialport->write(QByteArray::fromHex("DE021F"));
+}
+
+void Serial::getAux()
+{
+    qDebug() << "Enter getAux function";
+    serialport->write(QByteArray::fromHex("0002FD"));
+}
+
+void Serial::getMapIndices()
+{
+    qDebug() << "Enter getMapIndices function";
+    serialport->write(QByteArray::fromHex("DB0222"));
 }
 
 void Serial::readyToRead()

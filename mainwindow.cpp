@@ -1,12 +1,18 @@
+/*
+  \file mainwindow.cpp
+  \brief Power Tune Power FC related functions
+  \author Bastian Gschrey & Markus Ippy
+ */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <QThread>
 
-static QString map[] = {"RPM", "Intakepress", "PressureV",
-                       "ThrottleV", "Primaryinp", "Fuelc",
-                       "Leadingign", "Trailingign",
-                       "Fueltemp", "Moilp", "Boosttp",
+static QString map[] = {"rpm", "pim", "pimV",
+                       "TPS Voltage", "InjFp ms", "Inj",
+                       "IGL", "IGT",
+                       "Fuel", "Moilp", "Boosttp",
                        "Boostwg", "Watertemp", "Intaketemp",
                        "Knock", "BatteryV",
                        "Speed", "Iscvduty", "O2volt",
@@ -14,7 +20,8 @@ static QString map[] = {"RPM", "Intakepress", "PressureV",
                        "AUX1", "AUX2", "AUX3", "AUX4", "AUX5", "AUX6", "AUX7", "AUX8",
                        "Analog1", "Analog2", "Analog3", "Analog4",
                        "Power", "Accel", "GForce", "ForceN", "Gear", "PrimaryInjD", "AccelTimer",
-                       "Rec" };
+                       "Rec","Sens_PIM","Sens_VTA1","Sens_VTA2","Sens_VMOP","Sens_Wtrt","Sens_Airt",
+                       "Sens_Fuel","Sens_O2","Sens_Bitflags","MAP_N","MAP_P"};
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -71,17 +78,19 @@ void MainWindow::on_btnDisconnect_clicked()
 
 void MainWindow::readData()
 {
-    double mul[] = FC_ADV_INFO_MUL;  // required values for calculation from raw to readable values
-    double add[] = FC_ADV_INFO_ADD;
+    double mul[] = FC_INFO_MUL;  // required values for calculation from raw to readable values for Advanced Sensor info
+    double add[] = FC_INFO_ADD;
+
 
     QByteArray serialdata = serial->read();
 
     qDebug() << serialdata.length();
 
-    if(serialdata.length() == 33)
+    if(serialdata.length() == 33) //Check if the message = Advanced Sensor Data
     {
 
         fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialdata.data());
+
          rtv[0] = mul[0] * info->RPM + add[0];
          // previousRev_rpm[buf_currentIndex] = rtv[0];
          rtv[1] = mul[1] * info->Intakepress + add[1];
@@ -120,6 +129,7 @@ void MainWindow::readData()
          ui->txtConsole->append(map[6] + " " + QString::number(rtv[6]));
          ui->txtConsole->append(map[7] + " " + QString::number(rtv[7]));
          ui->txtConsole->append(map[8] + " " + QString::number(rtv[8]));
+         ui->txtConsole->append(map[0U] + " " + QString::number(rtv[8]));
          ui->txtConsole->append(map[9] + " " + QString::number(rtv[9]));
          ui->txtConsole->append(map[10] + " " + QString::number(rtv[10]));
          ui->txtConsole->append(map[11] + " " + QString::number(rtv[11]));
@@ -136,5 +146,91 @@ void MainWindow::readData()
 
          QThread::msleep(20);
     }
-    serial->getAdvData();
+    serial->getSensorData();
+    if(serialdata.length() == 20)//Check if the message = Sensor Data
+    {
+
+        fc_sens_info_t* info=reinterpret_cast<fc_sens_info_t*>(serialdata.data());
+      //  fc_flag_info_t* info=reinterpret_cast<fc_flag_info_t*>(serialdata.data());
+
+
+
+        rtv2[0] = mul[1] * info->pim + add[0];
+        rtv2[1] = mul[1] * info->vta1 + add[0];
+        rtv2[2] = mul[1] * info->vta2 + add[0];
+        rtv2[3] = mul[1] * info->vmop + add[0];
+        rtv2[4] = mul[1] * info->wtrt + add[0];
+        rtv2[5] = mul[1] * info->airt + add[0];
+        rtv2[6] = mul[1] * info->fuelt + add[0];
+        rtv2[7] = mul[1] * info->O2S + add[0];
+        rtv2[8] = info->Bitflags;
+
+
+
+         ui->txtSensConsole->clear();
+
+         ui->txtSensConsole->append("Data received: " + serialdata + " -> " + QString::number(serialdata.length()) + " bytes length");
+         ui->txtSensConsole->append(map[42] + " " + QString::number(rtv2[0]));
+         ui->txtSensConsole->append(map[43] + " " + QString::number(rtv2[1]));
+         ui->txtSensConsole->append(map[44] + " " + QString::number(rtv2[2]));
+         ui->txtSensConsole->append(map[45] + " " + QString::number(rtv2[3]));
+         ui->txtSensConsole->append(map[46] + " " + QString::number(rtv2[4]));
+         ui->txtSensConsole->append(map[47] + " " + QString::number(rtv2[5]));
+         ui->txtSensConsole->append(map[48] + " " + QString::number(rtv2[6]));
+         ui->txtSensConsole->append(map[49] + " " + QString::number(rtv2[7]));
+         ui->txtSensConsole->append(map[50] + " " + QString::number(rtv2[8]));
+
+
+        QThread::msleep(20);
+    }
+    if(serialdata.length() == 2)//Check if the message = Map indicies
+    {
+
+        fc_map_info_t* info=reinterpret_cast<fc_map_info_t*>(serialdata.data());
+
+
+        rtv3[0] = mul[0] * info->Map_N + add[0];
+        rtv3[1] = mul[0] * info->Map_P + add[0];
+
+         ui->txtMapConsole->clear();
+
+         ui->txtMapConsole->append("Data received: " + serialdata + " -> " + QString::number(serialdata.length()) + " bytes length");
+         ui->txtMapConsole->append(map[51] + " " + QString::number(rtv3[0]));
+         ui->txtMapConsole->append(map[52] + " " + QString::number(rtv3[1]));
+
+
+         QThread::msleep(20);
+    }
+
+    if(serialdata.length() == 4)//Check if the message = Aux Info
+    {
+
+        fc_aux_info_t* info=reinterpret_cast<fc_aux_info_t*>(serialdata.data());
+
+
+        rtv4[0] = mul[0] * info->AN1 + add[0];
+        rtv4[1] = mul[0] * info->AN2 + add[0];
+        rtv4[2] = mul[0] * info->AN3 + add[0];
+        rtv4[3] = mul[0] * info->AN4 + add[0];
+
+         ui->txtAuxConsole->clear();
+
+         ui->txtAuxConsole->append("Data received: " + serialdata + " -> " + QString::number(serialdata.length()) + " bytes length");
+         ui->txtAuxConsole->append(map[22] + " " + QString::number(rtv4[0]));
+         ui->txtAuxConsole->append(map[23] + " " + QString::number(rtv4[1]));
+         ui->txtAuxConsole->append(map[24] + " " + QString::number(rtv4[2]));
+         ui->txtAuxConsole->append(map[25] + " " + QString::number(rtv4[3]));
+
+         QThread::msleep(20);
+    }
+
+       // serial->getAdvData();
+    //Todo implement wait for serial ready to read before each request
+    serial->getSensorData();
+    //Todo implement wait for serial ready to read before each request
+        serial->getMapIndices();
+        //Todo implement wait for serial ready to read before each request
+        serial->getAux();
+
+
 }

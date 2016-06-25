@@ -14,7 +14,7 @@
 /*
   \file serial.h
   \brief Raspexi Viewer Power FC related functions
-  \author Suriyan Laohaprapanon & Jacob Donley & Bastian Gschrey
+  \author Suriyan Laohaprapanon & Jacob Donley & Bastian Gschrey & Markus Ippy
  */
 
 
@@ -42,6 +42,9 @@ public:
     void openConnection(SerialSetting::Settings); //open serial connection with settings
     void closeConnection();
     void getAdvData();
+    void getAux();
+    void getSensorData();
+    void getMapIndices();
 
 private slots:
     void readyToRead();
