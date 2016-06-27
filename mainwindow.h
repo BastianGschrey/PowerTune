@@ -110,11 +110,17 @@ private slots:
     void on_btnConnect_clicked();
     void on_btnDisconnect_clicked();
     void readData();
+    void sendRequest();
+    void decodeAdv(QByteArray serialdata);
+    void decodeSensor(QByteArray serialdata);
+    void decodeAux(QByteArray serialdata);
+    void decodeMap(QByteArray serialdata);
 
 private:
     Ui::MainWindow *ui;
     SerialSetting *wndwSerial;
     Serial *serial;
+
 
 };
 

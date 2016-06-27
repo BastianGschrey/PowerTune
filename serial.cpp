@@ -27,8 +27,6 @@ Serial::Serial(QObject *parent) : QObject(parent)
 {
 serialport = new QSerialPort(this);
 connect(this->serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
-
-
 }
 
 QByteArray Serial::read() const
@@ -54,15 +52,13 @@ serialport->setDataBits(QSerialPort::Data8);
 serialport->setStopBits(QSerialPort::OneStop);
 serialport->setFlowControl(QSerialPort::NoFlowControl);
 qDebug() << "Try to open SerialPort:";
+
 if(serialport->open(QIODevice::ReadWrite) == false)
 {
 qDebug() << serialport->errorString();
 }
 qDebug() << "Portname: " << p.portName;
 
-//Serial::getAdvData();
-
-Serial::getAux();
 }
 
 void Serial::closeConnection()
@@ -70,32 +66,32 @@ void Serial::closeConnection()
 serialport->close();
 }
 
+
+//Serial requests are send via Serial
 void Serial::getAdvData()
 {
-    qDebug() << "Enter getAdvData function";
     serialport->write(QByteArray::fromHex("F0020D"));
 }
 
 void Serial::getSensorData()
 {
-    qDebug() << "Enter getSensorData function";
     serialport->write(QByteArray::fromHex("DE021F"));
 }
 
 void Serial::getAux()
 {
-    qDebug() << "Enter getAux function";
     serialport->write(QByteArray::fromHex("0002FD"));
 }
 
 void Serial::getMapIndices()
 {
-    qDebug() << "Enter getMapIndices function";
     serialport->write(QByteArray::fromHex("DB0222"));
 }
+//End of serial requests
+
 
 void Serial::readyToRead()
 {
-    qDebug() <<"Signal readyRead fired be QSerialPort.";
+    qDebug() <<"Signal readyRead fired by QSerialPort.";
     emit readyRead();
 }

@@ -9,6 +9,11 @@
 #include <QDebug>
 #include <QThread>
 
+int requestIndex = 0;
+double mul[] = FC_INFO_MUL;  // required values for calculation from raw to readable values for Advanced Sensor info
+double add[] = FC_INFO_ADD;
+
+
 static QString map[] = {"rpm", "pim", "pimV",
                        "TPS Voltage", "InjFp ms", "Inj",
                        "IGL", "IGT",
@@ -51,9 +56,9 @@ void MainWindow::on_btnSerialSettings_clicked()
 
 void MainWindow::on_btnConnect_clicked()
 {
-    SerialSetting::Settings p;
-    p = wndwSerial->settings();
-    if(p.portName == "")
+    SerialSetting::Settings settings;
+    settings = wndwSerial->settings();
+    if(settings.portName == "")
     {
         QMessageBox msgBox;
         //msgBox.setText("No serialport selected");
@@ -65,7 +70,7 @@ void MainWindow::on_btnConnect_clicked()
         serial->openConnection(wndwSerial->settings());
         this->ui->btnConnect->setDisabled(true);
         this->ui->btnDisconnect->setDisabled(false);
-        //this->ui->txtConsole->append("Request sended.");
+        MainWindow::sendRequest();
     }
 }
 
@@ -76,19 +81,52 @@ void MainWindow::on_btnDisconnect_clicked()
     ui->btnConnect->setDisabled(false);
 }
 
+void MainWindow::sendRequest()
+{
+    switch (requestIndex){
+    case 0:
+        serial->getAdvData();
+        requestIndex++;
+        break;
+    case 1:
+        serial->getAux();
+        requestIndex++;
+        break;
+    case 2:
+        serial->getMapIndices();
+        requestIndex++;
+        break;
+    case 3:
+        serial->getSensorData();
+        requestIndex = 0;
+        break;
+    }
+}
+
+
 void MainWindow::readData()
 {
-    double mul[] = FC_INFO_MUL;  // required values for calculation from raw to readable values for Advanced Sensor info
-    double add[] = FC_INFO_ADD;
+
+
 
 
     QByteArray serialdata = serial->read();
+    quint8 requesttype = serialdata[0];
+    qDebug() << "Requesttype: " << requesttype << " Length: " << serialdata.length();
 
-    qDebug() << serialdata.length();
+    if(serialdata.length() == 33 && requesttype == 240){MainWindow::decodeAdv(serialdata);}
+    if(serialdata.length() == 20 && requesttype == 0xDE){MainWindow::decodeSensor(serialdata);}
+    if(serialdata.length() == 5 && requesttype == 0xDB){MainWindow::decodeAux(serialdata);}
+    if(serialdata.length() == 5 && requesttype == 0x00){MainWindow::decodeMap(serialdata);}
 
-    if(serialdata.length() == 33) //Check if the message = Advanced Sensor Data
-    {
+     QThread::msleep(100);
+     MainWindow::sendRequest();
+}
 
+void MainWindow::decodeAdv(QByteArray serialdata)
+{
+
+        qDebug() << "in ADV stream";
         fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialdata.data());
 
          rtv[0] = mul[0] * info->RPM + add[0];
@@ -143,13 +181,11 @@ void MainWindow::readData()
          ui->txtConsole->append(map[19] + " " + QString::number(rtv[19]));
          ui->txtConsole->append(map[20] + " " + QString::number(rtv[20]));
          ui->txtConsole->append(map[21] + " " + QString::number(rtv[21]));
-
-         QThread::msleep(20);
     }
-    serial->getSensorData();
-    if(serialdata.length() == 20)//Check if the message = Sensor Data
-    {
 
+void MainWindow::decodeSensor(QByteArray serialdata)
+{
+        qDebug() << "in sensor stream";
         fc_sens_info_t* info=reinterpret_cast<fc_sens_info_t*>(serialdata.data());
       //  fc_flag_info_t* info=reinterpret_cast<fc_flag_info_t*>(serialdata.data());
 
@@ -179,13 +215,11 @@ void MainWindow::readData()
          ui->txtSensConsole->append(map[48] + " " + QString::number(rtv2[6]));
          ui->txtSensConsole->append(map[49] + " " + QString::number(rtv2[7]));
          ui->txtSensConsole->append(map[50] + " " + QString::number(rtv2[8]));
-
-
-        QThread::msleep(20);
     }
-    if(serialdata.length() == 2)//Check if the message = Map indicies
-    {
 
+void MainWindow::decodeMap(QByteArray serialdata)
+{
+        qDebug() << "in map indicies stream";
         fc_map_info_t* info=reinterpret_cast<fc_map_info_t*>(serialdata.data());
 
 
@@ -197,14 +231,11 @@ void MainWindow::readData()
          ui->txtMapConsole->append("Data received: " + serialdata + " -> " + QString::number(serialdata.length()) + " bytes length");
          ui->txtMapConsole->append(map[51] + " " + QString::number(rtv3[0]));
          ui->txtMapConsole->append(map[52] + " " + QString::number(rtv3[1]));
+}
 
-
-         QThread::msleep(20);
-    }
-
-    if(serialdata.length() == 4)//Check if the message = Aux Info
-    {
-
+void MainWindow::decodeAux(QByteArray serialdata)
+{
+        qDebug() << "in aux stream";
         fc_aux_info_t* info=reinterpret_cast<fc_aux_info_t*>(serialdata.data());
 
 
@@ -220,17 +251,4 @@ void MainWindow::readData()
          ui->txtAuxConsole->append(map[23] + " " + QString::number(rtv4[1]));
          ui->txtAuxConsole->append(map[24] + " " + QString::number(rtv4[2]));
          ui->txtAuxConsole->append(map[25] + " " + QString::number(rtv4[3]));
-
-         QThread::msleep(20);
-    }
-
-       // serial->getAdvData();
-    //Todo implement wait for serial ready to read before each request
-    serial->getSensorData();
-    //Todo implement wait for serial ready to read before each request
-        serial->getMapIndices();
-        //Todo implement wait for serial ready to read before each request
-        serial->getAux();
-
-
 }
