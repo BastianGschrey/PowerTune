@@ -106,20 +106,16 @@ void MainWindow::sendRequest()
 
 void MainWindow::readData()
 {
-
-
-
-
     QByteArray serialdata = serial->read();
     quint8 requesttype = serialdata[0];
     qDebug() << "Requesttype: " << requesttype << " Length: " << serialdata.length();
 
-    if(serialdata.length() == 33 && requesttype == 240){MainWindow::decodeAdv(serialdata);}
+    if(serialdata.length() == 33 && requesttype == 0xF0){MainWindow::decodeAdv(serialdata);}
     if(serialdata.length() == 20 && requesttype == 0xDE){MainWindow::decodeSensor(serialdata);}
     if(serialdata.length() == 5 && requesttype == 0xDB){MainWindow::decodeAux(serialdata);}
     if(serialdata.length() == 5 && requesttype == 0x00){MainWindow::decodeMap(serialdata);}
 
-     QThread::msleep(100);
+     QThread::msleep(10);
      MainWindow::sendRequest();
 }
 
