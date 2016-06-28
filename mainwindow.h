@@ -1,5 +1,5 @@
 /*
-  \file mainwindow.h
+  \file mainwindow.hwndwSerial->show();
   \brief Power Tune Power FC related functions
   \author Bastian Gschrey & Markus Ippy
  */
@@ -10,6 +10,7 @@
 #include <QMainWindow>
 #include <serialsetting.h>
 #include <serial.h>
+#include <QBitArray>
 #include <QMessageBox>
 
 namespace Ui {
@@ -25,12 +26,11 @@ public:
     ~MainWindow();
 
 
-    double rtv[33];
+    double packageADV[33];
 
     struct fc_adv_info_t{
 
-
-//        quint16 requesttype;
+        quint16 requesttype;
         quint16 RPM;
         quint16 Intakepress;
         quint16 PressureV;
@@ -53,14 +53,15 @@ public:
         quint8 na1;
         quint16 Secinjpulse;
         quint8 na2;
-        //quint8 checksum;
+        quint8 checksum;
         fc_adv_info_t parse(const QByteArray &);
     };
 
-    double rtv2[20];
+    double packageSens[20];
 
     struct fc_sens_info_t{
 
+        quint16 requesttype;
         quint16 pim;
         quint16 vta1;
         quint16 vta2;
@@ -70,29 +71,34 @@ public:
         quint16 fuelt;
         quint16 O2S;
         quint16 Bitflags;
+        quint8  checksum;
 
         fc_sens_info_t parse(const QByteArray &);
 
     };
 
-    double rtv3[2];
+    double packageMap[2];
 
     struct fc_map_info_t{
 
+        quint16 requesttype;
         quint8 Map_N;
         quint8 Map_P;
+        quint8 checksum;
 
         fc_map_info_t parse(const QByteArray &);
     };
 
-    double rtv4[4];
+    double packageAux[4];
 
     struct fc_aux_info_t{
 
+        quint16 requesttype;
         quint8 AN1;
         quint8 AN2;
         quint8 AN3;
         quint8 AN4;
+        quint8 checksum;
 
         fc_aux_info_t parse(const QByteArray &);
     };
@@ -100,10 +106,6 @@ public:
     // FD3S
       #define FC_INFO_MUL		{1, 0.0001, 1, 1, 1.0/256, 1.0/256, 1, 1, 1, 212.0/256, 0.4, 0.4, 1, 1, 1, 0.1, 1, 0.1, 0.02, 1, 1.0/256, 1}
       #define FC_INFO_ADD		{0,-1.0332, 0, 0, 0, 0, -25, -25, -80, 0, 0, 0, -80, -80, 0, 0, 0, 0, 0, 0, 0, 0}
-
-
-
-
 
 private slots:
     void on_btnSerialSettings_clicked();

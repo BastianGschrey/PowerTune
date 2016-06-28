@@ -26,7 +26,8 @@ static QString map[] = {"rpm", "pim", "pimV",
                        "Analog1", "Analog2", "Analog3", "Analog4",
                        "Power", "Accel", "GForce", "ForceN", "Gear", "PrimaryInjD", "AccelTimer",
                        "Rec","Sens_PIM","Sens_VTA1","Sens_VTA2","Sens_VMOP","Sens_Wtrt","Sens_Airt",
-                       "Sens_Fuel","Sens_O2","Sens_Bitflags","MAP_N","MAP_P"};
+                       "Sens_Fuel","Sens_O2", "STR", "A/C", "PWS", "NTR", "CLT",
+                       "STP", "CAT", "ELD", "HWL", "FPD", "FPR", "APR", "PAC", "CCN", "TCN", "PRC" ,"MAP_N","MAP_P"};
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -112,13 +113,14 @@ void MainWindow::readData()
     qDebug() << "Requesttype: " << requesttype << " Length: " << serialdata.length();
 
     if(serialdata.length() == 33 && requesttype == 0xF0){MainWindow::decodeAdv(serialdata);}
-    if(serialdata.length() == 20 && requesttype == 0xDE){MainWindow::decodeSensor(serialdata);}
-    if(serialdata.length() == 5 && requesttype == 0xDB){MainWindow::decodeAux(serialdata);}
-    if(serialdata.length() == 5 && requesttype == 0x00){MainWindow::decodeMap(serialdata);}
+    if(serialdata.length() == 21 && requesttype == 0xDE){MainWindow::decodeSensor(serialdata);}
+    if(serialdata.length() == 7 && requesttype == 0x00){MainWindow::decodeAux(serialdata);}
+    if(serialdata.length() == 5 && requesttype == 0xDB){MainWindow::decodeMap(serialdata);}
 
-     QThread::msleep(10);
+     QThread::msleep(50);
      MainWindow::sendRequest();
 }
+
 
 void MainWindow::decodeAdv(QByteArray serialdata)
 {
@@ -126,59 +128,59 @@ void MainWindow::decodeAdv(QByteArray serialdata)
         qDebug() << "in ADV stream";
         fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialdata.data());
 
-         rtv[0] = mul[0] * info->RPM + add[0];
-         // previousRev_rpm[buf_currentIndex] = rtv[0];
-         rtv[1] = mul[1] * info->Intakepress + add[1];
-         rtv[2] = mul[2] * info->PressureV + add[2];
-         rtv[3] = mul[3] * info->ThrottleV + add[3];
-         rtv[4] = mul[4] * info->Primaryinp + add[4];
-         rtv[5] = mul[5] * info->Fuelc + add[5];
-         rtv[6] = mul[6] * info->Leadingign + add[6];
-         rtv[7] = mul[7] * info->Trailingign + add[7];
-         rtv[8] = mul[8] * info->Fueltemp + add[8];
-         rtv[9] = mul[9] * info->Moilp + add[9];
-         rtv[10] = mul[10] * info->Boosttp + add[10];
-         rtv[11] = mul[11] * info->Boostwg + add[11];
-         rtv[12] = mul[12] * info->Watertemp + add[12];
-         rtv[13] = mul[13] * info->Intaketemp + add[13];
-         rtv[14] = mul[14] * info->Knock + add[14];
-         rtv[15] = mul[15] * info->BatteryV + add[15];
-         rtv[16] = mul[16] * info->Speed + add[16];
+         packageADV[0] = mul[0] * info->RPM + add[0];
+         packageADV[1] = mul[1] * info->Intakepress + add[1];
+         packageADV[2] = mul[2] * info->PressureV + add[2];
+         packageADV[3] = mul[3] * info->ThrottleV + add[3];
+         packageADV[4] = mul[4] * info->Primaryinp + add[4];
+         packageADV[5] = mul[5] * info->Fuelc + add[5];
+         packageADV[6] = mul[6] * info->Leadingign + add[6];
+         packageADV[7] = mul[7] * info->Trailingign + add[7];
+         packageADV[8] = mul[8] * info->Fueltemp + add[8];
+         packageADV[9] = mul[9] * info->Moilp + add[9];
+         packageADV[10] = mul[10] * info->Boosttp + add[10];
+         packageADV[11] = mul[11] * info->Boostwg + add[11];
+         packageADV[12] = mul[12] * info->Watertemp + add[12];
+         packageADV[13] = mul[13] * info->Intaketemp + add[13];
+         packageADV[14] = mul[14] * info->Knock + add[14];
+         packageADV[15] = mul[15] * info->BatteryV + add[15];
+         packageADV[16] = mul[16] * info->Speed + add[16];
          //rtv[16] *= speed_correction;
          //previousSpeed_kph[buf_currentIndex] = rtv[16];
-         rtv[17] = mul[17] * info->Iscvduty + add[17];
-         rtv[18] = mul[18] * info->O2volt + add[18];
-         rtv[19] = mul[19] * info->na1 + add[19];
-         rtv[20] = mul[20] * info->Secinjpulse + add[20];
-         rtv[21] = mul[21] * info->na2 + add[21];
+         packageADV[17] = mul[17] * info->Iscvduty + add[17];
+         packageADV[18] = mul[18] * info->O2volt + add[18];
+         packageADV[19] = mul[19] * info->na1 + add[19];
+         packageADV[20] = mul[20] * info->Secinjpulse + add[20];
+         packageADV[21] = mul[21] * info->na2 + add[21];
 
          ui->txtConsole->clear();
 
          ui->txtConsole->append("Data received: " + serialdata + " -> " + QString::number(serialdata.length()) + " bytes length");
-         ui->txtConsole->append(map[0] + " " + QString::number(rtv[0]));
-         ui->txtConsole->append(map[1] + " " + QString::number(rtv[1]));
-         ui->txtConsole->append(map[2] + " " + QString::number(rtv[2]));
-         ui->txtConsole->append(map[3] + " " + QString::number(rtv[3]));
-         ui->txtConsole->append(map[4] + " " + QString::number(rtv[4]));
-         ui->txtConsole->append(map[5] + " " + QString::number(rtv[5]));
-         ui->txtConsole->append(map[6] + " " + QString::number(rtv[6]));
-         ui->txtConsole->append(map[7] + " " + QString::number(rtv[7]));
-         ui->txtConsole->append(map[8] + " " + QString::number(rtv[8]));
-         ui->txtConsole->append(map[0U] + " " + QString::number(rtv[8]));
-         ui->txtConsole->append(map[9] + " " + QString::number(rtv[9]));
-         ui->txtConsole->append(map[10] + " " + QString::number(rtv[10]));
-         ui->txtConsole->append(map[11] + " " + QString::number(rtv[11]));
-         ui->txtConsole->append(map[12] + " " + QString::number(rtv[12]));
-         ui->txtConsole->append(map[13] + " " + QString::number(rtv[13]));
-         ui->txtConsole->append(map[14] + " " + QString::number(rtv[14]));
-         ui->txtConsole->append(map[15] + " " + QString::number(rtv[15]));
-         ui->txtConsole->append(map[16] + " " + QString::number(rtv[16]));
-         ui->txtConsole->append(map[17] + " " + QString::number(rtv[17]));
-         ui->txtConsole->append(map[18] + " " + QString::number(rtv[18]));
-         ui->txtConsole->append(map[19] + " " + QString::number(rtv[19]));
-         ui->txtConsole->append(map[20] + " " + QString::number(rtv[20]));
-         ui->txtConsole->append(map[21] + " " + QString::number(rtv[21]));
-    }
+         ui->txtConsole->append(map[0] + " " + QString::number(packageADV[0]));
+         ui->txtConsole->append(map[1] + " " + QString::number(packageADV[1]));
+         ui->txtConsole->append(map[2] + " " + QString::number(packageADV[2]));
+         ui->txtConsole->append(map[3] + " " + QString::number(packageADV[3]));
+         ui->txtConsole->append(map[4] + " " + QString::number(packageADV[4]));
+         ui->txtConsole->append(map[5] + " " + QString::number(packageADV[5]));
+         ui->txtConsole->append(map[6] + " " + QString::number(packageADV[6]));
+         ui->txtConsole->append(map[7] + " " + QString::number(packageADV[7]));
+         ui->txtConsole->append(map[8] + " " + QString::number(packageADV[8]));
+         ui->txtConsole->append(map[9] + " " + QString::number(packageADV[9]));
+         ui->txtConsole->append(map[10] + " " + QString::number(packageADV[10]));
+         ui->txtConsole->append(map[11] + " " + QString::number(packageADV[11]));
+         ui->txtConsole->append(map[12] + " " + QString::number(packageADV[12]));
+         ui->txtConsole->append(map[13] + " " + QString::number(packageADV[13]));
+         ui->txtConsole->append(map[14] + " " + QString::number(packageADV[14]));
+         ui->txtConsole->append(map[15] + " " + QString::number(packageADV[15]));
+         ui->txtConsole->append(map[16] + " " + QString::number(packageADV[16]));
+         ui->txtConsole->append(map[17] + " " + QString::number(packageADV[17]));
+         ui->txtConsole->append(map[18] + " " + QString::number(packageADV[18]));
+         ui->txtConsole->append(map[19] + " " + QString::number(packageADV[19]));
+         ui->txtConsole->append(map[20] + " " + QString::number(packageADV[20]));
+         ui->txtConsole->append(map[21] + " " + QString::number(packageADV[21]));
+
+
+}
 
 void MainWindow::decodeSensor(QByteArray serialdata)
 {
@@ -188,30 +190,45 @@ void MainWindow::decodeSensor(QByteArray serialdata)
 
 
 
-        rtv2[0] = mul[1] * info->pim + add[0];
-        rtv2[1] = mul[1] * info->vta1 + add[0];
-        rtv2[2] = mul[1] * info->vta2 + add[0];
-        rtv2[3] = mul[1] * info->vmop + add[0];
-        rtv2[4] = mul[1] * info->wtrt + add[0];
-        rtv2[5] = mul[1] * info->airt + add[0];
-        rtv2[6] = mul[1] * info->fuelt + add[0];
-        rtv2[7] = mul[1] * info->O2S + add[0];
-        rtv2[8] = info->Bitflags;
-
+        packageSens[0] = mul[1] * info->pim + add[0];
+        packageSens[1] = mul[1] * info->vta1 + add[0];
+        packageSens[2] = mul[1] * info->vta2 + add[0];
+        packageSens[3] = mul[1] * info->vmop + add[0];
+        packageSens[4] = mul[1] * info->wtrt + add[0];
+        packageSens[5] = mul[1] * info->airt + add[0];
+        packageSens[6] = mul[1] * info->fuelt + add[0];
+        packageSens[7] = mul[1] * info->O2S + add[0];
+        packageSens[8] = info->Bitflags;
 
 
          ui->txtSensConsole->clear();
 
          ui->txtSensConsole->append("Data received: " + serialdata + " -> " + QString::number(serialdata.length()) + " bytes length");
-         ui->txtSensConsole->append(map[42] + " " + QString::number(rtv2[0]));
-         ui->txtSensConsole->append(map[43] + " " + QString::number(rtv2[1]));
-         ui->txtSensConsole->append(map[44] + " " + QString::number(rtv2[2]));
-         ui->txtSensConsole->append(map[45] + " " + QString::number(rtv2[3]));
-         ui->txtSensConsole->append(map[46] + " " + QString::number(rtv2[4]));
-         ui->txtSensConsole->append(map[47] + " " + QString::number(rtv2[5]));
-         ui->txtSensConsole->append(map[48] + " " + QString::number(rtv2[6]));
-         ui->txtSensConsole->append(map[49] + " " + QString::number(rtv2[7]));
-         ui->txtSensConsole->append(map[50] + " " + QString::number(rtv2[8]));
+         ui->txtSensConsole->append(map[42] + " " + QString::number(packageSens[0]));
+         ui->txtSensConsole->append(map[43] + " " + QString::number(packageSens[1]));
+         ui->txtSensConsole->append(map[44] + " " + QString::number(packageSens[2]));
+         ui->txtSensConsole->append(map[45] + " " + QString::number(packageSens[3]));
+         ui->txtSensConsole->append(map[46] + " " + QString::number(packageSens[4]));
+         ui->txtSensConsole->append(map[47] + " " + QString::number(packageSens[5]));
+         ui->txtSensConsole->append(map[48] + " " + QString::number(packageSens[6]));
+         ui->txtSensConsole->append(map[49] + " " + QString::number(packageSens[7]));
+         //ui->txtSensConsole->append(map[50] + " " + QBitArray(info->Bitflags[0])); // From here Flags
+
+         ui->txtSensConsole->append(map[51] + " " + QString::number(packageSens[8]));
+         ui->txtSensConsole->append(map[52] + " " + QString::number(packageSens[8]));
+         ui->txtSensConsole->append(map[53] + " " + QString::number(packageSens[8]));
+         ui->txtSensConsole->append(map[54] + " " + QString::number(packageSens[8]));
+         ui->txtSensConsole->append(map[55] + " " + QString::number(packageSens[8]));
+         ui->txtSensConsole->append(map[56] + " " + QString::number(packageSens[8]));
+         ui->txtSensConsole->append(map[57] + " " + QString::number(packageSens[8]));
+         ui->txtSensConsole->append(map[58] + " " + QString::number(packageSens[8]));
+         ui->txtSensConsole->append(map[59] + " " + QString::number(packageSens[8]));
+         ui->txtSensConsole->append(map[60] + " " + QString::number(packageSens[8]));
+         ui->txtSensConsole->append(map[61] + " " + QString::number(packageSens[8]));
+         ui->txtSensConsole->append(map[62] + " " + QString::number(packageSens[8]));
+         ui->txtSensConsole->append(map[63] + " " + QString::number(packageSens[8]));
+         ui->txtSensConsole->append(map[64] + " " + QString::number(packageSens[8]));
+         ui->txtSensConsole->append(map[65] + " " + QString::number(packageSens[8]));
     }
 
 void MainWindow::decodeMap(QByteArray serialdata)
@@ -220,14 +237,14 @@ void MainWindow::decodeMap(QByteArray serialdata)
         fc_map_info_t* info=reinterpret_cast<fc_map_info_t*>(serialdata.data());
 
 
-        rtv3[0] = mul[0] * info->Map_N + add[0];
-        rtv3[1] = mul[0] * info->Map_P + add[0];
+        packageMap[0] = mul[0] * info->Map_N + add[0];
+        packageMap[1] = mul[0] * info->Map_P + add[0];
 
          ui->txtMapConsole->clear();
 
          ui->txtMapConsole->append("Data received: " + serialdata + " -> " + QString::number(serialdata.length()) + " bytes length");
-         ui->txtMapConsole->append(map[51] + " " + QString::number(rtv3[0]));
-         ui->txtMapConsole->append(map[52] + " " + QString::number(rtv3[1]));
+         ui->txtMapConsole->append(map[66] + " " + QString::number(packageMap[0]));
+         ui->txtMapConsole->append(map[67] + " " + QString::number(packageMap[1]));
 }
 
 void MainWindow::decodeAux(QByteArray serialdata)
@@ -236,16 +253,16 @@ void MainWindow::decodeAux(QByteArray serialdata)
         fc_aux_info_t* info=reinterpret_cast<fc_aux_info_t*>(serialdata.data());
 
 
-        rtv4[0] = mul[0] * info->AN1 + add[0];
-        rtv4[1] = mul[0] * info->AN2 + add[0];
-        rtv4[2] = mul[0] * info->AN3 + add[0];
-        rtv4[3] = mul[0] * info->AN4 + add[0];
+        packageAux[0] = mul[0] * info->AN1 + add[0];
+        packageAux[1] = mul[0] * info->AN2 + add[0];
+        packageAux[2] = mul[0] * info->AN3 + add[0];
+        packageAux[3] = mul[0] * info->AN4 + add[0];
 
          ui->txtAuxConsole->clear();
 
          ui->txtAuxConsole->append("Data received: " + serialdata + " -> " + QString::number(serialdata.length()) + " bytes length");
-         ui->txtAuxConsole->append(map[22] + " " + QString::number(rtv4[0]));
-         ui->txtAuxConsole->append(map[23] + " " + QString::number(rtv4[1]));
-         ui->txtAuxConsole->append(map[24] + " " + QString::number(rtv4[2]));
-         ui->txtAuxConsole->append(map[25] + " " + QString::number(rtv4[3]));
+         ui->txtAuxConsole->append(map[22] + " " + QString::number(packageAux[0]));
+         ui->txtAuxConsole->append(map[23] + " " + QString::number(packageAux[1]));
+         ui->txtAuxConsole->append(map[24] + " " + QString::number(packageAux[2]));
+         ui->txtAuxConsole->append(map[25] + " " + QString::number(packageAux[3]));
 }
