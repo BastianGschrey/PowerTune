@@ -39,24 +39,30 @@ public:
 public:
     explicit Serial(QObject *parent = 0);
 
-    void openConnection(SerialSetting::Settings); //open serial connection with settings
+
     void closeConnection();
     void getAdvData();
     void getAux();
     void getSensorData();
     void getMapIndices();
 
-private slots:
-    void readyToRead();
+
+
 
 private:
 QSerialPort *serialport;
 
+
 signals:
-void advRequested();
-void readyRead();
+void finished();
+void error(QString err);
+void SIG_dataAvailable(QByteArray);
 
 public slots:
+    void process();
+    void readyToRead();
+    void openConnection(SerialSetting::Settings p); //open serial connection with settings
+    void sendRequest(int requestIndex);
 };
 
 #endif // SERIAL_H

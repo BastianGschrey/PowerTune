@@ -9,7 +9,8 @@
 #include <QDebug>
 #include <QThread>
 
-int requestIndex = 0;
+int requestID = 0; //ID for requested data type
+
 double mul[] = FC_INFO_MUL;  // required values for calculation from raw to readable values for Advanced Sensor info
 double add[] = FC_INFO_ADD;
 
@@ -34,13 +35,28 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    wndwSerial = new SerialSetting();
+    ui->btnDisconnect->setDisabled(true);
 
-     wndwSerial = new SerialSetting();
-     serial = new Serial();
-     ui->btnDisconnect->setDisabled(true);
+    QThread* serialthread = new QThread;
+    Serial*  serial = new Serial();
+    serial->moveToThread(serialthread);
+    qRegisterMetaType<SerialSetting::Settings>();
 
-//connect signals to slots:
-    connect(serial,SIGNAL(readyRead()), this, SLOT(readData()));
+
+
+//----------------------------SIGNALS---------------------------------
+    //connect(serial,SIGNAL(readyRead()), this, SLOT(readData()));
+    connect(serialthread, SIGNAL(started()), serial, SLOT(process()));
+    connect(serial, SIGNAL(finished()), serialthread, SLOT(quit()));
+    connect(serial, SIGNAL(finished()), serial, SLOT(deleteLater()));
+    connect(serialthread, SIGNAL(finished()), serialthread, SLOT(deleteLater()));
+    //Slots for Serial Communication
+    connect(this, SIGNAL(SIG_connectSerial(SerialSetting::Settings)), serial, SLOT(openConnection(SerialSetting::Settings)),Qt::QueuedConnection);
+    connect(this, SIGNAL(SIG_requestSerial(int)), serial, SLOT(sendRequest(int)), Qt::QueuedConnection);
+    connect(serial, SIGNAL(SIG_dataAvailable(QByteArray)), this, SLOT(readData(QByteArray)), Qt::QueuedConnection);
+
+    serialthread->start();
 }
 
 MainWindow::~MainWindow()
@@ -57,6 +73,7 @@ void MainWindow::on_btnSerialSettings_clicked()
 
 void MainWindow::on_btnConnect_clicked()
 {
+
     SerialSetting::Settings settings;
     settings = wndwSerial->settings();
     if(settings.portName == "")
@@ -69,46 +86,27 @@ void MainWindow::on_btnConnect_clicked()
     }
     else
     {
-        serial->openConnection(wndwSerial->settings());
+        //serial->openConnection(wndwSerial->settings());
         this->ui->btnConnect->setDisabled(true);
         this->ui->btnDisconnect->setDisabled(false);
-        MainWindow::sendRequest();
+        //serial->sendRequest(requestID);
+        emit SIG_connectSerial(settings);
+        emit SIG_requestSerial(requestID);
     }
 }
 
 void MainWindow::on_btnDisconnect_clicked()
 {
-    serial->closeConnection();
+    //serial->closeConnection();
     ui->btnDisconnect->setDisabled(true);
     ui->btnConnect->setDisabled(false);
 }
 
-void MainWindow::sendRequest()
-{
-    switch (requestIndex){
-    case 0:
-        serial->getAdvData();
-        requestIndex++;
-        break;
-    case 1:
-        serial->getAux();
-        requestIndex++;
-        break;
-    case 2:
-        serial->getMapIndices();
-        requestIndex++;
-        break;
-    case 3:
-        serial->getSensorData();
-        requestIndex = 0;
-        break;
-    }
-}
 
-
-void MainWindow::readData()
+void MainWindow::readData(QByteArray serialdata)
 {
-    QByteArray serialdata = serial->read();
+
+    //QByteArray serialdata = serial->read();
     quint8 requesttype = serialdata[0];
     qDebug() << "Requesttype: " << requesttype << " Length: " << serialdata.length();
 
@@ -117,16 +115,17 @@ void MainWindow::readData()
     if(serialdata.length() == 7 && requesttype == 0x00){MainWindow::decodeAux(serialdata);}
     if(serialdata.length() == 5 && requesttype == 0xDB){MainWindow::decodeMap(serialdata);}
 
-     QThread::msleep(50);
-     MainWindow::sendRequest();
+    if(requestID <= 2){requestID++;}
+    else{requestID = 0;}
+    emit SIG_requestSerial(requestID);
+
 }
 
 
 void MainWindow::decodeAdv(QByteArray serialdata)
 {
-
-        qDebug() << "in ADV stream";
-        fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialdata.data());
+         qDebug() << "in ADV stream";
+         fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialdata.data());
 
          packageADV[0] = mul[0] * info->RPM + add[0];
          packageADV[1] = mul[1] * info->Intakepress + add[1];
@@ -190,14 +189,14 @@ void MainWindow::decodeSensor(QByteArray serialdata)
 
 
 
-        packageSens[0] = mul[1] * info->pim + add[0];
-        packageSens[1] = mul[1] * info->vta1 + add[0];
-        packageSens[2] = mul[1] * info->vta2 + add[0];
-        packageSens[3] = mul[1] * info->vmop + add[0];
-        packageSens[4] = mul[1] * info->wtrt + add[0];
-        packageSens[5] = mul[1] * info->airt + add[0];
-        packageSens[6] = mul[1] * info->fuelt + add[0];
-        packageSens[7] = mul[1] * info->O2S + add[0];
+        packageSens[0] = mul[22] * info->pim + add[22];
+        packageSens[1] = mul[23] * info->vta1 + add[23];
+        packageSens[2] = mul[24] * info->vta2 + add[24];
+        packageSens[3] = mul[25] * info->vmop + add[25];
+        packageSens[4] = mul[26] * info->wtrt + add[26];
+        packageSens[5] = mul[27] * info->airt + add[27];
+        packageSens[6] = mul[28] * info->fuelt + add[28];
+        packageSens[7] = mul[29] * info->O2S + add[29];
         packageSens[8] = info->Bitflags;
 
 
@@ -266,3 +265,5 @@ void MainWindow::decodeAux(QByteArray serialdata)
          ui->txtAuxConsole->append(map[24] + " " + QString::number(packageAux[2]));
          ui->txtAuxConsole->append(map[25] + " " + QString::number(packageAux[3]));
 }
+
+

@@ -41,9 +41,8 @@ foreach(const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
 }
 
 void SerialSetting::apply()
-{ //Slot when apply button is clicked, stores selected settings
+{
     SerialSetting::currentSettings.portName = ui->cboComport->currentText();
-    //SerialSetting::currentSettings.baudRate = ui->cboBaudRate->currentText().toInt();
     hide();
 }
 

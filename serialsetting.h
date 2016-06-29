@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QtSerialPort/QSerialPort>
+#include <QMetaType>
+
 
 
 
@@ -49,5 +51,6 @@ private:
 
 
 };
+Q_DECLARE_METATYPE(SerialSetting::Settings)
 
 #endif // SERIALSETTING_H
