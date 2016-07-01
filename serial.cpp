@@ -31,11 +31,6 @@ Serial::Serial(QObject *parent) : QObject(parent)
 //serialport = new QSerialPort(this); <- Defined in Header, constuctor heap allocation now allowed in a thread - will crash
 }
 
-QByteArray Serial::read() const
-{
-    return serialport->readAll();
-}
-
 //function for flushing all serial buffers
 void Serial::clear() const
 {
@@ -72,7 +67,6 @@ serialport->close();
 //Serial requests are send via Serial
 void Serial::getAdvData()
 {
-    qDebug() << "getting Adv data...";
     serialport->write(QByteArray::fromHex("F0020D"));
 }
 
@@ -95,7 +89,6 @@ void Serial::getMapIndices()
 
 void Serial::readyToRead()
 {
-    qDebug() <<"Signal readyRead fired by QSerialPort.";
     emit SIG_dataAvailable(this->read());
 }
 
@@ -122,9 +115,23 @@ void Serial::sendRequest(int requestIndex)
     }
 }
 
+
+QByteArray Serial::read() const
+{
+    QByteArray receivedData;
+    int length;
+    receivedData = serialport->readAll();
+    length = receivedData[1];
+    if(length != receivedData.length() - 1)
+    {
+        qDebug() << "protocol error.";
+        return NULL;
+    }
+    return receivedData;
+}
+
 void Serial::process()
 {
     serialport = new QSerialPort();
     connect(this->serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
-    qDebug() << "Hello from thread!!!";
 }

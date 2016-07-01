@@ -11,7 +11,7 @@
 
 int requestID = 0; //ID for requested data type
 
-double mul[] = FC_INFO_MUL;  // required values for calculation from raw to readable values for Advanced Sensor info
+double mul[80] = FC_INFO_MUL;  // required values for calculation from raw to readable values for Advanced Sensor info
 double add[] = FC_INFO_ADD;
 
 
@@ -105,18 +105,18 @@ void MainWindow::on_btnDisconnect_clicked()
 
 void MainWindow::readData(QByteArray serialdata)
 {
-
-    //QByteArray serialdata = serial->read();
+    if(serialdata != NULL)
+    {
     quint8 requesttype = serialdata[0];
-    qDebug() << "Requesttype: " << requesttype << " Length: " << serialdata.length();
 
     if(serialdata.length() == 33 && requesttype == 0xF0){MainWindow::decodeAdv(serialdata);}
     if(serialdata.length() == 21 && requesttype == 0xDE){MainWindow::decodeSensor(serialdata);}
     if(serialdata.length() == 7 && requesttype == 0x00){MainWindow::decodeAux(serialdata);}
     if(serialdata.length() == 5 && requesttype == 0xDB){MainWindow::decodeMap(serialdata);}
-
+    }
     if(requestID <= 2){requestID++;}
     else{requestID = 0;}
+
     emit SIG_requestSerial(requestID);
 
 }
@@ -124,7 +124,6 @@ void MainWindow::readData(QByteArray serialdata)
 
 void MainWindow::decodeAdv(QByteArray serialdata)
 {
-         qDebug() << "in ADV stream";
          fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialdata.data());
 
          packageADV[0] = mul[0] * info->RPM + add[0];
@@ -154,7 +153,6 @@ void MainWindow::decodeAdv(QByteArray serialdata)
 
          ui->txtConsole->clear();
 
-         ui->txtConsole->append("Data received: " + serialdata + " -> " + QString::number(serialdata.length()) + " bytes length");
          ui->txtConsole->append(map[0] + " " + QString::number(packageADV[0]));
          ui->txtConsole->append(map[1] + " " + QString::number(packageADV[1]));
          ui->txtConsole->append(map[2] + " " + QString::number(packageADV[2]));
@@ -183,7 +181,6 @@ void MainWindow::decodeAdv(QByteArray serialdata)
 
 void MainWindow::decodeSensor(QByteArray serialdata)
 {
-        qDebug() << "in sensor stream";
         fc_sens_info_t* info=reinterpret_cast<fc_sens_info_t*>(serialdata.data());
       //  fc_flag_info_t* info=reinterpret_cast<fc_flag_info_t*>(serialdata.data());
 
@@ -202,7 +199,6 @@ void MainWindow::decodeSensor(QByteArray serialdata)
 
          ui->txtSensConsole->clear();
 
-         ui->txtSensConsole->append("Data received: " + serialdata + " -> " + QString::number(serialdata.length()) + " bytes length");
          ui->txtSensConsole->append(map[42] + " " + QString::number(packageSens[0]));
          ui->txtSensConsole->append(map[43] + " " + QString::number(packageSens[1]));
          ui->txtSensConsole->append(map[44] + " " + QString::number(packageSens[2]));
@@ -230,9 +226,26 @@ void MainWindow::decodeSensor(QByteArray serialdata)
          ui->txtSensConsole->append(map[65] + " " + QString::number(packageSens[8]));
     }
 
+void MainWindow::decodeAux(QByteArray serialdata)
+{
+        fc_aux_info_t* info=reinterpret_cast<fc_aux_info_t*>(serialdata.data());
+
+
+        packageAux[0] = mul[29] * info->AN1 + add[29];
+        packageAux[1] = mul[30] * info->AN2 + add[30];
+        packageAux[2] = mul[31] * info->AN3 + add[31];
+        packageAux[3] = mul[32] * info->AN4 + add[32];
+
+         ui->txtAuxConsole->clear();
+
+         ui->txtAuxConsole->append(map[22] + " " + QString::number(packageAux[0]));
+         ui->txtAuxConsole->append(map[23] + " " + QString::number(packageAux[1]));
+         ui->txtAuxConsole->append(map[24] + " " + QString::number(packageAux[2]));
+         ui->txtAuxConsole->append(map[25] + " " + QString::number(packageAux[3]));
+}
+
 void MainWindow::decodeMap(QByteArray serialdata)
 {
-        qDebug() << "in map indicies stream";
         fc_map_info_t* info=reinterpret_cast<fc_map_info_t*>(serialdata.data());
 
 
@@ -241,29 +254,6 @@ void MainWindow::decodeMap(QByteArray serialdata)
 
          ui->txtMapConsole->clear();
 
-         ui->txtMapConsole->append("Data received: " + serialdata + " -> " + QString::number(serialdata.length()) + " bytes length");
          ui->txtMapConsole->append(map[66] + " " + QString::number(packageMap[0]));
          ui->txtMapConsole->append(map[67] + " " + QString::number(packageMap[1]));
 }
-
-void MainWindow::decodeAux(QByteArray serialdata)
-{
-        qDebug() << "in aux stream";
-        fc_aux_info_t* info=reinterpret_cast<fc_aux_info_t*>(serialdata.data());
-
-
-        packageAux[0] = mul[0] * info->AN1 + add[0];
-        packageAux[1] = mul[0] * info->AN2 + add[0];
-        packageAux[2] = mul[0] * info->AN3 + add[0];
-        packageAux[3] = mul[0] * info->AN4 + add[0];
-
-         ui->txtAuxConsole->clear();
-
-         ui->txtAuxConsole->append("Data received: " + serialdata + " -> " + QString::number(serialdata.length()) + " bytes length");
-         ui->txtAuxConsole->append(map[22] + " " + QString::number(packageAux[0]));
-         ui->txtAuxConsole->append(map[23] + " " + QString::number(packageAux[1]));
-         ui->txtAuxConsole->append(map[24] + " " + QString::number(packageAux[2]));
-         ui->txtAuxConsole->append(map[25] + " " + QString::number(packageAux[3]));
-}
-
-
