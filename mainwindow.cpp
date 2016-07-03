@@ -46,15 +46,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 //----------------------------SIGNALS---------------------------------
-    //connect(serial,SIGNAL(readyRead()), this, SLOT(readData()));
     connect(serialthread, SIGNAL(started()), serial, SLOT(process()));
     connect(serial, SIGNAL(finished()), serialthread, SLOT(quit()));
     connect(serial, SIGNAL(finished()), serial, SLOT(deleteLater()));
     connect(serialthread, SIGNAL(finished()), serialthread, SLOT(deleteLater()));
     //Slots for Serial Communication
-    connect(this, SIGNAL(SIG_connectSerial(SerialSetting::Settings)), serial, SLOT(openConnection(SerialSetting::Settings)),Qt::QueuedConnection);
+    connect(this, SIGNAL(SIG_connectSerial(SerialSetting::Settings)), serial, SLOT(openConnection(SerialSetting::Settings)));
     connect(this, SIGNAL(SIG_requestSerial(int)), serial, SLOT(sendRequest(int)), Qt::QueuedConnection);
-    connect(serial, SIGNAL(SIG_dataAvailable(QByteArray)), this, SLOT(readData(QByteArray)), Qt::QueuedConnection);
+    connect(this, SIGNAL(SIG_closeSerial()), serial, SLOT(closeConnection()));
+    //connect(serial, SIGNAL(SIG_dataAvailable(QByteArray)), this, SLOT(readData(QByteArray)));
+    connect(serial, SIGNAL(SIG_dataAvailable(QByteArray)), this, SLOT(readData(QByteArray)));
 
     serialthread->start();
 }
@@ -66,8 +67,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btnSerialSettings_clicked()
 {
-    //Call windows for Serial settings
-
     wndwSerial->show();
 }
 
@@ -79,17 +78,14 @@ void MainWindow::on_btnConnect_clicked()
     if(settings.portName == "")
     {
         QMessageBox msgBox;
-        //msgBox.setText("No serialport selected");
         msgBox.warning(this,"Warning","\n No serialport selected. \n",QMessageBox::Ok);
         wndwSerial->show();
         return;
     }
     else
     {
-        //serial->openConnection(wndwSerial->settings());
         this->ui->btnConnect->setDisabled(true);
         this->ui->btnDisconnect->setDisabled(false);
-        //serial->sendRequest(requestID);
         emit SIG_connectSerial(settings);
         emit SIG_requestSerial(requestID);
     }
@@ -97,7 +93,7 @@ void MainWindow::on_btnConnect_clicked()
 
 void MainWindow::on_btnDisconnect_clicked()
 {
-    //serial->closeConnection();
+    emit SIG_closeSerial();
     ui->btnDisconnect->setDisabled(true);
     ui->btnConnect->setDisabled(false);
 }
@@ -105,6 +101,7 @@ void MainWindow::on_btnDisconnect_clicked()
 
 void MainWindow::readData(QByteArray serialdata)
 {
+    qDebug() << "readdata";
     if(serialdata != NULL)
     {
     quint8 requesttype = serialdata[0];
@@ -143,8 +140,6 @@ void MainWindow::decodeAdv(QByteArray serialdata)
          packageADV[14] = mul[14] * info->Knock + add[14];
          packageADV[15] = mul[15] * info->BatteryV + add[15];
          packageADV[16] = mul[16] * info->Speed + add[16];
-         //rtv[16] *= speed_correction;
-         //previousSpeed_kph[buf_currentIndex] = rtv[16];
          packageADV[17] = mul[17] * info->Iscvduty + add[17];
          packageADV[18] = mul[18] * info->O2volt + add[18];
          packageADV[19] = mul[19] * info->na1 + add[19];
@@ -182,11 +177,8 @@ void MainWindow::decodeAdv(QByteArray serialdata)
 void MainWindow::decodeSensor(QByteArray serialdata)
 {
         fc_sens_info_t* info=reinterpret_cast<fc_sens_info_t*>(serialdata.data());
-      //  fc_flag_info_t* info=reinterpret_cast<fc_flag_info_t*>(serialdata.data());
 
-
-
-        packageSens[0] = mul[22] * info->pim + add[22];
+        packageSens[0] = mul[22] * info->pim + add[212];
         packageSens[1] = mul[23] * info->vta1 + add[23];
         packageSens[2] = mul[24] * info->vta2 + add[24];
         packageSens[3] = mul[25] * info->vmop + add[25];
@@ -194,8 +186,10 @@ void MainWindow::decodeSensor(QByteArray serialdata)
         packageSens[5] = mul[27] * info->airt + add[27];
         packageSens[6] = mul[28] * info->fuelt + add[28];
         packageSens[7] = mul[29] * info->O2S + add[29];
-        packageSens[8] = info->Bitflags;
 
+        QBitArray flagArray(16);
+        for (int i=0; i<16; i++)
+            flagArray.setBit(i, info->flags>>i & 1);
 
          ui->txtSensConsole->clear();
 
@@ -207,23 +201,23 @@ void MainWindow::decodeSensor(QByteArray serialdata)
          ui->txtSensConsole->append(map[47] + " " + QString::number(packageSens[5]));
          ui->txtSensConsole->append(map[48] + " " + QString::number(packageSens[6]));
          ui->txtSensConsole->append(map[49] + " " + QString::number(packageSens[7]));
-         //ui->txtSensConsole->append(map[50] + " " + QBitArray(info->Bitflags[0])); // From here Flags
-
-         ui->txtSensConsole->append(map[51] + " " + QString::number(packageSens[8]));
-         ui->txtSensConsole->append(map[52] + " " + QString::number(packageSens[8]));
-         ui->txtSensConsole->append(map[53] + " " + QString::number(packageSens[8]));
-         ui->txtSensConsole->append(map[54] + " " + QString::number(packageSens[8]));
-         ui->txtSensConsole->append(map[55] + " " + QString::number(packageSens[8]));
-         ui->txtSensConsole->append(map[56] + " " + QString::number(packageSens[8]));
-         ui->txtSensConsole->append(map[57] + " " + QString::number(packageSens[8]));
-         ui->txtSensConsole->append(map[58] + " " + QString::number(packageSens[8]));
-         ui->txtSensConsole->append(map[59] + " " + QString::number(packageSens[8]));
-         ui->txtSensConsole->append(map[60] + " " + QString::number(packageSens[8]));
-         ui->txtSensConsole->append(map[61] + " " + QString::number(packageSens[8]));
-         ui->txtSensConsole->append(map[62] + " " + QString::number(packageSens[8]));
-         ui->txtSensConsole->append(map[63] + " " + QString::number(packageSens[8]));
-         ui->txtSensConsole->append(map[64] + " " + QString::number(packageSens[8]));
-         ui->txtSensConsole->append(map[65] + " " + QString::number(packageSens[8]));
+         //from here, bit flags
+         ui->txtSensConsole->append(map[50] + " " + QString::number(flagArray[0]));
+         ui->txtSensConsole->append(map[51] + " " + QString::number(flagArray[1]));
+         ui->txtSensConsole->append(map[52] + " " + QString::number(flagArray[2]));
+         ui->txtSensConsole->append(map[53] + " " + QString::number(flagArray[3]));
+         ui->txtSensConsole->append(map[54] + " " + QString::number(flagArray[4]));
+         ui->txtSensConsole->append(map[55] + " " + QString::number(flagArray[5]));
+         ui->txtSensConsole->append(map[56] + " " + QString::number(flagArray[6]));
+         ui->txtSensConsole->append(map[57] + " " + QString::number(flagArray[7]));
+         ui->txtSensConsole->append(map[58] + " " + QString::number(flagArray[8]));
+         ui->txtSensConsole->append(map[59] + " " + QString::number(flagArray[9]));
+         ui->txtSensConsole->append(map[60] + " " + QString::number(flagArray[10]));
+         ui->txtSensConsole->append(map[61] + " " + QString::number(flagArray[11]));
+         ui->txtSensConsole->append(map[62] + " " + QString::number(flagArray[12]));
+         ui->txtSensConsole->append(map[63] + " " + QString::number(flagArray[13]));
+         ui->txtSensConsole->append(map[64] + " " + QString::number(flagArray[14]));
+         ui->txtSensConsole->append(map[65] + " " + QString::number(flagArray[15]));
     }
 
 void MainWindow::decodeAux(QByteArray serialdata)
@@ -248,12 +242,11 @@ void MainWindow::decodeMap(QByteArray serialdata)
 {
         fc_map_info_t* info=reinterpret_cast<fc_map_info_t*>(serialdata.data());
 
-
         packageMap[0] = mul[0] * info->Map_N + add[0];
         packageMap[1] = mul[0] * info->Map_P + add[0];
 
-         ui->txtMapConsole->clear();
+        ui->txtMapConsole->clear();
 
-         ui->txtMapConsole->append(map[66] + " " + QString::number(packageMap[0]));
-         ui->txtMapConsole->append(map[67] + " " + QString::number(packageMap[1]));
+        ui->txtMapConsole->append(map[66] + " " + QString::number(packageMap[0]));
+        ui->txtMapConsole->append(map[67] + " " + QString::number(packageMap[1]));
 }

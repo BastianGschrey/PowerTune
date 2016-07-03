@@ -72,7 +72,7 @@ public:
         quint16 airt;
         quint16 fuelt;
         quint16 O2S;
-        quint16 Bitflags;
+        quint16 flags;
         quint8  checksum;
 
         fc_sens_info_t parse(const QByteArray &);
@@ -106,7 +106,7 @@ public:
     };
 
     // FD3S
-      #define FC_INFO_MUL		{1, 0.0001, 1, 1, 1.0/256, 1.0/256, 1, 1, 1, 212.0/256, 0.4, 0.4, 1, 1, 1, 0.1, 1, 0.1, 0.02, 1, 1.0/256, 1, 100, 100, 100, 100, 100, 100, 100, 5.0/255, 5.0/255, 5.0/255, 5.0/255}
+      #define FC_INFO_MUL		{1, 0.0001, 1, 1, 1.0/256, 1.0/256, 1, 1, 1, 212.0/256, 0.4, 0.4, 1, 1, 1, 0.1, 1, 0.1, 0.02, 1, 1.0/256, 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0/255, 5.0/255, 5.0/255, 5.0/255}
       #define FC_INFO_ADD		{0,-1.0332, 0, 0, 0, 0, -25, -25, -80, 0, 0, 0, -80, -80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
 private slots:
@@ -128,6 +128,7 @@ private:
 signals:
     void SIG_connectSerial(SerialSetting::Settings settings);
     void SIG_requestSerial(int requestID);
+    void SIG_closeSerial();
 
 };
 
