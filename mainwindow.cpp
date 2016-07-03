@@ -54,7 +54,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this, SIGNAL(SIG_connectSerial(SerialSetting::Settings)), serial, SLOT(openConnection(SerialSetting::Settings)));
     connect(this, SIGNAL(SIG_requestSerial(int)), serial, SLOT(sendRequest(int)), Qt::QueuedConnection);
     connect(this, SIGNAL(SIG_closeSerial()), serial, SLOT(closeConnection()));
-    //connect(serial, SIGNAL(SIG_dataAvailable(QByteArray)), this, SLOT(readData(QByteArray)));
     connect(serial, SIGNAL(SIG_dataAvailable(QByteArray)), this, SLOT(readData(QByteArray)));
 
     serialthread->start();

@@ -32,8 +32,6 @@ class Serial : public QObject
     Q_OBJECT
 
 public:
-
-    QByteArray read() const;
     void clear() const;
 
 public:
@@ -45,8 +43,6 @@ public:
     void getAux();
     void getSensorData();
     void getMapIndices();
-
-
 
 
 private:

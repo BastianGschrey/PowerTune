@@ -22,6 +22,7 @@
 
 #include "serial.h"
 #include <QDebug>
+#include <QThread>
 
 Serial::Serial(QObject *parent) : QObject(parent)
 {
@@ -87,9 +88,37 @@ void Serial::getMapIndices()
 //End of serial requests
 
 
+
+
+
+
+
+
 void Serial::readyToRead()
 {
-    emit SIG_dataAvailable(this->read());
+    QByteArray dataBody;
+    QByteArray dataHeader;
+    int packetLength;
+
+     while(serialport->bytesAvailable() < 2)
+     {
+         QThread::msleep(10);
+     }
+
+     dataHeader = serialport->read(2);
+     packetLength = dataHeader[1] -1;
+
+
+     while(dataBody.length() != packetLength)
+     {
+         dataBody.append(serialport->readAll());
+         qDebug() << "Bodylength: " << dataBody.length() << "Headerlength: " << packetLength;
+     }
+
+     dataHeader.append(dataBody);
+     qDebug() << "Length whole Packet: " << dataHeader.length();
+
+    emit SIG_dataAvailable(dataHeader);
 }
 
 
@@ -113,21 +142,6 @@ void Serial::sendRequest(int requestIndex)
         requestIndex = 0;
         break;
     }
-}
-
-
-QByteArray Serial::read() const
-{
-    QByteArray receivedData;
-    int length;
-    receivedData = serialport->readAll();
-    length = receivedData[1];
-    if(length != receivedData.length() - 1)
-    {
-        qDebug() << "protocol error.";
-        return NULL;
-    }
-    return receivedData;
 }
 
 void Serial::process()
