@@ -55,7 +55,6 @@ void error(QString err);
 void SIG_dataAvailable(QByteArray);
 
 public slots:
-    void process();
     void readyToRead();
     void openConnection(SerialSetting::Settings p); //open serial connection with settings
     void sendRequest(int requestIndex);

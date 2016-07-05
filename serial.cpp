@@ -26,16 +26,15 @@
 
 Serial::Serial(QObject *parent) : QObject(parent)
 {
-
-//connect(this->serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
-
-//serialport = new QSerialPort(this); <- Defined in Header, constuctor heap allocation now allowed in a thread - will crash
+    serialport = new QSerialPort(this);
+    connect(this->serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
 }
 
 //function for flushing all serial buffers
 void Serial::clear() const
 {
     serialport->clear();
+
 }
 
 //function to open serial port
@@ -43,9 +42,9 @@ void Serial::openConnection(SerialSetting::Settings p)
 {
 qDebug() << "Enter openConnection function";
 serialport->setBaudRate(QSerialPort::Baud57600);
+qDebug() <<"set baud";
 serialport->setPortName(p.portName);
 serialport->setParity(serialport->NoParity);
-
 serialport->setDataBits(QSerialPort::Data8);
 serialport->setStopBits(QSerialPort::OneStop);
 serialport->setFlowControl(QSerialPort::NoFlowControl);
@@ -102,16 +101,18 @@ void Serial::readyToRead()
 
      while(serialport->bytesAvailable() < 2)
      {
+         qDebug() << serialport->bytesAvailable();
          QThread::msleep(10);
      }
 
      dataHeader = serialport->read(2);
      packetLength = dataHeader[1] -1;
-
-
      while(dataBody.length() != packetLength)
      {
-         dataBody.append(serialport->readAll());
+
+            dataBody += serialport->readAll();
+
+         //dataBody.append(serialport->readAll());
          qDebug() << "Bodylength: " << dataBody.length() << "Headerlength: " << packetLength;
      }
 
@@ -142,10 +143,4 @@ void Serial::sendRequest(int requestIndex)
         requestIndex = 0;
         break;
     }
-}
-
-void Serial::process()
-{
-    serialport = new QSerialPort();
-    connect(this->serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
 }

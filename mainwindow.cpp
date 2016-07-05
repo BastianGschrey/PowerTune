@@ -37,26 +37,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     wndwSerial = new SerialSetting();
     ui->btnDisconnect->setDisabled(true);
+    serial = new Serial();
 
-    QThread* serialthread = new QThread;
-    Serial*  serial = new Serial();
-    serial->moveToThread(serialthread);
-    qRegisterMetaType<SerialSetting::Settings>();
+    connect(serial,SIGNAL(SIG_dataAvailable(QByteArray)),this,SLOT(readData(QByteArray)));
 
 
 
-//----------------------------SIGNALS---------------------------------
-    connect(serialthread, SIGNAL(started()), serial, SLOT(process()));
-    connect(serial, SIGNAL(finished()), serialthread, SLOT(quit()));
-    connect(serial, SIGNAL(finished()), serial, SLOT(deleteLater()));
-    connect(serialthread, SIGNAL(finished()), serialthread, SLOT(deleteLater()));
-    //Slots for Serial Communication
-    connect(this, SIGNAL(SIG_connectSerial(SerialSetting::Settings)), serial, SLOT(openConnection(SerialSetting::Settings)));
-    connect(this, SIGNAL(SIG_requestSerial(int)), serial, SLOT(sendRequest(int)), Qt::QueuedConnection);
-    connect(this, SIGNAL(SIG_closeSerial()), serial, SLOT(closeConnection()));
-    connect(serial, SIGNAL(SIG_dataAvailable(QByteArray)), this, SLOT(readData(QByteArray)));
-
-    serialthread->start();
 }
 
 MainWindow::~MainWindow()
@@ -85,8 +71,8 @@ void MainWindow::on_btnConnect_clicked()
     {
         this->ui->btnConnect->setDisabled(true);
         this->ui->btnDisconnect->setDisabled(false);
-        emit SIG_connectSerial(settings);
-        emit SIG_requestSerial(requestID);
+        serial->openConnection(settings);
+        serial->sendRequest(requestID);
     }
 }
 
@@ -113,7 +99,7 @@ void MainWindow::readData(QByteArray serialdata)
     if(requestID <= 2){requestID++;}
     else{requestID = 0;}
 
-    emit SIG_requestSerial(requestID);
+    serial->sendRequest(requestID);
 
 }
 
