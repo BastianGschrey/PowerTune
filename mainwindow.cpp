@@ -10,6 +10,7 @@
 #include <QThread>
 
 int requestID = 0; //ID for requested data type
+QByteArray serialdata;
 
 double mul[80] = FC_INFO_MUL;  // required values for calculation from raw to readable values for Advanced Sensor info
 double add[] = FC_INFO_ADD;
@@ -84,22 +85,27 @@ void MainWindow::on_btnDisconnect_clicked()
 }
 
 
-void MainWindow::readData(QByteArray serialdata)
+void MainWindow::readData(QByteArray ClassSerialData)
 {
+    serialdata.append(ClassSerialData);
     qDebug() << "readdata";
     if(serialdata != NULL)
     {
-    quint8 requesttype = serialdata[0];
+        quint8 requesttype = serialdata[0];
+        if(serialdata[1] + 1 == serialdata.length())
+        {
+            if(serialdata.length() == 33 && requesttype == 0xF0){MainWindow::decodeAdv(serialdata);}
+            if(serialdata.length() == 21 && requesttype == 0xDE){MainWindow::decodeSensor(serialdata);}
+            if(serialdata.length() == 7 && requesttype == 0x00){MainWindow::decodeAux(serialdata);}
+            if(serialdata.length() == 5 && requesttype == 0xDB){MainWindow::decodeMap(serialdata);}
+            serialdata.clear();
+            if(requestID <= 2){requestID++;}
+            else{requestID = 0;}
 
-    if(serialdata.length() == 33 && requesttype == 0xF0){MainWindow::decodeAdv(serialdata);}
-    if(serialdata.length() == 21 && requesttype == 0xDE){MainWindow::decodeSensor(serialdata);}
-    if(serialdata.length() == 7 && requesttype == 0x00){MainWindow::decodeAux(serialdata);}
-    if(serialdata.length() == 5 && requesttype == 0xDB){MainWindow::decodeMap(serialdata);}
+            serial->sendRequest(requestID);
+        }
     }
-    if(requestID <= 2){requestID++;}
-    else{requestID = 0;}
 
-    serial->sendRequest(requestID);
 
 }
 

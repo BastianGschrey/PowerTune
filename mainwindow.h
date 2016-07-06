@@ -113,7 +113,7 @@ private slots:
     void on_btnSerialSettings_clicked();
     void on_btnConnect_clicked();
     void on_btnDisconnect_clicked();
-    void readData(QByteArray serialdata);
+    void readData(QByteArray ClassSerialData);
     void decodeAdv(QByteArray serialdata);
     void decodeSensor(QByteArray serialdata);
     void decodeAux(QByteArray serialdata);

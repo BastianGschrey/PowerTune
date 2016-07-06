@@ -87,39 +87,10 @@ void Serial::getMapIndices()
 //End of serial requests
 
 
-
-
-
-
-
-
 void Serial::readyToRead()
 {
-    QByteArray dataBody;
-    QByteArray dataHeader;
-    int packetLength;
 
-     while(serialport->bytesAvailable() < 2)
-     {
-         qDebug() << serialport->bytesAvailable();
-         QThread::msleep(10);
-     }
-
-     dataHeader = serialport->read(2);
-     packetLength = dataHeader[1] -1;
-     while(dataBody.length() != packetLength)
-     {
-
-            dataBody += serialport->readAll();
-
-         //dataBody.append(serialport->readAll());
-         qDebug() << "Bodylength: " << dataBody.length() << "Headerlength: " << packetLength;
-     }
-
-     dataHeader.append(dataBody);
-     qDebug() << "Length whole Packet: " << dataHeader.length();
-
-    emit SIG_dataAvailable(dataHeader);
+            emit SIG_dataAvailable(serialport->readAll());
 }
 
 
