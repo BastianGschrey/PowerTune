@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1377</width>
-    <height>765</height>
+    <height>729</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="btnSerialSettings">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>630</y>
+      <x>310</x>
+      <y>640</y>
       <width>95</width>
       <height>30</height>
      </rect>
@@ -27,34 +27,24 @@
      <string>Settings</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="txtConsole">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>50</y>
-      <width>261</width>
-      <height>561</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="btnConnect">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>630</y>
+      <x>110</x>
+      <y>640</y>
       <width>91</width>
       <height>30</height>
      </rect>
     </property>
     <property name="text">
-     <string>Connect</string>
+     <string>Live Data</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btnDisconnect">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>630</y>
+      <x>210</x>
+      <y>640</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -63,109 +53,345 @@
      <string>Disconnect</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="txtSensConsole">
+   <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>50</y>
-      <width>261</width>
-      <height>561</height>
+      <x>0</x>
+      <y>0</y>
+      <width>1681</width>
+      <height>631</height>
      </rect>
     </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="LiveData">
+     <attribute name="title">
+      <string>Live Data</string>
+     </attribute>
+     <widget class="QTextBrowser" name="txtBasicConsole">
+      <property name="geometry">
+       <rect>
+        <x>1090</x>
+        <y>30</y>
+        <width>261</width>
+        <height>561</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="txtAuxConsole">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>30</y>
+        <width>261</width>
+        <height>561</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="txtSensConsole">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>30</y>
+        <width>251</width>
+        <height>561</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="txtMapConsole">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>30</y>
+        <width>261</width>
+        <height>561</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="txtConsole">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>261</width>
+        <height>561</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>10</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Advanced Info</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>10</y>
+        <width>101</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Sensor Info</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>650</x>
+        <y>10</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Map indicies</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>930</x>
+        <y>10</y>
+        <width>35</width>
+        <height>10</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Aux Info</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>1190</x>
+        <y>10</y>
+        <width>151</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Basic sensor Data</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="Settings1">
+     <attribute name="title">
+      <string>Settings 1</string>
+     </attribute>
+     <widget class="QFrame" name="frame">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>361</width>
+        <height>231</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="label_13">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>200</y>
+         <width>35</width>
+         <height>10</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Idle A/C</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_12">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>170</y>
+         <width>35</width>
+         <height>10</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Idle EL</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_11">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>140</y>
+         <width>35</width>
+         <height>10</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Idle AE</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_8">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>50</y>
+         <width>35</width>
+         <height>10</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>F/C AE</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>10</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Rev Limit</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_9">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>80</y>
+         <width>35</width>
+         <height>10</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>F/C E/L</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_10">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>110</y>
+         <width>35</width>
+         <height>10</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>F/C A/C</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineRevlim">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>10</y>
+         <width>81</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineFCAE">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>50</y>
+         <width>81</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineFCEL">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>80</y>
+         <width>81</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineFCAC">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>110</y>
+         <width>81</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineIdleEL">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>170</y>
+         <width>81</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineIdleAE">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>140</y>
+         <width>81</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineIdleAC">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>200</y>
+         <width>81</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>10</y>
+        <width>35</width>
+        <height>10</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Rev / Idle</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QPushButton" name="btnReadAll">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>0</y>
-      <width>161</width>
-      <height>41</height>
+      <x>10</x>
+      <y>640</y>
+      <width>91</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>Advanced Info </string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>0</y>
-      <width>161</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Sensor Info</string>
-    </property>
-   </widget>
-   <widget class="QTextBrowser" name="txtMapConsole">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>50</y>
-      <width>261</width>
-      <height>561</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>0</y>
-      <width>201</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Map indicies </string>
-    </property>
-   </widget>
-   <widget class="QTextBrowser" name="txtAuxConsole">
-    <property name="geometry">
-     <rect>
-      <x>820</x>
-      <y>50</y>
-      <width>261</width>
-      <height>561</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_4">
-    <property name="geometry">
-     <rect>
-      <x>830</x>
-      <y>0</y>
-      <width>231</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Aux Info</string>
-    </property>
-   </widget>
-   <widget class="QTextBrowser" name="txtBasicConsole">
-    <property name="geometry">
-     <rect>
-      <x>1090</x>
-      <y>50</y>
-      <width>261</width>
-      <height>561</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_5">
-    <property name="geometry">
-     <rect>
-      <x>1110</x>
-      <y>0</y>
-      <width>231</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Basic Sensor Data </string>
+     <string>not working</string>
     </property>
    </widget>
   </widget>
