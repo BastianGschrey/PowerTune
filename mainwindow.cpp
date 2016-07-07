@@ -124,6 +124,7 @@ void MainWindow::readData(QByteArray ClassSerialData)
             if(serialdata.length() == 5 && requesttype == 0xDB){MainWindow::decodeMap(serialdata);}
             if(serialdata.length() == 23 && requesttype == 0xDA){MainWindow::decodeBasic(serialdata);}
             if(serialdata.length() == 17 && requesttype == 0xB8){MainWindow::decodeRevIdle(serialdata);}
+            if(serialdata.length() == 12 && requesttype == 0x7D){MainWindow::decodeTurboTrans(serialdata);}
             serialdata.clear();
             if(requestID <= 41){requestID++;}
             else{requestID = 38;}
@@ -315,4 +316,29 @@ void MainWindow::decodeRevIdle(QByteArray serialdata)
     ui->lineIdleAE->setText (QString::number(packageRevIdle[4]));
     ui->lineIdleEL->setText (QString::number(packageRevIdle[5]));
     ui->lineIdleAC->setText (QString::number(packageRevIdle[6]));
+}
+
+void MainWindow::decodeTurboTrans(QByteArray serialdata)
+{
+    fc_TurboTrans_info_t* info=reinterpret_cast<fc_TurboTrans_info_t*>(serialdata.data());
+
+    packageTurboTrans[0] = mul[35] * info->TPS01;
+    packageTurboTrans[1] = mul[35] * info->TPS02;
+    packageTurboTrans[2] = mul[35] * info->TPS03;
+    packageTurboTrans[3] = mul[36] * info->LowRPM1;
+    packageTurboTrans[4] = mul[36] * info->LowRPM2;
+    packageTurboTrans[5] = mul[36] * info->LowRPM3;
+    packageTurboTrans[6] = mul[36] * info->HighRPM1;
+    packageTurboTrans[7] = mul[36] * info->HighRPM2;
+    packageTurboTrans[8] = mul[36] * info->HighRPM3;
+
+    ui->lineTPS01->setText (QString::number(packageTurboTrans[0]));
+    ui->lineTPS02->setText (QString::number(packageTurboTrans[1]));
+    ui->lineTPS03->setText (QString::number(packageTurboTrans[2]));
+    ui->lineLowRPM1->setText (QString::number(packageTurboTrans[3]));
+    ui->lineLowRPM2->setText (QString::number(packageTurboTrans[4]));
+    ui->lineLowRPM3->setText (QString::number(packageTurboTrans[5]));
+    ui->lineHighRPM1->setText (QString::number(packageTurboTrans[6]));
+    ui->lineHighRPM2->setText (QString::number(packageTurboTrans[7]));
+    ui->lineHighRPM3->setText (QString::number(packageTurboTrans[8]));
 }
