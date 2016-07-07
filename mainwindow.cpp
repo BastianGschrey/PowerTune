@@ -29,7 +29,9 @@ static QString map[] = {"rpm", "pim", "pimV",
                        "Power", "Accel", "GForce", "ForceN", "Gear", "PrimaryInjD", "AccelTimer",
                        "Rec","Sens_PIM","Sens_VTA1","Sens_VTA2","Sens_VMOP","Sens_Wtrt","Sens_Airt",
                        "Sens_Fuel","Sens_O2", "STR", "A/C", "PWS", "NTR", "CLT",
-                       "STP", "CAT", "ELD", "HWL", "FPD", "FPR", "APR", "PAC", "CCN", "TCN", "PRC" ,"MAP_N","MAP_P"};
+                       "STP", "CAT", "ELD", "HWL", "FPD", "FPR", "APR", "PAC", "CCN", "TCN", "PRC" ,"MAP_N","MAP_P",
+                       "Basic_Injduty", "Basic_IGL", "Basic_IGT", "Basic_RPM", "Basic_KPH", "Basic_Boost", "Basic_Knock", "Basic_Watert", "Basic_Airt", "Basic_BattV",};
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -98,8 +100,9 @@ void MainWindow::readData(QByteArray ClassSerialData)
             if(serialdata.length() == 21 && requesttype == 0xDE){MainWindow::decodeSensor(serialdata);}
             if(serialdata.length() == 7 && requesttype == 0x00){MainWindow::decodeAux(serialdata);}
             if(serialdata.length() == 5 && requesttype == 0xDB){MainWindow::decodeMap(serialdata);}
+            if(serialdata.length() == 23 && requesttype == 0xDA){MainWindow::decodeBasic(serialdata);}
             serialdata.clear();
-            if(requestID <= 2){requestID++;}
+            if(requestID <= 3){requestID++;}
             else{requestID = 0;}
 
             serial->sendRequest(requestID);
@@ -116,16 +119,16 @@ void MainWindow::decodeAdv(QByteArray serialdata)
 
          packageADV[0] = mul[0] * info->RPM + add[0];
          packageADV[1] = mul[1] * info->Intakepress + add[1];
-         packageADV[2] = mul[2] * info->PressureV + add[2];
-         packageADV[3] = mul[3] * info->ThrottleV + add[3];
+         packageADV[2] = mul[34] * info->PressureV + add[2];  //Value in Volt
+         packageADV[3] = mul[34] * info->ThrottleV + add[3];  //Value in Volt
          packageADV[4] = mul[4] * info->Primaryinp + add[4];
          packageADV[5] = mul[5] * info->Fuelc + add[5];
          packageADV[6] = mul[6] * info->Leadingign + add[6];
          packageADV[7] = mul[7] * info->Trailingign + add[7];
          packageADV[8] = mul[8] * info->Fueltemp + add[8];
-         packageADV[9] = mul[9] * info->Moilp + add[9];
-         packageADV[10] = mul[10] * info->Boosttp + add[10];
-         packageADV[11] = mul[11] * info->Boostwg + add[11];
+         packageADV[9] = mul[9] * info->Moilp + add[9];     //Value lower by 10 compared to FC Edit
+         packageADV[10] = mul[10] * info->Boosttp + add[10];    //Value shows correctly in Percent (FC edit shows just raw value
+         packageADV[11] = mul[11] * info->Boostwg + add[11];    //Value shows correctly in Percent (FC edit shows just raw value
          packageADV[12] = mul[12] * info->Watertemp + add[12];
          packageADV[13] = mul[13] * info->Intaketemp + add[13];
          packageADV[14] = mul[14] * info->Knock + add[14];
@@ -169,14 +172,14 @@ void MainWindow::decodeSensor(QByteArray serialdata)
 {
         fc_sens_info_t* info=reinterpret_cast<fc_sens_info_t*>(serialdata.data());
 
-        packageSens[0] = mul[22] * info->pim + add[212];
-        packageSens[1] = mul[23] * info->vta1 + add[23];
-        packageSens[2] = mul[24] * info->vta2 + add[24];
-        packageSens[3] = mul[25] * info->vmop + add[25];
-        packageSens[4] = mul[26] * info->wtrt + add[26];
-        packageSens[5] = mul[27] * info->airt + add[27];
-        packageSens[6] = mul[28] * info->fuelt + add[28];
-        packageSens[7] = mul[29] * info->O2S + add[29];
+        packageSens[0] = mul[33] * info->pim + add[0];
+        packageSens[1] = mul[33] * info->vta1 + add[0];
+        packageSens[2] = mul[33] * info->vta2 + add[0];
+        packageSens[3] = mul[33] * info->vmop + add[0];  //calculation incorrect compared with FC Edit
+        packageSens[4] = mul[33] * info->wtrt + add[0];
+        packageSens[5] = mul[33] * info->airt + add[0];
+        packageSens[6] = mul[33] * info->fuelt + add[0]; //calculation incorrect
+        packageSens[7] = mul[33] * info->O2S + add[0];
 
         QBitArray flagArray(16);
         for (int i=0; i<16; i++)
@@ -240,4 +243,32 @@ void MainWindow::decodeMap(QByteArray serialdata)
 
         ui->txtMapConsole->append(map[66] + " " + QString::number(packageMap[0]));
         ui->txtMapConsole->append(map[67] + " " + QString::number(packageMap[1]));
+}
+void MainWindow::decodeBasic(QByteArray serialdata)
+{
+        fc_Basic_info_t* info=reinterpret_cast<fc_Basic_info_t*>(serialdata.data());
+
+        packageBasic[0] = mul[15] * info->Basic_Injduty + add[0];
+        packageBasic[1] = mul[0] * info->Basic_IGL + add[6];
+        packageBasic[2] = mul[0] * info->Basic_IGT + add[6];
+        packageBasic[3] = mul[0] * info->Basic_RPM + add[0];
+        packageBasic[4] = mul[0] * info->Basic_KPH + add[0];
+        packageBasic[5] = mul[0] * info->Basic_Boost + add[0];  //calculation not yet correct
+        packageBasic[6] = mul[0] * info->Basic_Knock + add[0];
+        packageBasic[7] = mul[0] * info->Basic_Watert + add[8];
+        packageBasic[8] = mul[0] * info->Basic_Airt + add[8];
+        packageBasic[9] = mul[15] * info->Basic_BattV + add[0];
+
+        ui->txtBasicConsole->clear();
+
+        ui->txtBasicConsole->append(map[68] + " " + QString::number(packageBasic[0]));
+        ui->txtBasicConsole->append(map[69] + " " + QString::number(packageBasic[1]));
+        ui->txtBasicConsole->append(map[70] + " " + QString::number(packageBasic[2]));
+        ui->txtBasicConsole->append(map[71] + " " + QString::number(packageBasic[3]));
+        ui->txtBasicConsole->append(map[72] + " " + QString::number(packageBasic[4]));
+        ui->txtBasicConsole->append(map[73] + " " + QString::number(packageBasic[5]));
+        ui->txtBasicConsole->append(map[74] + " " + QString::number(packageBasic[6]));
+        ui->txtBasicConsole->append(map[75] + " " + QString::number(packageBasic[7]));
+        ui->txtBasicConsole->append(map[76] + " " + QString::number(packageBasic[8]));
+        ui->txtBasicConsole->append(map[77] + " " + QString::number(packageBasic[9]));
 }
