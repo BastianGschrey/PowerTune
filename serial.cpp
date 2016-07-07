@@ -83,6 +83,11 @@ void Serial::getAux()
 void Serial::getMapIndices()
 {
     serialport->write(QByteArray::fromHex("DB0222"));
+
+}
+void Serial::getBasic()
+{
+    serialport->write(QByteArray::fromHex("DA0223"));
 }
 //End of serial requests
 
@@ -111,7 +116,12 @@ void Serial::sendRequest(int requestIndex)
         break;
     case 3:
         Serial::getSensorData();
+        requestIndex++;
+        break;
+    case 4:
+        Serial::getBasic();
         requestIndex = 0;
         break;
     }
 }
+
