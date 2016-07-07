@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1158</width>
-    <height>726</height>
+    <width>1377</width>
+    <height>765</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -145,14 +145,37 @@
      <string>Aux Info</string>
     </property>
    </widget>
+   <widget class="QTextBrowser" name="txtBasicConsole">
+    <property name="geometry">
+     <rect>
+      <x>1090</x>
+      <y>50</y>
+      <width>261</width>
+      <height>561</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_5">
+    <property name="geometry">
+     <rect>
+      <x>1110</x>
+      <y>0</y>
+      <width>231</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Basic Sensor Data </string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1158</width>
-     <height>25</height>
+     <width>1377</width>
+     <height>17</height>
     </rect>
    </property>
   </widget>
