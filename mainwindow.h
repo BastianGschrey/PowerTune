@@ -105,8 +105,28 @@ public:
         fc_aux_info_t parse(const QByteArray &);
     };
 
+    double packageBasic[22];
+
+    struct fc_Basic_info_t{
+
+        quint16 requesttype;
+        quint16 Basic_Injduty;
+        quint16 Basic_IGL;
+        quint16 Basic_IGT;
+        quint16 Basic_RPM;
+        quint16 Basic_KPH;
+        quint16 Basic_Boost;
+        quint16 Basic_Knock;
+        quint16 Basic_Watert;
+        quint16 Basic_Airt;
+        quint16 Basic_BattV;
+        quint8 checksum;
+
+        fc_Basic_info_t parse(const QByteArray &);
+    };
+
     // FD3S
-      #define FC_INFO_MUL		{1, 0.0001, 1, 1, 1.0/256, 1.0/256, 1, 1, 1, 212.0/256, 0.4, 0.4, 1, 1, 1, 0.1, 1, 0.1, 0.02, 1, 1.0/256, 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0/255, 5.0/255, 5.0/255, 5.0/255}
+      #define FC_INFO_MUL		{1, 0.0001, 1, 1, 1.0/256, 1.0/256, 1, 1, 1, 212.0/256, 0.4, 0.4, 1, 1, 1, 0.1, 1, 0.1, 0.02, 1, 1.0/256, 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0/255, 5.0/255, 5.0/255, 5.0/255, 0.01, 0.001}
       #define FC_INFO_ADD		{0,-1.0332, 0, 0, 0, 0, -25, -25, -80, 0, 0, 0, -80, -80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
 private slots:
@@ -118,6 +138,7 @@ private slots:
     void decodeSensor(QByteArray serialdata);
     void decodeAux(QByteArray serialdata);
     void decodeMap(QByteArray serialdata);
+    void decodeBasic(QByteArray serialdata);
 
 
 private:
