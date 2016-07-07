@@ -43,6 +43,7 @@ public:
     void getAux();
     void getSensorData();
     void getMapIndices();
+    void getBasic();
 
 
 private:
