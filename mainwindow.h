@@ -125,12 +125,32 @@ public:
         fc_Basic_info_t parse(const QByteArray &);
     };
 
+     double packageRevIdle[16];
+
+     struct fc_RevIdle_info_t{
+
+        quint16 requesttype;
+        quint16 RevLIM;
+        quint16 FCAE;
+        quint16 FCEL;
+        quint16 FCAC;
+        quint16 IdleAE;
+        quint16 IdleEL;
+        quint16 IdleAC;
+        quint8 checksum;
+
+        fc_RevIdle_info_t parse(const QByteArray &);
+    };
+
+
+
     // FD3S
       #define FC_INFO_MUL		{1, 0.0001, 1, 1, 1.0/256, 1.0/256, 1, 1, 1, 212.0/256, 0.4, 0.4, 1, 1, 1, 0.1, 1, 0.1, 0.02, 1, 1.0/256, 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0/255, 5.0/255, 5.0/255, 5.0/255, 0.01, 0.001}
       #define FC_INFO_ADD		{0,-1.0332, 0, 0, 0, 0, -25, -25, -80, 0, 0, 0, -80, -80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
 private slots:
     void on_btnSerialSettings_clicked();
+    void on_btnReadAll_clicked();
     void on_btnConnect_clicked();
     void on_btnDisconnect_clicked();
     void readData(QByteArray ClassSerialData);
@@ -139,6 +159,7 @@ private slots:
     void decodeAux(QByteArray serialdata);
     void decodeMap(QByteArray serialdata);
     void decodeBasic(QByteArray serialdata);
+    void decodeRevIdle(QByteArray serialdata);
 
 
 private:
