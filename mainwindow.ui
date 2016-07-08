@@ -63,7 +63,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="LiveData">
      <attribute name="title">
@@ -740,15 +740,30 @@
     </widget>
     <widget class="QWidget" name="tab">
      <attribute name="title">
-      <string>Page</string>
+      <string>IGL MAP</string>
      </attribute>
      <widget class="QTableView" name="tableLeadIgn">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>20</y>
+        <x>10</x>
+        <y>10</y>
         <width>1201</width>
         <height>561</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="IGTMap">
+     <attribute name="title">
+      <string>IGT MAP</string>
+     </attribute>
+     <widget class="QTableView" name="tableTrailIgn">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>401</width>
+        <height>192</height>
        </rect>
       </property>
      </widget>
