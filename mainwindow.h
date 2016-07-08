@@ -13,6 +13,7 @@
 #include <QBitArray>
 #include <QMessageBox>
 #include <QMetaType>
+#include <QStandardItem>
 
 namespace Ui {
 class MainWindow;
@@ -27,7 +28,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-
+    QStandardItemModel *model = new QStandardItemModel(20,20,this);
     double packageADV[33];
 
     struct fc_adv_info_t{
@@ -181,6 +182,14 @@ private slots:
     void decodeRevIdle(QByteArray serialdata);
     void decodeTurboTrans(QByteArray serialdata);
     void decodeLeadIgn1(QByteArray serialdata);
+    void decodeLeadIgn2(QByteArray serialdata);
+    void decodeLeadIgn3(QByteArray serialdata);
+    void decodeLeadIgn4(QByteArray serialdata);
+    void decodeTrailIgn1(QByteArray serialdata);
+    void decodeTrailIgn2(QByteArray serialdata);
+    void decodeTrailIgn3(QByteArray serialdata);
+    void decodeTrailIgn4(QByteArray serialdata);
+
 
 private:
     Ui::MainWindow *ui;
