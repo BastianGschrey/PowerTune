@@ -29,6 +29,9 @@ public:
     ~MainWindow();
 
     QStandardItemModel *model = new QStandardItemModel(20,20,this);
+    QStandardItemModel *model1 = new QStandardItemModel(20,20,this);
+    QStandardItemModel *model2 = new QStandardItemModel(20,20,this);
+
     double packageADV[33];
 
     struct fc_adv_info_t{
@@ -189,7 +192,10 @@ private slots:
     void decodeTrailIgn2(QByteArray serialdata);
     void decodeTrailIgn3(QByteArray serialdata);
     void decodeTrailIgn4(QByteArray serialdata);
-
+    void decodeInjcorr1(QByteArray serialdata);
+    void decodeInjcorr2(QByteArray serialdata);
+    void decodeInjcorr3(QByteArray serialdata);
+    void decodeInjcorr4(QByteArray serialdata);
 
 private:
     Ui::MainWindow *ui;
