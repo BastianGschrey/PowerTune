@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <QThread>
 #include <QStandardItemModel>
+#include <QHeaderView>
 
 int requestID = 0; //ID for requested data type
 QByteArray serialdata;
@@ -136,6 +137,10 @@ void MainWindow::readData(QByteArray ClassSerialData)
             if(serialdata.length() == 103 && requesttype == 0x82){MainWindow::decodeTrailIgn2(serialdata);}
             if(serialdata.length() == 103 && requesttype == 0x83){MainWindow::decodeTrailIgn3(serialdata);}
             if(serialdata.length() == 103 && requesttype == 0x84){MainWindow::decodeTrailIgn4(serialdata);}
+            if(serialdata.length() == 103 && requesttype == 0x86){MainWindow::decodeInjcorr1(serialdata);}
+            if(serialdata.length() == 103 && requesttype == 0x87){MainWindow::decodeInjcorr2(serialdata);}
+            if(serialdata.length() == 103 && requesttype == 0x88){MainWindow::decodeInjcorr3(serialdata);}
+            if(serialdata.length() == 103 && requesttype == 0x89){MainWindow::decodeInjcorr4(serialdata);}
 
             serialdata.clear();
             serialdata.clear();
@@ -368,6 +373,8 @@ void MainWindow::decodeLeadIgn1(QByteArray serialdata)
                 if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
                     QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
                     model->setItem(row,column,value);
+                    ui->tableLeadIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableLeadIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
                     ui->tableLeadIgn->setModel(model);
             }
         }
@@ -383,6 +390,8 @@ void MainWindow::decodeLeadIgn2(QByteArray serialdata)
                 if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
                     QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
                     model->setItem(row,column,value);
+                    ui->tableLeadIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableLeadIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
                     ui->tableLeadIgn->setModel(model);
             }
         }
@@ -398,6 +407,8 @@ void MainWindow::decodeLeadIgn3(QByteArray serialdata)
                 if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
                     QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
                     model->setItem(row,column,value);
+                    ui->tableLeadIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableLeadIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
                     ui->tableLeadIgn->setModel(model);
             }
         }
@@ -413,6 +424,8 @@ void MainWindow::decodeLeadIgn4(QByteArray serialdata)
                 if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
                     QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
                     model->setItem(row,column,value);
+                    ui->tableLeadIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableLeadIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
                     ui->tableLeadIgn->setModel(model);
             }
         }
@@ -429,8 +442,10 @@ void MainWindow::decodeTrailIgn1(QByteArray serialdata)
             {
                 if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
                     QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
-                    model->setItem(row,column,value);
-                    ui->tableTrailIgn->setModel(model);
+                    model1->setItem(row,column,value);
+                    ui->tableTrailIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableTrailIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableTrailIgn->setModel(model1);
             }
         }
 }
@@ -444,8 +459,10 @@ void MainWindow::decodeTrailIgn2(QByteArray serialdata)
             {
                 if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
                     QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
-                    model->setItem(row,column,value);
-                    ui->tableTrailIgn->setModel(model);
+                    model1->setItem(row,column,value);
+                    ui->tableTrailIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableTrailIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableTrailIgn->setModel(model1);
             }
         }
 }
@@ -459,8 +476,10 @@ void MainWindow::decodeTrailIgn3(QByteArray serialdata)
             {
                 if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
                     QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
-                    model->setItem(row,column,value);
-                    ui->tableTrailIgn->setModel(model);
+                    model1->setItem(row,column,value);
+                    ui->tableTrailIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableTrailIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableTrailIgn->setModel(model1);
             }
         }
 }
@@ -474,9 +493,80 @@ void MainWindow::decodeTrailIgn4(QByteArray serialdata)
             {
                 if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
                     QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
-                    model->setItem(row,column,value);
-                    ui->tableTrailIgn->setModel(model);
+                    model1->setItem(row,column,value);
+                    ui->tableTrailIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableTrailIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableTrailIgn->setModel(model1);
             }
         }
 }
+//Injector correction
+void MainWindow::decodeInjcorr1(QByteArray serialdata)
+{
+    //Fill Table view with Injector correction Table1
 
+    int countarray = 1; //counter for the position in the array
+        for (int column = 0; column < 5; column++) //increases the counter column by 1 until column 5
+        {
+            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
+            {
+                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
+                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray])); //insert the array here and use count array for position in array
+                    model2->setItem(row,column,value);
+                    ui->tableInjCorr->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableInjCorr->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableInjCorr->setModel(model2);
+            }
+        }
+}
+void MainWindow::decodeInjcorr2(QByteArray serialdata)
+{
+    //Fill Table view with Injector correction Table2
+    int countarray = 1; //counter for the position in the array
+        for (int column = 5; column < 10; column++) //end column of last packet , increase until 5 columns are written
+        {
+            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
+            {
+                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
+                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray])); //insert the array here and use count array for position in array
+                    model2->setItem(row,column,value);
+                    ui->tableInjCorr->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableInjCorr->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableInjCorr->setModel(model2);
+            }
+        }
+}
+void MainWindow::decodeInjcorr3(QByteArray serialdata)
+{
+    //Fill Table view with Injector correction Table3
+    int countarray = 1; //counter for the position in the array
+        for (int column = 10; column < 15; column++) //end column of last packet , increase until 5 columns are written
+        {
+            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
+            {
+                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
+                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray])); //insert the array here and use count array for position in array
+                    model2->setItem(row,column,value);
+                    ui->tableInjCorr->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableInjCorr->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableInjCorr->setModel(model2);
+            }
+        }
+}
+void MainWindow::decodeInjcorr4(QByteArray serialdata)
+{
+    //Fill Table view with Injector correction Table4
+    int countarray = 1; //counter for the position in the array
+        for (int column = 15; column < 20; column++) //end column of last packet , increase until 5 columns are written
+        {
+            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
+            {
+                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
+                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray])); //insert the array here and use count array for position in array
+                    model2->setItem(row,column,value);
+                    ui->tableInjCorr->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableInjCorr->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    ui->tableInjCorr->setModel(model2);
+            }
+        }
+}
