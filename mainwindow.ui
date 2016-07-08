@@ -63,7 +63,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="LiveData">
      <attribute name="title">
@@ -738,6 +738,21 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Inj MAP</string>
+     </attribute>
+     <widget class="QTableView" name="tableInjCorr">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>781</width>
+        <height>421</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
     <widget class="QWidget" name="tab">
      <attribute name="title">
       <string>IGL MAP</string>
@@ -762,10 +777,25 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>401</width>
-        <height>192</height>
+        <width>1031</width>
+        <height>300</height>
        </rect>
       </property>
+      <property name="minimumSize">
+       <size>
+        <width>1031</width>
+        <height>300</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1031</width>
+        <height>300</height>
+       </size>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>75</number>
+      </attribute>
      </widget>
     </widget>
    </widget>
