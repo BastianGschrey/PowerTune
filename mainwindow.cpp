@@ -8,6 +8,7 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <QThread>
+#include <QStandardItemModel>
 
 int requestID = 0; //ID for requested data type
 QByteArray serialdata;
@@ -46,7 +47,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-}
+    }
+
+
 
 MainWindow::~MainWindow()
 {
@@ -125,6 +128,8 @@ void MainWindow::readData(QByteArray ClassSerialData)
             if(serialdata.length() == 23 && requesttype == 0xDA){MainWindow::decodeBasic(serialdata);}
             if(serialdata.length() == 17 && requesttype == 0xB8){MainWindow::decodeRevIdle(serialdata);}
             if(serialdata.length() == 12 && requesttype == 0x7D){MainWindow::decodeTurboTrans(serialdata);}
+            if(serialdata.length() == 103 && requesttype == 0x76){MainWindow::decodeLeadIgn1(serialdata);}
+            serialdata.clear();
             serialdata.clear();
             if(requestID <= 41){requestID++;}
             else{requestID = 38;}
@@ -341,4 +346,21 @@ void MainWindow::decodeTurboTrans(QByteArray serialdata)
     ui->lineHighRPM1->setText (QString::number(packageTurboTrans[6]));
     ui->lineHighRPM2->setText (QString::number(packageTurboTrans[7]));
     ui->lineHighRPM3->setText (QString::number(packageTurboTrans[8]));
+}
+void MainWindow::decodeLeadIgn1(QByteArray serialdata)
+{
+    //Fill Table view with Leading ignition Table1
+    QStandardItemModel *model = new QStandardItemModel(20,20,this); // Table view with 20 Rows 20 Columns
+    int countarray = 1; //counter for the position in the array
+        for (int column = 0; column < 5; column++) //increases the counter column by 1 until column 5
+        {
+
+            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
+            {
+                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
+                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
+                    model->setItem(row,column,value);
+                    ui->tableLeadIgn->setModel(model);
+            }
+        }
 }
