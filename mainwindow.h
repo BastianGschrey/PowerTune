@@ -180,6 +180,7 @@ private slots:
     void decodeBasic(QByteArray serialdata);
     void decodeRevIdle(QByteArray serialdata);
     void decodeTurboTrans(QByteArray serialdata);
+    void decodeLeadIgn1(QByteArray serialdata);
 
 private:
     Ui::MainWindow *ui;
