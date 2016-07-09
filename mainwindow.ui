@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1377</width>
-    <height>729</height>
+    <width>977</width>
+    <height>619</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="btnSerialSettings">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>640</y>
+      <x>320</x>
+      <y>530</y>
       <width>95</width>
       <height>30</height>
      </rect>
@@ -30,8 +30,8 @@
    <widget class="QPushButton" name="btnConnect">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>640</y>
+      <x>120</x>
+      <y>530</y>
       <width>91</width>
       <height>30</height>
      </rect>
@@ -43,8 +43,8 @@
    <widget class="QPushButton" name="btnDisconnect">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>640</y>
+      <x>220</x>
+      <y>530</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -56,56 +56,46 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>20</x>
       <y>0</y>
-      <width>1681</width>
-      <height>631</height>
+      <width>951</width>
+      <height>521</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="LiveData">
      <attribute name="title">
       <string>Live Data</string>
      </attribute>
-     <widget class="QTextBrowser" name="txtBasicConsole">
-      <property name="geometry">
-       <rect>
-        <x>1090</x>
-        <y>30</y>
-        <width>261</width>
-        <height>561</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QTextBrowser" name="txtAuxConsole">
       <property name="geometry">
        <rect>
-        <x>820</x>
+        <x>550</x>
         <y>30</y>
-        <width>261</width>
-        <height>561</height>
+        <width>171</width>
+        <height>341</height>
        </rect>
       </property>
      </widget>
      <widget class="QTextBrowser" name="txtSensConsole">
       <property name="geometry">
        <rect>
-        <x>290</x>
+        <x>190</x>
         <y>30</y>
-        <width>251</width>
-        <height>561</height>
+        <width>171</width>
+        <height>341</height>
        </rect>
       </property>
      </widget>
      <widget class="QTextBrowser" name="txtMapConsole">
       <property name="geometry">
        <rect>
-        <x>550</x>
+        <x>370</x>
         <y>30</y>
-        <width>261</width>
-        <height>561</height>
+        <width>171</width>
+        <height>341</height>
        </rect>
       </property>
      </widget>
@@ -114,15 +104,15 @@
        <rect>
         <x>10</x>
         <y>30</y>
-        <width>261</width>
-        <height>561</height>
+        <width>171</width>
+        <height>341</height>
        </rect>
       </property>
      </widget>
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>100</x>
+        <x>60</x>
         <y>10</y>
         <width>131</width>
         <height>16</height>
@@ -135,7 +125,7 @@
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>370</x>
+        <x>230</x>
         <y>10</y>
         <width>101</width>
         <height>16</height>
@@ -148,7 +138,7 @@
      <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
-        <x>650</x>
+        <x>420</x>
         <y>10</y>
         <width>81</width>
         <height>16</height>
@@ -161,10 +151,10 @@
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>930</x>
+        <x>610</x>
         <y>10</y>
-        <width>35</width>
-        <height>10</height>
+        <width>51</width>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
@@ -174,7 +164,7 @@
      <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>1190</x>
+        <x>770</x>
         <y>10</y>
         <width>151</width>
         <height>16</height>
@@ -182,6 +172,16 @@
       </property>
       <property name="text">
        <string>Basic sensor Data</string>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="txtBasicConsole">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>30</y>
+        <width>171</width>
+        <height>341</height>
+       </rect>
       </property>
      </widget>
     </widget>
@@ -793,8 +793,8 @@
        <rect>
         <x>10</x>
         <y>20</y>
-        <width>761</width>
-        <height>421</height>
+        <width>811</width>
+        <height>461</height>
        </rect>
       </property>
      </widget>
@@ -808,8 +808,8 @@
        <rect>
         <x>10</x>
         <y>20</y>
-        <width>761</width>
-        <height>551</height>
+        <width>811</width>
+        <height>471</height>
        </rect>
       </property>
      </widget>
@@ -822,34 +822,19 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>10</y>
-        <width>1031</width>
-        <height>300</height>
+        <y>20</y>
+        <width>811</width>
+        <height>461</height>
        </rect>
       </property>
-      <property name="minimumSize">
-       <size>
-        <width>1031</width>
-        <height>300</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>1031</width>
-        <height>300</height>
-       </size>
-      </property>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>75</number>
-      </attribute>
      </widget>
     </widget>
    </widget>
    <widget class="QPushButton" name="btnReadAll">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>640</y>
+      <x>20</x>
+      <y>530</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -864,7 +849,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1377</width>
+     <width>977</width>
      <height>21</height>
     </rect>
    </property>
