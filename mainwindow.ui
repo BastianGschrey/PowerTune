@@ -63,7 +63,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="LiveData">
      <attribute name="title">
@@ -737,6 +737,52 @@
        <string>Turbo Transition</string>
       </property>
      </widget>
+     <widget class="QLineEdit" name="linePlatform">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>220</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineVersion">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>250</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_15">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>220</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Version Name</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_16">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>250</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Version Number</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
@@ -747,7 +793,7 @@
        <rect>
         <x>10</x>
         <y>20</y>
-        <width>781</width>
+        <width>761</width>
         <height>421</height>
        </rect>
       </property>
@@ -761,9 +807,9 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>10</y>
-        <width>1201</width>
-        <height>561</height>
+        <y>20</y>
+        <width>761</width>
+        <height>551</height>
        </rect>
       </property>
      </widget>
@@ -819,7 +865,7 @@
      <x>0</x>
      <y>0</y>
      <width>1377</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

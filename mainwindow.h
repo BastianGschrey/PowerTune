@@ -196,6 +196,8 @@ private slots:
     void decodeInjcorr2(QByteArray serialdata);
     void decodeInjcorr3(QByteArray serialdata);
     void decodeInjcorr4(QByteArray serialdata);
+    void decodeVersion(QByteArray serialdata);
+    void decodeInit(QByteArray serialdata);
 
 private:
     Ui::MainWindow *ui;

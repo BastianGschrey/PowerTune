@@ -141,6 +141,8 @@ void MainWindow::readData(QByteArray ClassSerialData)
             if(serialdata.length() == 103 && requesttype == 0x87){MainWindow::decodeInjcorr2(serialdata);}
             if(serialdata.length() == 103 && requesttype == 0x88){MainWindow::decodeInjcorr3(serialdata);}
             if(serialdata.length() == 103 && requesttype == 0x89){MainWindow::decodeInjcorr4(serialdata);}
+            if(serialdata.length() == 8 && requesttype == 0xF5){MainWindow::decodeVersion(serialdata);}
+            if(serialdata.length() == 11 && requesttype == 0xF3){MainWindow::decodeInit(serialdata);}
 
             serialdata.clear();
             serialdata.clear();
@@ -569,4 +571,12 @@ void MainWindow::decodeInjcorr4(QByteArray serialdata)
                     ui->tableInjCorr->setModel(model2);
             }
         }
+}
+void MainWindow::decodeVersion(QByteArray serialdata)
+{
+        ui->lineVersion->setText (QString(serialdata).mid(2,5));
+}
+void MainWindow::decodeInit(QByteArray serialdata)
+{
+        ui->linePlatform->setText (QString(serialdata).mid(2,8));
 }
