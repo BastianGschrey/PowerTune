@@ -239,6 +239,95 @@ void Serial::getBoostvsIgn()
 {
     serialport->write(QByteArray::fromHex("9D0260"));
 }
+void Serial::getTrailIgnvsRPM()
+{
+    serialport->write(QByteArray::fromHex("9E025F"));
+}
+void Serial::getInjSecLagvsBattV()
+{
+    serialport->write(QByteArray::fromHex("9F025E"));
+}
+void Serial::getInjWarn()
+{
+    serialport->write(QByteArray::fromHex("A80255"));
+}
+void Serial::getKnockWarn()
+{
+    serialport->write(QByteArray::fromHex("A90254"));
+}
+void Serial::getO2Feedback()
+{
+    serialport->write(QByteArray::fromHex("AA0253"));
+}
+void Serial::getBoostcontrol()
+{
+    serialport->write(QByteArray::fromHex("AB0252"));
+}
+void Serial::getSettingProtections()
+{
+    serialport->write(QByteArray::fromHex("AC0251"));
+}
+void Serial::getTunerString()
+{
+    serialport->write(QByteArray::fromHex("AD0250"));
+}
+void Serial::getBaseFuel1()
+{
+    serialport->write(QByteArray::fromHex("B0024D"));
+}
+void Serial::getBaseFuel2()
+{
+    serialport->write(QByteArray::fromHex("B1024C"));
+}
+void Serial::getBaseFuel3()
+{
+    serialport->write(QByteArray::fromHex("B2024B"));
+}
+void Serial::getBaseFuel4()
+{
+    serialport->write(QByteArray::fromHex("B3024A"));
+}
+void Serial::getBaseFuel5()
+{
+    serialport->write(QByteArray::fromHex("B40249"));
+}
+void Serial::getBaseFuel6()
+{
+    serialport->write(QByteArray::fromHex("B50248"));
+}
+void Serial::getBaseFuel7()
+{
+    serialport->write(QByteArray::fromHex("B60247"));
+}
+void Serial::getBaseFuel8()
+{
+    serialport->write(QByteArray::fromHex("B70246"));
+}
+void Serial::getInjvsAirTemp()
+{
+    serialport->write(QByteArray::fromHex("B90244"));
+}
+void Serial::getInjvsTPS()
+{
+    serialport->write(QByteArray::fromHex("BA0243"));
+}
+void Serial::getIgnvsTPS()
+{
+    serialport->write(QByteArray::fromHex("BB0242"));
+}
+void Serial::getPIMScaleOffset()
+{
+    serialport->write(QByteArray::fromHex("BC0241"));
+}
+void Serial::getWarConStrFlags()
+{
+    serialport->write(QByteArray::fromHex("D60227"));
+}
+void Serial::getNotdocumented()
+{
+    serialport->write(QByteArray::fromHex("F40209"));
+}
+
 
 
 //End of serial requests
@@ -256,7 +345,7 @@ void Serial::sendRequest(int requestIndex)
     switch (requestIndex){
 
     case 0:
-         Serial::getRevIdle();
+         Serial::getInitPlatform();
          requestIndex++;
          break;
     case 1:
@@ -407,26 +496,106 @@ void Serial::sendRequest(int requestIndex)
          Serial::getBoostvsIgn();
          requestIndex++;
          break;
-// Live Data
     case 38:
+         Serial::getTrailIgnvsRPM();
+         requestIndex++;
+         break;
+    case 39:
+         Serial::getInjSecLagvsBattV();
+         requestIndex++;
+         break;
+    case 40:
+         Serial::getKnockWarn();
+         requestIndex++;
+         break;
+    case 41:
+         Serial::getNotdocumented();
+         requestIndex++;
+        break;
+    case 42:
+         Serial::getO2Feedback();
+         requestIndex++;
+         break;
+    case 43:
+         Serial::getBoostcontrol();
+         requestIndex++;
+         break;
+    case 44:
+         Serial::getSettingProtections();
+         requestIndex++;
+         break;
+    case 45:
+         Serial::getTunerString();
+         requestIndex++;
+         break;
+    case 46:
+         Serial::getBaseFuel1();
+         requestIndex++;
+         break;
+    case 47:
+         Serial::getBaseFuel2();
+         requestIndex++;
+         break;
+    case 48:
+         Serial::getBaseFuel3();
+         requestIndex++;
+         break;
+    case 49:
+         Serial::getBaseFuel4();
+         requestIndex++;
+         break;
+    case 50:
+         Serial::getBaseFuel5();
+         requestIndex++;
+         break;
+    case 51:
+         Serial::getBaseFuel6();
+         requestIndex++;
+         break;
+    case 52:
+         Serial::getBaseFuel7();
+         requestIndex++;
+         break;
+    case 53:
+         Serial::getBaseFuel8();
+         requestIndex++;
+         break;
+    case 54:
+         Serial::getInjvsAirTemp();
+         requestIndex++;
+         break;
+    case 55:
+         Serial::getInjvsTPS();
+         requestIndex++;
+         break;
+    case 56:
+         Serial::getPIMScaleOffset();
+         requestIndex++;
+         break;
+    case 57:
+         Serial::getWarConStrFlags();
+         requestIndex++;
+         break;
+// Live Data
+    case 58:
         Serial::getAdvData();
         requestIndex++;
         break;
-    case 39:
+    case 59:
         Serial::getAux();
         requestIndex++;
         break;
-    case 40:
+    case 60:
         Serial::getMapIndices();
         requestIndex++;
         break;
-    case 41:
+    case 61:
         Serial::getSensorData();
         requestIndex++;
         break;
-    case 42:
+    case 62:
         Serial::getBasic();
-        requestIndex = 38;
+        requestIndex = 58;
         break;
     }
 

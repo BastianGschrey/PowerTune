@@ -146,8 +146,8 @@ void MainWindow::readData(QByteArray ClassSerialData)
 
             serialdata.clear();
             serialdata.clear();
-            if(requestID <= 41){requestID++;}
-            else{requestID = 38;}
+            if(requestID <= 61){requestID++;}
+            else{requestID = 58;}
 
             serial->sendRequest(requestID);
         }
