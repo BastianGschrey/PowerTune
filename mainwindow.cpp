@@ -143,6 +143,12 @@ void MainWindow::readData(QByteArray ClassSerialData)
             if(serialdata.length() == 103 && requesttype == 0x89){MainWindow::decodeInjcorr4(serialdata);}
             if(serialdata.length() == 8 && requesttype == 0xF5){MainWindow::decodeVersion(serialdata);}
             if(serialdata.length() == 11 && requesttype == 0xF3){MainWindow::decodeInit(serialdata);}
+            if(serialdata.length() == 14 && requesttype == 0xAB){MainWindow::decodeBoostCont(serialdata);}
+            if(serialdata.length() == 9 && requesttype == 0x7B){MainWindow::decodeInjOverlap(serialdata);}
+            if(serialdata.length() == 15 && requesttype == 0x92){MainWindow::decodeInjPriLagvsBattV(serialdata);}
+            if(serialdata.length() == 15 && requesttype == 0x9F){MainWindow::decodeInjScLagvsBattV(serialdata);}
+            if(serialdata.length() == 27 && requesttype == 0x8D){MainWindow::decodeFuelInjectors(serialdata);}
+
 
             serialdata.clear();
             serialdata.clear();
@@ -513,7 +519,7 @@ void MainWindow::decodeInjcorr1(QByteArray serialdata)
             for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
             {
                 if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray])); //insert the array here and use count array for position in array
+                    QStandardItem *value = new QStandardItem(QString::number((serialdata[countarray]-128)*mul[40])); //insert the array here and use count array for position in array
                     model2->setItem(row,column,value);
                     ui->tableInjCorr->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
                     ui->tableInjCorr->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -530,7 +536,7 @@ void MainWindow::decodeInjcorr2(QByteArray serialdata)
             for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
             {
                 if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray])); //insert the array here and use count array for position in array
+                    QStandardItem *value = new QStandardItem(QString::number((serialdata[countarray]-128)*mul[40])); //insert the array here and use count array for position in array
                     model2->setItem(row,column,value);
                     ui->tableInjCorr->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
                     ui->tableInjCorr->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -547,7 +553,7 @@ void MainWindow::decodeInjcorr3(QByteArray serialdata)
             for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
             {
                 if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray])); //insert the array here and use count array for position in array
+                    QStandardItem *value = new QStandardItem(QString::number((serialdata[countarray]-128)*mul[40])); //insert the array here and use count array for position in array
                     model2->setItem(row,column,value);
                     ui->tableInjCorr->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
                     ui->tableInjCorr->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -564,7 +570,7 @@ void MainWindow::decodeInjcorr4(QByteArray serialdata)
             for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
             {
                 if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray])); //insert the array here and use count array for position in array
+                    QStandardItem *value = new QStandardItem(QString::number((serialdata[countarray]-128)*mul[40])); //insert the array here and use count array for position in array
                     model2->setItem(row,column,value);
                     ui->tableInjCorr->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
                     ui->tableInjCorr->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -572,6 +578,54 @@ void MainWindow::decodeInjcorr4(QByteArray serialdata)
             }
         }
 }
+void MainWindow::decodeBoostCont(QByteArray serialdata)
+{
+    fc_BoostCont_info_t* info=reinterpret_cast<fc_BoostCont_info_t*>(serialdata.data());
+
+    packageBoostControl[0] = info->Setting1;
+    packageBoostControl[1] = info->Setting2;
+    packageBoostControl[2] = info->Setting3;
+    packageBoostControl[3] = mul[37] * info->BoostPrimary1;
+    packageBoostControl[4] = mul[37] * info->BoostSecondary1;
+    packageBoostControl[5] = mul[37] * info->BoostPrimary2;
+    packageBoostControl[6] = mul[37] * info->BoostSecondary2;
+    packageBoostControl[7] = info->DutyPrimary1;
+    packageBoostControl[8] = info->DutySecondary1;
+    packageBoostControl[9] = info->DutyPrimary2;
+    packageBoostControl[10] = info->DutySecondary2;
+
+    ui->lineBoostPri1->setText (QString::number(packageBoostControl[3]));
+    ui->lineBoostSec1->setText (QString::number(packageBoostControl[4]));
+    ui->lineBoostPri2->setText (QString::number(packageBoostControl[5]));
+    ui->lineBoostSec2->setText (QString::number(packageBoostControl[6]));
+    ui->lineBoostDutyPri1->setText (QString::number(packageBoostControl[7]));
+    ui->lineBoostDutySec1->setText (QString::number(packageBoostControl[8]));
+    ui->lineBoostDutyPri2->setText (QString::number(packageBoostControl[9]));
+    ui->lineBoostDutySec2->setText (QString::number(packageBoostControl[10]));
+
+}
+void MainWindow::decodeInjOverlap(QByteArray serialdata)
+{
+    fc_InjOverlap_info_t* info=reinterpret_cast<fc_InjOverlap_info_t*>(serialdata.data());
+
+    packageInjOverlap[0] = mul[39] * info->InjOvBoost1;
+    packageInjOverlap[1] = info->lineInjOvSet1;
+    packageInjOverlap[2] = mul[39] * info->InjOvBoost2;
+    packageInjOverlap[3] = info->lineInjOvSet2;
+    packageInjOverlap[4] = mul[39] * info->InjOvBoost3;
+    packageInjOverlap[5] = info->lineInjOvSet3;
+
+
+    ui->lineInjOvBoost1->setText (QString::number(packageInjOverlap[0]));
+    ui->lineInjOvSet1->setText (QString::number(packageInjOverlap[1]));
+    ui->lineInjOvBoost2->setText (QString::number(packageInjOverlap[2]));
+    ui->lineInjOvSet2->setText (QString::number(packageInjOverlap[3]));
+    ui->lineInjOvBoost3->setText (QString::number(packageInjOverlap[4]));
+    ui->lineInjOvSet3->setText (QString::number(packageInjOverlap[5]));
+
+
+}
+
 void MainWindow::decodeVersion(QByteArray serialdata)
 {
         ui->lineVersion->setText (QString(serialdata).mid(2,5));
@@ -579,4 +633,69 @@ void MainWindow::decodeVersion(QByteArray serialdata)
 void MainWindow::decodeInit(QByteArray serialdata)
 {
         ui->linePlatform->setText (QString(serialdata).mid(2,8));
+}
+
+
+void MainWindow::decodeInjPriLagvsBattV(QByteArray serialdata)
+{
+    fc_InjPriLagvsBattV_info_t* info=reinterpret_cast<fc_InjPriLagvsBattV_info_t*>(serialdata.data());
+
+    packageInjPriLagvsBattV[0] = mul[38] * info->InjPriLag16V;
+    packageInjPriLagvsBattV[1] = mul[38] * info->InjPriLag14V;
+    packageInjPriLagvsBattV[2] = mul[38] * info->InjPriLag12V;
+    packageInjPriLagvsBattV[3] = mul[38] * info->InjPriLag10V;
+    packageInjPriLagvsBattV[4] = mul[38] * info->InjPriLag8V;
+    packageInjPriLagvsBattV[5] = mul[38] * info->InjPriLag6V;
+
+    ui->lineInjPrLag16V->setText (QString::number(packageInjPriLagvsBattV[0]));
+    ui->lineInjPrLag14V->setText (QString::number(packageInjPriLagvsBattV[1]));
+    ui->lineInjPrLag12V->setText (QString::number(packageInjPriLagvsBattV[2]));
+    ui->lineInjPrLag10V->setText (QString::number(packageInjPriLagvsBattV[3]));
+    ui->lineInjPrLag8V->setText (QString::number(packageInjPriLagvsBattV[4]));
+    ui->lineInjPrLag6V->setText (QString::number(packageInjPriLagvsBattV[5]));
+}
+void MainWindow::decodeInjScLagvsBattV(QByteArray serialdata)
+{
+    fc_InjScLagvsBattV_info_t* info=reinterpret_cast<fc_InjScLagvsBattV_info_t*>(serialdata.data());
+
+    packageInjScLagvsBattV[0] = mul[38] * info->InjScLag16V;
+    packageInjScLagvsBattV[1] = mul[38] * info->InjScLag14V;
+    packageInjScLagvsBattV[2] = mul[38] * info->InjScLag12V;
+    packageInjScLagvsBattV[3] = mul[38] * info->InjScLag10V;
+    packageInjScLagvsBattV[4] = mul[38] * info->InjScLag8V;
+    packageInjScLagvsBattV[5] = mul[38] * info->InjScLag6V;
+
+    ui->lineInjScLag16V->setText (QString::number(packageInjScLagvsBattV[0]));
+    ui->lineInjScLag14V->setText (QString::number(packageInjScLagvsBattV[1]));
+    ui->lineInjScLag12V->setText (QString::number(packageInjScLagvsBattV[2]));
+    ui->lineInjScLag10V->setText (QString::number(packageInjScLagvsBattV[3]));
+    ui->lineInjScLag8V->setText (QString::number(packageInjScLagvsBattV[4]));
+    ui->lineInjScLag6V->setText (QString::number(packageInjScLagvsBattV[5]));
+}
+void MainWindow::decodeFuelInjectors(QByteArray serialdata)
+{
+    fc_FuelInjectors_info_t* info=reinterpret_cast<fc_FuelInjectors_info_t*>(serialdata.data());
+
+    packageFuelInjectors[1] = mul[41] * info->frontpulse * mul[42];
+    packageFuelInjectors[3] = mul[41] * info->rearpulse * mul[42];
+    packageFuelInjectors[4] = mul[38] * info->frntprilag;//(multiply by 0.004)
+    packageFuelInjectors[6] = mul[38] * info->frntseclag;//(multiply by 0.004)
+    packageFuelInjectors[8] =  mul[38] *info->rearprilag;//(multiply by 0.004)
+    packageFuelInjectors[10] = mul[38] *info->rearseclag;//(multiply by 0.004)
+    packageFuelInjectors[12] = info->prinjsize;
+    packageFuelInjectors[13] = info->secinjsize;
+    packageFuelInjectors[14] = mul[15] * info->prisectransprc; // divide by 10 to get %
+    packageFuelInjectors[15] = mul[38] * info->prisectransms; //(multiply by 0.004)
+
+
+    ui->linefrontpulse->setText (QString::number(packageFuelInjectors[1]));
+    ui->linerearpulse->setText (QString::number(packageFuelInjectors[3]));
+    ui->linefrntprilag->setText (QString::number(packageFuelInjectors[4]));
+    ui->linefrntseclag->setText (QString::number(packageFuelInjectors[6]));
+    ui->linerearprilag->setText (QString::number(packageFuelInjectors[8]));
+    ui->linerearseclag->setText (QString::number(packageFuelInjectors[10]));
+    ui->linePriInjSize->setText (QString::number(packageFuelInjectors[12]));
+    ui->lineSecInjSize->setText (QString::number(packageFuelInjectors[13]));
+    ui->linePriSecTransPrc->setText (QString::number(packageFuelInjectors[14]));
+    ui->linePriSecTransms->setText (QString::number(packageFuelInjectors[15]));
 }
