@@ -276,18 +276,6 @@ private slots:
     void decodeBasic(QByteArray serialdata);
     void decodeRevIdle(QByteArray serialdata);
     void decodeTurboTrans(QByteArray serialdata);
-    void decodeLeadIgn1(QByteArray serialdata);
-    void decodeLeadIgn2(QByteArray serialdata);
-    void decodeLeadIgn3(QByteArray serialdata);
-    void decodeLeadIgn4(QByteArray serialdata);
-    void decodeTrailIgn1(QByteArray serialdata);
-    void decodeTrailIgn2(QByteArray serialdata);
-    void decodeTrailIgn3(QByteArray serialdata);
-    void decodeTrailIgn4(QByteArray serialdata);
-    void decodeInjcorr1(QByteArray serialdata);
-    void decodeInjcorr2(QByteArray serialdata);
-    void decodeInjcorr3(QByteArray serialdata);
-    void decodeInjcorr4(QByteArray serialdata);
     void decodeVersion(QByteArray serialdata);
     void decodeInit(QByteArray serialdata);
     void decodeBoostCont(QByteArray serialdata);
@@ -300,6 +288,9 @@ private:
     Ui::MainWindow *ui;
     SerialSetting *wndwSerial;
     Serial *serial;
+    void decodeTrailIgn(QByteArray serialdata, quint8 column);
+    void decodeLeadIgn(QByteArray serialdata, quint8 column);
+    void decodeInjcorr(QByteArray serialdata, quint8 column);
 
 signals:
     void SIG_connectSerial(SerialSetting::Settings settings);

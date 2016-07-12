@@ -129,18 +129,18 @@ void MainWindow::readData(QByteArray ClassSerialData)
             if(serialdata.length() == 23 && requesttype == 0xDA){MainWindow::decodeBasic(serialdata);}
             if(serialdata.length() == 17 && requesttype == 0xB8){MainWindow::decodeRevIdle(serialdata);}
             if(serialdata.length() == 12 && requesttype == 0x7D){MainWindow::decodeTurboTrans(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x76){MainWindow::decodeLeadIgn1(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x77){MainWindow::decodeLeadIgn2(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x78){MainWindow::decodeLeadIgn3(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x79){MainWindow::decodeLeadIgn4(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x81){MainWindow::decodeTrailIgn1(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x82){MainWindow::decodeTrailIgn2(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x83){MainWindow::decodeTrailIgn3(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x84){MainWindow::decodeTrailIgn4(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x86){MainWindow::decodeInjcorr1(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x87){MainWindow::decodeInjcorr2(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x88){MainWindow::decodeInjcorr3(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x89){MainWindow::decodeInjcorr4(serialdata);}
+            if(serialdata.length() == 103 && requesttype == 0x76){MainWindow::decodeLeadIgn(serialdata, 0);}
+            if(serialdata.length() == 103 && requesttype == 0x77){MainWindow::decodeLeadIgn(serialdata, 5);}
+            if(serialdata.length() == 103 && requesttype == 0x78){MainWindow::decodeLeadIgn(serialdata, 10);}
+            if(serialdata.length() == 103 && requesttype == 0x79){MainWindow::decodeLeadIgn(serialdata, 15);}
+            if(serialdata.length() == 103 && requesttype == 0x81){MainWindow::decodeTrailIgn(serialdata, 0);}
+            if(serialdata.length() == 103 && requesttype == 0x82){MainWindow::decodeTrailIgn(serialdata, 5);}
+            if(serialdata.length() == 103 && requesttype == 0x83){MainWindow::decodeTrailIgn(serialdata, 10);}
+            if(serialdata.length() == 103 && requesttype == 0x84){MainWindow::decodeTrailIgn(serialdata, 15);}
+            if(serialdata.length() == 103 && requesttype == 0x86){MainWindow::decodeInjcorr(serialdata, 0);}
+            if(serialdata.length() == 103 && requesttype == 0x87){MainWindow::decodeInjcorr(serialdata, 5);}
+            if(serialdata.length() == 103 && requesttype == 0x88){MainWindow::decodeInjcorr(serialdata, 10);}
+            if(serialdata.length() == 103 && requesttype == 0x89){MainWindow::decodeInjcorr(serialdata, 15);}
             if(serialdata.length() == 8 && requesttype == 0xF5){MainWindow::decodeVersion(serialdata);}
             if(serialdata.length() == 11 && requesttype == 0xF3){MainWindow::decodeInit(serialdata);}
             if(serialdata.length() == 14 && requesttype == 0xAB){MainWindow::decodeBoostCont(serialdata);}
@@ -368,12 +368,15 @@ void MainWindow::decodeTurboTrans(QByteArray serialdata)
     ui->lineHighRPM2->setText (QString::number(packageTurboTrans[7]));
     ui->lineHighRPM3->setText (QString::number(packageTurboTrans[8]));
 }
-void MainWindow::decodeLeadIgn1(QByteArray serialdata)
+
+void MainWindow::decodeLeadIgn(QByteArray serialdata, quint8 column)
 {
     //Fill Table view with Leading ignition Table1
 
-    int countarray = 1; //counter for the position in the array
-        for (int column = 0; column < 5; column++) //increases the counter column by 1 until column 5
+
+    quint8 columnLimit = column + 5;
+    quint8 countarray = 1; //counter for the position in the array
+        for (column; column < columnLimit; column++) //increases the counter column by 1 until column 5
         {
 
             for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
@@ -387,66 +390,19 @@ void MainWindow::decodeLeadIgn1(QByteArray serialdata)
             }
         }
 }
-void MainWindow::decodeLeadIgn2(QByteArray serialdata)
-{
-    //Fill Table view with Leading ignition Table2
-    int countarray = 1; //counter for the position in the array
-        for (int column = 5; column < 10; column++) //end column of last packet , increase until 5 columns are written
-        {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
-                    model->setItem(row,column,value);
-                    ui->tableLeadIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableLeadIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableLeadIgn->setModel(model);
-            }
-        }
-}
-void MainWindow::decodeLeadIgn3(QByteArray serialdata)
-{
-    //Fill Table view with Leading ignition Table3
-    int countarray = 1; //counter for the position in the array
-    for (int column = 10; column < 15; column++) //end column of last packet , increase until 5 columns are written
-        {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
-                    model->setItem(row,column,value);
-                    ui->tableLeadIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableLeadIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableLeadIgn->setModel(model);
-            }
-        }
-}
-void MainWindow::decodeLeadIgn4(QByteArray serialdata)
-{
-    //Fill Table view with Leading ignition Table4
-    int countarray = 1; //counter for the position in the array
-        for (int column = 15; column < 20; column++) //end column of last packet , increase until 5 columns are written
-        {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
-                    model->setItem(row,column,value);
-                    ui->tableLeadIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableLeadIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableLeadIgn->setModel(model);
-            }
-        }
-}
+
+
 //Trailing Ignition Map
-void MainWindow::decodeTrailIgn1(QByteArray serialdata)
+
+void MainWindow::decodeTrailIgn(QByteArray serialdata, quint8 column)
 {
     //Fill Table view with Trailing ignition Table1
 
-    int countarray = 1; //counter for the position in the array
-        for (int column = 0; column < 5; column++) //increases the counter column by 1 until column 5
+    quint8 columnLimit = column + 5;
+    quint8 countarray = 1; //counter for the position in the array
+        for (column; column < columnLimit; column++) //increases the counter column by 1 until column 5
         {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
+            for (quint8 row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
             {
                 if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
                     QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
@@ -457,64 +413,16 @@ void MainWindow::decodeTrailIgn1(QByteArray serialdata)
             }
         }
 }
-void MainWindow::decodeTrailIgn2(QByteArray serialdata)
-{
-    //Fill Table view with Trailing ignition Table2
-    int countarray = 1; //counter for the position in the array
-        for (int column = 5; column < 10; column++) //end column of last packet , increase until 5 columns are written
-        {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
-                    model1->setItem(row,column,value);
-                    ui->tableTrailIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableTrailIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableTrailIgn->setModel(model1);
-            }
-        }
-}
-void MainWindow::decodeTrailIgn3(QByteArray serialdata)
-{
-    //Fill Table view with Trailing ignition Table3
-    int countarray = 1; //counter for the position in the array
-        for (int column = 10; column < 15; column++) //end column of last packet , increase until 5 columns are written
-        {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
-                    model1->setItem(row,column,value);
-                    ui->tableTrailIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableTrailIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableTrailIgn->setModel(model1);
-            }
-        }
-}
-void MainWindow::decodeTrailIgn4(QByteArray serialdata)
-{
-    //Fill Table view with Trailing ignition Table4
-    int countarray = 1; //counter for the position in the array
-        for (int column = 15; column < 20; column++) //end column of last packet , increase until 5 columns are written
-        {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
-                    model1->setItem(row,column,value);
-                    ui->tableTrailIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableTrailIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableTrailIgn->setModel(model1);
-            }
-        }
-}
+
 //Injector correction
-void MainWindow::decodeInjcorr1(QByteArray serialdata)
+
+void MainWindow::decodeInjcorr(QByteArray serialdata, quint8 column)
 {
     //Fill Table view with Injector correction Table1
+    quint8 columnLimit = column + 5;
 
     int countarray = 1; //counter for the position in the array
-        for (int column = 0; column < 5; column++) //increases the counter column by 1 until column 5
+        for (column; column < columnLimit; column++) //increases the counter column by 1 until column 5
         {
             for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
             {
@@ -527,57 +435,7 @@ void MainWindow::decodeInjcorr1(QByteArray serialdata)
             }
         }
 }
-void MainWindow::decodeInjcorr2(QByteArray serialdata)
-{
-    //Fill Table view with Injector correction Table2
-    int countarray = 1; //counter for the position in the array
-        for (int column = 5; column < 10; column++) //end column of last packet , increase until 5 columns are written
-        {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number((serialdata[countarray]-128)*mul[40])); //insert the array here and use count array for position in array
-                    model2->setItem(row,column,value);
-                    ui->tableInjCorr->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableInjCorr->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableInjCorr->setModel(model2);
-            }
-        }
-}
-void MainWindow::decodeInjcorr3(QByteArray serialdata)
-{
-    //Fill Table view with Injector correction Table3
-    int countarray = 1; //counter for the position in the array
-        for (int column = 10; column < 15; column++) //end column of last packet , increase until 5 columns are written
-        {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number((serialdata[countarray]-128)*mul[40])); //insert the array here and use count array for position in array
-                    model2->setItem(row,column,value);
-                    ui->tableInjCorr->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableInjCorr->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableInjCorr->setModel(model2);
-            }
-        }
-}
-void MainWindow::decodeInjcorr4(QByteArray serialdata)
-{
-    //Fill Table view with Injector correction Table4
-    int countarray = 1; //counter for the position in the array
-        for (int column = 15; column < 20; column++) //end column of last packet , increase until 5 columns are written
-        {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number((serialdata[countarray]-128)*mul[40])); //insert the array here and use count array for position in array
-                    model2->setItem(row,column,value);
-                    ui->tableInjCorr->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableInjCorr->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableInjCorr->setModel(model2);
-            }
-        }
-}
+
 void MainWindow::decodeBoostCont(QByteArray serialdata)
 {
     fc_BoostCont_info_t* info=reinterpret_cast<fc_BoostCont_info_t*>(serialdata.data());
