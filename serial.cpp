@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2016 Bastian Gschrey & Markus Ippy
  *
@@ -328,6 +327,38 @@ void Serial::getNotdocumented()
     serialport->write(QByteArray::fromHex("F40209"));
 }
 
+void Serial::getFuelBase0()
+{
+    serialport->write(QByteArray::fromHex("B0024D"));
+}
+void Serial::getFuelBase1()
+{
+    serialport->write(QByteArray::fromHex("B1024C"));
+}
+void Serial::getFuelBase2()
+{
+    serialport->write(QByteArray::fromHex("B2024B"));
+}
+void Serial::getFuelBase3()
+{
+    serialport->write(QByteArray::fromHex("B3024A"));
+}
+void Serial::getFuelBase4()
+{
+    serialport->write(QByteArray::fromHex("B40249"));
+}
+void Serial::getFuelBase5()
+{
+    serialport->write(QByteArray::fromHex("B50248"));
+}
+void Serial::getFuelBase6()
+{
+    serialport->write(QByteArray::fromHex("B60247"));
+}
+void Serial::getFuelBase7()
+{
+    serialport->write(QByteArray::fromHex("B70246"));
+}
 
 
 //End of serial requests

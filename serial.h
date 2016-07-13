@@ -106,6 +106,14 @@ public:
 
 private:
 QSerialPort *serialport;
+void getFuelBase0();
+void getFuelBase1();
+void getFuelBase2();
+void getFuelBase3();
+void getFuelBase4();
+void getFuelBase5();
+void getFuelBase6();
+void getFuelBase7();
 
 
 signals:

@@ -41,6 +41,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     wndwSerial = new SerialSetting();
     ui->btnDisconnect->setDisabled(true);
+    QHeaderView* horizontalHeaderFuelTable = ui->tableFuelBase->horizontalHeader();
+    horizontalHeaderFuelTable->setSectionResizeMode(QHeaderView::Stretch);
+    QHeaderView* verticalHeaderFuelTable = ui->tableFuelBase->verticalHeader();
+    verticalHeaderFuelTable->setSectionResizeMode(QHeaderView::Stretch);
+    horizontalHeaderFuelTable->setStyleSheet("QHeaderView::section {background-color:grey}");
+    verticalHeaderFuelTable->setStyleSheet("QHeaderView::section {background-color:grey}");
     serial = new Serial();
 
     connect(serial,SIGNAL(SIG_dataAvailable(QByteArray)),this,SLOT(readData(QByteArray)));
@@ -141,6 +147,16 @@ void MainWindow::readData(QByteArray ClassSerialData)
             if(serialdata.length() == 103 && requesttype == 0x87){MainWindow::decodeInjcorr(serialdata, 5);}
             if(serialdata.length() == 103 && requesttype == 0x88){MainWindow::decodeInjcorr(serialdata, 10);}
             if(serialdata.length() == 103 && requesttype == 0x89){MainWindow::decodeInjcorr(serialdata, 15);}
+
+            if(serialdata.length() == 103 && requesttype == 0xB0){MainWindow::decodeFuelBase(serialdata, 0);}
+            if(serialdata.length() == 103 && requesttype == 0xB1){MainWindow::decodeFuelBase(serialdata, 2);}
+            if(serialdata.length() == 103 && requesttype == 0xB2){MainWindow::decodeFuelBase(serialdata, 4);}
+            if(serialdata.length() == 103 && requesttype == 0xB3){MainWindow::decodeFuelBase(serialdata, 6);}
+            if(serialdata.length() == 103 && requesttype == 0xB4){MainWindow::decodeFuelBase(serialdata, 8);}
+            if(serialdata.length() == 103 && requesttype == 0xB5){MainWindow::decodeFuelBase(serialdata, 10);}
+            if(serialdata.length() == 103 && requesttype == 0xB6){MainWindow::decodeFuelBase(serialdata, 12);}
+            if(serialdata.length() == 103 && requesttype == 0xB7){MainWindow::decodeFuelBase(serialdata, 14);}
+
             if(serialdata.length() == 8 && requesttype == 0xF5){MainWindow::decodeVersion(serialdata);}
             if(serialdata.length() == 11 && requesttype == 0xF3){MainWindow::decodeInit(serialdata);}
             if(serialdata.length() == 14 && requesttype == 0xAB){MainWindow::decodeBoostCont(serialdata);}
@@ -421,10 +437,10 @@ void MainWindow::decodeInjcorr(QByteArray serialdata, quint8 column)
     //Fill Table view with Injector correction Table1
     quint8 columnLimit = column + 5;
 
-    int countarray = 1; //counter for the position in the array
+    quint8 countarray = 1; //counter for the position in the array
         for (column; column < columnLimit; column++) //increases the counter column by 1 until column 5
         {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
+            for (quint8 row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
             {
                 if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
                     QStandardItem *value = new QStandardItem(QString::number((serialdata[countarray]-128)*mul[40])); //insert the array here and use count array for position in array
@@ -435,6 +451,31 @@ void MainWindow::decodeInjcorr(QByteArray serialdata, quint8 column)
             }
         }
 }
+
+void MainWindow::decodeFuelBase(QByteArray serialdata, quint8 column)
+{
+
+    fc_FuelBase_info_t* info=reinterpret_cast<fc_FuelBase_info_t*>(serialdata.data());
+    quint8 columnLimit = column + 5;
+    quint8 baseIndex = 0;
+    for (column; column < columnLimit; column++)
+    {
+        for (quint8 row = 0; row < 20; row++)
+        {
+
+            ui->tableFuelBase->setItem(row, column, new QTableWidgetItem(QString::number(info->fuelBase[baseIndex])));
+            /*QStandardItem *value = new QStandardItem(QString::number((info->fuelBase[baseIndex])));
+            model->setItem(row,column,value);
+            ui->tableFuelBase->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+            ui->tableFuelBase->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+            ui->tableFuelBase->setModel(model);
+            baseIndex++;*/
+
+        }
+    }
+
+}
+
 
 void MainWindow::decodeBoostCont(QByteArray serialdata)
 {

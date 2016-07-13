@@ -63,7 +63,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>9</number>
     </property>
     <widget class="QWidget" name="LiveData">
      <attribute name="title">
@@ -2199,6 +2199,222 @@
      <attribute name="title">
       <string>Base Map</string>
      </attribute>
+     <widget class="QTableWidget" name="tableFuelBase">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>951</width>
+        <height>501</height>
+       </rect>
+      </property>
+      <attribute name="horizontalHeaderCascadingSectionResizes">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderStretchLastSection">
+       <bool>false</bool>
+      </attribute>
+      <row>
+       <property name="text">
+        <string>P01</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P02</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P03</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P04</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P05</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P06</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P07</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P08</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P09</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P10</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P11</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P12</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P13</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P14</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P15</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P16</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P17</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P18</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P19</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>P20</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>N01</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N02</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N03</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N04</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N05</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N06</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N07</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N08</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N09</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N10</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N11</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N12</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N13</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N14</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N15</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N16</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N17</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N18</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N19</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>N20</string>
+       </property>
+      </column>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
@@ -2226,7 +2442,7 @@
      <x>0</x>
      <y>0</y>
      <width>977</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

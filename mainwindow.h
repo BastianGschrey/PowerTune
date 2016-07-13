@@ -257,6 +257,12 @@ public:
         fc_FuelInjectors_info_t parse(const QByteArray &);
     };
 
+     struct fc_FuelBase_info_t{
+         quint16 requesttype;
+         quint16 fuelBase[100];
+         quint8 checksum;
+         fc_FuelBase_info_t parse(const QByteArray &);
+     };
 
 
     // FD3S
@@ -291,6 +297,7 @@ private:
     void decodeTrailIgn(QByteArray serialdata, quint8 column);
     void decodeLeadIgn(QByteArray serialdata, quint8 column);
     void decodeInjcorr(QByteArray serialdata, quint8 column);
+    void decodeFuelBase(QByteArray serialdata, quint8 column);
 
 signals:
     void SIG_connectSerial(SerialSetting::Settings settings);
