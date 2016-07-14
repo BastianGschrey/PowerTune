@@ -89,14 +89,6 @@ public:
     void getBoostcontrol();
     void getSettingProtections();
     void getTunerString();
-    void getBaseFuel1();
-    void getBaseFuel2();
-    void getBaseFuel3();
-    void getBaseFuel4();
-    void getBaseFuel5();
-    void getBaseFuel6();
-    void getBaseFuel7();
-    void getBaseFuel8();
     void getInjvsAirTemp();
     void getInjvsTPS();
     void getIgnvsTPS();

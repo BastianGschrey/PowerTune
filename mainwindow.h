@@ -297,7 +297,7 @@ private:
     void decodeTrailIgn(QByteArray serialdata, quint8 column);
     void decodeLeadIgn(QByteArray serialdata, quint8 column);
     void decodeInjcorr(QByteArray serialdata, quint8 column);
-    void decodeFuelBase(QByteArray serialdata, quint8 column);
+    void decodeFuelBase(QByteArray serialdata, quint8 package);
 
 signals:
     void SIG_connectSerial(SerialSetting::Settings settings);

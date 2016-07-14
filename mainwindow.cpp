@@ -122,7 +122,6 @@ void MainWindow::on_btnDisconnect_clicked()
 void MainWindow::readData(QByteArray ClassSerialData)
 {
     serialdata.append(ClassSerialData);
-    qDebug() << "readdata";
     if(serialdata != NULL)
     {
         quint8 requesttype = serialdata[0];
@@ -149,13 +148,13 @@ void MainWindow::readData(QByteArray ClassSerialData)
             if(serialdata.length() == 103 && requesttype == 0x89){MainWindow::decodeInjcorr(serialdata, 15);}
 
             if(serialdata.length() == 103 && requesttype == 0xB0){MainWindow::decodeFuelBase(serialdata, 0);}
-            if(serialdata.length() == 103 && requesttype == 0xB1){MainWindow::decodeFuelBase(serialdata, 2);}
-            if(serialdata.length() == 103 && requesttype == 0xB2){MainWindow::decodeFuelBase(serialdata, 4);}
-            if(serialdata.length() == 103 && requesttype == 0xB3){MainWindow::decodeFuelBase(serialdata, 6);}
-            if(serialdata.length() == 103 && requesttype == 0xB4){MainWindow::decodeFuelBase(serialdata, 8);}
-            if(serialdata.length() == 103 && requesttype == 0xB5){MainWindow::decodeFuelBase(serialdata, 10);}
-            if(serialdata.length() == 103 && requesttype == 0xB6){MainWindow::decodeFuelBase(serialdata, 12);}
-            if(serialdata.length() == 103 && requesttype == 0xB7){MainWindow::decodeFuelBase(serialdata, 14);}
+            if(serialdata.length() == 103 && requesttype == 0xB1){MainWindow::decodeFuelBase(serialdata, 1);}
+            if(serialdata.length() == 103 && requesttype == 0xB2){MainWindow::decodeFuelBase(serialdata, 2);}
+            if(serialdata.length() == 103 && requesttype == 0xB3){MainWindow::decodeFuelBase(serialdata, 3);}
+            if(serialdata.length() == 103 && requesttype == 0xB4){MainWindow::decodeFuelBase(serialdata, 4);}
+            if(serialdata.length() == 103 && requesttype == 0xB5){MainWindow::decodeFuelBase(serialdata, 5);}
+            if(serialdata.length() == 103 && requesttype == 0xB6){MainWindow::decodeFuelBase(serialdata, 6);}
+            if(serialdata.length() == 103 && requesttype == 0xB7){MainWindow::decodeFuelBase(serialdata, 7);}
 
             if(serialdata.length() == 8 && requesttype == 0xF5){MainWindow::decodeVersion(serialdata);}
             if(serialdata.length() == 11 && requesttype == 0xF3){MainWindow::decodeInit(serialdata);}
@@ -452,30 +451,87 @@ void MainWindow::decodeInjcorr(QByteArray serialdata, quint8 column)
         }
 }
 
-void MainWindow::decodeFuelBase(QByteArray serialdata, quint8 column)
+void MainWindow::decodeFuelBase(QByteArray serialdata, quint8 package)
 {
 
     fc_FuelBase_info_t* info=reinterpret_cast<fc_FuelBase_info_t*>(serialdata.data());
-    quint8 columnLimit = column + 5;
+    quint8 column;
     quint8 baseIndex = 0;
-    for (column; column < columnLimit; column++)
+    quint8 row = 0;
+    switch(package)
     {
-        for (quint8 row = 0; row < 20; row++)
+    case 0:
+        column = 0;
+
+        do
         {
+            qDebug() << baseIndex << " | " << row << ":" << column;
 
             ui->tableFuelBase->setItem(row, column, new QTableWidgetItem(QString::number(info->fuelBase[baseIndex])));
-            /*QStandardItem *value = new QStandardItem(QString::number((info->fuelBase[baseIndex])));
-            model->setItem(row,column,value);
-            ui->tableFuelBase->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-            ui->tableFuelBase->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-            ui->tableFuelBase->setModel(model);
-            baseIndex++;*/
+            baseIndex++;
+            row++;
+            if(row == 20)
+            {
+                qDebug() << "next row";
+                row = 0;
+                column++;
+
+            }
+        }while(baseIndex < 50);
+
+        break;
+
+    /*case 1:
+        column = 2;
+
+        do
+        {
+            qDebug() << baseIndex << " | " << row << ":" << column;
+
+            if(column == 2)
+                {
+                ui->tableFuelBase->setItem(row+5, column, new QTableWidgetItem(QString::number(info->fuelBase[baseIndex])));
+                }
+            ui->tableFuelBase->setItem(row, column, new QTableWidgetItem(QString::number(info->fuelBase[baseIndex])));
+            baseIndex++;
+            row++;
+            if(row == 20)
+            {
+                qDebug() << "next row";
+                row = 0;
+                column++;
+
+            }
+        }while(baseIndex < 50);
+
+        break;*/
+
+    /*case 2:
+        column = 4;
+
+        do
+        {
+            qDebug() << baseIndex << " | " << row << ":" << column;
+
+            ui->tableFuelBase->setItem(row, column, new QTableWidgetItem(QString::number(info->fuelBase[baseIndex])));
+            baseIndex++;
+            row++;
+            if(row == 20)
+            {
+                qDebug() << "next row";
+                row = 0;
+                column++;
+
+            }
+        }while(baseIndex < 50);
+
+        break;*/
 
         }
-    }
+
+
 
 }
-
 
 void MainWindow::decodeBoostCont(QByteArray serialdata)
 {

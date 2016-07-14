@@ -270,38 +270,6 @@ void Serial::getTunerString()
 {
     serialport->write(QByteArray::fromHex("AD0250"));
 }
-void Serial::getBaseFuel1()
-{
-    serialport->write(QByteArray::fromHex("B0024D"));
-}
-void Serial::getBaseFuel2()
-{
-    serialport->write(QByteArray::fromHex("B1024C"));
-}
-void Serial::getBaseFuel3()
-{
-    serialport->write(QByteArray::fromHex("B2024B"));
-}
-void Serial::getBaseFuel4()
-{
-    serialport->write(QByteArray::fromHex("B3024A"));
-}
-void Serial::getBaseFuel5()
-{
-    serialport->write(QByteArray::fromHex("B40249"));
-}
-void Serial::getBaseFuel6()
-{
-    serialport->write(QByteArray::fromHex("B50248"));
-}
-void Serial::getBaseFuel7()
-{
-    serialport->write(QByteArray::fromHex("B60247"));
-}
-void Serial::getBaseFuel8()
-{
-    serialport->write(QByteArray::fromHex("B70246"));
-}
 void Serial::getInjvsAirTemp()
 {
     serialport->write(QByteArray::fromHex("B90244"));
@@ -560,35 +528,35 @@ void Serial::sendRequest(int requestIndex)
          requestIndex++;
          break;
     case 46:
-         Serial::getBaseFuel1();
+         Serial::getFuelBase0();
          requestIndex++;
          break;
     case 47:
-         Serial::getBaseFuel2();
+         Serial::getFuelBase1();
          requestIndex++;
          break;
     case 48:
-         Serial::getBaseFuel3();
+         Serial::getFuelBase2();
          requestIndex++;
          break;
     case 49:
-         Serial::getBaseFuel4();
+         Serial::getFuelBase3();
          requestIndex++;
          break;
     case 50:
-         Serial::getBaseFuel5();
+         Serial::getFuelBase4();
          requestIndex++;
          break;
     case 51:
-         Serial::getBaseFuel6();
+         Serial::getFuelBase5();
          requestIndex++;
          break;
     case 52:
-         Serial::getBaseFuel7();
+         Serial::getFuelBase6();
          requestIndex++;
          break;
     case 53:
-         Serial::getBaseFuel8();
+         Serial::getFuelBase7();
          requestIndex++;
          break;
     case 54:
