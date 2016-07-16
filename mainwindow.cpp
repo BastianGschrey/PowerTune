@@ -13,6 +13,7 @@
 
 int requestID = 0; //ID for requested data type
 QByteArray serialdata;
+QByteArray fullFuelBase;
 
 double mul[80] = FC_INFO_MUL;  // required values for calculation from raw to readable values for Advanced Sensor info
 double add[] = FC_INFO_ADD;
@@ -453,84 +454,29 @@ void MainWindow::decodeInjcorr(QByteArray serialdata, quint8 column)
 
 void MainWindow::decodeFuelBase(QByteArray serialdata, quint8 package)
 {
+quint8 index = 0;
+    qDebug() << "add package!";
 
-    fc_FuelBase_info_t* info=reinterpret_cast<fc_FuelBase_info_t*>(serialdata.data());
-    quint8 column;
-    quint8 baseIndex = 0;
-    quint8 row = 0;
-    switch(package)
-    {
-    case 0:
-        column = 0;
-
-        do
+        for(quint8 index = 2; index < 102; index++)
         {
-            qDebug() << baseIndex << " | " << row << ":" << column;
-
-            ui->tableFuelBase->setItem(row, column, new QTableWidgetItem(QString::number(info->fuelBase[baseIndex])));
-            baseIndex++;
-            row++;
-            if(row == 20)
-            {
-                qDebug() << "next row";
-                row = 0;
-                column++;
-
-            }
-        }while(baseIndex < 50);
-
-        break;
-
-    /*case 1:
-        column = 2;
-
-        do
-        {
-            qDebug() << baseIndex << " | " << row << ":" << column;
-
-            if(column == 2)
-                {
-                ui->tableFuelBase->setItem(row+5, column, new QTableWidgetItem(QString::number(info->fuelBase[baseIndex])));
-                }
-            ui->tableFuelBase->setItem(row, column, new QTableWidgetItem(QString::number(info->fuelBase[baseIndex])));
-            baseIndex++;
-            row++;
-            if(row == 20)
-            {
-                qDebug() << "next row";
-                row = 0;
-                column++;
-
-            }
-        }while(baseIndex < 50);
-
-        break;*/
-
-    /*case 2:
-        column = 4;
-
-        do
-        {
-            qDebug() << baseIndex << " | " << row << ":" << column;
-
-            ui->tableFuelBase->setItem(row, column, new QTableWidgetItem(QString::number(info->fuelBase[baseIndex])));
-            baseIndex++;
-            row++;
-            if(row == 20)
-            {
-                qDebug() << "next row";
-                row = 0;
-                column++;
-
-            }
-        }while(baseIndex < 50);
-
-        break;*/
-
+            fullFuelBase.append(serialdata[index]);
         }
 
+        if(package == 7)
+        {
+                fc_fullFuelBase_info_t* info=reinterpret_cast<fc_fullFuelBase_info_t*>(fullFuelBase.data());
 
-
+                for (quint8 column = 0; column <= 20; column++) //increases the counter column by 1 until column 5
+                {
+                    for (quint8 row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
+                    {
+                         ui->tableFuelBase->setItem(row, column, new QTableWidgetItem(QString::number(info->fuelBase[index])));
+                         index++;
+                         qDebug() << row << " : " << column;
+                    }
+                }
+                qDebug() << fullFuelBase.length();
+        }
 }
 
 void MainWindow::decodeBoostCont(QByteArray serialdata)
