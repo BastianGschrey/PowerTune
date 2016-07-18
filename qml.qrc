@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>LeadingIgnitionMap.qml</file>
+        <file>TrailingIgnitionMap.qml</file>
+        <file>InjectorMap.qml</file>
+        <file>BaseMap.qml</file>
+        <file>InjectorSettings.qml</file>
+        <file>BoostSettings.qml</file>
+        <file>Protections.qml</file>
+        <file>TempGauge.qml</file>
+        <file>graphics/background.png</file>
+        <file>graphics/Dial.qml</file>
+        <file>graphics/needle.png</file>
+        <file>graphics/needle_shadow.png</file>
+        <file>graphics/overlay.png</file>
+        <file>graphics/quit.png</file>
+        <file>graphics/QuitButton.qml</file>
+    </qresource>
+</RCC>

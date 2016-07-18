@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>graphics/background.png</file>
+        <file>graphics/Dial.qml</file>
+        <file>graphics/needle.png</file>
+        <file>graphics/needle_shadow.png</file>
+        <file>graphics/overlay.png</file>
+        <file>graphics/quit.png</file>
+        <file>graphics/QuitButton.qml</file>
+    </qresource>
+</RCC>
