@@ -4,10 +4,13 @@ import QtQuick.Dialogs 1.1
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.0
 
-
 TableView {
    anchors.fill: parent
 
+   TableViewColumn {
+     title: "Basemap"
+     width: Math.round(parent.width / 21)
+   }
    TableViewColumn {
      title: "N01"
      width: Math.round(parent.width / 21)

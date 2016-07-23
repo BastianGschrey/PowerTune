@@ -16,5 +16,12 @@
         <file>graphics/overlay.png</file>
         <file>graphics/quit.png</file>
         <file>graphics/QuitButton.qml</file>
+        <file>Dashboard.qml</file>
+        <file>SerialSettings.qml</file>
+        <file>graphics/Tacho_Mitte.png</file>
+        <file>RevGaugeInnerRing.qml</file>
+        <file>RevGaugeNeedle.qml</file>
+        <file>SpeedGaugeInnerRing.qml</file>
+        <file>SpeedGaugeNeedle.qml</file>
     </qresource>
 </RCC>

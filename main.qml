@@ -6,51 +6,134 @@ import QtQuick.Layouts 1.1
 
 ApplicationWindow {
     visible: true
-    width: Screen.desktopAvailableWidth
-    height: Screen.desktopAvailableWidth
+    width: 800
+    height: 480
+    // visibility: "FullScreen"
     title: qsTr("PowerTune")
     color: "black"
 
+    Rectangle {
+        id:dash
+        color : "black"
+        width: parent.width
+        height: parent.height
+        visible: true
+        Dashboard{}
+    }
+
+
+
+ /*   Rectangle{
+        id:rev
+        color:"transparent"
+        width: parent.width
+        height: parent.height
+
+        visible: true
+        SpeedGauge{}
+
+    }
+
+ /*  Rectangle{
+        id:speedo
+        color:"transparent"
+        width: parent.height / 1.5
+        height: width
+        y:parent.height / 5
+        x: parent.width / 6.66
+        visible: true
+        SpeedGauge{}
+
+    }*/
 
     Rectangle{
-        id:bmap
-        movable: true
+        id:lingmap
         width: Math.round(parent.width / 1.5)
         height: Math.round(parent.height / 1.5)
         anchors.left: parent.left;
-        BaseMap{}
+        visible: false
+        LeadingIgnitionMap{}
     }
+    Rectangle{
+        id: tingmap
+        width: Math.round(parent.width / 1.5)
+        height: Math.round(parent.height / 1.5)
+        anchors.left: parent.left;
+        visible: false
+        LeadingIgnitionMap{}
+    }
+
+
     Rectangle{
         id:gauge
         width: 200
         height: 250
-        anchors.left: bmap.right;
+        anchors.right: parent.right;
+        anchors.top: parent.top;
+        visible: false
         TempGauge{}
     }
 
-    toolBar:ToolBar {
-        RowLayout {
-            anchors.fill: parent
-            ToolButton {
-                text: "Show Basemap"
-                onClicked :{}
-               // signal showBase(string Base)
-            }
-            ToolButton {
-                text: "Enabled"
-            }
-            ToolButton {
-                text: "Enabled"
-            }
-            Item { Layout.fillWidth: true }
-            CheckBox {
-                text: "Enabled"
-                checked: true
-                Layout.alignment: Qt.AlignRight
-            }
-        }
+
+    TreeView{
+        id:tree
+        width:200
+        height: 200
+        visible: false
 
     }
+
+    toolBar:ToolBar {
+        id: maintoolbar
+        // anchors.fill: parent
+        // transformOrigin: Body.left;
+        //rotation :90;
+
+        // x: - maintoolbar.width
+        // y: -300
+
+
+        RowLayout {
+            ToolButton {
+                text: "ECU"
+                onClicked:{
+                    if (tree.visible==true)
+                        tree.visible=false
+                    else
+                        tree.visible=true
+                }
+
+            }
+            ToolButton {
+                text: "Basemap"
+                onClicked:{
+                    if (bmap.visible==true)
+                        bmap.visible=false
+                    else
+                        bmap.visible=true
+                        tingmap.visible=false
+                        lingmap.visible=false
+                }
+
+            }
+
+
+            ToolButton {
+                text: "LeadingMap"
+
+            onClicked:{
+                if (lingmap.visible==true)
+                    lingmap.visible=false
+                else
+                    lingmap.visible=true
+                    tingmap.visible=false
+                    bmap.visible=false
+                }
+            }
+        }
+    }
+
+
     menuBar: MenuBar {
         Menu {
             title: qsTr("File")
@@ -107,6 +190,7 @@ ApplicationWindow {
         }
     }
 }
+
 
 
 
