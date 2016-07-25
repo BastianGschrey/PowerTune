@@ -23,28 +23,16 @@ ApplicationWindow {
 
 
 
- /*   Rectangle{
-        id:rev
-        color:"transparent"
-        width: parent.width
-        height: parent.height
-
-        visible: true
-        SpeedGauge{}
+    Rectangle{
+        id:bmap
+        width: Math.round(parent.width / 1.5)
+        height: Math.round(parent.height / 1.5)
+        anchors.left: parent.left;
+        visible: false
+        BaseMap{}
 
     }
 
- /*  Rectangle{
-        id:speedo
-        color:"transparent"
-        width: parent.height / 1.5
-        height: width
-        y:parent.height / 5
-        x: parent.width / 6.66
-        visible: true
-        SpeedGauge{}
-
-    }*/
 
     Rectangle{
         id:lingmap
@@ -83,6 +71,14 @@ ApplicationWindow {
 
     }
 
+    Rectangle{
+        id:serialset
+        width:200
+        height: 200
+        visible: false
+        SerialSettings{}
+    }
+
     toolBar:ToolBar {
         id: maintoolbar
         // anchors.fill: parent
@@ -95,12 +91,31 @@ ApplicationWindow {
 
         RowLayout {
             ToolButton {
+                text: "Connect"
+            }
+            ToolButton {
+                text: "Dasboard"
+                onClicked:{
+                    if (dash.visible==true)
+                        dash.visible=false
+                    else
+                        dash.visible=true
+                        bmap.visible=false
+                        tingmap.visible=false
+                        lingmap.visible=false
+                        tree.visible=false
+                        serialset.visible=false
+                }
+
+            }
+            ToolButton {
                 text: "ECU"
                 onClicked:{
                     if (tree.visible==true)
                         tree.visible=false
                     else
                         tree.visible=true
+                        serialset.visible=false
                 }
 
             }
@@ -113,6 +128,9 @@ ApplicationWindow {
                         bmap.visible=true
                         tingmap.visible=false
                         lingmap.visible=false
+                        dash.visible=false
+                        tree.visible=false
+                        serialset.visible=false
                 }
 
             }
@@ -128,7 +146,11 @@ ApplicationWindow {
                     lingmap.visible=true
                     tingmap.visible=false
                     bmap.visible=false
+                    dash.visible=false
+                    tree.visible=false
+                    serialset.visible=false
                 }
+
             }
         }
     }
@@ -150,7 +172,18 @@ ApplicationWindow {
             title: qsTr("Options")
             MenuItem {
                 text: qsTr("COM Port")
-                onTriggered: console.log("Select COM Port");
+                onTriggered:{
+                    if (serialset.visible==true)
+                        serialset.visible=false
+                    else
+                        serialset.visible=true
+                        lingmap.visible=false
+                        tingmap.visible=false
+                        bmap.visible=false
+                        dash.visible=false
+                        tree.visible=false
+                    }
+
             }
             MenuItem {
                 text: qsTr("Connect")

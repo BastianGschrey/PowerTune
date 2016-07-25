@@ -18,13 +18,16 @@ Rectangle {
 
                        anchors.verticalCenterOffset: 0
                        anchors.centerIn: parent
-
+                       //this is just to animate the needles via keyboard button and can be deleted once C++ interface is working
                        focus: true
                        Keys.onPressed: {
                                 if (event.key == Qt.Key_0 && !event.isAutoRepeat) {
-                                    speedoNeedle.value = 100 // percentage of 360 degrees (gauge has a radius of 300 deg)
+                                    speedoNeedle.value = 100 // percentage (gauge has a radius of 100 = 300 deg)
                                     revNeedle.value = 100
                                 }
+                                //once C++ works
+                                //speedo.Needle.value = speed from C ++ /3  //Speedgauge 0-300 = 300 degrees
+                                //revNeedle.value = Rev from C++ /100      //Rev gauge has 0-10.000 RPM = 300 degrees
                        }
                        Keys.onReleased: {
                                if (event.key == Qt.Key_0 && !event.isAutoRepeat) {
@@ -33,7 +36,7 @@ Rectangle {
                                }}}
 
 
-
+               //revolutions can be replaced with Speed value from C++ no formula needed
               SpeedGaugeInnerRing   {
                 id: innerring
                 speed: (Math.round(speedoNeedle.currentValue, 0) + 360)
@@ -55,24 +58,13 @@ Rectangle {
                        anchors.verticalCenterOffset: 0
                        anchors.centerIn: parent
 
-                       /*focus: true
-                       Keys.onPressed: {
-                                if (event.key == Qt.Key_Shift && !event.isAutoRepeat) {
-                                    revNeedle.value = 100 // percentage (gauge has a span of 300 deg)
-
-                                }
-                       }
-                       Keys.onReleased: {
-                               if (event.key == Qt.Key_Shift && !event.isAutoRepeat) {
-                                   revNeedle.value = 0
-
-                               }}*/}
+               }
 
 
-
+               //revolutions can be replaced with Rev value from C++ no formula needed
               RevGaugeInnerRing   {
                 id: revinnerring
-                revolutions: (Math.round(revNeedle.revcurrentValue, 0) + 360) * 35
+                revolutions: (Math.round(revNeedle.revcurrentValue, 0) + 360) * 33.333333333
               }
 
 

@@ -3,7 +3,10 @@ TEMPLATE = app
 QT += qml quick
 CONFIG += c++11
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    serial.cpp \
+    serialsetting.cpp \
+    mainwindow.cpp
 
 RESOURCES += qml.qrc
 
@@ -13,7 +16,10 @@ QML_IMPORT_PATH =
 # Default rules for deployment.
 include(deployment.pri)
 
-HEADERS +=
+HEADERS += \
+    serial.h \
+    serialsetting.h \
+    mainwindow.h
 
 FORMS +=
 

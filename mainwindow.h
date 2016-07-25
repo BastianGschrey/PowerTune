@@ -6,7 +6,6 @@
 
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
 //#include <QMainWindow>
 #include <serialsetting.h>
 #include <serial.h>
@@ -208,10 +207,10 @@ public:
       #define FC_INFO_ADD		{0,-1.0332, 0, 0, 0, 0, -25, -25, -80, 0, 0, 0, -80, -80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
 private slots:
-    void on_btnSerialSettings_clicked();
-    void on_btnReadAll_clicked();
-    void on_btnConnect_clicked();
-    void on_btnDisconnect_clicked();
+//    void on_btnSerialSettings_clicked();
+//    void on_btnReadAll_clicked();
+//    void on_btnConnect_clicked();
+//    void on_btnDisconnect_clicked();
     void readData(QByteArray ClassSerialData);
     void decodeAdv(QByteArray serialdata);
     void decodeSensor(QByteArray serialdata);
@@ -236,17 +235,17 @@ private slots:
     void decodeInit(QByteArray serialdata);
     void decodeBoostCont(QByteArray serialdata);
     void decodeInjOverlap(QByteArray serialdata);
-
-/*private:
+/*
+private:
     Ui::MainWindow *ui;
     SerialSetting *wndwSerial;
     Serial *serial;
-
+*/
 signals:
     void SIG_connectSerial(SerialSetting::Settings settings);
     void SIG_requestSerial(int requestID);
     void SIG_closeSerial();
-*/
+
 };
 
 #endif // MAINWINDOW_H

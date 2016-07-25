@@ -25,15 +25,15 @@
 
 Serial::Serial(QObject *parent) : QObject(parent)
 {
-serialport = new QSerialPort(this);
-connect(this->serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
+/*serialport = new QSerialPort(this);
+connect(this->serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));*/
 }
 
 QByteArray Serial::read() const
 {
     return serialport->readAll();
 }
-
+/*
 //function for flushing all serial buffers
 void Serial::clear() const
 {
@@ -60,7 +60,7 @@ qDebug() << serialport->errorString();
 qDebug() << "Portname: " << p.portName;
 
 }
-
+*/
 void Serial::closeConnection()
 {
 serialport->close();

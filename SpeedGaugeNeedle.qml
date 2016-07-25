@@ -6,7 +6,7 @@ Canvas {
 
     property int value : 0
 
-    onValueChanged: {zeiger.rotation = Math.min(Math.max(-250, canvas.value*3.5 - 150), 150); canvas.currentValue = zeiger.rotation - 211} //130 minrotation, -30 maxrotation
+    onValueChanged: {zeiger.rotation = Math.min(Math.max(-250, canvas.value*3.5 - 150), 150); canvas.currentValue = zeiger.rotation - 210} //130 minrotation, -30 maxrotation
     width: parent.width; height: parent.height
 
     Rectangle {
@@ -21,11 +21,11 @@ Canvas {
         smooth: true
         antialiasing: true
         color: "#ffffff" // needle color
-        onRotationChanged: {canvas.currentValue = zeiger.rotation - 211; canvas.requestPaint()}//texti.text = zeiger.rotation
+        onRotationChanged: {canvas.currentValue = zeiger.rotation - 210; canvas.requestPaint()}//texti.text = zeiger.rotation
 
             Behavior on rotation {
                 NumberAnimation{
-                    duration: 15000
+                    duration: 30
                     easing.type: Easing.OutCirc
                 }
             }

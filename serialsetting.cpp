@@ -8,7 +8,7 @@
 QT_USE_NAMESPACE
 
 static const char blankString[] = QT_TRANSLATE_NOOP("SettingsDialog", "N/A");
-
+/*
 SerialSetting::SerialSetting(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SerialSetting)
@@ -28,7 +28,8 @@ SerialSetting::~SerialSetting()
 {
     delete ui;
 }
-
+*/
+/*
 void SerialSetting::fillPortsParameters()
 {
 
@@ -52,7 +53,8 @@ SerialSetting::Settings SerialSetting::settings()
     return SerialSetting::currentSettings;
 }
 
-void SerialSetting::on_btnApply_clicked()
+ void SerialSetting::on_btnApply_clicked()
 {
 
-}
+}*/
+

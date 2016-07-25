@@ -7,7 +7,6 @@ import QtQuick.Window 2.0
 
 TableView {
    anchors.fill: parent
-
    TableViewColumn {
      title: "LeadIgn"
      width: Math.round(parent.width / 21)
@@ -94,3 +93,4 @@ TableView {
      width: Math.round(parent.width / 21)
    }
 }
+
