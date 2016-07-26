@@ -6,21 +6,22 @@
 
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+
 //#include <QMainWindow>
+#include <QWindow>
 #include <serialsetting.h>
 #include <serial.h>
 #include <QBitArray>
 //#include <QMessageBox>
 #include <QMetaType>
 #include <QStandardItem>
-#include <QObject>
-#include <QWindow>
 
 namespace Ui {
 class MainWindow;
 }
 
 class MainWindow : public QWindow
+//class MainWindow : public QMainWindow
 {
     Q_OBJECT
 /*
@@ -200,11 +201,78 @@ public:
         quint8 checksum;
         fc_InjOverlap_info_t parse(const QByteArray &);
     };
+     double packageInjPriLagvsBattV[12];
 
+     struct fc_InjPriLagvsBattV_info_t{
+
+        quint16 requesttype;
+        quint16 InjPriLag16V;
+        quint16 InjPriLag14V;
+        quint16 InjPriLag12V;
+        quint16 InjPriLag10V;
+        quint16 InjPriLag8V;
+        quint16 InjPriLag6V;
+        quint8 checksum;
+        fc_InjPriLagvsBattV_info_t parse(const QByteArray &);
+    };
+
+     double packageInjScLagvsBattV[12];
+
+     struct fc_InjScLagvsBattV_info_t{
+
+        quint16 requesttype;
+        quint16 InjScLag16V;
+        quint16 InjScLag14V;
+        quint16 InjScLag12V;
+        quint16 InjScLag10V;
+        quint16 InjScLag8V;
+        quint16 InjScLag6V;
+        quint8 checksum;
+        fc_InjScLagvsBattV_info_t parse(const QByteArray &);
+    };
+     double packageFuelInjectors[26];
+
+     struct fc_FuelInjectors_info_t{
+
+        quint16 requesttype;
+        quint8 empty1;
+        quint8 frontpulse; //(for percent multiply by 100 to get percentage)
+        quint8 empty2;
+        quint8 rearpulse; //(for percent multiply by 100 to get percentage)
+        quint8 frntprilag; //(multiply by 0.004)
+        quint8 empty3;
+        quint8 frntseclag; // (multiply by 0.004)
+        quint8 empty4;
+        quint8 rearprilag; //  (multiply by 0.004)
+        quint8 empty5;
+        quint8 rearseclag; // (multiply by 0.004)
+        quint8 empty6;
+        quint16 prinjsize;
+        quint16 secinjsize;
+        quint16 prisectransprc; // (divide it by 10to get the percentage)
+        quint16 prisectransms;
+        quint8 empty7;
+        quint8 empty8;
+        quint8 empty9;
+        quint8 empty10;
+        quint8 checksum;
+        fc_FuelInjectors_info_t parse(const QByteArray &);
+    };
+
+     struct fc_FuelBase_info_t{
+         quint16 requesttype;
+         quint16 fuelBase[100];
+         quint8 checksum;
+         fc_FuelBase_info_t parse(const QByteArray &);
+     };
+
+     struct fc_fullFuelBase_info_t{
+         quint16 fuelBase[800];
+     };
 
     // FD3S
-      #define FC_INFO_MUL		{1, 0.0001, 1, 1, 1.0/256, 1.0/256, 1, 1, 1, 212.0/256, 0.4, 0.4, 1, 1, 1, 0.1, 1, 0.1, 0.02, 1, 1.0/256, 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0/255, 5.0/255, 5.0/255, 5.0/255, 0.01, 0.001, 0.019, 40, 0.05}
-      #define FC_INFO_ADD		{0,-1.0332, 0, 0, 0, 0, -25, -25, -80, 0, 0, 0, -80, -80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+      #define FC_INFO_MUL		{1, 0.0001, 1, 1, 1.0/256, 1.0/256, 1, 1, 1, 212.0/256, 0.4, 0.4, 1, 1, 1, 0.1, 1, 0.1, 0.02, 1, 1.0/256, 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0/255, 5.0/255, 5.0/255, 5.0/255, 0.01, 0.001, 0.019, 40, 0.05, 0.004 , 256, -0.00390625, 1.0/128,100}
+      #define FC_INFO_ADD		{0,-1.0332, 0, 0, 0, 0, -25, -25, -80, 0, 0, 0, -80, -80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -128}
 
 private slots:
 //    void on_btnSerialSettings_clicked();
@@ -219,28 +287,23 @@ private slots:
     void decodeBasic(QByteArray serialdata);
     void decodeRevIdle(QByteArray serialdata);
     void decodeTurboTrans(QByteArray serialdata);
-    void decodeLeadIgn1(QByteArray serialdata);
-    void decodeLeadIgn2(QByteArray serialdata);
-    void decodeLeadIgn3(QByteArray serialdata);
-    void decodeLeadIgn4(QByteArray serialdata);
-    void decodeTrailIgn1(QByteArray serialdata);
-    void decodeTrailIgn2(QByteArray serialdata);
-    void decodeTrailIgn3(QByteArray serialdata);
-    void decodeTrailIgn4(QByteArray serialdata);
-    void decodeInjcorr1(QByteArray serialdata);
-    void decodeInjcorr2(QByteArray serialdata);
-    void decodeInjcorr3(QByteArray serialdata);
-    void decodeInjcorr4(QByteArray serialdata);
     void decodeVersion(QByteArray serialdata);
     void decodeInit(QByteArray serialdata);
     void decodeBoostCont(QByteArray serialdata);
     void decodeInjOverlap(QByteArray serialdata);
-/*
+    void decodeInjPriLagvsBattV(QByteArray serialdata);
+    void decodeInjScLagvsBattV(QByteArray serialdata);
+    void decodeFuelInjectors(QByteArray serialdata);
+
 private:
     Ui::MainWindow *ui;
     SerialSetting *wndwSerial;
     Serial *serial;
-*/
+    void decodeTrailIgn(QByteArray serialdata, quint8 column);
+    void decodeLeadIgn(QByteArray serialdata, quint8 column);
+    void decodeInjcorr(QByteArray serialdata, quint8 column);
+    void decodeFuelBase(QByteArray serialdata, quint8 package);
+
 signals:
     void SIG_connectSerial(SerialSetting::Settings settings);
     void SIG_requestSerial(int requestID);

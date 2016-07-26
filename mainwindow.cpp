@@ -11,8 +11,12 @@
 #include <QStandardItemModel>
 //#include <QHeaderView>
 
+
+
+
 int requestID = 0; //ID for requested data type
 QByteArray serialdata;
+QByteArray fullFuelBase;
 
 double mul[80] = FC_INFO_MUL;  // required values for calculation from raw to readable values for Advanced Sensor info
 double add[] = FC_INFO_ADD;
@@ -33,14 +37,20 @@ static QString map[] = {"rpm", "pim", "pimV",
                         "STP", "CAT", "ELD", "HWL", "FPD", "FPR", "APR", "PAC", "CCN", "TCN", "PRC" ,"MAP_N","MAP_P",
                         "Basic_Injduty", "Basic_IGL", "Basic_IGT", "Basic_RPM", "Basic_KPH", "Basic_Boost", "Basic_Knock", "Basic_Watert", "Basic_Airt", "Basic_BattV",};
 
-
-/*MainWindow::MainWindow(QWidget *parent) :
+/*
+MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     wndwSerial = new SerialSetting();
     ui->btnDisconnect->setDisabled(true);
+    QHeaderView* horizontalHeaderFuelTable = ui->tableFuelBase->horizontalHeader();
+    horizontalHeaderFuelTable->setSectionResizeMode(QHeaderView::Stretch);
+    QHeaderView* verticalHeaderFuelTable = ui->tableFuelBase->verticalHeader();
+    verticalHeaderFuelTable->setSectionResizeMode(QHeaderView::Stretch);
+    horizontalHeaderFuelTable->setStyleSheet("QHeaderView::section {background-color:grey}");
+    verticalHeaderFuelTable->setStyleSheet("QHeaderView::section {background-color:grey}");
     serial = new Serial();
 
     connect(serial,SIGNAL(SIG_dataAvailable(QByteArray)),this,SLOT(readData(QByteArray)));
@@ -50,9 +60,9 @@ static QString map[] = {"rpm", "pim", "pimV",
 
     }
 
-*/
 
-/*MainWindow::~MainWindow()
+
+MainWindow::~MainWindow()
 {
     delete ui;
 }
@@ -111,12 +121,11 @@ void MainWindow::on_btnDisconnect_clicked()
     ui->btnDisconnect->setDisabled(true);
     ui->btnConnect->setDisabled(false);
 }
-
 */
+
 void MainWindow::readData(QByteArray ClassSerialData)
 {
     serialdata.append(ClassSerialData);
-    qDebug() << "readdata";
     if(serialdata != NULL)
     {
         quint8 requesttype = serialdata[0];
@@ -129,29 +138,43 @@ void MainWindow::readData(QByteArray ClassSerialData)
             if(serialdata.length() == 23 && requesttype == 0xDA){MainWindow::decodeBasic(serialdata);}
             if(serialdata.length() == 17 && requesttype == 0xB8){MainWindow::decodeRevIdle(serialdata);}
             if(serialdata.length() == 12 && requesttype == 0x7D){MainWindow::decodeTurboTrans(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x76){MainWindow::decodeLeadIgn1(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x77){MainWindow::decodeLeadIgn2(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x78){MainWindow::decodeLeadIgn3(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x79){MainWindow::decodeLeadIgn4(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x81){MainWindow::decodeTrailIgn1(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x82){MainWindow::decodeTrailIgn2(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x83){MainWindow::decodeTrailIgn3(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x84){MainWindow::decodeTrailIgn4(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x86){MainWindow::decodeInjcorr1(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x87){MainWindow::decodeInjcorr2(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x88){MainWindow::decodeInjcorr3(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x89){MainWindow::decodeInjcorr4(serialdata);}
+            if(serialdata.length() == 103 && requesttype == 0x76){MainWindow::decodeLeadIgn(serialdata, 0);}
+            if(serialdata.length() == 103 && requesttype == 0x77){MainWindow::decodeLeadIgn(serialdata, 5);}
+            if(serialdata.length() == 103 && requesttype == 0x78){MainWindow::decodeLeadIgn(serialdata, 10);}
+            if(serialdata.length() == 103 && requesttype == 0x79){MainWindow::decodeLeadIgn(serialdata, 15);}
+            if(serialdata.length() == 103 && requesttype == 0x81){MainWindow::decodeTrailIgn(serialdata, 0);}
+            if(serialdata.length() == 103 && requesttype == 0x82){MainWindow::decodeTrailIgn(serialdata, 5);}
+            if(serialdata.length() == 103 && requesttype == 0x83){MainWindow::decodeTrailIgn(serialdata, 10);}
+            if(serialdata.length() == 103 && requesttype == 0x84){MainWindow::decodeTrailIgn(serialdata, 15);}
+            if(serialdata.length() == 103 && requesttype == 0x86){MainWindow::decodeInjcorr(serialdata, 0);}
+            if(serialdata.length() == 103 && requesttype == 0x87){MainWindow::decodeInjcorr(serialdata, 5);}
+            if(serialdata.length() == 103 && requesttype == 0x88){MainWindow::decodeInjcorr(serialdata, 10);}
+            if(serialdata.length() == 103 && requesttype == 0x89){MainWindow::decodeInjcorr(serialdata, 15);}
+
+            if(serialdata.length() == 103 && requesttype == 0xB0){MainWindow::decodeFuelBase(serialdata, 0);}
+            if(serialdata.length() == 103 && requesttype == 0xB1){MainWindow::decodeFuelBase(serialdata, 1);}
+            if(serialdata.length() == 103 && requesttype == 0xB2){MainWindow::decodeFuelBase(serialdata, 2);}
+            if(serialdata.length() == 103 && requesttype == 0xB3){MainWindow::decodeFuelBase(serialdata, 3);}
+            if(serialdata.length() == 103 && requesttype == 0xB4){MainWindow::decodeFuelBase(serialdata, 4);}
+            if(serialdata.length() == 103 && requesttype == 0xB5){MainWindow::decodeFuelBase(serialdata, 5);}
+            if(serialdata.length() == 103 && requesttype == 0xB6){MainWindow::decodeFuelBase(serialdata, 6);}
+            if(serialdata.length() == 103 && requesttype == 0xB7){MainWindow::decodeFuelBase(serialdata, 7);}
+
             if(serialdata.length() == 8 && requesttype == 0xF5){MainWindow::decodeVersion(serialdata);}
             if(serialdata.length() == 11 && requesttype == 0xF3){MainWindow::decodeInit(serialdata);}
             if(serialdata.length() == 14 && requesttype == 0xAB){MainWindow::decodeBoostCont(serialdata);}
             if(serialdata.length() == 9 && requesttype == 0x7B){MainWindow::decodeInjOverlap(serialdata);}
+            if(serialdata.length() == 15 && requesttype == 0x92){MainWindow::decodeInjPriLagvsBattV(serialdata);}
+            if(serialdata.length() == 15 && requesttype == 0x9F){MainWindow::decodeInjScLagvsBattV(serialdata);}
+            if(serialdata.length() == 27 && requesttype == 0x8D){MainWindow::decodeFuelInjectors(serialdata);}
+
 
             serialdata.clear();
             serialdata.clear();
             if(requestID <= 61){requestID++;}
             else{requestID = 58;}
 
-            //serial->sendRequest(requestID);
+            serial->sendRequest(requestID);
         }
     }
 
@@ -185,8 +208,8 @@ void MainWindow::decodeAdv(QByteArray serialdata)
     packageADV[19] = mul[19] * info->na1 + add[19];
     packageADV[20] = mul[20] * info->Secinjpulse + add[20];
     packageADV[21] = mul[21] * info->na2 + add[21];
-
-/*    ui->txtConsole->clear();
+/*
+    ui->txtConsole->clear();
 
     ui->txtConsole->append(map[0] + " " + QString::number(packageADV[0]));
     ui->txtConsole->append(map[1] + " " + QString::number(packageADV[1]));
@@ -209,8 +232,8 @@ void MainWindow::decodeAdv(QByteArray serialdata)
     ui->txtConsole->append(map[18] + " " + QString::number(packageADV[18]));
     ui->txtConsole->append(map[19] + " " + QString::number(packageADV[19]));
     ui->txtConsole->append(map[20] + " " + QString::number(packageADV[20]));
-    ui->txtConsole->append(map[21] + " " + QString::number(packageADV[21])); */
-
+    ui->txtConsole->append(map[21] + " " + QString::number(packageADV[21]));
+*/
 
 }
 
@@ -230,8 +253,8 @@ void MainWindow::decodeSensor(QByteArray serialdata)
     QBitArray flagArray(16);
     for (int i=0; i<16; i++)
         flagArray.setBit(i, info->flags>>i & 1);
-
-/*    ui->txtSensConsole->clear();
+/*
+    ui->txtSensConsole->clear();
 
     ui->txtSensConsole->append(map[42] + " " + QString::number(packageSens[0]));
     ui->txtSensConsole->append(map[43] + " " + QString::number(packageSens[1]));
@@ -257,7 +280,8 @@ void MainWindow::decodeSensor(QByteArray serialdata)
     ui->txtSensConsole->append(map[62] + " " + QString::number(flagArray[12]));
     ui->txtSensConsole->append(map[63] + " " + QString::number(flagArray[13]));
     ui->txtSensConsole->append(map[64] + " " + QString::number(flagArray[14]));
-    ui->txtSensConsole->append(map[65] + " " + QString::number(flagArray[15])); */
+    ui->txtSensConsole->append(map[65] + " " + QString::number(flagArray[15]));
+*/
 }
 
 void MainWindow::decodeAux(QByteArray serialdata)
@@ -269,13 +293,14 @@ void MainWindow::decodeAux(QByteArray serialdata)
     packageAux[1] = mul[30] * info->AN2 + add[30];
     packageAux[2] = mul[31] * info->AN3 + add[31];
     packageAux[3] = mul[32] * info->AN4 + add[32];
-
-/*    ui->txtAuxConsole->clear();
+/*
+    ui->txtAuxConsole->clear();
 
     ui->txtAuxConsole->append(map[22] + " " + QString::number(packageAux[0]));
     ui->txtAuxConsole->append(map[23] + " " + QString::number(packageAux[1]));
     ui->txtAuxConsole->append(map[24] + " " + QString::number(packageAux[2]));
-    ui->txtAuxConsole->append(map[25] + " " + QString::number(packageAux[3])); */
+    ui->txtAuxConsole->append(map[25] + " " + QString::number(packageAux[3]));
+*/
 }
 
 void MainWindow::decodeMap(QByteArray serialdata)
@@ -284,11 +309,12 @@ void MainWindow::decodeMap(QByteArray serialdata)
 
     packageMap[0] = mul[0] * info->Map_N + add[0];
     packageMap[1] = mul[0] * info->Map_P + add[0];
-
- /*   ui->txtMapConsole->clear();
+/*
+    ui->txtMapConsole->clear();
 
     ui->txtMapConsole->append(map[66] + " " + QString::number(packageMap[0]));
-    ui->txtMapConsole->append(map[67] + " " + QString::number(packageMap[1]));*/
+    ui->txtMapConsole->append(map[67] + " " + QString::number(packageMap[1]));
+*/
 }
 void MainWindow::decodeBasic(QByteArray serialdata)
 {
@@ -304,8 +330,8 @@ void MainWindow::decodeBasic(QByteArray serialdata)
     packageBasic[7] = mul[0] * info->Basic_Watert + add[8];
     packageBasic[8] = mul[0] * info->Basic_Airt + add[8];
     packageBasic[9] = mul[15] * info->Basic_BattV + add[0];
-
- /*   ui->txtBasicConsole->clear();
+/*
+    ui->txtBasicConsole->clear();
 
     ui->txtBasicConsole->append(map[68] + " " + QString::number(packageBasic[0]));
     ui->txtBasicConsole->append(map[69] + " " + QString::number(packageBasic[1]));
@@ -316,7 +342,8 @@ void MainWindow::decodeBasic(QByteArray serialdata)
     ui->txtBasicConsole->append(map[74] + " " + QString::number(packageBasic[6]));
     ui->txtBasicConsole->append(map[75] + " " + QString::number(packageBasic[7]));
     ui->txtBasicConsole->append(map[76] + " " + QString::number(packageBasic[8]));
-    ui->txtBasicConsole->append(map[77] + " " + QString::number(packageBasic[9]));*/
+    ui->txtBasicConsole->append(map[77] + " " + QString::number(packageBasic[9]));
+*/
 }
 
 void MainWindow::decodeRevIdle(QByteArray serialdata)
@@ -330,14 +357,15 @@ void MainWindow::decodeRevIdle(QByteArray serialdata)
     packageRevIdle[4] = info->IdleAE;
     packageRevIdle[5] = info->IdleEL;
     packageRevIdle[6] = info->IdleAC;
-
-/*    ui->lineRevlim->setText (QString::number(packageRevIdle[0]));
+/*
+    ui->lineRevlim->setText (QString::number(packageRevIdle[0]));
     ui->lineFCAE->setText (QString::number(packageRevIdle[1]));
     ui->lineFCEL->setText (QString::number(packageRevIdle[2]));
     ui->lineFCAC->setText (QString::number(packageRevIdle[3]));
     ui->lineIdleAE->setText (QString::number(packageRevIdle[4]));
     ui->lineIdleEL->setText (QString::number(packageRevIdle[5]));
-    ui->lineIdleAC->setText (QString::number(packageRevIdle[6])); */
+    ui->lineIdleAC->setText (QString::number(packageRevIdle[6]));
+*/
 }
 
 void MainWindow::decodeTurboTrans(QByteArray serialdata)
@@ -353,8 +381,8 @@ void MainWindow::decodeTurboTrans(QByteArray serialdata)
     packageTurboTrans[6] = mul[36] * info->HighRPM1;
     packageTurboTrans[7] = mul[36] * info->HighRPM2;
     packageTurboTrans[8] = mul[36] * info->HighRPM3;
-
-/*    ui->lineTPS01->setText (QString::number(packageTurboTrans[0]));
+/*
+    ui->lineTPS01->setText (QString::number(packageTurboTrans[0]));
     ui->lineTPS02->setText (QString::number(packageTurboTrans[1]));
     ui->lineTPS03->setText (QString::number(packageTurboTrans[2]));
     ui->lineLowRPM1->setText (QString::number(packageTurboTrans[3]));
@@ -362,14 +390,18 @@ void MainWindow::decodeTurboTrans(QByteArray serialdata)
     ui->lineLowRPM3->setText (QString::number(packageTurboTrans[5]));
     ui->lineHighRPM1->setText (QString::number(packageTurboTrans[6]));
     ui->lineHighRPM2->setText (QString::number(packageTurboTrans[7]));
-    ui->lineHighRPM3->setText (QString::number(packageTurboTrans[8])); */
+    ui->lineHighRPM3->setText (QString::number(packageTurboTrans[8]));
+*/
 }
-void MainWindow::decodeLeadIgn1(QByteArray serialdata)
-{
- /*   //Fill Table view with Leading ignition Table1
 
-    int countarray = 1; //counter for the position in the array
-        for (int column = 0; column < 5; column++) //increases the counter column by 1 until column 5
+void MainWindow::decodeLeadIgn(QByteArray serialdata, quint8 column)
+{
+    //Fill Table view with Leading ignition Table1
+/*
+
+    quint8 columnLimit = column + 5;
+    quint8 countarray = 1; //counter for the position in the array
+        for (column; column < columnLimit; column++) //increases the counter column by 1 until column 5
         {
 
             for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
@@ -381,85 +413,22 @@ void MainWindow::decodeLeadIgn1(QByteArray serialdata)
                     ui->tableLeadIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
                     ui->tableLeadIgn->setModel(model);
             }
-        }*/
+        }
+*/
 }
-void MainWindow::decodeLeadIgn2(QByteArray serialdata)
-{
-/*    //Fill Table view with Leading ignition Table2
-    int countarray = 1; //counter for the position in the array
-        for (int column = 5; column < 10; column++) //end column of last packet , increase until 5 columns are written
-        {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
-                    model->setItem(row,column,value);
-                    ui->tableLeadIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableLeadIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableLeadIgn->setModel(model);
-            }
-        } */
-}
-void MainWindow::decodeLeadIgn3(QByteArray serialdata)
-{
- /*   //Fill Table view with Leading ignition Table3
-    int countarray = 1; //counter for the position in the array
-    for (int column = 10; column < 15; column++) //end column of last packet , increase until 5 columns are written
-        {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
-                    model->setItem(row,column,value);
-                    ui->tableLeadIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableLeadIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableLeadIgn->setModel(model);
-            }
-        } */
-}
-void MainWindow::decodeLeadIgn4(QByteArray serialdata)
-{
- /*   //Fill Table view with Leading ignition Table4
-    int countarray = 1; //counter for the position in the array
-        for (int column = 15; column < 20; column++) //end column of last packet , increase until 5 columns are written
-        {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
-                    model->setItem(row,column,value);
-                    ui->tableLeadIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableLeadIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableLeadIgn->setModel(model);
-            }
-        } */
-}
+
+
 //Trailing Ignition Map
-void MainWindow::decodeTrailIgn1(QByteArray serialdata)
-{
-/*    //Fill Table view with Trailing ignition Table1
 
-    int countarray = 1; //counter for the position in the array
-        for (int column = 0; column < 5; column++) //increases the counter column by 1 until column 5
-        {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
-                    model1->setItem(row,column,value);
-                    ui->tableTrailIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableTrailIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableTrailIgn->setModel(model1);
-            }
-        }*/
-}
-void MainWindow::decodeTrailIgn2(QByteArray serialdata)
+void MainWindow::decodeTrailIgn(QByteArray serialdata, quint8 column)
 {
- /*   //Fill Table view with Trailing ignition Table2
-    int countarray = 1; //counter for the position in the array
-        for (int column = 5; column < 10; column++) //end column of last packet , increase until 5 columns are written
+    //Fill Table view with Trailing ignition Table1
+    /*
+    quint8 columnLimit = column + 5;
+    quint8 countarray = 1; //counter for the position in the array
+        for (column; column < columnLimit; column++) //increases the counter column by 1 until column 5
         {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
+            for (quint8 row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
             {
                 if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
                     QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
@@ -468,112 +437,63 @@ void MainWindow::decodeTrailIgn2(QByteArray serialdata)
                     ui->tableTrailIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
                     ui->tableTrailIgn->setModel(model1);
             }
-        }*/
+        }
+*/
 }
-void MainWindow::decodeTrailIgn3(QByteArray serialdata)
-{
- /*   //Fill Table view with Trailing ignition Table3
-    int countarray = 1; //counter for the position in the array
-        for (int column = 10; column < 15; column++) //end column of last packet , increase until 5 columns are written
-        {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
-                    model1->setItem(row,column,value);
-                    ui->tableTrailIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableTrailIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableTrailIgn->setModel(model1);
-            }
-        }*/
-}
-void MainWindow::decodeTrailIgn4(QByteArray serialdata)
-{
- /*   //Fill Table view with Trailing ignition Table4
-    int countarray = 1; //counter for the position in the array
-        for (int column = 15; column < 20; column++) //end column of last packet , increase until 5 columns are written
-        {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray]-25)); //insert the array here and use count array for position in array
-                    model1->setItem(row,column,value);
-                    ui->tableTrailIgn->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableTrailIgn->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableTrailIgn->setModel(model1);
-            }
-        }*/
-}
+
 //Injector correction
-void MainWindow::decodeInjcorr1(QByteArray serialdata)
-{
- /*   //Fill Table view with Injector correction Table1
 
-    int countarray = 1; //counter for the position in the array
-        for (int column = 0; column < 5; column++) //increases the counter column by 1 until column 5
-        {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray])); //insert the array here and use count array for position in array
-                    model2->setItem(row,column,value);
-                    ui->tableInjCorr->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableInjCorr->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableInjCorr->setModel(model2);
-            }
-        }*/
-}
-void MainWindow::decodeInjcorr2(QByteArray serialdata)
+void MainWindow::decodeInjcorr(QByteArray serialdata, quint8 column)
 {
- /*   //Fill Table view with Injector correction Table2
-    int countarray = 1; //counter for the position in the array
-        for (int column = 5; column < 10; column++) //end column of last packet , increase until 5 columns are written
+    //Fill Table view with Injector correction Table1
+ /*
+    quint8 columnLimit = column + 5;
+
+    quint8 countarray = 1; //counter for the position in the array
+        for (column; column < columnLimit; column++) //increases the counter column by 1 until column 5
         {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
+            for (quint8 row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
             {
                 if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray])); //insert the array here and use count array for position in array
+                    QStandardItem *value = new QStandardItem(QString::number((serialdata[countarray]-128)*mul[40])); //insert the array here and use count array for position in array
                     model2->setItem(row,column,value);
                     ui->tableInjCorr->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
                     ui->tableInjCorr->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
                     ui->tableInjCorr->setModel(model2);
             }
-        }*/
+        }
+*/
 }
-void MainWindow::decodeInjcorr3(QByteArray serialdata)
+
+void MainWindow::decodeFuelBase(QByteArray serialdata, quint8 package)
 {
- /*   //Fill Table view with Injector correction Table3
-    int countarray = 1; //counter for the position in the array
-        for (int column = 10; column < 15; column++) //end column of last packet , increase until 5 columns are written
+/*
+quint8 index = 0;
+    qDebug() << "add package!";
+
+        for(quint8 index = 2; index < 102; index++)
         {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray])); //insert the array here and use count array for position in array
-                    model2->setItem(row,column,value);
-                    ui->tableInjCorr->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableInjCorr->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableInjCorr->setModel(model2);
-            }
-        }*/
-}
-void MainWindow::decodeInjcorr4(QByteArray serialdata)
-{
-    //Fill Table view with Injector correction Table4
-  /*  int countarray = 1; //counter for the position in the array
-        for (int column = 15; column < 20; column++) //end column of last packet , increase until 5 columns are written
+            fullFuelBase.append(serialdata[index]);
+        }
+
+        if(package == 7)
         {
-            for (int row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
-            {
-                if(countarray <= 102){countarray++;} //Increases the counter "countarray till 100"
-                    QStandardItem *value = new QStandardItem(QString::number(serialdata[countarray])); //insert the array here and use count array for position in array
-                    model2->setItem(row,column,value);
-                    ui->tableInjCorr->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableInjCorr->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-                    ui->tableInjCorr->setModel(model2);
-            }
-        }*/
+                fc_fullFuelBase_info_t* info=reinterpret_cast<fc_fullFuelBase_info_t*>(fullFuelBase.data());
+
+                for (quint8 column = 0; column <= 20; column++) //increases the counter column by 1 until column 5
+                {
+                    for (quint8 row = 0; row < 20 ; row++)// counter to increase row up to 20 then set counter to 0 for next column
+                    {
+                         ui->tableFuelBase->setItem(row, column, new QTableWidgetItem(QString::number(info->fuelBase[index])));
+                         index++;
+                         qDebug() << row << " : " << column;
+                    }
+                }
+                qDebug() << fullFuelBase.length();
+        }
+*/
 }
+
 void MainWindow::decodeBoostCont(QByteArray serialdata)
 {
     fc_BoostCont_info_t* info=reinterpret_cast<fc_BoostCont_info_t*>(serialdata.data());
@@ -589,31 +509,112 @@ void MainWindow::decodeBoostCont(QByteArray serialdata)
     packageBoostControl[8] = info->DutySecondary1;
     packageBoostControl[9] = info->DutyPrimary2;
     packageBoostControl[10] = info->DutySecondary2;
-
-
-
+/*
+    ui->lineBoostPri1->setText (QString::number(packageBoostControl[3]));
+    ui->lineBoostSec1->setText (QString::number(packageBoostControl[4]));
+    ui->lineBoostPri2->setText (QString::number(packageBoostControl[5]));
+    ui->lineBoostSec2->setText (QString::number(packageBoostControl[6]));
+    ui->lineBoostDutyPri1->setText (QString::number(packageBoostControl[7]));
+    ui->lineBoostDutySec1->setText (QString::number(packageBoostControl[8]));
+    ui->lineBoostDutyPri2->setText (QString::number(packageBoostControl[9]));
+    ui->lineBoostDutySec2->setText (QString::number(packageBoostControl[10]));
+*/
 }
 void MainWindow::decodeInjOverlap(QByteArray serialdata)
 {
     fc_InjOverlap_info_t* info=reinterpret_cast<fc_InjOverlap_info_t*>(serialdata.data());
 
-    packageInjOverlap[0] = info->InjOvBoost1;
+    packageInjOverlap[0] = mul[39] * info->InjOvBoost1;
     packageInjOverlap[1] = info->lineInjOvSet1;
-    packageInjOverlap[2] = info->InjOvBoost2;
+    packageInjOverlap[2] = mul[39] * info->InjOvBoost2;
     packageInjOverlap[3] = info->lineInjOvSet2;
-    packageInjOverlap[4] = info->InjOvBoost3;
+    packageInjOverlap[4] = mul[39] * info->InjOvBoost3;
     packageInjOverlap[5] = info->lineInjOvSet3;
 
+/*
+    ui->lineInjOvBoost1->setText (QString::number(packageInjOverlap[0]));
+    ui->lineInjOvSet1->setText (QString::number(packageInjOverlap[1]));
+    ui->lineInjOvBoost2->setText (QString::number(packageInjOverlap[2]));
+    ui->lineInjOvSet2->setText (QString::number(packageInjOverlap[3]));
+    ui->lineInjOvBoost3->setText (QString::number(packageInjOverlap[4]));
+    ui->lineInjOvSet3->setText (QString::number(packageInjOverlap[5]));
 
-
-
+*/
 }
 
 void MainWindow::decodeVersion(QByteArray serialdata)
 {
-//        ui->lineVersion->setText (QString(serialdata).mid(2,5));
+ //       ui->lineVersion->setText (QString(serialdata).mid(2,5));
 }
 void MainWindow::decodeInit(QByteArray serialdata)
 {
-//      ui->linePlatform->setText (QString(serialdata).mid(2,8));
+   //     ui->linePlatform->setText (QString(serialdata).mid(2,8));
+}
+
+
+void MainWindow::decodeInjPriLagvsBattV(QByteArray serialdata)
+{
+    fc_InjPriLagvsBattV_info_t* info=reinterpret_cast<fc_InjPriLagvsBattV_info_t*>(serialdata.data());
+
+    packageInjPriLagvsBattV[0] = mul[38] * info->InjPriLag16V;
+    packageInjPriLagvsBattV[1] = mul[38] * info->InjPriLag14V;
+    packageInjPriLagvsBattV[2] = mul[38] * info->InjPriLag12V;
+    packageInjPriLagvsBattV[3] = mul[38] * info->InjPriLag10V;
+    packageInjPriLagvsBattV[4] = mul[38] * info->InjPriLag8V;
+    packageInjPriLagvsBattV[5] = mul[38] * info->InjPriLag6V;
+/*
+    ui->lineInjPrLag16V->setText (QString::number(packageInjPriLagvsBattV[0]));
+    ui->lineInjPrLag14V->setText (QString::number(packageInjPriLagvsBattV[1]));
+    ui->lineInjPrLag12V->setText (QString::number(packageInjPriLagvsBattV[2]));
+    ui->lineInjPrLag10V->setText (QString::number(packageInjPriLagvsBattV[3]));
+    ui->lineInjPrLag8V->setText (QString::number(packageInjPriLagvsBattV[4]));
+    ui->lineInjPrLag6V->setText (QString::number(packageInjPriLagvsBattV[5]));
+*/
+}
+void MainWindow::decodeInjScLagvsBattV(QByteArray serialdata)
+{
+    fc_InjScLagvsBattV_info_t* info=reinterpret_cast<fc_InjScLagvsBattV_info_t*>(serialdata.data());
+
+    packageInjScLagvsBattV[0] = mul[38] * info->InjScLag16V;
+    packageInjScLagvsBattV[1] = mul[38] * info->InjScLag14V;
+    packageInjScLagvsBattV[2] = mul[38] * info->InjScLag12V;
+    packageInjScLagvsBattV[3] = mul[38] * info->InjScLag10V;
+    packageInjScLagvsBattV[4] = mul[38] * info->InjScLag8V;
+    packageInjScLagvsBattV[5] = mul[38] * info->InjScLag6V;
+/*
+    ui->lineInjScLag16V->setText (QString::number(packageInjScLagvsBattV[0]));
+    ui->lineInjScLag14V->setText (QString::number(packageInjScLagvsBattV[1]));
+    ui->lineInjScLag12V->setText (QString::number(packageInjScLagvsBattV[2]));
+    ui->lineInjScLag10V->setText (QString::number(packageInjScLagvsBattV[3]));
+    ui->lineInjScLag8V->setText (QString::number(packageInjScLagvsBattV[4]));
+    ui->lineInjScLag6V->setText (QString::number(packageInjScLagvsBattV[5]));
+*/
+}
+void MainWindow::decodeFuelInjectors(QByteArray serialdata)
+{
+    fc_FuelInjectors_info_t* info=reinterpret_cast<fc_FuelInjectors_info_t*>(serialdata.data());
+
+    packageFuelInjectors[1] = mul[41] * info->frontpulse * mul[42];
+    packageFuelInjectors[3] = mul[41] * info->rearpulse * mul[42];
+    packageFuelInjectors[4] = mul[38] * info->frntprilag;//(multiply by 0.004)
+    packageFuelInjectors[6] = mul[38] * info->frntseclag;//(multiply by 0.004)
+    packageFuelInjectors[8] =  mul[38] *info->rearprilag;//(multiply by 0.004)
+    packageFuelInjectors[10] = mul[38] *info->rearseclag;//(multiply by 0.004)
+    packageFuelInjectors[12] = info->prinjsize;
+    packageFuelInjectors[13] = info->secinjsize;
+    packageFuelInjectors[14] = mul[15] * info->prisectransprc; // divide by 10 to get %
+    packageFuelInjectors[15] = mul[38] * info->prisectransms; //(multiply by 0.004)
+
+/*
+    ui->linefrontpulse->setText (QString::number(packageFuelInjectors[1]));
+    ui->linerearpulse->setText (QString::number(packageFuelInjectors[3]));
+    ui->linefrntprilag->setText (QString::number(packageFuelInjectors[4]));
+    ui->linefrntseclag->setText (QString::number(packageFuelInjectors[6]));
+    ui->linerearprilag->setText (QString::number(packageFuelInjectors[8]));
+    ui->linerearseclag->setText (QString::number(packageFuelInjectors[10]));
+    ui->linePriInjSize->setText (QString::number(packageFuelInjectors[12]));
+    ui->lineSecInjSize->setText (QString::number(packageFuelInjectors[13]));
+    ui->linePriSecTransPrc->setText (QString::number(packageFuelInjectors[14]));
+    ui->linePriSecTransms->setText (QString::number(packageFuelInjectors[15]));
+*/
 }

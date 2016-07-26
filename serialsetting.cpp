@@ -1,9 +1,9 @@
 #include "serialsetting.h"
 //#include "ui_serialsetting.h"
-//#include <QLineEdit>
+
 #include <QtSerialPort/QSerialPortInfo>
 #include <QIntValidator>
-
+//#include <QLineEdit>
 
 QT_USE_NAMESPACE
 
@@ -28,8 +28,7 @@ SerialSetting::~SerialSetting()
 {
     delete ui;
 }
-*/
-/*
+
 void SerialSetting::fillPortsParameters()
 {
 
@@ -42,9 +41,8 @@ foreach(const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
 }
 
 void SerialSetting::apply()
-{ //Slot when apply button is clicked, stores selected settings
+{
     SerialSetting::currentSettings.portName = ui->cboComport->currentText();
-    //SerialSetting::currentSettings.baudRate = ui->cboBaudRate->currentText().toInt();
     hide();
 }
 
@@ -53,8 +51,8 @@ SerialSetting::Settings SerialSetting::settings()
     return SerialSetting::currentSettings;
 }
 
- void SerialSetting::on_btnApply_clicked()
+void SerialSetting::on_btnApply_clicked()
 {
 
-}*/
-
+}
+*/

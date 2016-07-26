@@ -1,8 +1,11 @@
 #ifndef SERIALSETTING_H
 #define SERIALSETTING_H
 
+//#include <QWidget>
 #include <QAbstractListModel>
 #include <QtSerialPort/QSerialPort>
+#include <QMetaType>
+
 
 
 
@@ -13,6 +16,7 @@ class SerialSetting;
 
 class QIntValidator;
 
+//class SerialSetting : public QWidget
 class SerialSetting : public QAbstractListModel
 {
     Q_OBJECT
@@ -32,9 +36,9 @@ public:
     ~SerialSetting();
 
 private slots:
-    void apply();
+//    void apply();
 
-    void on_btnApply_clicked();
+//    void on_btnApply_clicked();
 
 private:
     void fillPortsParameters();
@@ -43,10 +47,12 @@ private:
 
 
 private:
+//    Ui::SerialSetting *ui;
     Settings currentSettings;
     QIntValidator *intValidator;
 
 
 };
+Q_DECLARE_METATYPE(SerialSetting::Settings)
 
 #endif // SERIALSETTING_H

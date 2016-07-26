@@ -20,8 +20,7 @@
         <file>SerialSettings.qml</file>
         <file>graphics/Tacho_Mitte.png</file>
         <file>RevGaugeInnerRing.qml</file>
-        <file>RevGaugeNeedle.qml</file>
         <file>SpeedGaugeInnerRing.qml</file>
-        <file>SpeedGaugeNeedle.qml</file>
+        <file>GaugeNeedle.qml</file>
     </qresource>
 </RCC>
