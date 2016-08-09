@@ -13,8 +13,8 @@
 
 /*
   \file serial.h
-  \brief Raspexi Viewer Power FC related functions
-  \author Suriyan Laohaprapanon & Jacob Donley & Bastian Gschrey & Markus Ippy
+  \
+  \author Bastian Gschrey & Markus Ippy
  */
 
 
@@ -24,7 +24,6 @@
 #include <QObject>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
-#include <serialsetting.h>
 
 
 class Serial : public QObject
@@ -38,6 +37,7 @@ public:
     explicit Serial(QObject *parent = 0);
 
 
+    Q_INVOKABLE QStringList getPorts();
     void closeConnection();
     void getAdvData();
     void getAux();
@@ -115,7 +115,7 @@ void SIG_dataAvailable(QByteArray);
 
 public slots:
     void readyToRead();
-//    void openConnection(SerialSetting::Settings p); //open serial connection with settings
+    //void openConnection(SerialSetting::Settings p); //open serial connection with settings
     void sendRequest(int requestIndex);
 };
 

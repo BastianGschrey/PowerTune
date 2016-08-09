@@ -15,14 +15,13 @@
   \file serial.cpp
   \brief Raspexi Viewer Power FC related functions
   \author Bastian Gschrey
-  \credits to Suriyan Laohaprapanon & Jacob Donley
  */
 
 
 #include "serial.h"
 #include <QDebug>
 #include <QThread>
-/*
+
 Serial::Serial(QObject *parent) : QObject(parent)
 {
     serialport = new QSerialPort(this);
@@ -37,32 +36,32 @@ void Serial::clear() const
 }
 
 //function to open serial port
-void Serial::openConnection(SerialSetting::Settings p)
-{
-    qDebug() << "Enter openConnection function";
-    serialport->setBaudRate(QSerialPort::Baud57600);
-    qDebug() <<"set baud";
-    serialport->setPortName(p.portName);
-    serialport->setParity(serialport->NoParity);
-    serialport->setDataBits(QSerialPort::Data8);
-    serialport->setStopBits(QSerialPort::OneStop);
-    serialport->setFlowControl(QSerialPort::NoFlowControl);
-    qDebug() << "Try to open SerialPort:";
-
-    if(serialport->open(QIODevice::ReadWrite) == false)
-    {
-        qDebug() << serialport->errorString();
-    }
-    qDebug() << "Portname: " << p.portName;
-
-}
+//void Serial::openConnection(SerialSetting::Settings p)
+//{
+//    qDebug() << "Enter openConnection function";
+//    serialport->setBaudRate(QSerialPort::Baud57600);
+//    qDebug() <<"set baud";
+//    serialport->setPortName(p.portName);
+//    serialport->setParity(serialport->NoParity);
+//    serialport->setDataBits(QSerialPort::Data8);
+//    serialport->setStopBits(QSerialPort::OneStop);
+//    serialport->setFlowControl(QSerialPort::NoFlowControl);
+//    qDebug() << "Try to open SerialPort:";
+//
+//    if(serialport->open(QIODevice::ReadWrite) == false)
+//    {
+//        qDebug() << serialport->errorString();
+//    }
+//    qDebug() << "Portname: " << p.portName;
+//
+//}
 
 void Serial::closeConnection()
 {
     serialport->close();
 }
 
-*/
+
 //Serial requests are send via Serial
 void Serial::getAdvData()
 {
@@ -601,4 +600,15 @@ void Serial::sendRequest(int requestIndex)
 
 }
 
+QStringList Serial::getPorts()
+{
+    //QSerialPort *serialport = new QSerialPort();
+    qDebug() << "c++ getPorts invoked";
+    QStringList PortList;
+    foreach(const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
+    {
+        PortList.append(info.portName());
+    }
+
+}
 

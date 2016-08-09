@@ -1,12 +1,12 @@
 TEMPLATE = app
 
-QT += qml quick
+QT += qml quick serialport
 CONFIG += c++11
 
 SOURCES += main.cpp \
     serial.cpp \
-    serialsetting.cpp \
-    mainwindow.cpp
+    dashboard.cpp \
+    decoder.cpp
 
 RESOURCES += qml.qrc
 
@@ -18,8 +18,8 @@ include(deployment.pri)
 
 HEADERS += \
     serial.h \
-    serialsetting.h \
-    mainwindow.h
+    dashboard.h \
+    decoder.h
 
 FORMS +=
 

@@ -1,39 +1,18 @@
-/*
-  \file mainwindow.hwndwSerial->show();
-  \brief Power Tune Power FC related functions
-  \author Bastian Gschrey & Markus Ippy
- */
+#ifndef DECODER_H
+#define DECODER_H
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
-
-//#include <QMainWindow>
-#include <QWindow>
-#include <serialsetting.h>
+#include <QObject>
 #include <serial.h>
-#include <QBitArray>
-//#include <QMessageBox>
-#include <QMetaType>
-#include <QStandardItem>
 
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QWindow
-//class MainWindow : public QMainWindow
+class Decoder : public QObject
 {
     Q_OBJECT
-/*
 
-public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+private:
+//FD3S Definition
+    #define FC_INFO_MUL		{1, 0.0001, 1, 1, 1.0/256, 1.0/256, 1, 1, 1, 212.0/256, 0.4, 0.4, 1, 1, 1, 0.1, 1, 0.1, 0.02, 1, 1.0/256, 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0/255, 5.0/255, 5.0/255, 5.0/255, 0.01, 0.001, 0.019, 40, 0.05, 0.004 , 256, -0.00390625, 1.0/128,100}
+    #define FC_INFO_ADD		{0,-1.0332, 0, 0, 0, 0, -25, -25, -80, 0, 0, 0, -80, -80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -128}
 
-    QStandardItemModel *model = new QStandardItemModel(20,20,this);
-    QStandardItemModel *model1 = new QStandardItemModel(20,20,this);
-    QStandardItemModel *model2 = new QStandardItemModel(20,20,this);
-*/
     double packageADV[33];
 
     struct fc_adv_info_t{
@@ -270,45 +249,14 @@ public:
          quint16 fuelBase[800];
      };
 
-    // FD3S
-      #define FC_INFO_MUL		{1, 0.0001, 1, 1, 1.0/256, 1.0/256, 1, 1, 1, 212.0/256, 0.4, 0.4, 1, 1, 1, 0.1, 1, 0.1, 0.02, 1, 1.0/256, 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0/255, 5.0/255, 5.0/255, 5.0/255, 0.01, 0.001, 0.019, 40, 0.05, 0.004 , 256, -0.00390625, 1.0/128,100}
-      #define FC_INFO_ADD		{0,-1.0332, 0, 0, 0, 0, -25, -25, -80, 0, 0, 0, -80, -80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -128}
-
-private slots:
-//    void on_btnSerialSettings_clicked();
-//    void on_btnReadAll_clicked();
-//    void on_btnConnect_clicked();
-//    void on_btnDisconnect_clicked();
-    void readData(QByteArray ClassSerialData);
-    void decodeAdv(QByteArray serialdata);
-    void decodeSensor(QByteArray serialdata);
-    void decodeAux(QByteArray serialdata);
-    void decodeMap(QByteArray serialdata);
-    void decodeBasic(QByteArray serialdata);
-    void decodeRevIdle(QByteArray serialdata);
-    void decodeTurboTrans(QByteArray serialdata);
-    void decodeVersion(QByteArray serialdata);
-    void decodeInit(QByteArray serialdata);
-    void decodeBoostCont(QByteArray serialdata);
-    void decodeInjOverlap(QByteArray serialdata);
-    void decodeInjPriLagvsBattV(QByteArray serialdata);
-    void decodeInjScLagvsBattV(QByteArray serialdata);
-    void decodeFuelInjectors(QByteArray serialdata);
-
-private:
-    Ui::MainWindow *ui;
-    SerialSetting *wndwSerial;
-    Serial *serial;
-    void decodeTrailIgn(QByteArray serialdata, quint8 column);
-    void decodeLeadIgn(QByteArray serialdata, quint8 column);
-    void decodeInjcorr(QByteArray serialdata, quint8 column);
-    void decodeFuelBase(QByteArray serialdata, quint8 package);
+public:
+    explicit Decoder(QObject *parent = 0);
 
 signals:
-    void SIG_connectSerial(SerialSetting::Settings settings);
-    void SIG_requestSerial(int requestID);
-    void SIG_closeSerial();
+
+public slots:
+
 
 };
 
-#endif // MAINWINDOW_H
+#endif // DECODER_H

@@ -2,6 +2,8 @@ import QtQuick 2.3
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
+import com.powertune 1.0
+
 
 
 ApplicationWindow {
@@ -81,12 +83,6 @@ ApplicationWindow {
 
     toolBar:ToolBar {
         id: maintoolbar
-        // anchors.fill: parent
-        // transformOrigin: Body.left;
-        //rotation :90;
-
-        // x: - maintoolbar.width
-        // y: -300
 
 
         RowLayout {
@@ -168,11 +164,17 @@ ApplicationWindow {
                 onTriggered: Qt.quit();
             }
         }
+
+
         Menu {
+            SerialObject {  // <-- This is a Reference to the c++ object Serial::Serial
+                id: serialport
+            }
             title: qsTr("Options")
             MenuItem {
                 text: qsTr("COM Port")
                 onTriggered:{
+                    //console.log(serialport.getPorts())
                     if (serialset.visible==true)
                         serialset.visible=false
                     else

@@ -16,7 +16,7 @@ TableView {
    // selectionMode : SelectionMode.ExtendedSelection
 
    TableViewColumn {
-     title: "Basemap"
+     title: "Base"
      width: Math.round(parent.width / 21)
    }
    TableViewColumn {

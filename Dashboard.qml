@@ -4,6 +4,7 @@ import QtGraphicalEffects 1.0
 Item {
     width: parent.width
     height: parent.height
+    //property qint16 value : 0
 
 Rectangle {
     color: "transparent"
@@ -18,6 +19,7 @@ Rectangle {
 
                        anchors.verticalCenterOffset: 0
                        anchors.centerIn: parent
+
                        // once c++ interface works
                        //speedoNeedle.value =  packageADV[16] *0.26875 // max speedo 320 KMH = 86
 
@@ -25,7 +27,7 @@ Rectangle {
                        /*
                         this is just to animate the needles via keyboard button
                         and can be deleted once C++ interface is working
-                       */
+
                        focus: true
                        Keys.onPressed: {
                                 if (event.key == Qt.Key_0 && !event.isAutoRepeat) {
@@ -39,7 +41,9 @@ Rectangle {
                                if (event.key == Qt.Key_0 && !event.isAutoRepeat) {
                                    speedoNeedle.value = 0
                                    revNeedle.value = 0
-                               }}}
+                               }}
+*/
+}
 
 
 
