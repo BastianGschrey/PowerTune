@@ -24,6 +24,7 @@
 
 class SerialPort;
 class DashBoard;
+class Decoder;
 
 class Serial : public QObject
 {
@@ -102,7 +103,8 @@ public:
     QStringList portsNames() const { return m_portsNames; }
 
 private:
-    SerialPort *serialport;
+    SerialPort *m_serialport;
+    Decoder *m_decoder;
     DashBoard *m_dashBoard;
     QStringList m_portsNames;
 
@@ -134,6 +136,7 @@ public slots:
         m_portsNames = portsNames;
         emit portsNamesChanged(portsNames);
     }
+    void readData(QByteArray serialdata);
 };
 
 #endif // SERIAL_H

@@ -19,6 +19,7 @@ Item {
 
             anchors.verticalCenterOffset: 0
             anchors.centerIn: parent
+            value: innerring.speed
 
             // once c++ interface works
             //speedoNeedle.value =  packageADV[16] *0.26875 // max speedo 320 KMH = 86
@@ -68,6 +69,7 @@ Item {
             id: revNeedle
             anchors.verticalCenterOffset: 0
             anchors.centerIn: parent
+            value: revinnerring.revolutions
             //RevNeedle.value = packageADV[0] * 0.03        // max rev 10000 RPM = 86
         }
         //revolutions can be replaced with Rev value from C++ no formula needed
@@ -76,7 +78,6 @@ Item {
             // revolutions:(Math.round(revNeedle.currentValue, 0) + 360) * 33.33333333333334
             // revolutions: packageADV[0]
             revolutions: Dashboard.revs
-
         }
     }
 }

@@ -18,6 +18,7 @@
  */
 
 #include "serial.h"
+#include "decoder.h"
 #include "dashboard.h"
 #include "serialport.h"
 
@@ -31,10 +32,14 @@
 
 Serial::Serial(QObject *parent) :
     QObject(parent),
-    serialport(0)
+    m_serialport(Q_NULLPTR),
+    m_decoder(Q_NULLPTR),
+    m_dashBoard(Q_NULLPTR)
 {
     getPorts();
+    m_decoder = new Decoder(this);
     m_dashBoard = new DashBoard(this);
+
     QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
     if (engine == Q_NULLPTR)
         return;
@@ -43,10 +48,10 @@ Serial::Serial(QObject *parent) :
 
 void Serial::initSerialPort()
 {
-    if (serialport)
-        delete serialport;
-    serialport = new SerialPort(this);
-    connect(this->serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
+    if (m_serialport)
+        delete m_serialport;
+    m_serialport = new SerialPort(this);
+    connect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
 }
 
 void Serial::getPorts()
@@ -63,7 +68,7 @@ void Serial::getPorts()
 //function for flushing all serial buffers
 void Serial::clear() const
 {
-    serialport->clear();
+    m_serialport->clear();
 }
 //function to open serial port
 void Serial::openConnection(const QString &portName, const int &baudRate, const int &parity,
@@ -71,299 +76,353 @@ void Serial::openConnection(const QString &portName, const int &baudRate, const 
 {
     initSerialPort();
 
-    serialport->setPortName(portName);
-    serialport->setBaudRate(baudRate);
-    serialport->setParity(parity);
-    serialport->setDataBits(static_cast<QSerialPort::DataBits>(dataBits + 5));
-    serialport->setStopBits(static_cast<QSerialPort::StopBits>(stopBits + 1));
-    serialport->setFlowControl(static_cast<QSerialPort::FlowControl>(flowControl));
+    m_serialport->setPortName(portName);
+    m_serialport->setBaudRate(baudRate);
+    m_serialport->setParity(parity);
+    m_serialport->setDataBits(static_cast<QSerialPort::DataBits>(dataBits + 5));
+    m_serialport->setStopBits(static_cast<QSerialPort::StopBits>(stopBits + 1));
+    m_serialport->setFlowControl(static_cast<QSerialPort::FlowControl>(flowControl));
 
     qDebug() << "Try to open SerialPort:";
-    if(serialport->open(QIODevice::ReadWrite) == false)
+    if(m_serialport->open(QIODevice::ReadWrite) == false)
     {
-        qDebug() << "Open Serial port failed: " << serialport->errorString();
+        qDebug() << "Open Serial port failed: " << m_serialport->errorString();
     }
 }
 
 void Serial::closeConnection()
 {
-    serialport->close();
+    m_serialport->close();
     qDebug() << "Connection closed.";
 }
 
+void Serial::readyToRead()
+{
+    // TODO: parse received data and set values
+    if (0 /* speed */)
+    {
+        m_dashBoard->setSpeed(123);
+        m_dashBoard->setRevs(221);
+    }
+    readData(m_serialport->readAll());
+    // emit SIG_dataAvailable();
+}
+
+void Serial::readData(QByteArray serialdata)
+{
+    if( serialdata.length() )
+    {
+        quint8 requesttype = serialdata[0];
+        if(serialdata[1] + 1 == serialdata.length())
+        {
+            if(serialdata.length() == 33 && requesttype == 0xF0){m_decoder->decodeAdv(serialdata);}
+            if(serialdata.length() == 21 && requesttype == 0xDE){m_decoder->decodeSensor(serialdata);}
+            if(serialdata.length() == 7 && requesttype == 0x00){m_decoder->decodeAux(serialdata);}
+            if(serialdata.length() == 5 && requesttype == 0xDB){m_decoder->decodeMap(serialdata);}
+            if(serialdata.length() == 23 && requesttype == 0xDA){m_decoder->decodeBasic(serialdata);}
+            if(serialdata.length() == 17 && requesttype == 0xB8){m_decoder->decodeRevIdle(serialdata);}
+            if(serialdata.length() == 12 && requesttype == 0x7D){m_decoder->decodeTurboTrans(serialdata);}
+            if(serialdata.length() == 103 && requesttype == 0x76){m_decoder->decodeLeadIgn(serialdata, 0);}
+            if(serialdata.length() == 103 && requesttype == 0x77){m_decoder->decodeLeadIgn(serialdata, 5);}
+            if(serialdata.length() == 103 && requesttype == 0x78){m_decoder->decodeLeadIgn(serialdata, 10);}
+            if(serialdata.length() == 103 && requesttype == 0x79){m_decoder->decodeLeadIgn(serialdata, 15);}
+            if(serialdata.length() == 103 && requesttype == 0x81){m_decoder->decodeTrailIgn(serialdata, 0);}
+            if(serialdata.length() == 103 && requesttype == 0x82){m_decoder->decodeTrailIgn(serialdata, 5);}
+            if(serialdata.length() == 103 && requesttype == 0x83){m_decoder->decodeTrailIgn(serialdata, 10);}
+            if(serialdata.length() == 103 && requesttype == 0x84){m_decoder->decodeTrailIgn(serialdata, 15);}
+            if(serialdata.length() == 103 && requesttype == 0x86){m_decoder->decodeInjcorr(serialdata, 0);}
+            if(serialdata.length() == 103 && requesttype == 0x87){m_decoder->decodeInjcorr(serialdata, 5);}
+            if(serialdata.length() == 103 && requesttype == 0x88){m_decoder->decodeInjcorr(serialdata, 10);}
+            if(serialdata.length() == 103 && requesttype == 0x89){m_decoder->decodeInjcorr(serialdata, 15);}
+
+            if(serialdata.length() == 103 && requesttype == 0xB0){m_decoder->decodeFuelBase(serialdata, 0);}
+            if(serialdata.length() == 103 && requesttype == 0xB1){m_decoder->decodeFuelBase(serialdata, 1);}
+            if(serialdata.length() == 103 && requesttype == 0xB2){m_decoder->decodeFuelBase(serialdata, 2);}
+            if(serialdata.length() == 103 && requesttype == 0xB3){m_decoder->decodeFuelBase(serialdata, 3);}
+            if(serialdata.length() == 103 && requesttype == 0xB4){m_decoder->decodeFuelBase(serialdata, 4);}
+            if(serialdata.length() == 103 && requesttype == 0xB5){m_decoder->decodeFuelBase(serialdata, 5);}
+            if(serialdata.length() == 103 && requesttype == 0xB6){m_decoder->decodeFuelBase(serialdata, 6);}
+            if(serialdata.length() == 103 && requesttype == 0xB7){m_decoder->decodeFuelBase(serialdata, 7);}
+
+            if(serialdata.length() == 8 && requesttype == 0xF5){m_decoder->decodeVersion(serialdata);}
+            if(serialdata.length() == 11 && requesttype == 0xF3){m_decoder->decodeInit(serialdata);}
+            if(serialdata.length() == 14 && requesttype == 0xAB){m_decoder->decodeBoostCont(serialdata);}
+            if(serialdata.length() == 9 && requesttype == 0x7B){m_decoder->decodeInjOverlap(serialdata);}
+            if(serialdata.length() == 15 && requesttype == 0x92){m_decoder->decodeInjPriLagvsBattV(serialdata);}
+            if(serialdata.length() == 15 && requesttype == 0x9F){m_decoder->decodeInjScLagvsBattV(serialdata);}
+            if(serialdata.length() == 27 && requesttype == 0x8D){m_decoder->decodeFuelInjectors(serialdata);}
+
+
+            serialdata.clear();
+        }
+    }
+}
 
 // Serial requests are send via Serial
 void Serial::getAdvData()
 {
-    serialport->write(QByteArray::fromHex("F0020D"));
+    m_serialport->write(QByteArray::fromHex("F0020D"));
 }
 
 void Serial::getSensorData()
 {
-    serialport->write(QByteArray::fromHex("DE021F"));
+    m_serialport->write(QByteArray::fromHex("DE021F"));
 }
 
 void Serial::getAux()
 {
-    serialport->write(QByteArray::fromHex("0002FD"));
+    m_serialport->write(QByteArray::fromHex("0002FD"));
 }
 
 void Serial::getMapIndices()
 {
-    serialport->write(QByteArray::fromHex("DB0222"));
+    m_serialport->write(QByteArray::fromHex("DB0222"));
 
 }
 void Serial::getBasic()
 {
-    serialport->write(QByteArray::fromHex("DA0223"));
+    m_serialport->write(QByteArray::fromHex("DA0223"));
 }
 
 //Map Readout
 void Serial::getRevIdle()
 {
-    serialport->write(QByteArray::fromHex("B80245"));
+    m_serialport->write(QByteArray::fromHex("B80245"));
 }
 void Serial::getSensorStrings()
 {
-    serialport->write(QByteArray::fromHex("DD0220"));
+    m_serialport->write(QByteArray::fromHex("DD0220"));
 }
 void Serial::getPimStrInjA()
 {
-    serialport->write(QByteArray::fromHex("CB0232"));
+    m_serialport->write(QByteArray::fromHex("CB0232"));
 }
 void Serial::getVersion()
 {
-    serialport->write(QByteArray::fromHex("F50208"));
+    m_serialport->write(QByteArray::fromHex("F50208"));
 }
 void Serial::getMapRef()
 {
-    serialport->write(QByteArray::fromHex("8A0273"));
+    m_serialport->write(QByteArray::fromHex("8A0273"));
 }
 void Serial::getLeadign1()
 {
-    serialport->write(QByteArray::fromHex("760287"));
+    m_serialport->write(QByteArray::fromHex("760287"));
 }
 void Serial::getLeadign2()
 {
-    serialport->write(QByteArray::fromHex("770286"));
+    m_serialport->write(QByteArray::fromHex("770286"));
 }
 void Serial::getLeadign3()
 {
-    serialport->write(QByteArray::fromHex("780285"));
+    m_serialport->write(QByteArray::fromHex("780285"));
 }
 void Serial::getLeadign4()
 {
-    serialport->write(QByteArray::fromHex("790284"));
+    m_serialport->write(QByteArray::fromHex("790284"));
 }
 void Serial::getTrailIgn1()
 {
-    serialport->write(QByteArray::fromHex("81027C"));
+    m_serialport->write(QByteArray::fromHex("81027C"));
 }
 void Serial::getTrailIgn2()
 {
-    serialport->write(QByteArray::fromHex("82027B"));
+    m_serialport->write(QByteArray::fromHex("82027B"));
 }
 void Serial::getTrailIgn3()
 {
-    serialport->write(QByteArray::fromHex("83027A"));
+    m_serialport->write(QByteArray::fromHex("83027A"));
 }
 void Serial::getTrailIgn4()
 {
-    serialport->write(QByteArray::fromHex("840279"));
+    m_serialport->write(QByteArray::fromHex("840279"));
 }
 void Serial::getInitPlatform()
 {
-    serialport->write(QByteArray::fromHex("F3020A"));
+    m_serialport->write(QByteArray::fromHex("F3020A"));
 }
 void Serial::getInjOverlap()
 {
-    serialport->write(QByteArray::fromHex("7B0282"));
+    m_serialport->write(QByteArray::fromHex("7B0282"));
 }
 void Serial::getInjvsFuelT()
 {
-    serialport->write(QByteArray::fromHex("7C0281"));
+    m_serialport->write(QByteArray::fromHex("7C0281"));
 }
 void Serial::getTurboTrans()
 {
-    serialport->write(QByteArray::fromHex("7D0280"));
+    m_serialport->write(QByteArray::fromHex("7D0280"));
 }
 void Serial::getOilervsWaterT()
 {
-    serialport->write(QByteArray::fromHex("7E027F"));
+    m_serialport->write(QByteArray::fromHex("7E027F"));
 }
 void Serial::getFanvsWater()
 {
-    serialport->write(QByteArray::fromHex("7F027E"));
+    m_serialport->write(QByteArray::fromHex("7F027E"));
 }
 void Serial::getInjcorr1()
 {
-    serialport->write(QByteArray::fromHex("860277"));
+    m_serialport->write(QByteArray::fromHex("860277"));
 }
 void Serial::getInjcorr2()
 {
-    serialport->write(QByteArray::fromHex("870276"));
+    m_serialport->write(QByteArray::fromHex("870276"));
 }
 void Serial::getInjcorr3()
 {
-    serialport->write(QByteArray::fromHex("880275"));
+    m_serialport->write(QByteArray::fromHex("880275"));
 }
 void Serial::getInjcorr4()
 {
-    serialport->write(QByteArray::fromHex("890274"));
+    m_serialport->write(QByteArray::fromHex("890274"));
 }
 void Serial::getFuelInj()
 {
-    serialport->write(QByteArray::fromHex("8D0270"));
+    m_serialport->write(QByteArray::fromHex("8D0270"));
 }
 void Serial::getCranking()
 {
-    serialport->write(QByteArray::fromHex("8E026F"));
+    m_serialport->write(QByteArray::fromHex("8E026F"));
 }
 void Serial::getWaterTcorr()
 {
-    serialport->write(QByteArray::fromHex("8F026E"));
+    m_serialport->write(QByteArray::fromHex("8F026E"));
 }
 void Serial::getInjvsWaterBoost()
 {
-    serialport->write(QByteArray::fromHex("90026D"));
+    m_serialport->write(QByteArray::fromHex("90026D"));
 }
 void Serial::getInjvsAirTBoost()
 {
-    serialport->write(QByteArray::fromHex("91026C"));
+    m_serialport->write(QByteArray::fromHex("91026C"));
 }
 void Serial::getInjPrimaryLag()
 {
-    serialport->write(QByteArray::fromHex("92026B"));
+    m_serialport->write(QByteArray::fromHex("92026B"));
 }
 void Serial::getAccInj()
 {
-    serialport->write(QByteArray::fromHex("93026A"));
+    m_serialport->write(QByteArray::fromHex("93026A"));
 }
 void Serial::getInjvsAccel()
 {
-    serialport->write(QByteArray::fromHex("940269"));
+    m_serialport->write(QByteArray::fromHex("940269"));
 }
 void Serial::getIgnvsAircold()
 {
-    serialport->write(QByteArray::fromHex("960267"));
+    m_serialport->write(QByteArray::fromHex("960267"));
 }
 void Serial::getIgnvsWater()
 {
-    serialport->write(QByteArray::fromHex("980265"));
+    m_serialport->write(QByteArray::fromHex("980265"));
 }
 void Serial::getIgnvsAirwarm()
 {
-    serialport->write(QByteArray::fromHex("9A0263"));
+    m_serialport->write(QByteArray::fromHex("9A0263"));
 }
 void Serial::getLIgnvsRPM()
 {
-    serialport->write(QByteArray::fromHex("9B0262"));
+    m_serialport->write(QByteArray::fromHex("9B0262"));
 }
 void Serial::getIgnvsBatt()
 {
-    serialport->write(QByteArray::fromHex("9C0261"));
+    m_serialport->write(QByteArray::fromHex("9C0261"));
 }
 void Serial::getBoostvsIgn()
 {
-    serialport->write(QByteArray::fromHex("9D0260"));
+    m_serialport->write(QByteArray::fromHex("9D0260"));
 }
 void Serial::getTrailIgnvsRPM()
 {
-    serialport->write(QByteArray::fromHex("9E025F"));
+    m_serialport->write(QByteArray::fromHex("9E025F"));
 }
 void Serial::getInjSecLagvsBattV()
 {
-    serialport->write(QByteArray::fromHex("9F025E"));
+    m_serialport->write(QByteArray::fromHex("9F025E"));
 }
 void Serial::getInjWarn()
 {
-    serialport->write(QByteArray::fromHex("A80255"));
+    m_serialport->write(QByteArray::fromHex("A80255"));
 }
 void Serial::getKnockWarn()
 {
-    serialport->write(QByteArray::fromHex("A90254"));
+    m_serialport->write(QByteArray::fromHex("A90254"));
 }
 void Serial::getO2Feedback()
 {
-    serialport->write(QByteArray::fromHex("AA0253"));
+    m_serialport->write(QByteArray::fromHex("AA0253"));
 }
 void Serial::getBoostcontrol()
 {
-    serialport->write(QByteArray::fromHex("AB0252"));
+    m_serialport->write(QByteArray::fromHex("AB0252"));
 }
 void Serial::getSettingProtections()
 {
-    serialport->write(QByteArray::fromHex("AC0251"));
+    m_serialport->write(QByteArray::fromHex("AC0251"));
 }
 void Serial::getTunerString()
 {
-    serialport->write(QByteArray::fromHex("AD0250"));
+    m_serialport->write(QByteArray::fromHex("AD0250"));
 }
 void Serial::getInjvsAirTemp()
 {
-    serialport->write(QByteArray::fromHex("B90244"));
+    m_serialport->write(QByteArray::fromHex("B90244"));
 }
 void Serial::getInjvsTPS()
 {
-    serialport->write(QByteArray::fromHex("BA0243"));
+    m_serialport->write(QByteArray::fromHex("BA0243"));
 }
 void Serial::getIgnvsTPS()
 {
-    serialport->write(QByteArray::fromHex("BB0242"));
+    m_serialport->write(QByteArray::fromHex("BB0242"));
 }
 void Serial::getPIMScaleOffset()
 {
-    serialport->write(QByteArray::fromHex("BC0241"));
+    m_serialport->write(QByteArray::fromHex("BC0241"));
 }
 void Serial::getWarConStrFlags()
 {
-    serialport->write(QByteArray::fromHex("D60227"));
+    m_serialport->write(QByteArray::fromHex("D60227"));
 }
 void Serial::getNotdocumented()
 {
-    serialport->write(QByteArray::fromHex("F40209"));
+    m_serialport->write(QByteArray::fromHex("F40209"));
 }
 
 void Serial::getFuelBase0()
 {
-    serialport->write(QByteArray::fromHex("B0024D"));
+    m_serialport->write(QByteArray::fromHex("B0024D"));
 }
 void Serial::getFuelBase1()
 {
-    serialport->write(QByteArray::fromHex("B1024C"));
+    m_serialport->write(QByteArray::fromHex("B1024C"));
 }
 void Serial::getFuelBase2()
 {
-    serialport->write(QByteArray::fromHex("B2024B"));
+    m_serialport->write(QByteArray::fromHex("B2024B"));
 }
 void Serial::getFuelBase3()
 {
-    serialport->write(QByteArray::fromHex("B3024A"));
+    m_serialport->write(QByteArray::fromHex("B3024A"));
 }
 void Serial::getFuelBase4()
 {
-    serialport->write(QByteArray::fromHex("B40249"));
+    m_serialport->write(QByteArray::fromHex("B40249"));
 }
 void Serial::getFuelBase5()
 {
-    serialport->write(QByteArray::fromHex("B50248"));
+    m_serialport->write(QByteArray::fromHex("B50248"));
 }
 void Serial::getFuelBase6()
 {
-    serialport->write(QByteArray::fromHex("B60247"));
+    m_serialport->write(QByteArray::fromHex("B60247"));
 }
 void Serial::getFuelBase7()
 {
-    serialport->write(QByteArray::fromHex("B70246"));
+    m_serialport->write(QByteArray::fromHex("B70246"));
 }
-
-
 //End of serial requests
-
-void Serial::readyToRead()
-{
-    emit SIG_dataAvailable(serialport->readAll());
-}
 
 
 void Serial::sendRequest(int requestIndex)

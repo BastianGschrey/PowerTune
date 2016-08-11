@@ -252,9 +252,26 @@ private:
 public:
     explicit Decoder(QObject *parent = 0);
 
-signals:
+public slots:     
+     void decodeAdv(QByteArray serialdata);
+     void decodeSensor(QByteArray serialdata);
+     void decodeAux(QByteArray serialdata);
+     void decodeMap(QByteArray serialdata);
+     void decodeBasic(QByteArray serialdata);
+     void decodeRevIdle(QByteArray serialdata);
+     void decodeTurboTrans(QByteArray serialdata);
+     void decodeVersion(QByteArray serialdata);
+     void decodeInit(QByteArray serialdata);
+     void decodeBoostCont(QByteArray serialdata);
+     void decodeInjOverlap(QByteArray serialdata);
+     void decodeInjPriLagvsBattV(QByteArray serialdata);
+     void decodeInjScLagvsBattV(QByteArray serialdata);
+     void decodeFuelInjectors(QByteArray serialdata);
 
-public slots:
+     void decodeTrailIgn(QByteArray serialdata, quint8 column);
+     void decodeLeadIgn(QByteArray serialdata, quint8 column);
+     void decodeInjcorr(QByteArray serialdata, quint8 column);
+     void decodeFuelBase(QByteArray serialdata, quint8 package);
 
 
 };
