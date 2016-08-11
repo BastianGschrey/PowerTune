@@ -45,10 +45,7 @@ import "graphics"
 //! [imports]
 
 //! [0]
-Rectangle {
-    color: "black"
-    anchors.fill: parent
-
+Item {
     //! [the dial in use]
     // Dial with a slider to adjust it
     Dial {

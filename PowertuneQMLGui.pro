@@ -6,7 +6,8 @@ CONFIG += c++11
 SOURCES += main.cpp \
     serial.cpp \
     dashboard.cpp \
-    decoder.cpp
+    decoder.cpp \
+    serialport.cpp
 
 RESOURCES += qml.qrc
 
@@ -19,7 +20,8 @@ include(deployment.pri)
 HEADERS += \
     serial.h \
     dashboard.h \
-    decoder.h
+    decoder.h \
+    serialport.h
 
 FORMS +=
 

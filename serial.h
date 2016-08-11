@@ -17,28 +17,31 @@
   \author Bastian Gschrey & Markus Ippy
  */
 
-
 #ifndef SERIAL_H
 #define SERIAL_H
 
 #include <QObject>
-#include <QtSerialPort/QSerialPort>
-#include <QtSerialPort/QSerialPortInfo>
 
+class SerialPort;
+class DashBoard;
 
 class Serial : public QObject
 {
     Q_OBJECT
-
-public:
-    void clear() const;
+    Q_PROPERTY(QStringList portsNames READ portsNames WRITE setPortsNames NOTIFY portsNamesChanged)
 
 public:
     explicit Serial(QObject *parent = 0);
 
+    Q_INVOKABLE void clear() const;
+    Q_INVOKABLE void initSerialPort();
+    Q_INVOKABLE void openConnection(const QString &portName, const int &baudRate, const int &parity, const int &dataBits, const int &stopBits, const int &flowControl);
+    Q_INVOKABLE void closeConnection();
 
-    Q_INVOKABLE QStringList getPorts();
-    void closeConnection();
+public slots:
+    void getPorts();
+
+public:
     void getAdvData();
     void getAux();
     void getSensorData();
@@ -96,27 +99,41 @@ public:
     void getWarConStrFlags();
     void getNotdocumented();
 
-private:
-QSerialPort *serialport;
-void getFuelBase0();
-void getFuelBase1();
-void getFuelBase2();
-void getFuelBase3();
-void getFuelBase4();
-void getFuelBase5();
-void getFuelBase6();
-void getFuelBase7();
+    QStringList portsNames() const { return m_portsNames; }
 
+private:
+    SerialPort *serialport;
+    DashBoard *m_dashBoard;
+    QStringList m_portsNames;
+
+    void getFuelBase0();
+    void getFuelBase1();
+    void getFuelBase2();
+    void getFuelBase3();
+    void getFuelBase4();
+    void getFuelBase5();
+    void getFuelBase6();
+    void getFuelBase7();
 
 signals:
-void finished();
-void error(QString err);
-void SIG_dataAvailable(QByteArray);
+    void finished();
+    void error(QString err);
+    void SIG_dataAvailable(QByteArray);
+    void portsNamesChanged(QStringList portsNames);
 
 public slots:
     void readyToRead();
     //void openConnection(SerialSetting::Settings p); //open serial connection with settings
     void sendRequest(int requestIndex);
+
+    void setPortsNames(QStringList portsNames)
+    {
+        if (m_portsNames == portsNames)
+            return;
+
+        m_portsNames = portsNames;
+        emit portsNamesChanged(portsNames);
+    }
 };
 
 #endif // SERIAL_H

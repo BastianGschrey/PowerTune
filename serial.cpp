@@ -17,52 +17,82 @@
   \author Bastian Gschrey
  */
 
-
 #include "serial.h"
-#include <QDebug>
-#include <QThread>
+#include "dashboard.h"
+#include "serialport.h"
 
-Serial::Serial(QObject *parent) : QObject(parent)
+#include <QDebug>
+#include <QTimer>
+#include <QThread>
+#include <QSerialPort>
+#include <QSerialPortInfo>
+#include <QQmlContext>
+#include <QQmlApplicationEngine>
+
+Serial::Serial(QObject *parent) :
+    QObject(parent),
+    serialport(0)
 {
-    serialport = new QSerialPort(this);
+    getPorts();
+    m_dashBoard = new DashBoard(this);
+    QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
+    if (engine == Q_NULLPTR)
+        return;
+    engine->rootContext()->setContextProperty("Dashboard", m_dashBoard);
+}
+
+void Serial::initSerialPort()
+{
+    if (serialport)
+        delete serialport;
+    serialport = new SerialPort(this);
     connect(this->serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
 }
 
+void Serial::getPorts()
+{
+    QStringList PortList;
+    foreach(const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
+    {
+        PortList.append(info.portName());
+    }
+    setPortsNames(PortList);
+    // Check available ports evry 1000 ms
+    QTimer::singleShot(1000, this, SLOT(getPorts()));
+}
 //function for flushing all serial buffers
 void Serial::clear() const
 {
     serialport->clear();
-
 }
-
 //function to open serial port
-//void Serial::openConnection(SerialSetting::Settings p)
-//{
-//    qDebug() << "Enter openConnection function";
-//    serialport->setBaudRate(QSerialPort::Baud57600);
-//    qDebug() <<"set baud";
-//    serialport->setPortName(p.portName);
-//    serialport->setParity(serialport->NoParity);
-//    serialport->setDataBits(QSerialPort::Data8);
-//    serialport->setStopBits(QSerialPort::OneStop);
-//    serialport->setFlowControl(QSerialPort::NoFlowControl);
-//    qDebug() << "Try to open SerialPort:";
-//
-//    if(serialport->open(QIODevice::ReadWrite) == false)
-//    {
-//        qDebug() << serialport->errorString();
-//    }
-//    qDebug() << "Portname: " << p.portName;
-//
-//}
+void Serial::openConnection(const QString &portName, const int &baudRate, const int &parity,
+                            const int &dataBits, const int &stopBits, const int &flowControl )
+{
+    initSerialPort();
+
+    serialport->setPortName(portName);
+    serialport->setBaudRate(baudRate);
+    serialport->setParity(parity);
+    serialport->setDataBits(static_cast<QSerialPort::DataBits>(dataBits + 5));
+    serialport->setStopBits(static_cast<QSerialPort::StopBits>(stopBits + 1));
+    serialport->setFlowControl(static_cast<QSerialPort::FlowControl>(flowControl));
+
+    qDebug() << "Try to open SerialPort:";
+    if(serialport->open(QIODevice::ReadWrite) == false)
+    {
+        qDebug() << "Open Serial port failed: " << serialport->errorString();
+    }
+}
 
 void Serial::closeConnection()
 {
     serialport->close();
+    qDebug() << "Connection closed.";
 }
 
 
-//Serial requests are send via Serial
+// Serial requests are send via Serial
 void Serial::getAdvData()
 {
     serialport->write(QByteArray::fromHex("F0020D"));
@@ -330,10 +360,8 @@ void Serial::getFuelBase7()
 
 //End of serial requests
 
-
 void Serial::readyToRead()
 {
-
     emit SIG_dataAvailable(serialport->readAll());
 }
 
@@ -596,19 +624,6 @@ void Serial::sendRequest(int requestIndex)
         requestIndex = 58;
         break;
     }
-
-
 }
 
-QStringList Serial::getPorts()
-{
-    //QSerialPort *serialport = new QSerialPort();
-    qDebug() << "c++ getPorts invoked";
-    QStringList PortList;
-    foreach(const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
-    {
-        PortList.append(info.portName());
-    }
-
-}
 

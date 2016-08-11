@@ -4,154 +4,37 @@ import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 import com.powertune 1.0
 
-
-
 ApplicationWindow {
     visible: true
     width: 800
     height: 480
     // visibility: "FullScreen"
     title: qsTr("PowerTune")
-    color: "black"
+    color: "gray"
 
-    Rectangle {
-        id:dash
-        color : "black"
-        width: parent.width
-        height: parent.height
-        visible: true
-        Dashboard{}
-    }
-
-
-
-    Rectangle{
-        id:bmap
-        width: Math.round(parent.width / 1.5)
-        height: Math.round(parent.height / 1.5)
-        anchors.left: parent.left;
-        visible: false
-        BaseMap{}
-
-    }
-
-
-    Rectangle{
-        id:lingmap
-        width: Math.round(parent.width / 1.5)
-        height: Math.round(parent.height / 1.5)
-        anchors.left: parent.left;
-        visible: false
-        LeadingIgnitionMap{}
-    }
-    Rectangle{
-        id: tingmap
-        width: Math.round(parent.width / 1.5)
-        height: Math.round(parent.height / 1.5)
-        anchors.left: parent.left;
-        visible: false
-        LeadingIgnitionMap{}
-    }
-
-
-    Rectangle{
-        id:gauge
-        width: 200
-        height: 250
-        anchors.right: parent.right;
-        anchors.top: parent.top;
-        visible: false
-        TempGauge{}
-    }
-
-
-    TreeView{
-        id:tree
-        width:200
-        height: 200
-        visible: false
-
-    }
-
-    Rectangle{
-        id:serialset
-        width:200
-        height: 200
-        visible: false
-        SerialSettings{}
-    }
-
-    toolBar:ToolBar {
-        id: maintoolbar
-
-
-        RowLayout {
-            ToolButton {
-                text: "Connect"
-            }
-            ToolButton {
-                text: "Dasboard"
-                onClicked:{
-                    if (dash.visible==true)
-                        dash.visible=false
-                    else
-                        dash.visible=true
-                        bmap.visible=false
-                        tingmap.visible=false
-                        lingmap.visible=false
-                        tree.visible=false
-                        serialset.visible=false
-                }
-
-            }
-            ToolButton {
-                text: "ECU"
-                onClicked:{
-                    if (tree.visible==true)
-                        tree.visible=false
-                    else
-                        tree.visible=true
-                        serialset.visible=false
-                }
-
-            }
-            ToolButton {
-                text: "Basemap"
-                onClicked:{
-                    if (bmap.visible==true)
-                        bmap.visible=false
-                    else
-                        bmap.visible=true
-                        tingmap.visible=false
-                        lingmap.visible=false
-                        dash.visible=false
-                        tree.visible=false
-                        serialset.visible=false
-                }
-
-            }
-
-
-            ToolButton {
-                text: "LeadingMap"
-
-            onClicked:{
-                if (lingmap.visible==true)
-                    lingmap.visible=false
-                else
-                    lingmap.visible=true
-                    tingmap.visible=false
-                    bmap.visible=false
-                    dash.visible=false
-                    tree.visible=false
-                    serialset.visible=false
-                }
-
-            }
+    TabView {
+        id: tabView
+        anchors.fill: parent
+        Tab {
+            title: "Dashboard"
+            Dashboard{}
+        }
+        Tab {
+            title: "ECU"
+        }
+        Tab {
+            title: "Basemap"
+            BaseMap{}
+        }
+        Tab {
+            title: "Leading Map"
+            LeadingIgnitionMap{}
+        }
+        Tab {
+            title: "Serial settings"
+            SerialSettings{}
         }
     }
-
-
     menuBar: MenuBar {
         Menu {
             title: qsTr("File")
@@ -162,39 +45,6 @@ ApplicationWindow {
             MenuItem {
                 text: qsTr("Exit")
                 onTriggered: Qt.quit();
-            }
-        }
-
-
-        Menu {
-            SerialObject {  // <-- This is a Reference to the c++ object Serial::Serial
-                id: serialport
-            }
-            title: qsTr("Options")
-            MenuItem {
-                text: qsTr("COM Port")
-                onTriggered:{
-                    //console.log(serialport.getPorts())
-                    if (serialset.visible==true)
-                        serialset.visible=false
-                    else
-                        serialset.visible=true
-                        lingmap.visible=false
-                        tingmap.visible=false
-                        bmap.visible=false
-                        dash.visible=false
-                        tree.visible=false
-                    }
-
-            }
-            MenuItem {
-                text: qsTr("Connect")
-                onTriggered: console.log("Connecting to Power FC");
-
-            }
-            MenuItem {
-                text: qsTr("Disconnect")
-                onTriggered: console.log("Disconnect Power FC");
             }
         }
         Menu {

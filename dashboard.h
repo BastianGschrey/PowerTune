@@ -3,16 +3,16 @@
 
 #endif // DASHBOARD_H
 
-#include <QtQuick/QQuickPaintedItem>
+#include <QObject>
 
-class DashBoard : public QQuickPaintedItem
+class DashBoard : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(qint16 revs READ revs WRITE setRevs)
-    Q_PROPERTY(qint16 speed READ speed WRITE setSpeed)
+    Q_PROPERTY(qint16 revs READ revs WRITE setRevs NOTIFY revsChanged)
+    Q_PROPERTY(qint16 speed READ speed WRITE setSpeed NOTIFY speedChanged)
 
 public:
-    DashBoard(QQuickItem *parent = 0);
+    DashBoard(QObject *parent = 0);
 
     void setRevs(const qint16 &revs);
     void setSpeed(const qint16 &speed);
@@ -20,7 +20,9 @@ public:
     qint16 revs() const;
     qint16 speed() const;
 
-    void painter(QPainter *painter);
+signals:
+    void revsChanged(qint16 revs);
+    void speedChanged(qint16 speed);
 
 private:
     qint16 m_revs;
