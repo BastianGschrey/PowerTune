@@ -5,6 +5,8 @@
  */
 
 #include "decoder.h"
+#include "dashboard.h"
+
 #include <QDebug>
 #include <QBitArray>
 
@@ -32,7 +34,15 @@ static QString map[] = {"rpm", "pim", "pimV",
                         "STP", "CAT", "ELD", "HWL", "FPD", "FPR", "APR", "PAC", "CCN", "TCN", "PRC" ,"MAP_N","MAP_P",
                         "Basic_Injduty", "Basic_IGL", "Basic_IGT", "Basic_RPM", "Basic_KPH", "Basic_Boost", "Basic_Knock", "Basic_Watert", "Basic_Airt", "Basic_BattV",};
 
-Decoder::Decoder(QObject *parent) : QObject(parent)
+Decoder::Decoder(QObject *parent)
+    : QObject(parent)
+    , m_dashboard(Q_NULLPTR)
+{
+}
+
+Decoder::Decoder(DashBoard *dashboard, QObject *parent)
+    : QObject(parent)
+    , m_dashboard(dashboard)
 {
 }
 
@@ -62,6 +72,9 @@ void Decoder::decodeAdv(QByteArray serialdata)
     packageADV[19] = mul[19] * info->na1 + add[19];
     packageADV[20] = mul[20] * info->Secinjpulse + add[20];
     packageADV[21] = mul[21] * info->na2 + add[21];
+
+    m_dashboard->setRevs(packageADV[0]);
+    m_dashboard->setSpeed(packageADV[16]);
 
     //    ui->txtConsole->clear();
 

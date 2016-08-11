@@ -37,8 +37,8 @@ Serial::Serial(QObject *parent) :
     m_dashBoard(Q_NULLPTR)
 {
     getPorts();
-    m_decoder = new Decoder(this);
     m_dashBoard = new DashBoard(this);
+    m_decoder = new Decoder(m_dashBoard, this);
 
     QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
     if (engine == Q_NULLPTR)

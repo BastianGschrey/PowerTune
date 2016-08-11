@@ -2,7 +2,8 @@
 #define DECODER_H
 
 #include <QObject>
-#include <serial.h>
+
+class DashBoard;
 
 class Decoder : public QObject
 {
@@ -251,7 +252,10 @@ private:
 
 public:
     explicit Decoder(QObject *parent = 0);
+     explicit Decoder(DashBoard *dashboard, QObject *parent = 0);
 
+private:
+     DashBoard *m_dashboard;
 public slots:     
      void decodeAdv(QByteArray serialdata);
      void decodeSensor(QByteArray serialdata);
