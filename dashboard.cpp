@@ -2,8 +2,8 @@
 
 DashBoard::DashBoard(QObject *parent)
     : QObject(parent)
-    , m_revs(10)
-    , m_speed(220)
+    , m_revs(0)
+    , m_speed(0)
 {
 }
 
