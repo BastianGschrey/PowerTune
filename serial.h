@@ -25,6 +25,7 @@
 class SerialPort;
 class DashBoard;
 class Decoder;
+class AppSettings;
 
 class Serial : public QObject
 {
@@ -106,6 +107,7 @@ private:
     SerialPort *m_serialport;
     Decoder *m_decoder;
     DashBoard *m_dashBoard;
+    AppSettings *m_appSettings;
     QStringList m_portsNames;
 
     void getFuelBase0();

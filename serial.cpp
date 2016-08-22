@@ -21,6 +21,7 @@
 #include "decoder.h"
 #include "dashboard.h"
 #include "serialport.h"
+#include "appsettings.h"
 
 #include <QDebug>
 #include <QTimer>
@@ -39,11 +40,13 @@ Serial::Serial(QObject *parent) :
     getPorts();
     m_dashBoard = new DashBoard(this);
     m_decoder = new Decoder(m_dashBoard, this);
+    m_appSettings = new AppSettings(this);
 
     QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
     if (engine == Q_NULLPTR)
         return;
     engine->rootContext()->setContextProperty("Dashboard", m_dashBoard);
+    engine->rootContext()->setContextProperty("AppSettings", m_appSettings);
 }
 
 void Serial::initSerialPort()

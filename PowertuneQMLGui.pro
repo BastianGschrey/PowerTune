@@ -7,7 +7,8 @@ SOURCES += main.cpp \
     serial.cpp \
     dashboard.cpp \
     decoder.cpp \
-    serialport.cpp
+    serialport.cpp \
+    appsettings.cpp
 
 RESOURCES += qml.qrc
 
@@ -21,7 +22,8 @@ HEADERS += \
     serial.h \
     dashboard.h \
     decoder.h \
-    serialport.h
+    serialport.h \
+    appsettings.h
 
 FORMS +=
 
