@@ -10,7 +10,7 @@
 #include <QDebug>
 #include <QBitArray>
 
-int requestID = 0; //ID for requested data type
+
 
 QByteArray serialdata;
 QByteArray fullFuelBase;
