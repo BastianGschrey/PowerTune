@@ -19,39 +19,13 @@ Item {
 
             anchors.verticalCenterOffset: 0
             anchors.centerIn: parent
-            value: innerring.speed
-
-            // once c++ interface works
-            //speedoNeedle.value =  packageADV[16] *0.26875 // max speedo 320 KMH = 86
-
-
-            /*
-                        this is just to animate the needles via keyboard button
-                        and can be deleted once C++ interface is working
-
-                       focus: true
-                       Keys.onPressed: {
-                                if (event.key == Qt.Key_0 && !event.isAutoRepeat) {
-
-                                    speedoNeedle.value = 86 // 86 = 300 degrees 3.488 = 1 degree
-                                    revNeedle.value = 86    // 86 = 300 degrees 3.488 = 1 degree
-                                }
-
-                       }
-                       Keys.onReleased: {
-                               if (event.key == Qt.Key_0 && !event.isAutoRepeat) {
-                                   speedoNeedle.value = 0
-                                   revNeedle.value = 0
-                               }}
-*/
+            value: innerring.speed * 0.26875 //86 % of 360 degree is the full needle range = 320 KPH
         }
 
 
 
         SpeedGaugeInnerRing   {
             id: innerring
-            // speed: (Math.round(speedoNeedle.currentValue, 0) + 360) * 1.066666666666667
-            // speed: packageADV[16]
             speed: Dashboard.speed
         }
 
@@ -69,14 +43,11 @@ Item {
             id: revNeedle
             anchors.verticalCenterOffset: 0
             anchors.centerIn: parent
-            value: revinnerring.revolutions
-            //RevNeedle.value = packageADV[0] * 0.03        // max rev 10000 RPM = 86
+            value: revinnerring.revolutions * 0.0086  //86 % of 360 degree is the full needle range = 10.000 RPM
+            
         }
-        //revolutions can be replaced with Rev value from C++ no formula needed
         RevGaugeInnerRing   {
             id: revinnerring
-            // revolutions:(Math.round(revNeedle.currentValue, 0) + 360) * 33.33333333333334
-            // revolutions: packageADV[0]
             revolutions: Dashboard.revs
         }
     }
