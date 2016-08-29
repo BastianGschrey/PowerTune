@@ -1,10 +1,10 @@
 import QtQuick 2.4
 import QtGraphicalEffects 1.0
 
-Item {
+Rectangle {
     width: parent.width
     height: parent.height
-    //property qint16 value : 0
+    color: "black"
 
     Rectangle {
         color: "transparent"
