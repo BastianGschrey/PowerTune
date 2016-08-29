@@ -31,6 +31,8 @@
 #include <QQmlContext>
 #include <QQmlApplicationEngine>
 
+int requestID = 0; //ID for requested data type
+
 Serial::Serial(QObject *parent) :
     QObject(parent),
     m_serialport(Q_NULLPTR),
@@ -91,6 +93,8 @@ void Serial::openConnection(const QString &portName, const int &baudRate, const 
     {
         qDebug() << "Open Serial port failed: " << m_serialport->errorString();
     }
+    Serial::sendRequest(requestID);
+
 }
 
 void Serial::closeConnection()
@@ -157,6 +161,9 @@ void Serial::readData(QByteArray serialdata)
 
 
             serialdata.clear();
+            if(requestID <= 61){requestID++;}
+            else{requestID = 58;}
+            Serial::sendRequest(requestID);
         }
     }
 }
