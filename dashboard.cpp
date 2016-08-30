@@ -78,7 +78,7 @@ void DashBoard::setFuelc(const qint16 &Fuelc)
     emit FuelcChanged(Fuelc);
 }
 
-void DashBoard::setLeadingign(const qint8 &Leadingign)
+void DashBoard::setLeadingign(const qint16 &Leadingign)
 {
     if (m_Leadingign == Leadingign)
         return;
@@ -86,7 +86,7 @@ void DashBoard::setLeadingign(const qint8 &Leadingign)
     emit LeadingignChanged(Leadingign);
 }
 
-void DashBoard::setTrailingign(const qint8 &Trailingign)
+void DashBoard::setTrailingign(const qint16 &Trailingign)
 {
     if (m_Trailingign == Trailingign)
         return;
@@ -94,7 +94,7 @@ void DashBoard::setTrailingign(const qint8 &Trailingign)
     emit TrailingignChanged(Trailingign);
 }
 
-void DashBoard::setFueltemp(const qint8 &Fueltemp)
+void DashBoard::setFueltemp(const qint16 &Fueltemp)
 {
     if (m_Fueltemp == Fueltemp)
         return;
@@ -102,7 +102,7 @@ void DashBoard::setFueltemp(const qint8 &Fueltemp)
     emit FueltempChanged(Fueltemp);
 }
 
-void DashBoard::setMoilp(const qint8 &Moilp)
+void DashBoard::setMoilp(const qint16 &Moilp)
 {
     if (m_Moilp == Moilp)
         return;
@@ -110,7 +110,7 @@ void DashBoard::setMoilp(const qint8 &Moilp)
     emit MoilpChanged(Moilp);
 }
 
-void DashBoard::setBoosttp(const qint8 &Boosttp)
+void DashBoard::setBoosttp(const qint16 &Boosttp)
 {
     if (m_Boosttp == Boosttp)
         return;
@@ -118,7 +118,7 @@ void DashBoard::setBoosttp(const qint8 &Boosttp)
     emit BoosttpChanged(Boosttp);
 }
 
-void DashBoard::setBoostwg(const qint8 &Boostwg)
+void DashBoard::setBoostwg(const qint16 &Boostwg)
 {
     if (m_Boostwg == Boostwg)
         return;
@@ -126,7 +126,7 @@ void DashBoard::setBoostwg(const qint8 &Boostwg)
     emit BoostwgChanged(Boostwg);
 }
 
-void DashBoard::setWatertemp(const qint8 &Watertemp)
+void DashBoard::setWatertemp(const qint16 &Watertemp)
 {
     if (m_Watertemp == Watertemp)
         return;
@@ -134,7 +134,7 @@ void DashBoard::setWatertemp(const qint8 &Watertemp)
     emit WatertempChanged(Watertemp);
 }
 
-void DashBoard::setIntaketemp(const qint8 &Intaketemp)
+void DashBoard::setIntaketemp(const qint16 &Intaketemp)
 {
     if (m_Intaketemp == Intaketemp)
         return;
@@ -142,7 +142,7 @@ void DashBoard::setIntaketemp(const qint8 &Intaketemp)
     emit IntaketempChanged(Intaketemp);
 }
 
-void DashBoard::setKnock(const qint8 &Knock)
+void DashBoard::setKnock(const qint16 &Knock)
 {
     if (m_Knock == Knock)
         return;
@@ -150,7 +150,7 @@ void DashBoard::setKnock(const qint8 &Knock)
     emit KnockChanged(Knock);
 }
 
-void DashBoard::setBatteryV(const qint8 &BatteryV)
+void DashBoard::setBatteryV(const qint16 &BatteryV)
 {
     if (m_BatteryV == BatteryV)
         return;
@@ -174,14 +174,14 @@ void DashBoard::setIscvduty(const qint16 &Iscvduty)
     emit IscvdutyChanged(Iscvduty);
 }
 
-void DashBoard::setO2volt(const qint8 &O2volt)
+void DashBoard::setO2volt(const qint16 &O2volt)
 {
     if (m_O2volt == O2volt)
         return;
     m_O2volt = O2volt;
     emit O2voltChanged(O2volt);
 }
-void DashBoard::setna1(const qint8 &na1)
+void DashBoard::setna1(const qint16 &na1)
 {
     if (m_na1 == na1)
         return;
@@ -197,7 +197,7 @@ void DashBoard::setSecinjpulse(const qint16 &Secinjpulse)
     emit SecinjpulseChanged(Secinjpulse);
 }
 
-void DashBoard::setna2(const qint8 &na2)
+void DashBoard::setna2(const qint16 &na2)
 {
     if (m_na2 == na2)
         return;
@@ -212,22 +212,22 @@ qint16 DashBoard::PressureV() const { return m_PressureV; }
 qint16 DashBoard::ThrottleV() const { return m_ThrottleV; }
 qint16 DashBoard::Primaryinp() const { return m_Primaryinp; }
 qint16 DashBoard::Fuelc() const { return m_Fuelc; }
-qint8 DashBoard::Leadingign() const { return m_Leadingign; }
-qint8 DashBoard::Trailingign() const { return m_Trailingign; }
-qint8 DashBoard::Fueltemp() const { return m_Fueltemp; }
-qint8 DashBoard::Moilp() const { return m_Moilp; }
-qint8 DashBoard::Boosttp() const { return m_Boosttp; }
-qint8 DashBoard::Boostwg() const { return m_Boostwg; }
-qint8 DashBoard::Watertemp() const { return m_Watertemp; }
-qint8 DashBoard::Intaketemp() const { return m_Intaketemp; }
-qint8 DashBoard::Knock() const { return m_Knock; }
-qint8 DashBoard::BatteryV() const { return m_BatteryV; }
+qint16 DashBoard::Leadingign() const { return m_Leadingign; }
+qint16 DashBoard::Trailingign() const { return m_Trailingign; }
+qint16 DashBoard::Fueltemp() const { return m_Fueltemp; }
+qint16 DashBoard::Moilp() const { return m_Moilp; }
+qint16 DashBoard::Boosttp() const { return m_Boosttp; }
+qint16 DashBoard::Boostwg() const { return m_Boostwg; }
+qint16 DashBoard::Watertemp() const { return m_Watertemp; }
+qint16 DashBoard::Intaketemp() const { return m_Intaketemp; }
+qint16 DashBoard::Knock() const { return m_Knock; }
+qint16 DashBoard::BatteryV() const { return m_BatteryV; }
 qint16 DashBoard::speed() const { return m_speed; }
 qint16 DashBoard::Iscvduty() const { return m_Iscvduty; }
-qint8 DashBoard::O2volt() const { return m_O2volt; }
-qint8 DashBoard::na1() const { return m_na1; }
+qint16 DashBoard::O2volt() const { return m_O2volt; }
+qint16 DashBoard::na1() const { return m_na1; }
 qint16 DashBoard::Secinjpulse() const { return m_Secinjpulse; }
-qint8 DashBoard::na2() const { return m_na2; }
+qint16 DashBoard::na2() const { return m_na2; }
 
 
 

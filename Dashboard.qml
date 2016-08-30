@@ -33,9 +33,10 @@ Rectangle {
 
     Column {
         spacing: 2
+        anchors.centerIn: parent
         Text {
             color: "white"
-            text:" Kgcm2 " + Dashboard.Intakepress
+            text: "Kgcm2 " + Dashboard.Intakepress
         }
         Text {
             color: "white"
@@ -48,93 +49,93 @@ Rectangle {
         }
         Text {
             color: "white"
-            text: " Pri Inj "+ Dashboard.Primaryinp
+            text: "Pri Inj "+ Dashboard.Primaryinp
 
         }
         Text {
             color: "white"
-            text: " Fuelc " + Dashboard.Fuelc
+            text: "Fuelc " + Dashboard.Fuelc
 
         }
         Text {
             color: "white"
-            text: " Lead Ign " + Dashboard.Leadingign
+            text: "Lead Ign " + Dashboard.Leadingign
 
         }
         Text {
             color: "white"
-            text: " Trailingign " + Dashboard.Trailingign
+            text: "Trailingign " + Dashboard.Trailingign
 
         }
         Text {
             color: "white"
-            text: " Fueltemp " + Dashboard.Fueltemp
+            text: "Fueltemp " + Dashboard.Fueltemp
 
         }
         Text {
             color: "white"
-            text: Dashboard.Moilp+" Moilp"
+            text: "Moilp " + Dashboard.Moilp
 
         }
         Text {
             color: "white"
-            text: " Boosttp " + Dashboard.Boosttp
+            text: "Boosttp " + Dashboard.Boosttp
 
         }
         Text {
             color: "white"
-            text: " Boostwg " +Dashboard.Boostwg
+            text: "Boostwg " +Dashboard.Boostwg
 
         }
         Text {
             color: "white"
-            text:" Watertemp " + Dashboard.Watertemp
-
-        }
-
-        Text {
-            color: "white"
-            text: " Intaketemp " + Dashboard.Intaketemp
+            text:"Watertemp " + Dashboard.Watertemp
 
         }
 
         Text {
             color: "white"
-            text: " Knock " + Dashboard.Knock
+            text: "Intaketemp " + Dashboard.Intaketemp
 
         }
 
         Text {
             color: "white"
-            text: " Batt V " + Dashboard.BatteryV
-
-        }
-        Text {
-            color: "white"
-            text: " Iscvduty " + Dashboard.Iscvduty
+            text: "Knock " + Dashboard.Knock
 
         }
 
         Text {
             color: "white"
-            text: " O2volt" + Dashboard.O2volt
+            text: "Batt V " + Dashboard.BatteryV
+
+        }
+        Text {
+            color: "white"
+            text: "Iscvduty " + Dashboard.Iscvduty
 
         }
 
         Text {
             color: "white"
-            text: " na1" + Dashboard.na1
+            text: "O2volt " + Dashboard.O2volt
 
         }
 
         Text {
             color: "white"
-            text: " Secinjpulse " + Dashboard.Secinjpulse
+            text: "na1 " + Dashboard.na1
+
+        }
+
+        Text {
+            color: "white"
+            text: "Secinjpulse " + Dashboard.Secinjpulse
 
         }
         Text {
             color: "white"
-            text: " na2" + Dashboard.na2
+            text: "na2 " + Dashboard.na2
 
         }
 }
