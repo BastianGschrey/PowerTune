@@ -1,140 +1,235 @@
-#ifndef DASHBOARD_H
-#define DASHBOARD_H
+#include <dashboard.h>
 
-#endif // DASHBOARD_H
+DashBoard::DashBoard(QObject *parent)
+    : QObject(parent)
 
-#include <QObject>
+// Advanced Info FD3S
+    , m_revs(0)
+    , m_Intakepress(0)
+    , m_PressureV(0)
+    , m_ThrottleV(0)
+    , m_Primaryinp(0)
+    , m_Fuelc(0)
+    , m_Leadingign(0)
+    , m_Trailingign(0)
+    , m_Fueltemp(0)
+    , m_Moilp(0)
+    , m_Boosttp(0)
+    , m_Boostwg(0)
+    , m_Watertemp(0)
+    , m_Intaketemp(0)
+    , m_Knock(0)
+    , m_BatteryV(0)
+    , m_speed(0)
+    , m_Iscvduty(0)
+    , m_O2volt(0)
+    , m_na1(0)
+    , m_Secinjpulse(0)
+    , m_na2(0)
 
-class DashBoard : public QObject
 {
-    Q_OBJECT
+}
+// Advanced Info FD3S
+void DashBoard::setRevs(const qint16 &revs)
+{
+    if (m_revs == revs)
+        return;
+    m_revs = revs;
+    emit revsChanged(revs);
+}
 
-    // Advanced Info FD3S
-    Q_PROPERTY(qint16 revs READ revs WRITE setRevs NOTIFY revsChanged)
-    Q_PROPERTY(qint16 Intakepress READ Intakepress WRITE setIntakepress NOTIFY IntakepressChanged)
-    Q_PROPERTY(qint16 PressureV READ PressureV WRITE setPressureV NOTIFY PressureVChanged)
-    Q_PROPERTY(qint16 ThrottleV READ ThrottleV WRITE setThrottleV NOTIFY ThrottleVChanged)
-    Q_PROPERTY(qint16 Primaryinp READ Primaryinp WRITE setPrimaryinp NOTIFY PrimaryinpChanged)
-    Q_PROPERTY(qint16 Fuelc READ Fuelc WRITE setFuelc NOTIFY FuelcChanged)
-    Q_PROPERTY(qint8 Leadingign READ Leadingign WRITE setLeadingign NOTIFY LeadingignChanged)
-    Q_PROPERTY(qint8 Trailingign READ Trailingign WRITE setTrailingign NOTIFY TrailingignChanged)
-    Q_PROPERTY(qint8 Fueltemp READ Fueltemp WRITE setFueltemp NOTIFY FueltempChanged)
-    Q_PROPERTY(qint8 Moilp READ Moilp WRITE setMoilp NOTIFY MoilpChanged)
-    Q_PROPERTY(qint8 Boosttp READ Boosttp WRITE setBoosttp NOTIFY BoosttpChanged)
-    Q_PROPERTY(qint8 Boostwg READ Boostwg WRITE setBoostwg NOTIFY BoostwgChanged)
-    Q_PROPERTY(qint8 Watertemp READ Watertemp WRITE setWatertemp NOTIFY WatertempChanged)
-    Q_PROPERTY(qint8 Intaketemp READ Intaketemp WRITE setIntaketemp NOTIFY IntaketempChanged)
-    Q_PROPERTY(qint8 Knock READ Knock WRITE setKnock NOTIFY KnockChanged)
-    Q_PROPERTY(qint8 BatteryV READ BatteryV WRITE setBatteryV NOTIFY BatteryVChanged)
-    Q_PROPERTY(qint16 speed READ speed WRITE setSpeed NOTIFY speedChanged)
-    Q_PROPERTY(qint16 Iscvduty READ Iscvduty WRITE setIscvduty NOTIFY IscvdutyChanged)
-    Q_PROPERTY(qint8 O2volt READ O2volt WRITE setO2volt NOTIFY O2voltChanged)
-    Q_PROPERTY(qint8 na1 READ na1 WRITE setna1 NOTIFY na1Changed)
-    Q_PROPERTY(qint16 Secinjpulse READ Secinjpulse WRITE setSecinjpulse NOTIFY SecinjpulseChanged)
-    Q_PROPERTY(qint8 na2 READ Intaketemp WRITE setna2 NOTIFY na2Changed)
+void DashBoard::setIntakepress(const qint16 &Intakepress)
+{
+    if (m_Intakepress == Intakepress)
+        return;
+    m_Intakepress = Intakepress;
+    emit IntakepressChanged(Intakepress);
+}
+
+void DashBoard::setPressureV(const qint16 &PressureV)
+{
+    if (m_PressureV == PressureV)
+        return;
+    m_PressureV = PressureV;
+    emit PressureVChanged(PressureV);
+}
+
+void DashBoard::setThrottleV(const qint16 &ThrottleV)
+{
+    if (m_ThrottleV == ThrottleV)
+        return;
+    m_ThrottleV= ThrottleV;
+    emit ThrottleVChanged(ThrottleV);
+}
+
+void DashBoard::setPrimaryinp(const qint16 &Primaryinp)
+{
+    if (m_Primaryinp == Primaryinp)
+        return;
+    m_Primaryinp= Primaryinp;
+    emit PrimaryinpChanged(Primaryinp);
+}
+
+void DashBoard::setFuelc(const qint16 &Fuelc)
+{
+    if (m_Fuelc == Fuelc)
+        return;
+    m_Fuelc= Fuelc;
+    emit FuelcChanged(Fuelc);
+}
+
+void DashBoard::setLeadingign(const qint8 &Leadingign)
+{
+    if (m_Leadingign == Leadingign)
+        return;
+    m_Leadingign= Leadingign;
+    emit LeadingignChanged(Leadingign);
+}
+
+void DashBoard::setTrailingign(const qint8 &Trailingign)
+{
+    if (m_Trailingign == Trailingign)
+        return;
+    m_Trailingign= Trailingign;
+    emit TrailingignChanged(Trailingign);
+}
+
+void DashBoard::setFueltemp(const qint8 &Fueltemp)
+{
+    if (m_Fueltemp == Fueltemp)
+        return;
+    m_Fueltemp = Fueltemp;
+    emit FueltempChanged(Fueltemp);
+}
+
+void DashBoard::setMoilp(const qint8 &Moilp)
+{
+    if (m_Moilp == Moilp)
+        return;
+    m_Moilp = Moilp;
+    emit MoilpChanged(Moilp);
+}
+
+void DashBoard::setBoosttp(const qint8 &Boosttp)
+{
+    if (m_Boosttp == Boosttp)
+        return;
+    m_Boosttp = Boosttp;
+    emit BoosttpChanged(Boosttp);
+}
+
+void DashBoard::setBoostwg(const qint8 &Boostwg)
+{
+    if (m_Boostwg == Boostwg)
+        return;
+    m_Boostwg = Boostwg;
+    emit BoostwgChanged(Boostwg);
+}
+
+void DashBoard::setWatertemp(const qint8 &Watertemp)
+{
+    if (m_Watertemp == Watertemp)
+        return;
+    m_Watertemp = Watertemp;
+    emit WatertempChanged(Watertemp);
+}
+
+void DashBoard::setIntaketemp(const qint8 &Intaketemp)
+{
+    if (m_Intaketemp == Intaketemp)
+        return;
+    m_Intaketemp = Intaketemp;
+    emit IntaketempChanged(Intaketemp);
+}
+
+void DashBoard::setKnock(const qint8 &Knock)
+{
+    if (m_Knock == Knock)
+        return;
+    m_Knock = Knock;
+    emit KnockChanged(Knock);
+}
+
+void DashBoard::setBatteryV(const qint8 &BatteryV)
+{
+    if (m_BatteryV == BatteryV)
+        return;
+    m_BatteryV = BatteryV;
+    emit BatteryVChanged(BatteryV);
+}
+
+void DashBoard::setSpeed(const qint16 &speed)
+{
+    if (m_speed == speed)
+        return;
+    m_speed = speed;
+    emit speedChanged(speed);
+}
+
+void DashBoard::setIscvduty(const qint16 &Iscvduty)
+{
+    if (m_Iscvduty == Iscvduty)
+        return;
+    m_Iscvduty = Iscvduty;
+    emit IscvdutyChanged(Iscvduty);
+}
+
+void DashBoard::setO2volt(const qint8 &O2volt)
+{
+    if (m_O2volt == O2volt)
+        return;
+    m_O2volt = O2volt;
+    emit O2voltChanged(O2volt);
+}
+void DashBoard::setna1(const qint8 &na1)
+{
+    if (m_na1 == na1)
+        return;
+    m_na1 = na1;
+    emit na1Changed(na1);
+}
+
+void DashBoard::setSecinjpulse(const qint16 &Secinjpulse)
+{
+    if (m_Secinjpulse == Secinjpulse)
+        return;
+    m_Secinjpulse = Secinjpulse;
+    emit SecinjpulseChanged(Secinjpulse);
+}
+
+void DashBoard::setna2(const qint8 &na2)
+{
+    if (m_na2 == na2)
+        return;
+    m_na2 = na2;
+    emit na2Changed(na2);
+}
+
+// Advanced Info FD3S
+qint16 DashBoard::revs() const { return m_revs; }
+qint16 DashBoard::Intakepress() const { return m_Intakepress; }
+qint16 DashBoard::PressureV() const { return m_PressureV; }
+qint16 DashBoard::ThrottleV() const { return m_ThrottleV; }
+qint16 DashBoard::Primaryinp() const { return m_Primaryinp; }
+qint16 DashBoard::Fuelc() const { return m_Fuelc; }
+qint8 DashBoard::Leadingign() const { return m_Leadingign; }
+qint8 DashBoard::Trailingign() const { return m_Trailingign; }
+qint8 DashBoard::Fueltemp() const { return m_Fueltemp; }
+qint8 DashBoard::Moilp() const { return m_Moilp; }
+qint8 DashBoard::Boosttp() const { return m_Boosttp; }
+qint8 DashBoard::Boostwg() const { return m_Boostwg; }
+qint8 DashBoard::Watertemp() const { return m_Watertemp; }
+qint8 DashBoard::Intaketemp() const { return m_Intaketemp; }
+qint8 DashBoard::Knock() const { return m_Knock; }
+qint8 DashBoard::BatteryV() const { return m_BatteryV; }
+qint16 DashBoard::speed() const { return m_speed; }
+qint16 DashBoard::Iscvduty() const { return m_Iscvduty; }
+qint8 DashBoard::O2volt() const { return m_O2volt; }
+qint8 DashBoard::na1() const { return m_na1; }
+qint16 DashBoard::Secinjpulse() const { return m_Secinjpulse; }
+qint8 DashBoard::na2() const { return m_na2; }
 
 
 
 
-public:
-    DashBoard(QObject *parent = 0);
-    // Advanced Info FD3S
-    void setRevs(const qint16 &revs);
-    void setIntakepress(const qint16 &Intakepress);
-    void setPressureV(const qint16 &PressureV);
-    void setThrottleV(const qint16 &ThrottleV);
-    void setPrimaryinp(const qint16 &Primaryinp);
-    void setFuelc(const qint16 &Fuelc);
-    void setLeadingign(const qint8 &Leadingign);
-    void setTrailingign(const qint8 &Trailingign);
-    void setFueltemp(const qint8 &Fueltemp);
-    void setMoilp(const qint8 &Moilp);
-    void setBoosttp(const qint8 &Boosttp);
-    void setBoostwg(const qint8 &Boostwg);
-    void setWatertemp(const qint8 &Watertemp);
-    void setIntaketemp(const qint8 &Intaketemp);
-    void setKnock(const qint8 &Knock);
-    void setBatteryV(const qint8 &BatteryV);
-    void setSpeed(const qint16 &speed);   
-    void setIscvduty (const qint16 &Iscvduty );
-    void setO2volt(const qint8 &O2volt);
-    void setna1(const qint8 &na1);
-    void setSecinjpulse(const qint16 &Secinjpulse);
-    void setna2(const qint8 &na2);
 
-    // Advanced Info FD3S
-    qint16 revs() const;
-    qint16 Intakepress() const;
-    qint16 PressureV() const;
-    qint16 ThrottleV() const;
-    qint16 Primaryinp() const;
-    qint16 Fuelc() const;
-    qint8 Leadingign() const;
-    qint8 Trailingign() const;
-    qint8 Fueltemp() const;
-    qint8 Moilp() const;
-    qint8 Boosttp() const;
-    qint8 Boostwg() const;
-    qint8 Watertemp() const;
-    qint8 Intaketemp() const;
-    qint8 Knock() const;
-    qint16 speed() const;
-    qint8 BatteryV() const;
-    qint16 Iscvduty() const;
-    qint8 O2volt() const;
-    qint8 na1() const;
-    qint16 Secinjpulse() const;
-    qint8 na2() const;
-
-signals:
-
-    // Advanced Info FD3S
-    void revsChanged(qint16 revs);
-    void IntakepressChanged(qint16 Intakepress);
-    void PressureVChanged(qint16 PressureV);
-    void ThrottleVChanged(qint16 ThrottleV);
-    void PrimaryinpChanged(qint16 Primaryinp);
-    void FuelcChanged(qint16 Fuelc);
-    void LeadingignChanged(qint8 Leadingign);
-    void TrailingignChanged(qint8 Trailingign);
-    void FueltempChanged(qint8 Fueltemp);
-    void MoilpChanged(qint8 Moilp);
-    void BoosttpChanged(qint8 Boosttp);
-    void BoostwgChanged(qint8 Boostwg);
-    void WatertempChanged(qint8 Watertemp);
-    void IntaketempChanged(qint8 Intaketemp);
-    void KnockChanged(qint8 Knock);
-    void speedChanged(qint16 speed);
-    void BatteryVChanged(qint8 BatteryV);
-    void IscvdutyChanged(qint16 Iscvduty);
-    void O2voltChanged(qint8 O2volt);
-    void na1Changed(qint8 na1);
-    void SecinjpulseChanged(qint16 Secinjpulse);
-    void na2Changed(qint8 na2);
-
-private:
-    // Advanced Info FD3S
-    qint16 m_revs;
-    qint16 m_Intakepress;
-    qint16 m_PressureV;
-    qint16 m_ThrottleV;
-    qint16 m_Primaryinp;
-    qint16 m_Fuelc;
-    qint8 m_Leadingign;
-    qint8 m_Trailingign;
-    qint8 m_Fueltemp;
-    qint8 m_Moilp;
-    qint8 m_Boosttp;
-    qint8 m_Boostwg;
-    qint8 m_Watertemp;
-    qint8 m_Intaketemp;
-    qint8 m_Knock;
-    qint16 m_speed;
-    qint8 m_BatteryV;
-    qint16 m_Iscvduty;
-    qint8 m_O2volt;
-    qint8 m_na1;
-    qint16 m_Secinjpulse;
-    qint8 m_na2;
-
-};
