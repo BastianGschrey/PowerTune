@@ -10,8 +10,6 @@
 #include <QDebug>
 #include <QBitArray>
 
-
-
 QByteArray serialdata;
 QByteArray fullFuelBase;
 
@@ -74,33 +72,27 @@ void Decoder::decodeAdv(QByteArray serialdata)
     packageADV[21] = mul[21] * info->na2 + add[21];
 
     m_dashboard->setRevs(packageADV[0]);
+    m_dashboard->setIntakepress(packageADV[1]);
+    m_dashboard->setPressureV(packageADV[2]);
+    m_dashboard->setThrottleV(packageADV[3]);
+    m_dashboard->setPrimaryinp(packageADV[4]);
+    m_dashboard->setFuelc(packageADV[5]);
+    m_dashboard->setLeadingign(packageADV[6]);
+    m_dashboard->setTrailingign(packageADV[7]);
+    m_dashboard->setFueltemp(packageADV[8]);
+    m_dashboard->setMoilp(packageADV[9]);
+    m_dashboard->setBoosttp(packageADV[10]);
+    m_dashboard->setBoostwg(packageADV[11]);
+    m_dashboard->setWatertemp(packageADV[12]);
+    m_dashboard->setIntaketemp(packageADV[13]);
+    m_dashboard->setKnock(packageADV[14]);
+    m_dashboard->setBatteryV(packageADV[15]);
     m_dashboard->setSpeed(packageADV[16]);
-
-    //    ui->txtConsole->clear();
-
-    //    ui->txtConsole->append(map[0] + " " + QString::number(packageADV[0]));
-    //    ui->txtConsole->append(map[1] + " " + QString::number(packageADV[1]));
-    //    ui->txtConsole->append(map[2] + " " + QString::number(packageADV[2]));
-    //    ui->txtConsole->append(map[3] + " " + QString::number(packageADV[3]));
-    //    ui->txtConsole->append(map[4] + " " + QString::number(packageADV[4]));
-    //    ui->txtConsole->append(map[5] + " " + QString::number(packageADV[5]));
-    //    ui->txtConsole->append(map[6] + " " + QString::number(packageADV[6]));
-    //    ui->txtConsole->append(map[7] + " " + QString::number(packageADV[7]));
-    //    ui->txtConsole->append(map[8] + " " + QString::number(packageADV[8]));
-    //    ui->txtConsole->append(map[9] + " " + QString::number(packageADV[9]));
-    //    ui->txtConsole->append(map[10] + " " + QString::number(packageADV[10]));
-    //    ui->txtConsole->append(map[11] + " " + QString::number(packageADV[11]));
-    //    ui->txtConsole->append(map[12] + " " + QString::number(packageADV[12]));
-    //    ui->txtConsole->append(map[13] + " " + QString::number(packageADV[13]));
-    //    ui->txtConsole->append(map[14] + " " + QString::number(packageADV[14]));
-    //    ui->txtConsole->append(map[15] + " " + QString::number(packageADV[15]));
-    //    ui->txtConsole->append(map[16] + " " + QString::number(packageADV[16]));
-    //    ui->txtConsole->append(map[17] + " " + QString::number(packageADV[17]));
-    //    ui->txtConsole->append(map[18] + " " + QString::number(packageADV[18]));
-    //    ui->txtConsole->append(map[19] + " " + QString::number(packageADV[19]));
-    //    ui->txtConsole->append(map[20] + " " + QString::number(packageADV[20]));
-    //    ui->txtConsole->append(map[21] + " " + QString::number(packageADV[21]));
-
+    m_dashboard->setIscvduty(packageADV[17]);
+    m_dashboard->setO2volt(packageADV[18]);
+    m_dashboard->setna1(packageADV[19]);
+    m_dashboard->setSecinjpulse(packageADV[20]);
+    m_dashboard->setna2(packageADV[21]);
 
 }
 
