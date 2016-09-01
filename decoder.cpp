@@ -113,33 +113,34 @@ void Decoder::decodeSensor(QByteArray serialdata)
     for (int i=0; i<16; i++)
         flagArray.setBit(i, info->flags>>i & 1);
 
-    //    ui->txtSensConsole->clear();
 
-    //    ui->txtSensConsole->append(map[42] + " " + QString::number(packageSens[0]));
-    //    ui->txtSensConsole->append(map[43] + " " + QString::number(packageSens[1]));
-    //    ui->txtSensConsole->append(map[44] + " " + QString::number(packageSens[2]));
-    //    ui->txtSensConsole->append(map[45] + " " + QString::number(packageSens[3]));
-    //    ui->txtSensConsole->append(map[46] + " " + QString::number(packageSens[4]));
-    //    ui->txtSensConsole->append(map[47] + " " + QString::number(packageSens[5]));
-    //    ui->txtSensConsole->append(map[48] + " " + QString::number(packageSens[6]));
-    //    ui->txtSensConsole->append(map[49] + " " + QString::number(packageSens[7]));
-    //    //from here, bit flags
-    //    ui->txtSensConsole->append(map[50] + " " + QString::number(flagArray[0]));
-    //    ui->txtSensConsole->append(map[51] + " " + QString::number(flagArray[1]));
-    //    ui->txtSensConsole->append(map[52] + " " + QString::number(flagArray[2]));
-    //    ui->txtSensConsole->append(map[53] + " " + QString::number(flagArray[3]));
-    //    ui->txtSensConsole->append(map[54] + " " + QString::number(flagArray[4]));
-    //    ui->txtSensConsole->append(map[55] + " " + QString::number(flagArray[5]));
-    //    ui->txtSensConsole->append(map[56] + " " + QString::number(flagArray[6]));
-    //    ui->txtSensConsole->append(map[57] + " " + QString::number(flagArray[7]));
-    //    ui->txtSensConsole->append(map[58] + " " + QString::number(flagArray[8]));
-    //    ui->txtSensConsole->append(map[59] + " " + QString::number(flagArray[9]));
-    //    ui->txtSensConsole->append(map[60] + " " + QString::number(flagArray[10]));
-    //    ui->txtSensConsole->append(map[61] + " " + QString::number(flagArray[11]));
-    //    ui->txtSensConsole->append(map[62] + " " + QString::number(flagArray[12]));
-    //    ui->txtSensConsole->append(map[63] + " " + QString::number(flagArray[13]));
-    //    ui->txtSensConsole->append(map[64] + " " + QString::number(flagArray[14]));
-    //    ui->txtSensConsole->append(map[65] + " " + QString::number(flagArray[15]));
+    m_dashboard->setpim(packageSens[0]);
+    m_dashboard->setvta1(packageSens[1]);
+    m_dashboard->setvta2(packageSens[2]);
+    m_dashboard->setvmop(packageSens[3]);
+    m_dashboard->setwtrt(packageSens[4]);
+    m_dashboard->setairt(packageSens[5]);
+    m_dashboard->setfuelt(packageSens[6]);
+    m_dashboard->setO2S(packageSens[7]);
+
+    //Bit Flags for Sensors
+    m_dashboard->setFlag1(flagArray[0]);
+    m_dashboard->setFlag2(flagArray[1]);
+    m_dashboard->setFlag3(flagArray[2]);
+    m_dashboard->setFlag4(flagArray[3]);
+    m_dashboard->setFlag5(flagArray[4]);
+    m_dashboard->setFlag6(flagArray[5]);
+    m_dashboard->setFlag7(flagArray[6]);
+    m_dashboard->setFlag8(flagArray[7]);
+    m_dashboard->setFlag9(flagArray[8]);
+    m_dashboard->setFlag10(flagArray[9]);
+    m_dashboard->setFlag11(flagArray[10]);
+    m_dashboard->setFlag12(flagArray[11]);
+    m_dashboard->setFlag13(flagArray[12]);
+    m_dashboard->setFlag14(flagArray[13]);
+    m_dashboard->setFlag15(flagArray[14]);
+    m_dashboard->setFlag16(flagArray[15]);
+
 }
 
 void Decoder::decodeAux(QByteArray serialdata)
