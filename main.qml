@@ -10,7 +10,7 @@ ApplicationWindow {
     height: 480
     // visibility: "FullScreen"
     title: qsTr("PowerTune")
-    color: "gray"
+    color: "black"
 
     TabView {
         id: tabView

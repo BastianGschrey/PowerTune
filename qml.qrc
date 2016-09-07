@@ -22,5 +22,6 @@
         <file>RevGaugeInnerRing.qml</file>
         <file>SpeedGaugeInnerRing.qml</file>
         <file>GaugeNeedle.qml</file>
+        <file>Advanced.qml</file>
     </qresource>
 </RCC>
