@@ -50,9 +50,9 @@ void Decoder::decodeAdv(QByteArray serialdata)
 
     packageADV[0] = info->RPM + add[0];
     packageADV[1] = info->Intakepress;
-    packageADV[2] = info->PressureV; //value in mV
-    packageADV[3] = info->ThrottleV; //value in mV
-    packageADV[4] = info->Primaryinp;
+    packageADV[2] = info->PressureV * 0.001; //value in V
+    packageADV[3] = info->ThrottleV * 0.001; //value in V
+    packageADV[4] = info->Primaryinp * 0.001;
     packageADV[5] = info->Fuelc;
     packageADV[6] = info->Leadingign -25;
     packageADV[7] = info->Trailingign -25;
@@ -63,12 +63,12 @@ void Decoder::decodeAdv(QByteArray serialdata)
     packageADV[12] = info->Watertemp -80;
     packageADV[13] = info->Intaketemp -80;
     packageADV[14] = info->Knock;
-    packageADV[15] = info->BatteryV;
+    packageADV[15] = info->BatteryV * 0.1;
     packageADV[16] = info->Speed;
-    packageADV[17] = info->Iscvduty;
+    packageADV[17] = info->Iscvduty * 0.001;
     packageADV[18] = info->O2volt;
     packageADV[19] = info->na1;
-    packageADV[20] = info->Secinjpulse;
+    packageADV[20] = info->Secinjpulse * 0.001;
     packageADV[21] = info->na2;
 
     m_dashboard->setRevs(packageADV[0]);
@@ -101,14 +101,14 @@ void Decoder::decodeSensor(QByteArray serialdata)
 {
     fc_sens_info_t* info=reinterpret_cast<fc_sens_info_t*>(serialdata.data());
 
-    packageSens[0] = info->pim;
-    packageSens[1] = info->vta1;
-    packageSens[2] = info->vta2;
+    packageSens[0] = info->pim * 0.01;
+    packageSens[1] = info->vta1 * 0.01;
+    packageSens[2] = info->vta2 * 0.01;
     packageSens[3] = info->vmop;  //calculation incorrect compared with FC Edit
-    packageSens[4] = info->wtrt;
-    packageSens[5] = info->airt;
+    packageSens[4] = info->wtrt * 0.01;
+    packageSens[5] = info->airt * 0.01;
     packageSens[6] = info->fuelt; //calculation incorrect
-    packageSens[7] = info->O2S;
+    packageSens[7] = info->O2S * 0.01;
 
     QBitArray flagArray(16);
     for (int i=0; i<16; i++)
