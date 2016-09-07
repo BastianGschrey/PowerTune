@@ -48,28 +48,28 @@ void Decoder::decodeAdv(QByteArray serialdata)
 {
     fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialdata.data());
 
-    packageADV[0] = mul[0] * info->RPM + add[0];
-    packageADV[1] = mul[1] * info->Intakepress + add[1];
-    packageADV[2] = mul[34] * info->PressureV + add[2];  //Value in Volt
-    packageADV[3] = mul[34] * info->ThrottleV + add[3];  //Value in Volt
-    packageADV[4] = mul[4] * info->Primaryinp + add[4];
-    packageADV[5] = mul[5] * info->Fuelc + add[5];
-    packageADV[6] = mul[6] * info->Leadingign + add[6];
-    packageADV[7] = mul[7] * info->Trailingign + add[7];
-    packageADV[8] = mul[8] * info->Fueltemp + add[8];
-    packageADV[9] = mul[9] * info->Moilp + add[9];     //Value lower by 10 compared to FC Edit
-    packageADV[10] = mul[10] * info->Boosttp + add[10];    //Value shows correctly in Percent (FC edit shows just raw value
-    packageADV[11] = mul[11] * info->Boostwg + add[11];    //Value shows correctly in Percent (FC edit shows just raw value
-    packageADV[12] = mul[12] * info->Watertemp + add[12];
-    packageADV[13] = mul[13] * info->Intaketemp + add[13];
-    packageADV[14] = mul[14] * info->Knock + add[14];
-    packageADV[15] = mul[15] * info->BatteryV + add[15];
-    packageADV[16] = mul[16] * info->Speed + add[16];
-    packageADV[17] = mul[17] * info->Iscvduty + add[17];
-    packageADV[18] = mul[18] * info->O2volt + add[18];
-    packageADV[19] = mul[19] * info->na1 + add[19];
-    packageADV[20] = mul[20] * info->Secinjpulse + add[20];
-    packageADV[21] = mul[21] * info->na2 + add[21];
+    packageADV[0] = info->RPM + add[0];
+    packageADV[1] = info->Intakepress;
+    packageADV[2] = info->PressureV; //value in mV
+    packageADV[3] = info->ThrottleV; //value in mV
+    packageADV[4] = info->Primaryinp;
+    packageADV[5] = info->Fuelc;
+    packageADV[6] = info->Leadingign -25;
+    packageADV[7] = info->Trailingign -25;
+    packageADV[8] = info->Fueltemp + add[8];
+    packageADV[9] = info->Moilp;     //Value lower by 10 compared to FC Edit
+    packageADV[10] = info->Boosttp * (1.0/256);    //Value shows correctly in Percent (FC edit shows just raw value
+    packageADV[11] = info->Boostwg * (1.0/256);    //Value shows correctly in Percent (FC edit shows just raw value
+    packageADV[12] = info->Watertemp -80;
+    packageADV[13] = info->Intaketemp -80;
+    packageADV[14] = info->Knock;
+    packageADV[15] = info->BatteryV;
+    packageADV[16] = info->Speed;
+    packageADV[17] = info->Iscvduty;
+    packageADV[18] = info->O2volt;
+    packageADV[19] = info->na1;
+    packageADV[20] = info->Secinjpulse;
+    packageADV[21] = info->na2;
 
     m_dashboard->setRevs(packageADV[0]);
     m_dashboard->setIntakepress(packageADV[1]);
@@ -94,20 +94,21 @@ void Decoder::decodeAdv(QByteArray serialdata)
     m_dashboard->setSecinjpulse(packageADV[20]);
     m_dashboard->setna2(packageADV[21]);
 
+
 }
 
 void Decoder::decodeSensor(QByteArray serialdata)
 {
     fc_sens_info_t* info=reinterpret_cast<fc_sens_info_t*>(serialdata.data());
 
-    packageSens[0] = mul[33] * info->pim + add[0];
-    packageSens[1] = mul[33] * info->vta1 + add[0];
-    packageSens[2] = mul[33] * info->vta2 + add[0];
-    packageSens[3] = mul[33] * info->vmop + add[0];  //calculation incorrect compared with FC Edit
-    packageSens[4] = mul[33] * info->wtrt + add[0];
-    packageSens[5] = mul[33] * info->airt + add[0];
-    packageSens[6] = mul[33] * info->fuelt + add[0]; //calculation incorrect
-    packageSens[7] = mul[33] * info->O2S + add[0];
+    packageSens[0] = info->pim;
+    packageSens[1] = info->vta1;
+    packageSens[2] = info->vta2;
+    packageSens[3] = info->vmop;  //calculation incorrect compared with FC Edit
+    packageSens[4] = info->wtrt;
+    packageSens[5] = info->airt;
+    packageSens[6] = info->fuelt; //calculation incorrect
+    packageSens[7] = info->O2S;
 
     QBitArray flagArray(16);
     for (int i=0; i<16; i++)
@@ -442,14 +443,14 @@ void Decoder::decodeFuelInjectors(QByteArray serialdata)
 
     packageFuelInjectors[1] = mul[41] * info->frontpulse * mul[42];
     packageFuelInjectors[3] = mul[41] * info->rearpulse * mul[42];
-    packageFuelInjectors[4] = mul[38] * info->frntprilag;//(multiply by 0.004)
-    packageFuelInjectors[6] = mul[38] * info->frntseclag;//(multiply by 0.004)
-    packageFuelInjectors[8] =  mul[38] *info->rearprilag;//(multiply by 0.004)
-    packageFuelInjectors[10] = mul[38] *info->rearseclag;//(multiply by 0.004)
+    packageFuelInjectors[4] = 4 * info->frntprilag;//(multiply by 0.004)
+    packageFuelInjectors[6] = 4 * info->frntseclag;//(multiply by 0.004)
+    packageFuelInjectors[8] = 4 *info->rearprilag;//(multiply by 0.004)
+    packageFuelInjectors[10] = 4 *info->rearseclag;//(multiply by 0.004)
     packageFuelInjectors[12] = info->prinjsize;
     packageFuelInjectors[13] = info->secinjsize;
-    packageFuelInjectors[14] = mul[15] * info->prisectransprc; // divide by 10 to get %
-    packageFuelInjectors[15] = mul[38] * info->prisectransms; //(multiply by 0.004)
+    packageFuelInjectors[14] = info->prisectransprc /10; // divide by 10 to get %
+    packageFuelInjectors[15] = info->prisectransms /10; //(multiply by 0.004)
 
 
 //    ui->linefrontpulse->setText (QString::number(packageFuelInjectors[1]));
