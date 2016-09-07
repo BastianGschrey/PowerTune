@@ -20,10 +20,11 @@ ApplicationWindow {
             Dashboard{}
         }
         Tab {
-            title: "ECU"
+            title: "Advanced Info"
+            Advanced{}
         }
         Tab {
-            title: "Basemap"
+            title: "test"
             BaseMap{}
         }
         Tab {
@@ -35,7 +36,7 @@ ApplicationWindow {
             SerialSettings{}
         }
     }
-    menuBar: MenuBar {
+/*    menuBar: MenuBar {
         Menu {
             title: qsTr("File")
             MenuItem {
@@ -73,10 +74,5 @@ ApplicationWindow {
 
             }
         }
-    }
+    }*/
 }
-
-
-
-
-
