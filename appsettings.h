@@ -23,6 +23,10 @@ public:
 
     Q_INVOKABLE int getFlowControl();
     Q_INVOKABLE void setFlowControl(const int &arg);
+
+    Q_INVOKABLE int getECU();
+    Q_INVOKABLE void setECU(const int &arg);
+
 private:
     void setValue(const QString &key, const QVariant &value);
     QVariant getValue(const QString &key);

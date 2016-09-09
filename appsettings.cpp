@@ -1,5 +1,6 @@
 #include "appsettings.h"
 #include <QSettings>
+#include <QDebug>
 
 AppSettings::AppSettings(QObject *parent) : QObject(parent)
 {
@@ -55,6 +56,18 @@ void AppSettings::setFlowControl(const int &arg)
 {
     setValue("serial/flowcontrol", arg);
 }
+
+int AppSettings::getECU()
+{
+    return getValue("serial/ECU").toInt();
+
+}
+
+void AppSettings::setECU(const int &arg)
+{
+    setValue("serial/ECU", arg);
+}
+
 
 void AppSettings::setValue(const QString &key, const QVariant &value)
 {

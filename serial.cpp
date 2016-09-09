@@ -32,6 +32,7 @@
 #include <QQmlApplicationEngine>
 
 int requestID = 0; //ID for requested data type
+int selECU = 2; // ECU 1 = Apexi Power FC  ECU2 =Adaptronic
 
 Serial::Serial(QObject *parent) :
     QObject(parent),
@@ -93,8 +94,18 @@ void Serial::openConnection(const QString &portName, const int &baudRate, const 
     {
         qDebug() << "Open Serial port failed: " << m_serialport->errorString();
     }
-    Serial::sendRequest(requestID);
 
+    //Apexi
+    if (selECU == 1)
+    {
+    Serial::sendRequest(requestID);
+    }
+
+    //Adaptronic
+    if (selECU == 2)
+    {
+    Serial::AdaptronicStartStream();
+    }
 }
 
 void Serial::closeConnection()
@@ -119,9 +130,14 @@ void Serial::readData(QByteArray serialdata)
 {
     if( serialdata.length() )
     {
+        //Power FC Decode
         quint8 requesttype = serialdata[0];
+        quint8 requesttypeAdaptronic = serialdata[1];
+
         if(serialdata[1] + 1 == serialdata.length())
-        {
+
+           {
+
             if(serialdata.length() == 33 && requesttype == 0xF0){m_decoder->decodeAdv(serialdata);}
             if(serialdata.length() == 21 && requesttype == 0xDE){m_decoder->decodeSensor(serialdata);}
             if(serialdata.length() == 7 && requesttype == 0x00){m_decoder->decodeAux(serialdata);}
@@ -159,13 +175,26 @@ void Serial::readData(QByteArray serialdata)
             if(serialdata.length() == 15 && requesttype == 0x9F){m_decoder->decodeInjScLagvsBattV(serialdata);}
             if(serialdata.length() == 27 && requesttype == 0x8D){m_decoder->decodeFuelInjectors(serialdata);}
 
-
             serialdata.clear();
-            if(requestID <= 61){requestID++;}
+           if(requestID <= 61){requestID++;}
             else{requestID = 58;}
             Serial::sendRequest(requestID);
-        }
+
+
+      }
+
+       //  Adaptronic Streaming Comms decode
+       if(serialdata[2]  == 0xFA /*serialdata.length()*/)
+       {
+           if(serialdata.length() == 255 && requesttypeAdaptronic == 0xF3){m_decoder->decodeAdaptronic(serialdata);}
+
+       }
+
+
+
     }
+
+
 }
 
 // Serial requests are send via Serial
@@ -433,6 +462,19 @@ void Serial::getFuelBase7()
     m_serialport->write(QByteArray::fromHex("B70246"));
 }
 //End of serial requests
+
+// Adaptronic streaming comms
+
+
+void Serial::AdaptronicStartStream()
+{
+    m_serialport->write(QByteArray::fromHex("01 06 10 6D 00 01 DD 17"));
+}
+void Serial::AdaptronicStopStream()
+{
+    m_serialport->write(QByteArray::fromHex("01 06 10 6D 00 00 1C D7"));
+}
+
 
 
 void Serial::sendRequest(int requestIndex)

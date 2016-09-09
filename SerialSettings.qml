@@ -78,7 +78,19 @@ Item {
                 onCurrentIndexChanged: if (initialized) AppSettings.setFlowControl( currentIndex )
                 Component.onCompleted: { currentIndex = AppSettings.getFlowControl(); initialized = true }
             }
+
+            Text { text: "ECU (for future use):" }
+            ComboBox {
+                id: ecuSelect
+                width: 200
+                editable: false
+                model: [ "1", "2"]
+                property bool initialized: false
+                onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
+                Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
+            }
         }
+
         Button {
             text: "Connect"
             onClicked: {
@@ -96,6 +108,12 @@ Item {
             text: "Clear"
             onClicked: {
                 Serial.clear()
+            }
+        }
+        Button {
+            text: "Quit"
+            onClicked: {
+                Qt.quit()
             }
         }
     }

@@ -101,6 +101,11 @@ public:
     void getWarConStrFlags();
     void getNotdocumented();
 
+    //Adaptronic Streaming Comms
+
+    void AdaptronicStartStream();
+    void AdaptronicStopStream();
+
     QStringList portsNames() const { return m_portsNames; }
 
 private:
