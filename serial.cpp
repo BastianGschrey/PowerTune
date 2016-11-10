@@ -32,7 +32,7 @@
 #include <QQmlApplicationEngine>
 
 int requestID = 0; //ID for requested data type
-int selECU = 2; // ECU 1 = Apexi Power FC  ECU2 =Adaptronic
+int selECU = 1; // ECU 1 = Apexi Power FC  ECU2 =Adaptronic
 
 Serial::Serial(QObject *parent) :
     QObject(parent),
