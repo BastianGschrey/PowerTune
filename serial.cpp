@@ -122,8 +122,11 @@ void Serial::readyToRead()
         m_dashBoard->setSpeed(123);
         m_dashBoard->setRevs(221);
     }
-    readData(m_serialport->readAll());
-    // emit SIG_dataAvailable();
+QByteArray recvData = m_serialport->read(2);    
+int msgLen = recvData[1];    
+while ( recvData.size() <= (msgLen+3) )
+{       recvData += m_serialport->read(msgLen-recvData.size()+1);    }    
+	readData(recvData); 
 }
 
 void Serial::readData(QByteArray serialdata)
