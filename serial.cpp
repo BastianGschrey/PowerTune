@@ -114,7 +114,29 @@ void Serial::closeConnection()
     m_serialport->close();
     qDebug() << "Connection closed.";
 }
+/* Error handling still to be tested 
+void Serial::readyToRead()
 
+{
+    QByteArray recvData = m_serialport->read(2);	//reading byte0 = Msg Identifier and byte1 = Message lenght excluding Identifier
+    int msgLen = recvData[1];			//Total message Lenght excluding the first
+    recvData += m_serialport->read(msgLen-1);	//reading remainder of message into recvData
+
+//Error handling
+if
+   (msgLen +1 == recvData.length())			//if the received data lenght equals the message lenght from lenght byte + identifier byte (correct message lenght received )
+   {
+    readData(recvData);
+   }
+
+else							//if the lenght of the received message does not correspond with the expected lenght repeat the request
+   {
+    recvData.clear();
+    Serial::sendRequest(requestID-1); // resend request to ECU 
+   }
+
+}
+*/
 void Serial::readyToRead()
 {
 
