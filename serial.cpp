@@ -31,7 +31,7 @@
 #include <QQmlContext>
 #include <QQmlApplicationEngine>
 
-int requestID = 0; //ID for requested data type
+int requestID = 58; //ID for requested data type
 int selECU = 1; // ECU 1 = Apexi Power FC  ECU2 =Adaptronic
 
 Serial::Serial(QObject *parent) :
@@ -99,7 +99,7 @@ void Serial::openConnection(const QString &portName, const int &baudRate, const 
     if (selECU == 1)
     {
     Serial::sendRequest(requestID);
-    qDebug() << "Initial request from ECU";
+    qDebug() << "Initial request to ECU"<< requestID;
     }
 
     //Adaptronic
@@ -118,19 +118,22 @@ void Serial::closeConnection()
 void Serial::readyToRead()
 {
 
-QByteArray recvData = m_serialport->read(2);
-qDebug() << "read first two bytes :"<< recvData.toHex();
+    QByteArray recvData = m_serialport->read(2);// read first two bytes of available message (byte 0 = Msg Identifier byte 1 = msg length excl ident byte)
 
-int msgLen = recvData[1];
-qDebug() <<"lenght byte:" << msgLen;
-while ( recvData.size() <= (msgLen) )
-{       recvData += m_serialport->read(msgLen+1);    }
-	readData(recvData); 
-    qDebug() << "reading" << msgLen+1 << "bytes";
+    qDebug() << "read first two bytes :"<< recvData.toHex();
+
+    int msgLen = recvData[1]; // determine lenght of message excluding identifier byte
+
+    qDebug() <<"lenght byte:" << msgLen;
+
+    while ( recvData.size() <= (msgLen) ) // while the message lenght is shorter or equal lenght byte
+
+    {       recvData += m_serialport->read(msgLen-1);    } // reading the rest of the message excluding the first two bytes
+
+        readData(recvData);
+
+        qDebug() << "reading" << msgLen+1 << "bytes";
 }
-
-//readData(m_serialport->readAll());
-//}
 
 void Serial::readData(QByteArray serialdata)
 {
@@ -183,8 +186,9 @@ void Serial::readData(QByteArray serialdata)
             if(serialdata.length() == 27 && requesttype == 0x8D){m_decoder->decodeFuelInjectors(serialdata);}
 
             serialdata.clear();
-           if(requestID <= 61){requestID++;}
+            if(requestID <= 61){requestID++;}
             else{requestID = 58;}
+            qDebug() << "Requesting requestID :"<< requestID;
             Serial::sendRequest(requestID);
 
 
@@ -211,6 +215,7 @@ void Serial::getAdvData()
     m_serialport->write(QByteArray::fromHex("F0020D"));
     m_serialport->flush();
     m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+//    emit readyRead();
 }
 
 void Serial::getSensorData()
@@ -218,6 +223,7 @@ void Serial::getSensorData()
     m_serialport->write(QByteArray::fromHex("DE021F"));
     m_serialport->flush();
     m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+//    emit readyRead();
 }
 
 void Serial::getAux()
@@ -225,6 +231,7 @@ void Serial::getAux()
     m_serialport->write(QByteArray::fromHex("0002FD"));
 	m_serialport->flush(); 
     m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+
 }
 
 void Serial::getMapIndices()
@@ -232,6 +239,7 @@ void Serial::getMapIndices()
     m_serialport->write(QByteArray::fromHex("DB0222"));
 	m_serialport->flush(); 
     m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+//    emit readyRead();
 
 }
 void Serial::getBasic()
@@ -239,6 +247,7 @@ void Serial::getBasic()
     m_serialport->write(QByteArray::fromHex("DA0223"));
 	m_serialport->flush(); 
     m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+//    emit readyRead();
 }
 
 //Map Readout
