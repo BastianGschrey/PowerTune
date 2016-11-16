@@ -31,7 +31,7 @@
 #include <QQmlContext>
 #include <QQmlApplicationEngine>
 
-int requestID = 58; //ID for requested data type
+int requestIndex = 58; //ID for requested data type
 int selECU = 1; // ECU 1 = Apexi Power FC  ECU2 =Adaptronic
 
 Serial::Serial(QObject *parent) :
@@ -98,8 +98,9 @@ void Serial::openConnection(const QString &portName, const int &baudRate, const 
     //Apexi
     if (selECU == 1)
     {
-    Serial::sendRequest(requestID);
-    qDebug() << "Initial request to ECU"<< requestID;
+    qDebug() << "Initial request to ECU"<< requestIndex;
+    Serial::sendRequest(requestIndex);
+
     }
 
     //Adaptronic
@@ -114,29 +115,38 @@ void Serial::closeConnection()
     m_serialport->close();
     qDebug() << "Connection closed.";
 }
-/* Error handling still to be tested 
+// Error handling still to be tested
 void Serial::readyToRead()
 
 {
-    QByteArray recvData = m_serialport->read(2);	//reading byte0 = Msg Identifier and byte1 = Message lenght excluding Identifier
+    QByteArray recvData = m_serialport->readAll();	//reading byte0 = Msg Identifier and byte1 = Message lenght excluding Identifier
     int msgLen = recvData[1];			//Total message Lenght excluding the first
-    recvData += m_serialport->read(msgLen-1);	//reading remainder of message into recvData
+    qDebug() << "Expected Lenght"<< msgLen;
+    //recvData += m_serialport->read(msgLen-1);	//reading remainder of message into recvData
 
 //Error handling
 if
    (msgLen +1 == recvData.length())			//if the received data lenght equals the message lenght from lenght byte + identifier byte (correct message lenght received )
    {
+    qDebug() << "Received data OK"<<msgLen +1;
+    if(requestIndex <= 61){requestIndex++;}
+    else{requestIndex = 58;}
     readData(recvData);
    }
 
 else							//if the lenght of the received message does not correspond with the expected lenght repeat the request
    {
-    recvData.clear();
-    Serial::sendRequest(requestID-1); // resend request to ECU 
+    qDebug() << "Received data lenght NIO";
+    requestIndex-1;
+    readData(recvData);
+    qDebug() << "Request Message again"<< requestIndex;
+
+   // Serial::sendRequest(requestIndex-1); // resend request to ECU
+
    }
 
 }
-*/
+/*
 void Serial::readyToRead()
 {
 
@@ -156,7 +166,7 @@ void Serial::readyToRead()
 
         qDebug() << "reading" << msgLen+1 << "bytes";
 }
-
+*/
 void Serial::readData(QByteArray serialdata)
 {
     if( serialdata.length() )
@@ -207,14 +217,15 @@ void Serial::readData(QByteArray serialdata)
             if(serialdata.length() == 15 && requesttype == 0x9F){m_decoder->decodeInjScLagvsBattV(serialdata);}
             if(serialdata.length() == 27 && requesttype == 0x8D){m_decoder->decodeFuelInjectors(serialdata);}
 
-            serialdata.clear();
-            if(requestID <= 61){requestID++;}
-            else{requestID = 58;}
-            qDebug() << "Requesting requestID :"<< requestID;
-            Serial::sendRequest(requestID);
+
 
 
       }
+
+        serialdata.clear();
+      //  qDebug() << "Requesting via Loop:"<< requestIndex;
+        QThread::msleep(50);
+        Serial::sendRequest(requestIndex);
 
        //  Adaptronic Streaming Comms decode
        if(serialdata[2]  == 0xFA /*serialdata.length()*/)
@@ -654,95 +665,72 @@ void Serial::sendRequest(int requestIndex)
 
     case 0:
          Serial::getInitPlatform();
-         requestIndex++;
          break;
     case 1:
          Serial::getSensorStrings();
-         requestIndex++;
          break;
     case 2:
          Serial::getPimStrInjA();
-         requestIndex++;
          break;
     case 3:
          Serial::getVersion();
-         requestIndex++;
          break;
     case 4:
          Serial::getMapRef();
-         requestIndex++;
          break;
     case 5:
          Serial::getRevIdle();
-         requestIndex++;
          break;
     case 6:
          Serial::getLeadign1();
-         requestIndex++;
          break;
     case 7:
          Serial::getLeadign2();
-         requestIndex++;
          break;
     case 8:
          Serial::getLeadign3();
-         requestIndex++;
          break;
     case 9:
          Serial::getLeadign4();
-         requestIndex++;
          break;
     case 10:
          Serial::getTrailIgn1();
-         requestIndex++;
          break;
     case 11:
          Serial::getTrailIgn2();
-         requestIndex++;
          break;
     case 12:
          Serial::getTrailIgn3();
-         requestIndex++;
          break;
     case 13:
          Serial::getTrailIgn4();
-         requestIndex++;
          break;
     case 14:
          Serial::getInitPlatform();
-         requestIndex++;
          break;
     case 15:
          Serial::getInjOverlap();
-         requestIndex++;
          break;
     case 16:
          Serial::getInjvsFuelT();
-         requestIndex++;
          break;
     case 17:
          Serial::getTurboTrans();
-         requestIndex++;
          break;
     case 18:
          Serial::getOilervsWaterT();
-         requestIndex++;
          break;
     case 19:
          Serial::getFanvsWater();
-         requestIndex++;
          break;
     case 20:
          Serial::getInjcorr1();
-         requestIndex++;
          break;
     case 21:
          Serial::getInjcorr2();
-         requestIndex++;
          break;
     case 22:
          Serial::getInjcorr3();
-         requestIndex++;
          break;
     case 23:
          Serial::getInjcorr4();
@@ -750,160 +738,122 @@ void Serial::sendRequest(int requestIndex)
          break;
     case 24:
          Serial::getFuelInj();
-         requestIndex++;
          break;
     case 25:
          Serial::getCranking();
-         requestIndex++;
          break;
     case 26:
          Serial::getWaterTcorr();
-         requestIndex++;
          break;
     case 27:
          Serial::getInjvsWaterBoost();
-         requestIndex++;
          break;
     case 28:
          Serial::getInjvsAirTBoost();
-         requestIndex++;
          break;
     case 29:
          Serial::getInjPrimaryLag();
-         requestIndex++;
          break;
     case 30:
          Serial::getAccInj();
-         requestIndex++;
          break;
     case 31:
          Serial::getInjvsAccel();
-         requestIndex++;
          break;
     case 32:
          Serial::getIgnvsAircold();
-         requestIndex++;
          break;
     case 33:
          Serial::getIgnvsWater();
-         requestIndex++;
          break;
     case 34:
          Serial::getIgnvsAirwarm();
-         requestIndex++;
          break;
     case 35:
          Serial::getLIgnvsRPM();
-         requestIndex++;
          break;
     case 36:
          Serial::getIgnvsBatt();
-         requestIndex++;
          break;
     case 37:
          Serial::getBoostvsIgn();
-         requestIndex++;
          break;
     case 38:
          Serial::getTrailIgnvsRPM();
-         requestIndex++;
          break;
     case 39:
          Serial::getInjSecLagvsBattV();
-         requestIndex++;
          break;
     case 40:
          Serial::getKnockWarn();
-         requestIndex++;
          break;
     case 41:
          Serial::getNotdocumented();
-         requestIndex++;
         break;
     case 42:
          Serial::getO2Feedback();
-         requestIndex++;
          break;
     case 43:
          Serial::getBoostcontrol();
-         requestIndex++;
          break;
     case 44:
          Serial::getSettingProtections();
-         requestIndex++;
          break;
     case 45:
          Serial::getTunerString();
-         requestIndex++;
          break;
     case 46:
          Serial::getFuelBase0();
-         requestIndex++;
          break;
     case 47:
          Serial::getFuelBase1();
-         requestIndex++;
          break;
     case 48:
          Serial::getFuelBase2();
-         requestIndex++;
          break;
     case 49:
          Serial::getFuelBase3();
-         requestIndex++;
          break;
     case 50:
          Serial::getFuelBase4();
-         requestIndex++;
          break;
     case 51:
          Serial::getFuelBase5();
-         requestIndex++;
          break;
     case 52:
          Serial::getFuelBase6();
-         requestIndex++;
          break;
     case 53:
          Serial::getFuelBase7();
-         requestIndex++;
          break;
     case 54:
          Serial::getInjvsAirTemp();
-         requestIndex++;
          break;
     case 55:
          Serial::getInjvsTPS();
-         requestIndex++;
          break;
     case 56:
          Serial::getPIMScaleOffset();
-         requestIndex++;
          break;
     case 57:
          Serial::getWarConStrFlags();
-         requestIndex++;
          break;
 // Live Data
     case 58:
         Serial::getAdvData();
-        requestIndex++;
         break;
     case 59:
         Serial::getAux();
-        requestIndex++;
         break;
     case 60:
         Serial::getMapIndices();
-        requestIndex++;
         break;
     case 61:
         Serial::getSensorData();
-        requestIndex++;
         break;
     case 62:
         Serial::getBasic();
-        requestIndex = 58;
         break;
     }
 }
+
