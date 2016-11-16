@@ -31,7 +31,7 @@
 #include <QQmlContext>
 #include <QQmlApplicationEngine>
 
-int requestIndex = 58; //ID for requested data type
+int requestIndex = 0; //ID for requested data type
 int selECU = 1; // ECU 1 = Apexi Power FC  ECU2 =Adaptronic
 
 Serial::Serial(QObject *parent) :
@@ -98,8 +98,9 @@ void Serial::openConnection(const QString &portName, const int &baudRate, const 
     //Apexi
     if (selECU == 1)
     {
+    requestIndex = 0;
     qDebug() << "Initial request to ECU"<< requestIndex;
-    Serial::sendRequest(requestIndex);
+    Serial::getInitPlatform();
 
     }
 
@@ -137,11 +138,10 @@ if
 else							//if the lenght of the received message does not correspond with the expected lenght repeat the request
    {
     qDebug() << "Received data lenght NIO";
-    requestIndex-1;
+ //   if(requestIndex <= 1){requestIndex-1;}
     readData(recvData);
     qDebug() << "Request Message again"<< requestIndex;
 
-   // Serial::sendRequest(requestIndex-1); // resend request to ECU
 
    }
 
@@ -174,7 +174,7 @@ void Serial::readData(QByteArray serialdata)
         //Power FC Decode
         quint8 requesttype = serialdata[0];
         qDebug() << "Received message :"<< serialdata.toHex();
-        quint8 requesttypeAdaptronic = serialdata[1];
+        //quint8 requesttypeAdaptronic = serialdata[1];
 
         if(serialdata[1] + 1 == serialdata.length())
 
@@ -228,58 +228,64 @@ void Serial::readData(QByteArray serialdata)
         Serial::sendRequest(requestIndex);
 
        //  Adaptronic Streaming Comms decode
-       if(serialdata[2]  == 0xFA /*serialdata.length()*/)
-       {
-           if(serialdata.length() == 255 && requesttypeAdaptronic == 0xF3){m_decoder->decodeAdaptronic(serialdata);}
+       //if(serialdata[2]  == 0xFA /*serialdata.length()*/)
+       //{
 
-       }
+       //}
 
 
 
     }
+//    if(serialdata.length() == 255 && requesttypeAdaptronic == 0xF3){m_decoder->decodeAdaptronic(serialdata);}
 
 
 }
-
+/*
+void Serial::delayRequest()
+{
+    QThread::msleep(50);
+    Serial::sendRequest(requestIndex);
+}
+*/
 // Serial requests are send via Serial
 
 void Serial::getAdvData()
 {
     m_serialport->write(QByteArray::fromHex("F0020D"));
-    m_serialport->flush();
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 //    emit readyRead();
 }
 
 void Serial::getSensorData()
 {
     m_serialport->write(QByteArray::fromHex("DE021F"));
-    m_serialport->flush();
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 //    emit readyRead();
 }
 
 void Serial::getAux()
 {
     m_serialport->write(QByteArray::fromHex("0002FD"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 
 }
 
 void Serial::getMapIndices()
 {
     m_serialport->write(QByteArray::fromHex("DB0222"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 //    emit readyRead();
 
 }
 void Serial::getBasic()
 {
     m_serialport->write(QByteArray::fromHex("DA0223"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 //    emit readyRead();
 }
 
@@ -287,357 +293,357 @@ void Serial::getBasic()
 void Serial::getRevIdle()
 {
     m_serialport->write(QByteArray::fromHex("B80245"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getSensorStrings()
 {
     m_serialport->write(QByteArray::fromHex("DD0220"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getPimStrInjA()
 {
     m_serialport->write(QByteArray::fromHex("CB0232"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getVersion()
 {
     m_serialport->write(QByteArray::fromHex("F50208"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getMapRef()
 {
     m_serialport->write(QByteArray::fromHex("8A0273"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getLeadign1()
 {
     m_serialport->write(QByteArray::fromHex("760287"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getLeadign2()
 {
     m_serialport->write(QByteArray::fromHex("770286"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getLeadign3()
 {
     m_serialport->write(QByteArray::fromHex("780285"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getLeadign4()
 {
     m_serialport->write(QByteArray::fromHex("790284"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getTrailIgn1()
 {
     m_serialport->write(QByteArray::fromHex("81027C"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getTrailIgn2()
 {
     m_serialport->write(QByteArray::fromHex("82027B"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getTrailIgn3()
 {
     m_serialport->write(QByteArray::fromHex("83027A"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getTrailIgn4()
 {
     m_serialport->write(QByteArray::fromHex("840279"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getInitPlatform()
 {
     m_serialport->write(QByteArray::fromHex("F3020A"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getInjOverlap()
 {
     m_serialport->write(QByteArray::fromHex("7B0282"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getInjvsFuelT()
 {
     m_serialport->write(QByteArray::fromHex("7C0281"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getTurboTrans()
 {
     m_serialport->write(QByteArray::fromHex("7D0280"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getOilervsWaterT()
 {
     m_serialport->write(QByteArray::fromHex("7E027F"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getFanvsWater()
 {
     m_serialport->write(QByteArray::fromHex("7F027E"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getInjcorr1()
 {
     m_serialport->write(QByteArray::fromHex("860277"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getInjcorr2()
 {
     m_serialport->write(QByteArray::fromHex("870276"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getInjcorr3()
 {
     m_serialport->write(QByteArray::fromHex("880275"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getInjcorr4()
 {
     m_serialport->write(QByteArray::fromHex("890274"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getFuelInj()
 {
     m_serialport->write(QByteArray::fromHex("8D0270"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getCranking()
 {
     m_serialport->write(QByteArray::fromHex("8E026F"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getWaterTcorr()
 {
     m_serialport->write(QByteArray::fromHex("8F026E"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getInjvsWaterBoost()
 {
     m_serialport->write(QByteArray::fromHex("90026D"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getInjvsAirTBoost()
 {
     m_serialport->write(QByteArray::fromHex("91026C"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getInjPrimaryLag()
 {
     m_serialport->write(QByteArray::fromHex("92026B"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getAccInj()
 {
     m_serialport->write(QByteArray::fromHex("93026A"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getInjvsAccel()
 {
     m_serialport->write(QByteArray::fromHex("940269"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getIgnvsAircold()
 {
     m_serialport->write(QByteArray::fromHex("960267"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getIgnvsWater()
 {
     m_serialport->write(QByteArray::fromHex("980265"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getIgnvsAirwarm()
 {
     m_serialport->write(QByteArray::fromHex("9A0263"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getLIgnvsRPM()
 {
     m_serialport->write(QByteArray::fromHex("9B0262"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getIgnvsBatt()
 {
     m_serialport->write(QByteArray::fromHex("9C0261"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getBoostvsIgn()
 {
     m_serialport->write(QByteArray::fromHex("9D0260"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getTrailIgnvsRPM()
 {
     m_serialport->write(QByteArray::fromHex("9E025F"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getInjSecLagvsBattV()
 {
     m_serialport->write(QByteArray::fromHex("9F025E"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getInjWarn()
 {
     m_serialport->write(QByteArray::fromHex("A80255"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getKnockWarn()
 {
     m_serialport->write(QByteArray::fromHex("A90254"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getO2Feedback()
 {
     m_serialport->write(QByteArray::fromHex("AA0253"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getBoostcontrol()
 {
     m_serialport->write(QByteArray::fromHex("AB0252"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getSettingProtections()
 {
     m_serialport->write(QByteArray::fromHex("AC0251"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getTunerString()
 {
     m_serialport->write(QByteArray::fromHex("AD0250"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getInjvsAirTemp()
 {
     m_serialport->write(QByteArray::fromHex("B90244"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getInjvsTPS()
 {
     m_serialport->write(QByteArray::fromHex("BA0243"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getIgnvsTPS()
 {
     m_serialport->write(QByteArray::fromHex("BB0242"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getPIMScaleOffset()
 {
     m_serialport->write(QByteArray::fromHex("BC0241"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getWarConStrFlags()
 {
     m_serialport->write(QByteArray::fromHex("D60227"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getNotdocumented()
 {
     m_serialport->write(QByteArray::fromHex("F40209"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 
 void Serial::getFuelBase0()
 {
     m_serialport->write(QByteArray::fromHex("B0024D"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getFuelBase1()
 {
     m_serialport->write(QByteArray::fromHex("B1024C"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getFuelBase2()
 {
     m_serialport->write(QByteArray::fromHex("B2024B"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getFuelBase3()
 {
     m_serialport->write(QByteArray::fromHex("B3024A"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getFuelBase4()
 {
     m_serialport->write(QByteArray::fromHex("B40249"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getFuelBase5()
 {
     m_serialport->write(QByteArray::fromHex("B50248"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getFuelBase6()
 {
     m_serialport->write(QByteArray::fromHex("B60247"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::getFuelBase7()
 {
     m_serialport->write(QByteArray::fromHex("B70246"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 //End of serial requests
 
@@ -647,14 +653,14 @@ void Serial::getFuelBase7()
 void Serial::AdaptronicStartStream()
 {
     m_serialport->write(QByteArray::fromHex("01 06 10 6D 00 01 DD 17"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 void Serial::AdaptronicStopStream()
 {
     m_serialport->write(QByteArray::fromHex("01 06 10 6D 00 00 1C D7"));
-	m_serialport->flush(); 
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
+    // m_serialport->flush();
+    // m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec) }
 }
 
 
@@ -856,4 +862,3 @@ void Serial::sendRequest(int requestIndex)
         break;
     }
 }
-
