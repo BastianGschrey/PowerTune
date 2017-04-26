@@ -188,6 +188,9 @@ void Decoder::decodeBasic(QByteArray serialdata)
     packageBasic[7] = mul[0] * info->Basic_Watert + add[8];
     packageBasic[8] = mul[0] * info->Basic_Airt + add[8];
     packageBasic[9] = mul[15] * info->Basic_BattV + add[0];
+  
+    m_dashboard->setRevs(packageBasic[3]);
+    m_dashboard->setSpeed(packageBasic[4]);
 
     //    ui->txtBasicConsole->clear();
 
