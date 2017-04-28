@@ -100,7 +100,7 @@ void Serial::openConnection(const QString &portName, const int &baudRate, const 
     //Apexi
     if (selECU == 1)
     {
-    requestIndex = 0;
+    requestIndex = 1;
     qDebug() << "Initial request to ECU"<< requestIndex;
     Serial::sendRequest(requestIndex);
 
@@ -130,26 +130,13 @@ void Serial::readyToRead()
     int Bytes = 1000;
     QByteArray recvData;// = m_serialport->read(Bytesexpected);  // reading first two bytes of received message to determine lenght of ecpected message
     //int msgLen = Bytesexpected; //Total message Lenght excluding the first byte
-   /* while ( recvData.size() < (Bytesexpected))
-    {
-    if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
-    //if ( recvData.size()== (msgLen+1) ) break;
-    //recvData += m_serialport->read(msgLen+1-recvData.size());
-    recvData += m_serialport->readAll();
-    qDebug() << "time taken (ms) "<<startTime.msecsTo(QTime::currentTime());
-    qDebug() << "current message"<<recvData.toHex();
-    qDebug() << "current message"<<recvData;
-    qDebug() << "Message Size current"<<recvData.size();
-    qDebug() << " Bytes expected "<<Bytesexpected;
-    qDebug() << "current request index"<<requestIndex;
-    }
-    */
+
     while (Bytesexpected < Bytes)
         {
             if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
-            qDebug() << "time taken (ms) "<<startTime.msecsTo(QTime::currentTime());
-            qDebug() << "Bytes expected"<<Bytesexpected;
-            qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
+
+      //      qDebug() << "Bytes expected"<<Bytesexpected;
+      //      qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
             Bytes = m_serialport->bytesAvailable();
         }
    if  (Bytesexpected == m_serialport->bytesAvailable())
@@ -161,6 +148,7 @@ if
    (Bytesexpected == recvData.size())                  //if the received data lenght equals the message lenght from lenght byte + identifier byte (correct message lenght received )
    {
     qDebug() << "Received data OK"<<Bytesexpected;
+    qDebug() << "time taken (ms) "<<(QTime::currentTime());
     if(requestIndex <= 61){requestIndex++;}
     else{requestIndex = 58;}
     readData(recvData);
@@ -168,8 +156,10 @@ if
     m_serialport->flush();
 }
 else
-    qDebug() << "Received data  NOK";
+{
+    qDebug() << "Received data  NOK message"<<requestIndex;
 
+}
 }
 /*
 void Serial::readyToRead()
@@ -267,13 +257,7 @@ void Serial::readData(QByteArray serialdata)
 
 
 }
-/*
-void Serial::delayRequest()
-{
-    QThread::msleep(50);
-    Serial::sendRequest(requestIndex);
-}
-*/
+
 // Serial requests are send via Serial
 
 void Serial::getAdvData()

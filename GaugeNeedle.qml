@@ -6,13 +6,14 @@ Canvas {
 
     property int value : 0
 
-    onValueChanged: {zeiger.rotation = Math.min(Math.max(-250, canvas.value*3.5 - 150), 150); canvas.currentValue = zeiger.rotation - 210} //130 minrotation, -30 maxrotation
-    width: parent.width; height: parent.height
+    onValueChanged: {zeiger.rotation = Math.min(Math.max(-250, canvas.value*3.5 - 180), 180); canvas.currentValue = zeiger.rotation - 215} //130 minrotation, -30 maxrotation
+    width: parent.width;
+    height: parent.height
 
     Rectangle {
         id: zeiger
-        rotation: -150 //begin of rotation
-        width: 4
+        rotation: -180 //siehe minrotation
+        width: parent.width / 90
         height: parent.width / 2
         transformOrigin: Item.Bottom
         anchors.horizontalCenter: parent.horizontalCenter
@@ -20,12 +21,12 @@ Canvas {
 
         smooth: true
         antialiasing: true
-        color: "#ffffff" // needle color
-        onRotationChanged: {canvas.currentValue = zeiger.rotation - 210; canvas.requestPaint()}//texti.text = zeiger.rotation
+        color: "#81FFFE"
+        onRotationChanged: {canvas.currentValue = zeiger.rotation - 211; canvas.requestPaint()}//texti.text = zeiger.rotation
 
             Behavior on rotation {
                 NumberAnimation{
-                    duration: 30
+                    duration: 0
                     easing.type: Easing.OutCirc
                 }
             }
@@ -46,29 +47,35 @@ Canvas {
 
       // this is the angle that splits the circle in two arcs
       // first arc is drawn from 0 radians to angle radians
-      // second arc is angle radians to 2*PI rad27
-      property real angle: (currentValue - minimumValue) / (maximumValue - minimumValue) * 2 * Math.PI //+ 0.01
-      property real angleOffset: 20.955 //to start at 0mph //-Math.PI / 2
+      // second arc is angle radians to 2*PI radians
+      property real angle:(currentValue - minimumValue) / (maximumValue - minimumValue) * 2 * Math.PI *1.3//-0.01 //5.05
+      property real angleOffset: 20.41 //to start at 0mph //-Math.PI / 2
+
 
 
       onPaint: {
           var ctx = getContext("2d");
           ctx.save();
 
-          var gradient2 = ctx.createRadialGradient((parent.width / 2),(parent.height / 2), 0, (parent.width / 2),(parent.height / 2),parent.height);
+          var gradient2 = ctx.createRadialGradient((parent.width / 2),(parent.height / 2), 0, (parent.width / 2),(parent.height / 2),parent.height );
           gradient2.addColorStop(0.5, "#ffffff");   //outer needle ring color
           gradient2.addColorStop(0.46, "#e96448");   //middle needle ring color
           gradient2.addColorStop(0.45, "#f22900");   //inner needle ring color
           gradient2.addColorStop(0.33, "transparent");   //unten
+         /*
+          gradient2.addColorStop(0.5, "#81FFFE");   //oben
+          gradient2.addColorStop(0.46, "#81FFFE");   //oben
+          gradient2.addColorStop(0.45, "#112478");   //mitte
+          gradient2.addColorStop(0.33, "transparent");   //unten
+          */
 
           ctx.clearRect(0, 0, canvas.width, canvas.height);
 
           ctx.beginPath();
-          ctx.lineWidth = (parent.width / 2) ;
+          ctx.lineWidth = 150;
           ctx.strokeStyle = gradient2
           ctx.arc(canvas.centerWidth, canvas.centerHeight, canvas.radius - (ctx.lineWidth / 2), canvas.angleOffset, canvas.angleOffset + canvas.angle);
           ctx.stroke();
-
 
           ctx.restore();
       }

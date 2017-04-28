@@ -49,6 +49,7 @@ void Decoder::decodeAdv(QByteArray serialdata)
     fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialdata.data());
 
     packageADV[0] = info->RPM + add[0];
+    packageADV[1] = info->Boostcal * 0.0001 -1.03;
     packageADV[1] = info->Intakepress;
     packageADV[2] = info->PressureV * 0.001; //value in V
     packageADV[3] = info->ThrottleV * 0.001; //value in V
@@ -70,6 +71,10 @@ void Decoder::decodeAdv(QByteArray serialdata)
     packageADV[19] = info->na1;
     packageADV[20] = info->Secinjpulse * 0.001;
     packageADV[21] = info->na2;
+/*
+    if (Boostcal < 0)
+        Boostcal * 760 // convert Boost to mmhg in case the number is negative
+*/
 
     m_dashboard->setRevs(packageADV[0]);
     m_dashboard->setIntakepress(packageADV[1]);
@@ -115,7 +120,7 @@ void Decoder::decodeSensor(QByteArray serialdata)
         flagArray.setBit(i, info->flags>>i & 1);
 
 
-    m_dashboard->setpim(packageSens[0]);
+   // m_dashboard->setpim(packageSens[0]);
     m_dashboard->setvta1(packageSens[1]);
     m_dashboard->setvta2(packageSens[2]);
     m_dashboard->setvmop(packageSens[3]);
@@ -178,19 +183,28 @@ void Decoder::decodeBasic(QByteArray serialdata)
 {
     fc_Basic_info_t* info=reinterpret_cast<fc_Basic_info_t*>(serialdata.data());
 
+    int Boost;
+
     packageBasic[0] = mul[15] * info->Basic_Injduty + add[0];
     packageBasic[1] = mul[0] * info->Basic_IGL + add[6];
     packageBasic[2] = mul[0] * info->Basic_IGT + add[6];
     packageBasic[3] = mul[0] * info->Basic_RPM + add[0];
     packageBasic[4] = mul[0] * info->Basic_KPH + add[0];
-    packageBasic[5] = mul[0] * info->Basic_Boost + add[0];  //calculation not yet correct
+    packageBasic[5] = mul[0] * info->Basic_Boost -760;  //calculation not yet correct
     packageBasic[6] = mul[0] * info->Basic_Knock + add[0];
     packageBasic[7] = mul[0] * info->Basic_Watert + add[8];
     packageBasic[8] = mul[0] * info->Basic_Airt + add[8];
     packageBasic[9] = mul[15] * info->Basic_BattV + add[0];
-  
+
+    if (packageBasic[5] >= 0) // while boost pressure is positive multiply by 0.01 to show kg/cm2
+    {
+        Boost = packageBasic[5] *0.01;
+    }
+    else Boost = packageBasic[5]; // while boost pressure is negative show pressure in mmhg
+
     m_dashboard->setRevs(packageBasic[3]);
     m_dashboard->setSpeed(packageBasic[4]);
+    m_dashboard->setpim(Boost);
 
     //    ui->txtBasicConsole->clear();
 

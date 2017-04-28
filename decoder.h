@@ -21,6 +21,7 @@ private:
         quint16 requesttype;
         quint16 RPM;
         quint16 Intakepress;
+        quint16 Boostcal;
         quint16 PressureV;
         quint16 ThrottleV;
         quint16 Primaryinp;

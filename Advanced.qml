@@ -14,9 +14,7 @@ Rectangle {
         anchors.left: parent.left
         Text {
             color: "yellow"
-            text: "PIM " + Dashboard.Intakepress
-
-
+            text: "PIM kgcm2 " + Dashboard.Intakepress
         }
         Text {
             color: "yellow"
@@ -128,7 +126,7 @@ Rectangle {
         Text {
             color: "yellow"
             text: "Boost " + Dashboard.pim
-        }
+             }
         Text {
             color: "yellow"
             text: "VTA1 V " + Dashboard.vta1

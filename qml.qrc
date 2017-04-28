@@ -23,5 +23,7 @@
         <file>SpeedGaugeInnerRing.qml</file>
         <file>GaugeNeedle.qml</file>
         <file>Advanced.qml</file>
+        <file>TachometerStyle.qml</file>
+        <file>DashboardGaugeStyle.qml</file>
     </qresource>
 </RCC>
