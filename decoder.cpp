@@ -49,7 +49,7 @@ void Decoder::decodeAdv(QByteArray serialdata)
     fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialdata.data());
 
     packageADV[0] = info->RPM + add[0];
-    packageADV[1] = info->Boostcal * 0.0001 -1.03;
+   // packageADV[1] = info->Boostcal * 0.0001 -1.03;
     packageADV[1] = info->Intakepress;
     packageADV[2] = info->PressureV * 0.001; //value in V
     packageADV[3] = info->ThrottleV * 0.001; //value in V
@@ -59,8 +59,8 @@ void Decoder::decodeAdv(QByteArray serialdata)
     packageADV[7] = info->Trailingign -25;
     packageADV[8] = info->Fueltemp + add[8];
     packageADV[9] = info->Moilp;     //Value lower by 10 compared to FC Edit
-    packageADV[10] = info->Boosttp * (1.0/256);    //Value shows correctly in Percent (FC edit shows just raw value
-    packageADV[11] = info->Boostwg * (1.0/256);    //Value shows correctly in Percent (FC edit shows just raw value
+    packageADV[10] = info->Boosttp;    // (FC edit shows just raw value
+    packageADV[11] = info->Boostwg;    // (FC edit shows just raw value
     packageADV[12] = info->Watertemp -80;
     packageADV[13] = info->Intaketemp -80;
     packageADV[14] = info->Knock;
@@ -190,7 +190,7 @@ void Decoder::decodeBasic(QByteArray serialdata)
     packageBasic[2] = mul[0] * info->Basic_IGT + add[6];
     packageBasic[3] = mul[0] * info->Basic_RPM + add[0];
     packageBasic[4] = mul[0] * info->Basic_KPH + add[0];
-    packageBasic[5] = mul[0] * info->Basic_Boost -760;  //calculation not yet correct
+    packageBasic[5] = mul[0] * info->Basic_Boost -760;
     packageBasic[6] = mul[0] * info->Basic_Knock + add[0];
     packageBasic[7] = mul[0] * info->Basic_Watert + add[8];
     packageBasic[8] = mul[0] * info->Basic_Airt + add[8];
