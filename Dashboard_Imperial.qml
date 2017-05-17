@@ -34,20 +34,19 @@ Rectangle {
             anchors.fill: parent
             anchors.margins: 10
             orientation : Qt.Horizontal
-            minorTickmarkCount: 6
+            minorTickmarkCount: 0
             tickmarkStepSize : 70
-            //labelStepSize: 50
-            minimumValue: 0
-            maximumValue: 120
+            minimumValue: 100
+            maximumValue: 240
 
-            value: Dashboard.Watertemp
+            value: Math.round(Dashboard.Watertemp * 1.8 +32)
             Behavior on value {
                 NumberAnimation {
                     duration: 5
                 }
             }
             Text {
-                text:"Coolant " + Dashboard.Watertemp + "°C "
+                text:"Coolant " + Math.round(Dashboard.Watertemp * 1.8 +32) + "°F "
                 font.pixelSize: (parent.width / 14)
                  y: (parent.heigth / 22)
                 font.bold: true
@@ -87,17 +86,17 @@ Rectangle {
             minorTickmarkCount: 3
             tickmarkStepSize : 40
             //labelStepSize: 50
-            minimumValue: 0
-            maximumValue: 80
+            minimumValue: 40
+            maximumValue: 200
 
-            value: Dashboard.Intaketemp
+            value: Math.round(Dashboard.Intaketemp * 1.8 +32)
             Behavior on value {
                 NumberAnimation {
                     duration: 5
                 }
             }
             Text {
-                text:"Intake " + Dashboard.Intaketemp + "°C "
+                text:"Intake " + Math.round(Dashboard.Intaketemp * 1.8 +32) + "°F "
                 font.pixelSize: (parent.width / 14)
                  y: (parent.heigth / 22)
                 font.bold: true
@@ -128,9 +127,9 @@ Rectangle {
             id: speedometer
             height: parent.height
             width: height
-            value: Dashboard.speed
+            value: Math.round (Dashboard.speed * 0.62137119)
             anchors.verticalCenter: parent.verticalCenter
-            maximumValue: 320
+            maximumValue: 200
 
             style: DashboardGaugeStyle {}
         }
@@ -147,14 +146,14 @@ Rectangle {
 
                  anchors.verticalCenterOffset: 0
                  anchors.centerIn: parent
-                 value: Dashboard.speed / 4.155844155844156
+                 value: (Dashboard.speed*0.62137119)/2.597402597402597
 
 }
 
 
-        SpeedGaugeInnerRing   {
+        SpeedGaugeInnerRing_Imperial   {
             id: innerring
-            speed: Dashboard.speed
+            speed: Math.round(Dashboard.speed*0.62137119)
         }
     }
 

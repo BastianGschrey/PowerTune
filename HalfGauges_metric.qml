@@ -157,8 +157,8 @@ Rectangle {
                     value: Dashboard.speed
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.top: parent.top
-                    minimumValue: -30
-                    maximumValue: 30
+                    //minimumValue: 0
+                    //maximumValue: 2
 
                     style: HalfGaugeStyle {}
                 }
@@ -171,7 +171,7 @@ Rectangle {
                 y : parent.width /27
 
                 Text {
-                    text: "PSI"
+                    text: "BOOST"
                     font.pixelSize: (parent.width / 12)
                      y: (parent.width / 5)
                     font.bold: true
@@ -180,7 +180,7 @@ Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
                 Text {
-                    text: "BOOST"
+                    text: "mmHg / kg/cm²"
                     font.pixelSize: (parent.width / 14)
                      y: (parent.width / 2.4)
                     font.bold: true
@@ -221,7 +221,7 @@ Rectangle {
                 HalfNeedle {
                     anchors.verticalCenterOffset: 0
                     anchors.centerIn: parent
-                    value: 50//(Dashboard.Watertemp * 1.8 +32)
+                    value: 53//(Dashboard.Watertemp * 1.8 +32)
                 }
 
             }
