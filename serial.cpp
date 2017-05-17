@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2016 Bastian Gschrey & Markus Ippy
+* Copyright (C) 2017 Bastian Gschrey & Markus Ippy
 *
 * Digital Gauges for Apexi Power FC for RX7 on Raspberry Pi
 *
@@ -31,16 +31,20 @@
 #include <QSerialPortInfo>
 #include <QQmlContext>
 #include <QQmlApplicationEngine>
+#include <QModbusRtuSerialMaster>
 
 int requestIndex = 0; //ID for requested data type
-int selECU = 1; // ECU 1 = Apexi Power FC  ECU2 =Adaptronic
+//int selECU = 1; // ECU 1 = Apexi Power FC  ECU2 =Adaptronic
 int Bytesexpected = 500;
 
 Serial::Serial(QObject *parent) :
     QObject(parent),
     m_serialport(Q_NULLPTR),
     m_decoder(Q_NULLPTR),
-    m_dashBoard(Q_NULLPTR)
+    m_dashBoard(Q_NULLPTR),
+    lastRequest(nullptr),
+    modbusDevice(nullptr)
+
 {
     getPorts();
     m_dashBoard = new DashBoard(this);
@@ -62,6 +66,19 @@ void Serial::initSerialPort()
     connect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
 }
 
+void Serial::getEcus()
+{
+    QStringList EcuList;
+    EcuList.append("PowerFC");
+    EcuList.append("Adaptronic");
+    //setEcus(EcuList);
+}
+
+/*void Serial::setEcus(QStringList ECUList)
+{
+
+}*/
+
 void Serial::getPorts()
 {
     QStringList PortList;
@@ -80,7 +97,7 @@ void Serial::clear() const
 }
 //function to open serial port
 void Serial::openConnection(const QString &portName, const int &baudRate, const int &parity,
-                            const int &dataBits, const int &stopBits, const int &flowControl )
+                            const int &dataBits, const int &stopBits, const int &flowControl, const int &ecuSelect)
 {
     initSerialPort();
 
@@ -91,6 +108,7 @@ void Serial::openConnection(const QString &portName, const int &baudRate, const 
     m_serialport->setStopBits(static_cast<QSerialPort::StopBits>(stopBits + 1));
     m_serialport->setFlowControl(static_cast<QSerialPort::FlowControl>(flowControl));
 
+
     qDebug() << "Try to open SerialPort:";
     if(m_serialport->open(QIODevice::ReadWrite) == false)
     {
@@ -98,20 +116,47 @@ void Serial::openConnection(const QString &portName, const int &baudRate, const 
     }
 
     //Apexi
-    if (selECU == 1)
+    if (ecuSelect == 0)
     {
     requestIndex = 0;
-    qDebug() << "Initial request to ECU"<< requestIndex;
+    qDebug() << "Initial request to PowerFc"<< requestIndex;
     Serial::sendRequest(requestIndex);
 
     }
 
     //Adaptronic
-    if (selECU == 2)
+    if (ecuSelect == 1)
     {
+    qDebug() << "Initial request to Adaptronic";
+    modbusDevice = new QModbusRtuSerialMaster(this);
+    modbusDevice->setConnectionParameter(QModbusDevice::SerialPortNameParameter,portName);
+    modbusDevice->setConnectionParameter(QModbusDevice::SerialBaudRateParameter,57600);
+    modbusDevice->setTimeout(200);
+    modbusDevice->setNumberOfRetries(10);
+    modbusDevice->connectDevice();
     Serial::AdaptronicStartStream();
     }
 }
+
+/*QModbusDataUnit Serial::readRequest() const
+{
+    int startAddress = 4097;
+    int numberOfEntries = 6;
+
+    return QModbusDataUnit(startAddress, numberOfEntries);
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
 
 void Serial::closeConnection()
 {
@@ -700,9 +745,9 @@ void Serial::getFuelBase7()
 
 void Serial::AdaptronicStartStream()
 {
-    m_serialport->write(QByteArray::fromHex("01 06 10 6D 00 01 DD 17"));
+    /*m_serialport->write(QByteArray::fromHex("01 06 10 6D 00 01 DD 17"));
     m_serialport->flush();
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec)
+    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec)*/
 }
 void Serial::AdaptronicStopStream()
 {

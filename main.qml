@@ -5,6 +5,8 @@ import QtQuick.Layouts 1.1
 import com.powertune 1.0
 
 ApplicationWindow {
+
+
     visible: true
     width: 800
     height: 480
@@ -35,7 +37,13 @@ ApplicationWindow {
             title: "Serial settings"
             SerialSettings{}
         }
+
+
+
+
     }
+
+
 /*    menuBar: MenuBar {
         Menu {
             title: qsTr("File")

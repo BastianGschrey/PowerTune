@@ -84,7 +84,7 @@ Item {
                 id: ecuSelect
                 width: 200
                 editable: false
-                model: [ "1", "2"]
+                model: [ "PowerFC", "Adaptronic"]
                 property bool initialized: false
                 onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
                 Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
@@ -95,7 +95,7 @@ Item {
             text: "Connect"
             onClicked: {
                 Serial.openConnection(serialName.currentText, baudRate.currentText, parity.currentIndex,
-                                      databits.currentIndex, stopBits.currentIndex, flowcontrol.currentIndex)
+                                      databits.currentIndex, stopBits.currentIndex, flowcontrol.currentIndex, ecuSelect.currentIndex)
             }
         }
         Button {

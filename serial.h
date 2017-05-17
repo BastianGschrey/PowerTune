@@ -21,27 +21,31 @@
 #define SERIAL_H
 
 #include <QObject>
+#include <QModbusDataUnit>
 
 class SerialPort;
 class DashBoard;
 class Decoder;
 class AppSettings;
+class QModbusClient;
+class QModbusReply;
 
 class Serial : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QStringList portsNames READ portsNames WRITE setPortsNames NOTIFY portsNamesChanged)
+    Q_PROPERTY(QStringList portsNames READ portsNames WRITE setPortsNames NOTIFY sig_portsNamesChanged)
 
 public:
     explicit Serial(QObject *parent = 0);
 
     Q_INVOKABLE void clear() const;
     Q_INVOKABLE void initSerialPort();
-    Q_INVOKABLE void openConnection(const QString &portName, const int &baudRate, const int &parity, const int &dataBits, const int &stopBits, const int &flowControl);
+    Q_INVOKABLE void openConnection(const QString &portName, const int &baudRate, const int &parity, const int &dataBits, const int &stopBits, const int &flowControl, const int &ecuSelect);
     Q_INVOKABLE void closeConnection();
 
 public slots:
     void getPorts();
+    void getEcus();
 
 public:
     void getAdvData();
@@ -114,6 +118,12 @@ private:
     DashBoard *m_dashBoard;
     AppSettings *m_appSettings;
     QStringList m_portsNames;
+    QStringList *m_ecuList;
+    QModbusReply *lastRequest;
+    QModbusClient *modbusDevice;
+
+    QModbusDataUnit readRequest() const;
+
 
     void getFuelBase0();
     void getFuelBase1();
@@ -125,10 +135,10 @@ private:
     void getFuelBase7();
 
 signals:
-    void finished();
-    void error(QString err);
-    void SIG_dataAvailable(QByteArray);
-    void portsNamesChanged(QStringList portsNames);
+    void sig_finished();
+    void sig_error(QString err);
+    void sig_ApexiDataAvailable(QByteArray);
+    void sig_portsNamesChanged(QStringList portsNames);
 
 public slots:
     void readyToRead();
@@ -141,9 +151,11 @@ public slots:
             return;
 
         m_portsNames = portsNames;
-        emit portsNamesChanged(portsNames);
+        emit sig_portsNamesChanged(portsNames);
     }
     void readData(QByteArray serialdata);
+
+
 };
 
 #endif // SERIAL_H
