@@ -34,7 +34,7 @@
 #include <QModbusRtuSerialMaster>
 
 int requestIndex = 0; //ID for requested data type
-//int selECU = 1; // ECU 1 = Apexi Power FC  ECU2 =Adaptronic
+
 int Bytesexpected = 500;
 
 Serial::Serial(QObject *parent) :
@@ -99,32 +99,36 @@ void Serial::clear() const
 void Serial::openConnection(const QString &portName, const int &baudRate, const int &parity,
                             const int &dataBits, const int &stopBits, const int &flowControl, const int &ecuSelect)
 {
-    initSerialPort();
 
-    m_serialport->setPortName(portName);
-    m_serialport->setBaudRate(baudRate);
-    m_serialport->setParity(parity);
-    m_serialport->setDataBits(static_cast<QSerialPort::DataBits>(dataBits + 5));
-    m_serialport->setStopBits(static_cast<QSerialPort::StopBits>(stopBits + 1));
-    m_serialport->setFlowControl(static_cast<QSerialPort::FlowControl>(flowControl));
-
-
-    qDebug() << "Try to open SerialPort:";
-    if(m_serialport->open(QIODevice::ReadWrite) == false)
-    {
-        qDebug() << "Open Serial port failed: " << m_serialport->errorString();
-    }
 
     //Apexi
     if (ecuSelect == 0)
     {
-    requestIndex = 0;
-    qDebug() << "Initial request to PowerFc"<< requestIndex;
-    Serial::sendRequest(requestIndex);
 
-    }
+     initSerialPort();
 
-    //Adaptronic
+     m_serialport->setPortName(portName);
+     m_serialport->setBaudRate(baudRate);
+     m_serialport->setParity(parity);
+     m_serialport->setDataBits(static_cast<QSerialPort::DataBits>(dataBits + 5));
+     m_serialport->setStopBits(static_cast<QSerialPort::StopBits>(stopBits + 1));
+     m_serialport->setFlowControl(static_cast<QSerialPort::FlowControl>(flowControl));
+
+
+     qDebug() << "Try to open SerialPort:";
+     if(m_serialport->open(QIODevice::ReadWrite) == false)
+     {
+         qDebug() << "Open Serial port failed: " << m_serialport->errorString();
+     }
+
+     requestIndex = 0;
+     qDebug() << "Initial request to PowerFc"<< requestIndex;
+     Serial::sendRequest(requestIndex);
+
+     }
+
+
+    //Adaptronic    
     if (ecuSelect == 1)
     {
     qDebug() << "Initial request to Adaptronic";
@@ -134,29 +138,10 @@ void Serial::openConnection(const QString &portName, const int &baudRate, const 
     modbusDevice->setTimeout(200);
     modbusDevice->setNumberOfRetries(10);
     modbusDevice->connectDevice();
+    //modbusDevice->sendReadRequest(QModbusDataUnit(QModbusDataUnit::HoldingRegisters, 4097, 6),1);
     Serial::AdaptronicStartStream();
     }
 }
-
-/*QModbusDataUnit Serial::readRequest() const
-{
-    int startAddress = 4097;
-    int numberOfEntries = 6;
-
-    return QModbusDataUnit(startAddress, numberOfEntries);
-}*/
-
-
-
-
-
-
-
-
-
-
-
-
 
 void Serial::closeConnection()
 {
@@ -165,7 +150,6 @@ void Serial::closeConnection()
 }
 // Error handling still to be tested
 void Serial::readyToRead()
-
 {
 
 //Error handling
@@ -206,27 +190,7 @@ else
 
 }
 }
-/*
-void Serial::readyToRead()
-{
 
-    QByteArray recvData = m_serialport->read(2);// read first two bytes of available message (byte 0 = Msg Identifier byte 1 = msg length excl ident byte)
-
-    qDebug() << "read first two bytes :"<< recvData.toHex();
-
-    int msgLen = recvData[1]; // determine lenght of message excluding identifier byte
-
-    qDebug() <<"lenght byte:" << msgLen;
-
-    while ( recvData.size() <= (msgLen) ) // while the message lenght is shorter or equal lenght byte
-
-    {       recvData += m_serialport->read(msgLen-1);    } // reading the rest of the message excluding the first two bytes
-
-        readData(recvData);
-
-        qDebug() << "reading" << msgLen+1 << "bytes";
-}
-*/
 void Serial::readData(QByteArray serialdata)
 {
     if( serialdata.length() )
@@ -283,22 +247,11 @@ void Serial::readData(QByteArray serialdata)
       }
 
         serialdata.clear();
-        //recvData.clear();
-      //  qDebug() << "Requesting via Loop:"<< requestIndex;
-      //  QThread::msleep(50);
 
         Serial::sendRequest(requestIndex);
 
-       //  Adaptronic Streaming Comms decode
-       //if(serialdata[2]  == 0xFA /*serialdata.length()*/)
-       //{
-
-       //}
-
-
 
     }
-//    if(serialdata.length() == 255 && requesttypeAdaptronic == 0xF3){m_decoder->decodeAdaptronic(serialdata);}
 
 
 }
@@ -745,15 +698,11 @@ void Serial::getFuelBase7()
 
 void Serial::AdaptronicStartStream()
 {
-    /*m_serialport->write(QByteArray::fromHex("01 06 10 6D 00 01 DD 17"));
-    m_serialport->flush();
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec)*/
+modbusDevice->sendReadRequest(QModbusDataUnit(QModbusDataUnit::HoldingRegisters, 4097, 20),1); // read first twenty realtime values
 }
 void Serial::AdaptronicStopStream()
 {
-    m_serialport->write(QByteArray::fromHex("01 06 10 6D 00 00 1C D7"));
-    m_serialport->flush();
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec)
+//
 }
 
 
