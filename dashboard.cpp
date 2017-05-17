@@ -26,6 +26,8 @@ DashBoard::DashBoard(QObject *parent)
     , m_na1(0)
     , m_Secinjpulse(0)
     , m_na2(0)
+    , m_InjDuty(0)
+
 
  // Sensor Info FD3S
 
@@ -300,6 +302,14 @@ void DashBoard::setO2S(const qreal &O2S)
     emit O2SChanged(O2S);
 }
 
+void DashBoard::setInjDuty(const qreal &InjDuty)
+{
+    if (m_InjDuty == InjDuty)
+        return;
+    m_InjDuty = InjDuty;
+    emit O2SChanged(InjDuty);
+}
+
 
 
 //Flags
@@ -459,6 +469,8 @@ qreal DashBoard::O2volt() const { return m_O2volt; }
 qreal DashBoard::na1() const { return m_na1; }
 qreal DashBoard::Secinjpulse() const { return m_Secinjpulse; }
 qreal DashBoard::na2() const { return m_na2; }
+qreal DashBoard::InjDuty() const { return m_InjDuty; }
+
 
 
 

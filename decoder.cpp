@@ -202,9 +202,17 @@ void Decoder::decodeBasic(QByteArray serialdata)
     }
     else Boost = packageBasic[5]; // while boost pressure is negative show pressure in mmhg
 
+    m_dashboard->setInjDuty(packageBasic[0]);
+    m_dashboard->setLeadingign(packageBasic[1]);
+    m_dashboard->setTrailingign(packageBasic[2]);
     m_dashboard->setRevs(packageBasic[3]);
     m_dashboard->setSpeed(packageBasic[4]);
     m_dashboard->setpim(Boost);
+    m_dashboard->setKnock(packageBasic[6]);
+    m_dashboard->setWatertemp(packageBasic[7]);
+    m_dashboard->setIntaketemp(packageBasic[8]);
+    m_dashboard->setBatteryV(packageBasic[9]);
+
 
     //    ui->txtBasicConsole->clear();
 

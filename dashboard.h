@@ -32,6 +32,9 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal na1 READ na1 WRITE setna1 NOTIFY na1Changed)
     Q_PROPERTY(qreal Secinjpulse READ Secinjpulse WRITE setSecinjpulse NOTIFY SecinjpulseChanged)
     Q_PROPERTY(qreal na2 READ Intaketemp WRITE setna2 NOTIFY na2Changed)
+    Q_PROPERTY(qreal na2 READ Intaketemp WRITE setna2 NOTIFY na2Changed)
+    Q_PROPERTY(qreal InjDuty READ InjDuty WRITE setInjDuty NOTIFY InjDutyChanged)
+
 
 
 //Sensor Info
@@ -88,6 +91,9 @@ public:
     void setna1(const qreal &na1);
     void setSecinjpulse(const qreal &Secinjpulse);
     void setna2(const qreal &na2);
+    void setInjDuty(const qreal &InjDuty);
+
+
 
     //Sensor Info
     void setpim(const qreal &pim);
@@ -141,6 +147,7 @@ public:
     qreal na1() const;
     qreal Secinjpulse() const;
     qreal na2() const;
+    qreal InjDuty() const;
 
     //Sensor info
 
@@ -197,6 +204,8 @@ signals:
     void na1Changed(qreal na1);
     void SecinjpulseChanged(qreal Secinjpulse);
     void na2Changed(qreal na2);
+    void InjDutyChanged(qreal InjDuty);
+
 
     //Sensor info
 
@@ -253,6 +262,7 @@ private:
     qreal m_na1;
     qreal m_Secinjpulse;
     qreal m_na2;
+    qreal m_InjDuty;
 
     //Sensor info
 

@@ -25,7 +25,6 @@
         <file>Advanced.qml</file>
         <file>TachometerStyle.qml</file>
         <file>DashboardGaugeStyle.qml</file>
-        <file>graphics/turbo.png</file>
         <file>HalfGaugeStyle.qml</file>
         <file>Dash2.qml</file>
         <file>Charts.qml</file>

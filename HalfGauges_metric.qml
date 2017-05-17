@@ -265,8 +265,8 @@ Rectangle {
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
                     Text {
-                        //id: coolant
-                        text: Dashboard.Iscvduty
+                        id: injDuty
+                        text: Dashboard.InjDuty
                         font.pixelSize: (parent.width / 10)
                         font.bold: true
                         font.family: "Eurostile"
@@ -276,19 +276,19 @@ Rectangle {
                     }
 
                     DropShadow {
-                          //  anchors.fill: coolant
+                            anchors.fill: injDuty
                             horizontalOffset: 0
                             verticalOffset: 8
                             radius: 4.0
                             samples: 16
                             color: "black"
-                            source: coolant
+                            source: injDuty
                         }
                     HalfNeedle {
                         //id: waterneedle
                         anchors.verticalCenterOffset: 0
                         anchors.centerIn: parent
-                        value: 0
+                        value: Dashboard.InjDuty /1.886792452830189
 
 
                     }
