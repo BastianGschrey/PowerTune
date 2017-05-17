@@ -25,12 +25,12 @@ ApplicationWindow {
             title: "Advanced Info"
             Advanced{}
         }
- /*
+
         Tab {
-            title: "Round Imperial"
-            Dash1{}
+            title: "Imperial"
+            Dashboard_Imperial{}
         }
-*/
+
         Tab {
             title: "Half Gauges Metric"
             HalfGauges_metric{}
