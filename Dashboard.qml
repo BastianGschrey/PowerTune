@@ -12,25 +12,23 @@ Rectangle {
     width: parent.width
     height: parent.height
     color: "black"
-/*
+
+
+
     Rectangle {
         width: parent.width /8
         height: width
-        color: "blue"
-        Column {
-            spacing: 2
-            anchors.centerIn: parent
-            Text {
-                color: "yellow"
-                text: "Boost inhg / kgcm2"
-                 }
-            Text {
-                color: "yellow"
-                text: Dashboard.pim
-            }
-        }
+        color: "transparent"
+        anchors.centerIn: parent
+
+        Image {
+             id: innerRingRect
+             height: parent.height
+             width: parent.width
+             source: "/graphics/turbo.png"
+               }
     }
-    */
+
 
     Rectangle {
         CircularGauge {
@@ -43,7 +41,6 @@ Rectangle {
 
             style: DashboardGaugeStyle {}
         }
-
         color: "transparent"
         id: speedo
         height: parent.height / 1.5
@@ -51,15 +48,15 @@ Rectangle {
 
         x: 20
         y: (parent.height / 5)
-/*
+
         GaugeNeedle {
             id: speedoNeedle
 
-            anchors.verticalCenterOffset: 0
-            anchors.centerIn: parent
-            value: innerring.speed / 3.8
-        }
-*/
+                 anchors.verticalCenterOffset: 0
+                 anchors.centerIn: parent
+                 value: Dashboard.speed / 4.155844155844156
+
+}
 
 
         SpeedGaugeInnerRing   {
@@ -81,22 +78,20 @@ Rectangle {
              style: TachometerStyle {}
          }
 
-         color: "transparent"
-         //color: "blue"
+        color: "transparent"
         height: parent.height / 1.5
         width: height
         y: (parent.height / 5)
         x: ((parent.width - parent.height / 1.5 )-20)
         // anchors.right:parent.right
-/*
+
         GaugeNeedle {
             id: revNeedle
             anchors.verticalCenterOffset: 0
             anchors.centerIn: parent
-            value: 40//Dashboard.revs / 118.9 //* 0.00839 + 0.049
+            value: Dashboard.revs * 0.0077
 
         }
-*/
         RevGaugeInnerRing   {
             id: revinnerring
             revolutions: Dashboard.revs

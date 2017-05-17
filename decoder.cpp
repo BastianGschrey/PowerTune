@@ -59,8 +59,8 @@ void Decoder::decodeAdv(QByteArray serialdata)
     packageADV[7] = info->Trailingign -25;
     packageADV[8] = info->Fueltemp + add[8];
     packageADV[9] = info->Moilp;     //Value lower by 10 compared to FC Edit
-    packageADV[10] = info->Boosttp;    // (FC edit shows just raw value
-    packageADV[11] = info->Boostwg;    // (FC edit shows just raw value
+    packageADV[10] = info->Boosttp / 2.56;    // (FC edit shows just raw value
+    packageADV[11] = info->Boostwg / 2.56;     // (FC edit shows just raw value
     packageADV[12] = info->Watertemp -80;
     packageADV[13] = info->Intaketemp -80;
     packageADV[14] = info->Knock;

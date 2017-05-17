@@ -25,13 +25,15 @@ ApplicationWindow {
             title: "Advanced Info"
             Advanced{}
         }
+ /*
         Tab {
-            title: "test"
-            BaseMap{}
+            title: "Round Imperial"
+            Dash1{}
         }
+*/
         Tab {
-            title: "Leading Map"
-            LeadingIgnitionMap{}
+            title: "Half Gauges Metric"
+            HalfGauges_metric{}
         }
         Tab {
             title: "Serial settings"

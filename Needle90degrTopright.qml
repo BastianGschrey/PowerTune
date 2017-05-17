@@ -7,23 +7,23 @@ Canvas {
     property real value : 0
 
 
-    onValueChanged: {zeiger.rotation = Math.min(Math.max(-250, canvas.value*3.5 - 180), 90); canvas.currentValue = zeiger.rotation - 180} //130 minrotation, -30 maxrotation
+    onValueChanged: {zeiger.rotation = Math.min(Math.max(-90, canvas.value*3.5 - 90), 90); canvas.currentValue = zeiger.rotation - 90} //130 minrotation, -30 maxrotation
     width: parent.width;
     height: parent.height
 
     Rectangle {
         id: zeiger
-        rotation: -180 //siehe minrotation
-        width: parent.width / 85
-        height: parent.width / 2.08
+        rotation: -90 //siehe minrotation
+        width: parent.width / 90
+        height: parent.width / 2
         transformOrigin: Item.Bottom
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.verticalCenter
 
         smooth: true
         antialiasing: true
-        color: "white"
-        onRotationChanged: {canvas.currentValue = zeiger.rotation - 180; canvas.requestPaint()}//texti.text = zeiger.rotation
+        color: "transparent"
+        onRotationChanged: {canvas.currentValue = zeiger.rotation - 90; canvas.requestPaint()}//texti.text = zeiger.rotation
 
             Behavior on rotation {
                 NumberAnimation{
@@ -40,18 +40,17 @@ Canvas {
 
       property real centerWidth: width / 2
       property real centerHeight: height / 2
-      property real radius: Math.min(canvas.width, canvas.height) / 2.08
+      property real radius: Math.min(canvas.width, canvas.height) / 2.25
 
-      property real minimumValue: -360
+      property real minimumValue: -180
       property real maximumValue: 0
-      property real currentValue: -360
+      property real currentValue: -180
 
       // this is the angle that splits the circle in two arcs
       // first arc is drawn from 0 radians to angle radians
       // second arc is angle radians to 2*PI radians
-      property real angle:(currentValue - minimumValue) / (maximumValue - minimumValue) * 2 * Math.PI //-0.01 //5.05
-      property real angleOffset: Math.PI /2 //to start at 0mph //-Math.PI / 2
-
+      property real angle:(currentValue - minimumValue) / (maximumValue - minimumValue) * 2 * Math.PI /4
+      property real angleOffset: Math.PI *1.5
 
 
       onPaint: {
@@ -59,14 +58,10 @@ Canvas {
           ctx.save();
 
           var gradient2 = ctx.createRadialGradient((parent.width / 2),(parent.height / 2), 0, (parent.width / 2),(parent.height / 2),parent.height );
-   /*       gradient2.addColorStop(0.5, "#ffffff");   //outer needle ring color
-          gradient2.addColorStop(0.46, "#e96448");   //middle needle ring color
-          gradient2.addColorStop(0.45, "#f22900");   //inner needle ring color
-          gradient2.addColorStop(0.33, "transparent");   //unten
-         */
+
           gradient2.addColorStop(0.5, "#81FFFE");   //oben
           gradient2.addColorStop(0.46, "#81FFFE");   //oben
-          gradient2.addColorStop(0.45, "#112478");   //mitte
+          gradient2.addColorStop(0.45, "#81FFFE");   //mitte
           gradient2.addColorStop(0.33, "transparent");   //unten
 
 
@@ -81,4 +76,3 @@ Canvas {
           ctx.restore();
       }
 }
-

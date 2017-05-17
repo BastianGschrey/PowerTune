@@ -58,7 +58,7 @@ DashboardGaugeStyle {
     maximumValueAngle: 90
     tickmarkStepSize: 1
     labelStepSize: 1
-    needleLength: toPixels(0.95)
+    needleLength: toPixels(0.05)
     needleBaseWidth: toPixels(0.08)
     needleTipWidth: toPixels(0.03)
 

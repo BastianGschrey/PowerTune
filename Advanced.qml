@@ -57,12 +57,12 @@ Rectangle {
         }
         Text {
             color: "yellow"
-            text: "Boosttp " + Dashboard.Boosttp
+            text: "Boosttp %" + Dashboard.Boosttp
 
         }
         Text {
             color: "yellow"
-            text: "Boostwg " +Dashboard.Boostwg
+            text: "Boostwg %" +Dashboard.Boostwg
 
         }
         Text {

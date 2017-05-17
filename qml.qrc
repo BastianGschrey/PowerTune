@@ -25,5 +25,20 @@
         <file>Advanced.qml</file>
         <file>TachometerStyle.qml</file>
         <file>DashboardGaugeStyle.qml</file>
+        <file>graphics/turbo.png</file>
+        <file>HalfGaugeStyle.qml</file>
+        <file>Dash2.qml</file>
+        <file>Charts.qml</file>
+        <file>HalfNeedle.qml</file>
+        <file>Needle90Left.qml</file>
+        <file>Needle90degrTopright.qml</file>
+        <file>HalfGaugeWaterDegC.qml</file>
+        <file>Settings.qml</file>
+        <file>GuiSettings.qml</file>
+        <file>Dash1.qml</file>
+        <file>AirTempGaugeInnerRingF.qml</file>
+        <file>BoostGaugeInnerRing.qml</file>
+        <file>WaterGaugeInnerRingF.qml</file>
+        <file>HalfGauges_metric.qml</file>
     </qresource>
 </RCC>

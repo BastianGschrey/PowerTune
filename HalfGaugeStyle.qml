@@ -56,16 +56,16 @@ CircularGaugeStyle {
     tickmarkInset: toPixels(0.04)
     minorTickmarkInset: tickmarkInset
     labelStepSize: 20
-    labelInset: toPixels(0.23)
-    minimumValueAngle: -180
+    labelInset: toPixels(-0.1)
+    minimumValueAngle: -90
     maximumValueAngle: 90
 
     property real xCenter: outerRadius
     property real yCenter: outerRadius
-    property real needleLength: outerRadius /2 //- tickmarkInset * 1.25
+    property real needleLength: 0 //- tickmarkInset * 1.25
     property real needleTipWidth: toPixels(0.02)
     property real needleBaseWidth: toPixels(0.06)
-    property bool halfGauge: false
+    property bool halfGauge: true//false
 
     function toPixels(percentage) {
         return percentage * outerRadius;
@@ -120,25 +120,7 @@ CircularGaugeStyle {
             paintBackground(ctx);
         }
 
-        Text {
-            id: speedText
-            font.pixelSize: toPixels(0.3)
-            text: kphInt
-            color: "white"
-            horizontalAlignment: Text.AlignRight
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.verticalCenter
-            anchors.topMargin: toPixels(0.1)
 
-            readonly property int kphInt: control.value
-        }
-        Text {
-            text: "km/h"
-            color: "white"
-            font.pixelSize: toPixels(0.09)
-            anchors.top: speedText.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
     }
 
     needle: Canvas {
