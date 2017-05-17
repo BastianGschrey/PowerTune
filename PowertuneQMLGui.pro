@@ -8,8 +8,7 @@ SOURCES += main.cpp \
     dashboard.cpp \
     decoder.cpp \
     serialport.cpp \
-    appsettings.cpp \
-    adaptronic_decoder.cpp
+    appsettings.cpp
 
 RESOURCES += qml.qrc
 
@@ -24,8 +23,7 @@ HEADERS += \
     dashboard.h \
     decoder.h \
     serialport.h \
-    appsettings.h \
-    adaptronic_decoder.h
+    appsettings.h
 
 FORMS +=
 
