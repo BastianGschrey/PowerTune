@@ -9,9 +9,11 @@
 
 #include <QDebug>
 #include <QBitArray>
+#include <QModbusDataUnit>
 
 QByteArray serialdata;
 QByteArray fullFuelBase;
+
 
 double mul[80] = FC_INFO_MUL;  // required values for calculation from raw to readable values for Advanced Sensor info
 double add[] = FC_INFO_ADD;
@@ -492,12 +494,14 @@ void Decoder::decodeFuelInjectors(QByteArray serialdata)
 
 // Adaptronic Select ECU
 
-void Decoder::decodeAdaptronic(QByteArray serialdata)
+void Decoder::decodeAdaptronic(QModbusDataUnit unit)
 {
-    Adaptronic_Streaming_coms* info=reinterpret_cast<Adaptronic_Streaming_coms*>(serialdata.data());
+    qDebug() << "in Adaptronic Decoder";
+    Adaptronic_Streaming_coms* info=reinterpret_cast<Adaptronic_Streaming_coms*>(unit.HoldingRegisters);
+    qDebug() << "after cast in decoder";
 
-    packageAdaptronic[0] = info->RPM;
-    packageAdaptronic[1] = info->MAP;
+    //packageAdaptronic[0] = info->RPM;
+    /*packageAdaptronic[1] = info->MAP;
     packageAdaptronic[2] = info->MAT;
     packageAdaptronic[3] = info->WT;
     packageAdaptronic[4] = info->AuxT;
@@ -510,14 +514,14 @@ void Decoder::decodeAdaptronic(QByteArray serialdata)
     packageAdaptronic[11] = info->SVSS;
     packageAdaptronic[12] = info->Inj1;
     packageAdaptronic[13] = info->Inj2;
-    packageAdaptronic[12] = info->Inj3;
-    packageAdaptronic[13] = info->Inj4;
-    packageAdaptronic[14] = info->Ign1;
-    packageAdaptronic[15] = info->Ign2;
-    packageAdaptronic[16] = info->Ign3;
-    packageAdaptronic[17] = info->Ign4;
-    packageAdaptronic[18] = info->Trim;
-    packageAdaptronic[19] = info->Updates1;
+    packageAdaptronic[14] = info->Inj3;
+    packageAdaptronic[15] = info->Inj4;
+    packageAdaptronic[16] = info->Ign1;
+    packageAdaptronic[17] = info->Ign2;
+    packageAdaptronic[18] = info->Ign3;
+    packageAdaptronic[19] = info->Ign4;
+    packageAdaptronic[20] = info->Trim;
+ /* packageAdaptronic[19] = info->Updates1;
     packageAdaptronic[20] = info->Updates2;
     packageAdaptronic[21] = info->Updates3;
     packageAdaptronic[22] = info->Updates4;
@@ -621,8 +625,35 @@ void Decoder::decodeAdaptronic(QByteArray serialdata)
     packageAdaptronic[120] = info->Aux_pressure_kPa;
     packageAdaptronic[121] = info->Safety_cut_functions;
     packageAdaptronic[122] = info->Injection_angle;
-    packageAdaptronic[123] = info->CRC16;
+    packageAdaptronic[123] = info->CRC16;*/
 
-    m_dashboard->setRevs(packageAdaptronic[0]);
+    m_dashboard->setRevs(unit.value(0));
+    /*m_dashboard->setpim(packageAdaptronic[1]);
+    m_dashboard->setairt(packageAdaptronic[2]);
+    m_dashboard->setWatertemp(packageAdaptronic[3]);
     m_dashboard->setSpeed(packageAdaptronic[10]);
+    /*
+    m_dashboard->setRevs(packageADV[0]);
+    m_dashboard->setIntakepress(packageADV[1]);
+    m_dashboard->setPressureV(packageADV[2]);
+    m_dashboard->setThrottleV(packageADV[3]);
+    m_dashboard->setPrimaryinp(packageADV[4]);
+    m_dashboard->setFuelc(packageADV[5]);
+    m_dashboard->setLeadingign(packageADV[6]);
+    m_dashboard->setTrailingign(packageADV[7]);
+    m_dashboard->setFueltemp(packageADV[8]);
+    m_dashboard->setMoilp(packageADV[9]);
+    m_dashboard->setBoosttp(packageADV[10]);
+    m_dashboard->setBoostwg(packageADV[11]);
+    m_dashboard->setWatertemp(packageADV[12]);
+    m_dashboard->setIntaketemp(packageADV[13]);
+    m_dashboard->setKnock(packageADV[14]);
+    m_dashboard->setBatteryV(packageADV[15]);
+    m_dashboard->setSpeed(packageADV[16]);
+    m_dashboard->setIscvduty(packageADV[17]);
+    m_dashboard->setO2volt(packageADV[18]);
+    m_dashboard->setna1(packageADV[19]);
+    m_dashboard->setSecinjpulse(packageADV[20]);
+    m_dashboard->setna2(packageADV[21]);
+*/
 }

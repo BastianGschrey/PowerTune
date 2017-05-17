@@ -2,6 +2,7 @@
 #define DECODER_H
 
 #include <QObject>
+#include <QModbusDataUnit>
 
 class DashBoard;
 
@@ -422,7 +423,7 @@ public slots:
      void decodeFuelBase(QByteArray serialdata, quint8 package);
 
      //Adaptronic Streaming Comms
-     void decodeAdaptronic(QByteArray serialdata);
+     void decodeAdaptronic(QModbusDataUnit serialdata);
 
 
 };

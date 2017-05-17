@@ -34,8 +34,10 @@
 #include <QModbusRtuSerialMaster>
 
 int requestIndex = 0; //ID for requested data type
-
+int ecu; //0=apex, 1=adaptronic;
 int Bytesexpected = 500;
+//reply = new QModbusReply;
+
 
 Serial::Serial(QObject *parent) :
     QObject(parent),
@@ -64,8 +66,9 @@ void Serial::initSerialPort()
         delete m_serialport;
     m_serialport = new SerialPort(this);
     connect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
-}
+//    connect(this->reply,SIGNAL(finished()),this,SLOT(readyToRead()));
 
+}
 void Serial::getEcus()
 {
     QStringList EcuList;
@@ -100,6 +103,7 @@ void Serial::openConnection(const QString &portName, const int &baudRate, const 
                             const int &dataBits, const int &stopBits, const int &flowControl, const int &ecuSelect)
 {
 
+    ecu = ecuSelect;
 
     //Apexi
     if (ecuSelect == 0)
@@ -151,10 +155,9 @@ void Serial::closeConnection()
 // Error handling still to be tested
 void Serial::readyToRead()
 {
-
-//Error handling
-
-   QTime startTime = QTime::currentTime();
+    if(ecu == 0)
+    {
+    QTime startTime = QTime::currentTime();
     int timeOut = 100; // timeout in milisec.
     int Bytes = 1000;
     QByteArray recvData;// = m_serialport->read(Bytesexpected);  // reading first two bytes of received message to determine lenght of ecpected message
@@ -162,33 +165,51 @@ void Serial::readyToRead()
 
     while (Bytesexpected < Bytes)
         {
-            if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
+              if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
 
-      //      qDebug() << "Bytes expected"<<Bytesexpected;
-      //      qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
-            Bytes = m_serialport->bytesAvailable();
-        }
-   if  (Bytesexpected == m_serialport->bytesAvailable())
+              //      qDebug() << "Bytes expected"<<Bytesexpected;
+              //      qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
+              Bytes = m_serialport->bytesAvailable();
+         }
+
+    if  (Bytesexpected == m_serialport->bytesAvailable())
         {
          recvData += m_serialport->read(Bytesexpected);
         }
 
-if
-   (Bytesexpected == recvData.size())                  //if the received data lenght equals the message lenght from lenght byte + identifier byte (correct message lenght received )
-   {
-    qDebug() << "Received data OK"<<Bytesexpected;
-    qDebug() << "time taken (ms) "<<(QTime::currentTime());
-    if(requestIndex <= 61){requestIndex++;}
-    else{requestIndex = 58;}
-    readData(recvData);
-    recvData.clear();
-    m_serialport->flush();
-}
+    if(Bytesexpected == recvData.size())                  //if the received data lenght equals the message lenght from lenght byte + identifier byte (correct message lenght received )
+            {
+            qDebug() << "Received data OK"<<Bytesexpected;
+            qDebug() << "time taken (ms) "<<(QTime::currentTime());
+            if(requestIndex <= 61){requestIndex++;}
+            else{requestIndex = 58;}
+            readData(recvData);
+            recvData.clear();
+            m_serialport->flush();
+            }
 else
 {
     qDebug() << "Received data  NOK message"<<requestIndex;
 
 }
+    }
+
+    if(ecu == 1)
+    {
+
+    qDebug() << "Adaptronic serial Mode";
+
+    auto reply = qobject_cast<QModbusReply *>(sender());
+    if(!reply)
+        return;
+    if(reply->error() == QModbusDevice::NoError){
+        const QModbusDataUnit unit = reply->result();
+        m_decoder->decodeAdaptronic(unit);
+    }
+
+
+
+    }
 }
 
 void Serial::readData(QByteArray serialdata)
@@ -264,7 +285,6 @@ void Serial::getAdvData()
     m_serialport->flush();
     Bytesexpected = 33;
 }
-
 void Serial::getSensorData()
 {
     m_serialport->write(QByteArray::fromHex("DE021F"));
@@ -273,7 +293,6 @@ void Serial::getSensorData()
     m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec)
 //    emit readyRead();
 }
-
 void Serial::getAux()
 {
     m_serialport->write(QByteArray::fromHex("0002FD"));
@@ -282,7 +301,6 @@ void Serial::getAux()
     m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec)
 
 }
-
 void Serial::getMapIndices()
 {
     m_serialport->write(QByteArray::fromHex("DB0222"));
@@ -300,7 +318,6 @@ void Serial::getBasic()
     m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec)
 //    emit readyRead();
 }
-
 //Map Readout
 void Serial::getRevIdle()
 {
@@ -642,7 +659,6 @@ void Serial::getNotdocumented()
     m_serialport->flush();
     Bytesexpected = 4;
 }
-
 void Serial::getFuelBase0()
 {
     m_serialport->write(QByteArray::fromHex("B0024D"));
@@ -698,7 +714,13 @@ void Serial::getFuelBase7()
 
 void Serial::AdaptronicStartStream()
 {
-modbusDevice->sendReadRequest(QModbusDataUnit(QModbusDataUnit::HoldingRegisters, 4097, 20),1); // read first twenty realtime values
+auto *reply = modbusDevice->sendReadRequest(QModbusDataUnit(QModbusDataUnit::HoldingRegisters, 4096, 20),1); // read first twenty realtime values
+if (!reply->isFinished())
+    connect(reply, &QModbusReply::finished, this, Serial::readyToRead);
+else
+    delete reply;
+
+
 }
 void Serial::AdaptronicStopStream()
 {

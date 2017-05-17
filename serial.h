@@ -122,8 +122,12 @@ private:
     QModbusReply *lastRequest;
     QModbusClient *modbusDevice;
 
-    QModbusDataUnit readRequest() const;
 
+
+    //QModbusReply reply;
+
+
+    QModbusDataUnit readRequest() const;
 
     void getFuelBase0();
     void getFuelBase1();
@@ -139,6 +143,7 @@ signals:
     void sig_error(QString err);
     void sig_ApexiDataAvailable(QByteArray);
     void sig_portsNamesChanged(QStringList portsNames);
+
 
 public slots:
     void readyToRead();
