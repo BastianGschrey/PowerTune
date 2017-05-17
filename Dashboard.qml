@@ -16,12 +16,13 @@ Rectangle {
 
 
     Rectangle {
-        width: parent.width /10
+        width: parent.width /4
         height: parent.height /2
         color: "transparent"
-        anchors.centerIn: parent
-
-  /*      Timer {
+        anchors.horizontalCenter: parent.horizontalCenter
+        y: (parent.height / 20)
+/*
+        Timer {
             running: true
             repeat: true
             interval: 2000
@@ -32,19 +33,31 @@ Rectangle {
             id: gauge
             anchors.fill: parent
             anchors.margins: 10
+            orientation : Qt.Horizontal
+            minorTickmarkCount: 6
+            tickmarkStepSize : 70
+            //labelStepSize: 50
             minimumValue: 0
-            maximumValue: 140
+            maximumValue: 120
 
             value: Dashboard.Watertemp
             Behavior on value {
                 NumberAnimation {
-                    duration: 10000
+                    duration: 5
                 }
             }
-
+            Text {
+                text:"Coolant " + Dashboard.Watertemp + "°C "
+                font.pixelSize: (parent.width / 12)
+                 y: (parent.heigth / 22)
+                font.bold: true
+                font.family: "Eurostile"
+                color: "white"
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
               style: GaugeStyle {
                 valueBar: Rectangle {
-                   implicitWidth: 16
+                   implicitWidth: 20
 
                     color: Qt.rgba(gauge.value / gauge.maximumValue, 0, 1 - gauge.value / gauge.maximumValue, 1)
                 }
@@ -52,6 +65,55 @@ Rectangle {
       }
     }
 
+
+    Rectangle {
+        width: parent.width /4
+        height: parent.height /2
+        color: "transparent"
+        anchors.horizontalCenter: parent.horizontalCenter
+        y: (parent.height / 5)
+/*
+        Timer {
+            running: true
+            repeat: true
+            interval: 2000
+            onTriggered: gauge.value = gauge.value == gauge.maximumValue ? 5 : gauge.maximumValue
+        }
+*/
+        Gauge {
+            anchors.fill: parent
+            anchors.margins: 10
+            orientation : Qt.Horizontal
+            minorTickmarkCount: 6
+            tickmarkStepSize : 70
+            //labelStepSize: 50
+            minimumValue: 0
+            maximumValue: 120
+
+            value: Dashboard.Intaketemp
+            Behavior on value {
+                NumberAnimation {
+                    duration: 5
+                }
+            }
+            Text {
+                text:"Intake Temp " + Dashboard.Intaketemp + "°C "
+                font.pixelSize: (parent.width / 12)
+                 y: (parent.heigth / 22)
+                font.bold: true
+                font.family: "Eurostile"
+                color: "white"
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+              style: GaugeStyle {
+                valueBar: Rectangle {
+                   implicitWidth: 20
+
+                    color: Qt.rgba(gauge.value / gauge.maximumValue, 0, 1 - gauge.value / gauge.maximumValue, 1)
+                }
+            }
+      }
+    }
     Rectangle {
         width: parent.width /8
         height: width
