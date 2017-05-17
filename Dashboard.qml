@@ -16,17 +16,48 @@ Rectangle {
 
 
     Rectangle {
+        width: parent.width /10
+        height: parent.height /2
+        color: "transparent"
+        anchors.centerIn: parent
+
+  /*      Timer {
+            running: true
+            repeat: true
+            interval: 2000
+            onTriggered: gauge.value = gauge.value == gauge.maximumValue ? 5 : gauge.maximumValue
+        }
+*/
+        Gauge {
+            id: gauge
+            anchors.fill: parent
+            anchors.margins: 10
+            minimumValue: 0
+            maximumValue: 140
+
+            value: Dashboard.Watertemp
+            Behavior on value {
+                NumberAnimation {
+                    duration: 10000
+                }
+            }
+
+              style: GaugeStyle {
+                valueBar: Rectangle {
+                   implicitWidth: 16
+
+                    color: Qt.rgba(gauge.value / gauge.maximumValue, 0, 1 - gauge.value / gauge.maximumValue, 1)
+                }
+            }
+      }
+    }
+
+    Rectangle {
         width: parent.width /8
         height: width
         color: "transparent"
         anchors.centerIn: parent
 
-        Image {
-             id: innerRingRect
-             height: parent.height
-             width: parent.width
-             source: "/graphics/turbo.png"
-               }
     }
 
 

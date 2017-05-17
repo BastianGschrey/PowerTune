@@ -59,7 +59,7 @@ Canvas {
           ctx.save();
 
           var gradient2 = ctx.createRadialGradient((parent.width / 2),(parent.height / 2), 0, (parent.width / 2),(parent.height / 2),parent.height );
-   /*       gradient2.addColorStop(0.5, "#ffffff");   //outer needle ring color
+   /*     gradient2.addColorStop(0.5, "#ffffff");   //outer needle ring color
           gradient2.addColorStop(0.46, "#e96448");   //middle needle ring color
           gradient2.addColorStop(0.45, "#f22900");   //inner needle ring color
           gradient2.addColorStop(0.33, "transparent");   //unten
