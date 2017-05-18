@@ -129,7 +129,7 @@ Rectangle {
                 }
             }
             Text {
-                text:"Air Temp " + Dashboard.Intaketemp + "°C "
+               text:"Air Temp " + Dashboard.Intaketemp + "°C "
                 font.pixelSize: (parent.height / 3)
                  anchors.top : parent.top
                 font.bold: true
@@ -321,48 +321,7 @@ Rectangle {
     }
 
 
-    Rectangle {
-        id: idle
-        width: parent.width /3.2
-        height: parent.height /7
-        color: "transparent"
-        anchors.left: parent.left
-        anchors.top : battery.bottom
 
-        Gauge {
-            id: idleValuegauge
-            anchors.fill: parent
-            anchors.margins: 10
-            orientation : Qt.Horizontal
-            minorTickmarkCount: 0
-            tickmarkStepSize : 120
-            minimumValue: 0
-            maximumValue: 120
-
-            value: Dashboard.IdleValue
-            Behavior on value {
-                NumberAnimation {
-                    duration: 5
-                }
-            }
-            Text {
-                text:"Idle Step Duty " + Dashboard.IdleValue
-                font.pixelSize: (parent.height / 3)
-                 anchors.top : parent.top
-                font.bold: true
-                font.family: "Eurostile"
-                color: "white"
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-              style: GaugeStyle {
-                valueBar: Rectangle {
-                   implicitWidth:  rev.height /3
-
-                    color: Qt.rgba(idleValuegauge.value / idleValuegauge.maximumValue, 0, 1 - idleValuegauge.value / idleValuegauge.maximumValue, 1)
-                }
-            }
-      }
-    }
 //Middle Row with 7 Bars
 
     Rectangle {
@@ -625,7 +584,48 @@ Rectangle {
             }
       }
     }
+    Rectangle {
+        id: idle
+        width: parent.width /3.2
+        height: parent.height /7
+        color: "transparent"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top : inj4.bottom
 
+        Gauge {
+            id: idleValuegauge
+            anchors.fill: parent
+            anchors.margins: 10
+            orientation : Qt.Horizontal
+            minorTickmarkCount: 0
+            tickmarkStepSize : 120
+            minimumValue: 0
+            maximumValue: 120
+
+            value: Dashboard.IdleValue
+            Behavior on value {
+                NumberAnimation {
+                    duration: 5
+                }
+            }
+            Text {
+                text:"Idle Step Duty " + Dashboard.IdleValue
+                font.pixelSize: (parent.height / 3)
+                 anchors.top : parent.top
+                font.bold: true
+                font.family: "Eurostile"
+                color: "white"
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+              style: GaugeStyle {
+                valueBar: Rectangle {
+                   implicitWidth:  rev.height /3
+
+                    color: Qt.rgba(idleValuegauge.value / idleValuegauge.maximumValue, 0, 1 - idleValuegauge.value / idleValuegauge.maximumValue, 1)
+                }
+            }
+      }
+    }
  //7 Bars on the right
 
     Rectangle {
