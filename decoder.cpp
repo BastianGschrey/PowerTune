@@ -505,12 +505,12 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
     m_dashboard->setWatertemp(unit.value(3));
     m_dashboard->setAUXT(unit.value(4));
     m_dashboard->setAFR(unit.value(5)/2570.00);
-    qDebug() <<  unit.value(2);
+    qDebug() <<  unit.value(1);
 
     m_dashboard->setKnock(unit.value(6)/256);
     m_dashboard->setTPS(unit.value(7));
     m_dashboard->setIdleValue(unit.value(8));
-    m_dashboard->setBatteryV(unit.value(9));
+    m_dashboard->setBatteryV(unit.value(9)/10);
     m_dashboard->setMVSS(unit.value(10));
     m_dashboard->setSVSS(unit.value(11));
     m_dashboard->setInj1((unit.value(12)/3)*2);
