@@ -58,6 +58,26 @@ DashBoard::DashBoard(QObject *parent)
     , m_Flag15(0)
     , m_Flag16(0)
 
+
+    //Adaptronic extra
+    , m_MAP(0)
+    , m_AUXT(0)
+    , m_AFR(0)
+    , m_TPS(0)
+    , m_IdleValue(0)
+    , m_MVSS(0)
+    , m_SVSS(0)
+    , m_Inj1(0)
+    , m_Inj2(0)
+    , m_Inj3(0)
+    , m_Inj4(0)
+    , m_Ign1(0)
+    , m_Ign2(0)
+    , m_Ign3(0)
+    , m_Ign4(0)
+    , m_TRIM(0)
+
+
 {
 }
 // Advanced Info FD3S
@@ -442,7 +462,138 @@ void DashBoard::setFlag16(const qreal &Flag16)
     emit Flag16Changed(Flag16);
 }
 
+//Adaptronic extra
 
+
+
+
+void DashBoard::setMAP(const qreal &MAP)
+{
+    if (m_MAP == MAP)
+        return;
+    m_MAP = MAP;
+    emit MAPChanged(MAP);
+}
+
+void DashBoard::setAUXT(const qreal &AUXT)
+{
+    if (m_AUXT == AUXT)
+        return;
+    m_AUXT = AUXT;
+    emit AUXTChanged(AUXT);
+}
+
+void DashBoard::setAFR(const qreal &AFR)
+{
+    if (m_AFR == AFR)
+        return;
+    m_AFR = AFR;
+    emit AFRChanged(AFR);
+}
+
+void DashBoard::setTPS(const qreal &TPS)
+{
+    if (m_TPS == TPS)
+        return;
+    m_TPS = TPS;
+    emit TPSChanged(TPS);
+}
+
+void DashBoard::setIdleValue(const qreal &IdleValue)
+{
+    if (m_IdleValue == IdleValue)
+        return;
+    m_IdleValue = IdleValue;
+    emit IdleValueChanged(IdleValue);
+}
+
+void DashBoard::setMVSS(const qreal &MVSS)
+{
+    if (m_MVSS == MVSS)
+        return;
+    m_MVSS = MVSS;
+    emit MVSSChanged(MVSS);
+}
+
+void DashBoard::setSVSS(const qreal &SVSS)
+{
+    if (m_SVSS == SVSS)
+        return;
+    m_SVSS = SVSS;
+    emit SVSSChanged(SVSS);
+}
+
+void DashBoard::setInj1(const qreal &Inj1)
+{
+    if (m_Inj1 == Inj1)
+        return;
+    m_Inj1 = Inj1;
+    emit Inj1Changed(Inj1);
+}
+
+void DashBoard::setInj2(const qreal &Inj2)
+{
+    if (m_Inj2 == Inj2)
+        return;
+    m_Inj2 = Inj2;
+    emit Inj2Changed(Inj2);
+}
+
+void DashBoard::setInj3(const qreal &Inj3)
+{
+    if (m_Inj3 == Inj3)
+        return;
+    m_Inj3 = Inj3;
+    emit Inj3Changed(Inj3);
+}
+
+void DashBoard::setInj4(const qreal &Inj4)
+{
+    if (m_Inj4 == Inj4)
+        return;
+    m_Inj4 = Inj4;
+    emit Inj4Changed(Inj4);
+}
+
+void DashBoard::setIgn1(const qreal &Ign1)
+{
+    if (m_Ign1 == Ign1)
+        return;
+    m_Ign1 = Ign1;
+    emit Ign1Changed(Ign1);
+}
+
+void DashBoard::setIgn2(const qreal &Ign2)
+{
+    if (m_Ign2 == Ign2)
+        return;
+    m_Ign2 = Ign2;
+    emit Ign2Changed(Ign2);
+}
+
+void DashBoard::setIgn3(const qreal &Ign3)
+{
+    if (m_Ign3 == Ign3)
+        return;
+    m_Ign3 = Ign3;
+    emit Ign3Changed(Ign3);
+}
+
+void DashBoard::setIgn4(const qreal &Ign4)
+{
+    if (m_Ign4 == Ign4)
+        return;
+    m_Ign4 = Ign4;
+    emit Ign4Changed(Ign4);
+}
+
+void DashBoard::setTRIM(const qreal &TRIM)
+{
+    if (m_TRIM == TRIM)
+        return;
+    m_TRIM = TRIM;
+    emit TRIMChanged(TRIM);
+}
 
 
 
@@ -504,4 +655,22 @@ qreal DashBoard::Flag14() const { return m_Flag14; }
 qreal DashBoard::Flag15() const { return m_Flag15; }
 qreal DashBoard::Flag16() const { return m_Flag16; }
 
+//Adaptronic extra
 
+
+qreal DashBoard::MAP() const { return m_MAP; }
+qreal DashBoard::AUXT() const { return m_AUXT; }
+qreal DashBoard::AFR() const { return m_AFR; }
+qreal DashBoard::TPS() const { return m_TPS; }
+qreal DashBoard::IdleValue() const { return m_IdleValue; }
+qreal DashBoard::MVSS() const { return m_MVSS; }
+qreal DashBoard::SVSS() const { return m_SVSS; }
+qreal DashBoard::Inj1() const { return m_Inj1; }
+qreal DashBoard::Inj2() const { return m_Inj2; }
+qreal DashBoard::Inj3() const { return m_Inj3; }
+qreal DashBoard::Inj4() const { return m_Inj4; }
+qreal DashBoard::Ign1() const { return m_Ign1; }
+qreal DashBoard::Ign2() const { return m_Ign2; }
+qreal DashBoard::Ign3() const { return m_Ign3; }
+qreal DashBoard::Ign4() const { return m_Ign4; }
+qreal DashBoard::TRIM() const { return m_TRIM; }
