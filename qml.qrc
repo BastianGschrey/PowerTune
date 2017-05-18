@@ -41,5 +41,6 @@
         <file>HalfGauges_metric.qml</file>
         <file>Dashboard_Imperial.qml</file>
         <file>SpeedGaugeInnerRing_Imperial.qml</file>
+        <file>DashAdaptronic.qml</file>
     </qresource>
 </RCC>

@@ -22,6 +22,10 @@ ApplicationWindow {
             Dashboard{}
         }
         Tab {
+            title: "Adaptronic"
+            DashAdaptronic{}
+        }
+        Tab {
             title: "Advanced Info"
             Advanced{}
         }
@@ -46,43 +50,4 @@ ApplicationWindow {
     }
 
 
-/*    menuBar: MenuBar {
-        Menu {
-            title: qsTr("File")
-            MenuItem {
-                text: qsTr("&Open")
-                onTriggered: console.log("Open action triggered");
-            }
-            MenuItem {
-                text: qsTr("Exit")
-                onTriggered: Qt.quit();
-            }
-        }
-        Menu {
-            title: qsTr("ECU Controls")
-            MenuItem {
-                text: qsTr("&Open")
-                onTriggered: console.log("ECU Controls");
-            }
-            MenuItem {
-                text: qsTr("Exit")
-                onTriggered: Qt.quit();
-            }
-        }
-        Menu {
-            title: qsTr("Logging")
-            MenuItem {
-                text: qsTr("Logging Setup")
-                onTriggered: console.log("Open action triggered");
-            }
-            MenuItem {
-                text: qsTr("Logging Start")
-
-            }
-            MenuItem {
-                text: qsTr("Logging Stop")
-
-            }
-        }
-    }*/
 }
