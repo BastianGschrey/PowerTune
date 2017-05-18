@@ -48,11 +48,13 @@ Serial::Serial(QObject *parent) :
     modbusDevice(nullptr)
 
 {
+
+
     getPorts();
     m_dashBoard = new DashBoard(this);
     m_decoder = new Decoder(m_dashBoard, this);
     m_appSettings = new AppSettings(this);
-
+    connect(m_decoder,SIGNAL(sig_adaptronicReadFinished()),this,SLOT(AdaptronicStartStream()));
     QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
     if (engine == Q_NULLPTR)
         return;
@@ -66,7 +68,6 @@ void Serial::initSerialPort()
         delete m_serialport;
     m_serialport = new SerialPort(this);
     connect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
-//    connect(this->reply,SIGNAL(finished()),this,SLOT(readyToRead()));
 
 }
 void Serial::getEcus()
@@ -187,17 +188,16 @@ void Serial::readyToRead()
             recvData.clear();
             m_serialport->flush();
             }
-else
-{
+     else
+    {
     qDebug() << "Received data  NOK message"<<requestIndex;
-
-}
     }
+   }
 
     if(ecu == 1)
     {
 
-    qDebug() << "Adaptronic serial Mode";
+    qDebug() << "readytoread() Adaptronic serial Mode";
 
     auto reply = qobject_cast<QModbusReply *>(sender());
     if(!reply)
@@ -712,23 +712,6 @@ void Serial::getFuelBase7()
 // Adaptronic streaming comms
 
 
-void Serial::AdaptronicStartStream()
-{
-auto *reply = modbusDevice->sendReadRequest(QModbusDataUnit(QModbusDataUnit::HoldingRegisters, 4096, 20),1); // read first twenty realtime values
-if (!reply->isFinished())
-    connect(reply, &QModbusReply::finished, this, Serial::readyToRead);
-else
-    delete reply;
-
-
-}
-void Serial::AdaptronicStopStream()
-{
-//
-}
-
-
-
 void Serial::sendRequest(int requestIndex)
 {
     switch (requestIndex){
@@ -925,4 +908,21 @@ void Serial::sendRequest(int requestIndex)
         Serial::getBasic();
         break;
     }
+}
+
+
+
+void Serial::AdaptronicStartStream()
+{
+auto *reply = modbusDevice->sendReadRequest(QModbusDataUnit(QModbusDataUnit::HoldingRegisters, 4096, 20),1); // read first twenty realtime values
+if (!reply->isFinished())
+    connect(reply, &QModbusReply::finished, this, Serial::readyToRead);
+else
+    delete reply;
+
+
+}
+void Serial::AdaptronicStopStream()
+{
+
 }

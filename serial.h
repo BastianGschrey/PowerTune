@@ -107,7 +107,7 @@ public:
 
     //Adaptronic Streaming Comms
 
-    void AdaptronicStartStream();
+
     void AdaptronicStopStream();
 
     QStringList portsNames() const { return m_portsNames; }
@@ -145,9 +145,14 @@ signals:
     void sig_portsNamesChanged(QStringList portsNames);
 
 
+
 public slots:
     void readyToRead();
-    //void openConnection(SerialSetting::Settings p); //open serial connection with settings
+    void AdaptronicStartStream();
+
+
+
+        //void openConnection(SerialSetting::Settings p); //open serial connection with settings
     void sendRequest(int requestIndex);
 
     void setPortsNames(QStringList portsNames)

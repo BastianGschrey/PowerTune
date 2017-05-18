@@ -426,9 +426,10 @@ public slots:
      void decodeAdaptronic(QModbusDataUnit serialdata);
 
 
+
+signals:
+    void sig_adaptronicReadFinished();
+
 };
-
-
-
 
 #endif // DECODER_H

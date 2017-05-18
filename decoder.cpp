@@ -6,6 +6,7 @@
 
 #include "decoder.h"
 #include "dashboard.h"
+#include "serial.h"
 
 #include <QDebug>
 #include <QBitArray>
@@ -527,4 +528,6 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
     m_dashboard->setSecinjpulse(packageADV[20]);
     m_dashboard->setna2(packageADV[21]);
 */
+
+    emit sig_adaptronicReadFinished();
 }
