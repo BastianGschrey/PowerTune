@@ -150,8 +150,13 @@ void Serial::openConnection(const QString &portName, const int &baudRate, const 
 
 void Serial::closeConnection()
 {
+    if(ecu == 0){
     m_serialport->close();
     qDebug() << "Connection closed.";
+    }
+    if(ecu == 1){
+        modbusDevice->disconnectDevice();
+    }
 }
 // Error handling still to be tested
 void Serial::readyToRead()
