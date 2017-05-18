@@ -34,11 +34,6 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal na2 READ Intaketemp WRITE setna2 NOTIFY na2Changed)
     Q_PROPERTY(qreal na2 READ Intaketemp WRITE setna2 NOTIFY na2Changed)
     Q_PROPERTY(qreal InjDuty READ InjDuty WRITE setInjDuty NOTIFY InjDutyChanged)
-
-
-
-//Sensor Info
-
     Q_PROPERTY(qreal pim READ pim WRITE setpim NOTIFY pimChanged)
     Q_PROPERTY(qreal vta1 READ vta1 WRITE setvta1 NOTIFY vta1Changed)
     Q_PROPERTY(qreal vta2 READ vta2 WRITE setvta2 NOTIFY vta2Changed)
@@ -48,22 +43,44 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal fuelt READ fuelt WRITE setfuelt NOTIFY fueltChanged)
     Q_PROPERTY(qreal O2S READ O2S WRITE setO2S NOTIFY O2SChanged)
 
+    // Flags
+
     Q_PROPERTY(qreal Flag1 READ Flag1 WRITE setFlag1 NOTIFY Flag1Changed)
-    Q_PROPERTY(qreal Flag2 READ Flag2 WRITE setFlag1 NOTIFY Flag2Changed)
-    Q_PROPERTY(qreal Flag3 READ Flag3 WRITE setFlag1 NOTIFY Flag3Changed)
-    Q_PROPERTY(qreal Flag4 READ Flag4 WRITE setFlag1 NOTIFY Flag4Changed)
-    Q_PROPERTY(qreal Flag5 READ Flag5 WRITE setFlag1 NOTIFY Flag5Changed)
-    Q_PROPERTY(qreal Flag6 READ Flag6 WRITE setFlag1 NOTIFY Flag6Changed)
-    Q_PROPERTY(qreal Flag7 READ Flag7 WRITE setFlag1 NOTIFY Flag7Changed)
-    Q_PROPERTY(qreal Flag8 READ Flag8 WRITE setFlag1 NOTIFY Flag8Changed)
-    Q_PROPERTY(qreal Flag9 READ Flag9 WRITE setFlag1 NOTIFY Flag9Changed)
-    Q_PROPERTY(qreal Flag10 READ Flag10 WRITE setFlag1 NOTIFY Flag10Changed)
-    Q_PROPERTY(qreal Flag11 READ Flag11 WRITE setFlag1 NOTIFY Flag11Changed)
-    Q_PROPERTY(qreal Flag12 READ Flag12 WRITE setFlag1 NOTIFY Flag12Changed)
-    Q_PROPERTY(qreal Flag13 READ Flag13 WRITE setFlag1 NOTIFY Flag13Changed)
-    Q_PROPERTY(qreal Flag14 READ Flag14 WRITE setFlag1 NOTIFY Flag14Changed)
-    Q_PROPERTY(qreal Flag15 READ Flag15 WRITE setFlag1 NOTIFY Flag15Changed)
-    Q_PROPERTY(qreal Flag16 READ Flag16 WRITE setFlag1 NOTIFY Flag16Changed)
+    Q_PROPERTY(qreal Flag2 READ Flag2 WRITE setFlag2 NOTIFY Flag2Changed)
+    Q_PROPERTY(qreal Flag3 READ Flag3 WRITE setFlag3 NOTIFY Flag3Changed)
+    Q_PROPERTY(qreal Flag4 READ Flag4 WRITE setFlag4 NOTIFY Flag4Changed)
+    Q_PROPERTY(qreal Flag5 READ Flag5 WRITE setFlag5 NOTIFY Flag5Changed)
+    Q_PROPERTY(qreal Flag6 READ Flag6 WRITE setFlag6 NOTIFY Flag6Changed)
+    Q_PROPERTY(qreal Flag7 READ Flag7 WRITE setFlag7 NOTIFY Flag7Changed)
+    Q_PROPERTY(qreal Flag8 READ Flag8 WRITE setFlag8 NOTIFY Flag8Changed)
+    Q_PROPERTY(qreal Flag9 READ Flag9 WRITE setFlag9 NOTIFY Flag9Changed)
+    Q_PROPERTY(qreal Flag10 READ Flag10 WRITE setFlag10 NOTIFY Flag10Changed)
+    Q_PROPERTY(qreal Flag11 READ Flag11 WRITE setFlag11 NOTIFY Flag11Changed)
+    Q_PROPERTY(qreal Flag12 READ Flag12 WRITE setFlag12 NOTIFY Flag12Changed)
+    Q_PROPERTY(qreal Flag13 READ Flag13 WRITE setFlag13 NOTIFY Flag13Changed)
+    Q_PROPERTY(qreal Flag14 READ Flag14 WRITE setFlag14 NOTIFY Flag14Changed)
+    Q_PROPERTY(qreal Flag15 READ Flag15 WRITE setFlag15 NOTIFY Flag15Changed)
+    Q_PROPERTY(qreal Flag16 READ Flag16 WRITE setFlag16 NOTIFY Flag16Changed)
+
+
+    //Adaptronic extra
+
+    Q_PROPERTY(qreal MAP READ MAP WRITE setMAP NOTIFY MAPChanged)
+    Q_PROPERTY(qreal AUXT READ AUXT WRITE setAUXT NOTIFY AUXTChanged)
+    Q_PROPERTY(qreal AFR READ AFR WRITE setAFR NOTIFY AFRChanged)
+    Q_PROPERTY(qreal TPS READ TPS WRITE setTPS NOTIFY TPSChanged)
+    Q_PROPERTY(qreal IdleValue READ IdleValue WRITE setIdleValue NOTIFY IdleValueChanged)
+    Q_PROPERTY(qreal MVSS READ MVSS WRITE setMVSS NOTIFY MVSSChanged)
+    Q_PROPERTY(qreal SVSS READ SVSS WRITE setSVSS NOTIFY SVSSChanged)
+    Q_PROPERTY(qreal Inj1 READ Inj1 WRITE setInj1 NOTIFY Inj1Changed)
+    Q_PROPERTY(qreal Inj2 READ Inj2 WRITE setInj2 NOTIFY Inj2Changed)
+    Q_PROPERTY(qreal Inj3 READ Inj3 WRITE setInj3 NOTIFY Inj3Changed)
+    Q_PROPERTY(qreal Inj4 READ Inj4 WRITE setInj4 NOTIFY Inj4Changed)
+    Q_PROPERTY(qreal Ign1 READ Ign1 WRITE setIgn1 NOTIFY Ign1Changed)
+    Q_PROPERTY(qreal Ign2 READ Ign2 WRITE setIgn2 NOTIFY Ign2Changed)
+    Q_PROPERTY(qreal Ign3 READ Ign3 WRITE setIgn3 NOTIFY Ign3Changed)
+    Q_PROPERTY(qreal Ign4 READ Ign4 WRITE setIgn4 NOTIFY Ign4Changed)
+    Q_PROPERTY(qreal TRIM READ TRIM WRITE setTRIM NOTIFY TRIMChanged)
 
 
 public:
@@ -124,6 +141,26 @@ public:
     void setFlag15(const qreal &Flag15);
     void setFlag16(const qreal &Flag16);
 
+
+    //Adaptronic extra
+
+    void setMAP(const qreal &MAP);
+    void setAUXT(const qreal &AUXT);
+    void setAFR(const qreal &AFR);
+    void setTPS(const qreal &TPS);
+    void setIdleValue(const qreal &IdleValue);
+    void setMVSS(const qreal &MVSS);
+    void setSVSS(const qreal &SVSS);
+    void setInj1(const qreal &Inj1);
+    void setInj2(const qreal &Inj2);
+    void setInj3(const qreal &Inj3);
+    void setInj4(const qreal &Inj4);
+    void setIgn1(const qreal &Ign1);
+    void setIgn2(const qreal &Ign2);
+    void setIgn3(const qreal &Ign3);
+    void setIgn4(const qreal &Ign4);
+    void setTRIM(const qreal &TRIM);
+
     // Advanced Info FD3S
     qreal revs() const;
     qreal Intakepress() const;
@@ -178,6 +215,27 @@ public:
     qreal Flag14() const;
     qreal Flag15() const;
     qreal Flag16() const;
+
+
+
+    //Adaptronic extra
+
+    qreal MAP() const;
+    qreal AUXT() const;
+    qreal AFR() const;
+    qreal TPS() const;
+    qreal IdleValue() const;
+    qreal MVSS() const;
+    qreal SVSS() const;
+    qreal Inj1() const;
+    qreal Inj2() const;
+    qreal Inj3() const;
+    qreal Inj4() const;
+    qreal Ign1() const;
+    qreal Ign2() const;
+    qreal Ign3() const;
+    qreal Ign4() const;
+    qreal TRIM() const;
 
 signals:
 
@@ -238,6 +296,26 @@ signals:
     void Flag16Changed(qreal Flag16);
 
 
+    //Adaptronic extra
+
+    void MAPChanged(qreal MAP);
+    void AUXTChanged(qreal AUXT);
+    void AFRChanged(qreal AFR);
+    void TPSChanged(qreal TPS);
+    void IdleValueChanged(qreal IdleValue);
+    void MVSSChanged(qreal MVSS);
+    void SVSSChanged(qreal SVSS);
+    void Inj1Changed(qreal Inj1);
+    void Inj2Changed(qreal Inj2);
+    void Inj3Changed(qreal Inj3);
+    void Inj4Changed(qreal Inj4);
+    void Ign1Changed(qreal Ign1);
+    void Ign2Changed(qreal Ign2);
+    void Ign3Changed(qreal Ign3);
+    void Ign4Changed(qreal Ign4);
+    void TRIMChanged(qreal TRIM);
+
+
 private:
     // Advanced Info FD3S
     qreal m_revs;
@@ -293,5 +371,25 @@ private:
     qreal m_Flag14;
     qreal m_Flag15;
     qreal m_Flag16;
+
+
+    //Adaptronic extra
+
+    qreal m_MAP;
+    qreal m_AUXT;
+    qreal m_AFR;
+    qreal m_TPS;
+    qreal m_IdleValue;
+    qreal m_MVSS;
+    qreal m_SVSS;
+    qreal m_Inj1;
+    qreal m_Inj2;
+    qreal m_Inj3;
+    qreal m_Inj4;
+    qreal m_Ign1;
+    qreal m_Ign2;
+    qreal m_Ign3;
+    qreal m_Ign4;
+    qreal m_TRIM;
 
 };
