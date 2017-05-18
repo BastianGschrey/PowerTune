@@ -467,7 +467,7 @@ Rectangle {
             anchors.margins: 10
             orientation : Qt.Horizontal
             minorTickmarkCount: 6
-            tickmarkStepSize : 70
+            tickmarkStepSize : 1000
             //labelStepSize: 50
             minimumValue: 0
             maximumValue: 1000
@@ -510,7 +510,7 @@ Rectangle {
             anchors.margins: 10
             orientation : Qt.Horizontal
             minorTickmarkCount: 6
-            tickmarkStepSize : 70
+            tickmarkStepSize : 1000
             //labelStepSize: 50
             minimumValue: 0
             maximumValue: 1000
@@ -553,10 +553,10 @@ Rectangle {
             anchors.margins: 10
             orientation : Qt.Horizontal
             minorTickmarkCount: 6
-            tickmarkStepSize : 70
+            tickmarkStepSize : 1000
             //labelStepSize: 50
             minimumValue: 0
-            maximumValue: 120
+            maximumValue: 1000
 
             value: Dashboard.Inj3
             Behavior on value {
@@ -596,10 +596,10 @@ Rectangle {
             anchors.margins: 10
             orientation : Qt.Horizontal
             minorTickmarkCount: 6
-            tickmarkStepSize : 70
+            tickmarkStepSize : 1000
             //labelStepSize: 50
             minimumValue: 0
-            maximumValue: 120
+            maximumValue: 1000
 
             value: Dashboard.Inj4
             Behavior on value {
@@ -720,7 +720,7 @@ Rectangle {
         height: parent.height /7
         color: "transparent"
         anchors.right: parent.right
-        anchors.top :inj4.bottom
+        anchors.top : battery.bottom
 
         Gauge {
             id: ign1gauge
@@ -840,6 +840,7 @@ Gauge {
         }
     }
 }
+    }
 Rectangle {
     id: ign4
     width: parent.width /3.2
@@ -848,37 +849,36 @@ Rectangle {
     anchors.right: parent.right
     anchors.top :ign3.bottom
 Gauge {
-    id: ign4gauge
-    anchors.fill: parent
-    anchors.margins: 10
-    orientation : Qt.Horizontal
-    minorTickmarkCount: 6
-    tickmarkStepSize : 70
-    //labelStepSize: 50
-    minimumValue: -40
-    maximumValue: 40
+id: ign4gauge
+anchors.fill: parent
+anchors.margins: 10
+orientation : Qt.Horizontal
+minorTickmarkCount: 6
+tickmarkStepSize : 70
+//labelStepSize: 50
+minimumValue: -40
+maximumValue: 40
 
-    value: Dashboard.Ign4
-    Behavior on value {
-        NumberAnimation {
-            duration: 5
-        }
+value: Dashboard.Ign4
+Behavior on value {
+    NumberAnimation {
+        duration: 5
     }
-    Text {
-        text:"IGN4 " + Dashboard.Ign4 + " Deg "
-        font.pixelSize: (parent.height / 3)
-         anchors.top : parent.top
-        font.bold: true
-        font.family: "Eurostile"
-        color: "white"
-        anchors.horizontalCenter: parent.horizontalCenter
-    }
-      style: GaugeStyle {
-        valueBar: Rectangle {
-           implicitWidth:  rev.height /3
+}
+Text {
+    text:"IGN4 " + Dashboard.Ign4 + " Deg "
+    font.pixelSize: (parent.height / 3)
+     anchors.top : parent.top
+    font.bold: true
+    font.family: "Eurostile"
+    color: "white"
+    anchors.horizontalCenter: parent.horizontalCenter
+}
+  style: GaugeStyle {
+    valueBar: Rectangle {
+       implicitWidth:  rev.height /3
 
-            color: Qt.rgba(ign4gauge.value / ign4gauge.maximumValue, 0, 1 - ign4gauge.value / ign1gauge.maximumValue, 1)
-        }
+        color: Qt.rgba(ign4gauge.value / ign4gauge.maximumValue, 0, 1 - ign4gauge.value / ign4gauge.maximumValue, 1)
     }
 }
 }
