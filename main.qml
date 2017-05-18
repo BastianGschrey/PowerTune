@@ -8,8 +8,8 @@ ApplicationWindow {
 
 
     visible: true
-    width: 800
-    height: 480
+    minimumWidth: 800
+    minimumHeight: 480
     // visibility: "FullScreen"
     title: qsTr("PowerTune")
     color: "black"
