@@ -79,14 +79,14 @@ Rectangle {
             minimumValue: 0
             maximumValue: 300
 
-            value: Dashboard.pim
+            value: Dashboard.MAP
             Behavior on value {
                 NumberAnimation {
                     duration: 5
                 }
             }
             Text {
-                text:"MAP " + Dashboard.pim + "kpa "
+                text:"MAP " + Dashboard.MAP + "kpa "
                 font.pixelSize: (parent.height / 3)
                  anchors.top : parent.top
                 font.bold: true
