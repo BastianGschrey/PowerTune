@@ -1,5 +1,5 @@
-import QtQuick 2.0
-import QtQuick.Controls 1.4
+import QtQuick 2.6
+import QtQuick.Controls 2.0
 
 Item {
     Row {
@@ -15,7 +15,7 @@ Item {
             ComboBox {
                 id: serialName
                 width: 200
-                editable: false
+
                 model: Serial.portsNames
             }
             // [1]
@@ -23,7 +23,7 @@ Item {
             ComboBox {
                 id: baudRate
                 width: 200
-                editable: false
+
                 model: [
                     1200, 2400, 2400,
                     4800, 9600, 19200,
@@ -37,7 +37,7 @@ Item {
             ComboBox {
                 id: parity
                 width: 200
-                editable: false
+
                 model: [
                     "No Parity", "Even Parity", "Odd Parity",
                     "Space Parity", "Mark Parity" ]
@@ -50,7 +50,7 @@ Item {
             ComboBox {
                 id: databits
                 width: 200
-                editable: false
+
                 model: [ "Data 5", "Data 6", "Data 7", "Data 8" ]
                 property bool initialized: false
                 onCurrentIndexChanged: if (initialized) AppSettings.setDataBits( currentIndex )
@@ -61,7 +61,7 @@ Item {
             ComboBox {
                 id: stopBits
                 width: 200
-                editable: false
+
                 model: [ "One stop", "Two Stop", "One and half stop" ]
                 property bool initialized: false
                 onCurrentIndexChanged: if (initialized) AppSettings.setStopBits( currentIndex )
@@ -72,7 +72,7 @@ Item {
             ComboBox {
                 id: flowcontrol
                 width: 200
-                editable: false
+
                 model: [ "No flow control", "Hardware control", "Software control" ]
                 property bool initialized: false
                 onCurrentIndexChanged: if (initialized) AppSettings.setFlowControl( currentIndex )
@@ -83,7 +83,7 @@ Item {
             ComboBox {
                 id: ecuSelect
                 width: 200
-                editable: false
+
                 model: [ "PowerFC", "Adaptronic"]
                 property bool initialized: false
                 onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
