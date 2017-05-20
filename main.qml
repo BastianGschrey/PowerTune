@@ -1,6 +1,6 @@
-import QtQuick 2.3
+import QtQuick 2.6
 import QtQuick.Window 2.2
-import QtQuick.Controls 1.4
+import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
 import com.powertune 1.0
 
@@ -14,40 +14,45 @@ ApplicationWindow {
     title: qsTr("PowerTune")
     color: "black"
 
-    TabView {
-        id: tabView
+//Pane {
+//    id: pane
+
+    SwipeView {
+        id: view
+
+        currentIndex: 1
         anchors.fill: parent
-        Tab {
-            title: "Dashboard"
+
+        Item {
+            id: firstPage
             Dashboard{}
         }
-        Tab {
-            title: "Adaptronic"
-            DashAdaptronic{}
-        }
-        Tab {
-            title: "Advanced Info"
+        Item {
+            id: secondPage
             Advanced{}
         }
-
-        Tab {
-            title: "Imperial"
-            Dashboard_Imperial{}
-        }
-
-        Tab {
-            title: "Half Gauges Metric"
+        Item {
+            id: thirdPage
             HalfGauges_metric{}
         }
-        Tab {
-            title: "Serial settings"
-            SerialSettings{}
+        Item {
+            id: forthPage
+            DashAdaptronic{}
         }
-
-
-
-
+        Item {
+            id: fifthPage
+            Settings{}
+        }
     }
 
 
+    PageIndicator {
+        id: indicator
+
+        count: view.count
+        currentIndex: view.currentIndex
+
+        anchors.bottom: view.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+    }
 }
