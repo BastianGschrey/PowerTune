@@ -1,5 +1,11 @@
 import QtQuick 2.6
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.1
+import QtGraphicalEffects 1.0
+
+Rectangle {
+    width: parent.width
+    height: parent.height
+    color: "grey"
 
 Item {
     Row {
@@ -91,6 +97,11 @@ Item {
             }
         }
 
+        Grid {
+            rows: 10
+            columns: 2
+            spacing: 5
+
         Button {
             text: "Connect"
             onClicked: {
@@ -116,6 +127,8 @@ Item {
                 Qt.quit()
             }
         }
+        }
     }
+}
 }
 

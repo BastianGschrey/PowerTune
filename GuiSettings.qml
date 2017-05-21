@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Controls 1.4
+import QtQuick.Controls 2.1
 
 Item {
     Row {
@@ -14,7 +14,6 @@ Text { text: "Gauge 1"; width: 200}
 ComboBox {
     id: gauge1
     width: 200
-    editable: false
     model: [
         "HalfGaugeWaterDegC", "HalfGaugeWaterDegF" ]
     property bool initialized: false
