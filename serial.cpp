@@ -119,8 +119,8 @@ void Serial::openConnection(const QString &portName, const int &baudRate, const 
      m_serialport->setParity(QSerialPort::NoParity);
      m_serialport->setDataBits(static_cast<QSerialPort::DataBits>(dataBits + 5));
      m_serialport->setStopBits(static_cast<QSerialPort::StopBits>(stopBits + 1));
-     m_serialport->setFlowControl(static_cast<QSerialPort::FlowControl>(flowControl));
-
+     //m_serialport->setFlowControl(static_cast<QSerialPort::FlowControl>(flowControl));
+     m_serialport->setFlowControl(QSerialPort::NoFlowControl);
 
      qDebug() << "Try to open SerialPort:";
      if(m_serialport->open(QIODevice::ReadWrite) == false)
