@@ -113,8 +113,10 @@ void Serial::openConnection(const QString &portName, const int &baudRate, const 
      initSerialPort();
 
      m_serialport->setPortName(portName);
-     m_serialport->setBaudRate(baudRate);
-     m_serialport->setParity(parity);
+     //m_serialport->setBaudRate(baudRate);
+     m_serialport->setBaudRate(QSerialPort::Baud57600);
+     //m_serialport->setParity(parity);
+     m_serialport->setParity(QSerialPort::NoParity);
      m_serialport->setDataBits(static_cast<QSerialPort::DataBits>(dataBits + 5));
      m_serialport->setStopBits(static_cast<QSerialPort::StopBits>(stopBits + 1));
      m_serialport->setFlowControl(static_cast<QSerialPort::FlowControl>(flowControl));
@@ -136,7 +138,6 @@ void Serial::openConnection(const QString &portName, const int &baudRate, const 
     //Adaptronic    
     if (ecuSelect == 1)
     {
-    qDebug() << "Initial request to Adaptronic";
     modbusDevice = new QModbusRtuSerialMaster(this);
     modbusDevice->setConnectionParameter(QModbusDevice::SerialPortNameParameter,portName);
     modbusDevice->setConnectionParameter(QModbusDevice::SerialBaudRateParameter,57600);
@@ -201,8 +202,6 @@ void Serial::readyToRead()
 
     if(ecu == 1)
     {
-
-    qDebug() << "readytoread() Adaptronic serial Mode";
 
     auto reply = qobject_cast<QModbusReply *>(sender());
     if(!reply)
