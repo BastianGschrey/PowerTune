@@ -921,7 +921,7 @@ void Serial::AdaptronicStartStream()
 {
 auto *reply = modbusDevice->sendReadRequest(QModbusDataUnit(QModbusDataUnit::HoldingRegisters, 4096, 21),1); // read first twenty realtime values
 if (!reply->isFinished())
-    connect(reply, &QModbusReply::finished, this, Serial::readyToRead);
+    connect(reply, &QModbusReply::finished, this,&Serial::readyToRead);
 else
     delete reply;
 
