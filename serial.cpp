@@ -112,15 +112,10 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect)
      initSerialPort();
 
      m_serialport->setPortName(portName);
-     //m_serialport->setBaudRate(baudRate);
      m_serialport->setBaudRate(QSerialPort::Baud57600);
-     //m_serialport->setParity(parity);
      m_serialport->setParity(QSerialPort::NoParity);
-     //m_serialport->setDataBits(static_cast<QSerialPort::DataBits>(dataBits + 5));
      m_serialport->setDataBits(QSerialPort::Data8);
      m_serialport->setStopBits(QSerialPort::OneStop);
-     //m_serialport->setStopBits(static_cast<QSerialPort::StopBits>(stopBits + 1));
-     //m_serialport->setFlowControl(static_cast<QSerialPort::FlowControl>(flowControl));
      m_serialport->setFlowControl(QSerialPort::NoFlowControl);
 
      qDebug() << "Try to open SerialPort:";

@@ -105,8 +105,6 @@ Item {
         Button {
             text: "Connect"
             onClicked: {
-                //Serial.openConnection(serialName.currentText, baudRate.currentText, parity.currentIndex,
-                //                      databits.currentIndex, stopBits.currentIndex, flowcontrol.currentIndex, ecuSelect.currentIndex)
                 Serial.openConnection(serialName.currentText, ecuSelect.currentIndex)
             }
         }
