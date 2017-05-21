@@ -16,7 +16,7 @@ Rectangle {
 
 
     Rectangle {
-        width: parent.width /5
+        width: parent.width /6
         height: parent.height /2
         color: "transparent"
         anchors.horizontalCenter: parent.horizontalCenter
@@ -66,7 +66,7 @@ Rectangle {
 
 
     Rectangle {
-        width: parent.width /5
+        width: parent.width /6
         height: parent.height /2
         color: "transparent"
         anchors.horizontalCenter: parent.horizontalCenter

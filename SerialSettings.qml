@@ -23,8 +23,8 @@ Item {
                 width: 200
 
                 model: Serial.portsNames
-            }
-            // [1]
+           }
+/*          // [1]
             Text { text: "Baud rate:"; width: 200}
             ComboBox {
                 id: baudRate
@@ -84,8 +84,8 @@ Item {
                 onCurrentIndexChanged: if (initialized) AppSettings.setFlowControl( currentIndex )
                 Component.onCompleted: { currentIndex = AppSettings.getFlowControl(); initialized = true }
             }
-
-            Text { text: "ECU (for future use):" }
+*/
+            Text { text: "ECU Selection:" }
             ComboBox {
                 id: ecuSelect
                 width: 200
