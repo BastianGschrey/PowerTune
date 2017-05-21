@@ -218,7 +218,7 @@ Rectangle {
 */
 
 
-                Needle90Left {
+                HalfNeedle {
                     //Needle for the positive boost display
                     anchors.verticalCenterOffset: 0
                     anchors.centerIn: parent

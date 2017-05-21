@@ -1,6 +1,6 @@
 import QtQuick 2.6
 import QtQuick.Window 2.2
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.1
 import com.powertune 1.0
 
@@ -30,6 +30,18 @@ ApplicationWindow {
         Item {
             id: secondPage
             Advanced{}
+        }
+        Item {
+
+            Dash1{}
+        }
+        Item {
+
+            Dash2{}
+        }
+        Item {
+
+            Dashboard_Imperial{}
         }
         Item {
             id: thirdPage
