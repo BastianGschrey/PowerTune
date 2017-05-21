@@ -20,7 +20,7 @@ ApplicationWindow {
     SwipeView {
         id: view
 
-        currentIndex: 1
+        currentIndex: 0
         anchors.fill: parent
 
         Item {
