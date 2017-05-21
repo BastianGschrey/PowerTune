@@ -100,8 +100,7 @@ void Serial::clear() const
     m_serialport->clear();
 }
 //function to open serial port
-void Serial::openConnection(const QString &portName, const int &baudRate, const int &parity,
-                            const int &dataBits, const int &stopBits, const int &flowControl, const int &ecuSelect)
+void Serial::openConnection(const QString &portName, const int &ecuSelect)
 {
 
     ecu = ecuSelect;
@@ -117,8 +116,10 @@ void Serial::openConnection(const QString &portName, const int &baudRate, const 
      m_serialport->setBaudRate(QSerialPort::Baud57600);
      //m_serialport->setParity(parity);
      m_serialport->setParity(QSerialPort::NoParity);
-     m_serialport->setDataBits(static_cast<QSerialPort::DataBits>(dataBits + 5));
-     m_serialport->setStopBits(static_cast<QSerialPort::StopBits>(stopBits + 1));
+     //m_serialport->setDataBits(static_cast<QSerialPort::DataBits>(dataBits + 5));
+     m_serialport->setDataBits(QSerialPort::Data8);
+     m_serialport->setStopBits(QSerialPort::OneStop);
+     //m_serialport->setStopBits(static_cast<QSerialPort::StopBits>(stopBits + 1));
      //m_serialport->setFlowControl(static_cast<QSerialPort::FlowControl>(flowControl));
      m_serialport->setFlowControl(QSerialPort::NoFlowControl);
 
