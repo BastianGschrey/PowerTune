@@ -497,16 +497,13 @@ void Decoder::decodeFuelInjectors(QByteArray serialdata)
 
 void Decoder::decodeAdaptronic(QModbusDataUnit unit)
 {
-    m_dashboard->setSpeed(unit.value(10));
-
+    m_dashboard->setSpeed(unit.value(10)); // <-This is for the "main" speedo
     m_dashboard->setRevs(unit.value(0));
     m_dashboard->setMAP(unit.value(1));
     m_dashboard->setIntaketemp(unit.value(2));
     m_dashboard->setWatertemp(unit.value(3));
     m_dashboard->setAUXT(unit.value(4));
     m_dashboard->setAFR(unit.value(5)/2570.00);
-    qDebug() <<  unit.value(1);
-
     m_dashboard->setKnock(unit.value(6)/256);
     m_dashboard->setTPS(unit.value(7));
     m_dashboard->setIdleValue(unit.value(8));
