@@ -35,6 +35,7 @@
 
 int requestIndex = 0; //ID for requested data type
 int ecu; //0=apex, 1=adaptronic;
+int interface; // 0=fcHako, 1=fc-datalogIt
 int Bytesexpected = 500;
 //reply = new QModbusReply;
 
@@ -100,10 +101,12 @@ void Serial::clear() const
     m_serialport->clear();
 }
 //function to open serial port
-void Serial::openConnection(const QString &portName, const int &ecuSelect)
+void Serial::openConnection(const QString &portName, const int &ecuSelect, const int &interfaceSelect)
 {
 
     ecu = ecuSelect;
+    interface = interfaceSelect;
+
 
     //Apexi
     if (ecuSelect == 0)

@@ -118,7 +118,7 @@ Item {
         Button {
             text: "Connect"
             onClicked: {
-                Serial.openConnection(serialName.currentText, ecuSelect.currentIndex)
+                Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex)
             }
         }
         Button {
