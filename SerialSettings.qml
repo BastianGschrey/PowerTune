@@ -95,6 +95,19 @@ Item {
                 onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
                 Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
             }
+            Text {
+                id: textinterfaceSelect
+                visible: { (ecuSelect.currentIndex == "1") ? false: true; }
+                text: "PowerFC Interface:" }
+            ComboBox {
+                id: interfaceSelect
+                visible: { (ecuSelect.currentIndex == "1") ? false: true; }
+                width: 200
+                model: [ "FcHako", "Datalogit"]
+                property bool initialized: false
+                onCurrentIndexChanged: if (initialized) AppSettings.setInterface( currentIndex )
+                Component.onCompleted: { currentIndex = AppSettings.getInterface(); initialized = true }
+            }
         }
 
         Grid {
@@ -126,8 +139,13 @@ Item {
                 Qt.quit()
             }
         }
+        CheckBox {
+            text: qsTr("Autoconnect at startup")
+            checked: true
+        }
         }
     }
 }
 }
+
 
