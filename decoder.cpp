@@ -170,6 +170,20 @@ void Decoder::decodeAux(QByteArray serialdata)
     //    ui->txtAuxConsole->append(map[25] + " " + QString::number(packageAux[3]));
 }
 
+void Decoder::decodeAux2(QByteArray serialdata)
+{
+    fc_aux2_info_t* info=reinterpret_cast<fc_aux2_info_t*>(serialdata.data());
+
+
+    packageAux2[0] = mul[29] * info->AN1 + add[29];
+    packageAux2[1] = mul[30] * info->AN2 + add[30];
+    packageAux2[2] = mul[31] * info->AN3 + add[31];
+    packageAux2[3] = mul[32] * info->AN4 + add[32];
+    packageAux2[4] = mul[29] * info->AN5 + add[29];
+    packageAux2[5] = mul[30] * info->AN6 + add[30];
+    packageAux2[6] = mul[31] * info->AN7 + add[31];
+    packageAux2[7] = mul[32] * info->AN8 + add[32];
+}
 void Decoder::decodeMap(QByteArray serialdata)
 {
     fc_map_info_t* info=reinterpret_cast<fc_map_info_t*>(serialdata.data());

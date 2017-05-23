@@ -93,6 +93,23 @@ private:
         fc_aux_info_t parse(const QByteArray &);
     };
 
+    double packageAux2[8];
+    struct fc_aux2_info_t{
+
+        quint16 requesttype;
+        quint8 AN1;
+        quint8 AN2;
+        quint8 AN3;
+        quint8 AN4;
+        quint8 AN5;
+        quint8 AN6;
+        quint8 AN7;
+        quint8 AN8;
+        quint8 checksum;
+
+        fc_aux2_info_t parse(const QByteArray &);
+    };
+
     double packageBasic[22];
 
     struct fc_Basic_info_t{
@@ -405,6 +422,7 @@ public slots:
      void decodeAdv(QByteArray serialdata);
      void decodeSensor(QByteArray serialdata);
      void decodeAux(QByteArray serialdata);
+     void decodeAux2(QByteArray serialdata);
      void decodeMap(QByteArray serialdata);
      void decodeBasic(QByteArray serialdata);
      void decodeRevIdle(QByteArray serialdata);

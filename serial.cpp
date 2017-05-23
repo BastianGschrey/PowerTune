@@ -231,6 +231,7 @@ void Serial::readData(QByteArray serialdata)
             if(serialdata.length() == 33 && requesttype == 0xF0){m_decoder->decodeAdv(serialdata);}
             if(serialdata.length() == 21 && requesttype == 0xDE){m_decoder->decodeSensor(serialdata);}
             if(serialdata.length() == 7 && requesttype == 0x00){m_decoder->decodeAux(serialdata);}
+            if(serialdata.length() == 11 && requesttype == 0x00){m_decoder->decodeAux2(serialdata);}
             if(serialdata.length() == 5 && requesttype == 0xDB){m_decoder->decodeMap(serialdata);}
             if(serialdata.length() == 23 && requesttype == 0xDA){m_decoder->decodeBasic(serialdata);}
             if(serialdata.length() == 17 && requesttype == 0xB8){m_decoder->decodeRevIdle(serialdata);}
@@ -300,7 +301,10 @@ void Serial::getAux()
 {
     m_serialport->write(QByteArray::fromHex("0002FD"));
     m_serialport->flush();
-    Bytesexpected = 7;
+    if (interface == 0) // FcHako(4 Analog inputs)
+    {Bytesexpected = 7;}
+    if (interface == 1) // Datalogit (8 Analog inputs)
+    {Bytesexpected = 11;}
     m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec)
 
 }
