@@ -53,7 +53,7 @@ ApplicationWindow {
         }
         Item {
             id: fifthPage
-            SerialSettings{}
+            Settings{}
         }
     }
 
