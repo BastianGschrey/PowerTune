@@ -27,6 +27,9 @@ public:
     Q_INVOKABLE int getECU();
     Q_INVOKABLE void setECU(const int &arg);
 
+    Q_INVOKABLE int getInterface();
+    Q_INVOKABLE void setInterface(const int &arg);
+
 private:
     void setValue(const QString &key, const QVariant &value);
     QVariant getValue(const QString &key);

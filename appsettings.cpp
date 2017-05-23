@@ -68,6 +68,17 @@ void AppSettings::setECU(const int &arg)
     setValue("serial/ECU", arg);
 }
 
+int AppSettings::getInterface()
+{
+    return getValue("serial/Interface").toInt();
+
+}
+
+void AppSettings::setInterface(const int &arg)
+{
+    setValue("serial/Interface", arg);
+}
+
 
 void AppSettings::setValue(const QString &key, const QVariant &value)
 {
