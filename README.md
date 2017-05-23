@@ -6,7 +6,7 @@ Apexi Power FC :
 -FD3S
 
 Adaptronic Select :
--FD3s
+All ECUs of select Series
 
 Testet Platforms :
 
