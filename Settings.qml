@@ -4,6 +4,10 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.1
 
+Rectangle {
+    width: parent.width
+    height: parent.height
+    color: "grey"
 
 TabView {
     id: tabView
@@ -13,7 +17,12 @@ TabView {
         SerialSettings{}
     }
     Tab {
+        title: "Decoding"
+        DecodingSettings{}
+    }
+    Tab {
         title: "Gui"
         GuiSettings{}
     }
+}
 }

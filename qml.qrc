@@ -42,5 +42,6 @@
         <file>Dashboard_Imperial.qml</file>
         <file>SpeedGaugeInnerRing_Imperial.qml</file>
         <file>DashAdaptronic.qml</file>
+        <file>DecodingSettings.qml</file>
     </qresource>
 </RCC>
