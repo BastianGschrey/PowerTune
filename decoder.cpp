@@ -14,6 +14,7 @@
 
 QByteArray serialdata;
 QByteArray fullFuelBase;
+int Model;
 
 
 double mul[80] = FC_INFO_MUL;  // required values for calculation from raw to readable values for Advanced Sensor info
@@ -361,7 +362,7 @@ void Decoder::decodeInjcorr(QByteArray serialdata, quint8 column)
 void Decoder::decodeFuelBase(QByteArray serialdata, quint8 package)
 {
     quint8 index = 0;
-    qDebug() << "add package!";
+    //qDebug() << "add package!";
 
     for(quint8 index = 2; index < 102; index++)
     {
@@ -378,10 +379,10 @@ void Decoder::decodeFuelBase(QByteArray serialdata, quint8 package)
             {
 //                ui->tableFuelBase->setItem(row, column, new QTableWidgetItem(QString::number(info->fuelBase[index])));
                 index++;
-                qDebug() << row << " : " << column;
+               // qDebug() << row << " : " << column;
             }
         }
-        qDebug() << fullFuelBase.length();
+        //qDebug() << fullFuelBase.length();
     }
 }
 
@@ -439,7 +440,43 @@ void Decoder::decodeVersion(QByteArray serialdata)
 }
 void Decoder::decodeInit(QByteArray serialdata)
 {
+    qDebug() << "Model name ="<<(QString(serialdata).mid(2,8));
+
+       //Mazda
+       if (QString(serialdata).mid(2,8) == "13B-REW ")
+          {
+           Model =1;
+       }
+       //Toyota
+       if (QString(serialdata).mid(2,8)== "1ZZ-FRE " || "2jZ-GTE1" || "2ZZ-GE  " || "3S-GE   " || "3S-GTE3 " || "3E-FTE2 ")
+          {
+           Model =2;
+       }
+       //Nissan
+       if (QString(serialdata).mid(2,8)== "RB20DET " || "RB26DETT" || "SR20DET1" || "CA18DET " || "RB25-DE ")
+          {
+           Model =3;
+       }
+/*
+       //Subaru
+       if ((QString(serialdata).mid(2,8)== "")
+          {
+           Model =4;
+       }
+       //Honda
+       if ((QString(serialdata).mid(2,8)==== "EJ20K   ")
+          {
+           Model =5;
+       }
+       //Mitsubishi
+       if ((QString(serialdata).mid(2,8)==== "")
+          {
+           Model =6;
+       }
+
+*/
 //    ui->linePlatform->setText (QString(serialdata).mid(2,8));
+qDebug() << "Model ="<<Model;
 }
 
 

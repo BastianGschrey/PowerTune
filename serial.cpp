@@ -196,8 +196,8 @@ void Serial::readyToRead()
 // Pass OK Message on for proccessing
         if(Bytesexpected == recvData.size()) //if the received data lenght equals the message lenght from lenght byte + // Identifier byte (correct message lenght received )
                 {
-                qDebug() << "Received data OK"<<Bytesexpected;
-                qDebug() << "time taken (ms) "<<(QTime::currentTime());
+             //   qDebug() << "Received data OK"<<Bytesexpected;
+             //   qDebug() << "time taken (ms) "<<(QTime::currentTime());
                 if(requestIndex <= 61){requestIndex++;}
                 else{requestIndex = 58;}
                 readData(recvData);
@@ -206,8 +206,8 @@ void Serial::readyToRead()
                 }
          else
         {
-        qDebug() << "Received data  NOK message"<<requestIndex;
-        qDebug() << "Incorrect message received:"<< recvData.toHex();
+       // qDebug() << "Received data  NOK message"<<requestIndex;
+       // qDebug() << "Incorrect message received:"<< recvData.toHex();
         Serial::sendRequest(requestIndex);
         }
        }
@@ -234,7 +234,7 @@ void Serial::readData(QByteArray serialdata)
     {
         //Power FC Decode
         quint8 requesttype = serialdata[0];
-        qDebug() << "Received message :"<< serialdata.toHex();
+        //qDebug() << "Received message :"<< serialdata.toHex();
         //quint8 requesttypeAdaptronic = serialdata[1];
 
         if(serialdata[1] + 1 == serialdata.length())
@@ -305,7 +305,7 @@ void Serial::sendRequest(int requestIndex)
     switch (requestIndex){
 
     case 0:
-        //not documented (FC Edit sends this always as a first request
+        //not documented
         Serial::writeRequestPFC(QByteArray::fromHex("F40209"));
         break;
     case 1:
