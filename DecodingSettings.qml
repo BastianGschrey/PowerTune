@@ -25,6 +25,10 @@ ComboBox {
  //   Component.onCompleted: { currentIndex = AppSettings.getUnits(); initialized = true }
         }
 
+TextField {
+    placeholderText: qsTr("Value @ 0V")
+}
+
         }
     }
 }

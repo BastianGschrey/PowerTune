@@ -139,10 +139,11 @@ Item {
                 Qt.quit()
             }
         }
-        CheckBox {
+/*          CheckBox {
             text: qsTr("Autoconnect at startup")
             checked: true
         }
+*/
         }
     }
 }

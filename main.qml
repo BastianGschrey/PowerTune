@@ -17,6 +17,8 @@ ApplicationWindow {
 //Pane {
 //    id: pane
 
+
+
     SwipeView {
         id: view
 
@@ -53,9 +55,10 @@ ApplicationWindow {
         }
         Item {
             id: fifthPage
-            Settings{}
+            SerialSettings{}
         }
     }
+
 
 
     PageIndicator {

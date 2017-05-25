@@ -48,62 +48,8 @@ public slots:
     void getEcus();
 
 public:
-    void getAdvData();
-    void getAux();
-    void getSensorData();
-    void getMapIndices();
-    void getBasic();
-    void getRevIdle();
-    void getSensorStrings();
-    void getPimStrInjA();
-    void getVersion();
-    void getMapRef();
-    void getLeadign1();
-    void getLeadign2();
-    void getLeadign3();
-    void getLeadign4();
-    void getTrailIgn1();
-    void getTrailIgn2();
-    void getTrailIgn3();
-    void getTrailIgn4();
-    void getInitPlatform();
-    void getInjOverlap();
-    void getInjvsFuelT();
-    void getTurboTrans();
-    void getOilervsWaterT();
-    void getFanvsWater();
-    void getInjcorr1();
-    void getInjcorr2();
-    void getInjcorr3();
-    void getInjcorr4();
-    void getFuelInj();
-    void getCranking();
-    void getWaterTcorr();
-    void getInjvsWaterBoost();
-    void getInjvsAirTBoost();
-    void getInjPrimaryLag();
-    void getAccInj();
-    void getInjvsAccel();
-    void getIgnvsAircold();
-    void getIgnvsWater();
-    void getIgnvsAirwarm();
-    void getLIgnvsRPM();
-    void getIgnvsBatt();
-    void getBoostvsIgn();
-    void getTrailIgnvsRPM();
-    void getInjSecLagvsBattV();
-    void getInjWarn();
-    void getKnockWarn();
-    void getO2Feedback();
-    void getBoostcontrol();
-    void getSettingProtections();
-    void getTunerString();
-    void getInjvsAirTemp();
-    void getInjvsTPS();
-    void getIgnvsTPS();
-    void getPIMScaleOffset();
-    void getWarConStrFlags();
-    void getNotdocumented();
+    void writeRequestPFC(QByteArray);
+
 
     //Adaptronic Streaming Comms
 
@@ -128,15 +74,6 @@ private:
 
 
     QModbusDataUnit readRequest() const;
-
-    void getFuelBase0();
-    void getFuelBase1();
-    void getFuelBase2();
-    void getFuelBase3();
-    void getFuelBase4();
-    void getFuelBase5();
-    void getFuelBase6();
-    void getFuelBase7();
 
 signals:
     void sig_finished();

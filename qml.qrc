@@ -43,5 +43,6 @@
         <file>SpeedGaugeInnerRing_Imperial.qml</file>
         <file>DashAdaptronic.qml</file>
         <file>DecodingSettings.qml</file>
+        <file>Fullgauge180Needle.qml</file>
     </qresource>
 </RCC>

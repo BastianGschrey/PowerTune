@@ -104,13 +104,18 @@ Rectangle {
         CircularGauge {
             height: parent.height
             width: height
-            value: Dashboard.pim
+            value: Dashboard.pim * 14.22334
             anchors.verticalCenter: parent.verticalCenter
-            minimumValue: -30
+            minimumValue: 0
             maximumValue: 30
 
-            style: DashboardGaugeStyle {}
+
+            style: DashboardGaugeStyle {
+                minimumValueAngle: -90
+                maximumValueAngle: -180
+                labelStepSize: 5}
         }
+
         color: "transparent"
         //id: boost
         height: width
@@ -119,7 +124,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         y: (parent.height / 5)
 
-        GaugeNeedle {
+        Fullgauge180Needle {
         //    id: speedoNeedle
 
                  anchors.verticalCenterOffset: 0
@@ -130,7 +135,7 @@ Rectangle {
 
 
             BoostGaugeInnerRing   {
-            revolutions: Math.round(Dashboard.pim) //Dashboard.speed
+            revolutions: Math.round(Dashboard.pim * 14.22334) //Dashboard.speed
        }
     }
 }
