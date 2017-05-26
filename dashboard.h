@@ -60,6 +60,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal Flag14 READ Flag14 WRITE setFlag14 NOTIFY Flag14Changed)
     Q_PROPERTY(qreal Flag15 READ Flag15 WRITE setFlag15 NOTIFY Flag15Changed)
     Q_PROPERTY(qreal Flag16 READ Flag16 WRITE setFlag16 NOTIFY Flag16Changed)
+    Q_PROPERTY(QString Platform READ Platform WRITE setPlatform NOTIFY PlatformChanged)
 
 
     //Adaptronic extra
@@ -140,6 +141,8 @@ public:
     void setFlag15(const qreal &Flag15);
     void setFlag16(const qreal &Flag16);
 
+    void setPlatform(const QString &Platform);
+
 
     //Adaptronic extra
 
@@ -214,6 +217,7 @@ public:
     qreal Flag14() const;
     qreal Flag15() const;
     qreal Flag16() const;
+    QString Platform() const;
 
 
 
@@ -275,6 +279,7 @@ signals:
     void fueltChanged(qreal fuelt);
     void O2SChanged(qreal O2S);
 
+
     //Flags
 
     void Flag1Changed(qreal Flag1);
@@ -293,6 +298,8 @@ signals:
     void Flag14Changed(qreal Flag14);
     void Flag15Changed(qreal Flag15);
     void Flag16Changed(qreal Flag16);
+
+    void PlatformChanged(QString Platform);
 
 
     //Adaptronic extra
@@ -370,6 +377,8 @@ private:
     qreal m_Flag14;
     qreal m_Flag15;
     qreal m_Flag16;
+
+    QString m_Platform;
 
 
     //Adaptronic extra

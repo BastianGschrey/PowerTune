@@ -462,6 +462,17 @@ void DashBoard::setFlag16(const qreal &Flag16)
     emit Flag16Changed(Flag16);
 }
 
+void DashBoard::setPlatform(const QString &Platform)
+{
+    if (m_Platform == Platform)
+        return;
+    m_Platform = Platform;
+    emit PlatformChanged(Platform);
+}
+
+
+
+
 //Adaptronic extra
 
 
@@ -654,6 +665,8 @@ qreal DashBoard::Flag13() const { return m_Flag13; }
 qreal DashBoard::Flag14() const { return m_Flag14; }
 qreal DashBoard::Flag15() const { return m_Flag15; }
 qreal DashBoard::Flag16() const { return m_Flag16; }
+
+QString DashBoard::Platform() const { return m_Platform; }
 
 //Adaptronic extra
 

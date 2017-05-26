@@ -477,6 +477,7 @@ void Decoder::decodeInit(QByteArray serialdata)
 */
 //    ui->linePlatform->setText (QString(serialdata).mid(2,8));
 qDebug() << "Model ="<<Model;
+ m_dashboard->setPlatform(QString(serialdata).mid(2,8));
 }
 
 
@@ -548,6 +549,8 @@ void Decoder::decodeFuelInjectors(QByteArray serialdata)
 
 void Decoder::decodeAdaptronic(QModbusDataUnit unit)
 {
+    qreal realBoost;
+
     m_dashboard->setSpeed(unit.value(10)); // <-This is for the "main" speedo
     m_dashboard->setRevs(unit.value(0));
     m_dashboard->setMAP(unit.value(1));
@@ -598,6 +601,18 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
     m_dashboard->setSecinjpulse(packageADV[20]);
     m_dashboard->setna2(packageADV[21]);
 */
+    // Convert absolute pressure in KPA to relative pressure mmhg/Kg/cm2
+
+        if ((unit.value(1)) > 103) // while boost pressure is positive multiply by 0.01 to show kg/cm2
+        {
+            realBoost = ((unit.value(1))-103) * 0.01;
+        }
+        else if ((unit.value(1)) < 103) // while boost pressure is positive multiply by 0.01 to show kg/cm2
+        {
+            realBoost = ((unit.value(1))-103) * 7.50061561303;
+        }
+
+    m_dashboard->setpim(realBoost);
 
     emit sig_adaptronicReadFinished();
 }

@@ -15,6 +15,7 @@ Rectangle {
 
 
 
+
     Rectangle {
         width: parent.width /6
         height: parent.height /2

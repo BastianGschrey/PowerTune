@@ -76,7 +76,7 @@ Rectangle {
             id: waterneedle
             anchors.verticalCenterOffset: 0
             anchors.centerIn: parent
-            value: Dashboard.Watertemp / 2.641509433962264
+            value: Dashboard.Watertemp / 2.692307692307692
 
 
         }
@@ -143,24 +143,28 @@ Rectangle {
             HalfNeedle {
                 anchors.verticalCenterOffset: 0
                 anchors.centerIn: parent
-                value: Dashboard.Intaketemp / 2.641509433962264
+                value: Dashboard.Intaketemp / 2.692307692307692
 
 
             }
 
         }
-        //Gauge 3 top middle Boost Gauge (not yet finished)
+        //Gauge 3 top middle Boost Gauge
             Rectangle {
                 CircularGauge {
                     height: parent.height
                     width: parent.width
-                    value: Dashboard.speed
+                    value: Dashboard.pim
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.top: parent.top
-                    //minimumValue: 0
-                    //maximumValue: 2
+                    minimumValue: 0
+                    maximumValue: 1.5
 
-                    style: HalfGaugeStyle {}
+                    style: HalfGaugeStyle {
+                        labelStepSize: 0.5
+                        tickmarkStepSize: 0.5
+
+                    }
                 }
 
                 color: "transparent"
@@ -190,7 +194,7 @@ Rectangle {
                 }
                 Text {
                     //id: coolant
-                    text: Dashboard.Watertemp
+                    text: (Dashboard.pim).toFixed(2);
                     font.pixelSize: (parent.width / 10)
                     font.bold: true
                     font.family: "Eurostile"
@@ -208,20 +212,11 @@ Rectangle {
                         color: "black"
                         source: coolant
                     }
-/*
-                Needle90degrTopright {
-                    //Needle for the positive boost display
-                    anchors.verticalCenterOffset: 0
-                    anchors.centerIn: parent
-                    value: 23//(Dashboard.Watertemp * 1.8 +32)
- }
-*/
-
 
                 HalfNeedle {
                     anchors.verticalCenterOffset: 0
                     anchors.centerIn: parent
-                    value: 53//(Dashboard.Watertemp * 1.8 +32)
+                    value: Dashboard.pim / 0.0288461538461538
                 }
 
             }
@@ -336,7 +331,7 @@ Rectangle {
                         }
                         Text {
                             //id: coolant
-                            text: Dashboard.Watertemp
+                            text: Dashboard.AFR
                             font.pixelSize: (parent.width / 10)
                             font.bold: true
                             font.family: "Eurostile"
@@ -358,7 +353,7 @@ Rectangle {
                             //id: waterneedle
                             anchors.verticalCenterOffset: 0
                             anchors.centerIn: parent
-                            value: 0//(Dashboard.Watertemp * 1.8 +32)
+                            value: Dashboard.AFR / 0.3846153846153846
 
 
                         }

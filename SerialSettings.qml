@@ -98,7 +98,9 @@ Item {
             Text {
                 id: textinterfaceSelect
                 visible: { (ecuSelect.currentIndex == "1") ? false: true; }
-                text: "PowerFC Interface:" }
+                text: "PowerFC Interface:"
+
+            }
             ComboBox {
                 id: interfaceSelect
                 visible: { (ecuSelect.currentIndex == "1") ? false: true; }
@@ -139,11 +141,11 @@ Item {
                 Qt.quit()
             }
         }
-/*          CheckBox {
+            CheckBox {
             text: qsTr("Autoconnect at startup")
             checked: true
         }
-*/
+
         }
     }
 }

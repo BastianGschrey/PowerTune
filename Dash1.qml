@@ -129,7 +129,7 @@ Rectangle {
 
                  anchors.verticalCenterOffset: 0
                  anchors.centerIn: parent
-                 value: 40//Dashboard.speed / 4.155844155844156
+                 value: Dashboard.pim
 
 }
 

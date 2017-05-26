@@ -11,7 +11,7 @@ ApplicationWindow {
     minimumWidth: 800
     minimumHeight: 480
     // visibility: "FullScreen"
-    title: qsTr("PowerTune")
+    title: qsTr("PowerTune ") + Dashboard.Platform
     color: "black"
 
 //Pane {
@@ -33,6 +33,7 @@ ApplicationWindow {
             id: secondPage
             Advanced{}
         }
+        /*
         Item {
 
             Dash1{}
@@ -45,6 +46,7 @@ ApplicationWindow {
 
             Dashboard_Imperial{}
         }
+        */
         Item {
             id: thirdPage
             HalfGauges_metric{}

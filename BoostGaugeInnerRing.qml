@@ -39,7 +39,7 @@ Item {
 
          Text {
              text: "BOOST PSI"
-             font.pixelSize: (parent.width / 12)
+             font.pixelSize: (parent.width / 14)
               y: (parent.width / 5)
              font.bold: true
              font.family: "Eurostile"

@@ -157,10 +157,13 @@ Rectangle {
                     value: Dashboard.speed
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.top: parent.top
-                    minimumValue: -30
-                    maximumValue: 30
 
-                    style: HalfGaugeStyle {}
+                    minimumValue: 0
+                    maximumValue: 1.5
+
+                    style: HalfGaugeStyle {
+                        labelStepSize: 0.5
+                        tickmarkStepSize: 0.5}
                 }
 
                 color: "transparent"
@@ -171,7 +174,7 @@ Rectangle {
                 y : parent.width /27
 
                 Text {
-                    text: "PSI"
+                    text: "kg/cm2"
                     font.pixelSize: (parent.width / 12)
                      y: (parent.width / 5)
                     font.bold: true
