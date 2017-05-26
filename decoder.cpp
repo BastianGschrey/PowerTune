@@ -448,12 +448,12 @@ void Decoder::decodeInit(QByteArray serialdata)
            Model =1;
        }
        //Toyota
-       if (QString(serialdata).mid(2,8)== "1ZZ-FRE " || "2jZ-GTE1" || "2ZZ-GE  " || "3S-GE   " || "3S-GTE3 " || "3E-FTE2 ")
+       else if (QString(serialdata).mid(2,8)== "1ZZ-FRE " || "2jZ-GTE1" || "2ZZ-GE  " || "3S-GE   " || "3S-GTE3 " || "3E-FTE2 ")
           {
            Model =2;
        }
        //Nissan
-       if (QString(serialdata).mid(2,8)== "RB20DET " || "RB26DETT" || "SR20DET1" || "CA18DET " || "RB25-DE ")
+       else if (QString(serialdata).mid(2,8)== "RB20DET " || "RB26DETT" || "SR20DET1" || "CA18DET " || "RB25-DE ")
           {
            Model =3;
        }
