@@ -8,6 +8,10 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+    app.setOrganizationName("Power-Tune");
+    app.setOrganizationDomain("power-tune.org");
+    app.setApplicationName("PowerTune");
+
 
     QQmlApplicationEngine engine;
 

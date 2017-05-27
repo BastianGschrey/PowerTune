@@ -1,6 +1,7 @@
 import QtQuick 2.6
 import QtQuick.Controls 2.1
 import QtGraphicalEffects 1.0
+import Qt.labs.settings 1.0
 
 Rectangle {
     width: parent.width
@@ -8,6 +9,15 @@ Rectangle {
     color: "grey"
 
 Item {
+    id: powerTuneSettings
+
+    Settings {
+        property alias connectAtStartUp: connectAtStart.checkState
+        property alias serialPortName: serialName.currentText
+        property alias ecuType: ecuSelect.currentText
+        property alias powerFcInterface: interfaceSelect.currentText
+    }
+
     Row {
         x: 5
         y: 5
@@ -23,78 +33,18 @@ Item {
                 width: 200
 
                 model: Serial.portsNames
-                property bool initialized: false
+                //property bool initialized: false
                 onCurrentIndexChanged: if (initialized) AppSettings.setBaudRate( currentIndex )
                 Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true }
            }
-/*          // [1]
-            Text { text: "Baud rate:"; width: 200}
-            ComboBox {
-                id: baudRate
-                width: 200
 
-                model: [
-                    1200, 2400, 2400,
-                    4800, 9600, 19200,
-                    38400, 57600, 115200 ]
-                property bool initialized: false
-                onCurrentIndexChanged: if (initialized) AppSettings.setBaudRate( currentIndex )
-                Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true }
-            }
-            // [2]
-            Text { text: "Parity:" }
-            ComboBox {
-                id: parity
-                width: 200
-
-                model: [
-                    "No Parity", "Even Parity", "Odd Parity",
-                    "Space Parity", "Mark Parity" ]
-                property bool initialized: false
-                onCurrentIndexChanged: if (initialized) AppSettings.setParity( currentIndex )
-                Component.onCompleted: { currentIndex = AppSettings.getParity(); initialized = true }
-            }
-            // [3]
-            Text { text: "Data bits:" }
-            ComboBox {
-                id: databits
-                width: 200
-
-                model: [ "Data 5", "Data 6", "Data 7", "Data 8" ]
-                property bool initialized: false
-                onCurrentIndexChanged: if (initialized) AppSettings.setDataBits( currentIndex )
-                Component.onCompleted: { currentIndex = AppSettings.getDataBits(); initialized = true }
-            }
-            // [4]
-            Text { text: "Stop bits:" }
-            ComboBox {
-                id: stopBits
-                width: 200
-
-                model: [ "One stop", "Two Stop", "One and half stop" ]
-                property bool initialized: false
-                onCurrentIndexChanged: if (initialized) AppSettings.setStopBits( currentIndex )
-                Component.onCompleted: { currentIndex = AppSettings.getStopBits(); initialized = true }
-            }
-            // [5]
-            Text { text: "Flow control:" }
-            ComboBox {
-                id: flowcontrol
-                width: 200
-
-                model: [ "No flow control", "Hardware control", "Software control" ]
-                property bool initialized: false
-                onCurrentIndexChanged: if (initialized) AppSettings.setFlowControl( currentIndex )
-                Component.onCompleted: { currentIndex = AppSettings.getFlowControl(); initialized = true }
-            }
-*/
             Text { text: "ECU Selection:" }
             ComboBox {
                 id: ecuSelect
                 width: 200
 
                 model: [ "PowerFC", "Adaptronic"]
-                property bool initialized: false
+                //property bool initialized: false
                 onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
                 Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
             }
@@ -145,8 +95,9 @@ Item {
             }
         }
             CheckBox {
+            id: connectAtStart
             text: qsTr("Autoconnect at startup")
-            checked: true
+
         }
 
         }
