@@ -115,10 +115,10 @@ void Decoder::decodeAdv(QByteArray serialdata)
     packageADV[1] = mul[1] * info->EngLoad + add[1];
     packageADV[2] = mul[2] * info->MAF1V + add[2];
     packageADV[3] = mul[3] * info->MAF2V + add[3];
-    packageADV[4] = mul[4] * info->Primaryinp + add[4];
-    packageADV[5] = mul[5] * info->Fuelc + add[5];
-    packageADV[6] = mul[6] * info->Leadingign + add[6];
-    packageADV[7] = mul[7] * info->Trailingign + add[7];
+    packageADV[4] = mul[4] * info->injms + add[4];
+    packageADV[5] = mul[5] * info->Inj + add[5];
+    packageADV[6] = mul[6] * info->Ign + add[6];
+    packageADV[7] = mul[7] * info->Dwell + add[7];
     packageADV[8] = mul[8] * info->BoostPres + add[8];
     if (packageADV[8] >= 0x8000)
         packageADV[8] = (packageADV[8] - 0x8000) * 0.01;
@@ -561,21 +561,23 @@ void Decoder::decodeInit(QByteArray serialdata)
 {
     qDebug() << "Model name ="<<(QString(serialdata).mid(2,8));
 
-       //Mazda
-       if (QString(serialdata).mid(2,8) == "13B-REW ")
-          {
-           Model =1;
-       }
-       //Toyota
-       else if (QString(serialdata).mid(2,8)== "1ZZ-FRE " || "2jZ-GTE1" || "2ZZ-GE  " || "3S-GE   " || "3S-GTE3 " || "3E-FTE2 ")
-          {
-           Model =2;
-       }
-       //Nissan
-       else if (QString(serialdata).mid(2,8)== "RB20DET " || "RB26DETT" || "SR20DET1" || "CA18DET " || "RB25-DE ")
-          {
-           Model =3;
-       }
+    //Mazda
+    if (QString(serialdata).mid(2,8) == "13B-REW ")
+    {
+        Model =1;
+    }
+}
+//Nissan
+else if (QString(serialdata).mid(2,8)== "RB20DET " || "RB26DETT" || "SR20DET1" || "CA18DET " || "RB25-DE ")
+{
+    Model =2;
+}
+
+//Toyota
+else if (QString(serialdata).mid(2,8)== "1ZZ-FRE " || "2jZ-GTE1" || "2ZZ-GE  " || "3S-GE   " || "3S-GTE3 " || "3E-FTE2 ")
+{
+    Model =3;
+}
 /*
        //Subaru
        if ((QString(serialdata).mid(2,8)== "")
@@ -596,7 +598,7 @@ void Decoder::decodeInit(QByteArray serialdata)
 */
 //    ui->linePlatform->setText (QString(serialdata).mid(2,8));
 qDebug() << "Model ="<<Model;
- m_dashboard->setPlatform(QString(serialdata).mid(2,8));
+m_dashboard->setPlatform(QString(serialdata).mid(2,8));
 }
 
 
@@ -611,10 +613,10 @@ void Decoder::decodeInjPriLagvsBattV(QByteArray serialdata)
     packageInjPriLagvsBattV[4] = mul[38] * info->InjPriLag8V;
     packageInjPriLagvsBattV[5] = mul[38] * info->InjPriLag6V;
 
-//    ui->lineInjPrLag16V->setText (QString::number(packageInjPriLagvsBattV[0]));
-//    ui->lineInjPrLag14V->setText (QString::number(packageInjPriLagvsBattV[1]));
-//    ui->lineInjPrLag12V->setText (QString::number(packageInjPriLagvsBattV[2]));
-//    ui->lineInjPrLag10V->setText (QString::number(packageInjPriLagvsBattV[3]));
+    //    ui->lineInjPrLag16V->setText (QString::number(packageInjPriLagvsBattV[0]));
+    //    ui->lineInjPrLag14V->setText (QString::number(packageInjPriLagvsBattV[1]));
+    //    ui->lineInjPrLag12V->setText (QString::number(packageInjPriLagvsBattV[2]));
+    //    ui->lineInjPrLag10V->setText (QString::number(packageInjPriLagvsBattV[3]));
 //    ui->lineInjPrLag8V->setText (QString::number(packageInjPriLagvsBattV[4]));
 //    ui->lineInjPrLag6V->setText (QString::number(packageInjPriLagvsBattV[5]));
 }
