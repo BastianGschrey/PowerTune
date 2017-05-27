@@ -23,6 +23,9 @@ Item {
                 width: 200
 
                 model: Serial.portsNames
+                property bool initialized: false
+                onCurrentIndexChanged: if (initialized) AppSettings.setBaudRate( currentIndex )
+                Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true }
            }
 /*          // [1]
             Text { text: "Baud rate:"; width: 200}
