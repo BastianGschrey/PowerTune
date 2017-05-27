@@ -105,7 +105,7 @@ void Decoder::decodeAdv(QByteArray serialdata)
     m_dashboard->setSecinjpulse(packageADV[20]);
     m_dashboard->setna2(packageADV[21]);
     }
-    /*
+/*
     else if (Model == 2)
     {
     fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialdata.data());
@@ -555,29 +555,32 @@ void Decoder::decodeInjOverlap(QByteArray serialdata)
 
 void Decoder::decodeVersion(QByteArray serialdata)
 {
-//    ui->lineVersion->setText (QString(serialdata).mid(2,5));
+    //    ui->lineVersion->setText (QString(serialdata).mid(2,5));
 }
 void Decoder::decodeInit(QByteArray serialdata)
 {
     qDebug() << "Model name ="<<(QString(serialdata).mid(2,8));
+    qDebug() << "Model ="<<Model;
+    m_dashboard->setPlatform(QString(serialdata).mid(2,8));
 
     //Mazda
     if (QString(serialdata).mid(2,8) == "13B-REW ")
     {
         Model =1;
     }
-}
-//Nissan
-else if (QString(serialdata).mid(2,8)== "RB20DET " || "RB26DETT" || "SR20DET1" || "CA18DET " || "RB25-DE ")
-{
-    Model =2;
-}
 
-//Toyota
-else if (QString(serialdata).mid(2,8)== "1ZZ-FRE " || "2jZ-GTE1" || "2ZZ-GE  " || "3S-GE   " || "3S-GTE3 " || "3E-FTE2 ")
-{
-    Model =3;
-}
+    //Nissan
+    else if (QString(serialdata).mid(2,8)== "RB20DET " || "RB26DETT" || "SR20DET1" || "CA18DET " || "RB25-DE ")
+    {
+        Model =2;
+    }
+
+    //Toyota
+    else if (QString(serialdata).mid(2,8)== "1ZZ-FRE " || "2jZ-GTE1" || "2ZZ-GE  " || "3S-GE   " || "3S-GTE3 " || "3E-FTE2 ")
+    {
+        Model =3;
+    }
+
 /*
        //Subaru
        if ((QString(serialdata).mid(2,8)== "")
@@ -597,8 +600,7 @@ else if (QString(serialdata).mid(2,8)== "1ZZ-FRE " || "2jZ-GTE1" || "2ZZ-GE  " |
 
 */
 //    ui->linePlatform->setText (QString(serialdata).mid(2,8));
-qDebug() << "Model ="<<Model;
-m_dashboard->setPlatform(QString(serialdata).mid(2,8));
+
 }
 
 
