@@ -3,7 +3,7 @@
 DashBoard::DashBoard(QObject *parent)
     : QObject(parent)
 
-// Advanced Info FD3S
+// Advanced Info
     , m_revs(0)
     , m_Intakepress(0)
     , m_PressureV(0)
@@ -27,6 +27,18 @@ DashBoard::DashBoard(QObject *parent)
     , m_Secinjpulse(0)
     , m_na2(0)
     , m_InjDuty(0)
+    , m_EngLoad(0)
+    , m_MAF1V(0)
+    , m_MAF2V(0)
+    , m_injms(0)
+    , m_Inj(0)
+    , m_Ign(0)
+    , m_Dwell(0)
+    , m_BoostPres(0)
+    , m_BoostDuty(0)
+    , m_MAFactivity(0)
+    , m_O2volt_2(0)
+
 
 
  // Sensor Info FD3S
@@ -256,6 +268,95 @@ void DashBoard::setna2(const qreal &na2)
     emit na2Changed(na2);
 }
 
+void DashBoard::setEngLoad(const qreal &EngLoad)
+{
+    if (m_EngLoad == EngLoad)
+        return;
+    m_EngLoad = EngLoad;
+    emit EngLoadChanged(EngLoad);
+}
+
+void DashBoard::setMAF1V(const qreal &MAF1V)
+{
+    if (m_MAF1V == MAF1V)
+        return;
+    m_MAF1V = MAF1V;
+    emit MAF1VChanged(MAF1V);
+}
+
+void DashBoard::setMAF2V(const qreal &MAF2V)
+{
+    if (m_MAF2V == MAF2V)
+        return;
+    m_MAF2V = MAF2V;
+    emit MAF2VChanged(MAF2V);
+}
+
+void DashBoard::setinjms(const qreal &injms)
+{
+    if (m_injms == injms)
+        return;
+    m_injms = injms;
+    emit injmsChanged(injms);
+}
+
+void DashBoard::setIgn(const qreal &Ign)
+{
+    if (m_Ign == Ign)
+        return;
+    m_Ign = Ign;
+    emit IgnChanged(Ign);
+}
+
+void DashBoard::setInj(const qreal &Inj)
+{
+    if (m_Inj == Inj)
+        return;
+    m_Inj = Inj;
+    emit InjChanged(Inj);
+}
+void DashBoard::setDwell(const qreal &Dwell)
+{
+    if (m_Dwell == Dwell)
+        return;
+    m_Dwell = Dwell;
+    emit DwellChanged(Dwell);
+}
+
+void DashBoard::setBoostPres(const qreal &BoostPres)
+{
+    if (m_BoostPres == BoostPres)
+        return;
+    m_BoostPres = BoostPres;
+    emit BoostPresChanged(BoostPres);
+}
+
+void DashBoard::setBoostDuty(const qreal &BoostDuty)
+{
+    if (m_BoostDuty == BoostDuty)
+        return;
+    m_BoostDuty = BoostDuty;
+    emit BoostDutyChanged(BoostDuty);
+}
+
+void DashBoard::setMAFactivity(const qreal &MAFactivity)
+{
+    if (m_MAFactivity == MAFactivity)
+        return;
+    m_MAFactivity = MAFactivity;
+    emit MAFactivityChanged(MAFactivity);
+}
+
+void DashBoard::setO2volt_2(const qreal &O2volt_2)
+{
+    if (m_O2volt_2 == O2volt_2)
+        return;
+    m_O2volt_2 = O2volt_2;
+    emit O2volt_2Changed(O2volt_2);
+}
+
+
+
 //Sensor info
 
 void DashBoard::setpim(const qreal &pim)
@@ -327,7 +428,7 @@ void DashBoard::setInjDuty(const qreal &InjDuty)
     if (m_InjDuty == InjDuty)
         return;
     m_InjDuty = InjDuty;
-    emit O2SChanged(InjDuty);
+    emit InjDutyChanged(InjDuty);
 }
 
 
@@ -608,7 +709,7 @@ void DashBoard::setTRIM(const qreal &TRIM)
 
 
 
-// Advanced Info FD3S
+// Advanced Info
 qreal DashBoard::revs() const { return m_revs; }
 qreal DashBoard::Intakepress() const { return m_Intakepress; }
 qreal DashBoard::PressureV() const { return m_PressureV; }
@@ -632,6 +733,17 @@ qreal DashBoard::na1() const { return m_na1; }
 qreal DashBoard::Secinjpulse() const { return m_Secinjpulse; }
 qreal DashBoard::na2() const { return m_na2; }
 qreal DashBoard::InjDuty() const { return m_InjDuty; }
+qreal DashBoard::EngLoad() const { return m_EngLoad; }
+qreal DashBoard::MAF1V() const { return m_MAF1V; }
+qreal DashBoard::MAF2V() const { return m_MAF2V; }
+qreal DashBoard::injms() const { return m_injms; }
+qreal DashBoard::Inj() const { return m_Inj; }
+qreal DashBoard::Ign() const { return m_Ign; }
+qreal DashBoard::Dwell() const { return m_Dwell; }
+qreal DashBoard::BoostPres() const { return m_BoostPres; }
+qreal DashBoard::BoostDuty() const { return m_BoostDuty; }
+qreal DashBoard::MAFactivity() const { return m_MAFactivity; }
+qreal DashBoard::O2volt_2() const { return m_O2volt_2; }
 
 
 

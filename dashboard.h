@@ -9,7 +9,7 @@ class DashBoard : public QObject
 {
     Q_OBJECT
 
-    // Advanced Info FD3S
+    // Advanced Info
     Q_PROPERTY(qreal revs READ revs WRITE setRevs NOTIFY revsChanged)
     Q_PROPERTY(qreal Intakepress READ Intakepress WRITE setIntakepress NOTIFY IntakepressChanged)
     Q_PROPERTY(qreal PressureV READ PressureV WRITE setPressureV NOTIFY PressureVChanged)
@@ -40,7 +40,21 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal wtrt READ wtrt WRITE setwtrt NOTIFY wtrtChanged)
     Q_PROPERTY(qreal airt READ airt WRITE setairt NOTIFY airtChanged)
     Q_PROPERTY(qreal fuelt READ fuelt WRITE setfuelt NOTIFY fueltChanged)
-    Q_PROPERTY(qreal O2S READ O2S WRITE setO2S NOTIFY O2SChanged)
+    Q_PROPERTY(qreal O2S READ O2S WRITE setO2S NOTIFY O2SChanged)  
+    Q_PROPERTY(qreal EngLoad READ EngLoad WRITE setEngLoad NOTIFY EngLoadChanged)
+    Q_PROPERTY(qreal MAF1V READ MAF1V WRITE setMAF1V NOTIFY MAF1VChanged)
+    Q_PROPERTY(qreal MAF2V READ MAF2V WRITE setMAF2V NOTIFY MAF2VChanged)
+    Q_PROPERTY(qreal injms READ injms WRITE setinjms NOTIFY injmsChanged)
+    Q_PROPERTY(qreal Inj READ Inj WRITE setInj NOTIFY InjChanged)
+    Q_PROPERTY(qreal Ign READ Ign WRITE setIgn NOTIFY IgnChanged)
+    Q_PROPERTY(qreal Dwell READ Dwell WRITE setDwell NOTIFY DwellChanged)
+    Q_PROPERTY(qreal BoostPres READ BoostPres WRITE setBoostPres NOTIFY BoostPresChanged)
+    Q_PROPERTY(qreal BoostDuty READ BoostDuty WRITE setBoostDuty NOTIFY BoostDutyChanged)
+    Q_PROPERTY(qreal MAFactivity READ MAFactivity WRITE setMAFactivity NOTIFY MAFactivityChanged)
+    Q_PROPERTY(qreal O2volt_2 READ O2volt_2 WRITE setO2volt_2 NOTIFY O2volt_2Changed)
+
+
+
 
     // Flags
 
@@ -85,7 +99,7 @@ class DashBoard : public QObject
 
 public:
     DashBoard(QObject *parent = 0);
-    // Advanced Info FD3S
+    // Advanced Info
     void setRevs(const qreal &revs);
     void setIntakepress(const qreal &Intakepress);
     void setPressureV(const qreal &PressureV);
@@ -109,6 +123,21 @@ public:
     void setSecinjpulse(const qreal &Secinjpulse);
     void setna2(const qreal &na2);
     void setInjDuty(const qreal &InjDuty);
+
+    void setEngLoad(const qreal &EngLoad);
+    void setMAF1V(const qreal &MAF1V);
+    void setMAF2V(const qreal &MAF2V);
+    void setinjms(const qreal &injms);
+    void setInj(const qreal &Inj);
+    void setIgn(const qreal &Ign);
+    void setDwell(const qreal &Dwell);
+    void setBoostPres(const qreal &BoostPres);
+    void setBoostDuty(const qreal &BoostDuty);
+    void setMAFactivity(const qreal &MAFactivity);
+    void setO2volt_2(const qreal &O2volt_2);
+
+
+
 
 
 
@@ -140,6 +169,9 @@ public:
     void setFlag14(const qreal &Flag14);
     void setFlag15(const qreal &Flag15);
     void setFlag16(const qreal &Flag16);
+
+
+
 
     void setPlatform(const QString &Platform);
 
@@ -187,6 +219,17 @@ public:
     qreal Secinjpulse() const;
     qreal na2() const;
     qreal InjDuty() const;
+    qreal EngLoad() const;
+    qreal MAF1V() const;
+    qreal MAF2V() const;
+    qreal injms() const;
+    qreal Inj() const;
+    qreal Ign() const;
+    qreal Dwell() const;
+    qreal BoostPres() const;
+    qreal BoostDuty() const;
+    qreal MAFactivity() const;
+    qreal O2volt_2() const;
 
     //Sensor info
 
@@ -266,6 +309,21 @@ signals:
     void SecinjpulseChanged(qreal Secinjpulse);
     void na2Changed(qreal na2);
     void InjDutyChanged(qreal InjDuty);
+    void EngLoadChanged(qreal EngLoad);
+    void MAF1VChanged(qreal MAF1V);
+    void MAF2VChanged(qreal MAF2V);
+    void injmsChanged(qreal injms);
+    void InjChanged(qreal Inj);
+    void IgnChanged(qreal Ign);
+    void DwellChanged(qreal Dwell);
+    void BoostPresChanged(qreal BoostPres);
+    void BoostDutyChanged(qreal BoostDuty);
+    void MAFactivityChanged(qreal MAFactivity);
+    void O2volt_2Changed(qreal O2volt_2);
+
+
+
+
 
 
     //Sensor info
@@ -323,7 +381,7 @@ signals:
 
 
 private:
-    // Advanced Info FD3S
+    // Advanced Info
     qreal m_revs;
     qreal m_Intakepress;
     qreal m_PressureV;
@@ -347,6 +405,17 @@ private:
     qreal m_Secinjpulse;
     qreal m_na2;
     qreal m_InjDuty;
+    qreal m_EngLoad;
+    qreal m_MAF1V;
+    qreal m_MAF2V;
+    qreal m_injms;
+    qreal m_Inj;
+    qreal m_Ign;
+    qreal m_Dwell;
+    qreal m_BoostPres;
+    qreal m_BoostDuty;
+    qreal m_MAFactivity;
+    qreal m_O2volt_2;
 
     //Sensor info
 

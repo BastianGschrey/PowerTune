@@ -136,8 +136,7 @@ void Decoder::decodeAdv(QByteArray serialdata)
     packageADV[21] = 0;
 
     m_dashboard->setRevs(packageADV[0]);
-/*
-    m_dashboard->EngLoad(packageADV[1]);
+    m_dashboard->setEngLoad(packageADV[1]);
     m_dashboard->setMAF1V(packageADV[2]);
     m_dashboard->setMAF2V(packageADV[3]);
     m_dashboard->setinjms(packageADV[4]);
@@ -146,25 +145,22 @@ void Decoder::decodeAdv(QByteArray serialdata)
     m_dashboard->setDwell(packageADV[7]);
     m_dashboard->setBoostPres(packageADV[8]);
     m_dashboard->setBoostDuty(packageADV[9]);
-*/
     m_dashboard->setWatertemp(packageADV[10]);
     m_dashboard->setIntaketemp(packageADV[11]);
     m_dashboard->setKnock(packageADV[12]);
     m_dashboard->setBatteryV(packageADV[13]);
     m_dashboard->setSpeed(packageADV[14]);
-/*
     m_dashboard->setMAFactivity(packageADV[15]);
     m_dashboard->setO2volt(packageADV[16]);
     m_dashboard->setO2volt_2(packageADV[17]);
     m_dashboard->setO2volt(packageADV[18]);
-*/
     m_dashboard->setThrottleV(packageADV[19]);
 
     }
 /*
-    else if (Model == 3)
+    if (Model == 3)
     {
-        fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialdata.data());
+        fc_adv_info_t3* info=reinterpret_cast<fc_adv_info_t3*>(serialdata.data());
 
         packageADV[0] = mul[0] * info->RPM + add[0];
         //previousRev_rpm[buf_currentIndex] = packageADV[0];
@@ -188,10 +184,10 @@ void Decoder::decodeAdv(QByteArray serialdata)
         packageADV[14] = mul[14] * info->Speed + add[14];
        // packageADV[14] *= speed_correction;
         //previousSpeed_kph[buf_currentIndex] = packageADV[14];
-        packageADV[15] = mul[15] * info->Iscvduty + add[15];
+//        packageADV[15] = mul[15] * info->Iscvduty + add[15];
         packageADV[16] = mul[16] * info->O2volt + add[16];
-        packageADV[17] = mul[17] * info->SuctionAirTemp + add[17];
-        packageADV[18] = mul[18] * info->ThrottleV_2 + add[18];
+//        packageADV[17] = mul[17] * info->SuctionAirTemp + add[17];
+//        packageADV[18] = mul[18] * info->ThrottleV_2 + add[18];
         packageADV[19] = mul[19] * info->na1 + add[19];
         packageADV[20] = 0;
         packageADV[21] = 0;
@@ -219,6 +215,7 @@ void Decoder::decodeAdv(QByteArray serialdata)
     m_dashboard->setna1(packageADV[19]);
     m_dashboard->setSecinjpulse(packageADV[20]);
     m_dashboard->setna2(packageADV[21]);
+
     }
 */
 }

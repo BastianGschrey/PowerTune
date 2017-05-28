@@ -75,18 +75,18 @@ private:
 
          fc_adv_info_t2 parse(const QByteArray &);
     };
-
+/*
          double packageADV3[33];
 
          struct fc_adv_info_t3{
 
          quint16 requesttype;
          quint16 RPM;
-         quint16 EngLoad;
-         quint16 MAF1V;
-         quint16 MAF2V;
-         quint16 injms;
-         quint16 Inj;
+         quint16 Intakepress;
+         quint16 PressureV;
+         quint16 ThrottleV;
+         quint16 Primaryinp;
+         quint16 Fuelc;
          quint8 Ign;
          quint8 Dwell;
          quint16 BoostPres;
@@ -101,11 +101,10 @@ private:
          quint8 O2volt_2;
          quint16 ThrottleV;
          quint8 na1;
+        fc_adv_info_t3 parse(const QByteArray &);
 
-
-        fc_adv_info_t parse(const QByteArray &);
-    };
-
+ };
+*/
 
     double packageSens[20];
 
