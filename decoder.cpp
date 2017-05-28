@@ -106,7 +106,7 @@ void Decoder::decodeAdv(QByteArray serialdata)
     {
     fc_adv_info_t2* info=reinterpret_cast<fc_adv_info_t2*>(serialdata.data());
 
-    packageADV[0] = mul[0] * info->RPM + add[0];
+    packageADV[0] = info->RPM;
     packageADV[1] = mul[1] * info->EngLoad + add[1];
     packageADV[2] = mul[2] * info->MAF1V + add[2];
     packageADV[3] = mul[3] * info->MAF2V + add[3];
@@ -120,8 +120,8 @@ void Decoder::decodeAdv(QByteArray serialdata)
     else
         packageADV[8] = (1.0 / 2560 + 0.001) * packageADV[8];
     packageADV[9] = mul[9] * info->BoostDuty + add[9];
-    packageADV[10] = mul[10] * info->Watertemp + add[10];
-    packageADV[11] = mul[11] * info->Intaketemp + add[11];
+    packageADV[10] = info->Watertemp -80;
+    packageADV[11] = info->Intaketemp -80;
     packageADV[12] = mul[12] * info->Knock + add[12];
     packageADV[13] = mul[13] * info->BatteryV + add[13];
     packageADV[14] = mul[14] * info->Speed + add[14];

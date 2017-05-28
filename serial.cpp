@@ -241,8 +241,6 @@ void Serial::readData(QByteArray serialdata)
 
            {
             if(serialdata.length() == 33 && requesttype == 0xF0){m_decoder->decodeAdv(serialdata);}
-     //       if(serialdata.length() == 33 && Model == 2 && requesttype == 0xF0){m_decoder->decodeAdv2(serialdata);}
-     //       if(serialdata.length() == 33 && Model == 3 && requesttype == 0xF0){m_decoder->decodeAdv3(serialdata);}
             if(serialdata.length() == 21 && requesttype == 0xDE){m_decoder->decodeSensor(serialdata);}
             if(serialdata.length() == 7 && requesttype == 0x00){m_decoder->decodeAux(serialdata);}
             if(serialdata.length() == 11 && requesttype == 0x00){m_decoder->decodeAux2(serialdata);}
