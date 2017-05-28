@@ -50,12 +50,12 @@ Decoder::Decoder(DashBoard *dashboard, QObject *parent)
 
 void Decoder::decodeAdv(QByteArray serialdata)
 {
+    fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialdata.data());
     if (Model == 1)
     {
-    fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialdata.data());
+
 
     packageADV[0] = info->RPM + add[0];
-   // packageADV[1] = info->Boostcal * 0.0001 -1.03;
     packageADV[1] = info->Intakepress;
     packageADV[2] = info->PressureV * 0.001; //value in V
     packageADV[3] = info->ThrottleV * 0.001; //value in V
@@ -77,10 +77,6 @@ void Decoder::decodeAdv(QByteArray serialdata)
     packageADV[19] = info->na1;
     packageADV[20] = info->Secinjpulse * 0.001;
     packageADV[21] = info->na2;
-/*
-    if (Boostcal < 0)
-        Boostcal * 760 // convert Boost to mmhg in case the number is negative
-*/
 
     m_dashboard->setRevs(packageADV[0]);
     m_dashboard->setIntakepress(packageADV[1]);
@@ -105,13 +101,12 @@ void Decoder::decodeAdv(QByteArray serialdata)
     m_dashboard->setSecinjpulse(packageADV[20]);
     m_dashboard->setna2(packageADV[21]);
     }
-/*
-    else if (Model == 2)
+    // Most Nissan and Subaru
+    if (Model == 2)
     {
-    fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialdata.data());
+    fc_adv_info_t2* info=reinterpret_cast<fc_adv_info_t2*>(serialdata.data());
 
     packageADV[0] = mul[0] * info->RPM + add[0];
-    //previousRev_rpm[buf_currentIndex] = packageADV[0];
     packageADV[1] = mul[1] * info->EngLoad + add[1];
     packageADV[2] = mul[2] * info->MAF1V + add[2];
     packageADV[3] = mul[3] * info->MAF2V + add[3];
@@ -130,8 +125,8 @@ void Decoder::decodeAdv(QByteArray serialdata)
     packageADV[12] = mul[12] * info->Knock + add[12];
     packageADV[13] = mul[13] * info->BatteryV + add[13];
     packageADV[14] = mul[14] * info->Speed + add[14];
-    packageADV[14] *= speed_correction;
-    previousSpeed_kph[buf_currentIndex] = packageADV[14];
+//    packageADV[14] *= speed_correction;
+//    previousSpeed_kph[buf_currentIndex] = packageADV[14];
     packageADV[15] = mul[15] * info->MAFactivity + add[15];
     packageADV[16] = mul[16] * info->O2volt + add[16];
     packageADV[17] = mul[17] * info->O2volt_2 + add[17];
@@ -141,29 +136,32 @@ void Decoder::decodeAdv(QByteArray serialdata)
     packageADV[21] = 0;
 
     m_dashboard->setRevs(packageADV[0]);
-    m_dashboard->setIntakepress(packageADV[1]);
-    m_dashboard->setPressureV(packageADV[2]);
-    m_dashboard->setThrottleV(packageADV[3]);
-    m_dashboard->setPrimaryinp(packageADV[4]);
-    m_dashboard->setFuelc(packageADV[5]);
-    m_dashboard->setLeadingign(packageADV[6]);
-    m_dashboard->setTrailingign(packageADV[7]);
-    m_dashboard->setFueltemp(packageADV[8]);
-    m_dashboard->setMoilp(packageADV[9]);
-    m_dashboard->setBoosttp(packageADV[10]);
-    m_dashboard->setBoostwg(packageADV[11]);
-    m_dashboard->setWatertemp(packageADV[12]);
-    m_dashboard->setIntaketemp(packageADV[13]);
-    m_dashboard->setKnock(packageADV[14]);
-    m_dashboard->setBatteryV(packageADV[15]);
-    m_dashboard->setSpeed(packageADV[16]);
-    m_dashboard->setIscvduty(packageADV[17]);
+/*
+    m_dashboard->EngLoad(packageADV[1]);
+    m_dashboard->setMAF1V(packageADV[2]);
+    m_dashboard->setMAF2V(packageADV[3]);
+    m_dashboard->setinjms(packageADV[4]);
+    m_dashboard->setInj(packageADV[5]);
+    m_dashboard->setIgn(packageADV[6]);
+    m_dashboard->setDwell(packageADV[7]);
+    m_dashboard->setBoostPres(packageADV[8]);
+    m_dashboard->setBoostDuty(packageADV[9]);
+*/
+    m_dashboard->setWatertemp(packageADV[10]);
+    m_dashboard->setIntaketemp(packageADV[11]);
+    m_dashboard->setKnock(packageADV[12]);
+    m_dashboard->setBatteryV(packageADV[13]);
+    m_dashboard->setSpeed(packageADV[14]);
+/*
+    m_dashboard->setMAFactivity(packageADV[15]);
+    m_dashboard->setO2volt(packageADV[16]);
+    m_dashboard->setO2volt_2(packageADV[17]);
     m_dashboard->setO2volt(packageADV[18]);
-    m_dashboard->setna1(packageADV[19]);
-    m_dashboard->setSecinjpulse(packageADV[20]);
-    m_dashboard->setna2(packageADV[21]);
-    }
+*/
+    m_dashboard->setThrottleV(packageADV[19]);
 
+    }
+/*
     else if (Model == 3)
     {
         fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialdata.data());
@@ -559,24 +557,21 @@ void Decoder::decodeVersion(QByteArray serialdata)
 }
 void Decoder::decodeInit(QByteArray serialdata)
 {
-    qDebug() << "Model name ="<<(QString(serialdata).mid(2,8));
-    qDebug() << "Model ="<<Model;
-    m_dashboard->setPlatform(QString(serialdata).mid(2,8));
-
+    QString Modelname = QString(serialdata).mid(2,8);
     //Mazda
-    if (QString(serialdata).mid(2,8) == "13B-REW ")
+    if (Modelname == "13B-REW ")
     {
         Model =1;
     }
 
     //Nissan
-    else if (QString(serialdata).mid(2,8)== "RB20DET " || "RB26DETT" || "SR20DET1" || "CA18DET " || "RB25-DE ")
+    if (Modelname == "RB20DET " || Modelname == "RB26DETT" || Modelname == "SR20DET1" || Modelname == "CA18DET " || Modelname == "RB25DET ")
     {
         Model =2;
     }
 
     //Toyota
-    else if (QString(serialdata).mid(2,8)== "1ZZ-FRE " || "2jZ-GTE1" || "2ZZ-GE  " || "3S-GE   " || "3S-GTE3 " || "3E-FTE2 ")
+    if (Modelname == "4E-FTE2 " || Modelname == "1ZZ-FRE " || Modelname == "2jZ-GTE1" || Modelname == "2ZZ-GE  " || Modelname == "3S-GE   " || Modelname == "3S-GTE3 " || Modelname == "3E-FTE2 ")
     {
         Model =3;
     }
@@ -600,7 +595,9 @@ void Decoder::decodeInit(QByteArray serialdata)
 
 */
 //    ui->linePlatform->setText (QString(serialdata).mid(2,8));
-
+    qDebug() << "Model ="<<Model;
+    qDebug() << "Model name ="<<(QString(serialdata).mid(2,8));
+    m_dashboard->setPlatform(QString(serialdata).mid(2,8));
 }
 
 

@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QModbusDataUnit>
 
+
 class DashBoard;
 
 class Decoder : public QObject
@@ -22,7 +23,6 @@ private:
         quint16 requesttype;
         quint16 RPM;
         quint16 Intakepress;
-        //quint16 Boostcal;
         quint16 PressureV;
         quint16 ThrottleV;
         quint16 Primaryinp;
@@ -45,7 +45,67 @@ private:
         quint8 na2;
         quint8 checksum;
         fc_adv_info_t parse(const QByteArray &);
+   };
+
+
+        double packageADV2[33];
+
+        struct fc_adv_info_t2{
+         quint16 requesttype;
+         quint16 RPM;
+         quint16 EngLoad;
+         quint16 MAF1V;
+         quint16 MAF2V;
+         quint16 injms;
+         quint16 Inj;
+         quint8 Ign;
+         quint8 Dwell;
+         quint16 BoostPres;
+         quint8 BoostDuty;
+         quint8 Watertemp;
+         quint8 Intaketemp;
+         quint8 Knock;
+         quint8 BatteryV;
+         quint16 Speed;
+         quint16 MAFactivity;
+         quint8 O2volt;
+         quint8 O2volt_2;
+         quint16 ThrottleV;
+         quint8 na1;
+
+         fc_adv_info_t2 parse(const QByteArray &);
     };
+
+         double packageADV3[33];
+
+         struct fc_adv_info_t3{
+
+         quint16 requesttype;
+         quint16 RPM;
+         quint16 EngLoad;
+         quint16 MAF1V;
+         quint16 MAF2V;
+         quint16 injms;
+         quint16 Inj;
+         quint8 Ign;
+         quint8 Dwell;
+         quint16 BoostPres;
+         quint8 BoostDuty;
+         quint8 Watertemp;
+         quint8 Intaketemp;
+         quint8 Knock;
+         quint8 BatteryV;
+         quint16 Speed;
+         quint16 MAFactivity;
+         quint8 O2volt;
+         quint8 O2volt_2;
+         quint16 ThrottleV;
+         quint8 na1;
+
+
+        fc_adv_info_t parse(const QByteArray &);
+    };
+
 
     double packageSens[20];
 
