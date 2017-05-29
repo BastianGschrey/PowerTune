@@ -198,8 +198,8 @@ void Serial::readyToRead()
                 {
              //   qDebug() << "Received data OK"<<Bytesexpected;
              //   qDebug() << "time taken (ms) "<<(QTime::currentTime());
-                if(requestIndex <= 61){requestIndex++;}
-                else{requestIndex = 58;}
+                if(requestIndex <= 62){requestIndex++;}
+                else{requestIndex = 59;}
                 readData(recvData);
                 recvData.clear();
                 m_serialport->flush();
@@ -241,6 +241,7 @@ void Serial::readData(QByteArray serialdata)
 
            {
             if(serialdata.length() == 33 && requesttype == 0xF0){m_decoder->decodeAdv(serialdata);}
+            if(requesttype == 0xDD){m_decoder->decodeSensorStrings(serialdata);}
             if(serialdata.length() == 21 && requesttype == 0xDE){m_decoder->decodeSensor(serialdata);}
             if(serialdata.length() == 7 && requesttype == 0x00){m_decoder->decodeAux(serialdata);}
             if(serialdata.length() == 11 && requesttype == 0x00){m_decoder->decodeAux2(serialdata);}
@@ -536,24 +537,31 @@ void Serial::sendRequest(int requestIndex)
         //Serial::getWarConStrFlags();
         Serial::writeRequestPFC(QByteArray::fromHex("D60227"));
         break;
-// Live Data
     case 58:
+        //Serial::getSensorStrings();
+        Serial::writeRequestPFC(QByteArray::fromHex("DD0220"));
+        break;
+
+
+
+// Live Data
+    case 59:
         //Serial::getAdvData();
         Serial::writeRequestPFC(QByteArray::fromHex("F0020D"));
         break;
-    case 59:
+    case 60:
         //Serial::getAux();
         Serial::writeRequestPFC(QByteArray::fromHex("0002FD"));
         break;
-    case 60:
+    case 61:
         //Serial::getMapIndices();
         Serial::writeRequestPFC(QByteArray::fromHex("DB0222"));
         break;
-    case 61:
+    case 62:
         //Serial::getSensorData();
         Serial::writeRequestPFC(QByteArray::fromHex("DE021F"));
         break;
-    case 62:
+    case 63:
         //Serial::getBasic();
         Serial::writeRequestPFC(QByteArray::fromHex("DA0223"));
         break;

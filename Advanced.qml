@@ -169,94 +169,94 @@ Rectangle {
 
         Text {
             color: "yellow"
-            text: "STR " + Dashboard.Flag1
+            text: Dashboard.Flag1 +" "+ Dashboard.FlagString1
 
         }
         Text {
             color: "yellow"
-            text: "A/C " + Dashboard.Flag2
+            text: Dashboard.Flag2 +" "+ Dashboard.FlagString2
 
         }
         Text {
             color: "yellow"
-            text: "PWS " + Dashboard.Flag3
+            text: Dashboard.Flag3 +" "+ Dashboard.FlagString3
 
         }
         Text {
             color: "yellow"
-            text: "NTR " + Dashboard.Flag4
-
-        }
-
-        Text {
-            color: "yellow"
-            text: "CLT " + Dashboard.Flag5
+            text: Dashboard.Flag4 +" "+ Dashboard.FlagString4
 
         }
 
         Text {
             color: "yellow"
-            text: "STP " + Dashboard.Flag6
+            text: Dashboard.Flag5 +" "+ Dashboard.FlagString5
 
         }
 
         Text {
             color: "yellow"
-            text: "CAT " + Dashboard.Flag7
+            text: Dashboard.Flag6 +" "+ Dashboard.FlagString6
 
         }
 
         Text {
             color: "yellow"
-            text: "ELD " + Dashboard.Flag8
+            text: Dashboard.Flag7 +" "+ Dashboard.FlagString7
 
         }
 
         Text {
             color: "yellow"
-            text: "HWL " + Dashboard.Flag9
+            text: Dashboard.Flag8 +" "+ Dashboard.FlagString8
 
         }
 
         Text {
             color: "yellow"
-            text: "FPD " + Dashboard.Flag10
+            text: Dashboard.Flag9 +" "+ Dashboard.FlagString9
 
         }
 
         Text {
             color: "yellow"
-            text: "FPR " + Dashboard.Flag11
+            text: Dashboard.Flag10 +" "+ Dashboard.FlagString10
 
         }
 
         Text {
             color: "yellow"
-            text: "APR " + Dashboard.Flag12
+            text: Dashboard.Flag11 +" "+ Dashboard.FlagString11
 
         }
 
         Text {
             color: "yellow"
-            text: "PAC " + Dashboard.Flag13
+            text: Dashboard.Flag12 +" "+ Dashboard.FlagString12
 
         }
 
         Text {
             color: "yellow"
-            text: "CCN " + Dashboard.Flag14
+            text: Dashboard.Flag13 +" "+ Dashboard.FlagString13
 
         }
 
         Text {
             color: "yellow"
-            text: "TCN " + Dashboard.Flag15
+            text: Dashboard.Flag14 +" "+ Dashboard.FlagString14
 
         }
 
         Text {
             color: "yellow"
-            text: "PRC " + Dashboard.Flag16
+            text: Dashboard.Flag15 +" "+ Dashboard.FlagString15
+
+        }
+
+        Text {
+            color: "yellow"
+            text: Dashboard.Flag16 +" "+ Dashboard.FlagString16
 
         }
 

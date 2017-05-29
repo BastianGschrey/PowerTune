@@ -493,6 +493,7 @@ public slots:
      void decodeInjPriLagvsBattV(QByteArray serialdata);
      void decodeInjScLagvsBattV(QByteArray serialdata);
      void decodeFuelInjectors(QByteArray serialdata);
+     void decodeSensorStrings(QByteArray serialdata);
 
      void decodeTrailIgn(QByteArray serialdata, quint8 column);
      void decodeLeadIgn(QByteArray serialdata, quint8 column);

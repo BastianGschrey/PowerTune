@@ -563,6 +563,138 @@ void DashBoard::setFlag16(const qreal &Flag16)
     emit Flag16Changed(Flag16);
 }
 
+
+//Flag Strings
+
+void DashBoard::setFlagString1(const QString &FlagString1)
+{
+    if (m_FlagString1 == FlagString1)
+        return;
+    m_FlagString1 = FlagString1;
+    emit FlagString1Changed(FlagString1);
+}
+
+void DashBoard::setFlagString2(const QString &FlagString2)
+{
+    if (m_FlagString2 == FlagString2)
+        return;
+    m_FlagString2 = FlagString2;
+    emit FlagString2Changed(FlagString2);
+}
+
+void DashBoard::setFlagString3(const QString &FlagString3)
+{
+    if (m_FlagString3 == FlagString3)
+        return;
+    m_FlagString3 = FlagString3;
+    emit FlagString3Changed(FlagString3);
+}
+
+void DashBoard::setFlagString4(const QString &FlagString4)
+{
+    if (m_FlagString4 == FlagString4)
+        return;
+    m_FlagString4 = FlagString4;
+    emit FlagString4Changed(FlagString4);
+}
+
+void DashBoard::setFlagString5(const QString &FlagString5)
+{
+    if (m_FlagString5 == FlagString5)
+        return;
+    m_FlagString5 = FlagString5;
+    emit FlagString5Changed(FlagString5);
+}
+
+void DashBoard::setFlagString6(const QString &FlagString6)
+{
+    if (m_FlagString6 == FlagString6)
+        return;
+    m_FlagString6 = FlagString6;
+    emit FlagString6Changed(FlagString6);
+}
+
+void DashBoard::setFlagString7(const QString &FlagString7)
+{
+    if (m_FlagString7 == FlagString7)
+        return;
+    m_FlagString7 = FlagString7;
+    emit FlagString7Changed(FlagString7);
+}
+
+void DashBoard::setFlagString8(const QString &FlagString8)
+{
+    if (m_FlagString8 == FlagString8)
+        return;
+    m_FlagString8 = FlagString8;
+    emit FlagString8Changed(FlagString8);
+}
+
+void DashBoard::setFlagString9(const QString &FlagString9)
+{
+    if (m_FlagString9 == FlagString9)
+        return;
+    m_FlagString9 = FlagString9;
+    emit FlagString9Changed(FlagString9);
+}
+
+void DashBoard::setFlagString10(const QString &FlagString10)
+{
+    if (m_FlagString10 == FlagString10)
+        return;
+    m_FlagString10 = FlagString10;
+    emit FlagString10Changed(FlagString10);
+}
+
+void DashBoard::setFlagString11(const QString &FlagString11)
+{
+    if (m_FlagString11 == FlagString11)
+        return;
+    m_FlagString11 = FlagString11;
+    emit FlagString11Changed(FlagString11);
+}
+
+void DashBoard::setFlagString12(const QString &FlagString12)
+{
+    if (m_FlagString12 == FlagString12)
+        return;
+    m_FlagString12 = FlagString12;
+    emit FlagString12Changed(FlagString12);
+}
+
+void DashBoard::setFlagString13(const QString &FlagString13)
+{
+    if (m_FlagString13 == FlagString13)
+        return;
+    m_FlagString13 = FlagString13;
+    emit FlagString13Changed(FlagString13);
+}
+
+void DashBoard::setFlagString14(const QString &FlagString14)
+{
+    if (m_FlagString14 == FlagString14)
+        return;
+    m_FlagString14 = FlagString14;
+    emit FlagString14Changed(FlagString14);
+}
+
+void DashBoard::setFlagString15(const QString &FlagString15)
+{
+    if (m_FlagString15 == FlagString15)
+        return;
+    m_FlagString15 = FlagString15;
+    emit FlagString15Changed(FlagString15);
+}
+
+void DashBoard::setFlagString16(const QString &FlagString16)
+{
+    if (m_FlagString16 == FlagString16)
+        return;
+    m_FlagString16 = FlagString16;
+    emit FlagString16Changed(FlagString16);
+}
+
+
 void DashBoard::setPlatform(const QString &Platform)
 {
     if (m_Platform == Platform)
@@ -777,6 +909,25 @@ qreal DashBoard::Flag13() const { return m_Flag13; }
 qreal DashBoard::Flag14() const { return m_Flag14; }
 qreal DashBoard::Flag15() const { return m_Flag15; }
 qreal DashBoard::Flag16() const { return m_Flag16; }
+
+//Flag Strings
+
+QString DashBoard::FlagString1() const { return m_FlagString1; }
+QString DashBoard::FlagString2() const { return m_FlagString2; }
+QString DashBoard::FlagString3() const { return m_FlagString3; }
+QString DashBoard::FlagString4() const { return m_FlagString4; }
+QString DashBoard::FlagString5() const { return m_FlagString5; }
+QString DashBoard::FlagString6() const { return m_FlagString6; }
+QString DashBoard::FlagString7() const { return m_FlagString7; }
+QString DashBoard::FlagString8() const { return m_FlagString8; }
+QString DashBoard::FlagString9() const { return m_FlagString9; }
+QString DashBoard::FlagString10() const { return m_FlagString10; }
+QString DashBoard::FlagString11() const { return m_FlagString11; }
+QString DashBoard::FlagString12() const { return m_FlagString12; }
+QString DashBoard::FlagString13() const { return m_FlagString13; }
+QString DashBoard::FlagString14() const { return m_FlagString14; }
+QString DashBoard::FlagString15() const { return m_FlagString15; }
+QString DashBoard::FlagString16() const { return m_FlagString16; }
 
 QString DashBoard::Platform() const { return m_Platform; }
 

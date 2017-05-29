@@ -40,7 +40,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal wtrt READ wtrt WRITE setwtrt NOTIFY wtrtChanged)
     Q_PROPERTY(qreal airt READ airt WRITE setairt NOTIFY airtChanged)
     Q_PROPERTY(qreal fuelt READ fuelt WRITE setfuelt NOTIFY fueltChanged)
-    Q_PROPERTY(qreal O2S READ O2S WRITE setO2S NOTIFY O2SChanged)  
+    Q_PROPERTY(qreal O2S READ O2S WRITE setO2S NOTIFY O2SChanged)
     Q_PROPERTY(qreal EngLoad READ EngLoad WRITE setEngLoad NOTIFY EngLoadChanged)
     Q_PROPERTY(qreal MAF1V READ MAF1V WRITE setMAF1V NOTIFY MAF1VChanged)
     Q_PROPERTY(qreal MAF2V READ MAF2V WRITE setMAF2V NOTIFY MAF2VChanged)
@@ -74,6 +74,25 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal Flag14 READ Flag14 WRITE setFlag14 NOTIFY Flag14Changed)
     Q_PROPERTY(qreal Flag15 READ Flag15 WRITE setFlag15 NOTIFY Flag15Changed)
     Q_PROPERTY(qreal Flag16 READ Flag16 WRITE setFlag16 NOTIFY Flag16Changed)
+
+    //Flag Strings
+    Q_PROPERTY(QString FlagString1 READ FlagString1 WRITE setFlagString1 NOTIFY FlagString1Changed)
+    Q_PROPERTY(QString FlagString2 READ FlagString2 WRITE setFlagString2 NOTIFY FlagString2Changed)
+    Q_PROPERTY(QString FlagString3 READ FlagString3 WRITE setFlagString3 NOTIFY FlagString3Changed)
+    Q_PROPERTY(QString FlagString4 READ FlagString4 WRITE setFlagString4 NOTIFY FlagString4Changed)
+    Q_PROPERTY(QString FlagString5 READ FlagString5 WRITE setFlagString5 NOTIFY FlagString5Changed)
+    Q_PROPERTY(QString FlagString6 READ FlagString6 WRITE setFlagString6 NOTIFY FlagString6Changed)
+    Q_PROPERTY(QString FlagString7 READ FlagString7 WRITE setFlagString7 NOTIFY FlagString7Changed)
+    Q_PROPERTY(QString FlagString8 READ FlagString8 WRITE setFlagString8 NOTIFY FlagString8Changed)
+    Q_PROPERTY(QString FlagString9 READ FlagString9 WRITE setFlagString9 NOTIFY FlagString9Changed)
+    Q_PROPERTY(QString FlagString10 READ FlagString10 WRITE setFlagString10 NOTIFY FlagString10Changed)
+    Q_PROPERTY(QString FlagString11 READ FlagString11 WRITE setFlagString11 NOTIFY FlagString11Changed)
+    Q_PROPERTY(QString FlagString12 READ FlagString12 WRITE setFlagString12 NOTIFY FlagString12Changed)
+    Q_PROPERTY(QString FlagString13 READ FlagString13 WRITE setFlagString13 NOTIFY FlagString13Changed)
+    Q_PROPERTY(QString FlagString14 READ FlagString14 WRITE setFlagString14 NOTIFY FlagString14Changed)
+    Q_PROPERTY(QString FlagString15 READ FlagString15 WRITE setFlagString15 NOTIFY FlagString15Changed)
+    Q_PROPERTY(QString FlagString16 READ FlagString16 WRITE setFlagString16 NOTIFY FlagString16Changed)
+
     Q_PROPERTY(QString Platform READ Platform WRITE setPlatform NOTIFY PlatformChanged)
 
 
@@ -170,6 +189,24 @@ public:
     void setFlag15(const qreal &Flag15);
     void setFlag16(const qreal &Flag16);
 
+    //Flag Strings
+
+    void setFlagString1(const QString &FlagString1);
+    void setFlagString2(const QString &FlagString2);
+    void setFlagString3(const QString &FlagString3);
+    void setFlagString4(const QString &FlagString4);
+    void setFlagString5(const QString &FlagString5);
+    void setFlagString6(const QString &FlagString6);
+    void setFlagString7(const QString &FlagString7);
+    void setFlagString8(const QString &FlagString8);
+    void setFlagString9(const QString &FlagString9);
+    void setFlagString10(const QString &FlagString10);
+    void setFlagString11(const QString &FlagString11);
+    void setFlagString12(const QString &FlagString12);
+    void setFlagString13(const QString &FlagString13);
+    void setFlagString14(const QString &FlagString14);
+    void setFlagString15(const QString &FlagString15);
+    void setFlagString16(const QString &FlagString16);
 
 
 
@@ -260,6 +297,26 @@ public:
     qreal Flag14() const;
     qreal Flag15() const;
     qreal Flag16() const;
+
+    // Flag Strings
+
+    QString FlagString1() const;
+    QString FlagString2() const;
+    QString FlagString3() const;
+    QString FlagString4() const;
+    QString FlagString5() const;
+    QString FlagString6() const;
+    QString FlagString7() const;
+    QString FlagString8() const;
+    QString FlagString9() const;
+    QString FlagString10() const;
+    QString FlagString11() const;
+    QString FlagString12() const;
+    QString FlagString13() const;
+    QString FlagString14() const;
+    QString FlagString15() const;
+    QString FlagString16() const;
+
     QString Platform() const;
 
 
@@ -285,7 +342,7 @@ public:
 
 signals:
 
-    // Advanced Info FD3S
+    // Advanced Info
     void revsChanged(qreal revs);
     void IntakepressChanged(qreal Intakepress);
     void PressureVChanged(qreal PressureV);
@@ -356,6 +413,25 @@ signals:
     void Flag14Changed(qreal Flag14);
     void Flag15Changed(qreal Flag15);
     void Flag16Changed(qreal Flag16);
+
+    //Flag Strings
+
+    void FlagString1Changed(QString FlagString1);
+    void FlagString2Changed(QString FlagString2);
+    void FlagString3Changed(QString FlagString3);
+    void FlagString4Changed(QString FlagString4);
+    void FlagString5Changed(QString FlagString5);
+    void FlagString6Changed(QString FlagString6);
+    void FlagString7Changed(QString FlagString7);
+    void FlagString8Changed(QString FlagString8);
+    void FlagString9Changed(QString FlagString9);
+    void FlagString10Changed(QString FlagString10);
+    void FlagString11Changed(QString FlagString11);
+    void FlagString12Changed(QString FlagString12);
+    void FlagString13Changed(QString FlagString13);
+    void FlagString14Changed(QString FlagString14);
+    void FlagString15Changed(QString FlagString15);
+    void FlagString16Changed(QString FlagString16);
 
     void PlatformChanged(QString Platform);
 
@@ -446,6 +522,26 @@ private:
     qreal m_Flag14;
     qreal m_Flag15;
     qreal m_Flag16;
+
+
+    //Flag Strings
+
+    QString m_FlagString1;
+    QString m_FlagString2;
+    QString m_FlagString3;
+    QString m_FlagString4;
+    QString m_FlagString5;
+    QString m_FlagString6;
+    QString m_FlagString7;
+    QString m_FlagString8;
+    QString m_FlagString9;
+    QString m_FlagString10;
+    QString m_FlagString11;
+    QString m_FlagString12;
+    QString m_FlagString13;
+    QString m_FlagString14;
+    QString m_FlagString15;
+    QString m_FlagString16;
 
     QString m_Platform;
 

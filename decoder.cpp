@@ -597,6 +597,38 @@ void Decoder::decodeInit(QByteArray serialdata)
     m_dashboard->setPlatform(QString(serialdata).mid(2,8));
 }
 
+void Decoder::decodeSensorStrings(QByteArray serialdata)
+{
+    /*
+    m_dashboard->setSensorString1 (QString(serialdata).mid(2,4));
+    m_dashboard->setSensorString2 (QString(serialdata).mid(6,4));
+    m_dashboard->setSensorString3 (QString(serialdata).mid(10,4));
+    m_dashboard->setSensorString4 (QString(serialdata).mid(14,4));
+    m_dashboard->setSensorString5 (QString(serialdata).mid(18,4));
+    m_dashboard->setSensorString6 (QString(serialdata).mid(22,4));
+    m_dashboard->setSensorString7 (QString(serialdata).mid(26,4));
+    m_dashboard->setSensorString8 (QString(serialdata).mid(30,4));
+    */
+
+    m_dashboard->setFlagString1 (QString(serialdata).mid(34,3));
+     qDebug() << "Model name ="<<(QString(serialdata).mid(34,3));
+    m_dashboard->setFlagString2 (QString(serialdata).mid(37,3));
+    m_dashboard->setFlagString3 (QString(serialdata).mid(40,3));
+    m_dashboard->setFlagString4 (QString(serialdata).mid(43,3));
+    m_dashboard->setFlagString5 (QString(serialdata).mid(46,3));
+    m_dashboard->setFlagString6 (QString(serialdata).mid(49,3));
+    m_dashboard->setFlagString7 (QString(serialdata).mid(52,3));
+    m_dashboard->setFlagString8 (QString(serialdata).mid(55,3));
+    m_dashboard->setFlagString9 (QString(serialdata).mid(58,3));
+    m_dashboard->setFlagString10 (QString(serialdata).mid(61,3));
+    m_dashboard->setFlagString11 (QString(serialdata).mid(64,3));
+    m_dashboard->setFlagString12 (QString(serialdata).mid(67,3));
+    m_dashboard->setFlagString13 (QString(serialdata).mid(70,3));
+    m_dashboard->setFlagString14 (QString(serialdata).mid(73,3));
+    m_dashboard->setFlagString15 (QString(serialdata).mid(76,3));
+    m_dashboard->setFlagString16 (QString(serialdata).mid(79,3));
+}
+
 
 void Decoder::decodeInjPriLagvsBattV(QByteArray serialdata)
 {
