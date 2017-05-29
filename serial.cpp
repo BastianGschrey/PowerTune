@@ -39,6 +39,15 @@ int interface; // 0=fcHako, 1=fc-datalogIt
 int Bytesexpected = 500;
 //reply = new QModbusReply;
 
+Serial::~Serial()
+{
+
+    if (modbusDevice)
+        modbusDevice->disconnectDevice();
+    delete modbusDevice;
+
+}
+
 Serial::Serial(QObject *parent) :
     QObject(parent),
     m_serialport(Q_NULLPTR),
@@ -47,9 +56,9 @@ Serial::Serial(QObject *parent) :
     lastRequest(nullptr),
     modbusDevice(nullptr)
 
+
 {
-
-
+    modbusDevice = new QModbusRtuSerialMaster(this);
     getPorts();
     m_dashBoard = new DashBoard(this);
     m_decoder = new Decoder(m_dashBoard, this);
@@ -136,14 +145,25 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
     //Adaptronic    
     if (ecuSelect == 1)
     {
-    modbusDevice = new QModbusRtuSerialMaster(this);
-    modbusDevice->setConnectionParameter(QModbusDevice::SerialPortNameParameter,portName);
-    modbusDevice->setConnectionParameter(QModbusDevice::SerialBaudRateParameter,57600);
-    modbusDevice->setTimeout(200);
-    modbusDevice->setNumberOfRetries(10);
-    modbusDevice->connectDevice();
-    //modbusDevice->sendReadRequest(QModbusDataUnit(QModbusDataUnit::HoldingRegisters, 4097, 6),1);
-    Serial::AdaptronicStartStream();
+
+        if (!modbusDevice)
+               return;
+
+        if (modbusDevice->state() != QModbusDevice::ConnectedState)
+        {
+            qDebug() << "modbus is not connected";
+                //modbusDevice = new QModbusRtuSerialMaster(this);
+                modbusDevice->setConnectionParameter(QModbusDevice::SerialPortNameParameter,portName);
+                modbusDevice->setConnectionParameter(QModbusDevice::SerialBaudRateParameter,57600);
+                modbusDevice->setTimeout(200);
+                modbusDevice->setNumberOfRetries(10);
+                modbusDevice->connectDevice();
+
+                Serial::AdaptronicStartStream();
+
+        }
+        else  qDebug() <<modbusDevice->state();
+
     }
 }
 
@@ -155,6 +175,7 @@ void Serial::closeConnection()
     }
     if(ecu == 1){
         modbusDevice->disconnectDevice();
+        qDebug() << "device disconnected";
     }
 }
 // Error handling still to be tested

@@ -74,8 +74,8 @@ Rectangle {
                 Button {
                     text: "Connect"
                     onClicked: {
-                        console.log (serialName.currentText);
-                        //Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex)
+                       // console.log (serialName.currentText);
+                        Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex)
                     }
                 }
                 Button {

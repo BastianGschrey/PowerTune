@@ -36,6 +36,7 @@ class Serial : public QObject
     Q_PROPERTY(QStringList portsNames READ portsNames WRITE setPortsNames NOTIFY sig_portsNamesChanged)
 
 public:
+    ~Serial();
     explicit Serial(QObject *parent = 0);
 
     Q_INVOKABLE void clear() const;
