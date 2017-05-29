@@ -7,8 +7,6 @@ Rectangle {
     width: parent.width
     height: parent.height
     color: "grey"
-    //Automatically connect on startup if decoded
-    //Component.onCompleted:  Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex)
 
 
 Item {
@@ -100,7 +98,7 @@ Item {
             CheckBox {
             id: connectAtStart
             text: qsTr("Autoconnect at startup")
-
+            Component.onCompleted: if (connectAtStart.checkState == "2") Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex)
         }
 
         }
