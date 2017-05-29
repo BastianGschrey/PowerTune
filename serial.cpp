@@ -162,7 +162,6 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
                 Serial::AdaptronicStartStream();
 
         }
-        else  qDebug() <<modbusDevice->state();
 
     }
 }

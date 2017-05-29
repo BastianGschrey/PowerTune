@@ -13,7 +13,7 @@ Rectangle {
         id: powerTuneSettings
 
         Settings {
-            property alias connectAtStartUp: connectAtStart.checkState
+            property alias connectAtStartUp: connectAtStart.checked
             property alias serialPortName: serialName.currentText
             property alias ecuType: ecuSelect.currentText
             property alias powerFcInterface: interfaceSelect.currentText
@@ -72,13 +72,16 @@ Rectangle {
                 spacing: 5
 
                 Button {
+                    id: connectButton
                     text: "Connect"
                     onClicked: {
                        // console.log (serialName.currentText);
                         Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex)
-                    }
+
+                        }
                 }
                 Button {
+                    id: disconnectButton
                     text: "Disconnect"
                     onClicked: {
                         Serial.closeConnection()
@@ -96,7 +99,7 @@ Rectangle {
                         Qt.quit()
                     }
                 }
-                CheckBox {
+                Switch {
                     id: connectAtStart
                     text: qsTr("Autoconnect at startup")
                 }
