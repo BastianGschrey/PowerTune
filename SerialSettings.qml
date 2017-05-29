@@ -116,7 +116,7 @@ Rectangle {
         id: autoconnect
         function auto()
         {
-            if (connectAtStart.checkState == "2") Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex);
+            if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex);
         }
     }
 
