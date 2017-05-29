@@ -7,6 +7,9 @@ Rectangle {
     width: parent.width
     height: parent.height
     color: "grey"
+    //Automatically connect on startup if decoded
+    //Component.onCompleted:  Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex)
+
 
 Item {
     id: powerTuneSettings
