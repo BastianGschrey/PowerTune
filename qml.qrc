@@ -1,14 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>LeadingIgnitionMap.qml</file>
-        <file>TrailingIgnitionMap.qml</file>
-        <file>InjectorMap.qml</file>
-        <file>BaseMap.qml</file>
-        <file>InjectorSettings.qml</file>
-        <file>BoostSettings.qml</file>
-        <file>Protections.qml</file>
-        <file>TempGauge.qml</file>
         <file>graphics/background.png</file>
         <file>graphics/Dial.qml</file>
         <file>graphics/needle.png</file>
@@ -16,34 +8,37 @@
         <file>graphics/overlay.png</file>
         <file>graphics/quit.png</file>
         <file>graphics/QuitButton.qml</file>
-        <file>Dashboard.qml</file>
         <file>SerialSettings.qml</file>
         <file>graphics/Tacho_Mitte.png</file>
-        <file>RevGaugeInnerRing.qml</file>
-        <file>SpeedGaugeInnerRing.qml</file>
-        <file>GaugeNeedle.qml</file>
-        <file>Advanced.qml</file>
-        <file>TachometerStyle.qml</file>
-        <file>DashboardGaugeStyle.qml</file>
-        <file>HalfGaugeStyle.qml</file>
-        <file>Dash2.qml</file>
-        <file>Charts.qml</file>
-        <file>HalfNeedle.qml</file>
-        <file>Needle90Left.qml</file>
-        <file>Needle90degrTopright.qml</file>
-        <file>HalfGaugeWaterDegC.qml</file>
         <file>Settings.qml</file>
         <file>GuiSettings.qml</file>
-        <file>Dash1.qml</file>
-        <file>AirTempGaugeInnerRingF.qml</file>
-        <file>BoostGaugeInnerRing.qml</file>
-        <file>WaterGaugeInnerRingF.qml</file>
-        <file>HalfGauges_metric.qml</file>
-        <file>Dashboard_Imperial.qml</file>
-        <file>SpeedGaugeInnerRing_Imperial.qml</file>
-        <file>DashAdaptronic.qml</file>
         <file>DecodingSettings.qml</file>
-        <file>Fullgauge180Needle.qml</file>
-        <file>PFCSensors.qml</file>
+        <file>Gauges/AirTempGaugeInnerRingF.qml</file>
+        <file>Gauges/BoostGaugeInnerRing.qml</file>
+        <file>Gauges/DashboardGaugeStyle.qml</file>
+        <file>Gauges/Fullgauge180Needle.qml</file>
+        <file>Gauges/GaugeNeedle.qml</file>
+        <file>Gauges/HalfGaugeStyle.qml</file>
+        <file>Gauges/HalfGaugeWaterDegC.qml</file>
+        <file>Gauges/HalfGaugeWaterDegF.qml</file>
+        <file>Gauges/HalfNeedle.qml</file>
+        <file>Gauges/Needle180deg.qml</file>
+        <file>Gauges/Needle90degrTopright.qml</file>
+        <file>Gauges/Needle90Left.qml</file>
+        <file>Gauges/RevGauge.qml</file>
+        <file>Gauges/RevGaugeInnerRing.qml</file>
+        <file>Gauges/RevGaugeNeedle.qml</file>
+        <file>Gauges/SpeedGaugeInnerRing.qml</file>
+        <file>Gauges/SpeedGaugeInnerRing_Imperial.qml</file>
+        <file>Gauges/SpeedGaugeNeedle.qml</file>
+        <file>Gauges/TachometerStyle.qml</file>
+        <file>Gauges/TempGauge.qml</file>
+        <file>Gauges/WaterGaugeInnerRingF.qml</file>
+        <file>Gauges/Dash1.qml</file>
+        <file>Gauges/Dash2.qml</file>
+        <file>Gauges/DashAdaptronic.qml</file>
+        <file>Gauges/Dashboard.qml</file>
+        <file>Gauges/Dashboard_Imperial.qml</file>
+        <file>Gauges/PFCSensors.qml</file>
     </qresource>
 </RCC>

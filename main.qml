@@ -24,40 +24,40 @@ ApplicationWindow {
 
         currentIndex: 0
         anchors.fill: parent
+/*
+        Item {
+            width: 200; height: 200
 
-        Item {
-            id: firstPage
-            Dashboard{}
-        }
-        Item {
-            id: secondPage
-            PFCSensors{}
-        }
-        /*
-        Item {
+            Loader { id: pageLoader }
 
-            Dash1{}
+            MouseArea {
+                anchors.fill: parent
+                onClicked: pageLoader.source = "qrc:/Gauges/Dashboard.qml"
+            }
         }
-        Item {
+*/
+        Loader {
 
-            Dash2{}
+           id: firstPageLoader
+           source: "qrc:/Gauges/Dashboard.qml"
         }
-        Item {
 
-            Dashboard_Imperial{}
+        Loader {
+            id: secondPageLoader
+            source: "qrc:/Gauges/PFCSensors.qml"
         }
-        */
-        Item {
-            id: thirdPage
-            HalfGauges_metric{}
+
+        Loader {
+            id: thirdPageLoader
+           source: "qrc:/Gauges/HalfGauges_metric"
         }
-        Item {
-            id: forthPage
-            DashAdaptronic{}
+        Loader {
+            id: fourthPageLoader
+            source: "qrc:/Gauges/DashAdaptronic.qml"
         }
         Item {
             id: fifthPage
-            SerialSettings{}
+            Settings{}
         }
     }
 
