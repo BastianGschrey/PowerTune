@@ -44,5 +44,6 @@
         <file>DashAdaptronic.qml</file>
         <file>DecodingSettings.qml</file>
         <file>Fullgauge180Needle.qml</file>
+        <file>PFCSensors.qml</file>
     </qresource>
 </RCC>

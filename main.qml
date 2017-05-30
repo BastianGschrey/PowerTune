@@ -31,7 +31,7 @@ ApplicationWindow {
         }
         Item {
             id: secondPage
-            Advanced{}
+            PFCSensors{}
         }
         /*
         Item {
