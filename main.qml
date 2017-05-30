@@ -49,14 +49,18 @@ ApplicationWindow {
 
         Loader {
             id: thirdPageLoader
-           source: "qrc:/Gauges/HalfGauges_metric"
+           source: "qrc:/Gauges/HalfGauges_metric.qml"
         }
         Loader {
             id: fourthPageLoader
             source: "qrc:/Gauges/DashAdaptronic.qml"
         }
+        Loader {
+            id: fifthPageLoader
+            source: "qrc:/Gauges/DynamicDash.qml"
+        }
         Item {
-            id: fifthPage
+            id:seventhPage
             Settings{}
         }
     }
