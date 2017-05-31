@@ -9,12 +9,24 @@ import QtQuick.Extras 1.4
 //first try of full parameterised gauge
 
 Rectangle {
+            // Make the complete Rectangle draggable
+            Drag.active: dragArea.drag.active
+
+
+    MouseArea {
+        // Mouse area in which the item can be dragged
+        id: dragArea
+        anchors.fill: parent
+        drag.target: parent
+
+    }
         id: horizontalBarGauge
         width: 260
         height: 85
         color: "transparent"
-        anchors.left: parent.left
-        anchors.top : parent.top
+        // anchors prevent the item from beeing dragged
+   //     anchors.left: parent.left
+   //     anchors.top : parent.top
 
 
         property alias title: titleText.text
