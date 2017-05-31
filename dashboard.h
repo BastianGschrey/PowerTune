@@ -34,13 +34,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal na2 READ Intaketemp WRITE setna2 NOTIFY na2Changed)
     Q_PROPERTY(qreal InjDuty READ InjDuty WRITE setInjDuty NOTIFY InjDutyChanged)
     Q_PROPERTY(qreal pim READ pim WRITE setpim NOTIFY pimChanged)
-    Q_PROPERTY(qreal vta1 READ vta1 WRITE setvta1 NOTIFY vta1Changed)
-    Q_PROPERTY(qreal vta2 READ vta2 WRITE setvta2 NOTIFY vta2Changed)
-    Q_PROPERTY(qreal vmop READ vmop WRITE setvmop NOTIFY vmopChanged)
-    Q_PROPERTY(qreal wtrt READ wtrt WRITE setwtrt NOTIFY wtrtChanged)
-    Q_PROPERTY(qreal airt READ airt WRITE setairt NOTIFY airtChanged)
-    Q_PROPERTY(qreal fuelt READ fuelt WRITE setfuelt NOTIFY fueltChanged)
-    Q_PROPERTY(qreal O2S READ O2S WRITE setO2S NOTIFY O2SChanged)
+
     Q_PROPERTY(qreal EngLoad READ EngLoad WRITE setEngLoad NOTIFY EngLoadChanged)
     Q_PROPERTY(qreal MAF1V READ MAF1V WRITE setMAF1V NOTIFY MAF1VChanged)
     Q_PROPERTY(qreal MAF2V READ MAF2V WRITE setMAF2V NOTIFY MAF2VChanged)
@@ -53,8 +47,15 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal MAFactivity READ MAFactivity WRITE setMAFactivity NOTIFY MAFactivityChanged)
     Q_PROPERTY(qreal O2volt_2 READ O2volt_2 WRITE setO2volt_2 NOTIFY O2volt_2Changed)
 
-
-
+    // Sensor Voltage
+    Q_PROPERTY(qreal sens1 READ sens1 WRITE setsens1 NOTIFY sens1Changed)
+    Q_PROPERTY(qreal sens2 READ sens2 WRITE setsens2 NOTIFY sens2Changed)
+    Q_PROPERTY(qreal sens3 READ sens3 WRITE setsens3 NOTIFY sens3Changed)
+    Q_PROPERTY(qreal sens4 READ sens4 WRITE setsens4 NOTIFY sens4Changed)
+    Q_PROPERTY(qreal sens5 READ sens5 WRITE setsens5 NOTIFY sens5Changed)
+    Q_PROPERTY(qreal sens6 READ sens6 WRITE setsens6 NOTIFY sens6Changed)
+    Q_PROPERTY(qreal sens7 READ sens7 WRITE setsens7 NOTIFY sens7Changed)
+    Q_PROPERTY(qreal sens8 READ sens8 WRITE setsens8 NOTIFY sens8Changed)
 
     // Flags
 
@@ -157,18 +158,21 @@ public:
 
 
 
+    //Boost
 
+    void setpim(const qreal &pim);
 
 
     //Sensor Info
-    void setpim(const qreal &pim);
-    void setvta1(const qreal &vta1);
-    void setvta2(const qreal &vta2);
-    void setvmop(const qreal &vmop);
-    void setwtrt(const qreal &wtrt);
-    void setairt(const qreal &airt);
-    void setfuelt(const qreal &fuelt);
-    void setO2S(const qreal &O2S);
+
+    void setsens1(const qreal &sens1);
+    void setsens2(const qreal &sens2);
+    void setsens3(const qreal &sens3);
+    void setsens4(const qreal &sens4);
+    void setsens5(const qreal &sens5);
+    void setsens6(const qreal &sens6);
+    void setsens7(const qreal &sens7);
+    void setsens8(const qreal &sens8);
 
     //Flags
 
@@ -268,16 +272,20 @@ public:
     qreal MAFactivity() const;
     qreal O2volt_2() const;
 
-    //Sensor info
-
+    //Boost
     qreal pim() const;
-    qreal vta1() const;
-    qreal vta2() const;
-    qreal vmop() const;
-    qreal wtrt() const;
-    qreal airt() const;
-    qreal fuelt() const;
-    qreal O2S() const;
+
+    //Sensor Voltages
+
+    qreal sens1() const;
+    qreal sens2() const;
+    qreal sens3() const;
+    qreal sens4() const;
+    qreal sens5() const;
+    qreal sens6() const;
+    qreal sens7() const;
+    qreal sens8() const;
+
 
     //Flags
 
@@ -379,20 +387,20 @@ signals:
     void O2volt_2Changed(qreal O2volt_2);
 
 
+     //Boost
+     void pimChanged(qreal pim);
 
 
+    //Sensor Voltages
 
-
-    //Sensor info
-
-    void pimChanged(qreal pim);
-    void vta1Changed(qreal vta1);
-    void vta2Changed(qreal vta2);
-    void vmopChanged(qreal vmop);
-    void wtrtChanged(qreal wtrt);
-    void airtChanged(qreal airt);
-    void fueltChanged(qreal fuelt);
-    void O2SChanged(qreal O2S);
+     void sens1Changed(qreal sens1);
+     void sens2Changed(qreal sens2);
+     void sens3Changed(qreal sens3);
+     void sens4Changed(qreal sens4);
+     void sens5Changed(qreal sens5);
+     void sens6Changed(qreal sens6);
+     void sens7Changed(qreal sens7);
+     void sens8Changed(qreal sens8);
 
 
     //Flags
@@ -493,16 +501,19 @@ private:
     qreal m_MAFactivity;
     qreal m_O2volt_2;
 
-    //Sensor info
 
+ //Boost
     qreal m_pim;
-    qreal m_vta1;
-    qreal m_vta2;
-    qreal m_vmop;
-    qreal m_wtrt;
-    qreal m_airt;
-    qreal m_fuelt;
-    qreal m_O2S;
+
+  //Sensor Voltage
+    qreal m_sens1;
+    qreal m_sens2;
+    qreal m_sens3;
+    qreal m_sens4;
+    qreal m_sens5;
+    qreal m_sens6;
+    qreal m_sens7;
+    qreal m_sens8;
 
     //Flags
 

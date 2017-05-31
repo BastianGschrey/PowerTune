@@ -40,17 +40,20 @@ DashBoard::DashBoard(QObject *parent)
     , m_O2volt_2(0)
 
 
+//Boost
 
- // Sensor Info FD3S
 
     , m_pim(0)
-    , m_vta1(0)
-    , m_vta2(0)
-    , m_vmop(0)
-    , m_wtrt(0)
-    , m_airt(0)
-    , m_fuelt(0)
-    , m_O2S(0)
+
+ // Sensor Info FD3S
+    , m_sens1(0)
+    , m_sens2(0)
+    , m_sens3(0)
+    , m_sens4(0)
+    , m_sens5(0)
+    , m_sens6(0)
+    , m_sens7(0)
+    , m_sens8(0)
 
     //Bit Flags for Sensors
     , m_Flag1(0)
@@ -356,8 +359,7 @@ void DashBoard::setO2volt_2(const qreal &O2volt_2)
 }
 
 
-
-//Sensor info
+//Boost
 
 void DashBoard::setpim(const qreal &pim)
 {
@@ -367,60 +369,71 @@ void DashBoard::setpim(const qreal &pim)
     emit pimChanged(pim);
 }
 
-void DashBoard::setvta1(const qreal &vta1)
+//Sensor info
+
+
+void DashBoard::setsens1(const qreal &sens1)
 {
-    if (m_vta1 == vta1)
+    if (m_sens1 == sens1)
         return;
-    m_vta1 = vta1;
-    emit vta1Changed(vta1);
+    m_sens1 = sens1;
+    emit sens1Changed(sens1);
 }
 
-void DashBoard::setvta2(const qreal &vta2)
+void DashBoard::setsens2(const qreal &sens2)
 {
-    if (m_vta2 == vta2)
+    if (m_sens2 == sens2)
         return;
-    m_vta2 = vta2;
-    emit vta2Changed(vta2);
+    m_sens2 = sens2;
+    emit sens2Changed(sens2);
 }
 
-void DashBoard::setvmop(const qreal &vmop)
+void DashBoard::setsens3(const qreal &sens3)
 {
-    if (m_vmop == vmop)
+    if (m_sens3 == sens3)
         return;
-    m_vmop = vmop;
-    emit vmopChanged(vmop);
+    m_sens3 = sens3;
+    emit sens3Changed(sens3);
 }
 
-void DashBoard::setwtrt(const qreal &wtrt)
+void DashBoard::setsens4(const qreal &sens4)
 {
-    if (m_wtrt == wtrt)
+    if (m_sens4 == sens4)
         return;
-    m_wtrt = wtrt;
-    emit wtrtChanged(wtrt);
+    m_sens4 = sens4;
+    emit sens4Changed(sens4);
 }
 
-void DashBoard::setairt(const qreal &airt)
+void DashBoard::setsens5(const qreal &sens5)
 {
-    if (m_airt == airt)
+    if (m_sens5 == sens5)
         return;
-    m_airt = airt;
-    emit airtChanged(airt);
+    m_sens5 = sens5;
+    emit sens5Changed(sens5);
 }
 
-void DashBoard::setfuelt(const qreal &fuelt)
+void DashBoard::setsens6(const qreal &sens6)
 {
-    if (m_fuelt == fuelt)
+    if (m_sens6 == sens6)
         return;
-    m_fuelt = fuelt;
-    emit fueltChanged(fuelt);
+    m_sens6 = sens6;
+    emit sens6Changed(sens6);
 }
 
-void DashBoard::setO2S(const qreal &O2S)
+void DashBoard::setsens7(const qreal &sens7)
 {
-    if (m_O2S == O2S)
+    if (m_sens7 == sens7)
         return;
-    m_O2S = O2S;
-    emit O2SChanged(O2S);
+    m_sens7 = sens7;
+    emit sens7Changed(sens7);
+}
+
+void DashBoard::setsens8(const qreal &sens8)
+{
+    if (m_sens8 == sens8)
+        return;
+    m_sens8 = sens8;
+    emit sens8Changed(sens8);
 }
 
 void DashBoard::setInjDuty(const qreal &InjDuty)
@@ -878,18 +891,19 @@ qreal DashBoard::MAFactivity() const { return m_MAFactivity; }
 qreal DashBoard::O2volt_2() const { return m_O2volt_2; }
 
 
-
-
-//Sensor info
+//Boost
 
 qreal DashBoard::pim() const { return m_pim; }
-qreal DashBoard::vta1() const { return m_vta1; }
-qreal DashBoard::vta2() const { return m_vta2; }
-qreal DashBoard::vmop() const { return m_vmop; }
-qreal DashBoard::wtrt() const { return m_wtrt; }
-qreal DashBoard::airt() const { return m_airt; }
-qreal DashBoard::fuelt() const { return m_fuelt; }
-qreal DashBoard::O2S() const { return m_O2S; }
+
+//Sensor info
+qreal DashBoard::sens1() const { return m_sens1; }
+qreal DashBoard::sens2() const { return m_sens2; }
+qreal DashBoard::sens3() const { return m_sens3; }
+qreal DashBoard::sens4() const { return m_sens4; }
+qreal DashBoard::sens5() const { return m_sens5; }
+qreal DashBoard::sens6() const { return m_sens6; }
+qreal DashBoard::sens7() const { return m_sens7; }
+qreal DashBoard::sens8() const { return m_sens8; }
 
 //Flags
 

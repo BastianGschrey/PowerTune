@@ -224,28 +224,29 @@ void Decoder::decodeSensor(QByteArray serialdata)
 {
     fc_sens_info_t* info=reinterpret_cast<fc_sens_info_t*>(serialdata.data());
 
-    packageSens[0] = info->pim * 0.01;
-    packageSens[1] = info->vta1 * 0.01;
-    packageSens[2] = info->vta2 * 0.01;
-    packageSens[3] = info->vmop;  //calculation incorrect compared with FC Edit
-    packageSens[4] = info->wtrt * 0.01;
-    packageSens[5] = info->airt * 0.01;
-    packageSens[6] = info->fuelt; //calculation incorrect
-    packageSens[7] = info->O2S * 0.01;
-
+    packageSens[0] = info->sens1 * 0.01;
+    packageSens[1] = info->sens2 * 0.01;
+    packageSens[2] = info->sens3 * 0.01;
+    packageSens[3] = info->sens4 * 0.01;
+    packageSens[4] = info->sens5 * 0.01;
+    packageSens[5] = info->sens6 * 0.01;
+    packageSens[6] = info->sens7 * 0.01;
+    packageSens[7] = info->sens8 * 0.01;
+    //qDebug() << "Model ="<<packageSens[7];
     QBitArray flagArray(16);
     for (int i=0; i<16; i++)
         flagArray.setBit(i, info->flags>>i & 1);
 
 
-   // m_dashboard->setpim(packageSens[0]);
-    m_dashboard->setvta1(packageSens[1]);
-    m_dashboard->setvta2(packageSens[2]);
-    m_dashboard->setvmop(packageSens[3]);
-    m_dashboard->setwtrt(packageSens[4]);
-    m_dashboard->setairt(packageSens[5]);
-    m_dashboard->setfuelt(packageSens[6]);
-    m_dashboard->setO2S(packageSens[7]);
+    m_dashboard->setsens1(packageSens[0]);
+    m_dashboard->setsens2(packageSens[1]);
+    m_dashboard->setsens3(packageSens[2]);
+    m_dashboard->setsens4(packageSens[3]);
+    m_dashboard->setsens5(packageSens[4]);
+    m_dashboard->setsens6(packageSens[5]);
+    m_dashboard->setsens7(packageSens[6]);
+    m_dashboard->setsens8(packageSens[7]);
+
 
     //Bit Flags for Sensors
     m_dashboard->setFlag1(flagArray[0]);

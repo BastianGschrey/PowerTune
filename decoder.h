@@ -111,14 +111,14 @@ private:
     struct fc_sens_info_t{
 
         quint16 requesttype;
-        quint16 pim;
-        quint16 vta1;
-        quint16 vta2;
-        quint16 vmop;
-        quint16 wtrt;
-        quint16 airt;
-        quint16 fuelt;
-        quint16 O2S;
+        quint16 sens1;
+        quint16 sens2;
+        quint16 sens3;
+        quint16 sens4;
+        quint16 sens5;
+        quint16 sens6;
+        quint16 sens7;
+        quint16 sens8;
         quint16 flags;
         quint8  checksum;
 
