@@ -18,26 +18,30 @@ Rectangle {
         id: dragArea
         anchors.fill: parent
         drag.target: parent
+         }
 
-    }
-        id: horizontalBarGauge
-        width: 260
-        height: 85
-        color: "transparent"
-        // anchors prevent the item from beeing dragged
-   //     anchors.left: parent.left
-   //     anchors.top : parent.top
-
+        id: barGauge
 
         property alias title: titleText.text
         property alias type: gauge.value
+        property alias gaugetype: gauge.orientation
+
+       // width: 260
+       //   height: 85
+
+        //color: (hand.callValue >= hand.handRaiseXBB) ? hand.handFoldColor : hand.handCallColor
+
+        width: (gauge.orientation == Qt.Horizontal) ? 260 : 85
+        height: (gauge.orientation == Qt.Vertical) ? 260 : 85
+        color: "transparent"
+
 
 
         Gauge {
             id: gauge
             anchors.fill: parent
             anchors.margins: 10
-            orientation : Qt.Horizontal
+            orientation : Qt.Vertical
             minorTickmarkCount: 6
             tickmarkStepSize : 70
             //labelStepSize: 50

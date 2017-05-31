@@ -27,16 +27,22 @@ Rectangle {
         id: pieMenu
 
         MenuItem {
-            text: "Add Bar Gauge"
-            onTriggered: gaugeLoader.setSource("qrc:/Gauges/horizontalBarGauge.qml", { "title" : "MAP", "type" : "Dashboard.MAP" });
+            text: "Horizontal Bar Gauge"
+            onTriggered: gaugeLoader.setSource("qrc:/Gauges/BarGauge.qml", { "title" : "MAP", "type" : "Dashboard.MAP", "gaugetype" : Qt.Horizontal });
+        }
+
+        MenuItem {
+            text: "Vertical Bar Gauge"
+            onTriggered: gaugeLoader.setSource("qrc:/Gauges/BarGauge.qml", { "title" : "MAP", "type" : "Dashboard.MAP", "gaugetype" : Qt.Vertical });
 
         }
         MenuItem {
-            text: "Action 2"
-            onTriggered: print("Action 2")
-        }
+            text: "Dial Gauge"
+            onTriggered: print("Action 3")
+
+        }       
         MenuItem {
-            text: "Action 3"
+            text: "Flag Gauge"
             onTriggered: print("Action 3")
         }
     }

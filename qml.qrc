@@ -41,7 +41,7 @@
         <file>Gauges/Dashboard_Imperial.qml</file>
         <file>Gauges/PFCSensors.qml</file>
         <file>Gauges/DynamicDash.qml</file>
-        <file>Gauges/horizontalBarGauge.qml</file>
         <file>Gauges/HalfGauges_metric.qml</file>
+        <file>Gauges/BarGauge.qml</file>
     </qresource>
 </RCC>
