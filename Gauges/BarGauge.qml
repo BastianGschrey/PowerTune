@@ -56,7 +56,7 @@ Rectangle {
             }
             Text {
                 id: titleText
-                font.pixelSize: (parent.height / 3)
+                font.pixelSize: 20
                 anchors.top : parent.top
                 font.bold: true
                 font.family: "Eurostile"
@@ -65,7 +65,7 @@ Rectangle {
             }
               style: GaugeStyle {
                 valueBar: Rectangle {
-                   implicitWidth:  parent.height /3
+                   implicitWidth:  20
 
                     color: Qt.rgba(gauge.value / gauge.maximumValue, 0, 1 - gauge.value / gauge.maximumValue, 1)
                 }
