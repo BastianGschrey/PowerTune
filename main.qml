@@ -35,7 +35,9 @@ ApplicationWindow {
                 onClicked: pageLoader.source = "qrc:/Gauges/Dashboard.qml"
             }
         }
+
 */
+
         Loader {
 
            id: firstPageLoader

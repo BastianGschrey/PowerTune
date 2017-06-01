@@ -46,14 +46,45 @@ DashBoard::DashBoard(QObject *parent)
     , m_pim(0)
 
  // Sensor Info FD3S
-    , m_sens1(0)
-    , m_sens2(0)
-    , m_sens3(0)
-    , m_sens4(0)
-    , m_sens5(0)
-    , m_sens6(0)
-    , m_sens7(0)
-    , m_sens8(0)
+    , m_sens1(0.00)
+    , m_sens2(0.00)
+    , m_sens3(0.00)
+    , m_sens4(0.00)
+    , m_sens5(0.00)
+    , m_sens6(0.00)
+    , m_sens7(0.00)
+    , m_sens8(0.00)
+
+    //Flag Strings
+
+    , m_FlagString1 ("F-1")
+    , m_FlagString2 ("F-2")
+    , m_FlagString3 ("F-3")
+    , m_FlagString4 ("F-4")
+    , m_FlagString5 ("F-5")
+    , m_FlagString6 ("F-6")
+    , m_FlagString7 ("F-7")
+    , m_FlagString8 ("F-8")
+    , m_FlagString9 ("F-9")
+    , m_FlagString10 ("F10")
+    , m_FlagString11 ("F11")
+    , m_FlagString12 ("F12")
+    , m_FlagString13 ("F13")
+    , m_FlagString14 ("F14")
+    , m_FlagString15 ("F15")
+    , m_FlagString16 ("F16")
+
+    //Sensor Srings
+
+    , m_SensorString1 ("SEN1")
+    , m_SensorString2 ("SEN2")
+    , m_SensorString3 ("SEN3")
+    , m_SensorString4 ("SEN4")
+    , m_SensorString5 ("SEN5")
+    , m_SensorString6 ("SEN6")
+    , m_SensorString7 ("SEN7")
+    , m_SensorString8 ("SEN8")
+
 
     //Bit Flags for Sensors
     , m_Flag1(0)
@@ -716,6 +747,73 @@ void DashBoard::setPlatform(const QString &Platform)
     emit PlatformChanged(Platform);
 }
 
+//Sensor Strings
+
+//Sensor Strings
+
+void DashBoard::setSensorString1(const QString &SensorString1)
+{
+    if (m_SensorString1 == SensorString1)
+        return;
+    m_SensorString1 = SensorString1;
+    emit SensorString1Changed(SensorString1);
+}
+
+void DashBoard::setSensorString2(const QString &SensorString2)
+{
+    if (m_SensorString2 == SensorString2)
+        return;
+    m_SensorString2 = SensorString2;
+    emit SensorString2Changed(SensorString2);
+}
+
+void DashBoard::setSensorString3(const QString &SensorString3)
+{
+    if (m_SensorString3 == SensorString3)
+        return;
+    m_SensorString3 = SensorString3;
+    emit SensorString3Changed(SensorString3);
+}
+
+void DashBoard::setSensorString4(const QString &SensorString4)
+{
+    if (m_SensorString4 == SensorString4)
+        return;
+    m_SensorString4 = SensorString4;
+    emit SensorString4Changed(SensorString4);
+}
+
+void DashBoard::setSensorString5(const QString &SensorString5)
+{
+    if (m_SensorString5 == SensorString5)
+        return;
+    m_SensorString5 = SensorString5;
+    emit SensorString5Changed(SensorString5);
+}
+
+void DashBoard::setSensorString6(const QString &SensorString6)
+{
+    if (m_SensorString6 == SensorString6)
+        return;
+    m_SensorString6 = SensorString6;
+    emit SensorString6Changed(SensorString6);
+}
+
+void DashBoard::setSensorString7(const QString &SensorString7)
+{
+    if (m_SensorString7 == SensorString7)
+        return;
+    m_SensorString7 = SensorString7;
+    emit SensorString7Changed(SensorString7);
+}
+
+void DashBoard::setSensorString8(const QString &SensorString8)
+{
+    if (m_SensorString8 == SensorString8)
+        return;
+    m_SensorString8 = SensorString8;
+    emit SensorString8Changed(SensorString8);
+}
 
 
 
@@ -942,7 +1040,17 @@ QString DashBoard::FlagString13() const { return m_FlagString13; }
 QString DashBoard::FlagString14() const { return m_FlagString14; }
 QString DashBoard::FlagString15() const { return m_FlagString15; }
 QString DashBoard::FlagString16() const { return m_FlagString16; }
+// Sensor Strings
 
+QString DashBoard::SensorString1() const { return m_SensorString1; }
+QString DashBoard::SensorString2() const { return m_SensorString2; }
+QString DashBoard::SensorString3() const { return m_SensorString3; }
+QString DashBoard::SensorString4() const { return m_SensorString4; }
+QString DashBoard::SensorString5() const { return m_SensorString5; }
+QString DashBoard::SensorString6() const { return m_SensorString6; }
+QString DashBoard::SensorString7() const { return m_SensorString7; }
+QString DashBoard::SensorString8() const { return m_SensorString8; }
+//Platfrom String
 QString DashBoard::Platform() const { return m_Platform; }
 
 //Adaptronic extra

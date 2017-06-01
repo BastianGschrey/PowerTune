@@ -27,5 +27,6 @@ HEADERS += \
 
 FORMS +=
 
-DISTFILES +=
+DISTFILES += \
+    ../../../Users/Marku/Downloads/Changed Files.zip
 

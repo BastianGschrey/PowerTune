@@ -94,6 +94,18 @@ class DashBoard : public QObject
     Q_PROPERTY(QString FlagString15 READ FlagString15 WRITE setFlagString15 NOTIFY FlagString15Changed)
     Q_PROPERTY(QString FlagString16 READ FlagString16 WRITE setFlagString16 NOTIFY FlagString16Changed)
 
+
+    // Sensor Strings
+
+    Q_PROPERTY(QString SensorString1 READ SensorString1 WRITE setSensorString1 NOTIFY SensorString1Changed)
+    Q_PROPERTY(QString SensorString2 READ SensorString2 WRITE setSensorString2 NOTIFY SensorString2Changed)
+    Q_PROPERTY(QString SensorString3 READ SensorString3 WRITE setSensorString3 NOTIFY SensorString3Changed)
+    Q_PROPERTY(QString SensorString4 READ SensorString4 WRITE setSensorString4 NOTIFY SensorString4Changed)
+    Q_PROPERTY(QString SensorString5 READ SensorString5 WRITE setSensorString5 NOTIFY SensorString5Changed)
+    Q_PROPERTY(QString SensorString6 READ SensorString6 WRITE setSensorString6 NOTIFY SensorString6Changed)
+    Q_PROPERTY(QString SensorString7 READ SensorString7 WRITE setSensorString7 NOTIFY SensorString7Changed)
+    Q_PROPERTY(QString SensorString8 READ SensorString8 WRITE setSensorString8 NOTIFY SensorString8Changed)
+
     Q_PROPERTY(QString Platform READ Platform WRITE setPlatform NOTIFY PlatformChanged)
 
 
@@ -212,6 +224,18 @@ public:
     void setFlagString15(const QString &FlagString15);
     void setFlagString16(const QString &FlagString16);
 
+    //Sensor Strings
+
+    void setSensorString1(const QString &SensorString1);
+    void setSensorString2(const QString &SensorString2);
+    void setSensorString3(const QString &SensorString3);
+    void setSensorString4(const QString &SensorString4);
+    void setSensorString5(const QString &SensorString5);
+    void setSensorString6(const QString &SensorString6);
+    void setSensorString7(const QString &SensorString7);
+    void setSensorString8(const QString &SensorString8);
+
+    //Platform String
 
 
     void setPlatform(const QString &Platform);
@@ -324,6 +348,19 @@ public:
     QString FlagString14() const;
     QString FlagString15() const;
     QString FlagString16() const;
+
+    //Sensor Strings
+
+    QString SensorString1() const;
+    QString SensorString2() const;
+    QString SensorString3() const;
+    QString SensorString4() const;
+    QString SensorString5() const;
+    QString SensorString6() const;
+    QString SensorString7() const;
+    QString SensorString8() const;
+
+    //Platform String
 
     QString Platform() const;
 
@@ -441,6 +478,18 @@ signals:
     void FlagString15Changed(QString FlagString15);
     void FlagString16Changed(QString FlagString16);
 
+    //Sensor Strings
+
+    void SensorString1Changed(QString SensorString1);
+    void SensorString2Changed(QString SensorString2);
+    void SensorString3Changed(QString SensorString3);
+    void SensorString4Changed(QString SensorString4);
+    void SensorString5Changed(QString SensorString5);
+    void SensorString6Changed(QString SensorString6);
+    void SensorString7Changed(QString SensorString7);
+    void SensorString8Changed(QString SensorString8);
+
+    //Platfrom String
     void PlatformChanged(QString Platform);
 
 
@@ -553,6 +602,20 @@ private:
     QString m_FlagString14;
     QString m_FlagString15;
     QString m_FlagString16;
+
+    //Sensor strings
+
+
+    QString m_SensorString1;
+    QString m_SensorString2;
+    QString m_SensorString3;
+    QString m_SensorString4;
+    QString m_SensorString5;
+    QString m_SensorString6;
+    QString m_SensorString7;
+    QString m_SensorString8;
+
+    //Platform String
 
     QString m_Platform;
 

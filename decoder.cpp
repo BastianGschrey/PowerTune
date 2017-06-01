@@ -232,7 +232,7 @@ void Decoder::decodeSensor(QByteArray serialdata)
     packageSens[5] = info->sens6 * 0.01;
     packageSens[6] = info->sens7 * 0.01;
     packageSens[7] = info->sens8 * 0.01;
-    //qDebug() << "Model ="<<packageSens[7];
+
     QBitArray flagArray(16);
     for (int i=0; i<16; i++)
         flagArray.setBit(i, info->flags>>i & 1);
@@ -246,7 +246,6 @@ void Decoder::decodeSensor(QByteArray serialdata)
     m_dashboard->setsens6(packageSens[5]);
     m_dashboard->setsens7(packageSens[6]);
     m_dashboard->setsens8(packageSens[7]);
-
 
     //Bit Flags for Sensors
     m_dashboard->setFlag1(flagArray[0]);
@@ -600,7 +599,7 @@ void Decoder::decodeInit(QByteArray serialdata)
 
 void Decoder::decodeSensorStrings(QByteArray serialdata)
 {
-    /*
+
     m_dashboard->setSensorString1 (QString(serialdata).mid(2,4));
     m_dashboard->setSensorString2 (QString(serialdata).mid(6,4));
     m_dashboard->setSensorString3 (QString(serialdata).mid(10,4));
@@ -609,7 +608,7 @@ void Decoder::decodeSensorStrings(QByteArray serialdata)
     m_dashboard->setSensorString6 (QString(serialdata).mid(22,4));
     m_dashboard->setSensorString7 (QString(serialdata).mid(26,4));
     m_dashboard->setSensorString8 (QString(serialdata).mid(30,4));
-    */
+
 
     m_dashboard->setFlagString1 (QString(serialdata).mid(34,3));
      qDebug() << "Model name ="<<(QString(serialdata).mid(34,3));
