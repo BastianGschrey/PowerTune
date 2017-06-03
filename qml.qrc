@@ -43,5 +43,6 @@
         <file>Gauges/DynamicDash.qml</file>
         <file>Gauges/HalfGauges_metric.qml</file>
         <file>Gauges/BarGauge.qml</file>
+        <file>AuxInput.qml</file>
     </qresource>
 </RCC>

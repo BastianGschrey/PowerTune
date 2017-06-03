@@ -59,7 +59,7 @@ Rectangle {
                     id: interfaceSelect
                     visible: { (ecuSelect.currentIndex == "1") ? false: true; }
                     width: 200
-                    model: [ "4 Aux Inputs", "8 Aux Inputs"]
+                    model: [ "FcHako", "Datalogit"]
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setInterface( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getInterface(); initialized = true }

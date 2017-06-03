@@ -241,7 +241,7 @@ Rectangle {
             }
             StatusIndicator {
                 color: "green"
-                active: { (Dashboard.Flag13 == "11") ? true: false; }
+                active: { (Dashboard.Flag13 == "1") ? true: false; }
             }
 
 

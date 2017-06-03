@@ -17,6 +17,7 @@
   \author Bastian Gschrey
 */
 
+
 #include "serial.h"
 #include "decoder.h"
 #include "dashboard.h"
@@ -180,24 +181,68 @@ void Serial::closeConnection()
 // Error handling still to be tested
 void Serial::readyToRead()
 {
+    if(ecu == 0)
+    {
+    QTime startTime = QTime::currentTime();
+    int timeOut = 100; // timeout in milisec.
+    int Bytes = 1000;
+    QByteArray recvData;// = m_serialport->read(Bytesexpected);  // reading first two bytes of received message to determine lenght of ecpected message
+    //int msgLen = Bytesexpected; //Total message Lenght excluding the first byte
 
+    while (Bytesexpected < Bytes)
+        {
+              if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
+
+              //      qDebug() << "Bytes expected"<<Bytesexpected;
+              //      qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
+              Bytes = m_serialport->bytesAvailable();
+         }
+
+    if  (Bytesexpected == m_serialport->bytesAvailable())
+        {
+         recvData += m_serialport->read(Bytesexpected);
+        }
+
+    if(Bytesexpected == recvData.size())                  //if the received data lenght equals the message lenght from lenght byte + identifier byte (correct message lenght received )
+            {
+            qDebug() << "Received data OK"<<Bytesexpected;
+            qDebug() << "time taken (ms) "<<(QTime::currentTime());
+            if(requestIndex <= 62){requestIndex++;}
+            else{requestIndex = 59;}
+            readData(recvData);
+            recvData.clear();
+            m_serialport->flush();
+            }
+     else
+    {
+        qDebug() << "Received data  NOK message"<<requestIndex;
+        qDebug() << "Incorrect message received:"<< recvData.toHex();
+        Serial::sendRequest(requestIndex);
+    }
+   }
+
+
+
+/*
     if(ecu == 0)
 
         {
         QTime startTime = QTime::currentTime();
-        int timeOut = 5000; // timeout in milisec.
+        int timeOut = 500; // timeout in milisec.
         QByteArray recvData;
         int Bytesexpected = 100;
 
         while (Bytesexpected > recvData.size()) //check the sc
             {
                   if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
+                 // if (recvData == )
                   //      qDebug() << "Bytes expected"<<Bytesexpected;
                   //      qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
                   recvData += m_serialport->readAll();
+                  if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
                   Bytesexpected = recvData[1]+1;
              }
-
+*/
 /* For Later use
         // Process to calculate checksum
             int8_t checksum = 0xFFFFFFFFFFFFFFFF;                       //calculated checksum from serial message 0xFF - each byte in message (except the last byte)
@@ -213,6 +258,7 @@ void Serial::readyToRead()
         qDebug() << "Checksum OK"<<checksum;
         }
 */
+/*
 // Pass OK Message on for proccessing
         if(Bytesexpected == recvData.size()) //if the received data lenght equals the message lenght from lenght byte + // Identifier byte (correct message lenght received )
                 {
@@ -220,18 +266,19 @@ void Serial::readyToRead()
              //   qDebug() << "time taken (ms) "<<(QTime::currentTime());
                 if(requestIndex <= 62){requestIndex++;}
                 else{requestIndex = 59;}
+              //  m_dashboard->setInjDuty(recvData.toHex());
                 readData(recvData);
                 recvData.clear();
                 m_serialport->flush();
                 }
          else
         {
-       // qDebug() << "Received data  NOK message"<<requestIndex;
-       // qDebug() << "Incorrect message received:"<< recvData.toHex();
+        qDebug() << "Received data  NOK message"<<requestIndex;
+        qDebug() << "Incorrect message received:"<< recvData.toHex();
         Serial::sendRequest(requestIndex);
         }
        }
-
+*/
     if(ecu == 1)
     {
 
@@ -326,240 +373,299 @@ void Serial::sendRequest(int requestIndex)
     switch (requestIndex){
 
     case 0:
-        //not documented
-        Serial::writeRequestPFC(QByteArray::fromHex("F40209"));
+        //First request from (this is what FC Edit does)
+        Serial::writeRequestPFC(QByteArray::fromHex("0102FC"));
+        Bytesexpected = 4;
         break;
     case 1:
         //Init Platform for the first time ( usully returns a malformed packet)
         Serial::writeRequestPFC(QByteArray::fromHex("F3020A"));
+        Bytesexpected = 11;
         break;
     case 2:
         //Init Platform for a 2nd time
         Serial::writeRequestPFC(QByteArray::fromHex("F3020A"));
+        Bytesexpected = 11;
         break;
     case 3:
         //Serial::getVersion();
         Serial::writeRequestPFC(QByteArray::fromHex("F50208"));
+        Bytesexpected = 8;
         break;
     case 4:
         //Serial::getMapRef();
         Serial::writeRequestPFC(QByteArray::fromHex("8A0273"));
+        Bytesexpected = 83;
         break;
     case 5:
         //Serial::getRevIdle();
         Serial::writeRequestPFC(QByteArray::fromHex("B80245"));
+        Bytesexpected = 17;
         break;
     case 6:
         //Serial::getLeadign1();
         Serial::writeRequestPFC(QByteArray::fromHex("760287"));
+        Bytesexpected = 103;
         break;
     case 7:
         //Serial::getLeadign2();
         Serial::writeRequestPFC(QByteArray::fromHex("770286"));
+        Bytesexpected = 103;
         break;
     case 8:
         //Serial::getLeadign3();
         Serial::writeRequestPFC(QByteArray::fromHex("780285"));
+        Bytesexpected = 103;
         break;
     case 9:
         //Serial::getLeadign4();
         Serial::writeRequestPFC(QByteArray::fromHex("790284"));
+        Bytesexpected = 103;
         break;
     case 10:
         //Serial::getTrailIgn1();
         Serial::writeRequestPFC(QByteArray::fromHex("81027C"));
+        Bytesexpected = 103;
         break;
     case 11:
         //Serial::getTrailIgn2();
         Serial::writeRequestPFC(QByteArray::fromHex("82027B"));
+        Bytesexpected = 103;
         break;
     case 12:
         //Serial::getTrailIgn3();
         Serial::writeRequestPFC(QByteArray::fromHex("83027A"));
+        Bytesexpected = 103;
         break;
     case 13:
         //Serial::getTrailIgn4();
         Serial::writeRequestPFC(QByteArray::fromHex("840279"));
+        Bytesexpected = 103;
         break;
     case 14:
         //Serial::getPimStrInjA();
         Serial::writeRequestPFC(QByteArray::fromHex("CB0232"));
+        Bytesexpected = 110;
         break;
     case 15:
         //Serial::getInjOverlap();
         Serial::writeRequestPFC(QByteArray::fromHex("7B0282"));
+        Bytesexpected = 9;
         break;
     case 16:
         //Serial::getInjvsFuelT();
         Serial::writeRequestPFC(QByteArray::fromHex("7C0281"));
+        Bytesexpected = 12;
         break;
     case 17:
         //Serial::getTurboTrans();
         Serial::writeRequestPFC(QByteArray::fromHex("7D0280"));
+        Bytesexpected = 12;
         break;
     case 18:
         //Serial::getOilervsWaterT();
         Serial::writeRequestPFC(QByteArray::fromHex("7E027F")); //one of these is wrong
+        Bytesexpected = 9;
         break;
     case 19:
         //Serial::getFanvsWater();
         Serial::writeRequestPFC(QByteArray::fromHex("7F027E")); //one of these is wrong
+        Bytesexpected = 6;
         break;
     case 20:
         //Serial::getInjcorr1();
         Serial::writeRequestPFC(QByteArray::fromHex("860277"));
+        Bytesexpected = 103;
         break;
     case 21:
         //Serial::getInjcorr2();
         Serial::writeRequestPFC(QByteArray::fromHex("870276"));
+        Bytesexpected = 103;
         break;
     case 22:
         //Serial::getInjcorr3();
         Serial::writeRequestPFC(QByteArray::fromHex("880275"));
+        Bytesexpected = 103;
         break;
     case 23:
         //Serial::getInjcorr4();
         Serial::writeRequestPFC(QByteArray::fromHex("890274"));
+        Bytesexpected = 103;
         break;
     case 24:
         //Serial::getFuelInj();
         Serial::writeRequestPFC(QByteArray::fromHex("8D0270"));
+        Bytesexpected = 27;
         break;
     case 25:
         //Serial::getCranking();
         Serial::writeRequestPFC(QByteArray::fromHex("8E026F"));
+        Bytesexpected = 15;
         break;
     case 26:
         //Serial::getWaterTcorr();
         Serial::writeRequestPFC(QByteArray::fromHex("8F026E"));
+        Bytesexpected = 17;
         break;
     case 27:
         //Serial::getInjvsWaterBoost();
         Serial::writeRequestPFC(QByteArray::fromHex("90026D"));
+        Bytesexpected = 9;
         break;
     case 28:
         //Serial::getInjvsAirTBoost();
         Serial::writeRequestPFC(QByteArray::fromHex("91026C"));
+        Bytesexpected = 11;
         break;
     case 29:
         //Serial::getInjPrimaryLag();
         Serial::writeRequestPFC(QByteArray::fromHex("92026B"));
+        Bytesexpected = 15;
         break;
     case 30:
         //Serial::getAccInj();
         Serial::writeRequestPFC(QByteArray::fromHex("93026A"));
+        Bytesexpected = 28;
         break;
     case 31:
         //Serial::getInjvsAccel();
         Serial::writeRequestPFC(QByteArray::fromHex("940269"));
+        Bytesexpected = 12;
         break;
     case 32:
         //Serial::getIgnvsAircold();
         Serial::writeRequestPFC(QByteArray::fromHex("960267"));
+        Bytesexpected = 7;
         break;
     case 33:
         //Serial::getIgnvsWater();
         Serial::writeRequestPFC(QByteArray::fromHex("980265"));
+        Bytesexpected = 7;
         break;
     case 34:
         //Serial::getIgnvsAirwarm();
         Serial::writeRequestPFC(QByteArray::fromHex("9A0263"));
+        Bytesexpected = 9;
         break;
     case 35:
         //Serial::getLIgnvsRPM();
         Serial::writeRequestPFC(QByteArray::fromHex("9B0262"));
+        Bytesexpected = 9;
         break;
     case 36:
         //Serial::getIgnvsBatt();
         Serial::writeRequestPFC(QByteArray::fromHex("9C0261"));
+        Bytesexpected = 9;
         break;
     case 37:
         //Serial::getBoostvsIgn();
         Serial::writeRequestPFC(QByteArray::fromHex("9D0260"));
+        Bytesexpected = 7;
         break;
     case 38:
         //Serial::getTrailIgnvsRPM();
         Serial::writeRequestPFC(QByteArray::fromHex("9E025F"));
+        Bytesexpected = 9;
         break;
     case 39:
         //Serial::getInjSecLagvsBattV();
         Serial::writeRequestPFC(QByteArray::fromHex("9F025E"));
+        Bytesexpected = 15;
         break;
     case 40:
         //Serial::getKnockWarn();
         Serial::writeRequestPFC(QByteArray::fromHex("A90254"));
+        Bytesexpected = 7;
         break;
     case 41:
         //Injejtor warning
         Serial::writeRequestPFC(QByteArray::fromHex("A80255"));
+        Bytesexpected = 7;
         break;
     case 42:
         //Serial::getO2Feedback();
         Serial::writeRequestPFC(QByteArray::fromHex("AA0253"));
+        Bytesexpected = 6;
         break;
     case 43:
         //Serial::getBoostcontrol();
         Serial::writeRequestPFC(QByteArray::fromHex("AB0252"));
+        Bytesexpected = 14;
         break;
     case 44:
         //Serial::getSettingProtections();
         Serial::writeRequestPFC(QByteArray::fromHex("AC0251"));
+        Bytesexpected = 13;
         break;
     case 45:
         //Serial::getTunerString();
         Serial::writeRequestPFC(QByteArray::fromHex("AD0250"));
+        Bytesexpected = 11;
         break;
     case 46:
         //Serial::getFuelBase0();
         Serial::writeRequestPFC(QByteArray::fromHex("B0024D"));
+        Bytesexpected = 103;
         break;
     case 47:
         //Serial::getFuelBase1();
         Serial::writeRequestPFC(QByteArray::fromHex("B1024C"));
+        Bytesexpected = 103;
         break;
     case 48:
         //Serial::getFuelBase2();
         Serial::writeRequestPFC(QByteArray::fromHex("B2024B"));
+        Bytesexpected = 103;
         break;
     case 49:
         //Serial::getFuelBase3();
         Serial::writeRequestPFC(QByteArray::fromHex("B3024A"));
+        Bytesexpected = 103;
         break;
     case 50:
         //Serial::getFuelBase4();
         Serial::writeRequestPFC(QByteArray::fromHex("B40249"));
+        Bytesexpected = 103;
         break;
     case 51:
         //Serial::getFuelBase5();
         Serial::writeRequestPFC(QByteArray::fromHex("B50248"));
+        Bytesexpected = 103;
         break;
     case 52:
         //Serial::getFuelBase6();
         Serial::writeRequestPFC(QByteArray::fromHex("B60247"));
+        Bytesexpected = 103;
         break;
     case 53:
         //Serial::getFuelBase7();
         Serial::writeRequestPFC(QByteArray::fromHex("B70246"));
+        Bytesexpected = 103;
         break;
     case 54:
         //Serial::getInjvsAirTemp();
         Serial::writeRequestPFC(QByteArray::fromHex("B90244"));
+        Bytesexpected = 15;
         break;
     case 55:
         //Serial::getInjvsTPS();
         Serial::writeRequestPFC(QByteArray::fromHex("BB0242"));
+        Bytesexpected = 11;
         break;
     case 56:
         //Serial::getPIMScaleOffset();
         Serial::writeRequestPFC(QByteArray::fromHex("BC0241"));
+        Bytesexpected = 23;
         break;
     case 57:
         //Serial::getWarConStrFlags();
         Serial::writeRequestPFC(QByteArray::fromHex("D60227"));
+        Bytesexpected = 88;
         break;
     case 58:
         //Serial::getSensorStrings();
         Serial::writeRequestPFC(QByteArray::fromHex("DD0220"));
+        Bytesexpected = 83;
         break;
 
 
@@ -568,22 +674,30 @@ void Serial::sendRequest(int requestIndex)
     case 59:
         //Serial::getAdvData();
         Serial::writeRequestPFC(QByteArray::fromHex("F0020D"));
+        Bytesexpected = 33;
         break;
     case 60:
         //Serial::getAux();
         Serial::writeRequestPFC(QByteArray::fromHex("0002FD"));
+        if (interface ==0)
+        {Bytesexpected = 7;}
+        if (interface ==1)
+            {Bytesexpected = 11;}
         break;
     case 61:
         //Serial::getMapIndices();
         Serial::writeRequestPFC(QByteArray::fromHex("DB0222"));
+        Bytesexpected = 5;
         break;
     case 62:
         //Serial::getSensorData();
         Serial::writeRequestPFC(QByteArray::fromHex("DE021F"));
+        Bytesexpected = 21;
         break;
     case 63:
         //Serial::getBasic();
         Serial::writeRequestPFC(QByteArray::fromHex("DA0223"));
+       Bytesexpected = 23;
         break;
     }
 }
