@@ -186,9 +186,7 @@ void Serial::readyToRead()
     QTime startTime = QTime::currentTime();
     int timeOut = 100; // timeout in milisec.
     int Bytes = 1000;
-    QByteArray recvData;// = m_serialport->read(Bytesexpected);  // reading first two bytes of received message to determine lenght of ecpected message
-    //int msgLen = Bytesexpected; //Total message Lenght excluding the first byte
-
+    QByteArray recvData;
     while (Bytesexpected < Bytes)
         {
               if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
@@ -202,11 +200,35 @@ void Serial::readyToRead()
         {
          recvData += m_serialport->read(Bytesexpected);
         }
+            // Process to calculate checksum
 
-    if(Bytesexpected == recvData.size())                  //if the received data lenght equals the message lenght from lenght byte + identifier byte (correct message lenght received )
+                int checksum = 255; //calculated checksum from serial message 0xFF - each byte in message (except the last byte)
+                QByteArray checksumhex;
+                QByteArray recvchecksumhex = QByteArray::number(recvData[recvData[1]], 16).right(2); // reading the checksum byte , convert to Hex , and cut to 2 positions
+                recvchecksumhex = recvchecksumhex.rightJustified(2, '0'); // If the checksumbyte is less than 2 positions , prepend a 0 for example if value is 0x9 turn it into 0x09
+                //test1 = test.rightJustified(2, '0');
+
+                for (int i = 0; i <= recvData[1]-1; i++)
+                {
+                checksum = checksum - recvData[i];
+                checksumhex = QByteArray::number(checksum, 16).right(2);
+                checksumhex = checksumhex.rightJustified(2, '0');
+                }
+
+ /*           if (receivedchecksum == checksum)
             {
-            qDebug() << "Received data OK"<<Bytesexpected;
-            qDebug() << "time taken (ms) "<<(QTime::currentTime());
+            //qDebug() << "Checksum DEC"<<checksum;
+            qDebug() << "Message"<<recvData.toHex()<< "Checksum" <<checksumhex;
+            if(requestIndex <= 62){requestIndex++;}
+            else{requestIndex = 59;}
+            readData(recvData);
+            recvData.clear();
+            m_serialport->flush();
+            }
+*/
+    if(Bytesexpected == recvData.size() && recvchecksumhex == checksumhex)                 //if the received data lenght equals the message lenght from lenght byte + identifier byte (correct message lenght received )
+            {
+        qDebug() << "Message"<<recvData.toHex()<< "Checksum calculated" <<checksumhex << "Checksum receveived"<< recvchecksumhex;
             if(requestIndex <= 62){requestIndex++;}
             else{requestIndex = 59;}
             readData(recvData);
@@ -215,8 +237,8 @@ void Serial::readyToRead()
             }
      else
     {
-        qDebug() << "Received data  NOK message"<<requestIndex;
-        qDebug() << "Incorrect message received:"<< recvData.toHex();
+        qDebug() << "Received data  NOK request"<<requestIndex;
+        qDebug() << "Receved data "<<recvData.toHex()<< "Checksum calculated" <<checksumhex << "Checksum receveived"<< recvchecksumhex;
         Serial::sendRequest(requestIndex);
     }
    }
@@ -243,21 +265,8 @@ void Serial::readyToRead()
                   Bytesexpected = recvData[1]+1;
              }
 */
-/* For Later use
-        // Process to calculate checksum
-            int8_t checksum = 0xFFFFFFFFFFFFFFFF;                       //calculated checksum from serial message 0xFF - each byte in message (except the last byte)
-            int8_t checksumposition = recvData[1];                  //determines in which position of the message the checksumbyte is located
-            int8_t receivedchecksum = recvData[checksumposition];   //checksum from serial message
-            //int8_t integrity = checksum - receivedchecksum;
-            for (int i = 0; i <= recvData[1]-1; i++)
-            {
-            checksum = checksum - recvData[i];
-            }
-        if (receivedchecksum == checksum)
-        {
-        qDebug() << "Checksum OK"<<checksum;
-        }
-*/
+
+
 /*
 // Pass OK Message on for proccessing
         if(Bytesexpected == recvData.size()) //if the received data lenght equals the message lenght from lenght byte + // Identifier byte (correct message lenght received )
