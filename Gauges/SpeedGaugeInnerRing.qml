@@ -48,7 +48,7 @@ Item {
          }
 
          Text {
-             text: Dashboard.Odo
+             text: (Math.round (Dashboard.Odo *10))/10
              font.pixelSize: (parent.width / 12)
               y: (parent.width / 5)
              font.bold: true
