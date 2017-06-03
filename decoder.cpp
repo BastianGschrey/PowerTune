@@ -7,6 +7,8 @@
 #include "decoder.h"
 #include "dashboard.h"
 #include "serial.h"
+#include <QTime>
+#include <QTimer>
 
 #include <QDebug>
 #include <QBitArray>
@@ -15,8 +17,8 @@
 QByteArray serialdata;
 QByteArray fullFuelBase;
 int Model;
-
-
+qreal odometer;
+QTime startTime = QTime::currentTime();
 double mul[80] = FC_INFO_MUL;  // required values for calculation from raw to readable values for Advanced Sensor info
 double add[] = FC_INFO_ADD;
 
@@ -50,10 +52,10 @@ Decoder::Decoder(DashBoard *dashboard, QObject *parent)
 
 void Decoder::decodeAdv(QByteArray serialdata)
 {
+
     fc_adv_info_t* info=reinterpret_cast<fc_adv_info_t*>(serialdata.data());
     if (Model == 1)
     {
-
 
     packageADV[0] = info->RPM + add[0];
     packageADV[1] = info->Intakepress;
@@ -100,6 +102,15 @@ void Decoder::decodeAdv(QByteArray serialdata)
     m_dashboard->setna1(packageADV[19]);
     m_dashboard->setSecinjpulse(packageADV[20]);
     m_dashboard->setna2(packageADV[21]);
+
+
+//    qDebug() << "Time passed since last call"<< startTime.msecsTo(QTime::currentTime());
+    odometer += ((startTime.msecsTo(QTime::currentTime())) * ((packageADV[16]) / 3600000)); // Odometer
+    m_dashboard->setOdo(odometer);
+    startTime.restart(); //(QTime::currentTime())
+//    qDebug() << "Odometer"<< odometer;
+
+
     }
     // Most Nissan and Subaru
     if (Model == 2)
@@ -611,7 +622,6 @@ void Decoder::decodeSensorStrings(QByteArray serialdata)
 
 
     m_dashboard->setFlagString1 (QString(serialdata).mid(34,3));
-     qDebug() << "Model name ="<<(QString(serialdata).mid(34,3));
     m_dashboard->setFlagString2 (QString(serialdata).mid(37,3));
     m_dashboard->setFlagString3 (QString(serialdata).mid(40,3));
     m_dashboard->setFlagString4 (QString(serialdata).mid(43,3));
@@ -698,6 +708,7 @@ void Decoder::decodeFuelInjectors(QByteArray serialdata)
 
 void Decoder::decodeAdaptronic(QModbusDataUnit unit)
 {
+
     qreal realBoost;
 
     m_dashboard->setSpeed(unit.value(10)); // <-This is for the "main" speedo
@@ -750,6 +761,8 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
     m_dashboard->setSecinjpulse(packageADV[20]);
     m_dashboard->setna2(packageADV[21]);
 */
+
+
     // Convert absolute pressure in KPA to relative pressure mmhg/Kg/cm2
 
         if ((unit.value(1)) > 103) // while boost pressure is positive multiply by 0.01 to show kg/cm2

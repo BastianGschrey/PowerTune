@@ -9,6 +9,9 @@ class DashBoard : public QObject
 {
     Q_OBJECT
 
+    // Odometer
+    Q_PROPERTY(qreal Odo READ Odo WRITE setOdo NOTIFY OdoChanged)
+
     // Advanced Info
     Q_PROPERTY(qreal revs READ revs WRITE setRevs NOTIFY revsChanged)
     Q_PROPERTY(qreal Intakepress READ Intakepress WRITE setIntakepress NOTIFY IntakepressChanged)
@@ -131,6 +134,11 @@ class DashBoard : public QObject
 
 public:
     DashBoard(QObject *parent = 0);
+
+    // Odometer
+    void setOdo(const qreal &Odo);
+
+
     // Advanced Info
     void setRevs(const qreal &revs);
     void setIntakepress(const qreal &Intakepress);
@@ -260,6 +268,9 @@ public:
     void setIgn4(const qreal &Ign4);
     void setTRIM(const qreal &TRIM);
 
+
+    qreal Odo() const;
+
     // Advanced Info FD3S
     qreal revs() const;
     qreal Intakepress() const;
@@ -386,6 +397,10 @@ public:
     qreal TRIM() const;
 
 signals:
+
+    //Odometer
+    void OdoChanged(qreal Odo);
+
 
     // Advanced Info
     void revsChanged(qreal revs);
@@ -514,6 +529,10 @@ signals:
 
 
 private:
+    // Odometer
+
+    qreal m_Odo;
+
     // Advanced Info
     qreal m_revs;
     qreal m_Intakepress;

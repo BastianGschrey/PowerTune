@@ -3,7 +3,11 @@
 DashBoard::DashBoard(QObject *parent)
     : QObject(parent)
 
+//  Odometer
+
+
 // Advanced Info
+
     , m_revs(0)
     , m_Intakepress(0)
     , m_PressureV(0)
@@ -126,6 +130,16 @@ DashBoard::DashBoard(QObject *parent)
 
 {
 }
+
+// Odometer
+void DashBoard::setOdo(const qreal &Odo)
+{
+    if (m_Odo == Odo)
+        return;
+    m_Odo = Odo;
+    emit OdoChanged(Odo);
+}
+
 // Advanced Info FD3S
 void DashBoard::setRevs(const qreal &revs)
 {
@@ -950,7 +964,8 @@ void DashBoard::setTRIM(const qreal &TRIM)
     emit TRIMChanged(TRIM);
 }
 
-
+// Odometer
+qreal DashBoard::Odo() const { return m_Odo; }
 
 // Advanced Info
 qreal DashBoard::revs() const { return m_revs; }

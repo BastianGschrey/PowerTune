@@ -46,5 +46,16 @@ Item {
              color: "white"
              anchors.horizontalCenter: parent.horizontalCenter
          }
+
+         Text {
+             text: Dashboard.Odo
+             font.pixelSize: (parent.width / 12)
+              y: (parent.width / 5)
+             font.bold: true
+             font.family: "Eurostile"
+             color: "white"
+             anchors.bottom: parent.bottom
+             anchors.right: parent.right
+         }
     }
 }

@@ -194,6 +194,7 @@ void Serial::readyToRead()
               //      qDebug() << "Bytes expected"<<Bytesexpected;
               //      qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
               Bytes = m_serialport->bytesAvailable();
+
          }
 
     if  (Bytesexpected == m_serialport->bytesAvailable())
@@ -213,6 +214,7 @@ void Serial::readyToRead()
                 checksum = checksum - recvData[i];
                 checksumhex = QByteArray::number(checksum, 16).right(2);
                 checksumhex = checksumhex.rightJustified(2, '0');
+
                 }
 
  /*           if (receivedchecksum == checksum)
@@ -228,7 +230,7 @@ void Serial::readyToRead()
 */
     if(Bytesexpected == recvData.size() && recvchecksumhex == checksumhex)                 //if the received data lenght equals the message lenght from lenght byte + identifier byte (correct message lenght received )
             {
-        qDebug() << "Message"<<recvData.toHex()<< "Checksum calculated" <<checksumhex << "Checksum receveived"<< recvchecksumhex;
+        //qDebug() << "Message"<<recvData.toHex()<< "Checksum calculated" <<checksumhex << "Checksum receveived"<< recvchecksumhex;
             if(requestIndex <= 62){requestIndex++;}
             else{requestIndex = 59;}
             readData(recvData);
