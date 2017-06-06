@@ -30,6 +30,11 @@ public:
     Q_INVOKABLE int getInterface();
     Q_INVOKABLE void setInterface(const int &arg);
 
+    Q_INVOKABLE int getlogging();
+    Q_INVOKABLE void setlogging(const int &arg);
+
+
+
 private:
     void setValue(const QString &key, const QVariant &value);
     QVariant getValue(const QString &key);

@@ -17,6 +17,7 @@ Rectangle {
             property alias serialPortName: serialName.currentText
             property alias ecuType: ecuSelect.currentText
             property alias powerFcInterface: interfaceSelect.currentText
+            //property alias fileLogger: fileLogger.checked
         }
 
         Row {
@@ -75,10 +76,10 @@ Rectangle {
                     id: connectButton
                     text: "Connect"
                     onClicked: {
-                       // console.log (serialName.currentText);
+                        // console.log (serialName.currentText);
                         Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex)
 
-                        }
+                    }
                 }
                 Button {
                     id: disconnectButton
@@ -103,7 +104,14 @@ Rectangle {
                     id: connectAtStart
                     text: qsTr("Autoconnect at startup")
                 }
-
+                /*
+                Switch {
+                    id: fileLogger
+                    visible: { (ecuSelect.currentIndex == "1") ? false: true; }
+                    text: qsTr("log raw messages to File")
+                    onCheckedChanged: logger.logging()
+                    Component.onCompleted: logger.logging()
+                }*/
             }
 
 
@@ -118,6 +126,18 @@ Rectangle {
         {
             if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex);
         }
+    }
+    Item {
+        //Function to set Logging raw data on and off
+        function logging()
+        {
+            if (fileLogger.checked == true)AppSettings.setlogging(1);
+            if (fileLogger.checked == false)AppSettings.setlogging(0);
+            console.log (fileLogger.checked);
+
+        }
+
+
     }
 
 }

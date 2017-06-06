@@ -26,8 +26,30 @@ ComboBox {
         }
 
 TextField {
+    placeholderText: qsTr("Aux1 Value @ 0V")
+}
+TextField {
+    placeholderText: qsTr("Aux1 Value @ 5V")
+}
+TextField {
+    placeholderText: qsTr("Aux2 Value @ 0V")
+}
+TextField {
+    placeholderText: qsTr("Aux2 Value @ 5V")
+}
+TextField {
+    placeholderText: qsTr("Aux3 Value @ 0V")
+}
+TextField {
+    placeholderText: qsTr("Aux3 Value @ 5V")
+}
+TextField {
     placeholderText: qsTr("Value @ 0V")
 }
+TextField {
+    placeholderText: qsTr("Value @ 0V")
+}
+
 
         }
     }

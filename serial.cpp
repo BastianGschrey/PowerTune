@@ -33,12 +33,17 @@
 #include <QQmlContext>
 #include <QQmlApplicationEngine>
 #include <QModbusRtuSerialMaster>
+#include <QFile>
+#include <QTextStream>
+
 
 int requestIndex = 0; //ID for requested data type Power FC
 int ecu; //0=apex, 1=adaptronic;
 int interface; // 0=fcHako, 1=fc-datalogIt
+int logging; // 0 Logging off , 1 Logging to file
 int Bytesexpected = 500;
 //reply = new QModbusReply;
+
 
 Serial::~Serial()
 {
@@ -122,7 +127,7 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
     {
 
      initSerialPort();
-
+qDebug() << "logging" <<logging;
      m_serialport->setPortName(portName);
      m_serialport->setBaudRate(QSerialPort::Baud57600);
      m_serialport->setParity(QSerialPort::NoParity);
@@ -183,26 +188,27 @@ void Serial::readyToRead()
 {
     if(ecu == 0)
     {
-    QTime startTime = QTime::currentTime();
-    int timeOut = 100; // timeout in milisec.
-    int Bytes = 1000;
+
+    int timeOut = 200; // timeout in milisec.
+    int Bytes = 0;
     QByteArray recvData;
-    while (Bytesexpected < Bytes)
+    QTime startTime = QTime::currentTime();
+
+    while (Bytesexpected > Bytes)
         {
               if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
-
-              //      qDebug() << "Bytes expected"<<Bytesexpected;
-              //      qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
+              qDebug() << "Bytes expected"<<Bytesexpected;
+              qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
               Bytes = m_serialport->bytesAvailable();
 
          }
 
     if  (Bytesexpected == m_serialport->bytesAvailable())
         {
-         recvData += m_serialport->read(Bytesexpected);
+         recvData = m_serialport->read(Bytesexpected);
         }
-            // Process to calculate checksum
-
+            // Process to calculate checksum not evaluated at the moment , for later use
+/*
                 int checksum = 255; //calculated checksum from serial message 0xFF - each byte in message (except the last byte)
                 QByteArray checksumhex;
                 QByteArray recvchecksumhex = QByteArray::number(recvData[recvData[1]], 16).right(2); // reading the checksum byte , convert to Hex , and cut to 2 positions
@@ -214,21 +220,9 @@ void Serial::readyToRead()
                 checksum = checksum - recvData[i];
                 checksumhex = QByteArray::number(checksum, 16).right(2);
                 checksumhex = checksumhex.rightJustified(2, '0');
-
                 }
-
- /*           if (receivedchecksum == checksum)
-            {
-            //qDebug() << "Checksum DEC"<<checksum;
-            qDebug() << "Message"<<recvData.toHex()<< "Checksum" <<checksumhex;
-            if(requestIndex <= 62){requestIndex++;}
-            else{requestIndex = 59;}
-            readData(recvData);
-            recvData.clear();
-            m_serialport->flush();
-            }
 */
-    if(Bytesexpected == recvData.size() && recvchecksumhex == checksumhex)                 //if the received data lenght equals the message lenght from lenght byte + identifier byte (correct message lenght received )
+    if(Bytesexpected == recvData.size())                 //if the received data lenght equals the message lenght from lenght byte + identifier byte (correct message lenght received )
             {
         //qDebug() << "Message"<<recvData.toHex()<< "Checksum calculated" <<checksumhex << "Checksum receveived"<< recvchecksumhex;
             if(requestIndex <= 62){requestIndex++;}
@@ -239,8 +233,19 @@ void Serial::readyToRead()
             }
      else
     {
+        //Read Data and create error file
+        recvData += m_serialport->readAll();
+        QString fileName = "Errors.txt";
+        QFile mFile(fileName);
+        if(!mFile.open(QFile::Append | QFile::Text)){
+            qDebug() << "Could not open file for writing";
+        }
+        QTextStream out(&mFile);
+        out << "Request Index " << int(requestIndex)<< " lenght received "<< int(recvData.length())<< " Bytes "<< " Expected Bytes "<< int(Bytesexpected)<< " bytes " <<" Message "<< QByteArray(recvData.toHex()) <<endl;
+        mFile.close();
         qDebug() << "Received data  NOK request"<<requestIndex;
-        qDebug() << "Receved data "<<recvData.toHex()<< "Checksum calculated" <<checksumhex << "Checksum receveived"<< recvchecksumhex;
+        //qDebug() << "Receved data "<<recvData.toHex()<< "Checksum calculated" <<checksumhex << "Checksum receveived"<< recvchecksumhex;
+        recvData.clear();
         Serial::sendRequest(requestIndex);
     }
    }
@@ -313,11 +318,21 @@ void Serial::readData(QByteArray serialdata)
         //Power FC Decode
         quint8 requesttype = serialdata[0];
         //qDebug() << "Received message :"<< serialdata.toHex();
-        //quint8 requesttypeAdaptronic = serialdata[1];
 
+//Write all OK Serial Messages to a file
         if(serialdata[1] + 1 == serialdata.length())
-
            {
+            QString fileName = "OK Messages.txt";
+            QFile mFile(fileName);
+            if(!mFile.open(QFile::Append | QFile::Text)){
+                qDebug() << "Could not open file for writing";
+            }
+            QTextStream out(&mFile);
+            out << QByteArray(serialdata.toHex())<< endl;
+            mFile.close();
+
+
+
             if(serialdata.length() == 33 && requesttype == 0xF0){m_decoder->decodeAdv(serialdata);}
             if(requesttype == 0xDD){m_decoder->decodeSensorStrings(serialdata);}
             if(serialdata.length() == 21 && requesttype == 0xDE){m_decoder->decodeSensor(serialdata);}
@@ -375,6 +390,7 @@ void Serial::writeRequestPFC(QByteArray p_request)
 {
     m_serialport->write(p_request);
     m_serialport->flush();
+    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec)
 }
 
 //Power FC requests
@@ -394,9 +410,9 @@ void Serial::sendRequest(int requestIndex)
         Bytesexpected = 11;
         break;
     case 2:
-        //Init Platform for a 2nd time
-        Serial::writeRequestPFC(QByteArray::fromHex("F3020A"));
-        Bytesexpected = 11;
+        //Serial::getWarConStrFlags();
+        Serial::writeRequestPFC(QByteArray::fromHex("D60227"));
+        Bytesexpected = 88;
         break;
     case 3:
         //Serial::getVersion();
@@ -669,9 +685,9 @@ void Serial::sendRequest(int requestIndex)
         Bytesexpected = 23;
         break;
     case 57:
-        //Serial::getWarConStrFlags();
-        Serial::writeRequestPFC(QByteArray::fromHex("D60227"));
-        Bytesexpected = 88;
+        //Init Platform
+        Serial::writeRequestPFC(QByteArray::fromHex("F3020A"));
+        Bytesexpected = 11;
         break;
     case 58:
         //Serial::getSensorStrings();
