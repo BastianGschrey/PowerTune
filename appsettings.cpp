@@ -79,15 +79,15 @@ void AppSettings::setInterface(const int &arg)
     setValue("serial/Interface", arg);
 }
 
-int AppSettings::getlogging()
+int AppSettings::getLogging()
 {
-    return getValue("serial/logging").toInt();
+    return getValue("serial/Logging").toInt();
 
 }
 
-void AppSettings::setlogging(const int &arg)
+void AppSettings::setLogging(const int &arg)
 {
-    setValue("serial/logging", arg);
+    setValue("serial/Logging", arg);
 }
 
 void AppSettings::setValue(const QString &key, const QVariant &value)

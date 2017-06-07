@@ -93,6 +93,7 @@ void Serial::getEcus()
     //setEcus(EcuList);
 }
 
+
 /*void Serial::setEcus(QStringList ECUList)
 {
 
@@ -115,11 +116,12 @@ void Serial::clear() const
     m_serialport->clear();
 }
 //function to open serial port
-void Serial::openConnection(const QString &portName, const int &ecuSelect, const int &interfaceSelect)
+void Serial::openConnection(const QString &portName, const int &ecuSelect, const int &interfaceSelect, const int &loggingSelect)
 {
 
     ecu = ecuSelect;
     interface = interfaceSelect;
+    logging = loggingSelect;
 
 
     //Apexi
@@ -234,6 +236,7 @@ void Serial::readyToRead()
      else
     {
         //Read Data and create error file
+        if (logging ==1 ){
         recvData += m_serialport->readAll();
         QString fileName = "Errors.txt";
         QFile mFile(fileName);
@@ -243,6 +246,7 @@ void Serial::readyToRead()
         QTextStream out(&mFile);
         out << "Request Index " << int(requestIndex)<< " lenght received "<< int(recvData.length())<< " Bytes "<< " Expected Bytes "<< int(Bytesexpected)<< " bytes " <<" Message "<< QByteArray(recvData.toHex()) <<endl;
         mFile.close();
+        }
         qDebug() << "Received data  NOK request"<<requestIndex;
         //qDebug() << "Receved data "<<recvData.toHex()<< "Checksum calculated" <<checksumhex << "Checksum receveived"<< recvchecksumhex;
         recvData.clear();
@@ -322,6 +326,7 @@ void Serial::readData(QByteArray serialdata)
 //Write all OK Serial Messages to a file
         if(serialdata[1] + 1 == serialdata.length())
            {
+            if (logging ==1 ){
             QString fileName = "OK Messages.txt";
             QFile mFile(fileName);
             if(!mFile.open(QFile::Append | QFile::Text)){
@@ -330,6 +335,7 @@ void Serial::readData(QByteArray serialdata)
             QTextStream out(&mFile);
             out << QByteArray(serialdata.toHex())<< endl;
             mFile.close();
+            }
 
 
 

@@ -41,12 +41,13 @@ public:
 
     Q_INVOKABLE void clear() const;
     Q_INVOKABLE void initSerialPort();
-    Q_INVOKABLE void openConnection(const QString &portName, const int &ecuSelect, const int &interfaceSelect);
+    Q_INVOKABLE void openConnection(const QString &portName, const int &ecuSelect, const int &interfaceSelect, const int &loggingSelect);
     Q_INVOKABLE void closeConnection();
 
 public slots:
     void getPorts();
     void getEcus();
+    //void getLogging();
 
 public:
     void writeRequestPFC(QByteArray);

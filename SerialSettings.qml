@@ -17,7 +17,6 @@ Rectangle {
             property alias serialPortName: serialName.currentText
             property alias ecuType: ecuSelect.currentText
             property alias powerFcInterface: interfaceSelect.currentText
-            //property alias fileLogger: fileLogger.checked
         }
 
         Row {
@@ -65,6 +64,21 @@ Rectangle {
                     onCurrentIndexChanged: if (initialized) AppSettings.setInterface( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getInterface(); initialized = true }
                 }
+                Text {
+                    id: textloggingSelect
+                    visible: { (ecuSelect.currentIndex == "1") ? false: true; }
+                    text: "Log Raw Messages Error.txt , OK Messages.txt:"
+
+                }
+                ComboBox {
+                    id: loggerSelect
+                    visible: { (ecuSelect.currentIndex == "1") ? false: true; }
+                    width: 200
+                    model: [ "OFF", "ON"]
+                    property bool initialized: false
+                    onCurrentIndexChanged: if (initialized) AppSettings.setLogging( currentIndex )
+                    Component.onCompleted: { currentIndex = AppSettings.getLogging(); initialized = true }
+                }
             }
 
             Grid {
@@ -77,7 +91,7 @@ Rectangle {
                     text: "Connect"
                     onClicked: {
                         // console.log (serialName.currentText);
-                        Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex)
+                        Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex)
 
                     }
                 }
@@ -104,41 +118,23 @@ Rectangle {
                     id: connectAtStart
                     text: qsTr("Autoconnect at startup")
                 }
-                /*
-                Switch {
-                    id: fileLogger
-                    visible: { (ecuSelect.currentIndex == "1") ? false: true; }
-                    text: qsTr("log raw messages to File")
-                    onCheckedChanged: logger.logging()
-                    Component.onCompleted: logger.logging()
-                }*/
+
+
+
+
             }
-
-
-
         }
-    }
 
-    Item {
-        //Function to automatically connect at Startup , function is called from COmbobox Serialname component.oncompleted
-        id: autoconnect
-        function auto()
-        {
-            if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex);
-        }
-    }
-    Item {
-        //Function to set Logging raw data on and off
-        function logging()
-        {
-            if (fileLogger.checked == true)AppSettings.setlogging(1);
-            if (fileLogger.checked == false)AppSettings.setlogging(0);
-            console.log (fileLogger.checked);
-
+        Item {
+            //Function to automatically connect at Startup , function is called from COmbobox Serialname component.oncompleted
+            id: autoconnect
+            function auto()
+            {
+                if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex);
+            }
         }
 
 
     }
 
 }
-
