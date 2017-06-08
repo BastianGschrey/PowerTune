@@ -167,6 +167,15 @@ qDebug() << "logging" <<logging;
                 modbusDevice->setNumberOfRetries(10);
                 modbusDevice->connectDevice();
 
+
+                QString filename="Adaptronic_Log.csv";
+                QFile file( filename );
+                if ( file.open(QIODevice::ReadWrite) )
+                {
+                    QTextStream stream( &file );
+                    stream << "Time (s),RPM,MAP (kPa),MAT (°C),WT (°C),AuxT (°C),AFR,Knock,TPS %,Idle,MVSS (km/h),SVSS (km/h),Batt (V),Inj 1 (ms), Inj 2 (ms),Inj 3 (ms),Inj 4 (ms),Ign 1 (°),Ign 2 (°),Ign 3 (°),Ign 4 (°),Trim" << endl;
+                }
+
                 Serial::AdaptronicStartStream();
 
         }

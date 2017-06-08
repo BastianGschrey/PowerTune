@@ -824,6 +824,9 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
 
         mFile.close();
 
+
+
+
     m_dashboard->setpim(realBoost);
 
     emit sig_adaptronicReadFinished();
