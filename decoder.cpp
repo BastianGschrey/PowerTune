@@ -14,6 +14,9 @@
 #include <QBitArray>
 #include <QModbusDataUnit>
 
+#include <QFile>
+#include <QTextStream>
+
 QByteArray serialdata;
 QByteArray fullFuelBase;
 int Model;
@@ -22,7 +25,8 @@ QTime startTime = QTime::currentTime();
 double mul[80] = FC_INFO_MUL;  // required values for calculation from raw to readable values for Advanced Sensor info
 double add[] = FC_INFO_ADD;
 
-static QString map[] = {"rpm", "pim", "pimV",
+static QString mapFD3S[] ={"InjDuty", "IGL","IGT","Rpm","Speed","Boost","Knock","WtrTemp","AirTemp","BatVolt","PIM","VTA1","VTA2","VMOP","WTRT","AIRT","FUEL","O2S","STR","A/C","PWS","NTR","CLT","STP","CAT","ELD","HWL"};//	FPD	FPR	APR	PAC	CCN	TCN	PRC	AN1 raw	AN2 raw	AN3 raw	AN4 raw	AN1-AN2 Wide Band	AN2 raw	AN3 raw	AN4 raw	MAPN	MAPP	RPM	PIM	PIM V	TPS V	InjFrPr	Inj +/-	IGL	IGT	FuelT	Oil	PC%	WG%	WtrT	AirT	Knock	BatV	Speed	???(2)	O2S	???	InjFrSc
+/*{"rpm", "pim", "pimV",
                         "TPS Voltage", "InjFp ms", "Inj",
                         "IGL", "IGT",
                         "Fuel", "Moilp", "Boosttp",
@@ -37,7 +41,7 @@ static QString map[] = {"rpm", "pim", "pimV",
                         "Sens_Fuel","Sens_O2", "STR", "A/C", "PWS", "NTR", "CLT",
                         "STP", "CAT", "ELD", "HWL", "FPD", "FPR", "APR", "PAC", "CCN", "TCN", "PRC" ,"MAP_N","MAP_P",
                         "Basic_Injduty", "Basic_IGL", "Basic_IGT", "Basic_RPM", "Basic_KPH", "Basic_Boost", "Basic_Knock", "Basic_Watert", "Basic_Airt", "Basic_BattV",};
-
+*/
 Decoder::Decoder(QObject *parent)
     : QObject(parent)
     , m_dashboard(Q_NULLPTR)
@@ -49,6 +53,8 @@ Decoder::Decoder(DashBoard *dashboard, QObject *parent)
     , m_dashboard(dashboard)
 {
 }
+
+
 
 void Decoder::decodeAdv(QByteArray serialdata)
 {
@@ -231,6 +237,8 @@ void Decoder::decodeAdv(QByteArray serialdata)
 */
 }
 
+
+
 void Decoder::decodeSensor(QByteArray serialdata)
 {
     fc_sens_info_t* info=reinterpret_cast<fc_sens_info_t*>(serialdata.data());
@@ -355,6 +363,26 @@ void Decoder::decodeBasic(QByteArray serialdata)
     m_dashboard->setWatertemp(packageBasic[7]);
     m_dashboard->setIntaketemp(packageBasic[8]);
     m_dashboard->setBatteryV(packageBasic[9]);
+
+    QString fileName = "Logger.txt";
+    QFile mFile(fileName);
+    if(!mFile.open(QFile::Append | QFile::Text)){
+        qDebug() << "Could not open file for writing";
+    }
+    QTextStream out(&mFile);
+    out.setFieldWidth(8);
+    //out << QString (mapFD3S[0])<< "    "<< QString (mapFD3S[1])<< "    "<< QString (mapFD3S[2])<< "    "<< QString (mapFD3S[3])<< "    "<< QString (mapFD3S[4])<< "    "<< QString (mapFD3S[5])<< "    "<< QString (mapFD3S[6])<< "    "<< QString (mapFD3S[7])<< "    "<< QString (mapFD3S[8])<< "    "<< QString (mapFD3S[9])<<endl;
+    out << startTime.msecsTo(QTime::currentTime()) << packageBasic[0] << packageBasic[1]<< packageBasic[2] << packageBasic[3] << packageBasic[4] << packageBasic[5] << packageBasic[6] << packageBasic[7] << packageBasic[8]
+            << packageBasic[9] << packageSens[0] << packageSens[1] << packageSens[2] << packageSens[3] << packageSens[4] << packageSens[5] << packageSens[6] << packageSens[7]
+
+            << packageAux[0] << packageAux[1] << packageAux[2] << packageAux[3] << packageAux[4] << packageAux[5] << packageAux[6]
+            << packageAux[7]<< packageMap[0] << packageMap[1] << packageADV[0] << packageADV[1] << packageADV[2] << packageADV[3] << packageADV[4] << packageADV[5] << packageADV[6] << packageADV[7]
+            << packageADV[8] << packageADV[9] << packageADV[10] << packageADV[11] << packageADV[12] << packageADV[13] << packageADV[14] << packageADV[15] << packageADV[16] << packageADV[17] << packageADV[18]
+            << packageADV[19] << packageADV[20] << packageADV[21] << qSetFieldWidth(0) << endl <<qSetFieldWidth(8);
+    //out << packageBasic[0]<< "        "<< packageBasic[1]<< "    "<< packageBasic[2] << "    "<< packageBasic[3] << "    "<< packageBasic[4] << "    "<< packageBasic[5] << "    "<< packageBasic[6]<< "    "<< packageBasic[7]<< "    "<< packageBasic[8]<< "    "<< packageBasic[9] <<endl;
+    //out << "Request Index " << int(requestIndex)<< " lenght received "<< int(recvData.length())<< " Bytes "<< " Expected Bytes "<< int(Bytesexpected)<< " bytes " <<" Message "<< QByteArray(recvData.toHex()) <<endl;
+   // << flagArray[0] << flagArray[1] << flagArray[2] << flagArray[3] << flagArray[4] << flagArray[5] << flagArray[6] << flagArray[7] << flagArray[8] << flagArray[9] << flagArray[10] << flagArray[11] << flagArray[12] << flagArray[13] << flagArray[14] << flagArray[15]
+    mFile.close();
 
 
     //    ui->txtBasicConsole->clear();
