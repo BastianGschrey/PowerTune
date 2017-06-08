@@ -364,6 +364,8 @@ void Decoder::decodeBasic(QByteArray serialdata)
     m_dashboard->setIntaketemp(packageBasic[8]);
     m_dashboard->setBatteryV(packageBasic[9]);
 
+
+    //Logging file for Power FC , same format as FC Edit uses with a field width of 8 characters
     QString fileName = "Logger.txt";
     QFile mFile(fileName);
     if(!mFile.open(QFile::Append | QFile::Text)){
@@ -374,7 +376,6 @@ void Decoder::decodeBasic(QByteArray serialdata)
     //out << QString (mapFD3S[0])<< "    "<< QString (mapFD3S[1])<< "    "<< QString (mapFD3S[2])<< "    "<< QString (mapFD3S[3])<< "    "<< QString (mapFD3S[4])<< "    "<< QString (mapFD3S[5])<< "    "<< QString (mapFD3S[6])<< "    "<< QString (mapFD3S[7])<< "    "<< QString (mapFD3S[8])<< "    "<< QString (mapFD3S[9])<<endl;
     out << startTime.msecsTo(QTime::currentTime()) << packageBasic[0] << packageBasic[1]<< packageBasic[2] << packageBasic[3] << packageBasic[4] << packageBasic[5] << packageBasic[6] << packageBasic[7] << packageBasic[8]
             << packageBasic[9] << packageSens[0] << packageSens[1] << packageSens[2] << packageSens[3] << packageSens[4] << packageSens[5] << packageSens[6] << packageSens[7]
-
             << packageAux[0] << packageAux[1] << packageAux[2] << packageAux[3] << packageAux[4] << packageAux[5] << packageAux[6]
             << packageAux[7]<< packageMap[0] << packageMap[1] << packageADV[0] << packageADV[1] << packageADV[2] << packageADV[3] << packageADV[4] << packageADV[5] << packageADV[6] << packageADV[7]
             << packageADV[8] << packageADV[9] << packageADV[10] << packageADV[11] << packageADV[12] << packageADV[13] << packageADV[14] << packageADV[15] << packageADV[16] << packageADV[17] << packageADV[18]
@@ -803,9 +804,9 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
         }
 
 
-        //Datalogger Adaptronic
+        //Datalogger Adaptronic Comma seperated Text File for easy import to Excel
 
-        QString fileName = "Adaptronic_Log.txt";
+        QString fileName = "Adaptronic_Log.csv";
         QFile mFile(fileName);
         if(!mFile.open(QFile::Append | QFile::Text)){
             qDebug() << "Could not open file for writing";
