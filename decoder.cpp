@@ -802,6 +802,27 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
             realBoost = ((unit.value(1))-103) * 7.50061561303;
         }
 
+
+        //Datalogger Adaptronic
+
+        QString fileName = "Adaptronic_Log.txt";
+        QFile mFile(fileName);
+        if(!mFile.open(QFile::Append | QFile::Text)){
+            qDebug() << "Could not open file for writing";
+        }
+        QTextStream out(&mFile);
+        out << startTime.msecsTo(QTime::currentTime()) << "," << unit.value(0) << ","
+            << unit.value(1) << "," << unit.value(2) << "," << unit.value(3) << ","
+            << unit.value(4) << "," << (unit.value(5)/2570.00) << "," << (unit.value(6)/256)
+            << "," << unit.value(7) << "," << unit.value(8) << "," <<(unit.value(9)/10) << ","
+            << unit.value(10) << "," << unit.value(11) << ","<< ((unit.value(12)/3)*2) << ","
+            <<((unit.value(13)/3)*2) << "," << ((unit.value(14)/3)*2) << ","
+           << ((unit.value(15)/3)*2) << ","<< (unit.value(16)/5) << ","
+           << (unit.value(17)/5) << "," << (unit.value(18)/5) << ","
+           << (unit.value(19)/5) << "," << unit.value(20)<< "," << endl;
+
+        mFile.close();
+
     m_dashboard->setpim(realBoost);
 
     emit sig_adaptronicReadFinished();
