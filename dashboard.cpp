@@ -49,6 +49,12 @@ DashBoard::DashBoard(QObject *parent)
 
     , m_pim(0)
 
+    //Aux Inputs
+    , m_auxcalc1(0.00)
+    , m_auxcalc2(0.00)
+    , m_auxcalc3(0.00)
+    , m_auxcalc4(0.00)
+
  // Sensor Info FD3S
     , m_sens1(0.00)
     , m_sens2(0.00)
@@ -413,6 +419,41 @@ void DashBoard::setpim(const qreal &pim)
     m_pim = pim;
     emit pimChanged(pim);
 }
+
+//Aux Inputs
+
+void DashBoard::setauxcalc1(const qreal &auxcalc1)
+{
+ if (m_auxcalc1 == auxcalc1)
+     return;
+ m_auxcalc1 = auxcalc1;
+ emit auxcalc1Changed(auxcalc1);
+}
+
+void DashBoard::setauxcalc2(const qreal &auxcalc2)
+{
+ if (m_auxcalc2 == auxcalc2)
+     return;
+ m_auxcalc2 = auxcalc2;
+ emit auxcalc2Changed(auxcalc2);
+}
+
+void DashBoard::setauxcalc3(const qreal &auxcalc3)
+{
+ if (m_auxcalc3 == auxcalc3)
+     return;
+ m_auxcalc3 = auxcalc3;
+ emit auxcalc3Changed(auxcalc3);
+}
+
+void DashBoard::setauxcalc4(const qreal &auxcalc4)
+{
+ if (m_auxcalc4 == auxcalc4)
+     return;
+ m_auxcalc4 = auxcalc4;
+ emit auxcalc4Changed(auxcalc4);
+}
+
 
 //Sensor info
 
@@ -1007,6 +1048,12 @@ qreal DashBoard::O2volt_2() const { return m_O2volt_2; }
 //Boost
 
 qreal DashBoard::pim() const { return m_pim; }
+
+//Aux Inputs
+qreal DashBoard::auxcalc1() const { return m_auxcalc1; }
+qreal DashBoard::auxcalc2() const { return m_auxcalc2; }
+qreal DashBoard::auxcalc3() const { return m_auxcalc3; }
+qreal DashBoard::auxcalc4() const { return m_auxcalc4; }
 
 //Sensor info
 qreal DashBoard::sens1() const { return m_sens1; }

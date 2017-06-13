@@ -43,7 +43,11 @@ public:
     Q_INVOKABLE void initSerialPort();
     Q_INVOKABLE void openConnection(const QString &portName, const int &ecuSelect, const int &interfaceSelect, const int &loggingSelect);
     Q_INVOKABLE void closeConnection();
-
+    Q_INVOKABLE void startLogging(const QString &logfilenameSelect, const int &loggeron);
+    Q_INVOKABLE void stopLogging(const QString &logfilenameSelect, const int &loggeron);
+    Q_INVOKABLE void Auxcalc (const QString &unitaux1,const int &an1V0,const int &an2V5,const QString &unitaux2,const int &an3V0,const int &an4V5,const QString &unitaux3,const int &an5V0,const int &an6V5,const QString &unitaux4,const int &an7V0,const int &an8V5);
+    Q_INVOKABLE void gopro();
+    Q_INVOKABLE void goProSettings(const int &goProSelect, const QString &goPropass);
 public slots:
     void getPorts();
     void getEcus();

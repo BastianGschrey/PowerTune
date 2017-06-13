@@ -14,7 +14,7 @@
 /*!
   \file serial.cpp
   \brief Raspexi Viewer Power FC related functions
-  \author Bastian Gschrey
+  \author Bastian Gschrey & Markus Ippy
 */
 
 
@@ -35,14 +35,21 @@
 #include <QModbusRtuSerialMaster>
 #include <QFile>
 #include <QTextStream>
+#include <QtNetwork>
+#include <QNetworkAccessManager>
 
 
 int requestIndex = 0; //ID for requested data type Power FC
-int ecu; //0=apex, 1=adaptronic;
+int ecu =3; //0=apex, 1=adaptronic;
 int interface; // 0=fcHako, 1=fc-datalogIt
 int logging; // 0 Logging off , 1 Logging to file
+int loggingstatus;
 int Bytesexpected = 500;
+QString Logfilename;
+QString Command; // GoPro Command URL
 //reply = new QModbusReply;
+
+
 
 
 Serial::~Serial()
@@ -115,6 +122,8 @@ void Serial::clear() const
 {
     m_serialport->clear();
 }
+
+
 //function to open serial port
 void Serial::openConnection(const QString &portName, const int &ecuSelect, const int &interfaceSelect, const int &loggingSelect)
 {
@@ -142,10 +151,11 @@ qDebug() << "logging" <<logging;
      {
          qDebug() << "Open Serial port failed: " << m_serialport->errorString();
      }
-
      requestIndex = 0;
      qDebug() << "Initial request to PowerFc"<< requestIndex;
      Serial::sendRequest(requestIndex);
+
+
 
      }
 
@@ -166,15 +176,6 @@ qDebug() << "logging" <<logging;
                 modbusDevice->setTimeout(200);
                 modbusDevice->setNumberOfRetries(10);
                 modbusDevice->connectDevice();
-
-
-                QString filename="Adaptronic_Log.csv";
-                QFile file( filename );
-                if ( file.open(QIODevice::ReadWrite) )
-                {
-                    QTextStream stream( &file );
-                    stream << "Time (s),RPM,MAP (kPa),MAT (°C),WT (°C),AuxT (°C),AFR,Knock,TPS %,Idle,MVSS (km/h),SVSS (km/h),Batt (V),Inj 1 (ms), Inj 2 (ms),Inj 3 (ms),Inj 4 (ms),Ign 1 (°),Ign 2 (°),Ign 3 (°),Ign 4 (°),Trim" << endl;
-                }
 
                 Serial::AdaptronicStartStream();
 
@@ -208,8 +209,8 @@ void Serial::readyToRead()
     while (Bytesexpected > Bytes)
         {
               if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
-              qDebug() << "Bytes expected"<<Bytesexpected;
-              qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
+             // qDebug() << "Bytes expected"<<Bytesexpected;
+             // qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
               Bytes = m_serialport->bytesAvailable();
 
          }
@@ -317,6 +318,7 @@ void Serial::readyToRead()
     if(reply->error() == QModbusDevice::NoError){
         const QModbusDataUnit unit = reply->result();
         m_decoder->decodeAdaptronic(unit);
+
     }
 
 
@@ -759,4 +761,117 @@ void Serial::AdaptronicStartStream()
 void Serial::AdaptronicStopStream()
 {
 
+}
+
+
+//function for Start Logging
+void Serial::startLogging(const QString &logfilenameSelect, const int &loggeron)
+{
+   loggingstatus = loggeron;
+   Logfilename = logfilenameSelect;
+   qDebug() << Logfilename;
+   qDebug() << "on off"<< loggingstatus;
+   if (ecu == 0)    //Apexi
+   {
+       {
+           qDebug() << "Apexi start Log not implemented ";
+            m_decoder->loggerActivationstatus(loggingstatus);
+       }
+   }
+   if (ecu == 1)    //Adaptronic
+   {
+       QString filename = Logfilename + ".csv";
+       QFile file( filename );
+       qDebug() << "Adaptronic start Log";
+       if ( file.open(QIODevice::ReadWrite) )
+       {
+           QTextStream stream( &file );
+           stream << "Time (s),RPM,MAP (kPa),MAT (°C),WT (°C),AuxT (°C),AFR,Knock,TPS %,Idle,MVSS (km/h),SVSS (km/h),Batt (V),Inj 1 (ms), Inj 2 (ms),Inj 3 (ms),Inj 4 (ms),Ign 1 (°),Ign 2 (°),Ign 3 (°),Ign 4 (°),Trim" << endl;
+       }
+       file.close();
+   m_decoder->loggerAdaptronic(Logfilename);
+   m_decoder->loggerActivationstatus(loggingstatus);
+   }
+
+   return;
+}
+
+//function for Stop Logging
+void Serial::stopLogging(const QString &logfilenameSelect, const int &loggeron)
+{
+   loggingstatus = loggeron;
+   m_decoder->loggerActivationstatus(loggingstatus);
+   qDebug() << "Stop Logging ";
+   return;
+}
+void Serial::Auxcalc (const QString &unitaux1,const int &an1V0,const int &an2V5,const QString &unitaux2,const int &an3V0,const int &an4V5,const QString &unitaux3,const int &an5V0,const int &an6V5,const QString &unitaux4,const int &an7V0,const int &an8V5)
+{
+    int aux1min = an1V0;
+    int aux2max = an2V5;
+    int aux3min = an3V0;
+    int aux4max = an4V5;
+    int aux5min = an5V0;
+    int aux6max = an6V5;
+    int aux7min = an7V0;
+    int aux8max = an8V5;
+    m_decoder->calculatorAux(aux1min,aux2max,aux3min,aux4max,aux5min,aux6max,aux7min,aux8max);
+}
+//Function for GoPro command forwarding
+
+void Serial::goProSettings(const int &goProSelect, const QString &goPropass)
+{
+    int Index = goProSelect;
+    QString OPTION;
+    QString PARAM1;
+    QString PARAM2;
+    QString PASSWORD = goPropass;
+    QString ADRESS;
+
+
+
+    //HERO
+
+    if (Index == 0)
+    {
+    ADRESS = "http://10.5.5.9/gp/gpControl/command/shutter?p=";
+    Command = QString (ADRESS) + QString (OPTION);
+    }
+
+    //HERO 2
+
+    if (Index == 1)
+    {
+    ADRESS = "http://10.5.5.9/";
+    PARAM1 = "bacpac";
+    PARAM2 = "SH";
+    Command = QString (ADRESS) + QString (PARAM1) +"/"+  QString (PARAM2) + "?t=" + QString (PASSWORD) + "&p=%" + "0" + QString (OPTION);
+    }
+
+    //HERO 3
+    if (Index == 2)
+    {
+    ADRESS = "http://10.5.5.9/";
+    PARAM1 = "camera";
+    PARAM2 = "SH";
+    Command = QString (ADRESS) +QString (PARAM1) +"/"+ QString (PARAM2) + "?t=" + QString (PASSWORD) + "&p=%" + "0" + QString (OPTION);
+    }
+
+    //HERO 4
+
+    if (Index == 3)
+    {
+    PARAM1 = "camera";
+    PARAM2 = "SH";
+    Command = QString (ADRESS) +QString (PARAM1) +"/"+ QString (PARAM2) + "?t=" + QString (PASSWORD) + "&p=%" + QString (OPTION);
+    }
+
+    qDebug() << "Gopro Index" <<Index;
+    qDebug() << "Gopro Command" <<Command;
+}
+void Serial::gopro()
+{
+    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+    connect(manager, SIGNAL(finished(QNetworkReply*)),
+            this, SLOT(replyFinished(QNetworkReply*)));
+    manager->get(QNetworkRequest(QUrl(Command)));
 }

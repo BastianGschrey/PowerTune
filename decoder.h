@@ -481,6 +481,7 @@ private:
 public slots:     
      void decodeAdv(QByteArray serialdata);
      void decodeSensor(QByteArray serialdata);
+    // void decodeAux(QByteArray serialdata ,const QString &unitaux1,const int &an1V0.text,const int &an2V5,const QString &unitaux2,const int &an3V0,const int &an4V5,const QString unitaux3,const int &an4V5,const QString unitaux4,const int &an7V0,const int &an8V5);
      void decodeAux(QByteArray serialdata);
      void decodeAux2(QByteArray serialdata);
      void decodeMap(QByteArray serialdata);
@@ -503,6 +504,11 @@ public slots:
 
      //Adaptronic Streaming Comms
      void decodeAdaptronic(QModbusDataUnit serialdata);
+
+     void loggerAdaptronic(QString Logfilename);
+     void loggerActivationstatus(int loggingstatus);
+     void calculatorAux(int aux1min,int aux2max,int aux3min,int aux4max,int aux5min,int aux6max,int aux7min, int aux8max);
+     //void loggerApexi();
 
 
 

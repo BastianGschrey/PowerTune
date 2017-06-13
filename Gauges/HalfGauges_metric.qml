@@ -331,7 +331,7 @@ Rectangle {
                         }
                         Text {
                             //id: coolant
-                            text: Dashboard.AFR
+                            text: Dashboard.auxcalc1
                             font.pixelSize: (parent.width / 10)
                             font.bold: true
                             font.family: "Eurostile"
@@ -353,7 +353,7 @@ Rectangle {
                             //id: waterneedle
                             anchors.verticalCenterOffset: 0
                             anchors.centerIn: parent
-                            value: Dashboard.AFR / 0.3846153846153846
+                            value: Dashboard.auxcalc1 / 0.3846153846153846
 
 
                         }

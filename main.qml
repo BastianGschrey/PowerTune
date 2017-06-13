@@ -1,6 +1,6 @@
 import QtQuick 2.6
 import QtQuick.Window 2.2
-import QtQuick.Controls 2.1
+import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
 import com.powertune 1.0
 
@@ -37,7 +37,6 @@ ApplicationWindow {
         }
 
 */
-
         Loader {
 
            id: firstPageLoader

@@ -251,14 +251,14 @@ Rectangle {
             minimumValue: 0
             maximumValue: 20
 
-            value: Dashboard.AFR
+            value: Dashboard.auxcalc1
             Behavior on value {
                 NumberAnimation {
                     duration: 5
                 }
             }
             Text {
-                text:"AFR " + Dashboard.AFR
+                text:"AFR " + Dashboard.auxcalc1
                 font.pixelSize: (parent.height / 3)
                  anchors.top : parent.top
                 font.bold: true

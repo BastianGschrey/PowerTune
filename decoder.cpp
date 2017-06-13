@@ -19,9 +19,24 @@
 
 QByteArray serialdata;
 QByteArray fullFuelBase;
-int Model;
+QString Logfile;
 qreal odometer;
 QTime startTime = QTime::currentTime();
+QTime loggerStartTime = QTime::currentTime();
+int Model;
+int Logging =3;
+int Loggerstat;
+int auxval1;
+int auxval2;
+int auxval3;
+int auxval4;
+int auxval5;
+int auxval6;
+int auxval7;
+int auxval8;
+
+
+
 double mul[80] = FC_INFO_MUL;  // required values for calculation from raw to readable values for Advanced Sensor info
 double add[] = FC_INFO_ADD;
 
@@ -296,12 +311,11 @@ void Decoder::decodeAux(QByteArray serialdata)
     packageAux[2] = mul[31] * info->AN3 + add[31];
     packageAux[3] = mul[32] * info->AN4 + add[32];
 
-    //    ui->txtAuxConsole->clear();
+    //Analog1
+    m_dashboard->setauxcalc1((((auxval2-auxval1)/5) * (packageAux[0] - packageAux[1])) + auxval1);
+    //Analog2
+    m_dashboard->setauxcalc2((((auxval4-auxval3)/5) * (packageAux[2] - packageAux[4])) + auxval3);
 
-    //    ui->txtAuxConsole->append(map[22] + " " + QString::number(packageAux[0]));
-    //    ui->txtAuxConsole->append(map[23] + " " + QString::number(packageAux[1]));
-    //    ui->txtAuxConsole->append(map[24] + " " + QString::number(packageAux[2]));
-    //    ui->txtAuxConsole->append(map[25] + " " + QString::number(packageAux[3]));
 }
 
 void Decoder::decodeAux2(QByteArray serialdata)
@@ -317,6 +331,17 @@ void Decoder::decodeAux2(QByteArray serialdata)
     packageAux2[5] = mul[30] * info->AN6 + add[30];
     packageAux2[6] = mul[31] * info->AN7 + add[31];
     packageAux2[7] = mul[32] * info->AN8 + add[32];
+
+
+
+    //Analog1
+    m_dashboard->setauxcalc1((((auxval2-auxval1)/5) * (packageAux[0] - packageAux[1])) + auxval1);
+    //Analog2
+    m_dashboard->setauxcalc2((((auxval4-auxval3)/5) * (packageAux[2] - packageAux[4])) + auxval3);
+    //Analog3
+    m_dashboard->setauxcalc3((((auxval6-auxval5)/5) * (packageAux[5] - packageAux[6])) + auxval5);
+    //Analog4
+    m_dashboard->setauxcalc4((((auxval8-auxval7)/5) * (packageAux[7] - packageAux[8])) + auxval7);
 }
 void Decoder::decodeMap(QByteArray serialdata)
 {
@@ -746,7 +771,7 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
     m_dashboard->setIntaketemp(unit.value(2));
     m_dashboard->setWatertemp(unit.value(3));
     m_dashboard->setAUXT(unit.value(4));
-    m_dashboard->setAFR(unit.value(5)/2570.00);
+    m_dashboard->setauxcalc1(unit.value(5)/2570.00);
     m_dashboard->setKnock(unit.value(6)/256);
     m_dashboard->setTPS(unit.value(7));
     m_dashboard->setIdleValue(unit.value(8));
@@ -804,30 +829,54 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
         }
 
 
-        //Datalogger Adaptronic Comma seperated Text File for easy import to Excel
-
-        QString fileName = "Adaptronic_Log.csv";
-        QFile mFile(fileName);
-        if(!mFile.open(QFile::Append | QFile::Text)){
-            qDebug() << "Could not open file for writing";
-        }
-        QTextStream out(&mFile);
-        out << startTime.msecsTo(QTime::currentTime()) << "," << unit.value(0) << ","
-            << unit.value(1) << "," << unit.value(2) << "," << unit.value(3) << ","
-            << unit.value(4) << "," << (unit.value(5)/2570.00) << "," << (unit.value(6)/256)
-            << "," << unit.value(7) << "," << unit.value(8) << "," <<(unit.value(9)/10) << ","
-            << unit.value(10) << "," << unit.value(11) << ","<< ((unit.value(12)/3)*2) << ","
-            <<((unit.value(13)/3)*2) << "," << ((unit.value(14)/3)*2) << ","
-           << ((unit.value(15)/3)*2) << ","<< (unit.value(16)/5) << ","
-           << (unit.value(17)/5) << "," << (unit.value(18)/5) << ","
-           << (unit.value(19)/5) << "," << unit.value(20)<< "," << endl;
-
-        mFile.close();
-
-
-
-
     m_dashboard->setpim(realBoost);
 
+
+    //Datalogger Adaptronic Comma seperated Text File for easy import to Excel
+    if (Loggerstat ==1)
+    {
+    QString fileName = Logfile;
+    qDebug() << Logfile;
+    QFile mFile(fileName);
+    if(!mFile.open(QFile::Append | QFile::Text)){
+        qDebug() << "Could not open Adaptronic Loggerfile for writing";
+    }
+    QTextStream out(&mFile);
+    out << (loggerStartTime.msecsTo(QTime::currentTime()))<< "," << unit.value(0) << ","
+        << unit.value(1) << "," << unit.value(2) << "," << unit.value(3) << ","
+        << unit.value(4) << "," << (unit.value(5)/2570.00) << "," << (unit.value(6)/256)
+        << "," << unit.value(7) << "," << unit.value(8) << "," <<(unit.value(9)/10) << ","
+        << unit.value(10) << "," << unit.value(11) << ","<< ((unit.value(12)/3)*2) << ","
+        <<((unit.value(13)/3)*2) << "," << ((unit.value(14)/3)*2) << ","
+       << ((unit.value(15)/3)*2) << ","<< (unit.value(16)/5) << ","
+       << (unit.value(17)/5) << "," << (unit.value(18)/5) << ","
+       << (unit.value(19)/5) << "," << unit.value(20)<< "," << endl;
+
+    mFile.close();
+}
+
     emit sig_adaptronicReadFinished();
+}
+
+void Decoder::loggerAdaptronic(QString Logfilename)
+{
+Logfile = Logfilename+".csv";
+loggerStartTime.restart();
+}
+
+void Decoder::loggerActivationstatus(int loggingstatus)
+{
+Loggerstat = loggingstatus;
+qDebug() <<"Decoder loggingstatus"<< loggingstatus;
+}
+void Decoder::calculatorAux(int aux1min,int aux2max,int aux3min,int aux4max,int aux5min,int aux6max,int aux7min, int aux8max)
+{
+    auxval1 = aux1min;
+    auxval2 = aux2max;
+    auxval3 = aux3min;
+    auxval4 = aux4max;
+    auxval5 = aux5min;
+    auxval6 = aux6max;
+    auxval7 = aux7min;
+    auxval8 = aux8max;
 }

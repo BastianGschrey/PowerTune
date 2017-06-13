@@ -1,5 +1,5 @@
 import QtQuick 2.6
-import QtQuick.Controls 2.1
+import QtQuick.Controls 2.0
 import QtGraphicalEffects 1.0
 import Qt.labs.settings 1.0
 
@@ -8,15 +8,30 @@ Rectangle {
     height: parent.height
     color: "grey"
 
+    property  int test1: 0
 
     Item {
         id: powerTuneSettings
-
         Settings {
             property alias connectAtStartUp: connectAtStart.checked
             property alias serialPortName: serialName.currentText
             property alias ecuType: ecuSelect.currentText
             property alias powerFcInterface: interfaceSelect.currentText
+            property alias auxunit1: unitaux1.text
+            property alias aux1: an1V0.text
+            property alias aux2: an2V5.text
+            property alias auxunit2: unitaux2.text
+            property alias aux3: an3V0.text
+            property alias aux4: an4V5.text
+            property alias auxunit3: unitaux3.text
+            property alias aux5: an5V0.text
+            property alias aux6: an6V5.text
+            property alias auxunit4: unitaux4.text
+            property alias aux7: an7V0.text
+            property alias aux8: an8V5.text
+            property alias goProVariant: goProSelect.currentIndex
+            property alias password: goPropass.text
+
         }
 
         Row {
@@ -36,7 +51,7 @@ Rectangle {
                     model: Serial.portsNames
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setBaudRate( currentIndex )
-                    Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true; autoconnect.auto() }
+                    Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true; autoconnect.auto();logger.datalogger() }
                 }
 
                 Text { text: "ECU Selection:" }
@@ -67,7 +82,7 @@ Rectangle {
                 Text {
                     id: textloggingSelect
                     visible: { (ecuSelect.currentIndex == "1") ? false: true; }
-                    text: "Log Raw Messages Error.txt , OK Messages.txt:"
+                    text: "Log Raw Messages:"
 
                 }
                 ComboBox {
@@ -91,7 +106,7 @@ Rectangle {
                     text: "Connect"
                     onClicked: {
                         // console.log (serialName.currentText);
-                        Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex)
+                        Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text,unitaux3.text,an5V0.text,an6V5.text,unitaux4.text,an7V0.text,an8V5.text);
 
                     }
                 }
@@ -114,27 +129,179 @@ Rectangle {
                         Qt.quit()
                     }
                 }
+
+                Text
+                {
+                text: "Logfile name:"
+                }
+                TextField {
+                    id: logfilenameSelect
+                    text: qsTr("DataLog")
+                }
                 Switch {
                     id: connectAtStart
-                    text: qsTr("Autoconnect at startup")
+                    text: qsTr("Autoconnect")
+                }
+                Switch {
+                    id: loggerswitch
+                    text: qsTr("Data Logger")
+                    onCheckedChanged: logger.datalogger()
                 }
 
 
 
 
+                                Text { text: "GoPro Variant :" }
+                                ComboBox {
+                                    id: goProSelect
+                                    width: 200
+                                    model: [ "Hero", "Hero2","Hero3"]
+                                    Component.onCompleted: {transferSettings.sendSettings() }
+                                }
+                                Text { text: "GoPro Password :" }
+                                TextField {
+                                    id: goPropass
+                                    placeholderText: qsTr("GoPro Password")
+                                    Component.onCompleted: {transferSettings.sendSettings() }
+                                }
+                                Button {
+                                    id: applyButton
+                                    text: "Apply GoPro"
+                                    onClicked: {transferSettings.sendSettings() }
+
+                                }
+                            }
+                        }
+        }
+// make another grid
+        Item {
+            visible: { (ecuSelect.currentIndex == "1") ? false: true; }
+            Row {
+               x: 50
+               y: 200
+             spacing: 5
+                Grid {
+                    rows: 10
+                    columns: 4
+                    spacing: 5
+                    Text  { text: ""; width: 50}
+                    Text  { text: "Value 0V"; width: 50}
+                    Text  { text: "Value 5V"; width: 50}
+                    Text  { text: "Unit Name"; width: 50}
+                    Text  { text: "AN1-AN2"; width: 50}
+                    TextField {
+                        id: an1V0
+                        width: 50
+                        validator: IntValidator {bottom: 0; top: 1000;}
+                        placeholderText: qsTr("9")
+                    }
+                    TextField {
+                        id: an2V5
+                        width: 50
+                        validator: IntValidator {bottom: 0; top: 1000;}
+                        placeholderText: qsTr("16")
+                    }
+                    TextField {
+                        id: unitaux1
+                        width: 50
+                        placeholderText: qsTr("AFR")
+                    }
+                    Text  { text: "AN3-AN4"; width: 50}
+                    TextField {
+                        id: an3V0
+                        width: 50
+                        validator: IntValidator {bottom: 0; top: 1000;}
+                        placeholderText: qsTr("Value @ 0V")
+
+                    }
+                    TextField {
+                        id: an4V5
+                        width: 50
+                        validator: IntValidator {bottom: 0; top: 1000;}
+                        placeholderText: qsTr("Value @ 5V")
+                    }
+                    TextField {
+                        id: unitaux2
+                        width: 50
+                        placeholderText: qsTr("AFR")
+                    }
+                    Text  { text: "AN5-AN6"; width: 50;visible: { (interfaceSelect.currentIndex == "1") ? true: false; }}
+                    TextField {
+                        id: an5V0
+                        width: 50
+                        validator: IntValidator {bottom: 0; top: 1000;}
+                        placeholderText: qsTr("Value @ 0V")
+                        visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
+                    }
+                    TextField {
+                        id: an6V5
+                        width: 50
+                        validator: IntValidator {bottom: 0; top: 1000;}
+                        placeholderText: qsTr("Value @ 5V")
+                        visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
+                    }
+                    TextField {
+                        id: unitaux3
+                        width: 50
+                        placeholderText: qsTr("AFR")
+                        visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
+                    }
+                    Text  { text: "AN7-AN8"; width: 50;visible: { (interfaceSelect.currentIndex == "1") ? true: false; }}
+                    TextField {
+                        id: an7V0
+                        width: 50
+                        validator: IntValidator {bottom: 0; top: 1000;}
+                        placeholderText: qsTr("Value @ 0V")
+                        visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
+                    }
+                    TextField {
+                        id: an8V5
+                        width: 50
+                        validator: IntValidator {bottom: 0; top: 1000;}
+                        placeholderText: qsTr("Value @ 5V")
+                        visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
+                    }
+                    TextField {
+                        id: unitaux4
+                        width: 50
+                        placeholderText: qsTr("AFR")
+                        visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
+                    }
+
+                }
             }
         }
 
+//Functions
         Item {
             //Function to automatically connect at Startup , function is called from COmbobox Serialname component.oncompleted
             id: autoconnect
             function auto()
             {
-                if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex);
+               // if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex);
+            if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text,unitaux3.text,an5V0.text,an6V5.text,unitaux4.text,an7V0.text,an8V5.text);
+            }
+        }
+        Item {
+            //Logger on off function
+            id: logger
+            property var loggeron: 0
+            function datalogger()
+            {
+
+                if (loggerswitch.checked == true) logger.loggeron = 1, Serial.startLogging(logfilenameSelect.text, loggeron.valueOf());
+                if (loggerswitch.checked == false) logger.loggeron = 0,Serial.stopLogging(logfilenameSelect.text, loggeron.valueOf());
+            }
+        }
+        Item {
+            //Function to transmit GoPro variant and GoPro Password
+            id: transferSettings
+            function sendSettings()
+            {
+                Serial.goProSettings(goProSelect.currentIndex,goPropass.text);
+
             }
         }
 
 
     }
-
-}

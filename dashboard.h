@@ -60,6 +60,12 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal sens7 READ sens7 WRITE setsens7 NOTIFY sens7Changed)
     Q_PROPERTY(qreal sens8 READ sens8 WRITE setsens8 NOTIFY sens8Changed)
 
+    // Differential Aux Calculations
+    Q_PROPERTY(qreal auxcalc1 READ auxcalc1 WRITE setauxcalc1 NOTIFY auxcalc1Changed)
+    Q_PROPERTY(qreal auxcalc2 READ auxcalc2 WRITE setauxcalc2 NOTIFY auxcalc2Changed)
+    Q_PROPERTY(qreal auxcalc3 READ auxcalc3 WRITE setauxcalc3 NOTIFY auxcalc3Changed)
+    Q_PROPERTY(qreal auxcalc4 READ auxcalc4 WRITE setauxcalc4 NOTIFY auxcalc4Changed)
+
     // Flags
 
     Q_PROPERTY(qreal Flag1 READ Flag1 WRITE setFlag1 NOTIFY Flag1Changed)
@@ -182,7 +188,11 @@ public:
 
     void setpim(const qreal &pim);
 
-
+    //Aux Differential inputs
+    void setauxcalc1(const qreal &auxcalc1);
+    void setauxcalc2(const qreal &auxcalc2);
+    void setauxcalc3(const qreal &auxcalc3);
+    void setauxcalc4(const qreal &auxcalc4);
     //Sensor Info
 
     void setsens1(const qreal &sens1);
@@ -309,6 +319,13 @@ public:
 
     //Boost
     qreal pim() const;
+
+
+    //Aux Differential
+    qreal auxcalc1() const;
+    qreal auxcalc2() const;
+    qreal auxcalc3() const;
+    qreal auxcalc4() const;
 
     //Sensor Voltages
 
@@ -442,6 +459,12 @@ signals:
      //Boost
      void pimChanged(qreal pim);
 
+     //Aux Inputs
+
+      void auxcalc1Changed(qreal auxcalc1);
+      void auxcalc2Changed(qreal auxcalc2);
+      void auxcalc3Changed(qreal auxcalc3);
+      void auxcalc4Changed(qreal auxcalc4);
 
     //Sensor Voltages
 
@@ -572,6 +595,12 @@ private:
 
  //Boost
     qreal m_pim;
+
+    //Aux Inputs
+    qreal m_auxcalc1;
+    qreal m_auxcalc2;
+    qreal m_auxcalc3;
+    qreal m_auxcalc4;
 
   //Sensor Voltage
     qreal m_sens1;
