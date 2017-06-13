@@ -170,6 +170,12 @@ Rectangle {
                                     onClicked: {transferSettings.sendSettings() }
 
                                 }
+                                Button {
+                                    id: recordon
+                                    text: "GoPro REC"
+                                    onClicked: {goproRec.startrec() }
+
+                                }
                             }
                         }
         }
@@ -299,6 +305,17 @@ Rectangle {
             function sendSettings()
             {
                 Serial.goProSettings(goProSelect.currentIndex,goPropass.text);
+
+            }
+        }
+        Item {
+            //Function to transmit GoPro rec status on off
+            id: goproRec
+            property var record: 1
+            function startrec()
+            {
+
+                Serial.gopro(record.valueOf());
 
             }
         }

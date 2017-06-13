@@ -868,10 +868,13 @@ void Serial::goProSettings(const int &goProSelect, const QString &goPropass)
     qDebug() << "Gopro Index" <<Index;
     qDebug() << "Gopro Command" <<Command;
 }
-void Serial::gopro()
+void Serial::gopro(const QString &record)
 {
+    QString cmdstatus = record; // Status of GoPro command ,on off (0/1)
+    qDebug()<< "cmdstatus " << cmdstatus;
     QNetworkAccessManager *manager = new QNetworkAccessManager(this);
     connect(manager, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(replyFinished(QNetworkReply*)));
-    manager->get(QNetworkRequest(QUrl(Command)));
+    manager->get(QNetworkRequest(QUrl(QString (Command) + QString (cmdstatus))));
+    qDebug() << "sending HTTP request " <<QString (Command) + QString (cmdstatus);
 }
