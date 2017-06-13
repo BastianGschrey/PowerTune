@@ -164,18 +164,12 @@ Rectangle {
                                     placeholderText: qsTr("GoPro Password")
                                     Component.onCompleted: {transferSettings.sendSettings() }
                                 }
-                                Button {
-                                    id: applyButton
-                                    text: "Apply GoPro"
-                                    onClicked: {transferSettings.sendSettings() }
-
+                                Switch {
+                                    id: record
+                                    text: qsTr("GoPro rec")
+                                    onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                                 }
-                                Button {
-                                    id: recordon
-                                    text: "GoPro REC"
-                                    onClicked: {goproRec.startrec() }
 
-                                }
                             }
                         }
         }
@@ -311,11 +305,12 @@ Rectangle {
         Item {
             //Function to transmit GoPro rec status on off
             id: goproRec
-            property var record: 1
-            function startrec()
+            property var recording: 0
+            function rec()
             {
+                if (record.checked == true) goproRec.recording = 1, Serial.gopro(recording.valueOf());
+                if (record.checked == false) goproRec.recording = 0, Serial.gopro(recording.valueOf());
 
-                Serial.gopro(record.valueOf());
 
             }
         }

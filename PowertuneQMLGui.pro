@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick serialport serialbus
+QT += qml quick serialport serialbus network
 CONFIG += c++11
 
 SOURCES += main.cpp \

@@ -22,6 +22,7 @@
 
 #include <QObject>
 #include <QModbusDataUnit>
+#include <QNetworkReply>
 
 class SerialPort;
 class DashBoard;
@@ -51,7 +52,6 @@ public:
 public slots:
     void getPorts();
     void getEcus();
-    //void getLogging();
 
 public:
     void writeRequestPFC(QByteArray);
@@ -91,6 +91,7 @@ signals:
 
 public slots:
     void readyToRead();
+    void replyFinished(QNetworkReply* reply);
     void AdaptronicStartStream();
 
 

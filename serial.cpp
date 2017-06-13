@@ -37,6 +37,7 @@
 #include <QTextStream>
 #include <QtNetwork>
 #include <QNetworkAccessManager>
+#include <QNetworkReply>
 
 
 int requestIndex = 0; //ID for requested data type Power FC
@@ -872,9 +873,15 @@ void Serial::gopro(const QString &record)
 {
     QString cmdstatus = record; // Status of GoPro command ,on off (0/1)
     qDebug()<< "cmdstatus " << cmdstatus;
+
+
     QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-    connect(manager, SIGNAL(finished(QNetworkReply*)),
-            this, SLOT(replyFinished(QNetworkReply*)));
+    Serial::connect(manager, SIGNAL(finished(QNetworkReply*)),this, SLOT(replyFinished(QNetworkReply*)));
     manager->get(QNetworkRequest(QUrl(QString (Command) + QString (cmdstatus))));
     qDebug() << "sending HTTP request " <<QString (Command) + QString (cmdstatus);
 }
+ void Serial::replyFinished(QNetworkReply *net_reply)
+{
+     QByteArray data = net_reply->readAll();
+    qDebug() << "reply finished" << data.toInt();
+ }
