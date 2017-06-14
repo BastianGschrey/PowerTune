@@ -56,6 +56,7 @@ Rectangle {
 
                 Text { text: "ECU Selection:" }
                 ComboBox {
+
                     id: ecuSelect
                     width: 200
 
@@ -156,7 +157,7 @@ Rectangle {
                                     id: goProSelect
                                     width: 200
                                     model: [ "Hero", "Hero2","Hero3"]
-                                    Component.onCompleted: {transferSettings.sendSettings() }
+
                                 }
                                 Text { text: "GoPro Password :" }
                                 TextField {
@@ -298,7 +299,7 @@ Rectangle {
             id: transferSettings
             function sendSettings()
             {
-                Serial.goProSettings(goProSelect.currentIndex,goPropass.text);
+               GoPro.goProSettings(goProSelect.currentIndex,goPropass.text);
 
             }
         }
@@ -308,8 +309,8 @@ Rectangle {
             property var recording: 0
             function rec()
             {
-                if (record.checked == true) goproRec.recording = 1, Serial.gopro(recording.valueOf());
-                if (record.checked == false) goproRec.recording = 0, Serial.gopro(recording.valueOf());
+                if (record.checked == true) goproRec.recording = 1, GoPro.goprorec(recording.valueOf());
+                if (record.checked == false) goproRec.recording = 0,GoPro.goprorec(recording.valueOf());
 
 
             }

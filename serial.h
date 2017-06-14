@@ -22,12 +22,13 @@
 
 #include <QObject>
 #include <QModbusDataUnit>
-#include <QNetworkReply>
+
 
 class SerialPort;
 class DashBoard;
 class Decoder;
 class AppSettings;
+class GoPro;
 class QModbusClient;
 class QModbusReply;
 
@@ -47,8 +48,7 @@ public:
     Q_INVOKABLE void startLogging(const QString &logfilenameSelect, const int &loggeron);
     Q_INVOKABLE void stopLogging(const QString &logfilenameSelect, const int &loggeron);
     Q_INVOKABLE void Auxcalc (const QString &unitaux1,const int &an1V0,const int &an2V5,const QString &unitaux2,const int &an3V0,const int &an4V5,const QString &unitaux3,const int &an5V0,const int &an6V5,const QString &unitaux4,const int &an7V0,const int &an8V5);
-    Q_INVOKABLE void gopro(const QString &record);
-    Q_INVOKABLE void goProSettings(const int &goProSelect, const QString &goPropass);
+
 public slots:
     void getPorts();
     void getEcus();
@@ -69,6 +69,7 @@ private:
     Decoder *m_decoder;
     DashBoard *m_dashBoard;
     AppSettings *m_appSettings;
+    GoPro *m_gopro;
     QStringList m_portsNames;
     QStringList *m_ecuList;
     QModbusReply *lastRequest;
@@ -91,7 +92,6 @@ signals:
 
 public slots:
     void readyToRead();
-    void replyFinished(QNetworkReply* reply);
     void AdaptronicStartStream();
 
 

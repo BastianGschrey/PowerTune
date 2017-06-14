@@ -23,6 +23,7 @@
 #include "dashboard.h"
 #include "serialport.h"
 #include "appsettings.h"
+#include "gopro.h"
 
 #include <QDebug>
 #include <QTime>
@@ -35,9 +36,7 @@
 #include <QModbusRtuSerialMaster>
 #include <QFile>
 #include <QTextStream>
-#include <QtNetwork>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
+
 
 
 int requestIndex = 0; //ID for requested data type Power FC
@@ -47,7 +46,7 @@ int logging; // 0 Logging off , 1 Logging to file
 int loggingstatus;
 int Bytesexpected = 500;
 QString Logfilename;
-QString Command; // GoPro Command URL
+
 //reply = new QModbusReply;
 
 
@@ -67,6 +66,7 @@ Serial::Serial(QObject *parent) :
     m_serialport(Q_NULLPTR),
     m_decoder(Q_NULLPTR),
     m_dashBoard(Q_NULLPTR),
+    m_gopro(Q_NULLPTR),
     lastRequest(nullptr),
     modbusDevice(nullptr)
 
@@ -77,12 +77,14 @@ Serial::Serial(QObject *parent) :
     m_dashBoard = new DashBoard(this);
     m_decoder = new Decoder(m_dashBoard, this);
     m_appSettings = new AppSettings(this);
+    m_gopro = new GoPro(this);
     connect(m_decoder,SIGNAL(sig_adaptronicReadFinished()),this,SLOT(AdaptronicStartStream()));
     QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
     if (engine == Q_NULLPTR)
         return;
     engine->rootContext()->setContextProperty("Dashboard", m_dashBoard);
     engine->rootContext()->setContextProperty("AppSettings", m_appSettings);
+    engine->rootContext()->setContextProperty("GoPro", m_gopro);
 }
 
 void Serial::initSerialPort()
@@ -794,6 +796,7 @@ void Serial::startLogging(const QString &logfilenameSelect, const int &loggeron)
    m_decoder->loggerActivationstatus(loggingstatus);
    }
 
+
    return;
 }
 
@@ -805,6 +808,8 @@ void Serial::stopLogging(const QString &logfilenameSelect, const int &loggeron)
    qDebug() << "Stop Logging ";
    return;
 }
+
+
 void Serial::Auxcalc (const QString &unitaux1,const int &an1V0,const int &an2V5,const QString &unitaux2,const int &an3V0,const int &an4V5,const QString &unitaux3,const int &an5V0,const int &an6V5,const QString &unitaux4,const int &an7V0,const int &an8V5)
 {
     int aux1min = an1V0;
@@ -817,71 +822,3 @@ void Serial::Auxcalc (const QString &unitaux1,const int &an1V0,const int &an2V5,
     int aux8max = an8V5;
     m_decoder->calculatorAux(aux1min,aux2max,aux3min,aux4max,aux5min,aux6max,aux7min,aux8max);
 }
-//Function for GoPro command forwarding
-
-void Serial::goProSettings(const int &goProSelect, const QString &goPropass)
-{
-    int Index = goProSelect;
-    QString OPTION;
-    QString PARAM1;
-    QString PARAM2;
-    QString PASSWORD = goPropass;
-    QString ADRESS;
-
-
-
-    //HERO
-
-    if (Index == 0)
-    {
-    ADRESS = "http://10.5.5.9/gp/gpControl/command/shutter?p=";
-    Command = QString (ADRESS) + QString (OPTION);
-    }
-
-    //HERO 2
-
-    if (Index == 1)
-    {
-    ADRESS = "http://10.5.5.9/";
-    PARAM1 = "bacpac";
-    PARAM2 = "SH";
-    Command = QString (ADRESS) + QString (PARAM1) +"/"+  QString (PARAM2) + "?t=" + QString (PASSWORD) + "&p=%" + "0" + QString (OPTION);
-    }
-
-    //HERO 3
-    if (Index == 2)
-    {
-    ADRESS = "http://10.5.5.9/";
-    PARAM1 = "camera";
-    PARAM2 = "SH";
-    Command = QString (ADRESS) +QString (PARAM1) +"/"+ QString (PARAM2) + "?t=" + QString (PASSWORD) + "&p=%" + "0" + QString (OPTION);
-    }
-
-    //HERO 4
-
-    if (Index == 3)
-    {
-    PARAM1 = "camera";
-    PARAM2 = "SH";
-    Command = QString (ADRESS) +QString (PARAM1) +"/"+ QString (PARAM2) + "?t=" + QString (PASSWORD) + "&p=%" + QString (OPTION);
-    }
-
-    qDebug() << "Gopro Index" <<Index;
-    qDebug() << "Gopro Command" <<Command;
-}
-void Serial::gopro(const QString &record)
-{
-    QString cmdstatus = record; // Status of GoPro command ,on off (0/1)
-    qDebug()<< "cmdstatus " << cmdstatus;
-
-
-    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-    Serial::connect(manager, SIGNAL(finished(QNetworkReply*)),this, SLOT(replyFinished(QNetworkReply*)));
-    manager->get(QNetworkRequest(QUrl(QString (Command) + QString (cmdstatus))));
-    qDebug() << "sending HTTP request " <<QString (Command) + QString (cmdstatus);
-}
- void Serial::replyFinished(QNetworkReply *net_reply)
-{
-     QByteArray data = net_reply->readAll();
-    qDebug() << "reply finished" << data.toInt();
- }
