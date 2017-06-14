@@ -1,6 +1,7 @@
 import QtQuick 2.6
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.0
+import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 import com.powertune 1.0
 
@@ -14,17 +15,41 @@ ApplicationWindow {
     title: qsTr("PowerTune ") + Dashboard.Platform
     color: "black"
 
-//Pane {
-//    id: pane
+    //Pane {
+    //    id: pane
 
+    property real hideValue: 0
+    Behavior on hideValue {
+        NumberAnimation {duration: 200}
+    }
 
+    menuBar:  MenuBar {
+        id: menu
+        //__contentItem.scale: value                        // (1)
+        //__contentItem.opacity: hideValue                  // (2)
+        __contentItem.transform: Scale {yScale: hideValue}  // (3)
 
+        Menu {
+            id: m1
+            title: "File"
+            MenuItem { text: "Open..."
+                onTriggered: {
+                   hideValue = 0                            // hide the bar
+                }
+            }
+            MenuItem { text: "Close"
+                onTriggered: {
+                   hideValue = 0                            // hide the bar
+                }
+            }
+        }
+    }
     SwipeView {
         id: view
 
         currentIndex: 0
         anchors.fill: parent
-/*
+        /*
         Item {
             width: 200; height: 200
 
@@ -39,8 +64,8 @@ ApplicationWindow {
 */
         Loader {
 
-           id: firstPageLoader
-           source: "qrc:/Gauges/Dashboard.qml"
+            id: firstPageLoader
+            source: "qrc:/Gauges/Dashboard.qml"
         }
 
         Loader {
@@ -50,7 +75,7 @@ ApplicationWindow {
 
         Loader {
             id: thirdPageLoader
-           source: "qrc:/Gauges/HalfGauges_metric.qml"
+            source: "qrc:/Gauges/HalfGauges_metric.qml"
         }
         Loader {
             id: fourthPageLoader
@@ -78,3 +103,4 @@ ApplicationWindow {
         anchors.horizontalCenter: parent.horizontalCenter
     }
 }
+

@@ -4,15 +4,35 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Extras 1.4
+import Qt.labs.settings 1.0
 
 
 
 Rectangle {
-    width: parent.width
-    height: parent.height
+    id: gauge
+    width: 200
+    height: 200
     color: "black"
+    Drag.active: dragArea.drag.active
 
-CircularGauge {
+
+    MouseArea {
+        // Mouse area in which the item can be dragged
+        id: dragArea
+        anchors.fill: parent
+        drag.target: parent
+    }
+    Item {
+        id: positionSettings
+        Settings {
+            property alias gaugex: gauge.x
+            property alias gaugey: gauge.y
+    
+    
+    
+        }
+    }
+    CircularGauge {
         height: parent.height
         width: parent.width
         value: Math.round(Dashboard.Watertemp * 1.8 +32)
@@ -29,7 +49,7 @@ CircularGauge {
     Text {
         text: "°C"
         font.pixelSize: (parent.width / 12)
-         y: (parent.width / 5)
+        y: (parent.width / 5)
         font.bold: true
         font.family: "Eurostile"
         color: "white"
@@ -38,7 +58,7 @@ CircularGauge {
     Text {
         text: "COOLANT TEMP"
         font.pixelSize: (parent.width / 14)
-         y: (parent.width / 2.4)
+        y: (parent.width / 2.4)
         font.bold: true
         font.family: "Eurostile"
         color: "white"
@@ -56,14 +76,14 @@ CircularGauge {
     }
 
     DropShadow {
-            anchors.fill: coolant
-            horizontalOffset: 0
-            verticalOffset: 8
-            radius: 4.0
-            samples: 16
-            color: "grey"
-            source: coolant
-        }
+        anchors.fill: coolant
+        horizontalOffset: 0
+        verticalOffset: 8
+        radius: 4.0
+        samples: 16
+        color: "grey"
+        source: coolant
+    }
     HalfNeedle {
         id: waterneedle
         anchors.verticalCenterOffset: 0
