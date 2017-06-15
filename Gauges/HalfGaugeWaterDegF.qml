@@ -4,13 +4,34 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Extras 1.4
+import Qt.labs.settings 1.0
 
 
 
 Rectangle {
-    width: parent.width
-    height: parent.height
+    id:coolantImperialGauge
+    width: 200
+    height: width
     color: "black"
+    Drag.active: dragArea.drag.active
+
+
+    MouseArea {
+        // Mouse area in which the item can be dragged
+        id: dragArea
+        anchors.fill: parent
+        drag.target: parent
+    }
+    Item {
+        id: posSettings
+        Settings {
+            property alias coolantImperialGaugex: coolantImperialGauge.x
+            property alias coolantImperialGaugey: coolantImperialGauge.y
+
+
+
+        }
+    }
 
 CircularGauge {
         height: parent.height
