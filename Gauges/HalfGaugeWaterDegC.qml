@@ -11,8 +11,8 @@ import Qt.labs.settings 1.0
 Rectangle {
     id: gauge
     width: 200
-    height: 200
-    color: "black"
+    height: width
+    color: "transparent"
     Drag.active: dragArea.drag.active
 
 
@@ -27,6 +27,7 @@ Rectangle {
         Settings {
             property alias gaugex: gauge.x
             property alias gaugey: gauge.y
+            //property alias gaugesize:gauge.implicitWidth
     
     
     

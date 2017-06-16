@@ -12,7 +12,7 @@ Rectangle {
     id:coolantImperialGauge
     width: 200
     height: width
-    color: "black"
+    color: "transparent"
     Drag.active: dragArea.drag.active
 
 
@@ -27,6 +27,7 @@ Rectangle {
         Settings {
             property alias coolantImperialGaugex: coolantImperialGauge.x
             property alias coolantImperialGaugey: coolantImperialGauge.y
+            property alias size: coolantImperialGauge.width
 
 
 

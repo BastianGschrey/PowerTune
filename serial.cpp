@@ -45,6 +45,7 @@ int interface; // 0=fcHako, 1=fc-datalogIt
 int logging; // 0 Logging off , 1 Logging to file
 int loggingstatus;
 int Bytesexpected = 500;
+int Bytes = 0;
 QString Logfilename;
 
 //reply = new QModbusReply;
@@ -154,7 +155,7 @@ qDebug() << "logging" <<logging;
      {
          qDebug() << "Open Serial port failed: " << m_serialport->errorString();
      }
-     requestIndex = 0;
+     //requestIndex = 0;
      qDebug() << "Initial request to PowerFc"<< requestIndex;
      Serial::sendRequest(requestIndex);
 
@@ -205,7 +206,6 @@ void Serial::readyToRead()
     {
 
     int timeOut = 200; // timeout in milisec.
-    int Bytes = 0;
     QByteArray recvData;
     QTime startTime = QTime::currentTime();
 
@@ -260,9 +260,10 @@ void Serial::readyToRead()
         out << "Request Index " << int(requestIndex)<< " lenght received "<< int(recvData.length())<< " Bytes "<< " Expected Bytes "<< int(Bytesexpected)<< " bytes " <<" Message "<< QByteArray(recvData.toHex()) <<endl;
         mFile.close();
         }
-        qDebug() << "Received data  NOK request"<<requestIndex;
+        qDebug() << "Received data  NOK request"<<requestIndex<<"reveived"<<recvData.toHex();
         //qDebug() << "Receved data "<<recvData.toHex()<< "Checksum calculated" <<checksumhex << "Checksum receveived"<< recvchecksumhex;
         recvData.clear();
+        Serial::clear();
         Serial::sendRequest(requestIndex);
     }
    }
@@ -409,8 +410,10 @@ void Serial::readData(QByteArray serialdata)
 void Serial::writeRequestPFC(QByteArray p_request)
 {
     m_serialport->write(p_request);
-    m_serialport->flush();
+    qDebug() << "Request Message" <<p_request.toHex();
     m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec)
+    m_serialport->flush();
+    //QTimer::singleShot(1000, this, SLOT(readyToRead())); //timeout for message reply
 }
 
 //Power FC requests
