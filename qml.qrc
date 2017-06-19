@@ -45,5 +45,6 @@
         <file>Gauges/BarGauge.qml</file>
         <file>AuxInput.qml</file>
         <file>Gauges/RoundGaugeSpeedMetric.qml</file>
+        <file>Gauges/GaugeRoundREV.qml</file>
     </qresource>
 </RCC>

@@ -13,26 +13,6 @@ Rectangle {
     width: 200
     height: width
     color: "transparent"
-    Drag.active: dragArea.drag.active
-
-
-    MouseArea {
-        // Mouse area in which the item can be dragged
-        id: dragArea
-        anchors.fill: parent
-        drag.target: parent
-    }
-    Item {
-        id: posSettings
-        Settings {
-            property alias coolantImperialGaugex: coolantImperialGauge.x
-            property alias coolantImperialGaugey: coolantImperialGauge.y
-            property alias size: coolantImperialGauge.width
-
-
-
-        }
-    }
 
 CircularGauge {
         height: parent.height
@@ -40,9 +20,6 @@ CircularGauge {
         value: Math.round(Dashboard.Watertemp * 1.8 +32)
         anchors.verticalCenter: parent.verticalCenter
         anchors.top: parent.top
-//        minimumValue: 0
-  //      maximumValue: 270
-
         style: HalfGaugeStyle {}
     }
 

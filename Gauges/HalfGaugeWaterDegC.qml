@@ -13,26 +13,7 @@ Rectangle {
     width: 200
     height: width
     color: "transparent"
-    Drag.active: dragArea.drag.active
 
-
-    MouseArea {
-        // Mouse area in which the item can be dragged
-        id: dragArea
-        anchors.fill: parent
-        drag.target: parent
-    }
-    Item {
-        id: positionSettings
-        Settings {
-            property alias gaugex: gauge.x
-            property alias gaugey: gauge.y
-            //property alias gaugesize:gauge.implicitWidth
-    
-    
-    
-        }
-    }
     CircularGauge {
         height: parent.height
         width: parent.width

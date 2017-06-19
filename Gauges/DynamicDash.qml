@@ -67,30 +67,182 @@ Rectangle {
             property alias remembergauge19: remember.gauge19select
             property alias remembergauge29: remember.gauge20select
 
+            property alias widthloader1: loader1.width
+            property alias widthloader2: loader2.width
+            property alias widthloader3: loader3.width
+            property alias widthloader4: loader4.width
+            property alias widthloader5: loader5.width
+            property alias widthloader6: loader6.width
+            property alias widthloader7: loader7.width
+            property alias widthloader8: loader8.width
+            property alias widthloader9: loader9.width
+            property alias widthloader10: loader10.width
+            property alias widthloader11: loader11.width
+            property alias widthloader12: loader12.width
+            property alias widthloader13: loader13.width
+            property alias widthloader14: loader14.width
+            property alias widthloader15: loader15.width
+            property alias widthloader16: loader16.width
+            property alias widthloader17: loader17.width
+            property alias widthloader18: loader18.width
+            property alias widthloader19: loader19.width
+            property alias widthloader20: loader20.width
 
+            property alias xloader1: loader1.x
+            property alias yloader1: loader1.y
+            property alias xloader2: loader2.x
+            property alias yloader2: loader2.y
+            property alias xloader3: loader3.x
+            property alias yloader3: loader3.y
+            property alias xloader4: loader4.x
+            property alias yloader4: loader4.y
+            property alias xloader5: loader5.x
+            property alias yloader5: loader5.y
+            property alias xloader6: loader6.x
+            property alias yloader6: loader6.y
+            property alias xloader7: loader7.x
+            property alias yloader7: loader7.y
+            property alias xloader8: loader8.x
+            property alias yloader8: loader8.y
+            property alias xloader9: loader9.x
+            property alias yloader9: loader9.y
+            property alias xloader10: loader10.x
+            property alias yloader10: loader10.y
+            property alias xloader11: loader11.x
+            property alias yloader11: loader11.y
+            property alias xloader12: loader12.x
+            property alias yloader12: loader12.y
+            property alias xloader13: loader13.x
+            property alias yloader13: loader13.y
+            property alias xloader14: loader14.x
+            property alias yloader14: loader14.y
+            property alias xloader15: loader15.x
+            property alias yloader15: loader15.y
+            property alias xloader16: loader16.x
+            property alias yloader16: loader16.y
+            property alias xloader17: loader17.x
+            property alias yloader17: loader17.y
+            property alias xloader18: loader18.x
+            property alias yloader18: loader18.y
+            property alias xloader19: loader19.x
+            property alias yloader19: loader19.y
+            property alias xloader20: loader20.x
+            property alias yloader20: loader20.y
         }
     }
+    Item { id:loader1; width: 200; height: width;
+        Drag.active: dragArea.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea
+            anchors.fill: parent
+            drag.target: parent
+        }
+        Loader {
+            id: gauge1
+            anchors.fill: loader1
+        }
+    }
+    Item { id:loader2; width: 200; height: width;
+        Drag.active: dragArea2.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea2
+            anchors.fill: parent
+            drag.target: parent
+        }
+        Loader { id: gauge2
+            anchors.fill: parent
+        }
+    }
+    Item { id:loader3; width: 200; height: width;
+        Drag.active: dragArea3.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea3
+            anchors.fill: parent
+            drag.target: parent
+        }
+        Loader { id: gauge3
+            anchors.fill: parent
+        }
+    }
+    Item { id:loader4; width: 200; height: width;
+        Drag.active: dragArea4.drag.active
+        MouseArea {
+            id: dragArea4
+            anchors.fill: parent
+            drag.target: parent
+        }
+        Loader { id: gauge4
+            anchors.fill: parent
+        }
+    }
+    Item { id:loader5; width: 200; height: width
+        Loader { id: gauge5
+            anchors.fill: parent}
+    }
+    Item { id:loader6; width: 200; height: width
+        Loader { id: gauge6
+            anchors.fill: parent}
+    }
+    Item { id:loader7; width: 200; height: width
+        Loader { id: gauge7
+            anchors.fill: parent}
+    }
+    Item { id:loader8; width: 200; height: width
+        Loader { id: gauge8
+            anchors.fill: parent}
+    }
+    Item { id:loader9; width: 200; height: width
+        Loader { id: gauge9
+            anchors.fill: parent}
+    }
+    Item { id:loader10; width: 200; height: width
+        Loader { id: gauge10
+            anchors.fill: parent}
+    }
+    Item { id:loader11; width: 200; height: width
+        Loader { id: gauge11
+            anchors.fill: parent}
+    }
+    Item { id:loader12; width: 200; height: width
+        Loader { id: gauge12
+            anchors.fill: parent}
+    }
+    Item { id:loader13; width: 200; height: width
+        Loader { id: gauge13
+            anchors.fill: parent}
+    }
+    Item { id:loader14; width: 200; height: width
+        Loader { id: gauge14
+            anchors.fill: parent}
+    }
+    Item { id:loader15; width: 200; height: width
+        Loader { id: gauge15
+            anchors.fill: parent}
+    }
+    Item { id:loader16; width: 200; height: width
+        Loader { id: gauge16
+            anchors.fill: parent}
+    }
+    Item { id:loader17; width: 200; height: width
+        Loader { id: gauge17
+            anchors.fill: parent}
+    }
+    Item { id:loader18; width: 200; height: width
+        Loader { id: gauge18
+            anchors.fill: parent}
+    }
+    Item { id:loader19; width: 200; height: width
+        Loader { id: gauge19
+            anchors.fill: parent}
+    }
+    Item { id:loader20; width: 200; height: width
+        Loader { id: gauge20
+            anchors.fill: parent}
+    }
 
-    Loader { id: gauge1 }
-    Loader { id: gauge2 }
-    Loader { id: gauge3 }
-    Loader { id: gauge4 }
-    Loader { id: gauge5 }
-    Loader { id: gauge6 }
-    Loader { id: gauge7 }
-    Loader { id: gauge8 }
-    Loader { id: gauge9 }
-    Loader { id: gauge10}
-    Loader { id: gauge11}
-    Loader { id: gauge12}
-    Loader { id: gauge13}
-    Loader { id: gauge14}
-    Loader { id: gauge15}
-    Loader { id: gauge16}
-    Loader { id: gauge17}
-    Loader { id: gauge18}
-    Loader { id: gauge19}
-    Loader { id: gauge20}
 
     //gauge Selector with Dropdowns
     Rectangle{
@@ -108,31 +260,37 @@ Rectangle {
                 spacing: 5
                 Grid {
                     rows: 10
-                    columns: 4
+                    columns: 6
                     spacing: 5
                     ComboBox {
                         id: selectGaugeNumber
-                        width: 30
+                        width: 60
                         model: ["1","2","3","4","5","6","7","8","9","10",
                             "11","12","13","14","15","16","17","18","19","20"]
                         onCurrentIndexChanged: setRemember.remembersetIndex()
                     }
                     ComboBox {
                         id: selectGauge
-                        width: 300
+                        width: 250
                         currentIndex: 3
-                        model: [ "None","Half Gauge Coolant Metric","Half Gauge Coolant Imperial"]
+                        model: [ "None","Half Gauge Coolant Metric","Half Gauge Coolant Imperial","KMH Round","REV Round"]
                         onCurrentIndexChanged: setSource.sourceSetting(),remember.setIndex(),createGauge.create()
                     }
-                  /*  TextField {
-                        id: gaugesize
-                        width: 50
-                        placeholderText: qsTr("200")
-                        validator: IntValidator {bottom: 0; top: 3000;}
-
+                    Button{
+                        width: 120
+                        text: "gauge size -"
+                        onClicked:sizeminus.sizeminusfunc()
                     }
-                    */
-
+                    Button{
+                        width: 120
+                        text: "gauge size +"
+                        onClicked:sizeplus.sizeplusfunc()
+                    }
+                    Button{
+                        width: 100
+                        text: "close"
+                        onClicked:gaugeSelect.visible = false;
+                    }
                 }
             }
         }
@@ -162,8 +320,8 @@ Rectangle {
             if (selectGauge.currentIndex == 0)createGauge.gaugesource = ("");
             if (selectGauge.currentIndex == 1)createGauge.gaugesource = ("qrc:/Gauges/HalfGaugeWaterDegC.qml");
             if (selectGauge.currentIndex == 2)createGauge.gaugesource = ("qrc:/Gauges/HalfGaugeWaterDegF.qml");
-            if (selectGauge.currentIndex == 3)createGauge.gaugesource = ("");
-            if (selectGauge.currentIndex == 4)createGauge.gaugesource = ("");
+            if (selectGauge.currentIndex == 3)createGauge.gaugesource = ("qrc:/Gauges/RoundGaugeSpeedMetric.qml");
+            if (selectGauge.currentIndex == 4)createGauge.gaugesource = ("qrc:/Gauges/GaugeRoundREV.qml");
             if (selectGauge.currentIndex == 5)createGauge.gaugesource = ("");
             if (selectGauge.currentIndex == 6)createGauge.gaugesource = ("");
             if (selectGauge.currentIndex == 7)createGauge.gaugesource = ("");
@@ -243,7 +401,6 @@ Rectangle {
         function setIndex()
         {
             console.log ("Save index");
-
             if (selectGaugeNumber.currentIndex == 0)gauge1select = selectGauge.currentIndex;
             if (selectGaugeNumber.currentIndex == 1)gauge2select = selectGauge.currentIndex;
             if (selectGaugeNumber.currentIndex == 2)gauge3select = selectGauge.currentIndex;
@@ -264,7 +421,6 @@ Rectangle {
             if (selectGaugeNumber.currentIndex == 17)gauge18select = selectGauge.currentIndex;
             if (selectGaugeNumber.currentIndex == 18)gauge19select = selectGauge.currentIndex;
             if (selectGaugeNumber.currentIndex == 19)gauge20select = selectGauge.currentIndex;
-
 
 
         }
@@ -299,5 +455,64 @@ Rectangle {
 
         }
     }
+    Item {
+        //Function to remember selectGaugeNumber and selected gauge
+        id: sizeplus
+        function sizeplusfunc()
+        {
+            console.log ("increasing size");
+            if (selectGaugeNumber.currentIndex == 0)loader1.width = loader1.width + 10;
+            if (selectGaugeNumber.currentIndex == 1)loader2.width = loader2.width + 10;
+            if (selectGaugeNumber.currentIndex == 2)loader3.width = loader3.width + 10;
+            if (selectGaugeNumber.currentIndex == 3)loader4.width = loader4.width + 10;
+            if (selectGaugeNumber.currentIndex == 4)loader5.width = loader5.width + 10;
+            if (selectGaugeNumber.currentIndex == 5)loader6.width = loader6.width + 10;
+            if (selectGaugeNumber.currentIndex == 6)loader7.width = loader7.width + 10;
+            if (selectGaugeNumber.currentIndex == 7)loader8.width = loader8.width + 10;
+            if (selectGaugeNumber.currentIndex == 8)loader9.width = loader9.width + 10;
+            if (selectGaugeNumber.currentIndex == 9)loader10.width = loader10.width + 10;
+            if (selectGaugeNumber.currentIndex == 10)loader11.width = loader11.width + 10;
+            if (selectGaugeNumber.currentIndex == 11)loader12.width = loader12.width + 10;
+            if (selectGaugeNumber.currentIndex == 12)loader13.width = loader13.width + 10;
+            if (selectGaugeNumber.currentIndex == 13)loader14.width = loader14.width + 10;
+            if (selectGaugeNumber.currentIndex == 14)loader15.width = loader15.width + 10;
+            if (selectGaugeNumber.currentIndex == 15)loader16.width = loader16.width + 10;
+            if (selectGaugeNumber.currentIndex == 16)loader17.width = loader17.width + 10;
+            if (selectGaugeNumber.currentIndex == 17)loader18.width = loader18.width + 10;
+            if (selectGaugeNumber.currentIndex == 18)loader19.width = loader19.width + 10;
+            if (selectGaugeNumber.currentIndex == 19)loader20.width = loader20.width + 10;
 
+
+        }
+    }
+    Item {
+        //Function to remember selectGaugeNumber and selected gauge
+        id: sizeminus
+        function sizeminusfunc()
+        {
+            console.log ("decreasing size");
+            if (selectGaugeNumber.currentIndex == 0)loader1.width = loader1.width - 10;
+            if (selectGaugeNumber.currentIndex == 1)loader2.width = loader2.width - 10;
+            if (selectGaugeNumber.currentIndex == 2)loader3.width = loader3.width - 10;
+            if (selectGaugeNumber.currentIndex == 3)loader4.width = loader4.width - 10;
+            if (selectGaugeNumber.currentIndex == 4)loader5.width = loader5.width - 10;
+            if (selectGaugeNumber.currentIndex == 5)loader6.width = loader6.width - 10;
+            if (selectGaugeNumber.currentIndex == 6)loader7.width = loader7.width - 10;
+            if (selectGaugeNumber.currentIndex == 7)loader8.width = loader8.width - 10;
+            if (selectGaugeNumber.currentIndex == 8)loader9.width = loader9.width - 10;
+            if (selectGaugeNumber.currentIndex == 9)loader10.width = loader10.width - 10;
+            if (selectGaugeNumber.currentIndex == 10)loader11.width = loader11.width - 10;
+            if (selectGaugeNumber.currentIndex == 11)loader12.width = loader12.width - 10;
+            if (selectGaugeNumber.currentIndex == 12)loader13.width = loader13.width - 10;
+            if (selectGaugeNumber.currentIndex == 13)loader14.width = loader14.width - 10;
+            if (selectGaugeNumber.currentIndex == 14)loader15.width = loader15.width - 10;
+            if (selectGaugeNumber.currentIndex == 15)loader16.width = loader16.width - 10;
+            if (selectGaugeNumber.currentIndex == 16)loader17.width = loader17.width - 10;
+            if (selectGaugeNumber.currentIndex == 17)loader18.width = loader18.width - 10;
+            if (selectGaugeNumber.currentIndex == 18)loader19.width = loader19.width - 10;
+            if (selectGaugeNumber.currentIndex == 19)loader20.width = loader20.width - 10;
+
+
+        }
+    }
 }
