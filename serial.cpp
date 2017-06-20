@@ -205,22 +205,22 @@ void Serial::readyToRead()
     if(ecu == 0)
     {
 
-    int timeOut = 200; // timeout in milisec.
+    int timeOut = 2000; // timeout in milisec.
     QByteArray recvData;
     QTime startTime = QTime::currentTime();
 
     while (Bytesexpected > Bytes)
         {
               if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
-             // qDebug() << "Bytes expected"<<Bytesexpected;
-             // qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
+              qDebug() << "Bytes expected"<<timeOut;
+              qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
               Bytes = m_serialport->bytesAvailable();
 
          }
 
     if  (Bytesexpected == m_serialport->bytesAvailable())
         {
-         recvData = m_serialport->read(Bytesexpected);
+         recvData += m_serialport->read(Bytesexpected);
         }
             // Process to calculate checksum not evaluated at the moment , for later use
 /*
@@ -242,9 +242,10 @@ void Serial::readyToRead()
         //qDebug() << "Message"<<recvData.toHex()<< "Checksum calculated" <<checksumhex << "Checksum receveived"<< recvchecksumhex;
             if(requestIndex <= 62){requestIndex++;}
             else{requestIndex = 59;}
+            m_serialport->flush();
             readData(recvData);
             recvData.clear();
-            m_serialport->flush();
+
             }
      else
     {
@@ -252,6 +253,7 @@ void Serial::readyToRead()
         if (logging ==1 ){
         recvData += m_serialport->readAll();
         QString fileName = "Errors.txt";
+
         QFile mFile(fileName);
         if(!mFile.open(QFile::Append | QFile::Text)){
             qDebug() << "Could not open file for writing";
@@ -266,6 +268,7 @@ void Serial::readyToRead()
         Serial::clear();
         Serial::sendRequest(requestIndex);
     }
+
    }
 
 
@@ -423,9 +426,12 @@ void Serial::sendRequest(int requestIndex)
     switch (requestIndex){
 
     case 0:
-        //First request from (this is what FC Edit does)
+        //First request from (this is what FC Edit does seems to get a 4 or 8 Byte response dependant on Aux inputs ??)
         Serial::writeRequestPFC(QByteArray::fromHex("0102FC"));
-        Bytesexpected = 4;
+        if (interface ==0)
+        {Bytesexpected = 4;}
+        if (interface ==1)
+            {Bytesexpected = 8;}
         break;
     case 1:
         //Init Platform for the first time ( usully returns a malformed packet)
@@ -781,7 +787,23 @@ void Serial::startLogging(const QString &logfilenameSelect, const int &loggeron)
    {
        {
            qDebug() << "Apexi start Log not implemented ";
-            m_decoder->loggerActivationstatus(loggingstatus);
+           m_decoder->loggerActivationstatus(loggingstatus);
+           QString filename = Logfilename + ".txt";
+           QFile file( filename );
+           qDebug() << "Apexi Start Log";
+           if ( file.open(QIODevice::ReadWrite) )
+           {
+               QTextStream out( &file );
+               out.setFieldWidth(8);
+               out << "Time(S)" << "InjDuty" << "IGL" << "IGT" << "Rpm" << "Speed"
+                   << "Boost" << "Knock" << "WtrTemp" << "AirTemp"
+                   << "BatVolt" << "PIM" << "VTA1" << "VTA2" << "VMOP" << "WTRT"
+                   << "AIRT" << "FUEL" << "O2S" << "STR" << "A/C" << "PWS" << "NTR"
+                   << "CLT" << "STP" << "CAT" << "ELD"<<"HWL"<<"FPD"<<"FPR"<<"APR"<<"PAC"<<"CCN"<<"TCN"<<"PRC"<<"AN1<<raw"<<"AN2<<raw"<<"AN3<<raw"<<"AN4<<raw"<<"AN1<<AFR"<<"AN2<<raw"<<"AN3<<raw"<<"AN4<<raw"<<"MAPN"<<"MAPP"<<"RPM"<<"PIM"<<"PIM<<V"<<"TPS<<V"<<"InjFrPr"<<"Inj"<<"+/-"<<"IGL"<<"IGT"<<"FuelT"<<"Oil"<<"PC%"<<"WG%"<<"WtrT"<<"AirT"<<"Knock"<<"BatV"<<"Speed"<<"???(2)"<<"O2S"<<"???"<< "InjFrSc" << qSetFieldWidth(0) << endl <<qSetFieldWidth(8);
+           }
+           file.close();
+           m_decoder->loggerApexi(Logfilename);
+
        }
    }
    if (ecu == 1)    //Adaptronic
