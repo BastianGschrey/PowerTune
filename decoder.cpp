@@ -399,15 +399,16 @@ void Decoder::decodeBasic(QByteArray serialdata)
         qDebug() << "Could not open file for writing";
     }
     QTextStream out(&mFile);
+    out.setFieldAlignment(QTextStream::AlignLeft);
     out.setFieldWidth(8);
-        out << packageBasic[0]<< "        "<< packageBasic[1]<< "    "<< packageBasic[2] << "    "<< packageBasic[3] << "    "<< packageBasic[4] << "    "<< packageBasic[5] << "    "<< packageBasic[6]<< "    "<< packageBasic[7]<< "    "<< packageBasic[8]<< "    "<< packageBasic[9]
-            << packageBasic[9] << packageSens[0] << packageSens[1] << packageSens[2] << packageSens[3] << packageSens[4] << packageSens[5] << packageSens[6] << packageSens[7]
-            << packageAux[0] << packageAux[1] << packageAux[2] << packageAux[3] << packageAux[4] << packageAux[5] << packageAux[6]
-            << packageAux[7]<< packageMap[0] << packageMap[1] << packageADV[0] << packageADV[1] << packageADV[2] << packageADV[3] << packageADV[4] << packageADV[5] << packageADV[6] << packageADV[7]
-            << packageADV[8] << packageADV[9] << packageADV[10] << packageADV[11] << packageADV[12] << packageADV[13] << packageADV[14] << packageADV[15] << packageADV[16] << packageADV[17] << packageADV[18]
-            << flagArray[0] << flagArray[1] << flagArray[2] << flagArray[3] << flagArray[4] << flagArray[5] << flagArray[6] << flagArray[7] << flagArray[8] << flagArray[9] << flagArray[10] << flagArray[11] << flagArray[12] << flagArray[13] << flagArray[14] << flagArray[15]
-            << packageADV[19] << packageADV[20] << packageADV[21] << qSetFieldWidth(0) << endl <<qSetFieldWidth(8);
+            out << (loggerStartTime.msecsTo(QTime::currentTime()))<< packageBasic[0]<< packageBasic[1]<< packageBasic[2] << packageBasic[3] << packageBasic[4] << packageBasic[5] << packageBasic[6]<< packageBasic[7]<< packageBasic[8]
+                << packageBasic[9] << packageSens[0] << packageSens[1] << packageSens[2] << packageSens[3] << packageSens[4] << packageSens[5] << packageSens[6] << packageSens[7]
+                << flagArray[0] << flagArray[1] << flagArray[2] << flagArray[3] << flagArray[4] << flagArray[5] << flagArray[6] << flagArray[7] << flagArray[8] << flagArray[9] << flagArray[10] << flagArray[11] << flagArray[12] << flagArray[13] << flagArray[14] << flagArray[15]
+                << packageAux[0] << packageAux[1] << packageAux[2] << packageAux[3] << packageAux[4] << packageAux[5] << packageAux[6]
+                << packageAux[7]<< packageMap[0] << packageMap[1] << packageADV[0] << packageADV[1] << packageADV[2] << packageADV[3] << packageADV[4] << packageADV[5] << packageADV[6] << packageADV[7]
+                << packageADV[8] << packageADV[9] << packageADV[10] << packageADV[11] << packageADV[12] << packageADV[13] << packageADV[14] << packageADV[15] << packageADV[16] << packageADV[17] << packageADV[18]
 
+                << packageADV[19] << packageADV[20] << packageADV[21] << qSetFieldWidth(0) << endl <<qSetFieldWidth(8);
     mFile.close();
     }
 

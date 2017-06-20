@@ -212,7 +212,7 @@ void Serial::readyToRead()
     while (Bytesexpected > Bytes)
         {
               if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
-              qDebug() << "Bytes expected"<<timeOut;
+              qDebug() << "Bytes expected"<<Bytes;
               qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
               Bytes = m_serialport->bytesAvailable();
 
@@ -794,12 +794,23 @@ void Serial::startLogging(const QString &logfilenameSelect, const int &loggeron)
            if ( file.open(QIODevice::ReadWrite) )
            {
                QTextStream out( &file );
+               out.setFieldAlignment(QTextStream::AlignLeft);
                out.setFieldWidth(8);
-               out << "Time(S)" << "InjDuty" << "IGL" << "IGT" << "Rpm" << "Speed"
+               out << "Time(ms)"<< "InjDuty" << "IGL" << "IGT" << "Rpm" << "Speed"
                    << "Boost" << "Knock" << "WtrTemp" << "AirTemp"
                    << "BatVolt" << "PIM" << "VTA1" << "VTA2" << "VMOP" << "WTRT"
                    << "AIRT" << "FUEL" << "O2S" << "STR" << "A/C" << "PWS" << "NTR"
-                   << "CLT" << "STP" << "CAT" << "ELD"<<"HWL"<<"FPD"<<"FPR"<<"APR"<<"PAC"<<"CCN"<<"TCN"<<"PRC"<<"AN1<<raw"<<"AN2<<raw"<<"AN3<<raw"<<"AN4<<raw"<<"AN1<<AFR"<<"AN2<<raw"<<"AN3<<raw"<<"AN4<<raw"<<"MAPN"<<"MAPP"<<"RPM"<<"PIM"<<"PIM<<V"<<"TPS<<V"<<"InjFrPr"<<"Inj"<<"+/-"<<"IGL"<<"IGT"<<"FuelT"<<"Oil"<<"PC%"<<"WG%"<<"WtrT"<<"AirT"<<"Knock"<<"BatV"<<"Speed"<<"???(2)"<<"O2S"<<"???"<< "InjFrSc" << qSetFieldWidth(0) << endl <<qSetFieldWidth(8);
+                   << "CLT" << "STP" << "CAT" << "ELD"
+                   <<"HWL"<<"FPD"<<"FPR"<<"APR"
+                   <<"PAC"<<"CCN"<<"TCN"<<"PRC"
+                   <<"AN1" <<"AN2"<<"AN3"<<"AN4"
+                   <<"AN5"<<"AN6"<<"AN7"<<"AN8" <<"MAPN"
+                   <<"MAPP"<<"RPM"<<"PIM"<<"PIM  V"
+                   <<"TPS  V"<<"InjFrPr"<<"Inj+/-"
+                   <<"IGL"<<"IGT"<<"FuelT"
+                   <<"Oil"<<"PC%"<<"WG%"<<"WtrT"
+                   <<"AirT"<<"Knock"<<"BatV"<<"Speed"
+                   <<"Iscvdty"<<"O2S"<<"(1)"<< "InjFrSc"<<"(2)"<< qSetFieldWidth(0) << endl <<qSetFieldWidth(8);
            }
            file.close();
            m_decoder->loggerApexi(Logfilename);
