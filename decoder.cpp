@@ -19,11 +19,20 @@
 
 QByteArray serialdata;
 QByteArray fullFuelBase;
+qreal AN1AN2calc;
+qreal AN3AN4calc;
+qreal AN5AN6calc;
+qreal AN7AN8calc;
+//QBitArray flagArray;
 QString Logfile;
+QString Auxname1;
+QString Auxname2;
+QString Auxname3;
+QString Auxname4;
 qreal odometer;
 QTime startTime = QTime::currentTime();
 QTime loggerStartTime = QTime::currentTime();
-int Model;
+int Model = 0;
 int Logging =3;
 int Loggerstat;
 int auxval1;
@@ -34,7 +43,6 @@ int auxval5;
 int auxval6;
 int auxval7;
 int auxval8;
-
 
 
 double mul[80] = FC_INFO_MUL;  // required values for calculation from raw to readable values for Advanced Sensor info
@@ -299,6 +307,30 @@ void Decoder::decodeSensor(QByteArray serialdata)
     m_dashboard->setFlag15(flagArray[14]);
     m_dashboard->setFlag16(flagArray[15]);
 
+
+    if (Loggerstat ==1 && Model >= 1)
+    {
+    QString fileName = Logfile;
+    QFile mFile(fileName);
+    if(!mFile.open(QFile::Append | QFile::Text)){
+        qDebug() << "Could not open file for writing";
+    }
+    QTextStream out(&mFile);
+    out.setFieldAlignment(QTextStream::AlignLeft);
+    out.setFieldWidth(8);
+            out << (loggerStartTime.msecsTo(QTime::currentTime()))<< packageBasic[0]<< packageBasic[1]<< packageBasic[2] << packageBasic[3] << packageBasic[4] << packageBasic[5] << packageBasic[6]<< packageBasic[7]<< packageBasic[8]
+                << packageBasic[9] << packageSens[0] << packageSens[1] << packageSens[2] << packageSens[3] << packageSens[4] << packageSens[5] << packageSens[6] << packageSens[7]
+                << flagArray[0] << flagArray[1] << flagArray[2] << flagArray[3] << flagArray[4] << flagArray[5] << flagArray[6] << flagArray[7] << flagArray[8] << flagArray[9] << flagArray[10] << flagArray[11] << flagArray[12] << flagArray[13] << flagArray[14] << flagArray[15]
+                << AN1AN2calc << AN3AN4calc << AN5AN6calc << AN7AN8calc
+               // << packageAux2[0] << packageAux2[1] << packageAux2[2] << packageAux2[3]<< packageAux2[4] << packageAux2[5] << packageAux2[6] << packageAux2[7]
+                << packageMap[0] << packageMap[1] << packageADV[0] << packageADV[1] << packageADV[2] << packageADV[3] << packageADV[4] << packageADV[5] << packageADV[6] << packageADV[7]
+                << packageADV[8] << packageADV[9] << packageADV[10] << packageADV[11] << packageADV[12] << packageADV[13] << packageADV[14] << packageADV[15] << packageADV[16] << packageADV[17] << packageADV[18]
+
+                << packageADV[19] << packageADV[20] << packageADV[21] << qSetFieldWidth(0) << endl <<qSetFieldWidth(8);
+    mFile.close();
+    }
+
+
 }
 
 void Decoder::decodeAux(QByteArray serialdata)
@@ -312,9 +344,11 @@ void Decoder::decodeAux(QByteArray serialdata)
     packageAux[3] = mul[32] * info->AN4 + add[32];
 
     //Analog1
-    m_dashboard->setauxcalc1((((auxval2-auxval1)/5) * (packageAux[0] - packageAux[1])) + auxval1);
+    AN1AN2calc = ((((auxval2-auxval1)/5) * (packageAux[0] - packageAux[1])) + auxval1);
+    AN3AN4calc = ((((auxval4-auxval3)/5) * (packageAux[2] - packageAux[3])) + auxval3);
+    m_dashboard->setauxcalc1(AN1AN2calc);
     //Analog2
-    m_dashboard->setauxcalc2((((auxval4-auxval3)/5) * (packageAux[2] - packageAux[4])) + auxval3);
+    m_dashboard->setauxcalc2(AN3AN4calc);
 
 }
 
@@ -332,16 +366,19 @@ void Decoder::decodeAux2(QByteArray serialdata)
     packageAux2[6] = mul[31] * info->AN7 + add[31];
     packageAux2[7] = mul[32] * info->AN8 + add[32];
 
-
+    AN1AN2calc =((((auxval2-auxval1)/5) * (packageAux2[0] - packageAux2[1])) + auxval1);
+    AN3AN4calc =((((auxval3-auxval2)/5) * (packageAux2[2] - packageAux2[3])) + auxval3);
+    AN5AN6calc =((((auxval5-auxval4)/5) * (packageAux2[4] - packageAux2[5])) + auxval5);
+    AN7AN8calc =((((auxval7-auxval6)/5) * (packageAux2[6] - packageAux2[7])) + auxval7);
 
     //Analog1
-    m_dashboard->setauxcalc1((((auxval2-auxval1)/5) * (packageAux[0] - packageAux[1])) + auxval1);
+    m_dashboard->setauxcalc1(AN1AN2calc);
     //Analog2
-    m_dashboard->setauxcalc2((((auxval4-auxval3)/5) * (packageAux[2] - packageAux[4])) + auxval3);
+    m_dashboard->setauxcalc2(AN3AN4calc);
     //Analog3
-    m_dashboard->setauxcalc3((((auxval6-auxval5)/5) * (packageAux[5] - packageAux[6])) + auxval5);
+    m_dashboard->setauxcalc3(AN5AN6calc);
     //Analog4
-    m_dashboard->setauxcalc4((((auxval8-auxval7)/5) * (packageAux[7] - packageAux[8])) + auxval7);
+    m_dashboard->setauxcalc4(AN7AN8calc);
 }
 void Decoder::decodeMap(QByteArray serialdata)
 {
@@ -391,26 +428,6 @@ void Decoder::decodeBasic(QByteArray serialdata)
 
 
     //Logging file for Power FC , same format as FC Edit uses with a field width of 8 characters
-    if (Loggerstat ==1)
-    {
-    QString fileName = Logfile;
-    QFile mFile(fileName);
-    if(!mFile.open(QFile::Append | QFile::Text)){
-        qDebug() << "Could not open file for writing";
-    }
-    QTextStream out(&mFile);
-    out.setFieldAlignment(QTextStream::AlignLeft);
-    out.setFieldWidth(8);
-            out << (loggerStartTime.msecsTo(QTime::currentTime()))<< packageBasic[0]<< packageBasic[1]<< packageBasic[2] << packageBasic[3] << packageBasic[4] << packageBasic[5] << packageBasic[6]<< packageBasic[7]<< packageBasic[8]
-                << packageBasic[9] << packageSens[0] << packageSens[1] << packageSens[2] << packageSens[3] << packageSens[4] << packageSens[5] << packageSens[6] << packageSens[7]
-                << flagArray[0] << flagArray[1] << flagArray[2] << flagArray[3] << flagArray[4] << flagArray[5] << flagArray[6] << flagArray[7] << flagArray[8] << flagArray[9] << flagArray[10] << flagArray[11] << flagArray[12] << flagArray[13] << flagArray[14] << flagArray[15]
-                << packageAux[0] << packageAux[1] << packageAux[2] << packageAux[3] << packageAux[4] << packageAux[5] << packageAux[6]
-                << packageAux[7]<< packageMap[0] << packageMap[1] << packageADV[0] << packageADV[1] << packageADV[2] << packageADV[3] << packageADV[4] << packageADV[5] << packageADV[6] << packageADV[7]
-                << packageADV[8] << packageADV[9] << packageADV[10] << packageADV[11] << packageADV[12] << packageADV[13] << packageADV[14] << packageADV[15] << packageADV[16] << packageADV[17] << packageADV[18]
-
-                << packageADV[19] << packageADV[20] << packageADV[21] << qSetFieldWidth(0) << endl <<qSetFieldWidth(8);
-    mFile.close();
-    }
 
 
     //    ui->txtBasicConsole->clear();
@@ -476,7 +493,7 @@ void Decoder::decodeTurboTrans(QByteArray serialdata)
 void Decoder::decodeLeadIgn(QByteArray serialdata, quint8 column)
 {
     //Fill Table view with Leading ignition Table1
-
+/*
 
     quint8 columnLimit = column + 5;
     quint8 countarray = 1; //counter for the position in the array
@@ -493,6 +510,7 @@ void Decoder::decodeLeadIgn(QByteArray serialdata, quint8 column)
             //                    ui->tableLeadIgn->setModel(model);
         }
     }
+*/
 }
 
 
@@ -501,7 +519,7 @@ void Decoder::decodeLeadIgn(QByteArray serialdata, quint8 column)
 void Decoder::decodeTrailIgn(QByteArray serialdata, quint8 column)
 {
     //Fill Table view with Trailing ignition Table1
-
+/*
     quint8 columnLimit = column + 5;
     quint8 countarray = 1; //counter for the position in the array
     for (column; column < columnLimit; column++) //increases the counter column by 1 until column 5
@@ -516,6 +534,7 @@ void Decoder::decodeTrailIgn(QByteArray serialdata, quint8 column)
             //                    ui->tableTrailIgn->setModel(model1);
         }
     }
+*/
 }
 
 //Injector correction
@@ -523,6 +542,7 @@ void Decoder::decodeTrailIgn(QByteArray serialdata, quint8 column)
 void Decoder::decodeInjcorr(QByteArray serialdata, quint8 column)
 {
     //Fill Table view with Injector correction Table1
+ /*
     quint8 columnLimit = column + 5;
 
     quint8 countarray = 1; //counter for the position in the array
@@ -538,6 +558,7 @@ void Decoder::decodeInjcorr(QByteArray serialdata, quint8 column)
             //                    ui->tableInjCorr->setModel(model2);
         }
     }
+ */
 }
 
 void Decoder::decodeFuelBase(QByteArray serialdata, quint8 package)
@@ -870,14 +891,67 @@ void Decoder::loggerApexi(QString Logfilename)
 {
 Logfile = Logfilename+".txt";
 loggerStartTime.restart();
+QString filename = Logfilename + ".txt";
+QTime waitforModel = QTime::currentTime();
+int timeOut = 10000;
+
+//Waiting until the Model has been Set
+while (Model < 1)
+{
+    if ( waitforModel.msecsTo(QTime::currentTime()) > timeOut ) break;
+    Loggerstat = 0;
 }
+
+QFile file( filename );
+qDebug() << "Apexi Start Log";
+if ( file.open(QIODevice::ReadWrite) )
+{
+    QTextStream out( &file );
+    out.setFieldAlignment(QTextStream::AlignLeft);
+    out.setFieldWidth(8);
+    if (Model == 1) // FD3S Header
+    {
+    out << "Time(ms)"<< "InjDuty" << "IGL" << "IGT" << "Rpm" << "Speed"
+        << "Boost" << "Knock" << "WtrTemp" << "AirTemp"
+        << "BatVolt" << "PIM" << "VTA1" << "VTA2" << "VMOP" << "WTRT"
+        << "AIRT" << "FUEL" << "O2S" << "STR" << "A/C" << "PWS" << "NTR"
+        << "CLT" << "STP" << "CAT" << "ELD"
+        <<"HWL"<<"FPD"<<"FPR"<<"APR"
+        <<"PAC"<<"CCN"<<"TCN"<<"PRC"
+        << Auxname1 << Auxname2 << Auxname3 << Auxname4
+        <<"MAPN"<<"MAPP"<<"RPM"<<"PIM"<<"PIM  V"
+        <<"TPS  V"<<"InjFrPr"<<"Inj+/-"
+        <<"IGL"<<"IGT"<<"FuelT"
+        <<"Oil"<<"PC%"<<"WG%"<<"WtrT"
+        <<"AirT"<<"Knock"<<"BatV"<<"Speed"
+        <<"Iscvdty"<<"O2S"<<"(1)"<< "InjFrSc"<<"(2)"<< qSetFieldWidth(0) << endl <<qSetFieldWidth(8);
+        out << endl;
+    }
+    if (Model == 2)
+        {
+        }
+    if (Model == 3)
+        {
+        }
+    if (Model == 4)
+        {
+        }
+    if (Model == 5)
+        {
+        }
+    }
+file.close();
+Loggerstat = 1;
+}
+
+
 
 void Decoder::loggerActivationstatus(int loggingstatus)
 {
 Loggerstat = loggingstatus;
 qDebug() <<"Decoder loggingstatus"<< loggingstatus;
 }
-void Decoder::calculatorAux(int aux1min,int aux2max,int aux3min,int aux4max,int aux5min,int aux6max,int aux7min, int aux8max)
+void Decoder::calculatorAux(int aux1min,int aux2max,int aux3min,int aux4max,int aux5min,int aux6max,int aux7min, int aux8max,QString Auxunit1,QString Auxunit2,QString Auxunit3,QString Auxunit4)
 {
     auxval1 = aux1min;
     auxval2 = aux2max;
@@ -887,4 +961,10 @@ void Decoder::calculatorAux(int aux1min,int aux2max,int aux3min,int aux4max,int 
     auxval6 = aux6max;
     auxval7 = aux7min;
     auxval8 = aux8max;
+    Auxname1 = Auxunit1;
+    Auxname2 = Auxunit2;
+    Auxname3 = Auxunit3;
+    Auxname4 = Auxunit4;
+
+
 }

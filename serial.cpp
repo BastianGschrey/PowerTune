@@ -209,6 +209,16 @@ void Serial::readyToRead()
     QByteArray recvData;
     QTime startTime = QTime::currentTime();
 
+    while (Bytesexpected > recvData.size()) //check the sc
+        {
+              if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
+              qDebug() << "Bytes expected"<<Bytesexpected;
+              qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
+              recvData += m_serialport->readAll();
+              if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
+              Bytesexpected = recvData[1]+1;
+         }
+ /*
     while (Bytesexpected > Bytes)
         {
               if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
@@ -217,11 +227,8 @@ void Serial::readyToRead()
               Bytes = m_serialport->bytesAvailable();
 
          }
+*/
 
-    if  (Bytesexpected == m_serialport->bytesAvailable())
-        {
-         recvData += m_serialport->read(Bytesexpected);
-        }
             // Process to calculate checksum not evaluated at the moment , for later use
 /*
                 int checksum = 255; //calculated checksum from serial message 0xFF - each byte in message (except the last byte)
@@ -250,7 +257,7 @@ void Serial::readyToRead()
      else
     {
         //Read Data and create error file
-        if (logging ==1 ){
+       // if (logging ==1 ){
         recvData += m_serialport->readAll();
         QString fileName = "Errors.txt";
 
@@ -261,7 +268,7 @@ void Serial::readyToRead()
         QTextStream out(&mFile);
         out << "Request Index " << int(requestIndex)<< " lenght received "<< int(recvData.length())<< " Bytes "<< " Expected Bytes "<< int(Bytesexpected)<< " bytes " <<" Message "<< QByteArray(recvData.toHex()) <<endl;
         mFile.close();
-        }
+        //}
         qDebug() << "Received data  NOK request"<<requestIndex<<"reveived"<<recvData.toHex();
         //qDebug() << "Receved data "<<recvData.toHex()<< "Checksum calculated" <<checksumhex << "Checksum receveived"<< recvchecksumhex;
         recvData.clear();
@@ -303,7 +310,6 @@ void Serial::readyToRead()
              //   qDebug() << "time taken (ms) "<<(QTime::currentTime());
                 if(requestIndex <= 62){requestIndex++;}
                 else{requestIndex = 59;}
-              //  m_dashboard->setInjDuty(recvData.toHex());
                 readData(recvData);
                 recvData.clear();
                 m_serialport->flush();
@@ -786,35 +792,7 @@ void Serial::startLogging(const QString &logfilenameSelect, const int &loggeron)
    if (ecu == 0)    //Apexi
    {
        {
-           qDebug() << "Apexi start Log not implemented ";
-           m_decoder->loggerActivationstatus(loggingstatus);
-           QString filename = Logfilename + ".txt";
-           QFile file( filename );
-           qDebug() << "Apexi Start Log";
-           if ( file.open(QIODevice::ReadWrite) )
-           {
-               QTextStream out( &file );
-               out.setFieldAlignment(QTextStream::AlignLeft);
-               out.setFieldWidth(8);
-               out << "Time(ms)"<< "InjDuty" << "IGL" << "IGT" << "Rpm" << "Speed"
-                   << "Boost" << "Knock" << "WtrTemp" << "AirTemp"
-                   << "BatVolt" << "PIM" << "VTA1" << "VTA2" << "VMOP" << "WTRT"
-                   << "AIRT" << "FUEL" << "O2S" << "STR" << "A/C" << "PWS" << "NTR"
-                   << "CLT" << "STP" << "CAT" << "ELD"
-                   <<"HWL"<<"FPD"<<"FPR"<<"APR"
-                   <<"PAC"<<"CCN"<<"TCN"<<"PRC"
-                   <<"AN1" <<"AN2"<<"AN3"<<"AN4"
-                   <<"AN5"<<"AN6"<<"AN7"<<"AN8" <<"MAPN"
-                   <<"MAPP"<<"RPM"<<"PIM"<<"PIM  V"
-                   <<"TPS  V"<<"InjFrPr"<<"Inj+/-"
-                   <<"IGL"<<"IGT"<<"FuelT"
-                   <<"Oil"<<"PC%"<<"WG%"<<"WtrT"
-                   <<"AirT"<<"Knock"<<"BatV"<<"Speed"
-                   <<"Iscvdty"<<"O2S"<<"(1)"<< "InjFrSc"<<"(2)"<< qSetFieldWidth(0) << endl <<qSetFieldWidth(8);
-           }
-           file.close();
            m_decoder->loggerApexi(Logfilename);
-
        }
    }
    if (ecu == 1)    //Adaptronic
@@ -856,5 +834,12 @@ void Serial::Auxcalc (const QString &unitaux1,const int &an1V0,const int &an2V5,
     int aux6max = an6V5;
     int aux7min = an7V0;
     int aux8max = an8V5;
-    m_decoder->calculatorAux(aux1min,aux2max,aux3min,aux4max,aux5min,aux6max,aux7min,aux8max);
+    QString Auxunit1 = unitaux1;
+    QString Auxunit2 = unitaux2;
+    QString Auxunit3 = unitaux3;
+    QString Auxunit4 = unitaux4;
+
+
+
+    m_decoder->calculatorAux(aux1min,aux2max,aux3min,aux4max,aux5min,aux6max,aux7min,aux8max,Auxunit1,Auxunit2,Auxunit3,Auxunit4);
 }
