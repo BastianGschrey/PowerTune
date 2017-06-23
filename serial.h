@@ -19,9 +19,10 @@
 
 #ifndef SERIAL_H
 #define SERIAL_H
-
+#include <QtSerialPort/QSerialPort>
 #include <QObject>
 #include <QModbusDataUnit>
+#include <QTimer>
 
 
 class SerialPort;
@@ -74,6 +75,8 @@ private:
     QStringList *m_ecuList;
     QModbusReply *lastRequest;
     QModbusClient *modbusDevice;
+    QByteArray  m_readData;
+    QTimer      m_timer;
 
 
 
@@ -92,6 +95,8 @@ signals:
 
 public slots:
     void readyToRead();
+    void handleTimeout();
+    void handleError(QSerialPort::SerialPortError error);
     void AdaptronicStartStream();
 
 

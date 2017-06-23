@@ -94,6 +94,10 @@ void Serial::initSerialPort()
         delete m_serialport;
     m_serialport = new SerialPort(this);
     connect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
+    connect(m_serialport, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
+            this, &Serial::handleError);
+    connect(&m_timer, &QTimer::timeout, this, &Serial::handleTimeout);
+    m_timer.start(5000);
 
 }
 void Serial::getEcus()
@@ -199,12 +203,70 @@ void Serial::closeConnection()
         qDebug() << "device disconnected";
     }
 }
+
+//test
+
+
+void Serial::handleTimeout()
+{
+    qDebug() << "Timeout";
+    //request Data Again
+    QString fileName = "Errors.txt";
+    QFile mFile(fileName);
+    if(!mFile.open(QFile::Append | QFile::Text)){
+        qDebug() << "Could not open file for writing";
+    }
+    QTextStream out(&mFile);
+    out << "Timeout Request Index " << int(requestIndex)<< " lenght received "<< int(m_readData.length())<< " Bytes "<< " Expected Bytes "<< int(Bytesexpected)<< " bytes " <<" Message "<< QByteArray(m_readData.toHex()) <<endl;
+    mFile.close();
+    Serial::clear();
+    m_readData.clear();
+    Serial::sendRequest(requestIndex);
+}
+
+void Serial::handleError(QSerialPort::SerialPortError serialPortError)
+{
+    if (serialPortError == QSerialPort::ReadError) {
+        QString fileName = "Errors.txt";
+        QFile mFile(fileName);
+        if(!mFile.open(QFile::Append | QFile::Text)){
+            qDebug() << "Could not open file for writing";
+        }
+        QTextStream out(&mFile);
+        out << "Serial Error " << (m_serialport->errorString()) <<endl;
+        mFile.close();
+        qDebug() <<"Serialport Error" <<(m_serialport->errorString());
+    }
+}
+
+
+
+
+
+
 // Error handling still to be tested
 void Serial::readyToRead()
 {
     if(ecu == 0)
     {
 
+        m_readData.append(m_serialport->readAll());
+        Bytesexpected = m_readData[1]+1;
+        if (Bytesexpected == m_readData.size())
+            //qDebug() << "size"<<Bytesexpected;
+        {
+            if(requestIndex <= 62){requestIndex++;}
+            else{requestIndex = 59;}
+            readData(m_readData);
+            Serial::clear();
+            m_readData.clear();
+        }
+//Timeout
+        if (!m_timer.isActive())
+            m_timer.start(5000);
+
+
+   /*
     int timeOut = 2000; // timeout in milisec.
     QByteArray recvData;
     QTime startTime = QTime::currentTime();
@@ -244,6 +306,7 @@ void Serial::readyToRead()
                 checksumhex = checksumhex.rightJustified(2, '0');
                 }
 */
+        /*
     if(Bytesexpected == recvData.size())                 //if the received data lenght equals the message lenght from lenght byte + identifier byte (correct message lenght received )
             {
         //qDebug() << "Message"<<recvData.toHex()<< "Checksum calculated" <<checksumhex << "Checksum receveived"<< recvchecksumhex;
@@ -275,7 +338,7 @@ void Serial::readyToRead()
         Serial::clear();
         Serial::sendRequest(requestIndex);
     }
-
+*/
    }
 
 
@@ -402,11 +465,7 @@ void Serial::readData(QByteArray serialdata)
             if(serialdata.length() == 15 && requesttype == 0x9F){m_decoder->decodeInjScLagvsBattV(serialdata);}
             if(serialdata.length() == 27 && requesttype == 0x8D){m_decoder->decodeFuelInjectors(serialdata);}
             }
-        else
-        {
-        serialdata.clear();
-        Serial::sendRequest(requestIndex);
-        }
+
         serialdata.clear();
         Serial::sendRequest(requestIndex);
 
@@ -419,10 +478,8 @@ void Serial::readData(QByteArray serialdata)
 void Serial::writeRequestPFC(QByteArray p_request)
 {
     m_serialport->write(p_request);
-    qDebug() << "Request Message" <<p_request.toHex();
+   // qDebug() << "Request Message" <<p_request.toHex();
     m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec)
-    m_serialport->flush();
-    //QTimer::singleShot(1000, this, SLOT(readyToRead())); //timeout for message reply
 }
 
 //Power FC requests
