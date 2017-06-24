@@ -170,6 +170,11 @@ Rectangle {
                                     text: qsTr("GoPro rec")
                                     onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                                 }
+                                Text
+                                {
+                                color: "red"
+                                text: Dashboard.SerialStat
+                                }
 
                             }
                         }

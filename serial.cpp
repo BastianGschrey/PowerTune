@@ -68,6 +68,7 @@ Serial::Serial(QObject *parent) :
     m_decoder(Q_NULLPTR),
     m_dashBoard(Q_NULLPTR),
     m_gopro(Q_NULLPTR),
+    m_bytesWritten(0),
     lastRequest(nullptr),
     modbusDevice(nullptr)
 
@@ -96,8 +97,11 @@ void Serial::initSerialPort()
     connect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
     connect(m_serialport, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
             this, &Serial::handleError);
+    connect(m_serialport, &QSerialPort::bytesWritten, this, &Serial::handleBytesWritten);
     connect(&m_timer, &QTimer::timeout, this, &Serial::handleTimeout);
-    m_timer.start(5000);
+    m_readData.clear();
+    //m_timer.start(5000);
+
 
 }
 void Serial::getEcus()
@@ -119,7 +123,7 @@ void Serial::getPorts()
     QStringList PortList;
     foreach(const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
     {
-       PortList.append(info.portName());
+        PortList.append(info.portName());
     }
     setPortsNames(PortList);
     // Check available ports evry 1000 ms
@@ -145,47 +149,54 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
     if (ecuSelect == 0)
     {
 
-     initSerialPort();
-qDebug() << "logging" <<logging;
-     m_serialport->setPortName(portName);
-     m_serialport->setBaudRate(QSerialPort::Baud57600);
-     m_serialport->setParity(QSerialPort::NoParity);
-     m_serialport->setDataBits(QSerialPort::Data8);
-     m_serialport->setStopBits(QSerialPort::OneStop);
-     m_serialport->setFlowControl(QSerialPort::NoFlowControl);
+        initSerialPort();
+        qDebug() << "logging" <<logging;
+        m_serialport->setPortName(portName);
+        m_serialport->setBaudRate(QSerialPort::Baud57600);
+        m_serialport->setParity(QSerialPort::NoParity);
+        m_serialport->setDataBits(QSerialPort::Data8);
+        m_serialport->setStopBits(QSerialPort::OneStop);
+        m_serialport->setFlowControl(QSerialPort::NoFlowControl);
+        //m_serialport->setReadBufferSize(103);
 
-     qDebug() << "Try to open SerialPort:";
-     if(m_serialport->open(QIODevice::ReadWrite) == false)
-     {
-         qDebug() << "Open Serial port failed: " << m_serialport->errorString();
-     }
-     //requestIndex = 0;
-     qDebug() << "Initial request to PowerFc"<< requestIndex;
-     Serial::sendRequest(requestIndex);
+        qDebug() << "Try to open SerialPort:";
+        if(m_serialport->open(QIODevice::ReadWrite) == false)
+        {
+            m_dashBoard->setSerialStat(m_serialport->errorString());
+            qDebug() << "Open Serial port failed: " << m_serialport->errorString();
+        }
+        else
+        {
+            m_dashBoard->setSerialStat(QString("Connected to Serialport"));
+        }
+        //requestIndex = 0;
+
+        qDebug() << "Initial request to PowerFc"<< requestIndex;
+        Serial::sendRequest(requestIndex);
 
 
 
-     }
+    }
 
 
-    //Adaptronic    
+    //Adaptronic
     if (ecuSelect == 1)
     {
 
         if (!modbusDevice)
-               return;
+            return;
 
         if (modbusDevice->state() != QModbusDevice::ConnectedState)
         {
             qDebug() << "modbus is not connected";
-                //modbusDevice = new QModbusRtuSerialMaster(this);
-                modbusDevice->setConnectionParameter(QModbusDevice::SerialPortNameParameter,portName);
-                modbusDevice->setConnectionParameter(QModbusDevice::SerialBaudRateParameter,57600);
-                modbusDevice->setTimeout(200);
-                modbusDevice->setNumberOfRetries(10);
-                modbusDevice->connectDevice();
+            //modbusDevice = new QModbusRtuSerialMaster(this);
+            modbusDevice->setConnectionParameter(QModbusDevice::SerialPortNameParameter,portName);
+            modbusDevice->setConnectionParameter(QModbusDevice::SerialBaudRateParameter,57600);
+            modbusDevice->setTimeout(200);
+            modbusDevice->setNumberOfRetries(10);
+            modbusDevice->connectDevice();
 
-                Serial::AdaptronicStartStream();
+            Serial::AdaptronicStartStream();
 
         }
 
@@ -195,8 +206,8 @@ qDebug() << "logging" <<logging;
 void Serial::closeConnection()
 {
     if(ecu == 0){
-    m_serialport->close();
-    qDebug() << "Connection closed.";
+        m_serialport->close();
+        qDebug() << "Connection closed.";
     }
     if(ecu == 1){
         modbusDevice->disconnectDevice();
@@ -220,7 +231,9 @@ void Serial::handleTimeout()
     out << "Timeout Request Index " << int(requestIndex)<< " lenght received "<< int(m_readData.length())<< " Bytes "<< " Expected Bytes "<< int(Bytesexpected)<< " bytes " <<" Message "<< QByteArray(m_readData.toHex()) <<endl;
     mFile.close();
     Serial::clear();
+    qDebug() << "check whats still left on serialport"<<m_serialport->readAll();
     m_readData.clear();
+    qDebug() << "m_readData"<<m_readData;
     Serial::sendRequest(requestIndex);
 }
 
@@ -235,6 +248,7 @@ void Serial::handleError(QSerialPort::SerialPortError serialPortError)
         QTextStream out(&mFile);
         out << "Serial Error " << (m_serialport->errorString()) <<endl;
         mFile.close();
+        m_dashBoard->setSerialStat(m_serialport->errorString());
         qDebug() <<"Serialport Error" <<(m_serialport->errorString());
     }
 }
@@ -247,239 +261,159 @@ void Serial::handleError(QSerialPort::SerialPortError serialPortError)
 // Error handling still to be tested
 void Serial::readyToRead()
 {
+    qDebug() << "ready read";
     if(ecu == 0)
     {
 
         m_readData.append(m_serialport->readAll());
         Bytesexpected = m_readData[1]+1;
+        qDebug() << "readdata current" <<m_readData.toHex();
         if (Bytesexpected == m_readData.size())
-            //qDebug() << "size"<<Bytesexpected;
         {
+            m_timer.stop();
             if(requestIndex <= 62){requestIndex++;}
             else{requestIndex = 59;}
             readData(m_readData);
             Serial::clear();
             m_readData.clear();
+            Serial::sendRequest(requestIndex);
         }
-//Timeout
-        if (!m_timer.isActive())
+        if (Bytesexpected != m_readData.size())
+        {
+            qDebug() << "starting timer";
             m_timer.start(5000);
+        }
+    }
 
-
-   /*
-    int timeOut = 2000; // timeout in milisec.
-    QByteArray recvData;
-    QTime startTime = QTime::currentTime();
-
-    while (Bytesexpected > recvData.size()) //check the sc
+        if(ecu == 1)
         {
-              if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
-              qDebug() << "Bytes expected"<<Bytesexpected;
-              qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
-              recvData += m_serialport->readAll();
-              if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
-              Bytesexpected = recvData[1]+1;
-         }
- /*
-    while (Bytesexpected > Bytes)
-        {
-              if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
-              qDebug() << "Bytes expected"<<Bytes;
-              qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
-              Bytes = m_serialport->bytesAvailable();
 
-         }
-*/
-
-            // Process to calculate checksum not evaluated at the moment , for later use
-/*
-                int checksum = 255; //calculated checksum from serial message 0xFF - each byte in message (except the last byte)
-                QByteArray checksumhex;
-                QByteArray recvchecksumhex = QByteArray::number(recvData[recvData[1]], 16).right(2); // reading the checksum byte , convert to Hex , and cut to 2 positions
-                recvchecksumhex = recvchecksumhex.rightJustified(2, '0'); // If the checksumbyte is less than 2 positions , prepend a 0 for example if value is 0x9 turn it into 0x09
-                //test1 = test.rightJustified(2, '0');
-
-                for (int i = 0; i <= recvData[1]-1; i++)
-                {
-                checksum = checksum - recvData[i];
-                checksumhex = QByteArray::number(checksum, 16).right(2);
-                checksumhex = checksumhex.rightJustified(2, '0');
-                }
-*/
-        /*
-    if(Bytesexpected == recvData.size())                 //if the received data lenght equals the message lenght from lenght byte + identifier byte (correct message lenght received )
-            {
-        //qDebug() << "Message"<<recvData.toHex()<< "Checksum calculated" <<checksumhex << "Checksum receveived"<< recvchecksumhex;
-            if(requestIndex <= 62){requestIndex++;}
-            else{requestIndex = 59;}
-            m_serialport->flush();
-            readData(recvData);
-            recvData.clear();
+            auto reply = qobject_cast<QModbusReply *>(sender());
+            if(!reply)
+                return;
+            if(reply->error() == QModbusDevice::NoError){
+                const QModbusDataUnit unit = reply->result();
+                m_decoder->decodeAdaptronic(unit);
 
             }
-     else
-    {
-        //Read Data and create error file
-       // if (logging ==1 ){
-        recvData += m_serialport->readAll();
-        QString fileName = "Errors.txt";
 
-        QFile mFile(fileName);
-        if(!mFile.open(QFile::Append | QFile::Text)){
-            qDebug() << "Could not open file for writing";
+
+
         }
-        QTextStream out(&mFile);
-        out << "Request Index " << int(requestIndex)<< " lenght received "<< int(recvData.length())<< " Bytes "<< " Expected Bytes "<< int(Bytesexpected)<< " bytes " <<" Message "<< QByteArray(recvData.toHex()) <<endl;
-        mFile.close();
-        //}
-        qDebug() << "Received data  NOK request"<<requestIndex<<"reveived"<<recvData.toHex();
-        //qDebug() << "Receved data "<<recvData.toHex()<< "Checksum calculated" <<checksumhex << "Checksum receveived"<< recvchecksumhex;
-        recvData.clear();
-        Serial::clear();
-        Serial::sendRequest(requestIndex);
-    }
-*/
-   }
 
-
-
-/*
-    if(ecu == 0)
-
-        {
-        QTime startTime = QTime::currentTime();
-        int timeOut = 500; // timeout in milisec.
-        QByteArray recvData;
-        int Bytesexpected = 100;
-
-        while (Bytesexpected > recvData.size()) //check the sc
-            {
-                  if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
-                 // if (recvData == )
-                  //      qDebug() << "Bytes expected"<<Bytesexpected;
-                  //      qDebug() << "Bytes Available to read"<<m_serialport->bytesAvailable();
-                  recvData += m_serialport->readAll();
-                  if ( startTime.msecsTo(QTime::currentTime()) > timeOut ) break;
-                  Bytesexpected = recvData[1]+1;
-             }
-*/
-
-
-/*
-// Pass OK Message on for proccessing
-        if(Bytesexpected == recvData.size()) //if the received data lenght equals the message lenght from lenght byte + // Identifier byte (correct message lenght received )
-                {
-             //   qDebug() << "Received data OK"<<Bytesexpected;
-             //   qDebug() << "time taken (ms) "<<(QTime::currentTime());
-                if(requestIndex <= 62){requestIndex++;}
-                else{requestIndex = 59;}
-                readData(recvData);
-                recvData.clear();
-                m_serialport->flush();
-                }
-         else
-        {
-        qDebug() << "Received data  NOK message"<<requestIndex;
-        qDebug() << "Incorrect message received:"<< recvData.toHex();
-        Serial::sendRequest(requestIndex);
-        }
-       }
-*/
-    if(ecu == 1)
-    {
-
-    auto reply = qobject_cast<QModbusReply *>(sender());
-    if(!reply)
-        return;
-    if(reply->error() == QModbusDevice::NoError){
-        const QModbusDataUnit unit = reply->result();
-        m_decoder->decodeAdaptronic(unit);
-
-    }
-
-
-
-    }
 }
 
 void Serial::readData(QByteArray serialdata)
 {
+    // Process to calculate checksum not evaluated at the moment , for later use
+    /*
+            int checksum = 255; //calculated checksum from serial message 0xFF - each byte in message (except the last byte)
+            QByteArray checksumhex;
+            QByteArray recvchecksumhex = QByteArray::number(serialdata[serialdata[1]], 16).right(2); // reading the checksum byte , convert to Hex , and cut to 2 positions
+            recvchecksumhex = recvchecksumhex.rightJustified(2, '0'); // If the checksumbyte is less than 2 positions , prepend a 0 for example if value is 0x9 turn it into 0x09
+            //test1 = test.rightJustified(2, '0');
+
+            for (int i = 0; i <= serialdata[1]-1; i++)
+            {
+            checksum = checksum - serialdata[i];
+            checksumhex = QByteArray::number(checksum, 16).right(2);
+            checksumhex = checksumhex.rightJustified(2, '0');
+            }
+*/
     if( serialdata.length() )
     {
         //Power FC Decode
         quint8 requesttype = serialdata[0];
-        //qDebug() << "Received message :"<< serialdata.toHex();
+        qDebug() << "Processing Message"<< serialdata.toHex();
 
-//Write all OK Serial Messages to a file
+        //Write all OK Serial Messages to a file
         if(serialdata[1] + 1 == serialdata.length())
-           {
+        {
             if (logging ==1 ){
-            QString fileName = "OK Messages.txt";
-            QFile mFile(fileName);
-            if(!mFile.open(QFile::Append | QFile::Text)){
-                qDebug() << "Could not open file for writing";
+                QString fileName = "OK Messages.txt";
+                QFile mFile(fileName);
+                if(!mFile.open(QFile::Append | QFile::Text)){
+                    qDebug() << "Could not open file for writing";
+                }
+                QTextStream out(&mFile);
+                out << QByteArray(serialdata.toHex())<< endl;
+                mFile.close();
             }
-            QTextStream out(&mFile);
-            out << QByteArray(serialdata.toHex())<< endl;
-            mFile.close();
-            }
 
 
 
-            if(serialdata.length() == 33 && requesttype == 0xF0){m_decoder->decodeAdv(serialdata);}
+            if(requesttype == 0xF0){m_decoder->decodeAdv(serialdata);}
             if(requesttype == 0xDD){m_decoder->decodeSensorStrings(serialdata);}
-            if(serialdata.length() == 21 && requesttype == 0xDE){m_decoder->decodeSensor(serialdata);}
-            if(serialdata.length() == 7 && requesttype == 0x00){m_decoder->decodeAux(serialdata);}
-            if(serialdata.length() == 11 && requesttype == 0x00){m_decoder->decodeAux2(serialdata);}
-            if(serialdata.length() == 5 && requesttype == 0xDB){m_decoder->decodeMap(serialdata);}
-            if(serialdata.length() == 23 && requesttype == 0xDA){m_decoder->decodeBasic(serialdata);}
-            if(serialdata.length() == 17 && requesttype == 0xB8){m_decoder->decodeRevIdle(serialdata);}
-            if(serialdata.length() == 12 && requesttype == 0x7D){m_decoder->decodeTurboTrans(serialdata);}
-            if(serialdata.length() == 103 && requesttype == 0x76){m_decoder->decodeLeadIgn(serialdata, 0);}
-            if(serialdata.length() == 103 && requesttype == 0x77){m_decoder->decodeLeadIgn(serialdata, 5);}
-            if(serialdata.length() == 103 && requesttype == 0x78){m_decoder->decodeLeadIgn(serialdata, 10);}
-            if(serialdata.length() == 103 && requesttype == 0x79){m_decoder->decodeLeadIgn(serialdata, 15);}
-            if(serialdata.length() == 103 && requesttype == 0x81){m_decoder->decodeTrailIgn(serialdata, 0);}
-            if(serialdata.length() == 103 && requesttype == 0x82){m_decoder->decodeTrailIgn(serialdata, 5);}
-            if(serialdata.length() == 103 && requesttype == 0x83){m_decoder->decodeTrailIgn(serialdata, 10);}
-            if(serialdata.length() == 103 && requesttype == 0x84){m_decoder->decodeTrailIgn(serialdata, 15);}
-            if(serialdata.length() == 103 && requesttype == 0x86){m_decoder->decodeInjcorr(serialdata, 0);}
-            if(serialdata.length() == 103 && requesttype == 0x87){m_decoder->decodeInjcorr(serialdata, 5);}
-            if(serialdata.length() == 103 && requesttype == 0x88){m_decoder->decodeInjcorr(serialdata, 10);}
-            if(serialdata.length() == 103 && requesttype == 0x89){m_decoder->decodeInjcorr(serialdata, 15);}
+            if(requesttype == 0xDE){m_decoder->decodeSensor(serialdata);}
+            if(requesttype == 0x00){m_decoder->decodeAux(serialdata);}
+            if(requesttype == 0x00){m_decoder->decodeAux2(serialdata);}
+            if(requesttype == 0xDB){m_decoder->decodeMap(serialdata);}
+            if(requesttype == 0xDA){m_decoder->decodeBasic(serialdata);}
+            if(requesttype == 0xB8){m_decoder->decodeRevIdle(serialdata);}
+            if(requesttype == 0x7D){m_decoder->decodeTurboTrans(serialdata);}
+            if(requesttype == 0x76){m_decoder->decodeLeadIgn(serialdata, 0);}
+            if(requesttype == 0x77){m_decoder->decodeLeadIgn(serialdata, 5);}
+            if(requesttype == 0x78){m_decoder->decodeLeadIgn(serialdata, 10);}
+            if(requesttype == 0x79){m_decoder->decodeLeadIgn(serialdata, 15);}
+            if(requesttype == 0x81){m_decoder->decodeTrailIgn(serialdata, 0);}
+            if(requesttype == 0x82){m_decoder->decodeTrailIgn(serialdata, 5);}
+            if(requesttype == 0x83){m_decoder->decodeTrailIgn(serialdata, 10);}
+            if(requesttype == 0x84){m_decoder->decodeTrailIgn(serialdata, 15);}
+            if(requesttype == 0x86){m_decoder->decodeInjcorr(serialdata, 0);}
+            if(requesttype == 0x87){m_decoder->decodeInjcorr(serialdata, 5);}
+            if(requesttype == 0x88){m_decoder->decodeInjcorr(serialdata, 10);}
+            if(requesttype == 0x89){m_decoder->decodeInjcorr(serialdata, 15);}
 
-            if(serialdata.length() == 103 && requesttype == 0xB0){m_decoder->decodeFuelBase(serialdata, 0);}
-            if(serialdata.length() == 103 && requesttype == 0xB1){m_decoder->decodeFuelBase(serialdata, 1);}
-            if(serialdata.length() == 103 && requesttype == 0xB2){m_decoder->decodeFuelBase(serialdata, 2);}
-            if(serialdata.length() == 103 && requesttype == 0xB3){m_decoder->decodeFuelBase(serialdata, 3);}
-            if(serialdata.length() == 103 && requesttype == 0xB4){m_decoder->decodeFuelBase(serialdata, 4);}
-            if(serialdata.length() == 103 && requesttype == 0xB5){m_decoder->decodeFuelBase(serialdata, 5);}
-            if(serialdata.length() == 103 && requesttype == 0xB6){m_decoder->decodeFuelBase(serialdata, 6);}
-            if(serialdata.length() == 103 && requesttype == 0xB7){m_decoder->decodeFuelBase(serialdata, 7);}
+            if(requesttype == 0xB0){m_decoder->decodeFuelBase(serialdata, 0);}
+            if(requesttype == 0xB1){m_decoder->decodeFuelBase(serialdata, 1);}
+            if(requesttype == 0xB2){m_decoder->decodeFuelBase(serialdata, 2);}
+            if(requesttype == 0xB3){m_decoder->decodeFuelBase(serialdata, 3);}
+            if(requesttype == 0xB4){m_decoder->decodeFuelBase(serialdata, 4);}
+            if(requesttype == 0xB5){m_decoder->decodeFuelBase(serialdata, 5);}
+            if(requesttype == 0xB6){m_decoder->decodeFuelBase(serialdata, 6);}
+            if(requesttype == 0xB7){m_decoder->decodeFuelBase(serialdata, 7);}
 
-            if(serialdata.length() == 8 && requesttype == 0xF5){m_decoder->decodeVersion(serialdata);}
-            if(serialdata.length() == 11 && requesttype == 0xF3){m_decoder->decodeInit(serialdata);}
-            if(serialdata.length() == 14 && requesttype == 0xAB){m_decoder->decodeBoostCont(serialdata);}
-            if(serialdata.length() == 9 && requesttype == 0x7B){m_decoder->decodeInjOverlap(serialdata);}
-            if(serialdata.length() == 15 && requesttype == 0x92){m_decoder->decodeInjPriLagvsBattV(serialdata);}
-            if(serialdata.length() == 15 && requesttype == 0x9F){m_decoder->decodeInjScLagvsBattV(serialdata);}
-            if(serialdata.length() == 27 && requesttype == 0x8D){m_decoder->decodeFuelInjectors(serialdata);}
-            }
-
+            if(requesttype == 0xF5){m_decoder->decodeVersion(serialdata);}
+            if(requesttype == 0xF3){m_decoder->decodeInit(serialdata);}
+            if(requesttype == 0xAB){m_decoder->decodeBoostCont(serialdata);}
+            if(requesttype == 0x7B){m_decoder->decodeInjOverlap(serialdata);}
+            if(requesttype == 0x92){m_decoder->decodeInjPriLagvsBattV(serialdata);}
+            if(requesttype == 0x9F){m_decoder->decodeInjScLagvsBattV(serialdata);}
+            if(requesttype == 0x8D){m_decoder->decodeFuelInjectors(serialdata);}
+        }
         serialdata.clear();
-        Serial::sendRequest(requestIndex);
+\
 
     }
 
 
 }
+void Serial::handleBytesWritten(qint64 bytes)
+{
+    m_bytesWritten += bytes;
+    if (m_bytesWritten == m_writeData.size()) {
+        m_bytesWritten = 0;
+        qDebug() <<("Data successfully sent to port") << (m_serialport->portName());
 
+    }
+}
 // Serial requests are send via Serial
 void Serial::writeRequestPFC(QByteArray p_request)
 {
-    m_serialport->write(p_request);
-   // qDebug() << "Request Message" <<p_request.toHex();
-    m_serialport->waitForBytesWritten(1000); // timeout 1 sec (1000 msec)
+    qDebug() << "write request";
+    m_writeData = p_request;
+    qint64 bytesWritten = m_serialport->write(p_request);
+
+    //Action to be implemented
+    if (bytesWritten == -1) {
+        m_dashBoard->setSerialStat(m_serialport->errorString());
+        qDebug() << "Write request to port failed" << (m_serialport->errorString());
+    } else if (bytesWritten != m_writeData.size()) {
+        m_dashBoard->setSerialStat(m_serialport->errorString());
+        qDebug() << "could not write complete request to port" << (m_serialport->errorString());
+    }
+
+    //m_timer.start(5000);
 }
 
 //Power FC requests
@@ -494,7 +428,7 @@ void Serial::sendRequest(int requestIndex)
         if (interface ==0)
         {Bytesexpected = 4;}
         if (interface ==1)
-            {Bytesexpected = 8;}
+        {Bytesexpected = 8;}
         break;
     case 1:
         //Init Platform for the first time ( usully returns a malformed packet)
@@ -789,7 +723,7 @@ void Serial::sendRequest(int requestIndex)
 
 
 
-// Live Data
+        // Live Data
     case 59:
         //Serial::getAdvData();
         Serial::writeRequestPFC(QByteArray::fromHex("F0020D"));
@@ -801,7 +735,7 @@ void Serial::sendRequest(int requestIndex)
         if (interface ==0)
         {Bytesexpected = 7;}
         if (interface ==1)
-            {Bytesexpected = 11;}
+        {Bytesexpected = 11;}
         break;
     case 61:
         //Serial::getMapIndices();
@@ -816,7 +750,7 @@ void Serial::sendRequest(int requestIndex)
     case 63:
         //Serial::getBasic();
         Serial::writeRequestPFC(QByteArray::fromHex("DA0223"));
-       Bytesexpected = 23;
+        Bytesexpected = 23;
         break;
     }
 }
@@ -842,42 +776,42 @@ void Serial::AdaptronicStopStream()
 //function for Start Logging
 void Serial::startLogging(const QString &logfilenameSelect, const int &loggeron)
 {
-   loggingstatus = loggeron;
-   Logfilename = logfilenameSelect;
-   qDebug() << Logfilename;
-   qDebug() << "on off"<< loggingstatus;
-   if (ecu == 0)    //Apexi
-   {
-       {
-           m_decoder->loggerApexi(Logfilename);
-       }
-   }
-   if (ecu == 1)    //Adaptronic
-   {
-       QString filename = Logfilename + ".csv";
-       QFile file( filename );
-       qDebug() << "Adaptronic start Log";
-       if ( file.open(QIODevice::ReadWrite) )
-       {
-           QTextStream stream( &file );
-           stream << "Time (s),RPM,MAP (kPa),MAT (°C),WT (°C),AuxT (°C),AFR,Knock,TPS %,Idle,MVSS (km/h),SVSS (km/h),Batt (V),Inj 1 (ms), Inj 2 (ms),Inj 3 (ms),Inj 4 (ms),Ign 1 (°),Ign 2 (°),Ign 3 (°),Ign 4 (°),Trim" << endl;
-       }
-       file.close();
-   m_decoder->loggerAdaptronic(Logfilename);
-   m_decoder->loggerActivationstatus(loggingstatus);
-   }
+    loggingstatus = loggeron;
+    Logfilename = logfilenameSelect;
+    qDebug() << Logfilename;
+    qDebug() << "on off"<< loggingstatus;
+    if (ecu == 0)    //Apexi
+    {
+        {
+            m_decoder->loggerApexi(Logfilename);
+        }
+    }
+    if (ecu == 1)    //Adaptronic
+    {
+        QString filename = Logfilename + ".csv";
+        QFile file( filename );
+        qDebug() << "Adaptronic start Log";
+        if ( file.open(QIODevice::ReadWrite) )
+        {
+            QTextStream stream( &file );
+            stream << "Time (s),RPM,MAP (kPa),MAT (°C),WT (°C),AuxT (°C),AFR,Knock,TPS %,Idle,MVSS (km/h),SVSS (km/h),Batt (V),Inj 1 (ms), Inj 2 (ms),Inj 3 (ms),Inj 4 (ms),Ign 1 (°),Ign 2 (°),Ign 3 (°),Ign 4 (°),Trim" << endl;
+        }
+        file.close();
+        m_decoder->loggerAdaptronic(Logfilename);
+        m_decoder->loggerActivationstatus(loggingstatus);
+    }
 
 
-   return;
+    return;
 }
 
 //function for Stop Logging
 void Serial::stopLogging(const QString &logfilenameSelect, const int &loggeron)
 {
-   loggingstatus = loggeron;
-   m_decoder->loggerActivationstatus(loggingstatus);
-   qDebug() << "Stop Logging ";
-   return;
+    loggingstatus = loggeron;
+    m_decoder->loggerActivationstatus(loggingstatus);
+    qDebug() << "Stop Logging ";
+    return;
 }
 
 
@@ -895,8 +829,5 @@ void Serial::Auxcalc (const QString &unitaux1,const int &an1V0,const int &an2V5,
     QString Auxunit2 = unitaux2;
     QString Auxunit3 = unitaux3;
     QString Auxunit4 = unitaux4;
-
-
-
     m_decoder->calculatorAux(aux1min,aux2max,aux3min,aux4max,aux5min,aux6max,aux7min,aux8max,Auxunit1,Auxunit2,Auxunit3,Auxunit4);
 }

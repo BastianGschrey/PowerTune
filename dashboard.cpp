@@ -870,6 +870,14 @@ void DashBoard::setSensorString8(const QString &SensorString8)
     emit SensorString8Changed(SensorString8);
 }
 
+void DashBoard::setSerialStat(const QString &SerialStat)
+{
+    if (m_SerialStat == SerialStat)
+        return;
+    m_SerialStat = SerialStat;
+    emit SerialStatChanged(SerialStat);
+}
+
 
 
 //Adaptronic extra
@@ -1114,6 +1122,8 @@ QString DashBoard::SensorString7() const { return m_SensorString7; }
 QString DashBoard::SensorString8() const { return m_SensorString8; }
 //Platfrom String
 QString DashBoard::Platform() const { return m_Platform; }
+
+QString DashBoard::SerialStat() const { return m_SerialStat; }
 
 //Adaptronic extra
 

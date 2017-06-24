@@ -77,8 +77,8 @@ private:
     QModbusClient *modbusDevice;
     QByteArray  m_readData;
     QTimer      m_timer;
-
-
+    qint64      m_bytesWritten;
+    QByteArray  m_writeData;
 
     //QModbusReply reply;
 
@@ -96,6 +96,7 @@ signals:
 public slots:
     void readyToRead();
     void handleTimeout();
+    void handleBytesWritten(qint64 bytes);
     void handleError(QSerialPort::SerialPortError error);
     void AdaptronicStartStream();
 

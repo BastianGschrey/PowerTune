@@ -133,6 +133,8 @@ void Decoder::decodeAdv(QByteArray serialdata)
     m_dashboard->setna2(packageADV[21]);
 
 
+
+
 //    qDebug() << "Time passed since last call"<< startTime.msecsTo(QTime::currentTime());
     odometer += ((startTime.msecsTo(QTime::currentTime())) * ((packageADV[16]) / 3600000)); // Odometer
     m_dashboard->setOdo(odometer);

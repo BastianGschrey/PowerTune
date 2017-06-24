@@ -117,6 +117,8 @@ class DashBoard : public QObject
 
     Q_PROPERTY(QString Platform READ Platform WRITE setPlatform NOTIFY PlatformChanged)
 
+    Q_PROPERTY(QString SerialStat READ SerialStat WRITE setSerialStat NOTIFY SerialStatChanged)
+
 
     //Adaptronic extra
 
@@ -258,6 +260,10 @@ public:
 
     void setPlatform(const QString &Platform);
 
+    void setSerialStat(const QString &SerialStat);
+
+
+
 
     //Adaptronic extra
 
@@ -391,6 +397,8 @@ public:
     //Platform String
 
     QString Platform() const;
+
+    QString SerialStat() const;
 
 
 
@@ -530,6 +538,11 @@ signals:
     //Platfrom String
     void PlatformChanged(QString Platform);
 
+    void SerialStatChanged(QString SerialStat);
+
+
+
+
 
     //Adaptronic extra
 
@@ -666,6 +679,8 @@ private:
     //Platform String
 
     QString m_Platform;
+
+    QString m_SerialStat;
 
 
     //Adaptronic extra
