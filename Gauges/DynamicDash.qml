@@ -136,7 +136,7 @@ Rectangle {
             // Mouse area in which the item can be dragged
             id: dragArea
             anchors.fill: parent
-            drag.target: parent
+            drag.target: dragArea
         }
         Loader {
             id: gauge1
@@ -149,7 +149,7 @@ Rectangle {
             // Mouse area in which the item can be dragged
             id: dragArea2
             anchors.fill: parent
-            drag.target: parent
+            drag.target: dragArea2
         }
         Loader { id: gauge2
             anchors.fill: parent
@@ -161,7 +161,7 @@ Rectangle {
             // Mouse area in which the item can be dragged
             id: dragArea3
             anchors.fill: parent
-            drag.target: parent
+            drag.target: dragArea3
         }
         Loader { id: gauge3
             anchors.fill: parent
@@ -172,73 +172,185 @@ Rectangle {
         MouseArea {
             id: dragArea4
             anchors.fill: parent
-            drag.target: parent
+            drag.target: dragArea4
         }
         Loader { id: gauge4
             anchors.fill: parent
         }
     }
     Item { id:loader5; width: 200; height: width
+        Drag.active: dragArea5.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea5
+            anchors.fill: parent
+            drag.target: dragArea5
+        }
         Loader { id: gauge5
             anchors.fill: parent}
     }
     Item { id:loader6; width: 200; height: width
+        Drag.active: dragArea6.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea6
+            anchors.fill: parent
+            drag.target: dragArea6
+        }
         Loader { id: gauge6
             anchors.fill: parent}
     }
     Item { id:loader7; width: 200; height: width
+        Drag.active: dragArea7.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea7
+            anchors.fill: parent
+            drag.target: dragArea7
+        }
         Loader { id: gauge7
             anchors.fill: parent}
     }
     Item { id:loader8; width: 200; height: width
+        Drag.active: dragArea8.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea8
+            anchors.fill: parent
+            drag.target: dragArea8
+        }
         Loader { id: gauge8
             anchors.fill: parent}
     }
     Item { id:loader9; width: 200; height: width
+        Drag.active: dragArea9.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea9
+            anchors.fill: parent
+            drag.target: dragArea9
+        }
         Loader { id: gauge9
             anchors.fill: parent}
     }
     Item { id:loader10; width: 200; height: width
+        Drag.active: dragArea10.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea10
+            anchors.fill: parent
+            drag.target: dragArea10
+        }
         Loader { id: gauge10
             anchors.fill: parent}
     }
     Item { id:loader11; width: 200; height: width
+        Drag.active: dragArea11.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea11
+            anchors.fill: parent
+            drag.target: dragArea11
+        }
         Loader { id: gauge11
             anchors.fill: parent}
     }
     Item { id:loader12; width: 200; height: width
+        Drag.active: dragArea12.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea12
+            anchors.fill: parent
+            drag.target: dragArea12
+        }
         Loader { id: gauge12
             anchors.fill: parent}
     }
     Item { id:loader13; width: 200; height: width
+        Drag.active: dragArea13.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea13
+            anchors.fill: parent
+            drag.target: dragArea13
+        }
         Loader { id: gauge13
             anchors.fill: parent}
     }
     Item { id:loader14; width: 200; height: width
+        Drag.active: dragArea14.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea14
+            anchors.fill: parent
+            drag.target: dragArea14
+        }
         Loader { id: gauge14
             anchors.fill: parent}
     }
     Item { id:loader15; width: 200; height: width
+        Drag.active: dragArea15.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea15
+            anchors.fill: parent
+            drag.target: dragArea15
+        }
         Loader { id: gauge15
             anchors.fill: parent}
     }
     Item { id:loader16; width: 200; height: width
+        Drag.active: dragArea16.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea16
+            anchors.fill: parent
+            drag.target: dragArea16
+        }
         Loader { id: gauge16
             anchors.fill: parent}
     }
     Item { id:loader17; width: 200; height: width
+        Drag.active: dragArea17.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea17
+            anchors.fill: parent
+            drag.target: dragArea17
+        }
         Loader { id: gauge17
             anchors.fill: parent}
     }
     Item { id:loader18; width: 200; height: width
+        Drag.active: dragArea18.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea18
+            anchors.fill: parent
+            drag.target: dragArea18
+        }
         Loader { id: gauge18
             anchors.fill: parent}
     }
     Item { id:loader19; width: 200; height: width
+        Drag.active: dragArea19.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea19
+            anchors.fill: parent
+            drag.target: dragArea19
+        }
         Loader { id: gauge19
             anchors.fill: parent}
     }
     Item { id:loader20; width: 200; height: width
+        Drag.active: dragArea20.drag.active
+        MouseArea {
+            // Mouse area in which the item can be dragged
+            id: dragArea20
+            anchors.fill: parent
+            drag.target: dragArea20
+        }
         Loader { id: gauge20
             anchors.fill: parent}
     }
@@ -276,6 +388,14 @@ Rectangle {
                         model: [ "None","Half Gauge Coolant Metric","Half Gauge Coolant Imperial","KMH Round","REV Round"]
                         onCurrentIndexChanged: setSource.sourceSetting(),remember.setIndex(),createGauge.create()
                     }
+                    ComboBox {
+                        id: dragselect
+                        width: 150
+                        currentIndex: 0
+                        model: [ "movable off"," movable on"]
+                        onCurrentIndexChanged: dragstate.dragstateswitch()
+                    }
+
                     Button{
                         width: 120
                         text: "gauge size -"
@@ -515,4 +635,36 @@ Rectangle {
 
         }
     }
+
+    Item {
+        //Function to remember selectGaugeNumber and selected gauge
+        id: dragstate
+        function dragstateswitch()
+        {
+            console.log ("change movable");
+            if (dragselect.currentIndex == 1)dragArea.drag.target = loader1,dragArea2.drag.target = loader2,dragArea3.drag.target = loader3,dragArea4.drag.target = loader4,dragArea5.drag.target = loader5,dragArea6.drag.target = loader6,dragArea7.drag.target = loader7,dragArea8.drag.target = loader8,dragArea9.drag.target = loader9,dragArea10.drag.target = loader10,dragArea11.drag.target = loader11,dragArea12.drag.target = loader12,dragArea13.drag.target = loader13,dragArea14.drag.target = loader14,dragArea15.drag.target = loader15,dragArea16.drag.target = loader16,dragArea17.drag.target = loader17,dragArea18.drag.target = loader18,dragArea19.drag.target = loader19,dragArea20.drag.target = loader20;
+            if (dragselect.currentIndex == 0)dragArea.drag.target = dragArea,dragArea2.drag.target = dragArea2,dragArea3.drag.target = dragArea3,dragArea4.drag.target = dragArea4,dragArea5.drag.target = dragArea5,dragArea6.drag.target = dragArea6,dragArea7.drag.target = dragArea7,dragArea8.drag.target = dragArea8,dragArea9.drag.target = dragArea9,dragArea10.drag.target = dragArea10,dragArea11.drag.target = dragArea11,dragArea12.drag.target = dragArea12,dragArea13.drag.target = dragArea13,dragArea14.drag.target = dragArea14,dragArea15.drag.target = dragArea15,dragArea16.drag.target = dragArea16,dragArea17.drag.target = dragArea17,dragArea18.drag.target = dragArea18,dragArea19.drag.target = dragArea19,dragArea20.drag.target = dragArea20;
+            /*
+            if (dragselect.currentIndex == 1)loader5.Drag.active = dragArea5.drag.active;
+            if (dragselect.currentIndex == 1)loader6.Drag.active = dragArea6.drag.active;
+            if (dragselect.currentIndex == 1)loader7.Drag.active = dragArea7.drag.active;
+            if (dragselect.currentIndex == 1)loader8.Drag.active = dragArea8.drag.active;
+            if (dragselect.currentIndex == 1)loader9.Drag.active = dragArea9.drag.active;
+            if (dragselect.currentIndex == 1)loader10.Drag.active = dragArea10.drag.active;
+            if (dragselect.currentIndex == 1)loader11.Drag.active = dragArea11.drag.active;
+            if (dragselect.currentIndex == 1)loader12.Drag.active = dragArea12.drag.active;
+            if (dragselect.currentIndex == 1)loader13.Drag.active = dragArea13.drag.active;
+            if (dragselect.currentIndex == 1)loader14.Drag.active = dragArea14.drag.active;
+            if (dragselect.currentIndex == 1)loader15.Drag.active = dragArea15.drag.active;
+            if (dragselect.currentIndex == 1)loader16.Drag.active = dragArea16.drag.active;
+            if (dragselect.currentIndex == 1)loader17.Drag.active = dragArea17.drag.active;
+            if (dragselect.currentIndex == 1)loader18.Drag.active = dragArea18.drag.active;
+            if (dragselect.currentIndex == 1)loader19.Drag.active = dragArea19.drag.active;
+            if (dragselect.currentIndex == 1)loader20.Drag.active = dragArea20.drag.active;
+*/
+
+        }
+    }
+    //Drag.active: dragArea.drag.active
+
 }
