@@ -611,6 +611,8 @@ Rectangle {
         property var gauge19select
         property var gauge20select
 
+
+        // set index and make loader items only visible if a gauge source is selected
         function setIndex()
         {
             console.log ("Save index");
@@ -680,7 +682,7 @@ Rectangle {
         }
     }
     Item {
-        //Function to remember selectGaugeNumber and selected gauge
+        //Function to remember which gauge is selected in each ComboBox
         id: setRemember
         function remembersetIndex()
         {
@@ -711,7 +713,7 @@ Rectangle {
         }
     }
     Item {
-        //Function to remember selectGaugeNumber and selected gauge
+        //Function to increase selected gauge size by 10
         id: sizeplus
         function sizeplusfunc()
         {
@@ -741,7 +743,7 @@ Rectangle {
         }
     }
     Item {
-        //Function to remember selectGaugeNumber and selected gauge
+        //Function to decrease selected gauge size by 10
         id: sizeminus
         function sizeminusfunc()
         {
@@ -772,7 +774,7 @@ Rectangle {
     }
 
     Item {
-        //Function to remember selectGaugeNumber and selected gauge
+        //Function to enable and disable dragging
         id: dragstate
         function dragstateswitch()
         {
