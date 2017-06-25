@@ -131,7 +131,7 @@ Rectangle {
     }
     Item { id:loader1; width: 200; height: width;
         visible: true
-        //Drag.active: dragArea.drag.active
+        Drag.active: dragArea.drag.active
         MouseArea {
             // Mouse area in which the item can be dragged
             enabled: false
@@ -634,6 +634,47 @@ Rectangle {
             if (selectGaugeNumber.currentIndex == 17)gauge18select = selectGauge.currentIndex;
             if (selectGaugeNumber.currentIndex == 18)gauge19select = selectGauge.currentIndex;
             if (selectGaugeNumber.currentIndex == 19)gauge20select = selectGauge.currentIndex;
+            if (remember.gauge1select == 0)loader1.visible = false;
+            if (remember.gauge1select != 0)loader1.visible = true;
+            if (remember.gauge2select == 0)loader2.visible = false;
+            if (remember.gauge2select != 0)loader2.visible = true;
+            if (remember.gauge3select == 0)loader3.visible = false;
+            if (remember.gauge3select != 0)loader3.visible = true;
+            if (remember.gauge4select == 0)loader4.visible = false;
+            if (remember.gauge4select != 0)loader4.visible = true;
+            if (remember.gauge5select == 0)loader5.visible = false;
+            if (remember.gauge5select != 0)loader5.visible = true;
+            if (remember.gauge6select == 0)loader6.visible = false;
+            if (remember.gauge6select != 0)loader6.visible = true;
+            if (remember.gauge7select == 0)loader7.visible = false;
+            if (remember.gauge7select != 0)loader7.visible = true;
+            if (remember.gauge8select == 0)loader8.visible = false;
+            if (remember.gauge8select != 0)loader8.visible = true;
+            if (remember.gauge9select == 0)loader9.visible = false;
+            if (remember.gauge9select != 0)loader9.visible = true;
+            if (remember.gauge10select == 0)loader10.visible = false;
+            if (remember.gauge10select != 0)loader10.visible = true;
+            if (remember.gauge11select == 0)loader11.visible = false;
+            if (remember.gauge11select != 0)loader11.visible = true;
+            if (remember.gauge12select == 0)loader12.visible = false;
+            if (remember.gauge12select != 0)loader12.visible = true;
+            if (remember.gauge13select == 0)loader13.visible = false;
+            if (remember.gauge13select != 0)loader13.visible = true;
+            if (remember.gauge14select == 0)loader14.visible = false;
+            if (remember.gauge14select != 0)loader14.visible = true;
+            if (remember.gauge15select == 0)loader15.visible = false;
+            if (remember.gauge15select != 0)loader15.visible = true;
+            if (remember.gauge16select == 0)loader16.visible = false;
+            if (remember.gauge16select != 0)loader16.visible = true;
+            if (remember.gauge17select == 0)loader17.visible = false;
+            if (remember.gauge17select != 0)loader17.visible = true;
+            if (remember.gauge18select == 0)loader18.visible = false;
+            if (remember.gauge18select != 0)loader18.visible = true;
+            if (remember.gauge19select == 0)loader19.visible = false;
+            if (remember.gauge19select != 0)loader19.visible = true;
+            if (remember.gauge20select == 0)loader20.visible = false;
+            if (remember.gauge20select != 0)loader20.visible = true;
+
 
 
         }
@@ -664,6 +705,7 @@ Rectangle {
             if (selectGaugeNumber.currentIndex == 17)selectGauge.currentIndex = remember.gauge18select;
             if (selectGaugeNumber.currentIndex == 18)selectGauge.currentIndex = remember.gauge19select;
             if (selectGaugeNumber.currentIndex == 19)selectGauge.currentIndex = remember.gauge20select;
+
 
 
         }
