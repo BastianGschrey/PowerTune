@@ -15,9 +15,8 @@ Rectangle {
     color: "black"
 
     MouseArea {
-        anchors.fill: parent
+        anchors.fill: mainrectangle
         acceptedButtons: Qt.LeftButton
-
         onClicked: pieMenu.popup(mouseX, mouseY)
     }
     // Remember the Selected Gauges
@@ -131,229 +130,323 @@ Rectangle {
         }
     }
     Item { id:loader1; width: 200; height: width;
-        Drag.active: dragArea.drag.active
+        visible: true
+        //Drag.active: dragArea.drag.active
         MouseArea {
             // Mouse area in which the item can be dragged
+            enabled: false
             id: dragArea
             anchors.fill: parent
-            drag.target: dragArea
+            drag.target: parent
         }
         Loader {
             id: gauge1
             anchors.fill: loader1
         }
     }
+
     Item { id:loader2; width: 200; height: width;
+
         Drag.active: dragArea2.drag.active
+
         MouseArea {
+
             // Mouse area in which the item can be dragged
+
             id: dragArea2
+            enabled: false
             anchors.fill: parent
-            drag.target: dragArea2
+
+            drag.target: parent
+
         }
+
         Loader { id: gauge2
+
             anchors.fill: parent
+
         }
+
     }
+
     Item { id:loader3; width: 200; height: width;
+
         Drag.active: dragArea3.drag.active
+
         MouseArea {
+
             // Mouse area in which the item can be dragged
+
             id: dragArea3
+            enabled: false
             anchors.fill: parent
-            drag.target: dragArea3
+
+            drag.target: parent
+
         }
+
         Loader { id: gauge3
+
             anchors.fill: parent
+
         }
+
     }
+
     Item { id:loader4; width: 200; height: width;
+
         Drag.active: dragArea4.drag.active
+
         MouseArea {
+
             id: dragArea4
+            enabled: false
             anchors.fill: parent
-            drag.target: dragArea4
+
+            drag.target: parent
+
         }
+
         Loader { id: gauge4
+
             anchors.fill: parent
+
         }
+
     }
+
     Item { id:loader5; width: 200; height: width
         Drag.active: dragArea5.drag.active
         MouseArea {
-            // Mouse area in which the item can be dragged
             id: dragArea5
+            enabled: false
             anchors.fill: parent
-            drag.target: dragArea5
+            drag.target: parent
         }
+
+
         Loader { id: gauge5
+
             anchors.fill: parent}
+
     }
+
     Item { id:loader6; width: 200; height: width
         Drag.active: dragArea6.drag.active
         MouseArea {
-            // Mouse area in which the item can be dragged
             id: dragArea6
+            enabled: false
             anchors.fill: parent
-            drag.target: dragArea6
+            drag.target: parent
         }
+
         Loader { id: gauge6
+
             anchors.fill: parent}
+
     }
+
     Item { id:loader7; width: 200; height: width
         Drag.active: dragArea7.drag.active
         MouseArea {
-            // Mouse area in which the item can be dragged
             id: dragArea7
             anchors.fill: parent
-            drag.target: dragArea7
+            drag.target: parent
         }
+
         Loader { id: gauge7
+
             anchors.fill: parent}
+
     }
+
     Item { id:loader8; width: 200; height: width
         Drag.active: dragArea8.drag.active
+
         MouseArea {
-            // Mouse area in which the item can be dragged
             id: dragArea8
             anchors.fill: parent
-            drag.target: dragArea8
+            drag.target: parent
         }
+
         Loader { id: gauge8
+
             anchors.fill: parent}
+
     }
+
     Item { id:loader9; width: 200; height: width
         Drag.active: dragArea9.drag.active
         MouseArea {
-            // Mouse area in which the item can be dragged
             id: dragArea9
+            enabled: false
             anchors.fill: parent
-            drag.target: dragArea9
+            drag.target: parent
         }
+
         Loader { id: gauge9
+
             anchors.fill: parent}
+
     }
+
     Item { id:loader10; width: 200; height: width
+
         Drag.active: dragArea10.drag.active
         MouseArea {
-            // Mouse area in which the item can be dragged
             id: dragArea10
+            enabled: false
             anchors.fill: parent
-            drag.target: dragArea10
+            drag.target: parent
         }
         Loader { id: gauge10
+
             anchors.fill: parent}
+
     }
+
     Item { id:loader11; width: 200; height: width
         Drag.active: dragArea11.drag.active
         MouseArea {
-            // Mouse area in which the item can be dragged
             id: dragArea11
+            enabled: false
             anchors.fill: parent
-            drag.target: dragArea11
+            drag.target: parent
         }
         Loader { id: gauge11
+
             anchors.fill: parent}
+
     }
+
     Item { id:loader12; width: 200; height: width
         Drag.active: dragArea12.drag.active
         MouseArea {
-            // Mouse area in which the item can be dragged
             id: dragArea12
+            enabled: false
             anchors.fill: parent
-            drag.target: dragArea12
+            drag.target: parent
         }
+
         Loader { id: gauge12
+
             anchors.fill: parent}
+
     }
+
     Item { id:loader13; width: 200; height: width
         Drag.active: dragArea13.drag.active
         MouseArea {
-            // Mouse area in which the item can be dragged
             id: dragArea13
+            enabled: false
             anchors.fill: parent
-            drag.target: dragArea13
+            drag.target: parent
         }
         Loader { id: gauge13
+
             anchors.fill: parent}
+
     }
+
     Item { id:loader14; width: 200; height: width
         Drag.active: dragArea14.drag.active
         MouseArea {
-            // Mouse area in which the item can be dragged
             id: dragArea14
+            enabled: false
             anchors.fill: parent
-            drag.target: dragArea14
+            drag.target: parent
         }
         Loader { id: gauge14
+
             anchors.fill: parent}
+
     }
+
     Item { id:loader15; width: 200; height: width
         Drag.active: dragArea15.drag.active
         MouseArea {
-            // Mouse area in which the item can be dragged
             id: dragArea15
+            enabled: false
             anchors.fill: parent
-            drag.target: dragArea15
+            drag.target: parent
         }
         Loader { id: gauge15
+
             anchors.fill: parent}
+
     }
+
     Item { id:loader16; width: 200; height: width
         Drag.active: dragArea16.drag.active
         MouseArea {
-            // Mouse area in which the item can be dragged
             id: dragArea16
+            enabled: false
             anchors.fill: parent
-            drag.target: dragArea16
+            drag.target: parent
         }
         Loader { id: gauge16
+
             anchors.fill: parent}
+
     }
+
     Item { id:loader17; width: 200; height: width
         Drag.active: dragArea17.drag.active
         MouseArea {
-            // Mouse area in which the item can be dragged
             id: dragArea17
+            enabled: false
             anchors.fill: parent
-            drag.target: dragArea17
+            drag.target: parent
         }
         Loader { id: gauge17
+
             anchors.fill: parent}
+
     }
+
     Item { id:loader18; width: 200; height: width
         Drag.active: dragArea18.drag.active
         MouseArea {
-            // Mouse area in which the item can be dragged
             id: dragArea18
+            enabled: false
             anchors.fill: parent
-            drag.target: dragArea18
+            drag.target: parent
         }
         Loader { id: gauge18
+
             anchors.fill: parent}
+
     }
+
     Item { id:loader19; width: 200; height: width
         Drag.active: dragArea19.drag.active
         MouseArea {
-            // Mouse area in which the item can be dragged
             id: dragArea19
+            enabled: false
             anchors.fill: parent
-            drag.target: dragArea19
+            drag.target: parent
         }
         Loader { id: gauge19
+
             anchors.fill: parent}
+
     }
+
     Item { id:loader20; width: 200; height: width
         Drag.active: dragArea20.drag.active
         MouseArea {
-            // Mouse area in which the item can be dragged
             id: dragArea20
+            enabled: false
             anchors.fill: parent
-            drag.target: dragArea20
+            drag.target: parent
         }
         Loader { id: gauge20
+
             anchors.fill: parent}
+
     }
+
+
 
 
     //gauge Selector with Dropdowns
@@ -390,7 +483,7 @@ Rectangle {
                     }
                     ComboBox {
                         id: dragselect
-                        width: 150
+                        width: 100
                         currentIndex: 0
                         model: [ "movable off"," movable on"]
                         onCurrentIndexChanged: dragstate.dragstateswitch()
@@ -642,26 +735,9 @@ Rectangle {
         function dragstateswitch()
         {
             console.log ("change movable");
-            if (dragselect.currentIndex == 1)dragArea.drag.target = loader1,dragArea2.drag.target = loader2,dragArea3.drag.target = loader3,dragArea4.drag.target = loader4,dragArea5.drag.target = loader5,dragArea6.drag.target = loader6,dragArea7.drag.target = loader7,dragArea8.drag.target = loader8,dragArea9.drag.target = loader9,dragArea10.drag.target = loader10,dragArea11.drag.target = loader11,dragArea12.drag.target = loader12,dragArea13.drag.target = loader13,dragArea14.drag.target = loader14,dragArea15.drag.target = loader15,dragArea16.drag.target = loader16,dragArea17.drag.target = loader17,dragArea18.drag.target = loader18,dragArea19.drag.target = loader19,dragArea20.drag.target = loader20;
-            if (dragselect.currentIndex == 0)dragArea.drag.target = dragArea,dragArea2.drag.target = dragArea2,dragArea3.drag.target = dragArea3,dragArea4.drag.target = dragArea4,dragArea5.drag.target = dragArea5,dragArea6.drag.target = dragArea6,dragArea7.drag.target = dragArea7,dragArea8.drag.target = dragArea8,dragArea9.drag.target = dragArea9,dragArea10.drag.target = dragArea10,dragArea11.drag.target = dragArea11,dragArea12.drag.target = dragArea12,dragArea13.drag.target = dragArea13,dragArea14.drag.target = dragArea14,dragArea15.drag.target = dragArea15,dragArea16.drag.target = dragArea16,dragArea17.drag.target = dragArea17,dragArea18.drag.target = dragArea18,dragArea19.drag.target = dragArea19,dragArea20.drag.target = dragArea20;
-            /*
-            if (dragselect.currentIndex == 1)loader5.Drag.active = dragArea5.drag.active;
-            if (dragselect.currentIndex == 1)loader6.Drag.active = dragArea6.drag.active;
-            if (dragselect.currentIndex == 1)loader7.Drag.active = dragArea7.drag.active;
-            if (dragselect.currentIndex == 1)loader8.Drag.active = dragArea8.drag.active;
-            if (dragselect.currentIndex == 1)loader9.Drag.active = dragArea9.drag.active;
-            if (dragselect.currentIndex == 1)loader10.Drag.active = dragArea10.drag.active;
-            if (dragselect.currentIndex == 1)loader11.Drag.active = dragArea11.drag.active;
-            if (dragselect.currentIndex == 1)loader12.Drag.active = dragArea12.drag.active;
-            if (dragselect.currentIndex == 1)loader13.Drag.active = dragArea13.drag.active;
-            if (dragselect.currentIndex == 1)loader14.Drag.active = dragArea14.drag.active;
-            if (dragselect.currentIndex == 1)loader15.Drag.active = dragArea15.drag.active;
-            if (dragselect.currentIndex == 1)loader16.Drag.active = dragArea16.drag.active;
-            if (dragselect.currentIndex == 1)loader17.Drag.active = dragArea17.drag.active;
-            if (dragselect.currentIndex == 1)loader18.Drag.active = dragArea18.drag.active;
-            if (dragselect.currentIndex == 1)loader19.Drag.active = dragArea19.drag.active;
-            if (dragselect.currentIndex == 1)loader20.Drag.active = dragArea20.drag.active;
-*/
+            if (dragselect.currentIndex == 0)dragArea.enabled = false;dragArea2.enabled = false,dragArea3.enabled = false,dragArea4.enabled = false,dragArea5.enabled = false,dragArea6.enabled = false,dragArea7.enabled = false,dragArea8.enabled = false,dragArea9.enabled = false,dragArea10.enabled = false,dragArea11.enabled = false,dragArea12.drag.enabled = false,dragArea13.enabled = false,dragArea14.enabled = false,dragArea15.enabled = false,dragArea16.enabled = false,dragArea17.enabled = false,dragArea18.enabled = false,dragArea19.enabled = false,dragArea20.enabled = false;
+            if (dragselect.currentIndex == 1)dragArea.enabled = true;dragArea2.enabled = true,dragArea3.enabled = true,dragArea4.enabled = true,dragArea5.enabled = true,dragArea6.enabled = true,dragArea7.enabled = true,dragArea8.enabled = true,dragArea9.enabled = true,dragArea10.enabled = true,dragArea11.enabled = true,dragArea12.drag.enabled = true,dragArea13.enabled = true,dragArea14.enabled = true,dragArea15.enabled = true,dragArea16.enabled = true,dragArea17.enabled = true,dragArea18.enabled = true,dragArea19.enabled = true,dragArea20.enabled = true;
+            console.log (dragArea.enabled);
 
         }
     }
