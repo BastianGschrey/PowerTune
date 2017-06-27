@@ -10,8 +10,8 @@ import Qt.labs.settings 1.0
 
 Rectangle {
     id:coolantImperialGauge
-    width: 200
-    height: width
+    width: parent
+    height: parent
     color: "transparent"
 
 CircularGauge {
