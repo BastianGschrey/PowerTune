@@ -9,7 +9,8 @@ SOURCES += main.cpp \
     decoder.cpp \
     serialport.cpp \
     appsettings.cpp \
-    gopro.cpp
+    gopro.cpp \
+    gps.cpp
 
 RESOURCES += qml.qrc
 
@@ -25,7 +26,8 @@ HEADERS += \
     decoder.h \
     serialport.h \
     appsettings.h \
-    gopro.h
+    gopro.h \
+    gps.h
 
 FORMS +=
 
