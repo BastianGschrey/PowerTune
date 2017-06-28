@@ -521,6 +521,7 @@ void GPS::startGPScom()
         com->setParity(QSerialPort::NoParity);
         com->setStopBits(QSerialPort::OneStop);
         QObject::connect(com, SIGNAL(readyRead()), this, SLOT(readSerial()));
+        qDebug() << "GPS";
 
 
     /*for (int var = 0; var < 1000; ++var) {

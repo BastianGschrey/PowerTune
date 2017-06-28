@@ -32,6 +32,7 @@ class AppSettings;
 class GoPro;
 class QModbusClient;
 class QModbusReply;
+class GPS;
 
 class Serial : public QObject
 {
@@ -71,6 +72,7 @@ private:
     DashBoard *m_dashBoard;
     AppSettings *m_appSettings;
     GoPro *m_gopro;
+    GPS *m_gps;
     QStringList m_portsNames;
     QStringList *m_ecuList;
     QModbusReply *lastRequest;
@@ -79,6 +81,7 @@ private:
     QTimer      m_timer;
     qint64      m_bytesWritten;
     QByteArray  m_writeData;
+
 
     //QModbusReply reply;
 

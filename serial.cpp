@@ -24,6 +24,7 @@
 #include "serialport.h"
 #include "appsettings.h"
 #include "gopro.h"
+#include "gps.h"
 
 #include <QDebug>
 #include <QTime>
@@ -68,6 +69,7 @@ Serial::Serial(QObject *parent) :
     m_decoder(Q_NULLPTR),
     m_dashBoard(Q_NULLPTR),
     m_gopro(Q_NULLPTR),
+    m_gps(Q_NULLPTR),
     m_bytesWritten(0),
     lastRequest(nullptr),
     modbusDevice(nullptr)
@@ -80,6 +82,7 @@ Serial::Serial(QObject *parent) :
     m_decoder = new Decoder(m_dashBoard, this);
     m_appSettings = new AppSettings(this);
     m_gopro = new GoPro(this);
+    m_gps = new GPS(this);
     connect(m_decoder,SIGNAL(sig_adaptronicReadFinished()),this,SLOT(AdaptronicStartStream()));
     QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
     if (engine == Q_NULLPTR)
@@ -127,6 +130,7 @@ void Serial::getPorts()
     }
     setPortsNames(PortList);
     // Check available ports evry 1000 ms
+
     QTimer::singleShot(1000, this, SLOT(getPorts()));
 }
 //function for flushing all serial buffers
@@ -205,6 +209,7 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
 
 void Serial::closeConnection()
 {
+        m_gps->startGPScom();
     if(ecu == 0){
         m_serialport->close();
         qDebug() << "Connection closed.";
