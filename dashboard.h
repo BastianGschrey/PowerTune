@@ -4,10 +4,16 @@
 #endif // DASHBOARD_H
 
 #include <QObject>
+#include <QList>
 
 class DashBoard : public QObject
 {
     Q_OBJECT
+
+    //QStringList for GaugeModel
+    Q_PROPERTY(QStringList gaugeModel READ gaugeModel WRITE setGaugeModel NOTIFY sig_gaugeModelChanged)
+
+
 
     // Odometer
     Q_PROPERTY(qreal Odo READ Odo WRITE setOdo NOTIFY OdoChanged)
@@ -142,6 +148,8 @@ class DashBoard : public QObject
 
 public:
     DashBoard(QObject *parent = 0);
+
+    void GetGaugeModel();
 
     // Odometer
     void setOdo(const qreal &Odo);
@@ -701,5 +709,8 @@ private:
     qreal m_Ign3;
     qreal m_Ign4;
     qreal m_TRIM;
+
+
+
 
 };

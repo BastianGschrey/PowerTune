@@ -1144,3 +1144,25 @@ qreal DashBoard::Ign2() const { return m_Ign2; }
 qreal DashBoard::Ign3() const { return m_Ign3; }
 qreal DashBoard::Ign4() const { return m_Ign4; }
 qreal DashBoard::TRIM() const { return m_TRIM; }
+
+
+//Model for gauges
+void DashBoard::GetGaugeModel()
+{
+    QStringList GaugeModel;
+    GaugeModel << "odo" << "revs" << "IntakePress" << "PressureV" << "ThrottleV" << "Primaryinp"
+               << "Fuelc" << "Leadingign" << "Trailingign" << "Fueltemp" << "Moilp" << "Boosttp"
+               << "Boostwg" << "Watertemp" << "Intaketemp" << "Knock" << "Battery V" << "Speed"
+               << "ISC Valve DC" << "o2 Sensor V" << "na1" << "Sec. Inj. Pulse" << "na2" << "Inj DC"
+               << "PIM" << "Load" << "MAF1 V" << "MAF2 V" << "Inj Pulse ms" << "Inj" << "Ign" << "Dwell"
+               << "Boost Press." << "MAF Activity" <<  "o2 Voltage 2" << "sens1" << "sens2" << "sens3"
+               << "sens4" << "sens5" << "sens6" << "sens7" << "sens8" << "auxcalc1" << "auxcalc2"
+               << "auxcalc3" << "auxcalc4" << "Flag1" << "Flag2" << "Flag3" << "Flag4" << "Flag5"
+               << "Flag6" << "Flag7" << "Flag8" << "Flag9" << "Flag10" << "Flag11" << "Flag12" << "Flag13"
+               << "Flag14" << "Flag15" << "Flag16" << "SensorString1"  << "SensorString2" << "SensorString3"
+               << "SensorString4" << "SensorString5" << "SensorString6" << "SensorString7" << "SensorString8"
+               << "Pallform" << "SerialState" << "MAP" << "Aux Temp." << "AFR" << "TPS %" << "Idle Value"
+               << "MVSS" << "SVSS" << "Inj. 1" << "Inj. 2" << "Inj. 3" << "Inj. 4" << "Ign. 1"
+               << "Ign. 2" << "Ign. 3" << "Ign. 4" << "Trim %";
+
+}
