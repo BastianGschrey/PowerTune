@@ -11,7 +11,7 @@ class DashBoard : public QObject
     Q_OBJECT
 
     //QStringList for GaugeModel
-    Q_PROPERTY(QStringList gaugeModel READ gaugeModel WRITE setGaugeModel NOTIFY sig_gaugeModelChanged)
+    //Q_PROPERTY(QStringList gaugeModel READ gaugeModel WRITE setGaugeModel NOTIFY sig_gaugeModelChanged)
 
 
 
@@ -709,8 +709,5 @@ private:
     qreal m_Ign3;
     qreal m_Ign4;
     qreal m_TRIM;
-
-
-
 
 };
