@@ -19,7 +19,8 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton
-        onClicked: pieMenu.popup(mouseX, mouseY)
+        //onClicked: pieMenu.popup(mouseX, mouseY)
+
     }
 
 
@@ -27,16 +28,38 @@ Rectangle {
         id: pieMenu
 
         MenuItem {
-            text: "Open Gauge Select"
-            //onTriggered: gaugeSelect.visible = true;
-            onTriggered: BarGaugeScript.createbarGaugeObjects();
+            text: "Add gauge"
+
+            //onTriggered: BarGaugeScript.createbarGaugeObjects();
         }
 
         MenuItem {
-            text: "Close Gauge Select"
-            onTriggered: gaugeSelect.visible = false;
+            text: "remove gauge"
+
         }
+
+
 
     }
 
+    /*ListModel {
+        id: listModelSourceSelect
+        ListElement {
+            title: "RPM"
+        }
+        ListElement {
+            title: "Speed"
+        }
+        ListElement {
+            title: "MAP"
+        }
+        ListElement {
+            title: "Watertemp"
+        }
+    }
+
+    ListView {
+        id: listViewSourceSelect
+        model: listModelSourceSelect
+    }*/
 }

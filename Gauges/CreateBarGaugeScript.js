@@ -26,7 +26,7 @@ function finishCreation() {
     console.log("finish creation");
     if (component.status == Component.Ready) {
         console.log("3");
-        barGauge = component.createObject(mainrectangle, {"x": 100, "y": 100});
+        barGauge = component.createObject(mainrectangle, {'title':'TestGauge', 'value':'map', 'orientation':'Qt.Horizontal'});
         if (barGauge == null) {
             // Error Handling
             console.log("4");
