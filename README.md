@@ -37,4 +37,5 @@ Remote control GoPro Recording on off
 Logging to user selectable CSV file for Adaptronic 
 Logging to user selectable txt file for Power FC 
 Differential Aux input Settings for Power FC (2 for FC Hako / 4 For Datalogit) 
+GPS for NMEA 0183 compliant devices via Serial (Tested with BU-353S4 GPS Mouse) 
 
