@@ -109,7 +109,7 @@ Rectangle {
     }
     Text {
         id: pimval
-        text: Dashboard.pim
+        text: (Dashboard.pim).toFixed(2)
         font.pixelSize: (parent.width / 10)
          y: parent.height / 6
         font.bold: true

@@ -789,6 +789,7 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
 {
 
     qreal realBoost;
+    int Boostconv;
 
     m_dashboard->setSpeed(unit.value(10)); // <-This is for the "main" speedo
     m_dashboard->setRevs(unit.value(0));
@@ -846,11 +847,15 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
 
         if ((unit.value(1)) > 103) // while boost pressure is positive multiply by 0.01 to show kg/cm2
         {
-            realBoost = ((unit.value(1))-103) * 0.01;
+            Boostconv = ((unit.value(1))-103) ;
+            realBoost = Boostconv* 0.01;
+            qDebug() << realBoost;
         }
-        else if ((unit.value(1)) < 103) // while boost pressure is positive multiply by 0.01 to show kg/cm2
+        else if ((unit.value(1)) < 103) // while boost pressure is negative  multiply by 0.01 to show kg/cm2
         {
-            realBoost = ((unit.value(1))-103) * 7.50061561303;
+            Boostconv = ((unit.value(1))-103) * 7.50061561303;
+            realBoost = Boostconv;
+
         }
 
 
