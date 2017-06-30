@@ -517,13 +517,17 @@ bail:
 
 }
 
+void GPS::stopGPScom()
+{
+    com->close();
+}
 void GPS::startGPScom(const QString &portName,const QString &Baud)
 {
     com = new QSerialPort(this);
     serialBuffer = "";
     qDebug() <<"StartGPS"<< portName ;
     qDebug() <<"Baud"<< Baud ;
-//  com->close();
+    com->close();
 
     com->setPortName(portName);
     com->open(QSerialPort::ReadWrite);
@@ -569,10 +573,7 @@ void GPS::on_mapa_bot_clicked()
     }
 }
 
-void GPS::on_fechar_bot_clicked()
-{
-    com->close();
-}
+
 */
 /*
 void GPS::on_refresh_bot_clicked(){

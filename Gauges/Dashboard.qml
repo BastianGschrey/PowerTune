@@ -21,7 +21,7 @@ Rectangle {
         height: parent.height /2
         color: "transparent"
         anchors.horizontalCenter: parent.horizontalCenter
-        y: parent.height /2.6
+        y :parent.height /4
 /*
         Timer {
             running: true
@@ -65,14 +65,88 @@ Rectangle {
             }
       }
     }
+    Rectangle{
+        id: displaybox
+        color: "lightsteelblue"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        width: parent.width /6
+        height: parent.height /4
+    Text {
+        id: afrtext
+        text:"AFR"
+        font.pixelSize: (parent.width / 10)
+         y: parent.height / 4
+        font.bold: true
+        font.family: "Eurostile"
+        color: "white"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top :parent.top
+    }
+    Text {
+        id: aux
+        text:Dashboard.auxcalc1
+        font.pixelSize: (parent.width / 10)
+        font.bold: true
+        font.family: "Eurostile"
+        color: "white"
+        anchors.top : afrtext.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+    }
 
 
+
+    Text {
+        id:boost
+        text:"Boost"
+        font.pixelSize: (parent.width / 10)
+         y: parent.height / 6
+        font.bold: true
+        font.family: "Eurostile"
+        color: "white"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top : aux.bottom
+    }
+    Text {
+        id: pimval
+        text: Dashboard.pim
+        font.pixelSize: (parent.width / 10)
+         y: parent.height / 6
+        font.bold: true
+        font.family: "Eurostile"
+        color: "white"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top : boost.bottom
+    }
+    Text {
+        id: knock
+        text:"Knock"
+        font.pixelSize: (parent.width / 10)
+         y: parent.height / 6
+        font.bold: true
+        font.family: "Eurostile"
+        color: "white"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top : pimval.bottom
+    }
+    Text {
+        text: Dashboard.Knock
+        font.pixelSize: (parent.width / 10)
+         y: parent.height / 6
+        font.bold: true
+        font.family: "Eurostile"
+        color: "white"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top : knock.bottom
+    }
+}
     Rectangle {
+        id : intaketemp
         width: parent.width /6
         height: parent.height /2
         color: "transparent"
         anchors.horizontalCenter: parent.horizontalCenter
-        y: (parent.height / 2)
+        anchors.top :displaybox.bottom
 /*
         Timer {
             running: true
@@ -120,6 +194,7 @@ Rectangle {
         height: width
         color: "transparent"
         anchors.centerIn: parent
+
 
     }
 

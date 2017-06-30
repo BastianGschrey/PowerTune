@@ -32,6 +32,7 @@ public:
 
 public slots:
     void startGPScom(const QString &portName,const QString &Baud);
+    void stopGPScom();
 
 private slots:
 
