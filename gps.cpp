@@ -528,13 +528,13 @@ void GPS::startGPScom(const QString &portName,const QString &Baud)
     com = new QSerialPort(this);
     serialBuffer = "";
     qDebug() <<"StartGPS"<< portName ;
-    qDebug() <<"Baud"<< Baud ;
+    qDebug() <<"StartGPS"<< Baud ;
+
+
 
     com->setPortName(portName);
     com->open(QSerialPort::ReadWrite);
-//    com->setBaudRate(Baud);
     com->setBaudRate(QSerialPort::Baud4800);
-//    com->setBaudRate(QSerialPort::Baud57600);
     com->setDataBits(QSerialPort::Data8);
     com->setFlowControl(QSerialPort::NoFlowControl);
     com->setParity(QSerialPort::NoParity);
