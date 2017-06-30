@@ -523,21 +523,24 @@ void GPS::stopGPScom()
 }
 void GPS::startGPScom(const QString &portName,const QString &Baud)
 {
+   // if (com)
+     //   delete com;
     com = new QSerialPort(this);
     serialBuffer = "";
     qDebug() <<"StartGPS"<< portName ;
     qDebug() <<"Baud"<< Baud ;
-    com->close();
 
     com->setPortName(portName);
     com->open(QSerialPort::ReadWrite);
 //    com->setBaudRate(Baud);
     com->setBaudRate(QSerialPort::Baud4800);
+//    com->setBaudRate(QSerialPort::Baud57600);
     com->setDataBits(QSerialPort::Data8);
     com->setFlowControl(QSerialPort::NoFlowControl);
     com->setParity(QSerialPort::NoParity);
     com->setStopBits(QSerialPort::OneStop);
-    QObject::connect(com, SIGNAL(readyRead()), this, SLOT(readSerial()));
+   // QObject::connect(com, SIGNAL(readyRead()), this, SLOT(readSerial()));
+    connect(this->com,SIGNAL(readyRead()),this, SLOT(readSerial()));
 
 
     /*for (int var = 0; var < 1000; ++var) {
