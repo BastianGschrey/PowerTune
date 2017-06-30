@@ -70,7 +70,7 @@ ApplicationWindow {
 
         Loader {
             id: secondPageLoader
-            source: "qrc:/Gauges/PFCSensors.qml"
+            source: "qrc:/Gauges/GPS.qml"
         }
 
         Loader {

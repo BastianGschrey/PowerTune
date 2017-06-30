@@ -2,18 +2,12 @@
 #define DASHBOARD_H
 
 #endif // DASHBOARD_H
-
+#include <QStringList>
 #include <QObject>
-#include <QList>
 
 class DashBoard : public QObject
 {
     Q_OBJECT
-
-    //QStringList for GaugeModel
-    //Q_PROPERTY(QStringList gaugeModel READ gaugeModel WRITE setGaugeModel NOTIFY sig_gaugeModelChanged)
-
-
 
     // Odometer
     Q_PROPERTY(qreal Odo READ Odo WRITE setOdo NOTIFY OdoChanged)
@@ -146,10 +140,20 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal TRIM READ TRIM WRITE setTRIM NOTIFY TRIMChanged)
 
 
+    //GPS Strings
+
+
+    Q_PROPERTY(QString gpsTime READ gpsTime WRITE setgpsTime NOTIFY gpsTimeChanged)
+    Q_PROPERTY(QString gpsAltitude READ gpsAltitude WRITE setgpsAltitude NOTIFY gpsAltitudeChanged)
+    Q_PROPERTY(QString gpsLatitude READ gpsLatitude WRITE setgpsLatitude NOTIFY gpsLatitudeChanged)
+    Q_PROPERTY(QString gpsLongitude READ gpsLongitude WRITE setgpsLongitude NOTIFY gpsLongitudeChanged)
+    Q_PROPERTY(QString gpsSpeed READ gpsSpeed WRITE setgpsSpeed NOTIFY gpsSpeedChanged)
+    Q_PROPERTY(QString gpsVisibleSatelites READ gpsVisibleSatelites WRITE setgpsVisibleSatelites NOTIFY gpsVisibleSatelitesChanged)
+
+
+
 public:
     DashBoard(QObject *parent = 0);
-
-    void GetGaugeModel();
 
     // Odometer
     void setOdo(const qreal &Odo);
@@ -270,6 +274,16 @@ public:
 
     void setSerialStat(const QString &SerialStat);
 
+    // GPS
+
+    void setgpsTime(const QString &gpsTime);
+    void setgpsAltitude(const QString &gpsAltitude);
+    void setgpsLatitude(const QString &gpsLatitude);
+    void setgpsLongitude(const QString &gpsLongitude);
+    void setgpsSpeed(const QString &gpsSpeed);
+    void setgpsVisibleSatelites(const QString &gpsVisibleSatelites);
+
+
 
 
 
@@ -291,6 +305,9 @@ public:
     void setIgn3(const qreal &Ign3);
     void setIgn4(const qreal &Ign4);
     void setTRIM(const qreal &TRIM);
+
+
+
 
 
     qreal Odo() const;
@@ -408,6 +425,15 @@ public:
 
     QString SerialStat() const;
 
+    // GPS
+
+    QString gpsTime() const;
+    QString gpsAltitude() const;
+    QString gpsLatitude() const;
+    QString gpsLongitude() const;
+    QString gpsSpeed() const;
+    QString gpsVisibleSatelites() const;
+
 
 
     //Adaptronic extra
@@ -472,26 +498,26 @@ signals:
     void O2volt_2Changed(qreal O2volt_2);
 
 
-     //Boost
-     void pimChanged(qreal pim);
+    //Boost
+    void pimChanged(qreal pim);
 
-     //Aux Inputs
+    //Aux Inputs
 
-      void auxcalc1Changed(qreal auxcalc1);
-      void auxcalc2Changed(qreal auxcalc2);
-      void auxcalc3Changed(qreal auxcalc3);
-      void auxcalc4Changed(qreal auxcalc4);
+    void auxcalc1Changed(qreal auxcalc1);
+    void auxcalc2Changed(qreal auxcalc2);
+    void auxcalc3Changed(qreal auxcalc3);
+    void auxcalc4Changed(qreal auxcalc4);
 
     //Sensor Voltages
 
-     void sens1Changed(qreal sens1);
-     void sens2Changed(qreal sens2);
-     void sens3Changed(qreal sens3);
-     void sens4Changed(qreal sens4);
-     void sens5Changed(qreal sens5);
-     void sens6Changed(qreal sens6);
-     void sens7Changed(qreal sens7);
-     void sens8Changed(qreal sens8);
+    void sens1Changed(qreal sens1);
+    void sens2Changed(qreal sens2);
+    void sens3Changed(qreal sens3);
+    void sens4Changed(qreal sens4);
+    void sens5Changed(qreal sens5);
+    void sens6Changed(qreal sens6);
+    void sens7Changed(qreal sens7);
+    void sens8Changed(qreal sens8);
 
 
     //Flags
@@ -548,8 +574,14 @@ signals:
 
     void SerialStatChanged(QString SerialStat);
 
+    // GPS
 
-
+    void gpsTimeChanged(QString gpsTime);
+    void gpsAltitudeChanged(QString gpsAltitude);
+    void gpsLatitudeChanged(QString gpsLatitude);
+    void gpsLongitudeChanged(QString gpsLongitude);
+    void gpsSpeedChanged(QString gpsSpeed);
+    void gpsVisibleSatelitesChanged(QString gpsVisibleSatelites);
 
 
     //Adaptronic extra
@@ -570,6 +602,8 @@ signals:
     void Ign3Changed(qreal Ign3);
     void Ign4Changed(qreal Ign4);
     void TRIMChanged(qreal TRIM);
+
+
 
 
 private:
@@ -593,8 +627,8 @@ private:
     qreal m_Watertemp;
     qreal m_Intaketemp;
     qreal m_Knock;
-    qreal m_speed;
     qreal m_BatteryV;
+    qreal m_speed;
     qreal m_Iscvduty;
     qreal m_O2volt;
     qreal m_na1;
@@ -614,7 +648,7 @@ private:
     qreal m_O2volt_2;
 
 
- //Boost
+    //Boost
     qreal m_pim;
 
     //Aux Inputs
@@ -623,7 +657,7 @@ private:
     qreal m_auxcalc3;
     qreal m_auxcalc4;
 
-  //Sensor Voltage
+    //Sensor Voltage
     qreal m_sens1;
     qreal m_sens2;
     qreal m_sens3;
@@ -633,24 +667,8 @@ private:
     qreal m_sens7;
     qreal m_sens8;
 
-    //Flags
 
-    qreal m_Flag1;
-    qreal m_Flag2;
-    qreal m_Flag3;
-    qreal m_Flag4;
-    qreal m_Flag5;
-    qreal m_Flag6;
-    qreal m_Flag7;
-    qreal m_Flag8;
-    qreal m_Flag9;
-    qreal m_Flag10;
-    qreal m_Flag11;
-    qreal m_Flag12;
-    qreal m_Flag13;
-    qreal m_Flag14;
-    qreal m_Flag15;
-    qreal m_Flag16;
+
 
 
     //Flag Strings
@@ -684,6 +702,26 @@ private:
     QString m_SensorString7;
     QString m_SensorString8;
 
+    //Flags
+
+    qreal m_Flag1;
+    qreal m_Flag2;
+    qreal m_Flag3;
+    qreal m_Flag4;
+    qreal m_Flag5;
+    qreal m_Flag6;
+    qreal m_Flag7;
+    qreal m_Flag8;
+    qreal m_Flag9;
+    qreal m_Flag10;
+    qreal m_Flag11;
+    qreal m_Flag12;
+    qreal m_Flag13;
+    qreal m_Flag14;
+    qreal m_Flag15;
+    qreal m_Flag16;
+
+
     //Platform String
 
     QString m_Platform;
@@ -709,5 +747,16 @@ private:
     qreal m_Ign3;
     qreal m_Ign4;
     qreal m_TRIM;
+
+    // GPS
+
+    QString m_gpsTime;
+    QString m_gpsAltitude;
+    QString m_gpsLatitude;
+    QString m_gpsLongitude;
+    QString m_gpsSpeed;
+    QString m_gpsVisibleSatelites;
+
+
 
 };

@@ -9,12 +9,18 @@ Rectangle {
     color: "grey"
 
     property  int test1: 0
+    property  var gpscom
 
     Item {
         id: powerTuneSettings
         Settings {
             property alias connectAtStartUp: connectAtStart.checked
+            //property alias gpsswitch: gpsswitch.checked
             property alias serialPortName: serialName.currentText
+            property alias gpsPortName: serialNameGPS.currentText
+            property alias gpsPortNameindex: serialNameGPS.currentIndex
+            property alias gpsBaud: serialGPSBaud.currentText
+            property alias gpsBaudindex: serialGPSBaud.currentIndex
             property alias ecuType: ecuSelect.currentText
             property alias powerFcInterface: interfaceSelect.currentText
             property alias auxunit1: unitaux1.text
@@ -43,7 +49,7 @@ Rectangle {
                 columns: 2
                 spacing: 5
                 // [0]
-                Text { text: "Serial port name: " }
+                Text { text: "ECU Serial Port: " }
                 ComboBox {
                     id: serialName
                     width: 200
@@ -53,6 +59,20 @@ Rectangle {
                     onCurrentIndexChanged: if (initialized) AppSettings.setBaudRate( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true; autoconnect.auto();logger.datalogger() }
                 }
+                Text { text: "GPS Port: " }
+                    ComboBox {
+                        id: serialNameGPS
+                        width: 200
+                        model: Serial.portsNames
+
+                    }
+                Text { text: "GPS Baud: " }
+                    ComboBox {
+                        id: serialGPSBaud
+                        width: 200
+                        model: [ "2400", "4800", "9600", "14400", "19200", "38400", "57600", "115200"]
+
+                    }
 
                 Text { text: "ECU Selection:" }
                 ComboBox {
@@ -95,6 +115,27 @@ Rectangle {
                     onCurrentIndexChanged: if (initialized) AppSettings.setLogging( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getLogging(); initialized = true }
                 }
+                Text { text: "GoPro Variant :" }
+                ComboBox {
+                    id: goProSelect
+                    width: 200
+                    model: [ "Hero", "Hero2","Hero3"]
+
+                }
+                Text { text: "GoPro Password :" }
+                TextField {
+                    id: goPropass
+                    placeholderText: qsTr("GoPro Password")
+                    Component.onCompleted: {transferSettings.sendSettings() }
+                }
+                Text
+                {
+                    text: "Logfile name:"
+                }
+                TextField {
+                    id: logfilenameSelect
+                    text: qsTr("DataLog")
+                }
             }
 
             Grid {
@@ -131,14 +172,8 @@ Rectangle {
                     }
                 }
 
-                Text
-                {
-                text: "Logfile name:"
-                }
-                TextField {
-                    id: logfilenameSelect
-                    text: qsTr("DataLog")
-                }
+
+
                 Switch {
                     id: connectAtStart
                     text: qsTr("Autoconnect")
@@ -152,42 +187,25 @@ Rectangle {
 
 
 
-                                Text { text: "GoPro Variant :" }
-                                ComboBox {
-                                    id: goProSelect
-                                    width: 200
-                                    model: [ "Hero", "Hero2","Hero3"]
 
-                                }
-                                Text { text: "GoPro Password :" }
-                                TextField {
-                                    id: goPropass
-                                    placeholderText: qsTr("GoPro Password")
-                                    Component.onCompleted: {transferSettings.sendSettings() }
-                                }
-                                Switch {
-                                    id: record
-                                    text: qsTr("GoPro rec")
-                                    onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
-                                }
-                                Text
-                                {
-                                color: "red"
-                                text: Dashboard.SerialStat
-                                }
-
-                            }
-                        }
-        }
-// make another grid
-        Item {
-            visible: { (ecuSelect.currentIndex == "1") ? false: true; }
-            Row {
-               x: 50
-               y: 200
-             spacing: 5
+                Switch {
+                    id: record
+                    text: qsTr("GoPro rec")
+                    onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
+                }
+                Switch {
+                    id: gpsswitch
+                    text: qsTr("GPS")
+                    onCheckedChanged: {autoconnect.auto()}
+                }
+                Text
+                {
+                    color: "red"
+                    text: Dashboard.SerialStat
+                }
                 Grid {
-                    rows: 10
+                    visible: { (ecuSelect.currentIndex == "1") ? false: true; }
+                    rows: 5
                     columns: 4
                     spacing: 5
                     Text  { text: ""; width: 50}
@@ -275,51 +293,66 @@ Rectangle {
                     }
 
                 }
-            }
-        }
-
-//Functions
-        Item {
-            //Function to automatically connect at Startup , function is called from COmbobox Serialname component.oncompleted
-            id: autoconnect
-            function auto()
-            {
-               // if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex);
-            if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text,unitaux3.text,an5V0.text,an6V5.text,unitaux4.text,an7V0.text,an8V5.text);
-            }
-        }
-        Item {
-            //Logger on off function
-            id: logger
-            property var loggeron: 0
-            function datalogger()
-            {
-
-                if (loggerswitch.checked == true) logger.loggeron = 1, Serial.startLogging(logfilenameSelect.text, loggeron.valueOf());
-                if (loggerswitch.checked == false) logger.loggeron = 0,Serial.stopLogging(logfilenameSelect.text, loggeron.valueOf());
-            }
-        }
-        Item {
-            //Function to transmit GoPro variant and GoPro Password
-            id: transferSettings
-            function sendSettings()
-            {
-               GoPro.goProSettings(goProSelect.currentIndex,goPropass.text);
 
             }
         }
-        Item {
-            //Function to transmit GoPro rec status on off
-            id: goproRec
-            property var recording: 0
-            function rec()
-            {
-                if (record.checked == true) goproRec.recording = 1, GoPro.goprorec(recording.valueOf());
-                if (record.checked == false) goproRec.recording = 0,GoPro.goprorec(recording.valueOf());
-
-
-            }
-        }
-
-
     }
+    // make another grid
+ /*
+    Item {
+        visible: { (ecuSelect.currentIndex == "1") ? false: true; }
+        Row {
+            x: 50
+            y: 200
+            spacing: 5
+
+        }
+    }
+*/
+    //Functions
+    Item {
+        //Function to automatically connect at Startup , function is called from COmbobox Serialname component.oncompleted
+        id: autoconnect
+        function auto()
+        {
+            // if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex);
+            if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text,unitaux3.text,an5V0.text,an6V5.text,unitaux4.text,an7V0.text,an8V5.text);
+            if (gpsswitch.checked == true)GPS.startGPScom(serialNameGPS.currentText,serialGPSBaud.currentText);
+        }
+    }
+    Item {
+        //Logger on off function
+        id: logger
+        property var loggeron: 0
+        function datalogger()
+        {
+
+            if (loggerswitch.checked == true) logger.loggeron = 1, Serial.startLogging(logfilenameSelect.text, loggeron.valueOf());
+            if (loggerswitch.checked == false) logger.loggeron = 0,Serial.stopLogging(logfilenameSelect.text, loggeron.valueOf());
+        }
+    }
+    Item {
+        //Function to transmit GoPro variant and GoPro Password
+        id: transferSettings
+        function sendSettings()
+        {
+            GoPro.goProSettings(goProSelect.currentIndex,goPropass.text);
+
+        }
+    }
+    Item {
+        //Function to transmit GoPro rec status on off
+        id: goproRec
+        property var recording: 0
+        function rec()
+        {
+
+            if (record.checked == true) goproRec.recording = 1, GoPro.goprorec(recording.valueOf());
+            if (record.checked == false) goproRec.recording = 0,GoPro.goprorec(recording.valueOf());
+
+
+        }
+    }
+
+
+}

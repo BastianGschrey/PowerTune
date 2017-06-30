@@ -1,12 +1,14 @@
 #include <dashboard.h>
+#include <QStringList>
+
+
 
 DashBoard::DashBoard(QObject *parent)
     : QObject(parent)
 
-//  Odometer
 
+    //  Odometer
 
-// Advanced Info
 
     , m_revs(0)
     , m_Intakepress(0)
@@ -44,7 +46,7 @@ DashBoard::DashBoard(QObject *parent)
     , m_O2volt_2(0)
 
 
-//Boost
+    //Boost
 
 
     , m_pim(0)
@@ -55,7 +57,7 @@ DashBoard::DashBoard(QObject *parent)
     , m_auxcalc3(0.00)
     , m_auxcalc4(0.00)
 
- // Sensor Info FD3S
+    // Sensor Info FD3S
     , m_sens1(0.00)
     , m_sens2(0.00)
     , m_sens3(0.00)
@@ -96,6 +98,7 @@ DashBoard::DashBoard(QObject *parent)
     , m_SensorString8 ("SEN8")
 
 
+
     //Bit Flags for Sensors
     , m_Flag1(0)
     , m_Flag2(0)
@@ -133,9 +136,21 @@ DashBoard::DashBoard(QObject *parent)
     , m_Ign4(0)
     , m_TRIM(0)
 
+    //GPS Strings
+    , m_gpsTime ("0")
+    , m_gpsAltitude ("0")
+    , m_gpsLatitude ("0")
+    , m_gpsLongitude ("0")
+    , m_gpsSpeed ("0")
+    , m_gpsVisibleSatelites ("0")
+
+
+
 
 {
 }
+
+
 
 // Odometer
 void DashBoard::setOdo(const qreal &Odo)
@@ -424,34 +439,34 @@ void DashBoard::setpim(const qreal &pim)
 
 void DashBoard::setauxcalc1(const qreal &auxcalc1)
 {
- if (m_auxcalc1 == auxcalc1)
-     return;
- m_auxcalc1 = auxcalc1;
- emit auxcalc1Changed(auxcalc1);
+    if (m_auxcalc1 == auxcalc1)
+        return;
+    m_auxcalc1 = auxcalc1;
+    emit auxcalc1Changed(auxcalc1);
 }
 
 void DashBoard::setauxcalc2(const qreal &auxcalc2)
 {
- if (m_auxcalc2 == auxcalc2)
-     return;
- m_auxcalc2 = auxcalc2;
- emit auxcalc2Changed(auxcalc2);
+    if (m_auxcalc2 == auxcalc2)
+        return;
+    m_auxcalc2 = auxcalc2;
+    emit auxcalc2Changed(auxcalc2);
 }
 
 void DashBoard::setauxcalc3(const qreal &auxcalc3)
 {
- if (m_auxcalc3 == auxcalc3)
-     return;
- m_auxcalc3 = auxcalc3;
- emit auxcalc3Changed(auxcalc3);
+    if (m_auxcalc3 == auxcalc3)
+        return;
+    m_auxcalc3 = auxcalc3;
+    emit auxcalc3Changed(auxcalc3);
 }
 
 void DashBoard::setauxcalc4(const qreal &auxcalc4)
 {
- if (m_auxcalc4 == auxcalc4)
-     return;
- m_auxcalc4 = auxcalc4;
- emit auxcalc4Changed(auxcalc4);
+    if (m_auxcalc4 == auxcalc4)
+        return;
+    m_auxcalc4 = auxcalc4;
+    emit auxcalc4Changed(auxcalc4);
 }
 
 
@@ -878,6 +893,57 @@ void DashBoard::setSerialStat(const QString &SerialStat)
     emit SerialStatChanged(SerialStat);
 }
 
+// GPS
+
+
+void DashBoard::setgpsTime (const QString &gpsTime)
+{
+    if (m_gpsTime == gpsTime)
+        return;
+    m_gpsTime = gpsTime;
+    emit gpsTimeChanged(gpsTime);
+}
+
+void DashBoard::setgpsAltitude(const QString &gpsAltitude)
+{
+    if (m_gpsAltitude == gpsAltitude)
+        return;
+    m_gpsAltitude = gpsAltitude;
+    emit gpsAltitudeChanged(gpsAltitude);
+}
+
+void DashBoard::setgpsLatitude(const QString &gpsLatitude)
+{
+    if (m_gpsLatitude == gpsLatitude)
+        return;
+    m_gpsLatitude = gpsLatitude;
+    emit gpsLatitudeChanged(gpsLatitude);
+}
+
+void DashBoard::setgpsLongitude(const QString &gpsLongitude)
+{
+    if (m_gpsLongitude == gpsLongitude)
+        return;
+    m_gpsLongitude = gpsLongitude;
+    emit gpsLongitudeChanged(gpsLongitude);
+}
+
+void DashBoard::setgpsSpeed(const QString &gpsSpeed)
+{
+    if (m_gpsSpeed == gpsSpeed)
+        return;
+    m_gpsSpeed = gpsSpeed;
+    emit gpsSpeedChanged(gpsSpeed);
+}
+
+void DashBoard::setgpsVisibleSatelites(const QString &gpsVisibleSatelites)
+{
+    if (m_gpsVisibleSatelites == gpsVisibleSatelites)
+        return;
+    m_gpsVisibleSatelites = gpsVisibleSatelites;
+    emit gpsVisibleSatelitesChanged(gpsVisibleSatelites);
+}
+
 
 
 //Adaptronic extra
@@ -1013,6 +1079,12 @@ void DashBoard::setTRIM(const qreal &TRIM)
     emit TRIMChanged(TRIM);
 }
 
+
+// GPS
+
+
+
+
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
 
@@ -1125,6 +1197,17 @@ QString DashBoard::Platform() const { return m_Platform; }
 
 QString DashBoard::SerialStat() const { return m_SerialStat; }
 
+
+//GPS
+
+QString DashBoard::gpsTime() const { return m_gpsTime; }
+QString DashBoard::gpsAltitude() const { return m_gpsAltitude; }
+QString DashBoard::gpsLatitude() const { return m_gpsLatitude; }
+QString DashBoard::gpsLongitude () const { return m_gpsLongitude; }
+QString DashBoard::gpsSpeed() const { return m_gpsSpeed; }
+QString DashBoard::gpsVisibleSatelites () const { return m_gpsVisibleSatelites; }
+
+
 //Adaptronic extra
 
 
@@ -1146,23 +1229,3 @@ qreal DashBoard::Ign4() const { return m_Ign4; }
 qreal DashBoard::TRIM() const { return m_TRIM; }
 
 
-//Model for gauges
-void DashBoard::GetGaugeModel()
-{
-    QStringList GaugeModel;
-    GaugeModel << "odo" << "revs" << "IntakePress" << "PressureV" << "ThrottleV" << "Primaryinp"
-               << "Fuelc" << "Leadingign" << "Trailingign" << "Fueltemp" << "Moilp" << "Boosttp"
-               << "Boostwg" << "Watertemp" << "Intaketemp" << "Knock" << "Battery V" << "Speed"
-               << "ISC Valve DC" << "o2 Sensor V" << "na1" << "Sec. Inj. Pulse" << "na2" << "Inj DC"
-               << "PIM" << "Load" << "MAF1 V" << "MAF2 V" << "Inj Pulse ms" << "Inj" << "Ign" << "Dwell"
-               << "Boost Press." << "MAF Activity" <<  "o2 Voltage 2" << "sens1" << "sens2" << "sens3"
-               << "sens4" << "sens5" << "sens6" << "sens7" << "sens8" << "auxcalc1" << "auxcalc2"
-               << "auxcalc3" << "auxcalc4" << "Flag1" << "Flag2" << "Flag3" << "Flag4" << "Flag5"
-               << "Flag6" << "Flag7" << "Flag8" << "Flag9" << "Flag10" << "Flag11" << "Flag12" << "Flag13"
-               << "Flag14" << "Flag15" << "Flag16" << "SensorString1"  << "SensorString2" << "SensorString3"
-               << "SensorString4" << "SensorString5" << "SensorString6" << "SensorString7" << "SensorString8"
-               << "Pallform" << "SerialState" << "MAP" << "Aux Temp." << "AFR" << "TPS %" << "Idle Value"
-               << "MVSS" << "SVSS" << "Inj. 1" << "Inj. 2" << "Inj. 3" << "Inj. 4" << "Ign. 1"
-               << "Ign. 2" << "Ign. 3" << "Ign. 4" << "Trim %";
-
-}

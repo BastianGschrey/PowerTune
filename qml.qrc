@@ -47,5 +47,6 @@
         <file>Gauges/RoundGaugeSpeedMetric.qml</file>
         <file>Gauges/GaugeRoundREV.qml</file>
         <file>Gauges/CreateBarGaugeScript.js</file>
+        <file>Gauges/GPS.qml</file>
     </qresource>
 </RCC>

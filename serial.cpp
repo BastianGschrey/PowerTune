@@ -25,7 +25,6 @@
 #include "appsettings.h"
 #include "gopro.h"
 #include "gps.h"
-
 #include <QDebug>
 #include <QTime>
 #include <QTimer>
@@ -82,7 +81,7 @@ Serial::Serial(QObject *parent) :
     m_decoder = new Decoder(m_dashBoard, this);
     m_appSettings = new AppSettings(this);
     m_gopro = new GoPro(this);
-    m_gps = new GPS(this);
+    m_gps = new GPS(m_dashBoard, this);
     connect(m_decoder,SIGNAL(sig_adaptronicReadFinished()),this,SLOT(AdaptronicStartStream()));
     QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
     if (engine == Q_NULLPTR)
@@ -90,6 +89,7 @@ Serial::Serial(QObject *parent) :
     engine->rootContext()->setContextProperty("Dashboard", m_dashBoard);
     engine->rootContext()->setContextProperty("AppSettings", m_appSettings);
     engine->rootContext()->setContextProperty("GoPro", m_gopro);
+    engine->rootContext()->setContextProperty("GPS", m_gps);
 }
 
 void Serial::initSerialPort()
@@ -130,7 +130,6 @@ void Serial::getPorts()
     }
     setPortsNames(PortList);
     // Check available ports evry 1000 ms
-
     QTimer::singleShot(1000, this, SLOT(getPorts()));
 }
 //function for flushing all serial buffers
@@ -209,7 +208,6 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
 
 void Serial::closeConnection()
 {
-        m_gps->startGPScom();
     if(ecu == 0){
         m_serialport->close();
         qDebug() << "Connection closed.";
@@ -290,21 +288,21 @@ void Serial::readyToRead()
         }
     }
 
-        if(ecu == 1)
-        {
+    if(ecu == 1)
+    {
 
-            auto reply = qobject_cast<QModbusReply *>(sender());
-            if(!reply)
-                return;
-            if(reply->error() == QModbusDevice::NoError){
-                const QModbusDataUnit unit = reply->result();
-                m_decoder->decodeAdaptronic(unit);
-
-            }
-
-
+        auto reply = qobject_cast<QModbusReply *>(sender());
+        if(!reply)
+            return;
+        if(reply->error() == QModbusDevice::NoError){
+            const QModbusDataUnit unit = reply->result();
+            m_decoder->decodeAdaptronic(unit);
 
         }
+
+
+
+    }
 
 }
 
@@ -387,7 +385,7 @@ void Serial::readData(QByteArray serialdata)
             if(requesttype == 0x8D){m_decoder->decodeFuelInjectors(serialdata);}
         }
         serialdata.clear();
-\
+        \
 
     }
 

@@ -1,30 +1,23 @@
 #include "gps.h"
+#include "dashboard.h"
+#include "serial.h"
+#include "QStringList"
+
 
 
 GPS::GPS(QObject *parent)
     : QObject(parent)
+    , m_dashboard(Q_NULLPTR)
 
 {
 
-
-    com = new QSerialPort(this);
-    serialBuffer = "";
-
-
 }
-/*
-void GPS::refresh_com(){
-    for (int var = 0; var < ui->com->count()+1; ++var) {
-        ui->com->removeItem(ui->com->currentIndex());
-    }
-
-    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
-        ui->com->addItem( serialPortInfo.portName() + " | " + serialPortInfo.description() );
-    }
-
-
+GPS::GPS(DashBoard *dashboard, QObject *parent)
+    : QObject(parent)
+    , m_dashboard(dashboard)
+{
 }
-*/
+
 void GPS::readSerial()
 {
     QRegExp sep("(\n|\r)");
@@ -143,11 +136,13 @@ void GPS::GPGGA(QString package){
         }
     }
     qDebug()<< "time " << hora;
+    m_dashboard->setgpsTime(hora);
     qDebug()<< "precision" << (QString::number(package_data.H_diluicao_da_precisao_horizontal));
     qDebug()<< "altitude" << (QString::number(package_data.I_altitude));
-//    ui->hora->setText(hora);
-//    ui->precisao->setText(QString::number(package_data.H_diluicao_da_precisao_horizontal));
-//    ui->altitude->setText(QString::number(package_data.I_altitude));
+    m_dashboard->setgpsAltitude(QString::number(package_data.I_altitude));
+    //    ui->hora->setText(hora);
+    //    ui->precisao->setText(QString::number(package_data.H_diluicao_da_precisao_horizontal));
+    //    ui->altitude->setText(QString::number(package_data.I_altitude));
 
 
     int inteiro;
@@ -164,11 +159,16 @@ void GPS::GPGGA(QString package){
 
 
     if(package_data.C_latitude_dir == 'S' || package_data.C_latitude_dir == 's')
-      //  ui->latitude->setText(QString::number(((real/60)+inteiro)*-1,'g',9));
-    qDebug()<< "latitude" << (QString::number(((real/60)+inteiro)*-1,'g',9));
+    { //  ui->latitude->setText(QString::number(((real/60)+inteiro)*-1,'g',9));
+        qDebug()<< "latitude" << (QString::number(((real/60)+inteiro)*-1,'g',9));
+        m_dashboard->setgpsLatitude(QString::number(((real/60)+inteiro)*-1,'g',9));
+    }
     else
-       // ui->latitude->setText(QString::number(((real/60)+inteiro),'g',9));
-    qDebug()<< "latitude" << (QString::number(((real/60)+inteiro),'g',9));
+    {
+        // ui->latitude->setText(QString::number(((real/60)+inteiro),'g',9));
+        qDebug()<< "latitude" << (QString::number(((real/60)+inteiro),'g',9));
+        m_dashboard->setgpsLatitude(QString::number(((real/60)+inteiro),'g',9));
+    }
 
 
     while (package_data.D_longitude[0] == '0') {
@@ -183,11 +183,17 @@ void GPS::GPGGA(QString package){
 
 
     if(package_data.E_longitude_dir == 'W' || package_data.E_longitude_dir == 'w')
-     //   ui->longitude->setText(QString::number(((real/60)+inteiro)*-1,'g',9));
-     qDebug()<< "longitude" << (QString::number(((real/60)+inteiro)*-1,'g',9));
+    {
+        //   ui->longitude->setText(QString::number(((real/60)+inteiro)*-1,'g',9));
+        qDebug()<< "longitude" << (QString::number(((real/60)+inteiro)*-1,'g',9));
+        m_dashboard->setgpsLongitude(QString::number(((real/60)+inteiro)*-1,'g',9));
+    }
     else
-     //   ui->longitude->setText(QString::number(((real/60)+inteiro),'g',9));
-     qDebug()<< "longitude" << (QString::number(((real/60)+inteiro),'g',9));
+    {
+        //   ui->longitude->setText(QString::number(((real/60)+inteiro),'g',9));
+        qDebug()<< "longitude" << (QString::number(((real/60)+inteiro),'g',9));
+        m_dashboard->setgpsLongitude(QString::number(((real/60)+inteiro),'g',9));
+    }
 
 
 
@@ -227,8 +233,8 @@ void GPS::GPGSA(QString package){
             cc++;
         }
     }
-    qDebug()<< "Available Satelites" << (QString::number(cc));
-  //  ui->satelites_ativos->setText(QString::number(cc));
+    qDebug()<< "active Satelites" << (QString::number(cc));
+    //  ui->satelites_ativos->setText(QString::number(cc));
 
 
 
@@ -261,9 +267,10 @@ void GPS::GPGSV(QString package){
     package_data.DS_sats[3].C_azimuth = pkt_data.at(18).toInt();
     package_data.DS_sats[3].D_snr = pkt_data.at(19).toInt();
 
-    qDebug()<< "satelites_visiveis" << (QString::number(package_data.C_satelites_visiveis));
-   // ui->satelites_visiveis->setText(QString::number(package_data.C_satelites_visiveis));
-/*
+    qDebug()<< "satelites_visible" << (QString::number(package_data.C_satelites_visiveis));
+    m_dashboard->setgpsVisibleSatelites(QString::number(package_data.C_satelites_visiveis));
+    // ui->satelites_visiveis->setText(QString::number(package_data.C_satelites_visiveis));
+    /*
     if(satelites_v.size() != package_data.A_total_mensagens){
         if(satelites_v.size() < package_data.A_total_mensagens){
             int va = package_data.A_total_mensagens - satelites_v.size();
@@ -405,7 +412,8 @@ void GPS::GPRMC(QString package){
     package_data.K_variacao_magnetica_coord = pkt_data[11].toStdString()[0];
 
     qDebug()<< "velocity" <<(QString::number(package_data.G_velocidade_nos * 1.852));
- //   ui->velocidade->setText(QString::number(package_data.G_velocidade_nos * 1.852));
+    m_dashboard->setgpsSpeed(QString::number(package_data.G_velocidade_nos * 1.852));
+    //   ui->velocidade->setText(QString::number(package_data.G_velocidade_nos * 1.852));
 
 }
 /*
@@ -509,19 +517,23 @@ bail:
 
 }
 
-void GPS::startGPScom()
+void GPS::startGPScom(const QString &portName,const QString &Baud)
 {
-    com->close();
+    com = new QSerialPort(this);
+    serialBuffer = "";
+    qDebug() <<"StartGPS"<< portName ;
+    qDebug() <<"Baud"<< Baud ;
+//  com->close();
 
-        com->setPortName("COM7");
-        com->open(QSerialPort::ReadWrite);
-        com->setBaudRate(QSerialPort::Baud4800);
-        com->setDataBits(QSerialPort::Data8);
-        com->setFlowControl(QSerialPort::NoFlowControl);
-        com->setParity(QSerialPort::NoParity);
-        com->setStopBits(QSerialPort::OneStop);
-        QObject::connect(com, SIGNAL(readyRead()), this, SLOT(readSerial()));
-        qDebug() << "GPS";
+    com->setPortName(portName);
+    com->open(QSerialPort::ReadWrite);
+//    com->setBaudRate(Baud);
+    com->setBaudRate(QSerialPort::Baud4800);
+    com->setDataBits(QSerialPort::Data8);
+    com->setFlowControl(QSerialPort::NoFlowControl);
+    com->setParity(QSerialPort::NoParity);
+    com->setStopBits(QSerialPort::OneStop);
+    QObject::connect(com, SIGNAL(readyRead()), this, SLOT(readSerial()));
 
 
     /*for (int var = 0; var < 1000; ++var) {
