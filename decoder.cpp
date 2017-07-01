@@ -328,7 +328,7 @@ void Decoder::decodeSensor(QByteArray serialdata)
                 << packageMap[0] << packageMap[1] << packageADV[0] << packageADV[1] << packageADV[2] << packageADV[3] << packageADV[4] << packageADV[5] << packageADV[6] << packageADV[7]
                 << packageADV[8] << packageADV[9] << packageADV[10] << packageADV[11] << packageADV[12] << packageADV[13] << packageADV[14] << packageADV[15] << packageADV[16] << packageADV[17] << packageADV[18]
 
-                << packageADV[19] << packageADV[20] << packageADV[21] << qSetFieldWidth(0) << endl <<qSetFieldWidth(8);
+                << packageADV[19] << packageADV[20] << packageADV[21] <<m_dashboard->gpsTime() << qSetFieldWidth(0) << endl <<qSetFieldWidth(8);
     mFile.close();
     }
 

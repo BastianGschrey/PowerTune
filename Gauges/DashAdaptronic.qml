@@ -697,7 +697,7 @@ Rectangle {
                 }
             }
             Text {
-                text:"Battery " + Dashboard.BatteryV + "V "
+                text:"Battery " + (Dashboard.BatteryV).toFixed(2) + "V "
                 font.pixelSize: (parent.height / 3)
                  anchors.top : parent.top
                 font.bold: true

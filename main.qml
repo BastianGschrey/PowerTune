@@ -70,7 +70,7 @@ ApplicationWindow {
 
         Loader {
             id: secondPageLoader
-            source: "qrc:/Gauges/GPS.qml"
+            source: "qrc:/Gauges/PFCSensors.qml"
         }
 
         Loader {
@@ -83,7 +83,12 @@ ApplicationWindow {
         }
         Loader {
             id: fifthPageLoader
+            source: "qrc:/Gauges/GPS.qml"
+        }
+        Loader {
+            id: sixtPageLoader
             source: "qrc:/Gauges/DynamicDash.qml"
+
         }
         Item {
             id:seventhPage

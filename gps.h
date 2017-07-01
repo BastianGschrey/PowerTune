@@ -31,7 +31,7 @@ public:
 
 
 public slots:
-    void startGPScom(const QString &portName,const QString &Baud);
+    void startGPScom(const QString &portName);
     void stopGPScom();
 
 private slots:
@@ -120,8 +120,6 @@ private:
     void desenha_sat(float raio, float azimuth, bool usado,int num);
     void limpa_sat();
 
-    void refresh_com();
-
     void GPGGA(QString package);
     void GPGSV(QString package);
     void GPGSA(QString package);
@@ -129,19 +127,6 @@ private:
 
     bool checksum(QString package);
 
-    //    vector<satelite *> satelites_v;
-    //    vector<int> satelites_a;
-    //    vector<QVBoxLayout *> layouts;
-    //    vector<QPushButton *> sat_botoes;
-
-    //QGraphicsScene *scene;
-    //vector<QGraphicsEllipseItem *> sats_grap;
-    //
-    //    QBrush *brush_branco;
-    //    QBrush *brush_amarelo;
-    //    QBrush *brush_preto;
-    //    QBrush *brush_azul;
-    //    QPen *pen_preto;
     QMap<int, int> sat_ref;
 
     QSerialPort *com;

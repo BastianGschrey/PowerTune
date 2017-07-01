@@ -37,45 +37,7 @@ void GPS::readSerial()
     }
 
 }
-/*
-void GPS::desenha_sat(float raio, float azimuth, bool usado, int num){
 
-    float x =195 + (raio - 100) * sin((azimuth*M_PI)/180);
-    float y =195 + (raio - 100) * cos((azimuth*M_PI)/180);
-
-    if(usado)
-        sats_grap.push_back(scene->addEllipse(x,y,10,10,*pen_preto,*brush_amarelo));
-    else
-        sats_grap.push_back(scene->addEllipse(x,y,10,10,*pen_preto,*brush_preto));
-    sat_ref.insert(num,(int)(sats_grap.size()-1));
-
-    //sats_grap.back()->setFlags(QGraphicsItem::ItemIsMovable);
-}
-*/
-/*
-void GPS::limpa_sat(){
-    sat_ref.clear();
-
-    for (unsigned var = 0; var < sats_grap.size(); ++var) {
-
-        delete sats_grap.at(var);
-
-
-    }
-    if(!sats_grap.empty()){
-        scene->clear();
-        sats_grap.clear();
-        scene->addEllipse(100,100,200,200,*pen_preto,*brush_branco);
-        scene->addEllipse(150,150,100,100,*pen_preto,*brush_branco);
-        scene->addLine(200,300,200,100,*pen_preto);
-        scene->addLine(300,200,100,200,*pen_preto);
-
-    }
-
-
-
-}
-*/
 
 
 bool GPS::checksum(QString package){
@@ -137,7 +99,7 @@ void GPS::GPGGA(QString package){
     }
     qDebug()<< "time " << hora;
     m_dashboard->setgpsTime(hora);
-    qDebug()<< "precision" << (QString::number(package_data.H_diluicao_da_precisao_horizontal));
+    qDebug()<< "horizontal precision" << (QString::number(package_data.H_diluicao_da_precisao_horizontal));
     qDebug()<< "altitude" << (QString::number(package_data.I_altitude));
     m_dashboard->setgpsAltitude(QString::number(package_data.I_altitude));
     //    ui->hora->setText(hora);
@@ -181,17 +143,20 @@ void GPS::GPGGA(QString package){
     val = package_data.D_longitude;
     real = val.toDouble();
 
+    qDebug()<< "latitude dir" << package_data.C_latitude_dir;
+            qDebug()<< "longitude dir" << package_data.E_longitude_dir;
+         qDebug()<< " C latitude dir" << package_data.C_latitude_dir;
 
     if(package_data.E_longitude_dir == 'W' || package_data.E_longitude_dir == 'w')
     {
         //   ui->longitude->setText(QString::number(((real/60)+inteiro)*-1,'g',9));
-        qDebug()<< "longitude" << (QString::number(((real/60)+inteiro)*-1,'g',9));
+        //qDebug()<< "longitude" << (QString::number(((real/60)+inteiro)*-1,'g',9));
         m_dashboard->setgpsLongitude(QString::number(((real/60)+inteiro)*-1,'g',9));
     }
     else
     {
         //   ui->longitude->setText(QString::number(((real/60)+inteiro),'g',9));
-        qDebug()<< "longitude" << (QString::number(((real/60)+inteiro),'g',9));
+      //  qDebug()<< "longitude" << (QString::number(((real/60)+inteiro),'g',9));
         m_dashboard->setgpsLongitude(QString::number(((real/60)+inteiro),'g',9));
     }
 
@@ -229,12 +194,11 @@ void GPS::GPGSA(QString package){
     int cc = 0;
     for (int var = 0; var < 12; ++var) {
         if(package_data.CN_ids_satelites[var] != 0 && package_data.CN_ids_satelites[var] != -1){
-            //satelites_a.push_back(package_data.CN_ids_satelites[var]);
             cc++;
         }
     }
     qDebug()<< "active Satelites" << (QString::number(cc));
-    //  ui->satelites_ativos->setText(QString::number(cc));
+
 
 
 
@@ -269,129 +233,7 @@ void GPS::GPGSV(QString package){
 
     qDebug()<< "satelites_visible" << (QString::number(package_data.C_satelites_visiveis));
     m_dashboard->setgpsVisibleSatelites(QString::number(package_data.C_satelites_visiveis));
-    // ui->satelites_visiveis->setText(QString::number(package_data.C_satelites_visiveis));
-    /*
-    if(satelites_v.size() != package_data.A_total_mensagens){
-        if(satelites_v.size() < package_data.A_total_mensagens){
-            int va = package_data.A_total_mensagens - satelites_v.size();
-            for(;0 < va;va--){
-                satelites_v.push_back(new satelite[4]);
-            }
-        }
 
-        if(satelites_v.size() > package_data.A_total_mensagens){
-            int va = satelites_v.size() - package_data.A_total_mensagens;
-            for(;0 < va;va--){
-                delete[] satelites_v.back();
-                satelites_v.pop_back();
-                satelites_v.shrink_to_fit();
-            }
-        }}
-
-
-    for (int var = 0; var < 4; ++var) {
-        if(package_data.DS_sats[var].C_azimuth != -1 || package_data.DS_sats[var].A_sv_prn != -1){
-            satelites_v[package_data.B_numero_desta_mensagem - 1][var].A_sv_prn = package_data.DS_sats[var].A_sv_prn;
-            satelites_v[package_data.B_numero_desta_mensagem - 1][var].B_elevacao_graus = package_data.DS_sats[var].B_elevacao_graus;
-            satelites_v[package_data.B_numero_desta_mensagem - 1][var].C_azimuth = package_data.DS_sats[var].C_azimuth;
-            satelites_v[package_data.B_numero_desta_mensagem - 1][var].D_snr = package_data.DS_sats[var].D_snr;
-        }
-    }
-
-    if(package_data.A_total_mensagens == package_data.B_numero_desta_mensagem){
-        for(;;){
-            if(sat_botoes.size() == 0 || layouts.size() == 0){
-                break;
-            }
-            delete sat_botoes.back();
-            sat_botoes.pop_back();
-            sat_botoes.shrink_to_fit();
-            if(layouts.back()->count() == 0){
-                delete layouts.back();
-                layouts.pop_back();
-                layouts.shrink_to_fit();
-            }
-        }
-
-
-        limpa_sat();
-        for (unsigned var = 0; var < satelites_v.size(); ++var) {
-            for (unsigned vara = 0; vara < 4; ++vara) {
-                if (satelites_v[var][vara].A_sv_prn == -1 || (
-                            satelites_v[var][vara].B_elevacao_graus == -1 &&
-                            satelites_v[var][vara].C_azimuth == -1 &&
-                            satelites_v[var][vara].D_snr == -1)){
-                    continue;
-                }
-                if (satelites_v[var][vara].A_sv_prn == 0 || (
-                            satelites_v[var][vara].B_elevacao_graus == 0 &&
-                            satelites_v[var][vara].C_azimuth == 0 &&
-                            satelites_v[var][vara].D_snr == 0)){
-                    continue;
-                }
-
-
-                if (layouts.size() == 0) {
-                    layouts.push_back(new QVBoxLayout);
-                    ui->satelite_layout->addLayout(layouts.back());
-                }
-                bool ex = false;
-                if(layouts[ui->satelite_layout->count()-1]->count() < 3){
-                    sat_botoes.push_back(new QPushButton(QString::number(satelites_v[var][vara].A_sv_prn)));
-                    connect(sat_botoes.back(),SIGNAL(clicked(bool)),this,SLOT(sat_but_clicked()));
-                    for (unsigned vear = 0; vear < satelites_a.size(); ++vear) {
-                        if(satelites_v[var][vara].A_sv_prn == satelites_a[vear]){
-                            QPalette pal = sat_botoes.back()->palette();
-                            pal.setColor(QPalette::Button, QColor(Qt::blue));
-                            sat_botoes.back()->setAutoFillBackground(true);
-                            sat_botoes.back()->setPalette(pal);
-                            sat_botoes.back()->update();
-                            ex=true;
-                        }
-                    }
-                    if(ex)
-                        desenha_sat(satelites_v[var][vara].B_elevacao_graus * 1.11,satelites_v[var][vara].C_azimuth,true,satelites_v[var][vara].A_sv_prn);
-                    else
-                        desenha_sat(satelites_v[var][vara].B_elevacao_graus * 1.11,satelites_v[var][vara].C_azimuth,false,satelites_v[var][vara].A_sv_prn);
-                    layouts[ui->satelite_layout->count()-1]->addWidget(sat_botoes.back());
-                }else{
-                    if(layouts.size() > 8){
-                        break;
-                    }
-                    bool ex = false;
-                    layouts.push_back(new QVBoxLayout);
-                    ui->satelite_layout->addLayout(layouts.back());
-                    sat_botoes.push_back(new QPushButton(QString::number(satelites_v[var][vara].A_sv_prn)));
-                    connect(sat_botoes.back(),SIGNAL(clicked(bool)),this,SLOT(sat_but_clicked()));
-                    for (unsigned vear = 0; vear < satelites_a.size(); ++vear) {
-                        if(satelites_v[var][vara].A_sv_prn == satelites_a[vear]){
-                            ex=true;
-                            QPalette pal = sat_botoes.back()->palette();
-                            pal.setColor(QPalette::Button, QColor(Qt::blue));
-                            sat_botoes.back()->setAutoFillBackground(true);
-                            sat_botoes.back()->setPalette(pal);
-                            sat_botoes.back()->update();
-
-                        }
-                    }
-                    if(ex)
-                        desenha_sat(satelites_v[var][vara].B_elevacao_graus * 1.11,satelites_v[var][vara].C_azimuth,true,satelites_v[var][vara].A_sv_prn);
-                    else
-                        desenha_sat(satelites_v[var][vara].B_elevacao_graus * 1.11,satelites_v[var][vara].C_azimuth,false,satelites_v[var][vara].A_sv_prn);
-                    layouts[ui->satelite_layout->count()-1]->addWidget(sat_botoes.back());
-                }
-
-
-
-            }
-
-        }
-
-
-    }
-
-
-*/
 }
 
 void GPS::GPRMC(QString package){
@@ -521,14 +363,11 @@ void GPS::stopGPScom()
 {
     com->close();
 }
-void GPS::startGPScom(const QString &portName,const QString &Baud)
+void GPS::startGPScom(const QString &portName)
 {
-   // if (com)
-     //   delete com;
     com = new QSerialPort(this);
     serialBuffer = "";
     qDebug() <<"StartGPS"<< portName ;
-    qDebug() <<"StartGPS"<< Baud ;
 
 
 
@@ -543,7 +382,7 @@ void GPS::startGPScom(const QString &portName,const QString &Baud)
     connect(this->com,SIGNAL(readyRead()),this, SLOT(readSerial()));
 
 
-    /*for (int var = 0; var < 1000; ++var) {
+    for (int var = 0; var < 1000; ++var) {
         QString buffer("$GPRMC,232803.000,A,2709.5426,S,05131.4711,W,0.14,6.67,110416,,,A*64\n"
                        "$GPGSV,5,1,20,03,69,085,26,23,55,181,32,09,42,233,21,22,35,057,43*78\n"
                        "$GPGGA,232803.000,2709.5426,S,05131.4711,W,1,8,0.96,697.8,M,3.1,M,,*62\n"
@@ -557,68 +396,13 @@ void GPS::startGPScom(const QString &portName,const QString &Baud)
 
 
         decodifica(buffer.split("\n",QString::SkipEmptyParts));
-    }*/
-
-
-
-
-
-}
-/*
-void GPS::on_mapa_bot_clicked()
-{
-
-
-
-    if(ui->longitude->text() != "" && ui->latitude->text() != ""){
-        QString link = "https://www.google.com.br/maps/place/"+ ui->latitude->text()+" "+ui->longitude->text();
-        QDesktopServices::openUrl(QUrl(link, QUrl::TolerantMode));
     }
-}
 
 
-*/
-/*
-void GPS::on_refresh_bot_clicked(){
-    refresh_com();
-}
-*/
-/*
-void GPS::on_actionIngles_triggered()
-{
-    //ui->altitude_l->setText("Altitude (m)");// not needed
-    ui->azimute_l->setText("Azimuth");
-    ui->elevacao_l->setText("Elevation");
-    ui->fechar_bot->setText("Close COM");
-    //ui->gps_gp->setTitle(); // not needed
-    ui->hora_l->setText("Hour (UTC)");
-    //ui->latitude_l->setText("a"); // not needed
-    //ui->longitude_l->setText("a"); // not needed
-    ui->mapa_bot->setText("See on Google maps");
-    ui->precisao_l->setText("Horizontal dilution of precision");
-    ui->refresh_bot->setText("Refresh");
-    ui->satativos_l->setText("Active Satellites");
-    ui->satelite_gp->setTitle("Satellites");
-    ui->sats_gp->setTitle("Sattelites (Visible and Active)");
-    ui->satvisiveis_l->setText("Visible Satellites");
-    ui->sinal_l->setText("Signal (db)");
-    //ui->svprn_l->setText("a"); // not needed
-    ui->velocidade_l->setText("Speed (Km/h)");
-    ui->abrir_bot->setText("Open COM");
 
-    ui->menuIdioma->setTitle("Language");
-    ui->actionIngles->setText("English");
-    ui->actionPortugu_s->setText("Portuguese");
+
 
 }
 
-*/
-/*
-GPGGA::GPGGA(){}
-GPGSA::GPGSA(){}
-SATELITE::SATELITE(){}
-GPGSV::GPGSV(){}
-GPRMC::GPRMC(){}
-GPS::GPS(){}
-*/
+
 

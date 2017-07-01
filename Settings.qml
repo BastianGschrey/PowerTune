@@ -16,9 +16,5 @@ TabView {
         title: "Serial"
         SerialSettings{}
     }
-    Tab {
-        title: "Gui"
-        GuiSettings{}
-    }
 }
 }

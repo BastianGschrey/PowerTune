@@ -19,8 +19,8 @@ Rectangle {
             property alias serialPortName: serialName.currentText
             property alias gpsPortName: serialNameGPS.currentText
             property alias gpsPortNameindex: serialNameGPS.currentIndex
-            property alias gpsBaud: serialGPSBaud.currentText
-            property alias gpsBaudindex: serialGPSBaud.currentIndex
+            //property alias gpsBaud: serialGPSBaud.currentText
+           // property alias gpsBaudindex: serialGPSBaud.currentIndex
             property alias ecuType: ecuSelect.currentText
             property alias powerFcInterface: interfaceSelect.currentText
             property alias auxunit1: unitaux1.text
@@ -66,14 +66,15 @@ Rectangle {
                         model: Serial.portsNames
 
                     }
-                Text { text: "GPS Baud: " }
+ /*               Text { text: "GPS Baud: " }
                     ComboBox {
                         id: serialGPSBaud
                         width: 200
-                        model: [ "4800 Hardcoded"]//[ "2400", "4800", "9600", "14400", "19200", "38400", "57600", "115200"]
+                        model: [ "2400", "4800", "9600", "14400", "19200", "38400", "57600", "115200"]
+                        //Component.onCompleted: {autoconnectGPS.auto()}
 
                     }
-
+*/
                 Text { text: "ECU Selection:" }
                 ComboBox {
 
@@ -197,6 +198,7 @@ Rectangle {
                     id: gpsswitch
                     text: qsTr("GPS")
                     onCheckedChanged: {autoconnectGPS.auto()}
+                    //Component.onCompleted: {autoconnectGPS.auto()}
                 }
                 Text
                 {
@@ -325,7 +327,8 @@ Rectangle {
         id: autoconnectGPS
         function auto()
         {
-            if (gpsswitch.checked == true)GPS.startGPScom(serialNameGPS.currentText,serialGPSBaud.currentText);
+
+            if (gpsswitch.checked == true)GPS.startGPScom(serialNameGPS.currentText);
             if (gpsswitch.checked == false)GPS.stopGPScom();
         }
     }
