@@ -30,7 +30,7 @@ void GPS::readSerial()
         serialData.clear();
     }else{
         serialBuffer.clear();
-        decodifica(buffer_split);
+        decode(buffer_split);
         qDebug() <<"Invalid Packages:" << packages_invalidos;
         qDebug() <<"Available bytes:" << com->bytesAvailable();
 
@@ -308,7 +308,7 @@ void GPS::sat_but_clicked(){
 
 }
 */
-void GPS::decodifica(QStringList packages){
+void GPS::decode(QStringList packages){
     QString tipo;
     int starting_point;
 
@@ -361,7 +361,10 @@ bail:
 
 void GPS::stopGPScom()
 {
+    if (!com->isOpen())
+    {
     com->close();
+    }
 }
 void GPS::startGPScom(const QString &portName)
 {
@@ -372,7 +375,7 @@ void GPS::startGPScom(const QString &portName)
 
 
     com->setPortName(portName);
-    com->open(QSerialPort::ReadWrite);
+    com->open(QSerialPort::ReadOnly);
     com->setBaudRate(QSerialPort::Baud4800);
     com->setDataBits(QSerialPort::Data8);
     com->setFlowControl(QSerialPort::NoFlowControl);
@@ -381,7 +384,7 @@ void GPS::startGPScom(const QString &portName)
    // QObject::connect(com, SIGNAL(readyRead()), this, SLOT(readSerial()));
     connect(this->com,SIGNAL(readyRead()),this, SLOT(readSerial()));
 
-
+/*
     for (int var = 0; var < 1000; ++var) {
         QString buffer("$GPRMC,232803.000,A,2709.5426,S,05131.4711,W,0.14,6.67,110416,,,A*64\n"
                        "$GPGSV,5,1,20,03,69,085,26,23,55,181,32,09,42,233,21,22,35,057,43*78\n"
@@ -394,10 +397,9 @@ void GPS::startGPScom(const QString &portName)
                        );
 
 
-
-        decodifica(buffer.split("\n",QString::SkipEmptyParts));
+     decode(buffer.split("\n",QString::SkipEmptyParts));
     }
-
+*/
 
 
 

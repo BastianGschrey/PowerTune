@@ -14,7 +14,7 @@ Rectangle {
     Item {
         id: powerTuneSettings
         Settings {
-            property alias connectAtStartUp: connectAtStart.checked
+           // property alias connectAtStartUp: connectAtStart.checked
             property alias gpsswitch: gpsswitch.checked
             property alias serialPortName: serialName.currentText
             property alias gpsPortName: serialNameGPS.currentText

@@ -115,7 +115,7 @@ private:
     };
 
     unsigned packages_invalidos=0;
-    void decodifica(QStringList packages);
+    void decode(QStringList packages);
 
     void desenha_sat(float raio, float azimuth, bool usado,int num);
     void limpa_sat();
