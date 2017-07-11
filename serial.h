@@ -80,7 +80,9 @@ private:
     QModbusClient *modbusDevice;
     QByteArray  m_readData;
     QTimer      m_timer;
-
+    QByteArray  m_buffer;
+    QByteArray  m_dicktatorMsg;
+    QByteArray  m_apexiMsg;
     QByteArray  m_writeData;
 
     //QModbusReply reply;
@@ -102,6 +104,8 @@ public slots:
     void handleBytesWritten(qint64 bytes);
     void handleError(QSerialPort::SerialPortError error);
     void AdaptronicStartStream();
+    void dicktatorECU(const QByteArray &buffer);
+    void apexiECU(const QByteArray &buffer);
 
 
 

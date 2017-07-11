@@ -41,7 +41,7 @@ Rectangle {
 
 
     }
-
+/*
     ListModel {
         id: sourceList
         ListElement {title:"m_revs" }
@@ -176,6 +176,7 @@ Rectangle {
         ListElement {title:"m_gpsSpeed" }
         ListElement {title:"m_gpsVisibleSatelites" }
     }
+    */
     /*
     ListView {
         id: listViewSourceSelect

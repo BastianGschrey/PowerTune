@@ -473,6 +473,47 @@ private:
          Adaptronic_Streaming_coms parse(const QByteArray &);
       };
 
+ // Dicktator ECU
+     double packageDicktator[33];
+
+     struct dicktator_info_t{
+
+         quint8 msgS;
+         quint8 msgT;
+         quint8 msgA;
+         quint8 msgR;
+         quint8 msgT1;
+         quint8 b5;
+         quint8 b6;
+         quint8 b7;
+         quint8 b8;
+         quint8 b9;
+         quint8 b10;
+         quint8 b11;
+         quint8 b12;
+         quint8 b13;
+         quint8 b14;
+         quint8 b15;
+         quint8 b16;
+         quint8 b17;
+         quint8 b18;
+         quint8 b19;
+         quint8 b20;
+         quint8 b21;
+         quint8 b22;
+         quint8 b23;
+         quint8 b24;
+         quint8 b25;
+         quint8 b26;
+         quint8 b27;
+         quint8 b28;
+         quint8 b29;
+         quint8 msgE;
+         quint8 msgN;
+         quint8 msgD;
+         dicktator_info_t parse(const QByteArray &);
+    };
+
 public:
     explicit Decoder(QObject *parent = 0);
      explicit Decoder(DashBoard *dashboard, QObject *parent = 0);
@@ -512,6 +553,10 @@ public slots:
      void loggerActivationstatus(int loggingstatus);
      void calculatorAux(int aux1min,int aux2max,int aux3min,int aux4max,int aux5min,int aux6max,int aux7min, int aux8max,QString Auxunit1,QString Auxunit2,QString Auxunit3,QString Auxunit4);
      //void loggerApexi();
+
+     //Dicktator ECU
+
+     void decodeDicktator(QByteArray m_dicktatorMsg);
 
 
 

@@ -975,3 +975,19 @@ void Decoder::calculatorAux(int aux1min,int aux2max,int aux3min,int aux4max,int 
 
 
 }
+void Decoder::decodeDicktator(QByteArray m_dicktatorMsg)
+{
+    dicktator_info_t* info=reinterpret_cast<dicktator_info_t*>(m_dicktatorMsg.data());
+qDebug() << "decoder Dicktator" <<m_dicktatorMsg.toHex();
+
+        packageDicktator[14] = (info->b14 * 0.001);
+        packageDicktator[15] = (info->b15 * 0.278);
+        packageDicktator[18] = (info->b18 * 16);
+        packageDicktator[19] = (info->b20*25 + info->b19*0.1 ); //TPS
+        qDebug() << "Battery" << packageDicktator[18];
+        qDebug() << "TPS" << packageDicktator[19];
+        qDebug() << "Bost " << packageDicktator[14] + packageDicktator[15];//– 0.894;
+        dicktator_info_t parse(const QByteArray &);
+
+
+}
