@@ -237,8 +237,6 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
             m_dashBoard->setSerialStat(QString("Connected to Serialport"));
         }
 
-      //        qDebug() << "Send request to Dicktator";
-      //        m_serialport->write(QByteArray::fromHex("05 f8 01 60 ea 48"));
 
 
 
@@ -352,7 +350,7 @@ void Serial::dicktatorECU(const QByteArray &buffer)
     int pos = 0;
     while((pos = startmatcher.indexIn(m_buffer, pos)) != -1)
     {
-     //   qDebug() << "pattern found at pos" << pos;
+     //   qDebug() << "Dicktator pattern found at pos" << pos;
         if (pos !=0)
         {
             m_buffer.remove(0, pos); //remove all bytes before "Start:
@@ -380,17 +378,25 @@ void Serial::apexiECU(const QByteArray &buffer)
 {
     qDebug() << "APEXI ecu";
 
-    if (Bytesexpected != m_buffer.size())
+    if (Bytesexpected != m_buffer.length())
     {
         qDebug() << "starting timer";
         m_timer.start(5000);
     }
     m_buffer.append(buffer);
- //   qDebug() << "current buffer"<<m_buffer.toHex() << "current message index "<< startpattern.toHex();
+    if (Bytesexpected > m_buffer.length())
+    {
+        qDebug() << "clearing"<< Bytesexpected <<m_buffer.length();
+        m_buffer.clear();
+    }
+    qDebug() << "current buffer"<<m_buffer.toHex();
+    qDebug() << "buffer length"<<m_buffer.length()<< "Expected"<< Bytesexpected;
+/*
     const char start[] =  {m_writeData[0]};
 
     QByteArray startpattern(start);
     QByteArrayMatcher startmatcher(startpattern);
+    qDebug() << "Message"<<start<<"Start"<< startpattern;
 
     int pos = 0;
     while((pos = startmatcher.indexIn(m_buffer, pos)) != -1)
@@ -401,28 +407,31 @@ void Serial::apexiECU(const QByteArray &buffer)
             m_buffer.remove(0, pos); //remove all bytes before Identifier
             qDebug() << "removed all bytes before the expected response start" << m_buffer;
         }
-        if (m_buffer.length() == Bytesexpected)
+        if (pos == 0 ) break;
+
+
+    }
+*/
+    if (m_buffer.length() == Bytesexpected)
+    {
+        m_apexiMsg =  m_buffer;
+        //m_apexiMsg.remove(Bytesexpected,m_apexiMsg.length()+1);
+        qDebug() << "Extracted Apexi Message" << m_buffer;
+        //m_buffer.remove(0,Bytesexpected); // remove extracted message from the buffer
+        qDebug() << "left on buffer" << m_buffer;
+        m_buffer.clear();
+        // Process to calculate checksum not evaluated at the moment , for later use
+
+        int checksum = 255; //calculated checksum from serial message 0xFF - each byte in message (except the last byte)
+        recvchecksumhex = QByteArray::number(m_apexiMsg[m_apexiMsg[1]], 16).right(2); // reading the checksum byte , convert to Hex , and cut to 2 positions
+        recvchecksumhex = recvchecksumhex.rightJustified(2, '0'); // If the checksumbyte is less than 2 positions , prepend a 0 for example if value is 0x9 turn it into 0x09
+        //test1 = test.rightJustified(2, '0');
+
+        for (int i = 0; i <= m_apexiMsg[1]-1; i++)
         {
-            m_apexiMsg =  m_buffer;
-            m_apexiMsg.remove(Bytesexpected,m_apexiMsg.length()+1);
-            qDebug() << "Extracted Apexi Message" << m_buffer;
-            m_buffer.remove(0,Bytesexpected); // remove extracted message from the buffer
-            qDebug() << "left on buffer" << m_buffer;
-            // Process to calculate checksum not evaluated at the moment , for later use
-
-            int checksum = 255; //calculated checksum from serial message 0xFF - each byte in message (except the last byte)
-            recvchecksumhex = QByteArray::number(m_apexiMsg[m_apexiMsg[1]], 16).right(2); // reading the checksum byte , convert to Hex , and cut to 2 positions
-            recvchecksumhex = recvchecksumhex.rightJustified(2, '0'); // If the checksumbyte is less than 2 positions , prepend a 0 for example if value is 0x9 turn it into 0x09
-            //test1 = test.rightJustified(2, '0');
-
-            for (int i = 0; i <= m_apexiMsg[1]-1; i++)
-            {
-                checksum = checksum - m_apexiMsg[i];
-                checksumhex = QByteArray::number(checksum, 16).right(2);
-                checksumhex = checksumhex.rightJustified(2, '0');
-            }
-
-
+            checksum = checksum - m_apexiMsg[i];
+            checksumhex = QByteArray::number(checksum, 16).right(2);
+            checksumhex = checksumhex.rightJustified(2, '0');
         }
 
         if (checksumhex == recvchecksumhex)
@@ -435,8 +444,6 @@ void Serial::apexiECU(const QByteArray &buffer)
             m_apexiMsg.clear();
             Serial::sendRequest(requestIndex);
         }
-
-
 
     }
 }
@@ -560,12 +567,12 @@ void Serial::sendRequest(int requestIndex)
     case 1:
         //Init Platform for the first time ( usully returns a malformed packet)
         Serial::writeRequestPFC(QByteArray::fromHex("F3020A"));
-        //   Bytesexpected = 11;
+        Bytesexpected = 11;
         break;
     case 2:
         //Serial::getWarConStrFlags();
         Serial::writeRequestPFC(QByteArray::fromHex("D60227"));
-        //   Bytesexpected = 88;
+        Bytesexpected = 88;
         break;
     case 3:
         //Serial::getVersion();
