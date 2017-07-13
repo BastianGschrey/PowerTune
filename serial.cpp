@@ -163,8 +163,7 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
         m_serialport->setParity(QSerialPort::NoParity);
         m_serialport->setDataBits(QSerialPort::Data8);
         m_serialport->setStopBits(QSerialPort::OneStop);
-        m_serialport->setFlowControl(QSerialPort::NoFlowControl);
-        //m_serialport->setReadBufferSize(103);
+        m_serialport->setFlowControl(QSerialPort::NoFlowControl);;
 
         qDebug() << "Try to open SerialPort:";
         if(m_serialport->open(QIODevice::ReadWrite) == false)
@@ -255,9 +254,13 @@ void Serial::closeConnection()
         modbusDevice->disconnectDevice();
         qDebug() << "device disconnected";
     }
+    if(ecu == 2){
+        m_serialport->close();
+        qDebug() << "Connection closed.";
+    }
 }
 
-//test
+
 
 
 void Serial::handleTimeout()
@@ -384,7 +387,7 @@ void Serial::apexiECU(const QByteArray &buffer)
         m_timer.start(5000);
     }
     m_buffer.append(buffer);
-    if (Bytesexpected > m_buffer.length())
+    if (Bytesexpected < m_buffer.length())
     {
         qDebug() << "clearing"<< Bytesexpected <<m_buffer.length();
         m_buffer.clear();
@@ -537,6 +540,7 @@ void Serial::writeRequestPFC(QByteArray p_request)
     qDebug() << "write request" << p_request.toHex();
     m_writeData = p_request;
     qint64 bytesWritten = m_serialport->write(p_request);
+    m_dashBoard->setSerialStat(QString("Sending Request " + p_request.toHex()));
 
     //Action to be implemented
     if (bytesWritten == -1) {
