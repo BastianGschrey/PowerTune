@@ -394,11 +394,11 @@ void Serial::apexiECU(const QByteArray &buffer)
         m_buffer.clear();
     }
 */
-    qDebug() << "current buffer"<<m_buffer.toHex();
-    qDebug() << "buffer length"<<m_buffer.length()<< "Expected"<< Bytesexpected;
+//    qDebug() << "current buffer"<<m_buffer.toHex();
+//    qDebug() << "buffer length"<<m_buffer.length()<< "Expected"<< Bytesexpected;
     QByteArray startpattern = m_writeData.left(1);
     QByteArrayMatcher startmatcher(startpattern);
-    qDebug() << "Expected Start"<< startpattern;// <<"Start"<< startpattern;
+//    qDebug() << "Expected Start"<< startpattern;// <<"Start"<< startpattern;
 
     int pos = 0;
     while((pos = startmatcher.indexIn(m_buffer, pos)) != -1)
@@ -408,6 +408,12 @@ void Serial::apexiECU(const QByteArray &buffer)
         {
             m_buffer.remove(0, pos); //remove all bytes before Identifier
             qDebug() << "removed all bytes before the expected response start" << m_buffer;
+            if (m_buffer.length() > Bytesexpected)
+              {
+               qDebug() << "message too long " << m_buffer.toHex();
+               m_buffer.remove(Bytesexpected,m_buffer.length() );
+               qDebug() << "removed extra bytes after message" << m_buffer.toHex();
+              }
         }
         if (pos == 0 )
         {
@@ -451,6 +457,10 @@ void Serial::apexiECU(const QByteArray &buffer)
             readData(m_apexiMsg);
             m_apexiMsg.clear();
             Serial::sendRequest(requestIndex);
+        }
+        else
+        {
+            Serial::handleTimeout();
         }
 
     }

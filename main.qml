@@ -12,7 +12,7 @@ ApplicationWindow {
     minimumWidth: 800
     minimumHeight: 480
     // visibility: "FullScreen"
-    title: qsTr("PowerTune ") + Dashboard.Platform
+    title: qsTr("PowerTune ") + Dashboard.Platform + "Beta 12"
     color: "black"
 
     //Pane {
