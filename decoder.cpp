@@ -982,19 +982,18 @@ qDebug() << "decoder Dicktator" <<m_dicktatorMsg.toHex();
 
 
         packageDicktator[5] = (info->b5);                //rpm
-        packageDicktator[6] = ((460 / info->b6) * 255);  //rpm
+        packageDicktator[6] = ((3060 / info->b6) * 25.5);  //rpm
         packageDicktator[7] = (info->b7 + 1);            //rpm
         packageDicktator[14] = (info->b14 * 0.001);      // boost calc still not correct
         packageDicktator[15] = (info->b15 * 0.278);      // boost calc still not correct
-        packageDicktator[18] = (info->b18 / 16);
+        packageDicktator[18] = (info->b18);
         packageDicktator[19] = (info->b20 * 25 + info->b19*0.1 ); //TPS
         qDebug() << "Battery" << packageDicktator[18];
         qDebug() << "TPS" << packageDicktator[19];
         qDebug() << "Bost " << packageDicktator[14] + packageDicktator[15];//– 0.894;
-        
         m_dashboard->setRevs(packageDicktator[6]/packageDicktator[7]);
-        m_dashboard->setBatteryV(packageDicktator[18]);
-       
+        m_dashboard->setBatteryV(packageDicktator[18] / 16);
+
   
   
         dicktator_info_t parse(const QByteArray &);

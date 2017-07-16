@@ -273,13 +273,13 @@ void Serial::handleTimeout()
         qDebug() << "Could not open file for writing";
     }
     QTextStream out(&mFile);
-    out << "Timeout Request Index " << int(requestIndex)<< "Request identifier " << m_writeData[0] << " lenght received "<< int(m_readData.length())<< " Bytes "<< " Expected Bytes "<< int(Bytesexpected)<< " bytes " <<" Message "<< QByteArray(m_readData.toHex()) <<endl;
+    out << "Timeout Request Index " << m_writeData.toHex() << " lenght received "<< int(m_buffer.length())<< " Bytes "<< " Expected Bytes "<< int(Bytesexpected)<< " bytes " <<" Message "<< QByteArray(m_buffer.toHex()) <<endl;
     mFile.close();
     Serial::clear();
     qDebug() << "check whats still left on serialport"<< m_serialport->readAll();
     m_serialport->flush();
     m_readData.clear();
-    qDebug() << "m_readData"<<m_readData;
+    qDebug() << "m_readData"<<m_buffer;
     Serial::sendRequest(requestIndex);
 }
 
@@ -387,34 +387,39 @@ void Serial::apexiECU(const QByteArray &buffer)
         m_timer.start(5000);
     }
     m_buffer.append(buffer);
+/*
     if (Bytesexpected < m_buffer.length())
     {
         qDebug() << "clearing"<< Bytesexpected <<m_buffer.length();
         m_buffer.clear();
     }
+*/
     qDebug() << "current buffer"<<m_buffer.toHex();
     qDebug() << "buffer length"<<m_buffer.length()<< "Expected"<< Bytesexpected;
-/*
-    const char start[] =  {m_writeData[0]};
-
-    QByteArray startpattern(start);
+    QByteArray startpattern = m_writeData.left(1);
     QByteArrayMatcher startmatcher(startpattern);
-    qDebug() << "Message"<<start<<"Start"<< startpattern;
+    qDebug() << "Expected Start"<< startpattern;// <<"Start"<< startpattern;
 
     int pos = 0;
     while((pos = startmatcher.indexIn(m_buffer, pos)) != -1)
     {
-        qDebug() << "pattern found at pos" << pos;
+        qDebug() << "pattern found at pos" << pos << m_buffer;
         if (pos !=0)
         {
             m_buffer.remove(0, pos); //remove all bytes before Identifier
             qDebug() << "removed all bytes before the expected response start" << m_buffer;
         }
-        if (pos == 0 ) break;
+        if (pos == 0 )
+        {
+
+             Bytesexpected = m_buffer[1]+1;
+             qDebug() << "Message begin as expected , changing bytes expected" << Bytesexpected;
+             break;
+        }
 
 
     }
-*/
+
     if (m_buffer.length() == Bytesexpected)
     {
         m_apexiMsg =  m_buffer;
@@ -655,12 +660,12 @@ void Serial::sendRequest(int requestIndex)
         break;
     case 18:
         //Serial::getOilervsWaterT();
-        Serial::writeRequestPFC(QByteArray::fromHex("7E027F")); //one of these is wrong
+        Serial::writeRequestPFC(QByteArray::fromHex("7E027F"));
         Bytesexpected = 9;
         break;
     case 19:
         //Serial::getFanvsWater();
-        Serial::writeRequestPFC(QByteArray::fromHex("7F027E")); //one of these is wrong
+        Serial::writeRequestPFC(QByteArray::fromHex("7F027E"));
         Bytesexpected = 6;
         break;
     case 20:
