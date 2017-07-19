@@ -492,8 +492,7 @@ private:
          quint8 b11;
          quint8 b12;
          quint8 b13;
-         quint8 b14;
-         quint8 b15;
+         quint16 boost;
          quint8 b16;
          quint8 b17;
          quint8 b18;

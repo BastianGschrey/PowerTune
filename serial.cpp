@@ -333,8 +333,9 @@ void Serial::readyToRead()
     if(ecu == 2) //Dicktator ECU
     {
         m_readData = m_serialport->readAll();
-        qDebug() << "ready read slot entered"<<m_readData.toHex();
+        qDebug() << "ready read slot e"<<m_readData.toHex();
         Serial::dicktatorECU(m_readData);
+        m_readData.clear();
     }
 
 }
@@ -343,8 +344,11 @@ void Serial::dicktatorECU(const QByteArray &buffer)
 {
 
     //Appending the message until the patterns Start and End Are found , then removing all bytes before and after the message
+
     m_buffer.append(buffer);
- //   qDebug() << "Dicktator ecu"<< m_buffer.toHex();
+
+
+    qDebug() << "Dicktator ecu"<< m_buffer.toHex();
     QByteArray startpattern("START");
     QByteArrayMatcher startmatcher(startpattern);
     QByteArray endpattern("END");
@@ -353,27 +357,36 @@ void Serial::dicktatorECU(const QByteArray &buffer)
     int pos = 0;
     while((pos = startmatcher.indexIn(m_buffer, pos)) != -1)
     {
-     //   qDebug() << "Dicktator pattern found at pos" << pos;
+        qDebug() << "Dicktator pattern found at pos" << pos;
+        m_buffer.remove(0, pos); //remove all bytes before "Start:
+        m_buffer.remove(33,m_buffer.length());
+        qDebug() << "remove all bytes before d" << m_buffer.toHex();
         if (pos !=0)
         {
-            m_buffer.remove(0, pos); //remove all bytes before "Start:
-       //     qDebug() << "removed all bytes before the string START " << m_buffer;
+
+            qDebug() << "removed all bytes before the string START " << m_buffer;
         }
         if (pos == 0 ) break;
     }
     int pos2 = 0;
-    if((pos2 = endmatcher.indexIn(m_buffer, pos2)) != -1)
+/*    if((pos2 = endmatcher.indexIn(m_buffer, pos2)) != -1)
     {
-  //      qDebug() << "found end of message at " << pos2;
-        m_dicktatorMsg.append(m_buffer); // Appending all bytes from "START" to "END" into a new array
-        m_dicktatorMsg.remove(pos2+3, m_dicktatorMsg.length()+1 );// Remove all bytes after "END"
-        m_buffer.remove(0, pos2+3); //clear all bytes  from buffer that have been written into m_dicktatorMsg
-    //    qDebug() << "Finsished processing  Dicktator messag" << m_dicktatorMsg;
-    //    qDebug() << "removed processed part from Buffer" << m_buffer;
-        m_decoder->decodeDicktator(m_dicktatorMsg);
-        m_dicktatorMsg.clear();
-    }
 
+
+    }
+*/    while((pos2 = endmatcher.indexIn(m_buffer, pos2)) != -1)
+    {
+
+        qDebug() << "found end of message at " << pos2;
+
+       if (pos2 == 30 )
+       {
+           m_dicktatorMsg = m_buffer;
+           m_buffer.clear();
+           m_decoder->decodeDicktator(m_dicktatorMsg);
+           break;
+}
+    }
 
 }
 
