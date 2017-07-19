@@ -987,8 +987,8 @@ qDebug() << "decoder Dicktator" <<m_dicktatorMsg.toHex();
         packageDicktator[6] = ((3060 / info->b6) * 25.5);  //rpm
         }
         packageDicktator[7] = (info->b7 + 1);            //rpm
-        packageDicktator[14] = info->boost * 0.00305859 - 0.989;     // boost calc still not correct
-        packageDicktator[18] = (info->b18 /16);
+        packageDicktator[14] = info->boost * 0.00305859 - 0.989;     //Relative Boost
+        packageDicktator[18] = (info->b18 /16); //Battery Voltage
         packageDicktator[19] = (info->b20 * 25 + info->b19*0.1 ); //TPS
         qDebug() << "Battery" << packageDicktator[18];
         qDebug() << "TPS" << packageDicktator[19];

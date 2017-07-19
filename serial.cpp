@@ -359,7 +359,7 @@ void Serial::dicktatorECU(const QByteArray &buffer)
     {
         qDebug() << "Dicktator pattern found at pos" << pos;
         m_buffer.remove(0, pos); //remove all bytes before "Start:
-        m_buffer.remove(33,m_buffer.length());
+         m_buffer.resize(33);
         qDebug() << "remove all bytes before d" << m_buffer.toHex();
         if (pos !=0)
         {
@@ -378,6 +378,7 @@ void Serial::dicktatorECU(const QByteArray &buffer)
     {
 
         qDebug() << "found end of message at " << pos2;
+
 
        if (pos2 == 30 )
        {
