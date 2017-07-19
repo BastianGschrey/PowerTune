@@ -74,7 +74,7 @@ Rectangle {
         height: parent.height /4
     Text {
         id: afrtext
-        text:"AFR"
+        text:"Battery Voltage"
         font.pixelSize: (parent.width / 10)
          y: parent.height / 4
         font.bold: true
@@ -85,7 +85,7 @@ Rectangle {
     }
     Text {
         id: aux
-        text:Dashboard.auxcalc1
+        text:Dashboard.BatteryV
         font.pixelSize: (parent.width / 10)
         font.bold: true
         font.family: "Eurostile"

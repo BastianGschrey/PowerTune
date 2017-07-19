@@ -991,8 +991,7 @@ qDebug() << "decoder Dicktator" <<m_dicktatorMsg.toHex();
         packageDicktator[18] = (info->b18 /16); //Battery Voltage
         packageDicktator[19] = (info->b20 * 25 + info->b19*0.1 ); //TPS
         qDebug() << "Battery" << packageDicktator[18];
-        qDebug() << "TPS" << packageDicktator[19];
-        qDebug() << "Bost " << packageDicktator[14];
+
         m_dashboard->setRevs(packageDicktator[6]/packageDicktator[7]);
         m_dashboard->setBatteryV(packageDicktator[18]);
         m_dashboard->setpim(packageDicktator[14]);
