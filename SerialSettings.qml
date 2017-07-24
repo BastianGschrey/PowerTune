@@ -20,7 +20,7 @@ Rectangle {
             property alias gpsPortName: serialNameGPS.currentText
             property alias gpsPortNameindex: serialNameGPS.currentIndex
             //property alias gpsBaud: serialGPSBaud.currentText
-           // property alias gpsBaudindex: serialGPSBaud.currentIndex
+            // property alias gpsBaudindex: serialGPSBaud.currentIndex
             property alias ecuType: ecuSelect.currentText
             property alias powerFcInterface: interfaceSelect.currentText
             property alias auxunit1: unitaux1.text
@@ -60,13 +60,13 @@ Rectangle {
                     Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true; autoconnect.auto();logger.datalogger() }
                 }
                 Text { text: "GPS Port: " }
-                    ComboBox {
-                        id: serialNameGPS
-                        width: 200
-                        model: Serial.portsNames
+                ComboBox {
+                    id: serialNameGPS
+                    width: 200
+                    model: Serial.portsNames
 
-                    }
- /*               Text { text: "GPS Baud: " }
+                }
+                /*               Text { text: "GPS Baud: " }
                     ComboBox {
                         id: serialGPSBaud
                         width: 200
@@ -75,6 +75,17 @@ Rectangle {
 
                     }
 */
+                Text { text: "Display units:" }
+                ComboBox {
+
+                    id: unitSelect
+                    width: 200
+
+                    model: [ "Metric","Imperial"]
+                    property bool initialized: false
+                    // onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
+                    // Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
+                }
                 Text { text: "ECU Selection:" }
                 ComboBox {
 
@@ -88,13 +99,13 @@ Rectangle {
                 }
                 Text {
                     id: textinterfaceSelect
-                    visible: { (ecuSelect.currentIndex == "1") ? false: true; }
+                    visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
                     text: "PowerFC Interface:"
 
                 }
                 ComboBox {
                     id: interfaceSelect
-                    visible: { (ecuSelect.currentIndex == "1") ? false: true; }
+                    visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
                     width: 200
                     model: [ "4 Aux Inputs", "8 Aux Inputs"]
                     property bool initialized: false
@@ -103,13 +114,13 @@ Rectangle {
                 }
                 Text {
                     id: textloggingSelect
-                    visible: { (ecuSelect.currentIndex == "1") ? false: true; }
+                    visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
                     text: "Log Raw Messages:"
 
                 }
                 ComboBox {
                     id: loggerSelect
-                    visible: { (ecuSelect.currentIndex == "1") ? false: true; }
+                    visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
                     width: 200
                     model: [ "OFF", "ON"]
                     property bool initialized: false
@@ -206,7 +217,7 @@ Rectangle {
                     text: Dashboard.SerialStat
                 }
                 Grid {
-                    visible: { (ecuSelect.currentIndex == "1") ? false: true; }
+                    visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
                     rows: 5
                     columns: 4
                     spacing: 5
@@ -300,7 +311,7 @@ Rectangle {
         }
     }
     // make another grid
- /*
+    /*
     Item {
         visible: { (ecuSelect.currentIndex == "1") ? false: true; }
         Row {

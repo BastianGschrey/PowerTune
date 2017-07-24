@@ -17,6 +17,8 @@
 #include <QFile>
 #include <QTextStream>
 
+
+int units = 0;// 0 Metric / 1 Imperial
 QByteArray serialdata;
 QByteArray fullFuelBase;
 qreal AN1AN2calc;
@@ -98,11 +100,26 @@ void Decoder::decodeAdv(QByteArray serialdata)
     packageADV[9] = info->Moilp;     //Value lower by 10 compared to FC Edit
     packageADV[10] = info->Boosttp / 2.56;    // (FC edit shows just raw value
     packageADV[11] = info->Boostwg / 2.56;     // (FC edit shows just raw value
+    if (units == 0 )
+    {
     packageADV[12] = info->Watertemp -80;
     packageADV[13] = info->Intaketemp -80;
+    }
+    if (units == 1 )
+    {
+    packageADV[12] = ((info->Watertemp -80)* 1.8) + 32 ;
+    packageADV[13] = ((info->Intaketemp -80)* 1.8) + 32 ;
+    }
     packageADV[14] = info->Knock;
     packageADV[15] = info->BatteryV * 0.1;
-    packageADV[16] = info->Speed;
+    if (units == 0 )
+    {
+    packageADV[16] = info->Speed ;
+    }
+    if (units == 1 )
+    {
+    packageADV[16] = info->Speed  * 0.621371;
+    }
     packageADV[17] = info->Iscvduty * 0.001;
     packageADV[18] = info->O2volt;
     packageADV[19] = info->na1;
@@ -404,19 +421,49 @@ void Decoder::decodeBasic(QByteArray serialdata)
     packageBasic[1] = mul[0] * info->Basic_IGL + add[6];
     packageBasic[2] = mul[0] * info->Basic_IGT + add[6];
     packageBasic[3] = mul[0] * info->Basic_RPM + add[0];
+    if (units == 0)
+    {
     packageBasic[4] = mul[0] * info->Basic_KPH + add[0];
+    }
+    if (units == 1)
+    {
+    packageBasic[4] = (mul[0] * info->Basic_KPH + add[0]) * 0.621371;
+    }
     packageBasic[5] = mul[0] * info->Basic_Boost -760;
     packageBasic[6] = mul[0] * info->Basic_Knock + add[0];
+    if (units == 0)
+    {
     packageBasic[7] = mul[0] * info->Basic_Watert + add[8];
+    }
+    if (units == 1)
+    {
+        packageBasic[7] = ((mul[0] * info->Basic_Watert + add[8])*1.8) + 32 ;
+    }
+    if (units == 0)
+    {
     packageBasic[8] = mul[0] * info->Basic_Airt + add[8];
+    }
+    if (units == 1)
+    {
+    packageBasic[8] = ((mul[0] * info->Basic_Airt + add[8]) *1.8) + 32 ;
+    }
     packageBasic[9] = mul[15] * info->Basic_BattV + add[0];
-
+    if (units == 0)
+    {
     if (packageBasic[5] >= 0) // while boost pressure is positive multiply by 0.01 to show kg/cm2
     {
         Boost = packageBasic[5] *0.01;
     }
     else Boost = packageBasic[5]; // while boost pressure is negative show pressure in mmhg
-
+    }
+    if (units == 1)
+    {
+    if (packageBasic[5] >= 0) // while boost pressure is positive multiply by 0.01 to show PSI
+    {
+        Boost = packageBasic[5] * 0.142233;
+    }
+    else Boost = packageBasic[5] * 0.039370079; // while boost pressure is negative show pressure in inhg
+    }
    // m_dashboard->setInjDuty(packageBasic[0]);
     m_dashboard->setLeadingign(packageBasic[1]);
     m_dashboard->setTrailingign(packageBasic[2]);
@@ -791,7 +838,14 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
     qreal realBoost;
     int Boostconv;
 
-    m_dashboard->setSpeed(unit.value(10)); // <-This is for the "main" speedo
+ if (units == 0)
+ {
+    m_dashboard->setSpeed(unit.value(10)); // <-This is for the "main" speedo KMH
+ }
+ if (units == 1)
+ {
+    m_dashboard->setSpeed((unit.value(10))* 0.621371) ; // <-This is for the "main" speedo in MPH
+ }
     m_dashboard->setRevs(unit.value(0));
     m_dashboard->setMAP(unit.value(1));
     m_dashboard->setIntaketemp(unit.value(2));
