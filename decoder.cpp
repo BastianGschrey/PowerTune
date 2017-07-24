@@ -837,14 +837,21 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
 
     qreal realBoost;
     int Boostconv;
+    qreal Speedconvreal;
+    int Speedconv;
 
  if (units == 0)
  {
+     qDebug() << "i am at 0 " ;
     m_dashboard->setSpeed(unit.value(10)); // <-This is for the "main" speedo KMH
  }
  if (units == 1)
  {
-    m_dashboard->setSpeed((unit.value(10))* 0.621371) ; // <-This is for the "main" speedo in MPH
+    qDebug() << "i am at 1 " ;
+
+    Speedconv = (unit.value(10)) ;
+    Speedconvreal = (Speedconv*0.621371) ;
+    m_dashboard->setSpeed(Speedconvreal) ; // <-This is for the "main" speedo in MPH
  }
     m_dashboard->setRevs(unit.value(0));
     m_dashboard->setMAP(unit.value(1));

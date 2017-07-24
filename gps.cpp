@@ -4,7 +4,7 @@
 #include "QStringList"
 
 
-
+int connected;
 GPS::GPS(QObject *parent)
     : QObject(parent)
     , m_dashboard(Q_NULLPTR)
@@ -359,12 +359,10 @@ bail:
 
 }
 
-void GPS::stopGPScom()
-{
-    com->close();
-}
+
 void GPS::startGPScom(const QString &portName)
 {
+
     com = new QSerialPort(this);
     serialBuffer = "";
     qDebug() <<"StartGPS"<< portName ;
@@ -380,6 +378,7 @@ void GPS::startGPScom(const QString &portName)
     com->setStopBits(QSerialPort::OneStop);
    // QObject::connect(com, SIGNAL(readyRead()), this, SLOT(readSerial()));
     connect(this->com,SIGNAL(readyRead()),this, SLOT(readSerial()));
+    connected =1;
 
 
     for (int var = 0; var < 1000; ++var) {
@@ -404,5 +403,12 @@ void GPS::startGPScom(const QString &portName)
 
 }
 
-
+void GPS::stopGPScom()
+{
+    if (connected == 1)
+    {
+     connected =0;
+     com->close();
+    }
+}
 
