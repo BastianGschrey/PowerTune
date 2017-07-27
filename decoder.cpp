@@ -18,7 +18,7 @@
 #include <QTextStream>
 
 
-int units = 0;// 0 Metric / 1 Imperial
+int units;// 0 Metric / 1 Imperial
 QByteArray serialdata;
 QByteArray fullFuelBase;
 qreal AN1AN2calc;
@@ -79,6 +79,11 @@ Decoder::Decoder(DashBoard *dashboard, QObject *parent)
 {
 }
 
+void Decoder::setUnits(const int &unitSelect)
+{
+    units = unitSelect;
+    qDebug() << "Unitselection"<< units;
+}
 
 
 void Decoder::decodeAdv(QByteArray serialdata)
@@ -837,8 +842,7 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
 
     qreal realBoost;
     int Boostconv;
-    qreal Speedconvreal;
-    int Speedconv;
+
 
  if (units == 0)
  {
@@ -847,24 +851,55 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
  }
  if (units == 1)
  {
-    qDebug() << "i am at 1 " ;
-
-    Speedconv = (unit.value(10)) ;
-    Speedconvreal = (Speedconv*0.621371) ;
-    m_dashboard->setSpeed(Speedconvreal) ; // <-This is for the "main" speedo in MPH
+    m_dashboard->setSpeed(unit.value(10)*0.621371); // <-This is for the "main" speedo in MPH
  }
     m_dashboard->setRevs(unit.value(0));
     m_dashboard->setMAP(unit.value(1));
+    if (units == 0)
+    {
     m_dashboard->setIntaketemp(unit.value(2));
+    }
+    if (units == 1)
+    {
+    m_dashboard->setIntaketemp(unit.value(2)* 1.8 + 32);
+    }
+    if (units == 0)
+    {
     m_dashboard->setWatertemp(unit.value(3));
+    }
+    if (units == 1)
+    {
+    m_dashboard->setWatertemp(unit.value(3)* 1.8 + 32);
+    }
+    if (units == 0)
+    {
     m_dashboard->setAUXT(unit.value(4));
+    }
+    if (units == 1)
+    {
+    m_dashboard->setAUXT(unit.value(4)* 1.8 + 32);
+    }
     m_dashboard->setauxcalc1(unit.value(5)/2570.00);
     m_dashboard->setKnock(unit.value(6)/256);
     m_dashboard->setTPS(unit.value(7));
     m_dashboard->setIdleValue(unit.value(8));
     m_dashboard->setBatteryV(unit.value(9)/10);
+    if (units == 0)
+    {
     m_dashboard->setMVSS(unit.value(10));
+    }
+    if (units == 1)
+    {
+    m_dashboard->setMVSS(unit.value(10)*0.621371);
+    }
+    if (units == 0)
+    {
     m_dashboard->setSVSS(unit.value(11));
+    }
+    if (units == 1)
+    {
+    m_dashboard->setSVSS(unit.value(11)*0.621371);
+    }
     m_dashboard->setInj1((unit.value(12)/3)*2);
     m_dashboard->setInj2((unit.value(13)/3)*2);
     m_dashboard->setInj3((unit.value(14)/3)*2);

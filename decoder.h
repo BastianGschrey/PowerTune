@@ -520,6 +520,7 @@ public:
 private:
      DashBoard *m_dashboard;
 public slots:     
+     void setUnits(const int &unitSelect);
      void decodeAdv(QByteArray serialdata);
      void decodeSensor(QByteArray serialdata);
     // void decodeAux(QByteArray serialdata ,const QString &unitaux1,const int &an1V0.text,const int &an2V5,const QString &unitaux2,const int &an3V0,const int &an4V5,const QString unitaux3,const int &an4V5,const QString unitaux4,const int &an7V0,const int &an8V5);

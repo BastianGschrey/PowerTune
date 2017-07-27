@@ -37,6 +37,7 @@ Rectangle {
             property alias aux8: an8V5.text
             property alias goProVariant: goProSelect.currentIndex
             property alias password: goPropass.text
+            property alias unitSelector: unitSelect.currentIndex
 
         }
 
@@ -83,8 +84,8 @@ Rectangle {
 
                     model: [ "Metric","Imperial"]
                     property bool initialized: false
-                    // onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
-                    // Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
+                    Component.onCompleted: { Decoder.setUnits(currentIndex) }
+                    onCurrentIndexChanged: { Decoder.setUnits(currentIndex) }
                 }
                 Text { text: "ECU Selection:" }
                 ComboBox {

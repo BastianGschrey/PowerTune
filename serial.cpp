@@ -90,6 +90,7 @@ Serial::Serial(QObject *parent) :
     if (engine == Q_NULLPTR)
         return;
     engine->rootContext()->setContextProperty("Dashboard", m_dashBoard);
+    engine->rootContext()->setContextProperty("Decoder", m_decoder);
     engine->rootContext()->setContextProperty("AppSettings", m_appSettings);
     engine->rootContext()->setContextProperty("GoPro", m_gopro);
     engine->rootContext()->setContextProperty("GPS", m_gps);
