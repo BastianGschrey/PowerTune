@@ -236,15 +236,31 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
         {
             m_dashBoard->setSerialStat(QString("Connected to Serialport"));
         }
-
-
-
-
-
-
     }
-}
+    //PowertMods
+    if (ecuSelect == 3)
+    {
 
+        initSerialPort();
+        m_serialport->setPortName(portName);
+        m_serialport->setBaudRate(QSerialPort::Baud115200);
+        m_serialport->setParity(QSerialPort::NoParity);
+        m_serialport->setDataBits(QSerialPort::Data8);
+        m_serialport->setStopBits(QSerialPort::OneStop);
+        m_serialport->setFlowControl(QSerialPort::NoFlowControl);;
+
+        qDebug() << "Try to open SerialPort:";
+        if(m_serialport->open(QIODevice::ReadWrite) == false)
+        {
+            m_dashBoard->setSerialStat(m_serialport->errorString());
+            qDebug() << "Open Serial port failed: " << m_serialport->errorString();
+        }
+        else
+        {
+            m_dashBoard->setSerialStat(QString("Connected to Serialport"));
+        }
+}
+}
 void Serial::closeConnection()
 {
     if(ecu == 0){
