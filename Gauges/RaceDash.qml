@@ -47,11 +47,11 @@ Rectangle {
         spacing: 20
     StatusIndicator {
         color: "green"
-        active: { (Dashboard.revs > "0") ? true: false; }
+        active: { (Dashboard.revs > "3000") ? true: false; }
     }
     StatusIndicator {
         color: "green"
-        active: { (Dashboard.revs > "2000") ? true: false; }
+        active: { (Dashboard.revs > "4000") ? true: false; }
     }
     StatusIndicator {
         color: "yellow"
@@ -63,11 +63,11 @@ Rectangle {
     }
     StatusIndicator {
         color: "red"
-        active: { (Dashboard.revs > "8000") ? true: false; }
+        active: { (Dashboard.revs > "7900") ? true: false; }
     }
     StatusIndicator {
         color: "red"
-        active: { (Dashboard.revs > "8000") ? true: false; }
+        active: { (Dashboard.revs > "7900") ? true: false; }
     }
     StatusIndicator {
         color: "yellow"
@@ -79,11 +79,11 @@ Rectangle {
     }
     StatusIndicator {
         color: "green"
-        active: { (Dashboard.revs > "2000") ? true: false; }
+        active: { (Dashboard.revs > "4000") ? true: false; }
     }
     StatusIndicator {
         color: "green"
-        active: { (Dashboard.revs > "0") ? true: false; }
+        active: { (Dashboard.revs > "3000") ? true: false; }
     }
 }
     Text {
@@ -107,7 +107,7 @@ Rectangle {
 
     }
     Text {
-        text: Dashboard.speed
+        text: (Dashboard.speed).toFixed(0)
         font.pixelSize: (parent.width / 25)
          y: 100
          x: 520
@@ -121,6 +121,47 @@ Rectangle {
         font.pixelSize: (parent.width / 25)
          y: 100
          x: 600
+        font.bold: true
+        font.family: "Eurostile"
+        color: "black"
+
+    }
+    Text {
+        text:" AFR "
+        font.pixelSize: (parent.width / 25)
+         y: 330
+         x: 40
+        font.bold: true
+        font.family: "Eurostile"
+        color: "black"
+
+    }
+    Text {
+        text: (Dashboard.auxcalc1).toFixed(1)
+        font.pixelSize: (parent.width / 25)
+         y: 380
+         x: 50
+        font.bold: true
+        font.family: "Eurostile"
+        color: "black"
+
+    }
+
+    Text {
+        text:" Boost "
+        font.pixelSize: (parent.width / 25)
+         y: 330
+         x: 170
+        font.bold: true
+        font.family: "Eurostile"
+        color: "black"
+
+    }
+    Text {
+        text: (Dashboard.pim).toFixed(2)
+        font.pixelSize: (parent.width / 25)
+         y: 380
+         x: 190
         font.bold: true
         font.family: "Eurostile"
         color: "black"
