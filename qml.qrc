@@ -48,5 +48,7 @@
         <file>Gauges/GaugeRoundREV.qml</file>
         <file>Gauges/CreateBarGaugeScript.js</file>
         <file>Gauges/GPS.qml</file>
+        <file>Gauges/RaceDash.qml</file>
+        <file>graphics/Racedash800x480.png</file>
     </qresource>
 </RCC>

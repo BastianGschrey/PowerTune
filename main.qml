@@ -65,7 +65,8 @@ ApplicationWindow {
         Loader {
 
             id: firstPageLoader
-            source: "qrc:/Gauges/Dashboard.qml"
+            source: "qrc:/Gauges/RaceDash.qml"
+            //source: "qrc:/Gauges/Dashboard.qml"
         }
 
         Loader {
