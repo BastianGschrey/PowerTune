@@ -66,7 +66,7 @@ ApplicationWindow {
 
             id: firstPageLoader
             source: "qrc:/Gauges/RaceDash.qml"
-            //source: "qrc:/Gauges/Dashboard.qml"
+
         }
 
         Loader {
@@ -88,7 +88,8 @@ ApplicationWindow {
         }
         Loader {
             id: sixtPageLoader
-            source: "qrc:/Gauges/DynamicDash.qml"
+            source: "qrc:/Gauges/Dashboard.qml"
+            //source: "qrc:/Gauges/DynamicDash.qml"
 
         }
         Item {

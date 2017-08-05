@@ -7,12 +7,12 @@ import QtQuick.Controls.Styles 1.4
 Rectangle {
     width: parent.width
     height:parent.height
-    color:"black"
+    color:"grey"
     Gauge {
         id: gauge
         height: parent.height
         width: 780
-        y:100
+        y:0
         minorTickmarkCount: 0
         tickmarkStepSize : 9000
         //labelStepSize: 9000
@@ -29,7 +29,7 @@ Rectangle {
         style: GaugeStyle {
           valueBar: Rectangle {
              width:  400
-              color: "yellow"
+              color: Qt.rgba(gauge.value / gauge.maximumValue, 0, 1 - gauge.value / gauge.maximumValue, 1)
           }
     }
     }
@@ -86,85 +86,206 @@ Rectangle {
         active: { (Dashboard.revs > "3000") ? true: false; }
     }
 }
+
     Text {
-        text: Dashboard.revs
-        font.pixelSize: (parent.width / 25)
-         y: 100
-         x: 160
+        text:"0"
+        font.pixelSize: 20
+         y: 220
+         x: 10
         font.bold: true
         font.family: "Eurostile"
-        color: "black"
+        color: "grey"
 
     }
     Text {
-        text:" RPM "
-        font.pixelSize: (parent.width / 25)
-         y: 100
-         x: 260
+        text:"1"
+        font.pixelSize: 20
+         y: 220
+         x: 80
         font.bold: true
         font.family: "Eurostile"
-        color: "black"
+        color: "grey"
 
     }
     Text {
-        text: (Dashboard.speed).toFixed(0)
-        font.pixelSize: (parent.width / 25)
-         y: 100
+        text:"2"
+        font.pixelSize: 20
+         y: 160
+         x: 165
+        font.bold: true
+        font.family: "Eurostile"
+        color: "grey"
+
+    }
+    Text {
+        text:"3"
+        font.pixelSize: 20
+         y: 110
+         x: 250
+        font.bold: true
+        font.family: "Eurostile"
+        color: "grey"
+
+    }
+    Text {
+        text:"4"
+        font.pixelSize: 20
+         y: 110
+         x: 335
+        font.bold: true
+        font.family: "Eurostile"
+        color: "grey"
+
+    }
+    Text {
+        text:"5"
+        font.pixelSize: 20
+         y: 110
+         x: 420
+        font.bold: true
+        font.family: "Eurostile"
+        color: "grey"
+
+    }
+    Text {
+        text:"6"
+        font.pixelSize: 20
+         y: 110
+         x: 505
+        font.bold: true
+        font.family: "Eurostile"
+        color: "grey"
+
+    }
+    Text {
+        text:"7"
+        font.pixelSize: 20
+         y: 110
+         x: 590
+        font.bold: true
+        font.family: "Eurostile"
+        color: "grey"
+
+    }
+    Text {
+        text:"8"
+        font.pixelSize: 20
+         y: 110
+         x: 675
+        font.bold: true
+        font.family: "Eurostile"
+        color: "grey"
+
+    }
+    Text {
+        text:"9"
+        font.pixelSize: 20
+         y: 110
+         x: 760
+        font.bold: true
+        font.family: "Eurostile"
+        color: "grey"
+
+    }
+    Text {
+        text:" RPM : " + Dashboard.revs
+        font.pixelSize: 32
+         y: 160
+         x: 190
+        font.bold: true
+        font.family: "Eurostile"
+        color: "white"
+
+    }
+    Text {
+        text: " Speed : " +(Dashboard.speed).toFixed(0)
+        font.pixelSize: 32
+         y: 160
          x: 520
         font.bold: true
         font.family: "Eurostile"
-        color: "black"
-
-    }
-    Text {
-        text:" KM/H "
-        font.pixelSize: (parent.width / 25)
-         y: 100
-         x: 600
-        font.bold: true
-        font.family: "Eurostile"
-        color: "black"
+        color: "white"
 
     }
     Text {
         text:" AFR "
-        font.pixelSize: (parent.width / 25)
+        font.pixelSize: 32
          y: 330
          x: 40
         font.bold: true
         font.family: "Eurostile"
-        color: "black"
+        color: "white"
 
     }
     Text {
         text: (Dashboard.auxcalc1).toFixed(1)
-        font.pixelSize: (parent.width / 25)
+        font.pixelSize: 32
          y: 380
          x: 50
         font.bold: true
         font.family: "Eurostile"
-        color: "black"
+        color: "white"
 
     }
 
     Text {
         text:" Boost "
-        font.pixelSize: (parent.width / 25)
+        font.pixelSize: 32
          y: 330
          x: 170
         font.bold: true
         font.family: "Eurostile"
-        color: "black"
+        color: "white"
 
     }
     Text {
         text: (Dashboard.pim).toFixed(2)
-        font.pixelSize: (parent.width / 25)
+        font.pixelSize: 32
          y: 380
          x: 190
         font.bold: true
         font.family: "Eurostile"
-        color: "black"
+        color: "white"
+
+    }
+    Text {
+        text:" Air T. "
+        font.pixelSize: 32
+         y: 330
+         x: 350
+        font.bold: true
+        font.family: "Eurostile"
+        color: "white"
+
+    }
+    Text {
+        text: (Dashboard.Intaketemp).toFixed(0)
+        font.pixelSize: 32
+         y: 380
+         x: 370
+        font.bold: true
+        font.family: "Eurostile"
+        color: "white"
+
+    }
+    Text {
+        text:" Water T. "
+        font.pixelSize: 32
+         y: 330
+         x: 500
+        font.bold: true
+        font.family: "Eurostile"
+        color: "white"
+
+    }
+    Text {
+        text: (Dashboard.Watertemp).toFixed(0)
+        font.pixelSize: 32
+         y: 380
+         x: 560
+        font.bold: true
+        font.family: "Eurostile"
+        color: "white"
 
     }
 }
