@@ -76,7 +76,8 @@ ApplicationWindow {
 
         Loader {
             id: thirdPageLoader
-            source: "qrc:/Gauges/HalfGauges_metric.qml"
+            source: "qrc:/Gauges/PFCSensors.qml"
+           // source: "qrc:/Gauges/HalfGauges_metric.qml"
         }
         Loader {
             id: fourthPageLoader
