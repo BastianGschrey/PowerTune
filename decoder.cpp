@@ -165,7 +165,7 @@ void Decoder::decodeAdv(QByteArray serialdata)
 
 
     }
-    // Most Nissan and Subaru
+    // Nissan and Subaru
     if (Model == 2)
     {
     fc_adv_info_t2* info=reinterpret_cast<fc_adv_info_t2*>(serialdata.data());
@@ -221,7 +221,7 @@ void Decoder::decodeAdv(QByteArray serialdata)
     m_dashboard->setThrottleV(packageADV[19]);
 
     }
-/*
+
     if (Model == 3)
     {
         fc_adv_info_t3* info=reinterpret_cast<fc_adv_info_t3*>(serialdata.data());
@@ -233,8 +233,8 @@ void Decoder::decodeAdv(QByteArray serialdata)
         packageADV[3] = mul[3] * info->ThrottleV + add[3];
         packageADV[4] = mul[4] * info->Primaryinp + add[4];
         packageADV[5] = mul[5] * info->Fuelc + add[5];
-        packageADV[6] = mul[6] * info->Leadingign + add[6];
-        packageADV[7] = mul[7] * info->Trailingign + add[7];
+        packageADV[6] = mul[6] * info->Ign + add[6];
+        packageADV[7] = mul[7] * info->Dwell + add[7];
         packageADV[8] = mul[8] * info->BoostPres + add[8];
         if (packageADV[8] >= 0x8000)
             packageADV[8] = (packageADV[8] - 0x8000) * 0.01;
@@ -281,7 +281,7 @@ void Decoder::decodeAdv(QByteArray serialdata)
     m_dashboard->setna2(packageADV[21]);
 
     }
-*/
+
 }
 
 

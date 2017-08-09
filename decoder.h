@@ -77,7 +77,7 @@ private:
 
          fc_adv_info_t2 parse(const QByteArray &);
     };
-/*
+
          double packageADV3[33];
 
          struct fc_adv_info_t3{
@@ -101,12 +101,12 @@ private:
          quint16 MAFactivity;
          quint8 O2volt;
          quint8 O2volt_2;
-         quint16 ThrottleV;
+         quint16 na2;
          quint8 na1;
         fc_adv_info_t3 parse(const QByteArray &);
 
  };
-*/
+
 
     double packageSens[20];
 
