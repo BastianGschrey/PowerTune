@@ -203,6 +203,9 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
             //modbusDevice = new QModbusRtuSerialMaster(this);
             modbusDevice->setConnectionParameter(QModbusDevice::SerialPortNameParameter,portName);
             modbusDevice->setConnectionParameter(QModbusDevice::SerialBaudRateParameter,57600);
+            modbusDevice->setConnectionParameter(QModbusDevice::SerialDataBitsParameter,8);
+            modbusDevice->setConnectionParameter(QModbusDevice::SerialParityParameter,0);
+            modbusDevice->setConnectionParameter(QModbusDevice::SerialStopBitsParameter,1);
             modbusDevice->setTimeout(200);
             modbusDevice->setNumberOfRetries(10);
             modbusDevice->connectDevice();
