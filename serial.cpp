@@ -177,7 +177,7 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
             m_dashBoard->setSerialStat(QString("Connected to Serialport"));
         }
 
-        //requestIndex = 0;
+        requestIndex = 0;
 
         qDebug() << "Initial request to PowerFc"<< requestIndex;
 
@@ -495,8 +495,8 @@ void Serial::apexiECU(const QByteArray &buffer)
         {
             qDebug() << "Checksum matches expected Checksum " << checksumhex << " " << recvchecksumhex;
             m_timer.stop();
-            if(requestIndex <= 62){requestIndex++;}
-            else{requestIndex = 59;}
+            if(requestIndex <= 5){requestIndex++;}
+            else{requestIndex = 2;}
             readData(m_apexiMsg);
             m_apexiMsg.clear();
             Serial::sendRequest(requestIndex);
@@ -617,7 +617,7 @@ void Serial::writeRequestPFC(QByteArray p_request)
 void Serial::sendRequest(int requestIndex)
 {
     switch (requestIndex){
-
+/*
     case 0:
         //First request from (this is what FC Edit does seems to get a 4 or 8 Byte response dependant on Aux inputs ??)
         Serial::writeRequestPFC(QByteArray::fromHex("0102FC"));
@@ -626,11 +626,14 @@ void Serial::sendRequest(int requestIndex)
         if (interface ==1)
         {Bytesexpected = 8;}
         break;
-    case 1:
-        //Init Platform for the first time ( usully returns a malformed packet)
+*/
+    //case 1:
+    case 0:
+        //Init Platform (This returns the Platform String )
         Serial::writeRequestPFC(QByteArray::fromHex("F3020A"));
         Bytesexpected = 11;
         break;
+/*
     case 2:
         //Serial::getWarConStrFlags();
         Serial::writeRequestPFC(QByteArray::fromHex("D60227"));
@@ -911,7 +914,9 @@ void Serial::sendRequest(int requestIndex)
         Serial::writeRequestPFC(QByteArray::fromHex("F3020A"));
         Bytesexpected = 11;
         break;
-    case 58:
+*/
+    //case 58:
+    case 1:
         //Serial::getSensorStrings();
         Serial::writeRequestPFC(QByteArray::fromHex("DD0220"));
         Bytesexpected = 83;
@@ -920,34 +925,36 @@ void Serial::sendRequest(int requestIndex)
 
 
         // Live Data
-    case 59:
+        case 2:
         //Serial::getAdvData();
         Serial::writeRequestPFC(QByteArray::fromHex("F0020D"));
         Bytesexpected = 33;
         break;
-    case 60:
+        case 3:
         Serial::writeRequestPFC(QByteArray::fromHex("F0020D")); // this is just for testing
         Bytesexpected = 33;
         //Serial::getAux();
-        /* Removed aux for testing , message lenght seems incorrect
+    /*
+        Removed aux for testing , message lenght seems incorrect
         Serial::writeRequestPFC(QByteArray::fromHex("0002FD"));
         if (interface ==0)
         {Bytesexpected = 7;}
         if (interface ==1)
         {Bytesexpected = 11;}
-        */
+
         break;
-    case 61:
+  */
+    case 4:
         //Serial::getMapIndices();
         Serial::writeRequestPFC(QByteArray::fromHex("DB0222"));
         Bytesexpected = 5;
         break;
-    case 62:
+    case 5:
         //Serial::getSensorData();
         Serial::writeRequestPFC(QByteArray::fromHex("DE021F"));
         Bytesexpected = 21;
         break;
-    case 63:
+    case 6:
         //Serial::getBasic();
         Serial::writeRequestPFC(QByteArray::fromHex("DA0223"));
         Bytesexpected = 23;

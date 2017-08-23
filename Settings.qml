@@ -8,13 +8,6 @@ Rectangle {
     width: parent.width
     height: parent.height
     color: "grey"
+    SerialSettings{}
 
-TabView {
-    id: tabView
-    anchors.fill: parent
-    Tab {
-        title: "Serial"
-        SerialSettings{}
-    }
-}
 }

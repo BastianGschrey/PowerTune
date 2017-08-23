@@ -120,7 +120,7 @@ Rectangle {
     Text {
         text:"3"
         font.pixelSize: 20
-         y: 110
+         y: 120
          x: 250
         font.bold: true
         font.family: "Eurostile"
@@ -130,7 +130,7 @@ Rectangle {
     Text {
         text:"4"
         font.pixelSize: 20
-         y: 110
+         y: 120
          x: 335
         font.bold: true
         font.family: "Eurostile"
@@ -140,7 +140,7 @@ Rectangle {
     Text {
         text:"5"
         font.pixelSize: 20
-         y: 110
+         y: 120
          x: 420
         font.bold: true
         font.family: "Eurostile"
@@ -150,7 +150,7 @@ Rectangle {
     Text {
         text:"6"
         font.pixelSize: 20
-         y: 110
+         y: 120
          x: 505
         font.bold: true
         font.family: "Eurostile"
@@ -160,7 +160,7 @@ Rectangle {
     Text {
         text:"7"
         font.pixelSize: 20
-         y: 110
+         y: 120
          x: 590
         font.bold: true
         font.family: "Eurostile"
@@ -170,7 +170,7 @@ Rectangle {
     Text {
         text:"8"
         font.pixelSize: 20
-         y: 110
+         y: 120
          x: 675
         font.bold: true
         font.family: "Eurostile"
@@ -180,7 +180,7 @@ Rectangle {
     Text {
         text:"9"
         font.pixelSize: 20
-         y: 110
+         y: 120
          x: 760
         font.bold: true
         font.family: "Eurostile"

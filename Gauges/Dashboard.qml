@@ -70,7 +70,7 @@ Rectangle {
         color: "lightsteelblue"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        width: parent.width /6
+        width: parent.width /7
         height: parent.height /4
     Text {
         id: afrtext

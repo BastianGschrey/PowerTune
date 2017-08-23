@@ -12,38 +12,8 @@ ApplicationWindow {
     minimumWidth: 800
     minimumHeight: 480
     // visibility: "FullScreen"
-    title: qsTr("PowerTune ") + Dashboard.Platform + "Beta 13"
+    title: qsTr("PowerTune ") + Dashboard.Platform + "Beta 14"
     color: "black"
-
-    //Pane {
-    //    id: pane
-
-    property real hideValue: 0
-    Behavior on hideValue {
-        NumberAnimation {duration: 200}
-    }
-
-    menuBar:  MenuBar {
-        id: menu
-        //__contentItem.scale: value                        // (1)
-        //__contentItem.opacity: hideValue                  // (2)
-        __contentItem.transform: Scale {yScale: hideValue}  // (3)
-
-        Menu {
-            id: m1
-            title: "File"
-            MenuItem { text: "Open..."
-                onTriggered: {
-                   hideValue = 0                            // hide the bar
-                }
-            }
-            MenuItem { text: "Close"
-                onTriggered: {
-                   hideValue = 0                            // hide the bar
-                }
-            }
-        }
-    }
     SwipeView {
         id: view
 
@@ -74,11 +44,13 @@ ApplicationWindow {
             source: "qrc:/Gauges/PFCSensors.qml"
         }
 
+        /*
         Loader {
             id: thirdPageLoader
             source: "qrc:/Gauges/PFCSensors.qml"
            // source: "qrc:/Gauges/HalfGauges_metric.qml"
         }
+        */
         Loader {
             id: fourthPageLoader
             source: "qrc:/Gauges/DashAdaptronic.qml"
