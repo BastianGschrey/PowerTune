@@ -495,7 +495,7 @@ void Serial::apexiECU(const QByteArray &buffer)
         {
             qDebug() << "Checksum matches expected Checksum " << checksumhex << " " << recvchecksumhex;
             m_timer.stop();
-            if(requestIndex <= 5){requestIndex++;}
+            if(requestIndex <= 4){requestIndex++;}
             else{requestIndex = 2;}
             readData(m_apexiMsg);
             m_apexiMsg.clear();
@@ -930,35 +930,36 @@ void Serial::sendRequest(int requestIndex)
         Serial::writeRequestPFC(QByteArray::fromHex("F0020D"));
         Bytesexpected = 33;
         break;
-        case 3:
-        Serial::writeRequestPFC(QByteArray::fromHex("F0020D")); // this is just for testing
-        Bytesexpected = 33;
-        //Serial::getAux();
-    /*
-        Removed aux for testing , message lenght seems incorrect
-        Serial::writeRequestPFC(QByteArray::fromHex("0002FD"));
-        if (interface ==0)
-        {Bytesexpected = 7;}
-        if (interface ==1)
-        {Bytesexpected = 11;}
 
-        break;
-  */
-    case 4:
+    case 3:
         //Serial::getMapIndices();
         Serial::writeRequestPFC(QByteArray::fromHex("DB0222"));
         Bytesexpected = 5;
         break;
-    case 5:
+    case 4:
         //Serial::getSensorData();
         Serial::writeRequestPFC(QByteArray::fromHex("DE021F"));
         Bytesexpected = 21;
         break;
-    case 6:
+    case 5:
         //Serial::getBasic();
         Serial::writeRequestPFC(QByteArray::fromHex("DA0223"));
         Bytesexpected = 23;
         break;
+        /*
+               case 3:
+               Serial::writeRequestPFC(QByteArray::fromHex("0002FD")); // this is just for testing
+               Bytesexpected = 33;
+               //Serial::getAux();
+       //        Removed aux for testing , message lenght seems incorrect
+
+               if (interface ==0)
+               {Bytesexpected = 7;}
+               if (interface ==1)
+               {Bytesexpected = 11;}
+
+               break;
+         */
     }
 }
 
