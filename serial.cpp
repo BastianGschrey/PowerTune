@@ -447,6 +447,7 @@ void Serial::apexiECU(const QByteArray &buffer)
     while((pos = startmatcher.indexIn(m_buffer, pos)) != -1)
     {
         qDebug() << "pattern found at pos" << pos << m_buffer.toHex();
+        qDebug() << "message length current" << m_buffer.size() << "message length expected" << Bytesexpected;
         if (pos !=0)
         {
             m_buffer.remove(0, pos); //remove all bytes before Identifier
@@ -458,15 +459,15 @@ void Serial::apexiECU(const QByteArray &buffer)
                qDebug() << "removed extra bytes after message" << m_buffer.toHex();
               }
         }
-/* 
+
         if (pos == 0 )
         {
 
-             Bytesexpected = m_buffer[1]+1;
-             qDebug() << "Message begin as expected , changing bytes expected" << Bytesexpected;
+             //Bytesexpected = m_buffer[1]+1;
+             //qDebug() << "Message begin as expected , changing bytes expected" << Bytesexpected;
              break;
         }
-*/
+
 
     }
 
@@ -474,12 +475,11 @@ void Serial::apexiECU(const QByteArray &buffer)
     {
         m_apexiMsg =  m_buffer;
         //m_apexiMsg.remove(Bytesexpected,m_apexiMsg.length()+1);
-        qDebug() << "Extracted Apexi Message" << m_buffer;
+        qDebug() << "Extracted Apexi Message" << m_buffer.toHex();
         //m_buffer.remove(0,Bytesexpected); // remove extracted message from the buffer
-        qDebug() << "left on buffer" << m_buffer;
         m_buffer.clear();
         // Process to calculate checksum not evaluated at the moment , for later use
-
+/*
         int checksum = 255; //calculated checksum from serial message 0xFF - each byte in message (except the last byte)
         recvchecksumhex = QByteArray::number(m_apexiMsg[m_apexiMsg[1]], 16).right(2); // reading the checksum byte , convert to Hex , and cut to 2 positions
         recvchecksumhex = recvchecksumhex.rightJustified(2, '0'); // If the checksumbyte is less than 2 positions , prepend a 0 for example if value is 0x9 turn it into 0x09
@@ -494,18 +494,15 @@ void Serial::apexiECU(const QByteArray &buffer)
 
         if (checksumhex == recvchecksumhex)
         {
-            qDebug() << "Checksum matches expected Checksum " << checksumhex << " " << recvchecksumhex;
+*/
+ //           qDebug() << "Checksum matches expected Checksum " << checksumhex << " " << recvchecksumhex;
             m_timer.stop();
-            if(requestIndex <= 4){requestIndex++;}
+            if(requestIndex <= 5){requestIndex++;}
             else{requestIndex = 2;}
             readData(m_apexiMsg);
             m_apexiMsg.clear();
             Serial::sendRequest(requestIndex);
-        }
-        else
-        {
-            Serial::handleTimeout();
-        }
+//        }
 
     }
 }
@@ -947,20 +944,16 @@ void Serial::sendRequest(int requestIndex)
         Serial::writeRequestPFC(QByteArray::fromHex("DA0223"));
         Bytesexpected = 23;
         break;
-        /*
-               case 3:
-               Serial::writeRequestPFC(QByteArray::fromHex("0002FD")); // this is just for testing
-               Bytesexpected = 33;
-               //Serial::getAux();
-       //        Removed aux for testing , message lenght seems incorrect
-
-               if (interface ==0)
-               {Bytesexpected = 7;}
-               if (interface ==1)
-               {Bytesexpected = 11;}
-
-               break;
-         */
+    case 6:
+        Serial::writeRequestPFC(QByteArray::fromHex("0002FD")); // this is just for testing
+        Bytesexpected = 33;
+        //Serial::getAux();
+        //        Removed aux for testing , message lenght seems incorrect
+        if (interface ==0)
+        {Bytesexpected = 7;}
+        if (interface ==1)
+        {Bytesexpected = 11;}
+        break;
     }
 }
 
