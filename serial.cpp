@@ -446,11 +446,11 @@ void Serial::apexiECU(const QByteArray &buffer)
     int pos = 0;
     while((pos = startmatcher.indexIn(m_buffer, pos)) != -1)
     {
-        qDebug() << "pattern found at pos" << pos << m_buffer;
+        qDebug() << "pattern found at pos" << pos << m_buffer.toHex();
         if (pos !=0)
         {
             m_buffer.remove(0, pos); //remove all bytes before Identifier
-            qDebug() << "removed all bytes before the expected response start" << m_buffer;
+            qDebug() << "removed all bytes before the expected response start" << m_buffer.toHex();
             if (m_buffer.length() > Bytesexpected)
               {
                qDebug() << "message too long " << m_buffer.toHex();
@@ -458,6 +458,7 @@ void Serial::apexiECU(const QByteArray &buffer)
                qDebug() << "removed extra bytes after message" << m_buffer.toHex();
               }
         }
+/* 
         if (pos == 0 )
         {
 
@@ -465,7 +466,7 @@ void Serial::apexiECU(const QByteArray &buffer)
              qDebug() << "Message begin as expected , changing bytes expected" << Bytesexpected;
              break;
         }
-
+*/
 
     }
 
