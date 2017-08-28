@@ -170,55 +170,55 @@ void Decoder::decodeAdv(QByteArray serialdata)
     {
     fc_adv_info_t2* info=reinterpret_cast<fc_adv_info_t2*>(serialdata.data());
 
-    packageADV[0] = info->RPM;
-    packageADV[1] = mul[1] * info->EngLoad + add[1];
-    packageADV[2] = mul[2] * info->MAF1V + add[2];
-    packageADV[3] = mul[3] * info->MAF2V + add[3];
-    packageADV[4] = mul[4] * info->injms + add[4];
-    packageADV[5] = mul[5] * info->Inj + add[5];
-    packageADV[6] = mul[6] * info->Ign + add[6];
-    packageADV[7] = mul[7] * info->Dwell + add[7];
-    packageADV[8] = mul[8] * info->BoostPres + add[8];
-    if (packageADV[8] >= 0x8000)
-        packageADV[8] = (packageADV[8] - 0x8000) * 0.01;
+    packageADV2[0] = info->RPM;
+    packageADV2[1] = mul[1] * info->EngLoad + add[1];
+    packageADV2[2] = mul[2] * info->MAF1V + add[2];
+    packageADV2[3] = mul[3] * info->MAF2V + add[3];
+    packageADV2[4] = mul[4] * info->injms + add[4];
+    packageADV2[5] = mul[5] * info->Inj + add[5];
+    packageADV2[6] = mul[6] * info->Ign + add[6];
+    packageADV2[7] = mul[7] * info->Dwell + add[7];
+    packageADV2[8] = mul[8] * info->BoostPres + add[8];
+    if (packageADV2[8] >= 0x8000)
+        packageADV2[8] = (packageADV[8] - 0x8000) * 0.01;
     else
-        packageADV[8] = (1.0 / 2560 + 0.001) * packageADV[8];
-    packageADV[9] = mul[9] * info->BoostDuty + add[9];
-    packageADV[10] = info->Watertemp -80;
-    packageADV[11] = info->Intaketemp -80;
-    packageADV[12] = mul[12] * info->Knock + add[12];
-    packageADV[13] = mul[13] * info->BatteryV + add[13];
-    packageADV[14] = mul[14] * info->Speed + add[14];
-//    packageADV[14] *= speed_correction;
+        packageADV2[8] = (1.0 / 2560 + 0.001) * packageADV[8];
+    packageADV2[9] = mul[9] * info->BoostDuty + add[9];
+    packageADV2[10] = info->Watertemp -80;
+    packageADV2[11] = info->Intaketemp -80;
+    packageADV2[12] = mul[12] * info->Knock + add[12];
+    packageADV2[13] = mul[13] * info->BatteryV + add[13];
+    packageADV2[14] = mul[14] * info->Speed + add[14];
+//    packageADV2[14] *= speed_correction;
 //    previousSpeed_kph[buf_currentIndex] = packageADV[14];
-    packageADV[15] = mul[15] * info->MAFactivity + add[15];
-    packageADV[16] = mul[16] * info->O2volt + add[16];
-    packageADV[17] = mul[17] * info->O2volt_2 + add[17];
-    packageADV[18] = mul[18] * info->ThrottleV + add[18];
-    packageADV[19] = mul[19] * info->na1 + add[19];
-    packageADV[20] = 0;
-    packageADV[21] = 0;
-
-    m_dashboard->setRevs(packageADV[0]);
-    m_dashboard->setEngLoad(packageADV[1]);
-    m_dashboard->setMAF1V(packageADV[2]);
-    m_dashboard->setMAF2V(packageADV[3]);
-    m_dashboard->setinjms(packageADV[4]);
-    m_dashboard->setInj(packageADV[5]);
-    m_dashboard->setIgn(packageADV[6]);
-    m_dashboard->setDwell(packageADV[7]);
-    m_dashboard->setBoostPres(packageADV[8]);
-    m_dashboard->setBoostDuty(packageADV[9]);
-    m_dashboard->setWatertemp(packageADV[10]);
-    m_dashboard->setIntaketemp(packageADV[11]);
-    m_dashboard->setKnock(packageADV[12]);
-    m_dashboard->setBatteryV(packageADV[13]);
-    m_dashboard->setSpeed(packageADV[14]);
-    m_dashboard->setMAFactivity(packageADV[15]);
-    m_dashboard->setO2volt(packageADV[16]);
-    m_dashboard->setO2volt_2(packageADV[17]);
-    m_dashboard->setO2volt(packageADV[18]);
-    m_dashboard->setThrottleV(packageADV[19]);
+    packageADV2[15] = mul[15] * info->MAFactivity + add[15];
+    packageADV2[16] = mul[16] * info->O2volt + add[16];
+    packageADV2[17] = mul[17] * info->O2volt_2 + add[17];
+    packageADV2[18] = mul[18] * info->ThrottleV + add[18];
+    packageADV2[19] = mul[19] * info->na1 + add[19];
+    packageADV2[20] = 0;
+    packageADV2[21] = 0;
+ qDebug() << "Advanced 2";
+    m_dashboard->setRevs(packageADV2[0]);
+    m_dashboard->setEngLoad(packageADV2[1]);
+    m_dashboard->setMAF1V(packageADV2[2]);
+    m_dashboard->setMAF2V(packageADV2[3]);
+    m_dashboard->setinjms(packageADV2[4]);
+    m_dashboard->setInj(packageADV2[5]);
+    m_dashboard->setIgn(packageADV2[6]);
+    m_dashboard->setDwell(packageADV2[7]);
+    m_dashboard->setBoostPres(packageADV2[8]);
+    m_dashboard->setBoostDuty(packageADV2[9]);
+    m_dashboard->setWatertemp(packageADV2[10]);
+    m_dashboard->setIntaketemp(packageADV2[11]);
+    m_dashboard->setKnock(packageADV2[12]);
+    m_dashboard->setBatteryV(packageADV2[13]);
+    m_dashboard->setSpeed(packageADV2[14]);
+    m_dashboard->setMAFactivity(packageADV2[15]);
+    m_dashboard->setO2volt(packageADV2[16]);
+    m_dashboard->setO2volt_2(packageADV2[17]);
+    m_dashboard->setO2volt(packageADV2[18]);
+    m_dashboard->setThrottleV(packageADV2[19]);
 
     }
 
@@ -226,59 +226,80 @@ void Decoder::decodeAdv(QByteArray serialdata)
     {
         fc_adv_info_t3* info=reinterpret_cast<fc_adv_info_t3*>(serialdata.data());
 
-        packageADV[0] = mul[0] * info->RPM + add[0];
+        packageADV3[0] = mul[0] * info->RPM3 + add[0];
         //previousRev_rpm[buf_currentIndex] = packageADV[0];
-        packageADV[1] = mul[1] * info->Intakepress + add[1];
-        packageADV[2] = mul[2] * info->PressureV + add[2];
-        packageADV[3] = mul[3] * info->ThrottleV + add[3];
-        packageADV[4] = mul[4] * info->Primaryinp + add[4];
-        packageADV[5] = mul[5] * info->Fuelc + add[5];
-        packageADV[6] = mul[6] * info->Ign + add[6];
-        packageADV[7] = mul[7] * info->Dwell + add[7];
-        packageADV[8] = mul[8] * info->BoostPres + add[8];
-        if (packageADV[8] >= 0x8000)
-            packageADV[8] = (packageADV[8] - 0x8000) * 0.01;
+        packageADV3[1] = info->Intakepress3;
+        packageADV3[2] = info->PressureV3 * 0.001;
+        packageADV3[3] = info->ThrottleV3 * 0.001;
+        packageADV3[4] = info->Primaryinp3;
+        packageADV3[5] = info->Fuelc3;
+        packageADV3[6] = info->Ign3;
+        packageADV3[7] = info->Dwell3;
+        packageADV3[8] = -760 + info->BoostPres3;
+/*
+        if (packageADV3[8] >= 0x8000)
+            packageADV3[8] = (packageADV3[8] - 0x8000) * 0.01;
         else
-            packageADV[8] = (1.0 / 2560 + 0.001) * packageADV[8];
-        packageADV[9] = mul[9] * info->BoostDuty + add[9];
-        packageADV[10] = mul[10] * info->Watertemp + add[10];
-        packageADV[11] = mul[11] * info->Intaketemp + add[11];
-        packageADV[12] = mul[12] * info->Knock + add[12];
-        packageADV[13] = mul[13] * info->BatteryV + add[13];
-        packageADV[14] = mul[14] * info->Speed + add[14];
-       // packageADV[14] *= speed_correction;
+            packageADV3[8] = (1.0 / 2560 + 0.001) * packageADV3[8];
+*/
+        packageADV3[9] = mul[9] * info->BoostDuty3 + add[9];
+        packageADV3[10] = info->Watertemp3 -80;
+        packageADV3[11] = info->Intaketemp3 -80;
+        packageADV3[12] = info->Knock3;
+        packageADV3[13] = info->BatteryV3 *0.1;
+        packageADV3[14] = mul[14] * info->Speed3 + add[14];
+       // packageADV3[14] *= speed_correction;
         //previousSpeed_kph[buf_currentIndex] = packageADV[14];
-//        packageADV[15] = mul[15] * info->Iscvduty + add[15];
-        packageADV[16] = mul[16] * info->O2volt + add[16];
-//        packageADV[17] = mul[17] * info->SuctionAirTemp + add[17];
-//        packageADV[18] = mul[18] * info->ThrottleV_2 + add[18];
-        packageADV[19] = mul[19] * info->na1 + add[19];
-        packageADV[20] = 0;
-        packageADV[21] = 0;
+//        packageADV3[15] = mul[15] * info->Iscvduty + add[15];
+        packageADV3[16] = mul[16] * info->O2volt3 + add[16];
+//        packageADV3[17] = mul[17] * info->SuctionAirTemp + add[17];
+//        packageADV3[18] = mul[18] * info->ThrottleV_2 + add[18];
+        packageADV3[19] = mul[19] * info->na13 + add[19];
+        packageADV3[20] = 0;
+        packageADV3[21] = 0;
 
-
-    m_dashboard->setRevs(packageADV[0]);
-    m_dashboard->setIntakepress(packageADV[1]);
-    m_dashboard->setPressureV(packageADV[2]);
-    m_dashboard->setThrottleV(packageADV[3]);
-    m_dashboard->setPrimaryinp(packageADV[4]);
-    m_dashboard->setFuelc(packageADV[5]);
-    m_dashboard->setLeadingign(packageADV[6]);
-    m_dashboard->setTrailingign(packageADV[7]);
-    m_dashboard->setFueltemp(packageADV[8]);
-    m_dashboard->setMoilp(packageADV[9]);
-    m_dashboard->setBoosttp(packageADV[10]);
-    m_dashboard->setBoostwg(packageADV[11]);
-    m_dashboard->setWatertemp(packageADV[12]);
-    m_dashboard->setIntaketemp(packageADV[13]);
-    m_dashboard->setKnock(packageADV[14]);
-    m_dashboard->setBatteryV(packageADV[15]);
-    m_dashboard->setSpeed(packageADV[16]);
-    m_dashboard->setIscvduty(packageADV[17]);
-    m_dashboard->setO2volt(packageADV[18]);
-    m_dashboard->setna1(packageADV[19]);
-    m_dashboard->setSecinjpulse(packageADV[20]);
-    m_dashboard->setna2(packageADV[21]);
+ qDebug() << "Advanced 3";
+    m_dashboard->setRevs(packageADV3[0]); //correct
+    m_dashboard->setIntakepress(packageADV3[1]); //correct
+    m_dashboard->setPressureV(packageADV3[2]); //correct
+    m_dashboard->setThrottleV(packageADV3[3]); //correct
+    m_dashboard->setPrimaryinp(packageADV3[4]); //correct
+    m_dashboard->setFuelc(packageADV3[5]); //correct
+    m_dashboard->setLeadingign(packageADV3[6]);
+    m_dashboard->setTrailingign(packageADV3[7]);
+    m_dashboard->setpim(packageADV3[8]);
+    m_dashboard->setWatertemp(packageADV3[10]);  //correct
+    m_dashboard->setIntaketemp(packageADV3[11]); //verified
+    m_dashboard->setKnock(packageADV3[12]); //correct
+    m_dashboard->setBatteryV(packageADV3[13]); //correct
+    m_dashboard->setSpeed(packageADV3[14]); //correct
+  //  m_dashboard->setIscvduty(packageADV3[17]);
+  //  m_dashboard->setO2volt(packageADV3[18]);
+  //  m_dashboard->setna1(packageADV3[19]);
+  //  m_dashboard->setSecinjpulse(packageADV3[20]);
+  //  m_dashboard->setna2(packageADV3[21]);
+ qDebug() << "0"<< packageADV3[0];
+    qDebug() << "1"<< packageADV3[1];
+  qDebug() << "2"<< packageADV3[2];
+  qDebug() << "3"<< packageADV3[3];
+  qDebug() << "4"<< packageADV3[4];
+  qDebug() << "5"<< packageADV3[5];
+  qDebug() << "6"<< packageADV3[6];
+  qDebug() << "7"<< packageADV3[7];
+  qDebug() << "8"<< packageADV3[8];
+  qDebug() << "9"<< packageADV3[9];
+  qDebug() << "10"<< packageADV3[10];
+  qDebug() << "11"<< packageADV3[11];
+  qDebug() << "12"<< packageADV3[12];
+  qDebug() << "13"<< packageADV3[13];
+  qDebug() << "14"<< packageADV3[14];
+  qDebug() << "15"<< packageADV3[15];
+  qDebug() << "16"<< packageADV3[16];
+  qDebug() << "17"<< packageADV3[17];
+  qDebug() << "18"<< packageADV3[18];
+  qDebug() << "19"<< packageADV3[19];
+  qDebug() << "20"<< packageADV3[20];
+  qDebug() << "22"<< packageADV3[21];
 
     }
 
@@ -469,6 +490,7 @@ void Decoder::decodeBasic(QByteArray serialdata)
     }
     else Boost = packageBasic[5] * 0.039370079; // while boost pressure is negative show pressure in inhg
     }
+
    // m_dashboard->setInjDuty(packageBasic[0]);
     m_dashboard->setLeadingign(packageBasic[1]);
     m_dashboard->setTrailingign(packageBasic[2]);
@@ -480,22 +502,6 @@ void Decoder::decodeBasic(QByteArray serialdata)
     m_dashboard->setIntaketemp(packageBasic[8]);
     m_dashboard->setBatteryV(packageBasic[9]);
 
-
-    //Logging file for Power FC , same format as FC Edit uses with a field width of 8 characters
-
-
-    //    ui->txtBasicConsole->clear();
-
-    //    ui->txtBasicConsole->append(map[68] + " " + QString::number(packageBasic[0]));
-    //    ui->txtBasicConsole->append(map[69] + " " + QString::number(packageBasic[1]));
-    //    ui->txtBasicConsole->append(map[70] + " " + QString::number(packageBasic[2]));
-    //    ui->txtBasicConsole->append(map[71] + " " + QString::number(packageBasic[3]));
-    //    ui->txtBasicConsole->append(map[72] + " " + QString::number(packageBasic[4]));
-    //    ui->txtBasicConsole->append(map[73] + " " + QString::number(packageBasic[5]));
-    //    ui->txtBasicConsole->append(map[74] + " " + QString::number(packageBasic[6]));
-    //    ui->txtBasicConsole->append(map[75] + " " + QString::number(packageBasic[7]));
-    //    ui->txtBasicConsole->append(map[76] + " " + QString::number(packageBasic[8]));
-    //    ui->txtBasicConsole->append(map[77] + " " + QString::number(packageBasic[9]));
 }
 
 void Decoder::decodeRevIdle(QByteArray serialdata)

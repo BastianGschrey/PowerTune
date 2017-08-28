@@ -74,6 +74,7 @@ private:
          quint8 O2volt_2;
          quint16 ThrottleV;
          quint8 na1;
+         quint8 checksum;
 
          fc_adv_info_t2 parse(const QByteArray &);
     };
@@ -83,26 +84,27 @@ private:
          struct fc_adv_info_t3{
 
          quint16 requesttype;
-         quint16 RPM;
-         quint16 Intakepress;
-         quint16 PressureV;
-         quint16 ThrottleV;
-         quint16 Primaryinp;
-         quint16 Fuelc;
-         quint8 Ign;
-         quint8 Dwell;
-         quint16 BoostPres;
-         quint8 BoostDuty;
-         quint8 Watertemp;
-         quint8 Intaketemp;
-         quint8 Knock;
-         quint8 BatteryV;
-         quint16 Speed;
-         quint16 MAFactivity;
-         quint8 O2volt;
-         quint8 O2volt_2;
-         quint16 na2;
-         quint8 na1;
+         quint16 RPM3;
+         quint16 Intakepress3;
+         quint16 PressureV3;
+         quint16 ThrottleV3;
+         quint16 Primaryinp3;
+         quint16 Fuelc3;
+         quint8 Ign3;
+         quint8 Dwell3;
+         quint16 BoostPres3;
+         quint16 BoostDuty3;
+         quint8 Watertemp3;
+         quint8 Intaketemp3;
+         quint8 Knock3;
+         quint8 BatteryV3;
+         quint16 Speed3;
+         quint16 MAFactivity3;
+         quint8 O2volt3;
+         quint8 O2volt_23;
+         quint16 na23;
+         quint8 na13;
+         quint8 checksum;
         fc_adv_info_t3 parse(const QByteArray &);
 
  };

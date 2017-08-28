@@ -223,9 +223,9 @@ Rectangle {
                     columns: 4
                     spacing: 5
                     Text  { text: ""; width: 50}
-                    Text  { text: "Value 0V"; width: 50}
-                    Text  { text: "Value 5V"; width: 50}
-                    Text  { text: "Unit Name"; width: 50}
+                    Text  { text: "0V"; width: 50}
+                    Text  { text: "5V"; width: 50}
+                    Text  { text: "Name"; width: 50}
                     Text  { text: "AN1-AN2"; width: 50}
                     TextField {
                         id: an1V0

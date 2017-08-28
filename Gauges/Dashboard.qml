@@ -85,7 +85,7 @@ Rectangle {
     }
     Text {
         id: aux
-        text:Dashboard.BatteryV
+        text:(Dashboard.BatteryV).toFixed(2)
         font.pixelSize: (parent.width / 10)
         font.bold: true
         font.family: "Eurostile"
