@@ -31,8 +31,8 @@ void GPS::readSerial()
     }else{
         serialBuffer.clear();
         decode(buffer_split);
-        qDebug() <<"Invalid Packages:" << packages_invalidos;
-        qDebug() <<"Available bytes:" << com->bytesAvailable();
+        //qDebug() <<"Invalid Packages:" << packages_invalidos;
+        //qDebug() <<"Available bytes:" << com->bytesAvailable();
 
     }
 
@@ -97,10 +97,10 @@ void GPS::GPGGA(QString package){
             inserts++;
         }
     }
-    qDebug()<< "time " << hora;
+    //qDebug()<< "time " << hora;
     m_dashboard->setgpsTime(hora);
-    qDebug()<< "horizontal precision" << (QString::number(package_data.H_diluicao_da_precisao_horizontal));
-    qDebug()<< "altitude" << (QString::number(package_data.I_altitude));
+    //qDebug()<< "horizontal precision" << (QString::number(package_data.H_diluicao_da_precisao_horizontal));
+    //qDebug()<< "altitude" << (QString::number(package_data.I_altitude));
     m_dashboard->setgpsAltitude(QString::number(package_data.I_altitude));
     //    ui->hora->setText(hora);
     //    ui->precisao->setText(QString::number(package_data.H_diluicao_da_precisao_horizontal));
@@ -122,13 +122,13 @@ void GPS::GPGGA(QString package){
 
     if(package_data.C_latitude_dir == 'S' || package_data.C_latitude_dir == 's')
     { //  ui->latitude->setText(QString::number(((real/60)+inteiro)*-1,'g',9));
-        qDebug()<< "latitude" << (QString::number(((real/60)+inteiro)*-1,'g',9));
+        //qDebug()<< "latitude" << (QString::number(((real/60)+inteiro)*-1,'g',9));
         m_dashboard->setgpsLatitude(QString::number(((real/60)+inteiro)*-1,'g',9));
     }
     else
     {
         // ui->latitude->setText(QString::number(((real/60)+inteiro),'g',9));
-        qDebug()<< "latitude" << (QString::number(((real/60)+inteiro),'g',9));
+        //qDebug()<< "latitude" << (QString::number(((real/60)+inteiro),'g',9));
         m_dashboard->setgpsLatitude(QString::number(((real/60)+inteiro),'g',9));
     }
 
@@ -143,20 +143,20 @@ void GPS::GPGGA(QString package){
     val = package_data.D_longitude;
     real = val.toDouble();
 
-    qDebug()<< "latitude dir" << package_data.C_latitude_dir;
-            qDebug()<< "longitude dir" << package_data.E_longitude_dir;
-         qDebug()<< " C latitude dir" << package_data.C_latitude_dir;
+    //qDebug()<< "latitude dir" << package_data.C_latitude_dir;
+            //qDebug()<< "longitude dir" << package_data.E_longitude_dir;
+         //qDebug()<< " C latitude dir" << package_data.C_latitude_dir;
 
     if(package_data.E_longitude_dir == 'W' || package_data.E_longitude_dir == 'w')
     {
         //   ui->longitude->setText(QString::number(((real/60)+inteiro)*-1,'g',9));
-        //qDebug()<< "longitude" << (QString::number(((real/60)+inteiro)*-1,'g',9));
+        ////qDebug()<< "longitude" << (QString::number(((real/60)+inteiro)*-1,'g',9));
         m_dashboard->setgpsLongitude(QString::number(((real/60)+inteiro)*-1,'g',9));
     }
     else
     {
         //   ui->longitude->setText(QString::number(((real/60)+inteiro),'g',9));
-      //  qDebug()<< "longitude" << (QString::number(((real/60)+inteiro),'g',9));
+      //  //qDebug()<< "longitude" << (QString::number(((real/60)+inteiro),'g',9));
         m_dashboard->setgpsLongitude(QString::number(((real/60)+inteiro),'g',9));
     }
 
@@ -197,7 +197,7 @@ void GPS::GPGSA(QString package){
             cc++;
         }
     }
-    qDebug()<< "active Satelites" << (QString::number(cc));
+    //qDebug()<< "active Satelites" << (QString::number(cc));
 
 
 
@@ -231,7 +231,7 @@ void GPS::GPGSV(QString package){
     package_data.DS_sats[3].C_azimuth = pkt_data.at(18).toInt();
     package_data.DS_sats[3].D_snr = pkt_data.at(19).toInt();
 
-    qDebug()<< "satelites_visible" << (QString::number(package_data.C_satelites_visiveis));
+    //qDebug()<< "satelites_visible" << (QString::number(package_data.C_satelites_visiveis));
     m_dashboard->setgpsVisibleSatelites(QString::number(package_data.C_satelites_visiveis));
 
 }
@@ -253,7 +253,7 @@ void GPS::GPRMC(QString package){
     package_data.J_variacao_magnetica = pkt_data[10].toFloat();
     package_data.K_variacao_magnetica_coord = pkt_data[11].toStdString()[0];
 
-    qDebug()<< "velocity" <<(QString::number(package_data.G_velocidade_nos * 1.852));
+    //qDebug()<< "velocity" <<(QString::number(package_data.G_velocidade_nos * 1.852));
     m_dashboard->setgpsSpeed(QString::number(package_data.G_velocidade_nos * 1.852));
     //   ui->velocidade->setText(QString::number(package_data.G_velocidade_nos * 1.852));
 
@@ -348,7 +348,7 @@ void GPS::decode(QStringList packages){
             packages_invalidos++;
         }
 
-        //qDebug() << tipo;
+        ////qDebug() << tipo;
 
         continue;
 bail:
@@ -365,7 +365,7 @@ void GPS::startGPScom(const QString &portName)
 
     com = new QSerialPort(this);
     serialBuffer = "";
-    qDebug() <<"StartGPS"<< portName ;
+    //qDebug() <<"StartGPS"<< portName ;
 
 
 

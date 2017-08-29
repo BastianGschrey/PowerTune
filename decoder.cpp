@@ -82,7 +82,7 @@ Decoder::Decoder(DashBoard *dashboard, QObject *parent)
 void Decoder::setUnits(const int &unitSelect)
 {
     units = unitSelect;
-    qDebug() << "Unitselection"<< units;
+    //qDebug() << "Unitselection"<< units;
 }
 
 
@@ -157,11 +157,11 @@ void Decoder::decodeAdv(QByteArray serialdata)
 
 
 
-//    qDebug() << "Time passed since last call"<< startTime.msecsTo(QTime::currentTime());
+//    //qDebug() << "Time passed since last call"<< startTime.msecsTo(QTime::currentTime());
     odometer += ((startTime.msecsTo(QTime::currentTime())) * ((packageADV[16]) / 3600000)); // Odometer
     m_dashboard->setOdo(odometer);
     startTime.restart(); //(QTime::currentTime())
-//    qDebug() << "Odometer"<< odometer;
+//    //qDebug() << "Odometer"<< odometer;
 
 
     }
@@ -198,7 +198,7 @@ void Decoder::decodeAdv(QByteArray serialdata)
     packageADV2[19] = mul[19] * info->na1 + add[19];
     packageADV2[20] = 0;
     packageADV2[21] = 0;
- qDebug() << "Advanced 2";
+ //qDebug() << "Advanced 2";
     m_dashboard->setRevs(packageADV2[0]);
     m_dashboard->setEngLoad(packageADV2[1]);
     m_dashboard->setMAF1V(packageADV2[2]);
@@ -258,7 +258,7 @@ void Decoder::decodeAdv(QByteArray serialdata)
         packageADV3[20] = 0;
         packageADV3[21] = 0;
 
- qDebug() << "Advanced 3";
+ //qDebug() << "Advanced 3";
     m_dashboard->setRevs(packageADV3[0]); //correct
     m_dashboard->setIntakepress(packageADV3[1]); //correct
     m_dashboard->setPressureV(packageADV3[2]); //correct
@@ -278,28 +278,28 @@ void Decoder::decodeAdv(QByteArray serialdata)
   //  m_dashboard->setna1(packageADV3[19]);
   //  m_dashboard->setSecinjpulse(packageADV3[20]);
   //  m_dashboard->setna2(packageADV3[21]);
- qDebug() << "0"<< packageADV3[0];
-    qDebug() << "1"<< packageADV3[1];
-  qDebug() << "2"<< packageADV3[2];
-  qDebug() << "3"<< packageADV3[3];
-  qDebug() << "4"<< packageADV3[4];
-  qDebug() << "5"<< packageADV3[5];
-  qDebug() << "6"<< packageADV3[6];
-  qDebug() << "7"<< packageADV3[7];
-  qDebug() << "8"<< packageADV3[8];
-  qDebug() << "9"<< packageADV3[9];
-  qDebug() << "10"<< packageADV3[10];
-  qDebug() << "11"<< packageADV3[11];
-  qDebug() << "12"<< packageADV3[12];
-  qDebug() << "13"<< packageADV3[13];
-  qDebug() << "14"<< packageADV3[14];
-  qDebug() << "15"<< packageADV3[15];
-  qDebug() << "16"<< packageADV3[16];
-  qDebug() << "17"<< packageADV3[17];
-  qDebug() << "18"<< packageADV3[18];
-  qDebug() << "19"<< packageADV3[19];
-  qDebug() << "20"<< packageADV3[20];
-  qDebug() << "22"<< packageADV3[21];
+ //qDebug() << "0"<< packageADV3[0];
+    //qDebug() << "1"<< packageADV3[1];
+  //qDebug() << "2"<< packageADV3[2];
+  //qDebug() << "3"<< packageADV3[3];
+  //qDebug() << "4"<< packageADV3[4];
+  //qDebug() << "5"<< packageADV3[5];
+  //qDebug() << "6"<< packageADV3[6];
+  //qDebug() << "7"<< packageADV3[7];
+  //qDebug() << "8"<< packageADV3[8];
+  //qDebug() << "9"<< packageADV3[9];
+  //qDebug() << "10"<< packageADV3[10];
+  //qDebug() << "11"<< packageADV3[11];
+  //qDebug() << "12"<< packageADV3[12];
+  //qDebug() << "13"<< packageADV3[13];
+  //qDebug() << "14"<< packageADV3[14];
+  //qDebug() << "15"<< packageADV3[15];
+  //qDebug() << "16"<< packageADV3[16];
+  //qDebug() << "17"<< packageADV3[17];
+  //qDebug() << "18"<< packageADV3[18];
+  //qDebug() << "19"<< packageADV3[19];
+  //qDebug() << "20"<< packageADV3[20];
+  //qDebug() << "22"<< packageADV3[21];
 
     }
 
@@ -358,7 +358,7 @@ void Decoder::decodeSensor(QByteArray serialdata)
     QString fileName = Logfile;
     QFile mFile(fileName);
     if(!mFile.open(QFile::Append | QFile::Text)){
-        qDebug() << "Could not open file for writing";
+        //qDebug() << "Could not open file for writing";
     }
     QTextStream out(&mFile);
     out.setFieldAlignment(QTextStream::AlignLeft);
@@ -624,7 +624,7 @@ void Decoder::decodeInjcorr(QByteArray serialdata, quint8 column)
 void Decoder::decodeFuelBase(QByteArray serialdata, quint8 package)
 {
     quint8 index = 0;
-    //qDebug() << "add package!";
+    ////qDebug() << "add package!";
 
     for(quint8 index = 2; index < 102; index++)
     {
@@ -641,10 +641,10 @@ void Decoder::decodeFuelBase(QByteArray serialdata, quint8 package)
             {
 //                ui->tableFuelBase->setItem(row, column, new QTableWidgetItem(QString::number(info->fuelBase[index])));
                 index++;
-               // qDebug() << row << " : " << column;
+               // //qDebug() << row << " : " << column;
             }
         }
-        //qDebug() << fullFuelBase.length();
+        ////qDebug() << fullFuelBase.length();
     }
 }
 
@@ -740,8 +740,8 @@ void Decoder::decodeInit(QByteArray serialdata)
 
 */
 //    ui->linePlatform->setText (QString(serialdata).mid(2,8));
-    qDebug() << "Model ="<<Model;
-    qDebug() << "Model name ="<<(QString(serialdata).mid(2,8));
+    //qDebug() << "Model ="<<Model;
+    //qDebug() << "Model name ="<<(QString(serialdata).mid(2,8));
     m_dashboard->setPlatform(QString(serialdata).mid(2,8));
 }
 
@@ -852,7 +852,7 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
 
  if (units == 0)
  {
-     qDebug() << "i am at 0 " ;
+     //qDebug() << "i am at 0 " ;
     m_dashboard->setSpeed(unit.value(10)); // <-This is for the "main" speedo KMH
  }
  if (units == 1)
@@ -951,7 +951,7 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
         {
             Boostconv = ((unit.value(1))-103) ;
             realBoost = Boostconv* 0.01;
-            qDebug() << realBoost;
+            //qDebug() << realBoost;
         }
         else if ((unit.value(1)) < 103) // while boost pressure is negative  multiply by 0.01 to show kg/cm2
         {
@@ -968,10 +968,10 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
     if (Loggerstat ==1)
     {
     QString fileName = Logfile;
-    qDebug() << Logfile;
+    //qDebug() << Logfile;
     QFile mFile(fileName);
     if(!mFile.open(QFile::Append | QFile::Text)){
-        qDebug() << "Could not open Adaptronic Loggerfile for writing";
+        //qDebug() << "Could not open Adaptronic Loggerfile for writing";
     }
     QTextStream out(&mFile);
     out << (loggerStartTime.msecsTo(QTime::currentTime()))<< "," << unit.value(0) << ","
@@ -1012,7 +1012,7 @@ while (Model < 1)
 }
 
 QFile file( filename );
-qDebug() << "Apexi Start Log";
+//qDebug() << "Apexi Start Log";
 if ( file.open(QIODevice::ReadWrite) )
 {
     QTextStream out( &file );
@@ -1058,7 +1058,7 @@ Loggerstat = 1;
 void Decoder::loggerActivationstatus(int loggingstatus)
 {
 Loggerstat = loggingstatus;
-qDebug() <<"Decoder loggingstatus"<< loggingstatus;
+//qDebug() <<"Decoder loggingstatus"<< loggingstatus;
 }
 void Decoder::calculatorAux(int aux1min,int aux2max,int aux3min,int aux4max,int aux5min,int aux6max,int aux7min, int aux8max,QString Auxunit1,QString Auxunit2,QString Auxunit3,QString Auxunit4)
 {
@@ -1080,7 +1080,7 @@ void Decoder::calculatorAux(int aux1min,int aux2max,int aux3min,int aux4max,int 
 void Decoder::decodeDicktator(QByteArray m_dicktatorMsg)
 {
     dicktator_info_t* info=reinterpret_cast<dicktator_info_t*>(m_dicktatorMsg.data());
-qDebug() << "decoder Dicktator" <<m_dicktatorMsg.toHex();
+//qDebug() << "decoder Dicktator" <<m_dicktatorMsg.toHex();
 
 
         packageDicktator[5] = (info->b5);                //rpm
@@ -1092,7 +1092,7 @@ qDebug() << "decoder Dicktator" <<m_dicktatorMsg.toHex();
         packageDicktator[14] = info->boost * 0.00305859 - 0.989;     //Relative Boost
         packageDicktator[18] = (info->b18 /16); //Battery Voltage
         packageDicktator[19] = (info->b20 * 25 + info->b19*0.1 ); //TPS
-        qDebug() << "Battery" << packageDicktator[18];
+        //qDebug() << "Battery" << packageDicktator[18];
 
         m_dashboard->setRevs(packageDicktator[6]/packageDicktator[7]);
         m_dashboard->setBatteryV(packageDicktator[18]);

@@ -148,7 +148,7 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
 {
 
     ecu = ecuSelect;
-    qDebug() << "Selected ECU" << ecu;
+    //qDebug() << "Selected ECU" << ecu;
     interface = interfaceSelect;
     logging = loggingSelect;
 
@@ -158,7 +158,7 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
     {
 
         initSerialPort();
-        qDebug() << "logging" <<logging;
+        //qDebug() << "logging" <<logging;
         m_serialport->setPortName(portName);
         m_serialport->setBaudRate(QSerialPort::Baud57600);
         m_serialport->setParity(QSerialPort::NoParity);
@@ -166,11 +166,11 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
         m_serialport->setStopBits(QSerialPort::OneStop);
         m_serialport->setFlowControl(QSerialPort::NoFlowControl);;
 
-        qDebug() << "Try to open SerialPort:";
+        //qDebug() << "Try to open SerialPort:";
         if(m_serialport->open(QIODevice::ReadWrite) == false)
         {
             m_dashBoard->setSerialStat(m_serialport->errorString());
-            qDebug() << "Open Serial port failed: " << m_serialport->errorString();
+            //qDebug() << "Open Serial port failed: " << m_serialport->errorString();
         }
         else
         {
@@ -179,7 +179,7 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
 
         requestIndex = 0;
 
-        qDebug() << "Initial request to PowerFc"<< requestIndex;
+        //qDebug() << "Initial request to PowerFc"<< requestIndex;
 
        Serial::sendRequest(requestIndex);
 
@@ -199,7 +199,7 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
 
         if (modbusDevice->state() != QModbusDevice::ConnectedState)
         {
-            qDebug() << "modbus is not connected";
+            //qDebug() << "modbus is not connected";
             //modbusDevice = new QModbusRtuSerialMaster(this);
             modbusDevice->setConnectionParameter(QModbusDevice::SerialPortNameParameter,portName);
             modbusDevice->setConnectionParameter(QModbusDevice::SerialBaudRateParameter,57600);
@@ -220,7 +220,7 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
     {
 
         initSerialPort();
-        qDebug() << "logging" <<logging;
+        //qDebug() << "logging" <<logging;
         m_serialport->setPortName(portName);
         m_serialport->setBaudRate(QSerialPort::Baud19200);
         m_serialport->setParity(QSerialPort::NoParity);
@@ -229,11 +229,11 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
         m_serialport->setFlowControl(QSerialPort::NoFlowControl);
         //m_serialport->setReadBufferSize(103);
 
-        qDebug() << "Try to open SerialPort:";
+        //qDebug() << "Try to open SerialPort:";
         if(m_serialport->open(QIODevice::ReadWrite) == false)
         {
             m_dashBoard->setSerialStat(m_serialport->errorString());
-            qDebug() << "Open Serial port failed: " << m_serialport->errorString();
+            //qDebug() << "Open Serial port failed: " << m_serialport->errorString();
         }
         else
         {
@@ -252,11 +252,11 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
         m_serialport->setStopBits(QSerialPort::OneStop);
         m_serialport->setFlowControl(QSerialPort::NoFlowControl);;
 
-        qDebug() << "Try to open SerialPort:";
+        //qDebug() << "Try to open SerialPort:";
         if(m_serialport->open(QIODevice::ReadWrite) == false)
         {
             m_dashBoard->setSerialStat(m_serialport->errorString());
-            qDebug() << "Open Serial port failed: " << m_serialport->errorString();
+            //qDebug() << "Open Serial port failed: " << m_serialport->errorString();
         }
         else
         {
@@ -268,15 +268,15 @@ void Serial::closeConnection()
 {
     if(ecu == 0){
         m_serialport->close();
-        qDebug() << "Connection closed.";
+        //qDebug() << "Connection closed.";
     }
     if(ecu == 1){
         modbusDevice->disconnectDevice();
-        qDebug() << "device disconnected";
+        //qDebug() << "device disconnected";
     }
     if(ecu == 2){
         m_serialport->close();
-        qDebug() << "Connection closed.";
+        //qDebug() << "Connection closed.";
     }
 }
 
@@ -285,21 +285,21 @@ void Serial::closeConnection()
 
 void Serial::handleTimeout()
 {
-    qDebug() << "Timeout";
+    //qDebug() << "Timeout";
     //request Data Again
     QString fileName = "Errors.txt";
     QFile mFile(fileName);
     if(!mFile.open(QFile::Append | QFile::Text)){
-        qDebug() << "Could not open file for writing";
+        //qDebug() << "Could not open file for writing";
     }
     QTextStream out(&mFile);
     out << "Timeout Request Index " << m_writeData.toHex() << " lenght received "<< int(m_buffer.length())<< " Bytes "<< " Expected Bytes "<< int(Bytesexpected)<< " bytes " <<" Message "<< QByteArray(m_buffer.toHex()) <<endl;
     mFile.close();
     Serial::clear();
-    qDebug() << "check whats still left on serialport"<< m_serialport->readAll();
+    //qDebug() << "check whats still left on serialport"<< m_serialport->readAll();
     m_serialport->flush();
     m_readData.clear();
-    qDebug() << "m_readData"<<m_buffer;
+    //qDebug() << "m_readData"<<m_buffer;
     Serial::sendRequest(requestIndex);
 }
 
@@ -309,13 +309,13 @@ void Serial::handleError(QSerialPort::SerialPortError serialPortError)
         QString fileName = "Errors.txt";
         QFile mFile(fileName);
         if(!mFile.open(QFile::Append | QFile::Text)){
-            qDebug() << "Could not open file for writing";
+            //qDebug() << "Could not open file for writing";
         }
         QTextStream out(&mFile);
         out << "Serial Error " << (m_serialport->errorString()) <<endl;
         mFile.close();
         m_dashBoard->setSerialStat(m_serialport->errorString());
-        qDebug() <<"Serialport Error" <<(m_serialport->errorString());
+        //qDebug() <<"Serialport Error" <<(m_serialport->errorString());
     }
 }
 
@@ -331,7 +331,7 @@ void Serial::readyToRead()
     if(ecu == 0)
     {
         m_readData = m_serialport->readAll();
-        qDebug() << "ready read slot entered"<<m_readData.toHex();
+        //qDebug() << "ready read slot entered"<<m_readData.toHex();
         Serial::apexiECU(m_readData);
     }
 
@@ -353,7 +353,7 @@ void Serial::readyToRead()
     if(ecu == 2) //Dicktator ECU
     {
         m_readData = m_serialport->readAll();
-        qDebug() << "ready read slot e"<<m_readData.toHex();
+        //qDebug() << "ready read slot e"<<m_readData.toHex();
         Serial::dicktatorECU(m_readData);
         m_readData.clear();
     }
@@ -368,22 +368,22 @@ void Serial::dicktatorECU(const QByteArray &buffer)
     m_buffer.append(buffer);
 
 
-    qDebug() << "Dicktator ecu"<< m_buffer.toHex();
+    //qDebug() << "Dicktator ecu"<< m_buffer.toHex();
     QByteArray startpattern("START");
     QByteArrayMatcher startmatcher(startpattern);
     QByteArray endpattern("END");
     QByteArrayMatcher endmatcher(endpattern);
-//    qDebug() << "Dicktator ecu" <<m_buffer;
+//    //qDebug() << "Dicktator ecu" <<m_buffer;
     int pos = 0;
     while((pos = startmatcher.indexIn(m_buffer, pos)) != -1)
     {
 
         if (pos !=0)
         {
-            qDebug() << "Dicktator pattern found at pos" << pos;
+            //qDebug() << "Dicktator pattern found at pos" << pos;
             m_buffer.remove(0, pos); //remove all bytes before "Start:
 
-            qDebug() << "removed all bytes before the string START " << m_buffer;
+            //qDebug() << "removed all bytes before the string START " << m_buffer;
         }
         if (pos == 0 ) break;
     }
@@ -396,17 +396,17 @@ void Serial::dicktatorECU(const QByteArray &buffer)
 */    while((pos2 = endmatcher.indexIn(m_buffer, pos2)) != -1)
     {
 
-        qDebug() << "found end of message at " << pos2;
-        qDebug() << "current " << m_buffer;
+        //qDebug() << "found end of message at " << pos2;
+        //qDebug() << "current " << m_buffer;
 /*        if (m_buffer.length() > 33)
         {
         m_buffer.remove(33,m_buffer.length()-33);
  */    if (pos2 > 30)
        {
 
-         qDebug() << "pos2 is not where it is expected" << pos2;
+         //qDebug() << "pos2 is not where it is expected" << pos2;
          m_buffer.remove(0,pos2-30);
-         qDebug() << "removed all the shit " << m_buffer;
+         //qDebug() << "removed all the shit " << m_buffer;
         }
 
        if (pos2 == 30 )
@@ -422,41 +422,41 @@ void Serial::dicktatorECU(const QByteArray &buffer)
 
 void Serial::apexiECU(const QByteArray &buffer)
 {
-    qDebug() << "APEXI ecu";
+    //qDebug() << "APEXI ecu";
 
     if (Bytesexpected != m_buffer.length())
     {
-        qDebug() << "starting timer";
+        //qDebug() << "starting timer";
         m_timer.start(5000);
     }
     m_buffer.append(buffer);
 /*
     if (Bytesexpected < m_buffer.length())
     {
-        qDebug() << "clearing"<< Bytesexpected <<m_buffer.length();
+        //qDebug() << "clearing"<< Bytesexpected <<m_buffer.length();
         m_buffer.clear();
     }
 */
-//    qDebug() << "current buffer"<<m_buffer.toHex();
-//    qDebug() << "buffer length"<<m_buffer.length()<< "Expected"<< Bytesexpected;
+//    //qDebug() << "current buffer"<<m_buffer.toHex();
+//    //qDebug() << "buffer length"<<m_buffer.length()<< "Expected"<< Bytesexpected;
     QByteArray startpattern = m_writeData.left(1);
     QByteArrayMatcher startmatcher(startpattern);
-//    qDebug() << "Expected Start"<< startpattern;// <<"Start"<< startpattern;
+//    //qDebug() << "Expected Start"<< startpattern;// <<"Start"<< startpattern;
 
     int pos = 0;
     while((pos = startmatcher.indexIn(m_buffer, pos)) != -1)
     {
-        qDebug() << "pattern found at pos" << pos << m_buffer.toHex();
-        qDebug() << "message length current" << m_buffer.size() << "message length expected" << Bytesexpected;
+        //qDebug() << "pattern found at pos" << pos << m_buffer.toHex();
+        //qDebug() << "message length current" << m_buffer.size() << "message length expected" << Bytesexpected;
         if (pos !=0)
         {
             m_buffer.remove(0, pos); //remove all bytes before Identifier
-            qDebug() << "removed all bytes before the expected response start" << m_buffer.toHex();
+            //qDebug() << "removed all bytes before the expected response start" << m_buffer.toHex();
             if (m_buffer.length() > Bytesexpected)
               {
-               qDebug() << "message too long " << m_buffer.toHex();
+               //qDebug() << "message too long " << m_buffer.toHex();
                m_buffer.remove(Bytesexpected,m_buffer.length() );
-               qDebug() << "removed extra bytes after message" << m_buffer.toHex();
+               //qDebug() << "removed extra bytes after message" << m_buffer.toHex();
               }
         }
 
@@ -464,7 +464,7 @@ void Serial::apexiECU(const QByteArray &buffer)
         {
 
              //Bytesexpected = m_buffer[1]+1;
-             //qDebug() << "Message begin as expected , changing bytes expected" << Bytesexpected;
+             ////qDebug() << "Message begin as expected , changing bytes expected" << Bytesexpected;
              break;
         }
 
@@ -475,7 +475,7 @@ void Serial::apexiECU(const QByteArray &buffer)
     {
         m_apexiMsg =  m_buffer;
         //m_apexiMsg.remove(Bytesexpected,m_apexiMsg.length()+1);
-        qDebug() << "Extracted Apexi Message" << m_buffer.toHex();
+        //qDebug() << "Extracted Apexi Message" << m_buffer.toHex();
         //m_buffer.remove(0,Bytesexpected); // remove extracted message from the buffer
         m_buffer.clear();
         // Process to calculate checksum not evaluated at the moment , for later use
@@ -495,7 +495,7 @@ void Serial::apexiECU(const QByteArray &buffer)
         if (checksumhex == recvchecksumhex)
         {
 */
- //           qDebug() << "Checksum matches expected Checksum " << checksumhex << " " << recvchecksumhex;
+ //           //qDebug() << "Checksum matches expected Checksum " << checksumhex << " " << recvchecksumhex;
             m_timer.stop();
             if(requestIndex <= 5){requestIndex++;}
             else{requestIndex = 2;}
@@ -517,7 +517,7 @@ void Serial::readData(QByteArray serialdata)
     {
         //Power FC Decode
         quint8 requesttype = serialdata[0];
-        qDebug() << "Processing Message"<< serialdata.toHex();
+        //qDebug() << "Processing Message"<< serialdata.toHex();
 
         //Write all OK Serial Messages to a file
         if(serialdata[1] + 1 == serialdata.length())
@@ -526,7 +526,7 @@ void Serial::readData(QByteArray serialdata)
                 QString fileName = "OK Messages.txt";
                 QFile mFile(fileName);
                 if(!mFile.open(QFile::Append | QFile::Text)){
-                    qDebug() << "Could not open file for writing";
+                    //qDebug() << "Could not open file for writing";
                 }
                 QTextStream out(&mFile);
                 out << QByteArray(serialdata.toHex())<< endl;
@@ -586,14 +586,14 @@ void Serial::handleBytesWritten(qint64 bytes)
     m_bytesWritten += bytes;
     if (m_bytesWritten == m_writeData.size()) {
         m_bytesWritten = 0;
-        qDebug() <<("Data successfully sent to port") << (m_serialport->portName());
+        //qDebug() <<("Data successfully sent to port") << (m_serialport->portName());
 
     }
 }
 // Serial requests are send via Serial
 void Serial::writeRequestPFC(QByteArray p_request)
 {
-    qDebug() << "write request" << p_request.toHex();
+    //qDebug() << "write request" << p_request.toHex();
     m_writeData = p_request;
     qint64 bytesWritten = m_serialport->write(p_request);
     m_dashBoard->setSerialStat(QString("Sending Request " + p_request.toHex()));
@@ -601,10 +601,10 @@ void Serial::writeRequestPFC(QByteArray p_request)
     //Action to be implemented
     if (bytesWritten == -1) {
         m_dashBoard->setSerialStat(m_serialport->errorString());
-        qDebug() << "Write request to port failed" << (m_serialport->errorString());
+        //qDebug() << "Write request to port failed" << (m_serialport->errorString());
     } else if (bytesWritten != m_writeData.size()) {
         m_dashBoard->setSerialStat(m_serialport->errorString());
-        qDebug() << "could not write complete request to port" << (m_serialport->errorString());
+        //qDebug() << "could not write complete request to port" << (m_serialport->errorString());
     }
 
     //m_timer.start(5000);
@@ -980,8 +980,8 @@ void Serial::startLogging(const QString &logfilenameSelect, const int &loggeron)
 {
     loggingstatus = loggeron;
     Logfilename = logfilenameSelect;
-    qDebug() << Logfilename;
-    qDebug() << "on off"<< loggingstatus;
+    //qDebug() << Logfilename;
+    //qDebug() << "on off"<< loggingstatus;
     if (ecu == 0)    //Apexi
     {
         {
@@ -992,7 +992,7 @@ void Serial::startLogging(const QString &logfilenameSelect, const int &loggeron)
     {
         QString filename = Logfilename + ".csv";
         QFile file( filename );
-        qDebug() << "Adaptronic start Log";
+        //qDebug() << "Adaptronic start Log";
         if ( file.open(QIODevice::ReadWrite) )
         {
             QTextStream stream( &file );
@@ -1012,7 +1012,7 @@ void Serial::stopLogging(const QString &logfilenameSelect, const int &loggeron)
 {
     loggingstatus = loggeron;
     m_decoder->loggerActivationstatus(loggingstatus);
-    qDebug() << "Stop Logging ";
+    //qDebug() << "Stop Logging ";
     return;
 }
 

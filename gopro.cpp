@@ -80,22 +80,22 @@ void GoPro::goProSettings(const int &goProSelect, const QString &goPropass)
     Command = QString (ADRESS) +QString (PARAM1) +"/"+ QString (PARAM2) + "?t=" + QString (PASSWORD) + "&p=%" + QString (OPTION);
     }
 
-    qDebug() << "Gopro Index" <<Index;
-    qDebug() << "Gopro Command" <<Command;
+    //qDebug() << "Gopro Index" <<Index;
+    //qDebug() << "Gopro Command" <<Command;
 }
 void GoPro::goprorec(const QString &record)
 {
     QString cmdstatus = record; // Status of GoPro command ,on off (0/1)
-    qDebug()<< "cmdstatus " << cmdstatus;
+    //qDebug()<< "cmdstatus " << cmdstatus;
 
 
     QNetworkAccessManager *manager = new QNetworkAccessManager(this);
     GoPro::connect(manager, SIGNAL(finished(QNetworkReply*)),this, SLOT(replyFinished(QNetworkReply*)));
     manager->get(QNetworkRequest(QUrl(QString (Command) + QString (cmdstatus))));
-    qDebug() << "sending HTTP request " <<QString (Command) + QString (cmdstatus);
+    //qDebug() << "sending HTTP request " <<QString (Command) + QString (cmdstatus);
 }
  void GoPro::replyFinished(QNetworkReply *net_reply)
 {
      QByteArray data = net_reply->readAll();
-    qDebug() << "reply finished" << data.toInt();
+    //qDebug() << "reply finished" << data.toInt();
  }
