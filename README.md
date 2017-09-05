@@ -11,19 +11,38 @@ Windows 10
 Raspbian Jessie 2017-04-10
 
 
-Implemented Power FC variants :
+#### Implemented PowerFC variants:
 
-Mazda:
+#### Mazda :
 13B-REW 
 
-Nissan:
-RB20DET 
-RB26DETT
+#### Nissan :
+
+RB20DET
+RB26DET
 SR20DET1
 CA18DET
 RB25DET
 
-Implemented Adaptronic Variants :
+#### Toyota :  
+4E-FTE2
+1JZ-GTE
+1JZ-GTE3
+1ZZ-FRE
+2jZ-GTE1
+2ZZ-GE
+3S-GE
+3S-GTE3
+3S-GTE
+3E-FTE2
+
+
+#### Tested Vehicles Apexi PFC :              ECU Variant:*                            FC Hako:*           FC Datalogit:* 
+Mazda RX7 FD3S                                (13B-REW)          <big>__✓__*          <big>__✓__*
+Toyota MR2                                    (3S-GTE3)          <big>__✓__*          <big>__✓__*
+
+#### Adaptronic Variants :
+
 
 Adaptronic Select series:
 All variants
