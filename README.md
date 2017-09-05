@@ -47,7 +47,7 @@ Raspbian Jessie 2017-04-10
 * All variants
 
 #### Tested Vehicles Adaptronic :              ECU Variant:         
-* FD3S                                               PNP S8           <big>__✓__       
+* FD3S                                         PNP S8*           <big>__✓__       
 
 Implemented Features :
 
