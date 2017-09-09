@@ -16,6 +16,8 @@
 
 #include <QFile>
 #include <QTextStream>
+#include <QThread>
+
 
 
 int units;// 0 Metric / 1 Imperial

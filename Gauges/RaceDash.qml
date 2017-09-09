@@ -5,13 +5,14 @@ import QtQuick.Controls.Styles 1.4
 
 
 Rectangle {
+    id:racedashwindow
     width: parent.width
     height:parent.height
     color:"grey"
     Gauge {
         id: gauge
         height: parent.height
-        width: 780
+        width: parent.width /1.025
         y:0
         minorTickmarkCount: 0
         tickmarkStepSize : 9000
@@ -89,7 +90,7 @@ Rectangle {
 
     Text {
         text:"0"
-        font.pixelSize: 20
+        font.pixelSize: racedashwindow.width /40
          y: 220
          x: 10
         font.bold: true
@@ -99,7 +100,7 @@ Rectangle {
     }
     Text {
         text:"1"
-        font.pixelSize: 20
+        font.pixelSize: racedashwindow.width /40
          y: 220
          x: 80
         font.bold: true
@@ -109,7 +110,7 @@ Rectangle {
     }
     Text {
         text:"2"
-        font.pixelSize: 20
+        font.pixelSize: racedashwindow.width /40
          y: 160
          x: 165
         font.bold: true
@@ -119,7 +120,7 @@ Rectangle {
     }
     Text {
         text:"3"
-        font.pixelSize: 20
+        font.pixelSize: racedashwindow.width /40
          y: 120
          x: 250
         font.bold: true
@@ -129,7 +130,7 @@ Rectangle {
     }
     Text {
         text:"4"
-        font.pixelSize: 20
+        font.pixelSize: racedashwindow.width /40
          y: 120
          x: 335
         font.bold: true
@@ -139,7 +140,7 @@ Rectangle {
     }
     Text {
         text:"5"
-        font.pixelSize: 20
+        font.pixelSize: racedashwindow.width /40
          y: 120
          x: 420
         font.bold: true
@@ -149,7 +150,7 @@ Rectangle {
     }
     Text {
         text:"6"
-        font.pixelSize: 20
+        font.pixelSize: racedashwindow.width /40
          y: 120
          x: 505
         font.bold: true
@@ -159,7 +160,7 @@ Rectangle {
     }
     Text {
         text:"7"
-        font.pixelSize: 20
+        font.pixelSize: racedashwindow.width /40
          y: 120
          x: 590
         font.bold: true
@@ -169,7 +170,7 @@ Rectangle {
     }
     Text {
         text:"8"
-        font.pixelSize: 20
+        font.pixelSize: racedashwindow.width /40
          y: 120
          x: 675
         font.bold: true
@@ -179,7 +180,7 @@ Rectangle {
     }
     Text {
         text:"9"
-        font.pixelSize: 20
+        font.pixelSize: racedashwindow.width /40
          y: 120
          x: 760
         font.bold: true
