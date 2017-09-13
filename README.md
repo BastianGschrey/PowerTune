@@ -57,3 +57,67 @@ Implemented Features :
 * Differential Aux input Settings for Power FC (2 for FC Hako / 4 For Datalogit) 
 * GPS for NMEA 0183 compliant devices via Serial (Tested with BU-353S4 GPS Mouse) 
 
+
+#### How to build a Raspberry Pi3 PowerTune image:
+
+
+This was tested on Ubuntu 17.04
+
+  ```
+  $ git clone https://github.com/MarkusIppy/buildroot.git
+  ```
+  ```
+  $ cd buildroot
+  ```
+  ```
+  $ make powertune_rpi3_defconfig
+  ```
+
+If you use another screen than the official pi Screen , edit the following file 
+
+  ```
+  $ nano /buildroot/board/powertune/rpi3/rootfs/profile.d/qt5-env.sh
+  ```
+
+  Press "Ctrl+x" when you finished modifing the file and plress "y" to save
+
+  ```
+  $ make
+  ```
+
+
+
+This will download all required sourcecode into a seperate folder called "dl"
+Once the compilation has finished it will create a pi image called "powertune.img" in the folder
+/buildroot/output/images
+
+Flash the image to your SD card ( you can user Etcher or do it via command Line ) 
+Etcher can be downloaded her https://etcher.io/
+
+The image currently has a boot time of approx 17 seconds until PowerTune is starting ( i am still working on optimization ) 
+
+About the image :
+The username and password are :
+
+user: root
+pw: root
+
+Not all linux commands are supported and there is no need to use sudo 
+
+Should you wish to use Wlan :
+
+quit powertune 
+
+login with username and password
+
+Type the following :
+
+$nano /etc/network/wpa_supplicant.conf
+
+Enter your WLAN SSID and Password 
+
+Press "Ctrl+x" then press "y" to save
+
+$reboot
+
+Now your pi will always log into WLAN at boot 
