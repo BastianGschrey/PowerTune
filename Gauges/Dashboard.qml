@@ -34,7 +34,7 @@ Rectangle {
         Gauge {
             id: gauge
             anchors.fill: parent
-            anchors.margins: 10
+            anchors.margins: 5
             orientation : Qt.Horizontal
             minorTickmarkCount: 6
             tickmarkStepSize : 70
@@ -158,7 +158,7 @@ Rectangle {
 */
         Gauge {
             anchors.fill: parent
-            anchors.margins: 10
+            anchors.margins: 5
             orientation : Qt.Horizontal
             minorTickmarkCount: 3
             tickmarkStepSize : 40
