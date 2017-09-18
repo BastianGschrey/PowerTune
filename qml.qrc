@@ -50,6 +50,5 @@
         <file>Gauges/GPS.qml</file>
         <file>Gauges/RaceDash.qml</file>
         <file>graphics/Racedash800x480.png</file>
-        <file>Gauges/Charts.qml</file>
     </qresource>
 </RCC>

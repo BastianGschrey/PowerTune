@@ -4,8 +4,6 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Extras 1.4
-import QtCharts 2.0
-
 
 
 
@@ -37,7 +35,7 @@ Rectangle {
             anchors.margins: 5
             orientation : Qt.Horizontal
             minorTickmarkCount: 6
-            tickmarkStepSize : 70
+            tickmarkStepSize : 0
             //labelStepSize: 50
             minimumValue: 0
             maximumValue: 120
@@ -160,9 +158,8 @@ Rectangle {
             anchors.fill: parent
             anchors.margins: 5
             orientation : Qt.Horizontal
-            minorTickmarkCount: 3
-            tickmarkStepSize : 40
-            //labelStepSize: 50
+            minorTickmarkCount: 0
+            tickmarkStepSize : 0
             minimumValue: 0
             maximumValue: 80
 
