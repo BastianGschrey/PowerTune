@@ -22,19 +22,21 @@ Rectangle {
             //property alias gpsBaud: serialGPSBaud.currentText
             // property alias gpsBaudindex: serialGPSBaud.currentIndex
             property alias ecuType: ecuSelect.currentText
-            property alias powerFcInterface: interfaceSelect.currentText
+            //property alias powerFcInterface: interfaceSelect.currentText
             property alias auxunit1: unitaux1.text
             property alias aux1: an1V0.text
             property alias aux2: an2V5.text
             property alias auxunit2: unitaux2.text
             property alias aux3: an3V0.text
             property alias aux4: an4V5.text
+            /*
             property alias auxunit3: unitaux3.text
             property alias aux5: an5V0.text
             property alias aux6: an6V5.text
             property alias auxunit4: unitaux4.text
             property alias aux7: an7V0.text
             property alias aux8: an8V5.text
+*/
             property alias goProVariant: goProSelect.currentIndex
             property alias password: goPropass.text
             property alias unitSelector: unitSelect.currentIndex
@@ -98,6 +100,7 @@ Rectangle {
                     onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
                 }
+                /*
                 Text {
                     id: textinterfaceSelect
                     visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
@@ -113,6 +116,7 @@ Rectangle {
                     onCurrentIndexChanged: if (initialized) AppSettings.setInterface( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getInterface(); initialized = true }
                 }
+                */
                 Text {
                     id: textloggingSelect
                     visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
@@ -226,7 +230,7 @@ Rectangle {
                     Text  { text: "0V"; width: 50}
                     Text  { text: "5V"; width: 50}
                     Text  { text: "Name"; width: 50}
-                    Text  { text: "AN1-AN2"; width: 50}
+                    Text  { text: "AN1-2"; width: 50}
                     TextField {
                         id: an1V0
                         width: 50
@@ -244,7 +248,7 @@ Rectangle {
                         width: 50
                         placeholderText: qsTr("AFR")
                     }
-                    Text  { text: "AN3-AN4"; width: 50}
+                    Text  { text: "AN3-4"; width: 50}
                     TextField {
                         id: an3V0
                         width: 50
@@ -263,6 +267,7 @@ Rectangle {
                         width: 50
                         placeholderText: qsTr("AFR")
                     }
+                    /*
                     Text  { text: "AN5-AN6"; width: 50;visible: { (interfaceSelect.currentIndex == "1") ? true: false; }}
                     TextField {
                         id: an5V0
@@ -305,7 +310,7 @@ Rectangle {
                         placeholderText: qsTr("AFR")
                         visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
                     }
-
+*/
                 }
 
             }

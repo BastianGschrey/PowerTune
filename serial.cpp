@@ -946,13 +946,13 @@ void Serial::sendRequest(int requestIndex)
         break;
     case 6:
         Serial::writeRequestPFC(QByteArray::fromHex("0002FD")); // this is just for testing
-        Bytesexpected = 33;
-        //Serial::getAux();
-        //        Removed aux for testing , message lenght seems incorrect
+        Bytesexpected = 7;
+        /*
         if (interface ==0)
         {Bytesexpected = 7;}
         if (interface ==1)
         {Bytesexpected = 11;}
+        */
         break;
     }
 }
