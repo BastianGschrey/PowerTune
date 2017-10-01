@@ -1017,19 +1017,14 @@ void Serial::stopLogging(const QString &logfilenameSelect, const int &loggeron)
 }
 
 
-void Serial::Auxcalc (const QString &unitaux1,const int &an1V0,const int &an2V5,const QString &unitaux2,const int &an3V0,const int &an4V5,const QString &unitaux3,const int &an5V0,const int &an6V5,const QString &unitaux4,const int &an7V0,const int &an8V5)
+void Serial::Auxcalc (const QString &unitaux1,const int &an1V0,const int &an2V5,const QString &unitaux2,const int &an3V0,const int &an4V5)
 {
     int aux1min = an1V0;
     int aux2max = an2V5;
     int aux3min = an3V0;
     int aux4max = an4V5;
-    int aux5min = an5V0;
-    int aux6max = an6V5;
-    int aux7min = an7V0;
-    int aux8max = an8V5;
     QString Auxunit1 = unitaux1;
     QString Auxunit2 = unitaux2;
-    QString Auxunit3 = unitaux3;
-    QString Auxunit4 = unitaux4;
-    m_decoder->calculatorAux(aux1min,aux2max,aux3min,aux4max,aux5min,aux6max,aux7min,aux8max,Auxunit1,Auxunit2,Auxunit3,Auxunit4);
+
+    m_decoder->calculatorAux(aux1min,aux2max,aux3min,aux4max,Auxunit1,Auxunit2);
 }

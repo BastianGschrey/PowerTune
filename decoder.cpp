@@ -25,14 +25,11 @@ QByteArray serialdata;
 QByteArray fullFuelBase;
 qreal AN1AN2calc;
 qreal AN3AN4calc;
-qreal AN5AN6calc;
-qreal AN7AN8calc;
+
 //QBitArray flagArray;
 QString Logfile;
 QString Auxname1;
 QString Auxname2;
-QString Auxname3;
-QString Auxname4;
 qreal odometer;
 QTime startTime = QTime::currentTime();
 QTime loggerStartTime = QTime::currentTime();
@@ -43,10 +40,7 @@ int auxval1;
 int auxval2;
 int auxval3;
 int auxval4;
-int auxval5;
-int auxval6;
-int auxval7;
-int auxval8;
+
 
 
 double mul[80] = FC_INFO_MUL;  // required values for calculation from raw to readable values for Advanced Sensor info
@@ -61,7 +55,7 @@ static QString mapFD3S[] ={"InjDuty", "IGL","IGT","Rpm","Speed","Boost","Knock",
                         "Knock", "BatteryV",
                         "Speed", "Iscvduty", "O2volt",
                         "na1", "Secinjpulse", "na2",
-                        "AUX1", "AUX2", "AUX3", "AUX4", "AUX5", "AUX6", "AUX7", "AUX8",
+                        "AUX1", "AUX2", "AUX3", "AUX4",
                         "Analog1", "Analog2", "Analog3", "Analog4",
                         "Power", "Accel", "GForce", "ForceN", "Gear", "PrimaryInjD", "AccelTimer",
                         "Rec","Sens_PIM","Sens_VTA1","Sens_VTA2","Sens_VMOP","Sens_Wtrt","Sens_Airt",
@@ -368,7 +362,7 @@ void Decoder::decodeSensor(QByteArray serialdata)
             out << (loggerStartTime.msecsTo(QTime::currentTime()))<< packageBasic[0]<< packageBasic[1]<< packageBasic[2] << packageBasic[3] << packageBasic[4] << packageBasic[5] << packageBasic[6]<< packageBasic[7]<< packageBasic[8]
                 << packageBasic[9] << packageSens[0] << packageSens[1] << packageSens[2] << packageSens[3] << packageSens[4] << packageSens[5] << packageSens[6] << packageSens[7]
                 << flagArray[0] << flagArray[1] << flagArray[2] << flagArray[3] << flagArray[4] << flagArray[5] << flagArray[6] << flagArray[7] << flagArray[8] << flagArray[9] << flagArray[10] << flagArray[11] << flagArray[12] << flagArray[13] << flagArray[14] << flagArray[15]
-                << AN1AN2calc << AN3AN4calc << AN5AN6calc << AN7AN8calc
+                << AN1AN2calc << AN3AN4calc
                // << packageAux2[0] << packageAux2[1] << packageAux2[2] << packageAux2[3]<< packageAux2[4] << packageAux2[5] << packageAux2[6] << packageAux2[7]
                 << packageMap[0] << packageMap[1] << packageADV[0] << packageADV[1] << packageADV[2] << packageADV[3] << packageADV[4] << packageADV[5] << packageADV[6] << packageADV[7]
                 << packageADV[8] << packageADV[9] << packageADV[10] << packageADV[11] << packageADV[12] << packageADV[13] << packageADV[14] << packageADV[15] << packageADV[16] << packageADV[17] << packageADV[18]
@@ -415,17 +409,13 @@ void Decoder::decodeAux2(QByteArray serialdata)
 
     AN1AN2calc =((((auxval2-auxval1)/5) * (packageAux2[0] - packageAux2[1])) + auxval1);
     AN3AN4calc =((((auxval3-auxval2)/5) * (packageAux2[2] - packageAux2[3])) + auxval3);
-    AN5AN6calc =((((auxval5-auxval4)/5) * (packageAux2[4] - packageAux2[5])) + auxval5);
-    AN7AN8calc =((((auxval7-auxval6)/5) * (packageAux2[6] - packageAux2[7])) + auxval7);
+
 
     //Analog1
     m_dashboard->setauxcalc1(AN1AN2calc);
     //Analog2
     m_dashboard->setauxcalc2(AN3AN4calc);
-    //Analog3
-    m_dashboard->setauxcalc3(AN5AN6calc);
-    //Analog4
-    m_dashboard->setauxcalc4(AN7AN8calc);
+
 }
 void Decoder::decodeMap(QByteArray serialdata)
 {
@@ -1029,7 +1019,7 @@ if ( file.open(QIODevice::ReadWrite) )
         << "CLT" << "STP" << "CAT" << "ELD"
         <<"HWL"<<"FPD"<<"FPR"<<"APR"
         <<"PAC"<<"CCN"<<"TCN"<<"PRC"
-        << Auxname1 << Auxname2 << Auxname3 << Auxname4
+        << Auxname1 << Auxname2
         <<"MAPN"<<"MAPP"<<"RPM"<<"PIM"<<"PIM  V"
         <<"TPS  V"<<"InjFrPr"<<"Inj+/-"
         <<"IGL"<<"IGT"<<"FuelT"
@@ -1062,20 +1052,16 @@ void Decoder::loggerActivationstatus(int loggingstatus)
 Loggerstat = loggingstatus;
 //qDebug() <<"Decoder loggingstatus"<< loggingstatus;
 }
-void Decoder::calculatorAux(int aux1min,int aux2max,int aux3min,int aux4max,int aux5min,int aux6max,int aux7min, int aux8max,QString Auxunit1,QString Auxunit2,QString Auxunit3,QString Auxunit4)
+void Decoder::calculatorAux(int aux1min,int aux2max,int aux3min,int aux4max,QString Auxunit1,QString Auxunit2)
 {
     auxval1 = aux1min;
     auxval2 = aux2max;
     auxval3 = aux3min;
     auxval4 = aux4max;
-    auxval5 = aux5min;
-    auxval6 = aux6max;
-    auxval7 = aux7min;
-    auxval8 = aux8max;
+
     Auxname1 = Auxunit1;
     Auxname2 = Auxunit2;
-    Auxname3 = Auxunit3;
-    Auxname4 = Auxunit4;
+
 
 
 }

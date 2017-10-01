@@ -165,7 +165,7 @@ Rectangle {
                     text: "Connect"
                     onClicked: {
                         // console.log (serialName.currentText);
-                        Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text,unitaux3.text,an5V0.text,an6V5.text,unitaux4.text,an7V0.text,an8V5.text);
+                        Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
 
                     }
                 }

@@ -554,7 +554,7 @@ public slots:
      void loggerApexi(QString Logfilename);
      void loggerAdaptronic(QString Logfilename);
      void loggerActivationstatus(int loggingstatus);
-     void calculatorAux(int aux1min,int aux2max,int aux3min,int aux4max,int aux5min,int aux6max,int aux7min, int aux8max,QString Auxunit1,QString Auxunit2,QString Auxunit3,QString Auxunit4);
+     void calculatorAux(int aux1min,int aux2max,int aux3min,int aux4max,QString Auxunit1,QString Auxunit2);
      //void loggerApexi();
 
      //Dicktator ECU
