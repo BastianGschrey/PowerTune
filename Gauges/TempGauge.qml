@@ -39,8 +39,7 @@
 ****************************************************************************/
 
 //! [imports]
-import QtQuick 2.2
-import QtQuick.Window 2.1
+import QtQuick 2.9
 import "graphics"
 //! [imports]
 
