@@ -47,7 +47,7 @@ ApplicationWindow {
             id: fifthPageLoader
             //source: "qrc:/Gauges/Charts.qml"
             source: "qrc:/Gauges/GPS.qml"
-        
+         }
         /*
         Loader {
             id: sixtPageLoader
