@@ -19,19 +19,7 @@ ApplicationWindow {
 
         currentIndex: 0
         anchors.fill: parent
-        /*
-        Item {
-            width: 200; height: 200
-
-            Loader { id: pageLoader }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: pageLoader.source = "qrc:/Gauges/Dashboard.qml"
-            }
-        }
-
-*/
+ 
         Loader {
 
             id: firstPageLoader
@@ -59,13 +47,15 @@ ApplicationWindow {
             id: fifthPageLoader
             //source: "qrc:/Gauges/Charts.qml"
             source: "qrc:/Gauges/GPS.qml"
-        }
+        
+        /*
         Loader {
             id: sixtPageLoader
             source: "qrc:/Gauges/Dashboard.qml"
             //source: "qrc:/Gauges/DynamicDash.qml"
 
         }
+        */
         Item {
             id:seventhPage
             Settings{}
