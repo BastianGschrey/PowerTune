@@ -39,7 +39,7 @@
 ****************************************************************************/
 
 //! [imports]
-import QtQuick 2.9
+import QtQuick 2.8
 import "graphics"
 //! [imports]
 
