@@ -32,13 +32,13 @@ ApplicationWindow {
             source: "qrc:/Gauges/PFCSensors.qml"
         }
 
-        /*
+      
         Loader {
             id: thirdPageLoader
             source: "qrc:/Gauges/PFCSensors.qml"
            // source: "qrc:/Gauges/HalfGauges_metric.qml"
         }
-        */
+        
         Loader {
             id: fourthPageLoader
             source: "qrc:/Gauges/DashAdaptronic.qml"
