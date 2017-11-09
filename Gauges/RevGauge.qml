@@ -1,4 +1,4 @@
-import QtQuick 2.9
+import QtQuick 2.8
 import QtGraphicalEffects 1.0
 
 Rectangle {
