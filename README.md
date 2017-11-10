@@ -121,3 +121,89 @@ Press "Ctrl+x" then press "y" to save
 $reboot
 
 Now your pi will always log into WLAN at boot 
+
+
+Debian Jessie image:
+
+Create a sercive to launch the startPowerTune.sh script at boot 
+
+```
+$ sudo nano /etc/systemd/system/PowerTune.service
+
+```
+
+Insert the following text into PowerTune.service
+
+```
+[Unit]
+
+Description=PowerTune
+
+[Service]
+
+Type=simple
+
+ExecStart=/home/pi/startPowerTune.sh
+
+[Install]
+
+WantedBy=multi-user.target
+
+```
+
+Test if the script works:
+```
+$ sudo systemctl start /etc/systemd/system/PowerTune.service
+```
+If PowerTune is launching , quit PowerTune
+
+Now enable the script 
+
+```
+$ sudo systemctl enable /etc/systemd/system/PowerTune.service
+```
+
+Reboot your pi and you should see PowerTune starting at boot 
+ 
+```
+$ sudo reboot
+```
+
+
+12.Launch a custom video at boot with OMXPlayer (only works on linx distros which uses systemd eg Jessie)
+
+```
+$ sudo nano /etc/systemd/system/bootsplash.service
+```
+
+Copy the following content into the file and save it ( this example assumes you have a video called "Raspexi.mp4" in the folder: "/home/pi/"  :
+
+```
+[Unit]
+Description=BootSplash
+DefaultDependencies=no
+After=local-fs.target
+Before=basic.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/omxplayer -b /home/pi/Raspexi.mp4
+
+[Install]
+WantedBy=getty.target
+
+```
+
+
+Test if the script works:
+```
+$ sudo systemctl start /etc/systemd/system/bootsplash.service
+```
+If the video is playing , then enable the script:
+```
+$ sudo systemctl enable /etc/systemd/system/bootsplash.service
+```
+Reboot your pi and you should see your video at boot 
+```
+$ sudo reboot
+```
