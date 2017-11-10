@@ -123,7 +123,88 @@ $reboot
 Now your pi will always log into WLAN at boot 
 
 
-Debian Jessie image:
+Build your own Debian Stretch image:
+
+On a fresh Debian Stretch image build QT5.8 (5.9.x doesn't work with PowerTune on raspberry pi for some reason) ,
+i made some scripts here :
+```
+https://github.com/MarkusIppy/QT5.x-raspbian-stretch
+```
+
+Now download the sourcecode for PowerTune
+```
+$ git clone https://github.com/BastianGschrey/PowerTune.git
+```
+Your source code is now available in /home/pi/PowerTune
+
+Now creade a directory where we compile and start PowerTune from :
+```
+$ sudo mkdir /opt/PowerTune
+```
+```
+$ sudo chown pi:pi /opt/PowerTune
+```
+
+Compile PowerTune:
+```
+$ cd /opt/PowerTune
+```
+
+```
+$ qmake /home/pi/PowerTune/PowerTuneQMLGui.pro
+```
+```
+$ make -j4
+```
+now PowerTune is installed in /opt/PowerTune
+
+
+
+Create a start script for PowerTune :
+
+```
+$ sudo nano /home/pi/startPowerTune.sh
+
+```
+Insert the following text into startPowerTune.sh
+
+```
+export QT_QPA_EGLFS_PHYSICAL_WIDTH=155
+export QT_QPA_EGLFS_PHYSICAL_HEIGHT=86
+/opt/PowerTune/PowerTuneQMLGui
+```
+save the file by pressing "ctrl"+"x" and then press "y"
+
+Make the script executable :
+```
+$ sudo chmod +x /home/pi/startPowerTune.sh 
+```
+
+Test the script 
+```
+$ ./startPowerTune.sh
+```
+
+Now we can build ourselfs a update script for PowerTune
+```
+$ sudo nano /home/pi/update.sh
+```
+Insert the following into the file 
+```
+cd /home/pi/PowerTune
+git pull
+cd /opt/PowerTune
+qmake /home/pi/PowerTune/PowerTuneQMLGui.pro
+make -j4
+```
+save the file by pressing "ctrl"+"x" and then press "y"
+
+Make the script executable :
+```
+$ sudo chmod +x /home/pi/update.sh 
+```
+
+Making PowerTune Autostart at Boot
 
 Create a sercive to launch the startPowerTune.sh script at boot 
 
@@ -170,13 +251,14 @@ $ sudo reboot
 ```
 
 
-12.Launch a custom video at boot with OMXPlayer (only works on linx distros which uses systemd eg Jessie)
+12.Launch a custom video at boot with OMXPlayer
+ 
 
 ```
 $ sudo nano /etc/systemd/system/bootsplash.service
 ```
 
-Copy the following content into the file and save it ( this example assumes you have a video called "Raspexi.mp4" in the folder: "/home/pi/"  :
+Copy the following content into the file and save it ( this example assumes you have a video called "bootvideo.mp4" in the folder: "/home/pi/"  :
 
 ```
 [Unit]
@@ -187,7 +269,7 @@ Before=basic.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/omxplayer -b /home/pi/Raspexi.mp4
+ExecStart=/usr/bin/omxplayer -b /home/pi/bootvideo.mp4
 
 [Install]
 WantedBy=getty.target
