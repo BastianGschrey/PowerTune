@@ -35,7 +35,7 @@ ApplicationWindow {
       
         Loader {
             id: thirdPageLoader
-            source: "qrc:/Gauges/PFCSensors.qml"
+            source: "qrc:/Gauges/Dashboard.qml"
            // source: "qrc:/Gauges/HalfGauges_metric.qml"
         }
         
