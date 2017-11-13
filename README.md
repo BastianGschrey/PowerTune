@@ -125,7 +125,7 @@ Now your pi will always log into WLAN at boot
 
 Build your own Debian Stretch image:
 
-On a fresh Debian Stretch image build QT5.8 (5.9.x doesn't work with PowerTune on raspberry pi for some reason) ,
+On a fresh Debian Stretch image build QT5.8 
 i made some scripts here :
 ```
 https://github.com/MarkusIppy/QT5.x-raspbian-stretch
