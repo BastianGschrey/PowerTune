@@ -58,7 +58,7 @@ Implemented Features :
 * GPS for NMEA 0183 compliant devices via Serial (Tested with BU-353S4 GPS Mouse) 
 
 
-#### How to build a Raspberry Pi3 PowerTune image:
+<big>_Build a Raspberry Pi image with Buildroot:_</big>
 
 
 This was tested on Ubuntu 17.04
