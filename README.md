@@ -234,14 +234,14 @@ WantedBy=multi-user.target
 
 Test if the script works:
 ```
-$ sudo systemctl start /etc/systemd/system/PowerTune.service
+$ sudo systemctl start PowerTune.service
 ```
 If PowerTune is launching , quit PowerTune
 
 Now enable the script 
 
 ```
-$ sudo systemctl enable /etc/systemd/system/PowerTune.service
+$ sudo systemctl enable PowerTune.service
 ```
 
 Reboot your pi and you should see PowerTune starting at boot 
@@ -279,11 +279,11 @@ WantedBy=getty.target
 
 Test if the script works:
 ```
-$ sudo systemctl start /etc/systemd/system/bootsplash.service
+$ sudo systemctl start bootsplash.service
 ```
 If the video is playing , then enable the script:
 ```
-$ sudo systemctl enable /etc/systemd/system/bootsplash.service
+$ sudo systemctl enable bootsplash.service
 ```
 Reboot your pi and you should see your video at boot 
 ```
