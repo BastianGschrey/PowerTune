@@ -123,7 +123,8 @@ $reboot
 Now your pi will always log into WLAN at boot 
 
 
-Build your own Debian Stretch image:
+<big>_Build your own Debian Stretch image:_</big>
+
 
 On a fresh Debian Stretch image build QT5.8 
 i made some scripts here :
