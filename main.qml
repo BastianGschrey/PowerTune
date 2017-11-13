@@ -31,13 +31,6 @@ ApplicationWindow {
             id: secondPageLoader
             source: "qrc:/Gauges/PFCSensors.qml"
         }
-
-      
-        Loader {
-            id: thirdPageLoader
-            source: "qrc:/Gauges/Dashboard.qml"
-           // source: "qrc:/Gauges/HalfGauges_metric.qml"
-        }
         
         Loader {
             id: fourthPageLoader
