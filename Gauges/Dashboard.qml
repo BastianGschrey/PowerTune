@@ -1,6 +1,7 @@
-import QtQuick 2.8
+import QtQuick 2.4
 import QtGraphicalEffects 1.0
-import QtQuick.Controls 2.1
+import QtQuick.Window 2.1
+import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Extras 1.4
 
@@ -13,21 +14,14 @@ Rectangle {
 
 
 
-
+/*
     Rectangle {
         width: parent.width /6
         height: parent.height /2
         color: "transparent"
         anchors.horizontalCenter: parent.horizontalCenter
         y :parent.height /4
-/*
-        Timer {
-            running: true
-            repeat: true
-            interval: 2000
-            onTriggered: gauge.value = gauge.value == gauge.maximumValue ? 5 : gauge.maximumValue
-        }
-*/
+
         Gauge {
             id: gauge
             anchors.fill: parent
@@ -145,7 +139,7 @@ Rectangle {
         color: "transparent"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top :displaybox.bottom
-/*
+
         Timer {
             running: true
             repeat: true
