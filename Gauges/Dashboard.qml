@@ -146,7 +146,7 @@ Rectangle {
             interval: 2000
             onTriggered: gauge.value = gauge.value == gauge.maximumValue ? 5 : gauge.maximumValue
         }
-*/
+
         Gauge {
             anchors.fill: parent
             anchors.margins: 5
@@ -189,7 +189,7 @@ Rectangle {
 
     }
 
-
+*/
     Rectangle {
         CircularGauge {
             id: speedometer
