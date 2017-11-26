@@ -53,5 +53,6 @@
         <file>graphics/MainDash.png</file>
         <file>Gauges/GaugeNeedle_minus90to180.qml</file>
         <file>Gauges/GaugeNeedle_minus180to90.qml</file>
+        <file>Gauges/Charts.qml</file>
     </qresource>
 </RCC>
