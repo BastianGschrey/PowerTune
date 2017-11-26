@@ -12,7 +12,7 @@ ApplicationWindow {
     minimumWidth: 800
     minimumHeight: 480
     // visibility: "FullScreen"
-    title: qsTr("PowerTune ") + Dashboard.Platform + "Beta 17"
+    title: qsTr("PowerTune ") + Dashboard.Platform + "Beta 18"
     color: "black"
     SwipeView {
         id: view
@@ -41,14 +41,14 @@ ApplicationWindow {
             //source: "qrc:/Gauges/Charts.qml"
             source: "qrc:/Gauges/GPS.qml"
          }
-        /*
+
         Loader {
             id: sixtPageLoader
             source: "qrc:/Gauges/Dashboard.qml"
-            //source: "qrc:/Gauges/DynamicDash.qml"
+
 
         }
-        */
+
         Item {
             id:seventhPage
             Settings{}

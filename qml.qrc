@@ -50,5 +50,8 @@
         <file>Gauges/GPS.qml</file>
         <file>Gauges/RaceDash.qml</file>
         <file>graphics/Racedash800x480.png</file>
+        <file>graphics/MainDash.png</file>
+        <file>Gauges/GaugeNeedle_minus90to180.qml</file>
+        <file>Gauges/GaugeNeedle_minus180to90.qml</file>
     </qresource>
 </RCC>
