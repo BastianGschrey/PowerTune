@@ -84,11 +84,11 @@ Item {
 
 
                timeline++;
-               series1.append(timeline, 3000);
-               series2.append(timeline, 250);
+                //series1.append(timeline, 3000);
+                //series2.append(timeline, 250);
 
-                //series1.append(timeline, Dashboard.revs);
-                //series2.append(timeline, Dashboard.speed);
+                series1.append(timeline, Dashboard.revs);
+                series2.append(timeline, Dashboard.speed);
 
                 if(amountOfData > axisX.max){
                     axisX.min++;
