@@ -29,7 +29,7 @@ ApplicationWindow {
 
         Loader {
             id: secondPageLoader
-            source: "qrc:/Gauges/Racedash.qml"
+            source: "qrc:/Gauges/RaceDash.qml"
         }
         
         Loader {
