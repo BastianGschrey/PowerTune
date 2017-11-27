@@ -58,9 +58,9 @@ DashboardGaugeStyle {
     maximumValueAngle: 90
     tickmarkStepSize: 1
     labelStepSize: 1
-    needleLength: toPixels(0.05)
-    needleBaseWidth: toPixels(0.08)
-    needleTipWidth: toPixels(0.03)
+    //needleLength: toPixels(0.05)
+    //needleBaseWidth: toPixels(0.08)
+   // needleTipWidth: toPixels(0.03)
 
     // outer tickmarks in red from 8 - 10
     tickmark: Rectangle {
@@ -83,7 +83,7 @@ DashboardGaugeStyle {
         onPaint: {
             var ctx = getContext("2d");
             ctx.reset();
-            paintBackground(ctx);
+            //paintBackground(ctx);
 
             ctx.beginPath();
             ctx.lineWidth = tachometerStyle.toPixels(0.08);
