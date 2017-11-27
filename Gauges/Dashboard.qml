@@ -1,6 +1,5 @@
 import QtQuick 2.8
 import QtGraphicalEffects 1.0
-import QtQuick.Window 2.1
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Extras 1.4
@@ -132,6 +131,9 @@ Rectangle {
             style: DashboardGaugeStyle {
             labelStepSize: 20
             labelInset: toPixels(0.21)
+            needleLength: 0
+            needleTipWidth: 0
+            needleBaseWidth: 0
             }
         }
 // Speedo Needle animation
@@ -169,6 +171,9 @@ Rectangle {
                         //labelInset: toPixels(0.21)
                         minimumValueAngle: -90
                         maximumValueAngle: 180
+                        needleLength: 0
+                        needleTipWidth: 0
+                        needleBaseWidth: 0
                         }
                     }
 
