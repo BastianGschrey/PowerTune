@@ -12,7 +12,7 @@ Canvas {
     property real value : 0
 
 
-    onValueChanged: {zeiger.rotation = Math.min(Math.max(-250, canvas.value*3.5 - 90), 180); canvas.currentValue = zeiger.rotation - 180} //130 minrotation, -30 maxrotation
+    onValueChanged: {zeiger.rotation = Math.min(Math.max(-250, canvas.value*3.5 - 90), 180); canvas.currentValue = zeiger.rotation - 270} //130 minrotation, -30 maxrotation
     width: parent.width;
     height: parent.height
 
@@ -28,7 +28,7 @@ Canvas {
         smooth: true
         antialiasing: true
         color: "white"
-        onRotationChanged: {canvas.currentValue = zeiger.rotation -270 ; canvas.requestPaint()}//texti.text = zeiger.rotation
+        onRotationChanged: {canvas.currentValue = zeiger.rotation; canvas.requestPaint()}//texti.text = zeiger.rotation
 
             Behavior on rotation {
                 NumberAnimation{
