@@ -1,5 +1,5 @@
 import QtQuick 2.8
-import QtCharts 2.0
+import QtCharts 2.1
 import QtQuick.Controls 2.1
 
 Item {
@@ -83,9 +83,12 @@ Item {
         onTriggered: {
 
 
-                timeline++;
-                series1.append(timeline, Dashboard.revs);
-                series2.append(timeline, Dashboard.speed);
+               timeline++;
+               series1.append(timeline, 3000);
+               series2.append(timeline, 250);
+
+                //series1.append(timeline, Dashboard.revs);
+                //series2.append(timeline, Dashboard.speed);
 
                 if(amountOfData > axisX.max){
                     axisX.min++;
@@ -95,10 +98,12 @@ Item {
             }
                 //remove all data points that are not visible anymore
                 if (timeline > 100){
-                    //series1.removePoints(axisX.min, 1);
-                    //series2.removePoints(axisX.min, 1);
+                    series1.remove(1);
+                    series2.remove(1);
                     console.log (axisX.min);
+                    
     }
  }
 }
 }
+
