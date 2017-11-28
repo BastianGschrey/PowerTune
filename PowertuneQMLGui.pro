@@ -2,6 +2,11 @@ TEMPLATE = app
 
 QT += qml quick serialport serialbus network charts
 CONFIG += c++11
+static {
+    QT += svg
+    QTPLUGIN += qtvirtualkeyboardplugin
+}
+
 
 SOURCES += main.cpp \
     serial.cpp \

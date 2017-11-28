@@ -1,8 +1,10 @@
 import QtQuick 2.8
 import QtQuick.Controls 2.1
 import Qt.labs.settings 1.0
+import QtQuick.VirtualKeyboard 2.1
 
 Rectangle {
+    id: windowbackround
     width: parent.width
     height: parent.height
     color: "grey"
@@ -94,7 +96,7 @@ Rectangle {
                     id: ecuSelect
                     width: 200
 
-                    model: [ "PowerFC", "Adaptronic","Dicktator","PowerMods"]
+                    model: [ "PowerFC", "Adaptronic"]//[ "PowerFC", "Adaptronic","Dicktator","PowerMods"]
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
@@ -142,6 +144,7 @@ Rectangle {
                 TextField {
                     id: goPropass
                     placeholderText: qsTr("GoPro Password")
+                    inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhPreferLowercase | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
                     Component.onCompleted: {transferSettings.sendSettings() }
                 }
                 Text
@@ -151,6 +154,8 @@ Rectangle {
                 TextField {
                     id: logfilenameSelect
                     text: qsTr("DataLog")
+                    inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhPreferLowercase | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
+                    //enterKeyAction: EnterKeyAction.Next
                 }
             }
 
@@ -222,9 +227,29 @@ Rectangle {
                 }
                 Grid {
                     visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
-                    rows: 5
+                    rows: 10
                     columns: 4
                     spacing: 5
+//Just a spacer for now still need to do it properly
+                    Text  { text: ""; width: 50}
+                    Text  { text: ""; width: 50}
+                    Text  { text: ""; width: 50}
+                    Text  { text: ""; width: 50}
+                    Text  { text: ""; width: 50}
+                    Text  { text: ""; width: 50}
+                    Text  { text: ""; width: 50}
+                    Text  { text: ""; width: 50}
+                    Text  { text: ""; width: 50}
+                    Text  { text: ""; width: 50}
+                    Text  { text: ""; width: 50}
+                    Text  { text: ""; width: 50}
+                    Text  { text: ""; width: 50}
+                    Text  { text: ""; width: 50}
+                    Text  { text: ""; width: 50}
+                    Text  { text: ""; width: 50}
+//Spacer end
+
+
                     Text  { text: ""; width: 50}
                     Text  { text: "0V"; width: 50}
                     Text  { text: "5V"; width: 50}
@@ -234,12 +259,14 @@ Rectangle {
                         id: an1V0
                         width: 50
                         validator: IntValidator {bottom: 0; top: 1000;}
+                        inputMethodHints: Qt.ImhDigitsOnly
                         placeholderText: qsTr("9")
                     }
                     TextField {
                         id: an2V5
                         width: 50
                         validator: IntValidator {bottom: 0; top: 1000;}
+                        inputMethodHints: Qt.ImhDigitsOnly
                         placeholderText: qsTr("16")
                     }
                     TextField {
@@ -252,6 +279,7 @@ Rectangle {
                         id: an3V0
                         width: 50
                         validator: IntValidator {bottom: 0; top: 1000;}
+                        inputMethodHints: Qt.ImhDigitsOnly
                         placeholderText: qsTr("Value @ 0V")
 
                     }
@@ -259,6 +287,7 @@ Rectangle {
                         id: an4V5
                         width: 50
                         validator: IntValidator {bottom: 0; top: 1000;}
+                        inputMethodHints: Qt.ImhDigitsOnly
                         placeholderText: qsTr("Value @ 5V")
                     }
                     TextField {
@@ -381,6 +410,40 @@ Rectangle {
 
         }
     }
+// Virtual Keyboard
 
 
+    InputPanel {
+        id: keyboard;
+        y: windowbackround.height; // position the top of the keyboard to the bottom of the screen/display
+
+        anchors.left: windowbackround.left;
+        anchors.right: windowbackround.right;
+
+
+        states: State {
+            name: "visible";
+            when: keyboard.active;
+            PropertyChanges {
+                target: keyboard;
+                // position the top of the keyboard to the bottom of the text input field
+                y: 0 ;
+            }
+        }
+        transitions: Transition {
+            from: ""; // default initial state
+            to: "visible";
+            reversible: true; // toggle visibility with reversible: true;
+            ParallelAnimation {
+                NumberAnimation {
+                    properties: "y";
+                    duration: 250;
+                    easing.type: Easing.InOutQuad;
+                }
+            }
+        }
+    }
 }
+
+
+
