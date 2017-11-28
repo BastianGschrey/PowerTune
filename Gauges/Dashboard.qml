@@ -21,6 +21,13 @@ Rectangle {
         running: true
     }
     OpacityAnimator {
+        target: rightgaugeticks;
+        from: 0;
+        to: 1;
+        duration: 6000
+        running: true
+    }
+    OpacityAnimator {
         target: speedometer;
         from: 0;
         to: 1;
@@ -82,7 +89,7 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
                 minimumValue: 30
                 maximumValue: 110
-                style: TachometerStyle {
+                style: DashboardGaugeStyle {
                     labelStepSize: 20
                     tickmarkStepSize: 20
                     labelInset: toPixels(0.21)
@@ -91,47 +98,81 @@ Rectangle {
                     needleLength: toPixels(1)
                     needleBaseWidth: toPixels(0.1)
                     needleTipWidth: toPixels(0.04)
+                    tickmark: Rectangle {
+                        implicitWidth: toPixels(0.03)
+                        antialiasing: true
+                        implicitHeight: toPixels(0.08)
+                        color: styleData.index === 4  ? Qt.rgba(0.5, 0, 0, 1) : "#c8c8c8"
+                    }
+                    minorTickmark: null
+                    tickmarkLabel: Text {
+                        font.pixelSize: Math.max(6, toPixels(0.18))
+                        text: styleData.value
+                        color: styleData.index === 4 ? Qt.rgba(0.5, 0, 0, 1) : "#c8c8c8"
+                        antialiasing: true
+                    }
                 }
             }
         }
-/*
         // small gauge on the right
-        //Small gauge on the left
+
         Rectangle {
             color: "transparent"
             id: rightgauge
             height: scalerect.height /5.3
             width: height
             anchors.right: scalerect.right
-            anchors.rightMargin: scalerect.width /26.66
+            anchors.rightMargin: scalerect.width /39
             anchors.bottom: scalerect.bottom
-            anchors.bottomMargin: scalerect.height / 3.79 //127
+            anchors.bottomMargin: scalerect.height / 3.85
 
             // Paint Tickmarks and Labels on the right gauge
             CircularGauge {
                 id: rightgaugeticks
                 height: parent.height
                 width: height
-                value: Dashboard.Watertemp
+                value: Dashboard.Intaketemp
                 anchors.verticalCenter: parent.verticalCenter
-                minimumValue: 30
-                maximumValue: 110
-                style: TachometerStyle {
+                minimumValue: 20
+                maximumValue: 80
+                //
+                style: DashboardGaugeStyle {
                     labelStepSize: 20
                     tickmarkStepSize: 20
-                    labelInset: toPixels(0.21)
-                    minimumValueAngle: 130
-                    maximumValueAngle: 20
+                    labelInset: toPixels(0.3)
+                    minimumValueAngle: 160
+                    maximumValueAngle: 45
                     needleLength: toPixels(1)
                     needleBaseWidth: toPixels(0.1)
                     needleTipWidth: toPixels(0.04)
+                    tickmark: Rectangle {
+                        implicitWidth: toPixels(0.03)
+                        antialiasing: true
+                        implicitHeight: toPixels(0.08)
+                        color: styleData.index === 2 || styleData.index === 3 ? Qt.rgba(0.5, 0, 0, 1) : "#c8c8c8"
+                    }
+                    minorTickmark: null
+                    tickmarkLabel: Text {
+                        font.pixelSize: Math.max(6, toPixels(0.18))
+                        text: styleData.value
+                        color: styleData.index === 2 ||styleData.index === 3  ? Qt.rgba(0.5, 0, 0, 1) : "#c8c8c8"
+                        antialiasing: true
+                    }
+                    Text {
+                        id: valueText
+                        text: "Major and minor values"
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.bottom: parent.bottom
+                    }
+
 
                 }
             }
 
+            //test
 
         }
-*/
+
         Rectangle {
             width: parent.width /6
             height: parent.height /2
@@ -222,11 +263,6 @@ Rectangle {
 
             }
         }
-
-
-
-
-
     }
 
 }
