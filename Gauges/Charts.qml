@@ -97,11 +97,12 @@ Item {
                     amountOfData++; //This else is just to stop incrementing the variable unnecessarily
             }
                 //remove all data points that are not visible anymore
-                if (timeline > 100){
+                if (series1.count == 100)
+                {
                     series1.remove(1);
                     series2.remove(1);
-                    console.log (axisX.min);
-                    
+
+                    console.log (series1.count);
     }
  }
 }

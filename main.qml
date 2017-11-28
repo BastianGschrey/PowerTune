@@ -30,18 +30,20 @@ ApplicationWindow {
         Loader {
             id: secondPageLoader
             source: "qrc:/Gauges/RaceDash.qml"
+
         }
         
         Loader {
             id: fourthPageLoader
             source: "qrc:/Gauges/DashAdaptronic.qml"
         }
+        /*
         Loader {
             id: fifthPageLoader
             source: "qrc:/Gauges/Charts.qml"
            
          }
-
+*/
         Loader {
             id: sixtPageLoader
             source: "qrc:/Gauges/PFCSensors.qml"

@@ -12,6 +12,7 @@ Rectangle {
     property  int test1: 0
     property  var gpscom
 
+
     Item {
         id: powerTuneSettings
         Settings {
@@ -133,6 +134,7 @@ Rectangle {
                     onCurrentIndexChanged: if (initialized) AppSettings.setLogging( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getLogging(); initialized = true }
                 }
+
                 Text { text: "GoPro Variant :" }
                 ComboBox {
                     id: goProSelect
@@ -180,6 +182,13 @@ Rectangle {
                         Serial.closeConnection(),GPS.stopGPScom();
                     }
                 }
+/*
+                Button {
+                    id: oppendashselect
+                    text: "Open Dashselect"
+                    onClicked: {dashselector.visible = true}
+                }
+*/
                 Button {
                     text: "Clear"
                     onClicked: {
@@ -230,7 +239,7 @@ Rectangle {
                     rows: 10
                     columns: 4
                     spacing: 5
-//Just a spacer for now still need to do it properly
+                    //Just a spacer for now still need to do it properly
                     Text  { text: ""; width: 50}
                     Text  { text: ""; width: 50}
                     Text  { text: ""; width: 50}
@@ -247,7 +256,7 @@ Rectangle {
                     Text  { text: ""; width: 50}
                     Text  { text: ""; width: 50}
                     Text  { text: ""; width: 50}
-//Spacer end
+                    //Spacer end
 
 
                     Text  { text: ""; width: 50}
@@ -363,7 +372,7 @@ Rectangle {
         function auto()
         {
             // if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex);
-            if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text,unitaux3.text,an5V0.text,an6V5.text,unitaux4.text,an7V0.text,an8V5.text);
+            if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
 
         }
     }
@@ -410,7 +419,18 @@ Rectangle {
 
         }
     }
-// Virtual Keyboard
+    //Function to select Dash1
+    Item {
+        id: select1
+        function selDash1()
+        {
+            console.log (dash1.currentIndex);
+            if (dash1.currentIndex == "0") {firstPageLoader.source = "qrc:/Gauges/Dashboard.qml"};
+            if (dash1.currentIndex == "1") {firstPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
+        }
+
+    }
+    // Virtual Keyboard
 
 
     InputPanel {
@@ -443,7 +463,67 @@ Rectangle {
             }
         }
     }
+    /*
+    Rectangle{
+
+            id: dashselector
+            visible: false
+            width: parent.width
+            height: parent.height
+            color: "grey"
+
+            Grid {
+                rows: 10
+                columns: 4
+                spacing: 5
+            Text { text: "Dash1" }
+            Text { text: "Dash2" }
+            Text { text: "Dash3" }
+            Text { text: "Dash4" }
+            ComboBox {
+                id: dash1
+                width: 180
+                model: ["Dashboard", "Adaptronic" ]
+                property bool initialized: true
+                onCurrentIndexChanged:{select1.selDash1() }
+                Component.onCompleted: {select1.selDash1() }
+            }
+
+            ComboBox {
+                id: dash2
+                width: 180
+                model: ["SensorCheck", "Adaptronic" ]
+                property bool initialized: true
+                onCurrentIndexChanged:{select1.selDash2() }
+                Component.onCompleted: {select1.selDash2() }
+            }
+
+            ComboBox {
+                id: dash3
+                width: 180
+                model: ["SensorCheck", "Adaptronic" ]
+                property bool initialized: true
+                onCurrentIndexChanged:{select1.selDash4() }
+                Component.onCompleted: {select1.selDash4() }
+            }
+            ComboBox {
+                id: dash4
+                width: 180
+                model: ["SensorCheck", "Adaptronic" ]
+                property bool initialized: true
+                onCurrentIndexChanged:{select1.selDash4() }
+                Component.onCompleted: {select1.selDash4() }
+            }
+            Button {
+                id: closedashselector
+                text: "OK"
+                onClicked: {dashselector.visible = false}
+            }
 }
 
+
+    }
+*/
+}
 
 

@@ -14,11 +14,10 @@ Item {
             ComboBox {
                 id: dash1
                 width: 200
-                model: [
-                    "SensorCheck", "Adaptronic" ]
+                model: ["SensorCheck", "Adaptronic" ]
                 property bool initialized: true
-                 onCurrentIndexChanged:{select1.selDash1() }
-                 Component.onCompleted: {select1.selDash1() }
+                onCurrentIndexChanged:{select1.selDash1() }
+                Component.onCompleted: {select1.selDash1() }
                 //  onCurrentIndexChanged: if (initialized) AppSettings.setBaudRate( currentIndex )
                 //   Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true }
             }

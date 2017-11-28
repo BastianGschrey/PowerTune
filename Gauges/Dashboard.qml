@@ -91,11 +91,11 @@ Rectangle {
                     needleLength: toPixels(1)
                     needleBaseWidth: toPixels(0.1)
                     needleTipWidth: toPixels(0.04)
-   }
+                }
             }
         }
-
-// small gauge on the right
+/*
+        // small gauge on the right
         //Small gauge on the left
         Rectangle {
             color: "transparent"
@@ -120,8 +120,8 @@ Rectangle {
                     labelStepSize: 20
                     tickmarkStepSize: 20
                     labelInset: toPixels(0.21)
-                    minimumValueAngle: 20
-                    maximumValueAngle: 130
+                    minimumValueAngle: 130
+                    maximumValueAngle: 20
                     needleLength: toPixels(1)
                     needleBaseWidth: toPixels(0.1)
                     needleTipWidth: toPixels(0.04)
@@ -131,7 +131,7 @@ Rectangle {
 
 
         }
-
+*/
         Rectangle {
             width: parent.width /6
             height: parent.height /2
