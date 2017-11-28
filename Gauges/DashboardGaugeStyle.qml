@@ -77,30 +77,13 @@ CircularGaugeStyle {
     function radToDeg(radians) {
         return radians * (180 / Math.PI);
     }
-
+/*
     function paintBackground(ctx) {
         if (halfGauge) {
             ctx.beginPath();
             ctx.rect(0, 0, ctx.canvas.width, ctx.canvas.height / 2);
             ctx.clip();
         }
-
-        ctx.beginPath();
-        ctx.fillStyle = "black";
-        ctx.ellipse(0, 0, ctx.canvas.width, ctx.canvas.height);
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.lineWidth = tickmarkInset;
-        ctx.strokeStyle = "black";
-        ctx.arc(xCenter, yCenter, outerRadius - ctx.lineWidth / 2, outerRadius - ctx.lineWidth / 2, 0, Math.PI * 2);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.lineWidth = tickmarkInset / 2;
-        ctx.strokeStyle = "#222";
-        ctx.arc(xCenter, yCenter, outerRadius - ctx.lineWidth / 2, outerRadius - ctx.lineWidth / 2, 0, Math.PI * 2);
-        ctx.stroke();
 
         ctx.beginPath();
         var gradient = ctx.createRadialGradient(xCenter, yCenter, outerRadius * 0.8, xCenter, yCenter, outerRadius);
@@ -111,14 +94,15 @@ CircularGaugeStyle {
         ctx.arc(xCenter, yCenter, outerRadius - tickmarkInset, outerRadius - tickmarkInset, 0, Math.PI * 2);
         ctx.fill();
     }
-
+*/
+    /*
     background: Canvas {
+
         onPaint: {
             var ctx = getContext("2d");
             ctx.reset();
             paintBackground(ctx);
         }
-
         Text {
             id: speedText
             font.pixelSize: toPixels(0.3)
@@ -139,6 +123,7 @@ CircularGaugeStyle {
             anchors.horizontalCenter: parent.horizontalCenter
         }
     }
+*/
 
     needle: Canvas {
         implicitWidth: needleBaseWidth

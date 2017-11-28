@@ -12,7 +12,7 @@ ApplicationWindow {
     minimumWidth: 800
     minimumHeight: 480
     // visibility: "FullScreen"
-    title: qsTr("PowerTune ") + Dashboard.Platform + "Beta 18"
+    title: qsTr("PowerTune ") + Dashboard.Platform + "Beta 19"
     color: "black"
     SwipeView {
         id: view
@@ -23,13 +23,13 @@ ApplicationWindow {
         Loader {
 
             id: firstPageLoader
-            source: "qrc:/Gauges/RaceDash.qml"
+            source: "qrc:/Gauges/Dashboard.qml"
 
         }
 
         Loader {
             id: secondPageLoader
-            source: "qrc:/Gauges/PFCSensors.qml"
+            source: "qrc:/Gauges/RaceDash.qml"
         }
         
         Loader {
@@ -38,15 +38,18 @@ ApplicationWindow {
         }
         Loader {
             id: fifthPageLoader
-            //source: "qrc:/Gauges/Charts.qml"
-            source: "qrc:/Gauges/GPS.qml"
+            source: "qrc:/Gauges/Charts.qml"
+           
          }
 
         Loader {
             id: sixtPageLoader
-            source: "qrc:/Gauges/Dashboard.qml"
-
-
+            source: "qrc:/Gauges/PFCSensors.qml"
+        }
+        
+        Loader {
+            id: seventhPageLoader
+            source: "qrc:/Gauges/GPS.qml"
         }
 
         Item {
