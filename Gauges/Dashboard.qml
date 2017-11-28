@@ -158,12 +158,7 @@ Rectangle {
                         color: styleData.index === 2 ||styleData.index === 3  ? Qt.rgba(0.5, 0, 0, 1) : "#c8c8c8"
                         antialiasing: true
                     }
-                    Text {
-                        id: valueText
-                        text: "Major and minor values"
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        anchors.bottom: parent.bottom
-                    }
+
 
 
                 }
