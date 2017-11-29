@@ -23,39 +23,29 @@ ApplicationWindow {
         Loader {
 
             id: firstPageLoader
-            source: "qrc:/Gauges/Dashboard.qml"
+            source: ""
 
         }
 
         Loader {
             id: secondPageLoader
-            source: "qrc:/Gauges/RaceDash.qml"
+            source: ""
 
         }
+        Loader {
+            id: thirdPageLoader
+            source: ""
+
+         }
         
         Loader {
             id: fourthPageLoader
-            source: "qrc:/Gauges/DashAdaptronic.qml"
-        }
-        /*
-        Loader {
-            id: fifthPageLoader
-            source: "qrc:/Gauges/Charts.qml"
-           
-         }
-*/
-        Loader {
-            id: sixtPageLoader
-            source: "qrc:/Gauges/PFCSensors.qml"
-        }
-        
-        Loader {
-            id: seventhPageLoader
-            source: "qrc:/Gauges/GPS.qml"
+            source: ""
         }
 
+
         Item {
-            id:seventhPage
+            id:lastPage
             Settings{}
         }
     }

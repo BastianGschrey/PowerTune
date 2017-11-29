@@ -5,11 +5,10 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Extras 1.4
 
 
-Rectangle {
+
+Item {
     id: view
-    width: parent.width
-    height: parent.height
-    color: "black"
+    anchors.fill: parent
 
     //fade in effect for the Gauges (Welcome animation)
 
@@ -56,6 +55,7 @@ Rectangle {
         height: parent.height
         fillMode: Image.PreserveAspectFit
         source: "/graphics/MainDash.png"
+
     }
 
 
@@ -260,4 +260,131 @@ Rectangle {
         }
     }
 
+    Rectangle {
+        id: touchsurface
+        width: parent.width
+        height: parent.height
+        color: "transparent"
+        //For Later use
+        /*
+        MouseArea {
+            anchors.fill: parent
+            acceptedButtons: Qt.LeftButton
+            onClicked: pieMenu.popup(mouseX, mouseY)
+
+        }
+
+
+        PieMenu {
+            id: pieMenu
+
+            MenuItem {
+                text: "Customise"
+
+                onTriggered: sourceselect.visible = true;
+            }
+
+
+        }
+*/
+        Rectangle {
+            id: sourceselect
+            visible: false
+            width: parent.width
+            height: parent.height
+            color: "transparent"
+
+            Grid {
+                rows: 10
+                columns: 4
+                spacing: 5
+                Text { text: "Data Display 1"
+                    color : "white" }
+                Text { text: "Data Display 2"
+                    color : "white" }
+                Text { text: "Data Display 3"
+                    color : "white" }
+                Text { text: "Data Display 4"
+                    color : "white" }
+                ComboBox {
+                    id: dash1
+                    width: 180
+                    model: sourcelist
+                    property bool initialized: true
+                    // onCurrentIndexChanged:{select1.selDash1() }
+                    // Component.onCompleted: {select1.selDash1() }
+                }
+
+                ComboBox {
+                    id: dash2
+                    width: 180
+                    model: sourcelist
+                    property bool initialized: true
+                    // onCurrentIndexChanged:{select1.selDash2() }
+                    // Component.onCompleted: {select1.selDash2() }
+                }
+
+                ComboBox {
+                    id: dash3
+                    width: 180
+                    model: sourcelist
+                    property bool initialized: true
+                    //onCurrentIndexChanged:{select1.selDash4() }
+                    //Component.onCompleted: {select1.selDash4() }
+                }
+                ComboBox {
+                    id: dash4
+                    width: 180
+                    model: sourcelist
+                    property bool initialized: true
+                    //  onCurrentIndexChanged:{select1.selDash4() }
+                    //  Component.onCompleted: {select1.selDash4() }
+                }
+
+                Button {
+                    id: btn_apply
+                    text: "Apply"
+                    onClicked: sourceselect.visible = false;
+                }
+                //ListModel
+                ListModel {
+                    id : sourcelist
+                    ListElement {text:"RPM" }
+                    ListElement {text:"PIM" }
+                    ListElement {text:"PIM Voltage" }
+                    ListElement {text:"Throttle Voltage" }
+                    ListElement {text:"Primary Injector Pulse width" }
+                    ListElement {text:"Fuel Temp" }
+                    ListElement {text:"IGN 1" }
+                    ListElement {text:"IGN 2" }
+                    ListElement {text:"Fuel Temp" }
+                    ListElement {text:"Metering Oil Pump" }
+                    ListElement {text:"Boost TP" }
+                    ListElement {text:"Boost WG" }
+                    ListElement {text:"WaterTemp" }
+                    ListElement {text:"Intake Temp" }
+                    ListElement {text:"Knock" }
+                    ListElement {text:"Battery Voltage" }
+                    ListElement {text:"Speed" }
+                    ListElement {text:"ISCV Duty" }
+                    ListElement {text:"O2 Voltage" }
+                    ListElement {text:"na1" }
+                    ListElement {text:"Secinjpulse" }
+                    ListElement {text:"Injector Duty" }
+                    ListElement {text:"Engline Load" }
+                    ListElement {text:"MAF1 Voltage" }
+                    ListElement {text:"MAF2 Voltage" }
+                    ListElement {text:"injms" }
+                    ListElement {text:"Inj" }
+                    ListElement {text:"Ign" }
+                    ListElement {text:"Dwell" }
+                    ListElement {text:"Boost Pressure" }
+                    ListElement {text:"Boost Duty" }
+                    ListElement {text:"MAF Activity" }
+                    ListElement {text:"O2 Volt2" }
+                }
+
+            }
+        }
+    }
 }

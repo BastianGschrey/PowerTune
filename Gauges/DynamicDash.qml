@@ -18,7 +18,7 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton
-        //onClicked: pieMenu.popup(mouseX, mouseY)
+        onClicked: pieMenu.popup(mouseX, mouseY)
 
     }
 
@@ -29,16 +29,13 @@ Rectangle {
         MenuItem {
             text: "Add gauge"
 
-            //onTriggered: BarGaugeScript.createbarGaugeObjects();
+            onTriggered: BarGaugeScript.createbarGaugeObjects();
         }
 
         MenuItem {
             text: "remove gauge"
 
         }
-
-
-
     }
 /*
     ListModel {

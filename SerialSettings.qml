@@ -21,6 +21,10 @@ Rectangle {
             property alias serialPortName: serialName.currentText
             property alias gpsPortName: serialNameGPS.currentText
             property alias gpsPortNameindex: serialNameGPS.currentIndex
+            property alias dashselect1 : dash1.currentIndex
+            property alias dashselect2 : dash2.currentIndex
+            property alias dashselect3 : dash3.currentIndex
+            property alias dashselect4 : dash4.currentIndex
             //property alias gpsBaud: serialGPSBaud.currentText
             // property alias gpsBaudindex: serialGPSBaud.currentIndex
             property alias ecuType: ecuSelect.currentText
@@ -71,15 +75,15 @@ Rectangle {
                     model: Serial.portsNames
 
                 }
-                /*               Text { text: "GPS Baud: " }
-                    ComboBox {
-                        id: serialGPSBaud
-                        width: 200
-                        model: [ "2400", "4800", "9600", "14400", "19200", "38400", "57600", "115200"]
-                        //Component.onCompleted: {autoconnectGPS.auto()}
+                Text { text: "GPS Baud: " }
+                ComboBox {
+                    id: serialGPSBaud
+                    width: 200
+                    model: [ "2400", "4800", "9600", "14400", "19200", "38400", "57600", "115200"]
+                    Component.onCompleted: {autoconnectGPS.auto()}
 
-                    }
-*/
+                }
+
                 Text { text: "Display units:" }
                 ComboBox {
 
@@ -102,23 +106,7 @@ Rectangle {
                     onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
                 }
-                /*
-                Text {
-                    id: textinterfaceSelect
-                    visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
-                    text: "PowerFC Interface:"
 
-                }
-                ComboBox {
-                    id: interfaceSelect
-                    visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
-                    width: 200
-                    model: [ "4 Aux Inputs", "8 Aux Inputs"]
-                    property bool initialized: false
-                    onCurrentIndexChanged: if (initialized) AppSettings.setInterface( currentIndex )
-                    Component.onCompleted: { currentIndex = AppSettings.getInterface(); initialized = true }
-                }
-                */
                 Text {
                     id: textloggingSelect
                     visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
@@ -182,13 +170,13 @@ Rectangle {
                         Serial.closeConnection(),GPS.stopGPScom();
                     }
                 }
-/*
+
                 Button {
                     id: oppendashselect
                     text: "Open Dashselect"
                     onClicked: {dashselector.visible = true}
                 }
-*/
+
                 Button {
                     text: "Clear"
                     onClicked: {
@@ -424,9 +412,59 @@ Rectangle {
         id: select1
         function selDash1()
         {
-            console.log (dash1.currentIndex);
             if (dash1.currentIndex == "0") {firstPageLoader.source = "qrc:/Gauges/Dashboard.qml"};
             if (dash1.currentIndex == "1") {firstPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
+            if (dash1.currentIndex == "2") {firstPageLoader.source = "qrc:/Gauges/Charts.qml"};
+            if (dash1.currentIndex == "3") {firstPageLoader.source = "qrc:/Gauges/GPS.qml"};
+            if (dash1.currentIndex == "4") {firstPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
+            if (dash1.currentIndex == "5") {firstPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
+            if (dash1.currentIndex == "6") {firstPageLoader.source = "qrc:/Gauges/Dash1.qml"};
+
+        }
+
+    }
+    Item {
+        id: select2
+        function selDash2()
+        {
+            if (dash2.currentIndex == "0") {secondPageLoader.source = "qrc:/Gauges/Dashboard.qml"};
+            if (dash2.currentIndex == "1") {secondPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
+            if (dash2.currentIndex == "2") {secondPageLoader.source = "qrc:/Gauges/Charts.qml"};
+            if (dash2.currentIndex == "3") {secondPageLoader.source = "qrc:/Gauges/GPS.qml"};
+            if (dash2.currentIndex == "4") {secondPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
+            if (dash2.currentIndex == "5") {secondPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
+            if (dash2.currentIndex == "6") {secondPageLoader.source = "qrc:/Gauges/Dash1.qml"};
+
+        }
+
+    }
+    Item {
+        id: select3
+        function selDash3()
+        {
+            if (dash3.currentIndex == "0") {thirdPageLoader.source = "qrc:/Gauges/Dashboard.qml"};
+            if (dash3.currentIndex == "1") {thirdPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
+            if (dash3.currentIndex == "2") {thirdPageLoader.source = "qrc:/Gauges/Charts.qml"};
+            if (dash3.currentIndex == "3") {thirdPageLoader.source = "qrc:/Gauges/GPS.qml"};
+            if (dash3.currentIndex == "4") {thirdPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
+            if (dash3.currentIndex == "5") {thirdPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
+            if (dash3.currentIndex == "6") {thirdPageLoader.source = "qrc:/Gauges/Dash1.qml"};
+
+        }
+
+    }
+    Item {
+        id: select4
+        function selDash4()
+        {
+            if (dash4.currentIndex == "0") {fourthPageLoader.source = "qrc:/Gauges/Dashboard.qml"};
+            if (dash4.currentIndex == "1") {fourthPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
+            if (dash4.currentIndex == "2") {fourthPageLoader.source = "qrc:/Gauges/Charts.qml"};
+            if (dash4.currentIndex == "3") {fourthPageLoader.source = "qrc:/Gauges/GPS.qml"};
+            if (dash4.currentIndex == "4") {fourthPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
+            if (dash4.currentIndex == "5") {fourthPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
+            if (dash4.currentIndex == "6") {fourthPageLoader.source = "qrc:/Gauges/Dash1.qml"};
+
         }
 
     }
@@ -463,19 +501,19 @@ Rectangle {
             }
         }
     }
-    /*
+
     Rectangle{
 
-            id: dashselector
-            visible: false
-            width: parent.width
-            height: parent.height
-            color: "grey"
+        id: dashselector
+        visible: false
+        width: parent.width
+        height: parent.height
+        color: "grey"
 
-            Grid {
-                rows: 10
-                columns: 4
-                spacing: 5
+        Grid {
+            rows: 3
+            columns: 4
+            spacing: 5
             Text { text: "Dash1" }
             Text { text: "Dash2" }
             Text { text: "Dash3" }
@@ -483,7 +521,7 @@ Rectangle {
             ComboBox {
                 id: dash1
                 width: 180
-                model: ["Dashboard", "Adaptronic" ]
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","test"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select1.selDash1() }
                 Component.onCompleted: {select1.selDash1() }
@@ -492,38 +530,38 @@ Rectangle {
             ComboBox {
                 id: dash2
                 width: 180
-                model: ["SensorCheck", "Adaptronic" ]
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","test"]
                 property bool initialized: true
-                onCurrentIndexChanged:{select1.selDash2() }
-                Component.onCompleted: {select1.selDash2() }
+                onCurrentIndexChanged:{select2.selDash2() }
+                Component.onCompleted: {select2.selDash2() }
             }
 
             ComboBox {
                 id: dash3
                 width: 180
-                model: ["SensorCheck", "Adaptronic" ]
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","test"]
                 property bool initialized: true
-                onCurrentIndexChanged:{select1.selDash4() }
-                Component.onCompleted: {select1.selDash4() }
+                onCurrentIndexChanged:{select3.selDash3() }
+                Component.onCompleted: {select3.selDash3() }
             }
             ComboBox {
                 id: dash4
                 width: 180
-                model: ["SensorCheck", "Adaptronic" ]
+                model:  ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","test"]
                 property bool initialized: true
-                onCurrentIndexChanged:{select1.selDash4() }
-                Component.onCompleted: {select1.selDash4() }
+                onCurrentIndexChanged:{select4.selDash4() }
+                Component.onCompleted: {select4.selDash4() }
             }
             Button {
                 id: closedashselector
-                text: "OK"
+                text: "Apply"
                 onClicked: {dashselector.visible = false}
             }
-}
+        }
 
 
     }
-*/
+
 }
 
 

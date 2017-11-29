@@ -86,7 +86,6 @@ Item {
                timeline++;
                 //series1.append(timeline, 3000);
                 //series2.append(timeline, 250);
-
                 series1.append(timeline, Dashboard.revs);
                 series2.append(timeline, Dashboard.speed);
 
@@ -97,13 +96,12 @@ Item {
                     amountOfData++; //This else is just to stop incrementing the variable unnecessarily
             }
                 //remove all data points that are not visible anymore
-                if (series1.count == 100)
-                {
-                    series1.remove(1);
-                    series2.remove(1);
+                if (series1.count == 100){
 
-                    console.log (series1.count);
-    }
+                     //series1.remove(0);
+                     //series2.remove(0);
+
+                    console.log (series1.count);}
  }
 }
 }

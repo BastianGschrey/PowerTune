@@ -7,10 +7,10 @@ import QtQuick.Extras 1.4
 
 
 
-Rectangle {
+Item {
     width: parent.width
     height: parent.height
-    color: "black"
+    //color: "black"
 
 
 //Left Row with 7 Bars
