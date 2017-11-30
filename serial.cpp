@@ -37,6 +37,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QByteArrayMatcher>
+#include <QProcess>
 
 
 
@@ -266,6 +267,7 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
 }
 void Serial::closeConnection()
 {
+
     if(ecu == 0){
         m_serialport->close();
         //qDebug() << "Connection closed.";
@@ -280,9 +282,12 @@ void Serial::closeConnection()
     }
 }
 
-
-
-
+void Serial::update()
+{
+    QProcess process;
+    process.startDetached("/bin/sh", QStringList()<< "/home/pi/update.sh");
+    qDebug() << "Update PowerTune.";
+}
 void Serial::handleTimeout()
 {
     //qDebug() << "Timeout";

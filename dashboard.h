@@ -150,6 +150,10 @@ class DashBoard : public QObject
     Q_PROPERTY(QString gpsSpeed READ gpsSpeed WRITE setgpsSpeed NOTIFY gpsSpeedChanged)
     Q_PROPERTY(QString gpsVisibleSatelites READ gpsVisibleSatelites WRITE setgpsVisibleSatelites NOTIFY gpsVisibleSatelitesChanged)
 
+    //Units ( metric /imperial select
+    Q_PROPERTY(QString units READ units WRITE setunits NOTIFY unitsChanged)
+
+
 
 
 public:
@@ -282,6 +286,9 @@ public:
     void setgpsLongitude(const QString &gpsLongitude);
     void setgpsSpeed(const QString &gpsSpeed);
     void setgpsVisibleSatelites(const QString &gpsVisibleSatelites);
+    // Units
+    void setunits(const QString &units);
+
 
 
 
@@ -433,7 +440,8 @@ public:
     QString gpsLongitude() const;
     QString gpsSpeed() const;
     QString gpsVisibleSatelites() const;
-
+//units
+    QString units() const;
 
 
     //Adaptronic extra
@@ -583,6 +591,9 @@ signals:
     void gpsSpeedChanged(QString gpsSpeed);
     void gpsVisibleSatelitesChanged(QString gpsVisibleSatelites);
 
+    // units
+
+    void unitsChanged(QString units);
 
     //Adaptronic extra
 
@@ -757,6 +768,9 @@ private:
     QString m_gpsSpeed;
     QString m_gpsVisibleSatelites;
 
+    //Units
+
+    QString m_units;
 
 
 };

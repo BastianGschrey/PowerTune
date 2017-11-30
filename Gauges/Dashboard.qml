@@ -9,6 +9,8 @@ import QtQuick.Extras 1.4
 Item {
     id: view
     anchors.fill: parent
+    Component.onCompleted: {units.unitadjust()} // adjusts the Gauges to metric or imperial
+
 
     //fade in effect for the Gauges (Welcome animation)
 
@@ -90,7 +92,8 @@ Item {
                 minimumValue: 30
                 maximumValue: 110
                 style: DashboardGaugeStyle {
-                    labelStepSize: 20
+                    id: leftgaugetickstyle
+                    labelStepSize: 30
                     tickmarkStepSize: 20
                     labelInset: toPixels(0.21)
                     minimumValueAngle: -160
@@ -137,7 +140,7 @@ Item {
                 maximumValue: 80
                 //
                 style: DashboardGaugeStyle {
-                    labelStepSize: 20
+                    labelStepSize: 30
                     tickmarkStepSize: 20
                     labelInset: toPixels(0.3)
                     minimumValueAngle: 160
@@ -194,6 +197,7 @@ Item {
                 id: speedometer
                 height: parent.height
                 width: height
+
                 value: Dashboard.speed
                 anchors.verticalCenter: parent.verticalCenter
                 maximumValue: 320
@@ -209,7 +213,6 @@ Item {
             // Speedo Needle animation
             GaugeNeedle_minus180to90  {
                 id: speedoNeedle
-
                 anchors.verticalCenterOffset: 0
                 anchors.centerIn: parent
                 value: Dashboard.speed / 4.155844155844156
@@ -387,4 +390,17 @@ Item {
             }
         }
     }
+    //Setting the scale of the speedo and temp gauges according to metric or imperial
+    Item {
+        id: units
+        function unitadjust()
+        {
+            if (Dashboard.units == "metric") {speedometer.maximumValue = 320, leftgaugeticks.minimumValue =30,leftgaugeticks.maximumValue =110, rightgaugeticks.minimumValue =20,rightgaugeticks.maximumValue = 80};
+            if (Dashboard.units == "imperial") {speedometer.maximumValue = 200,speedoNeedle.value = (Dasboard.speed / 2.597402597402597),leftgaugeticks.minimumValue =60,leftgaugeticks.maximumValue =220, rightgaugeticks.minimumValue = 70,rightgaugeticks.maximumValue = 190};
+
+
+        }
+
+    }
+
 }

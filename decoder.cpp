@@ -78,6 +78,10 @@ Decoder::Decoder(DashBoard *dashboard, QObject *parent)
 void Decoder::setUnits(const int &unitSelect)
 {
     units = unitSelect;
+    if (units == 0 )
+    {m_dashboard->setunits("metric");}
+    if (units == 1 )
+    {m_dashboard->setunits("imperial");}
     //qDebug() << "Unitselection"<< units;
 }
 

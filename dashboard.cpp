@@ -144,8 +144,8 @@ DashBoard::DashBoard(QObject *parent)
     , m_gpsSpeed ("0")
     , m_gpsVisibleSatelites ("0")
 
-
-
+  //units
+    , m_units("unit")
 
 {
 }
@@ -944,7 +944,14 @@ void DashBoard::setgpsVisibleSatelites(const QString &gpsVisibleSatelites)
     emit gpsVisibleSatelitesChanged(gpsVisibleSatelites);
 }
 
-
+// Units
+void DashBoard::setunits (const QString &units)
+{
+    if (m_units == units)
+        return;
+    m_units = units;
+    emit unitsChanged(units);
+}
 
 //Adaptronic extra
 
@@ -1206,6 +1213,9 @@ QString DashBoard::gpsLatitude() const { return m_gpsLatitude; }
 QString DashBoard::gpsLongitude () const { return m_gpsLongitude; }
 QString DashBoard::gpsSpeed() const { return m_gpsSpeed; }
 QString DashBoard::gpsVisibleSatelites () const { return m_gpsVisibleSatelites; }
+
+//units
+QString DashBoard::units() const { return m_units; }
 
 
 //Adaptronic extra

@@ -176,11 +176,18 @@ Rectangle {
                     text: "Open Dashselect"
                     onClicked: {dashselector.visible = true}
                 }
-
+/*
                 Button {
                     text: "Clear"
                     onClicked: {
                         Serial.clear()
+                    }
+                }
+*/              //for official raspberry Pi image only !!!!
+                Button {
+                    text: "Pi Update "
+                    onClicked: {
+                        Serial.update()
                     }
                 }
                 Button {
