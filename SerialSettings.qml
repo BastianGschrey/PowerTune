@@ -189,7 +189,7 @@ Rectangle {
                     text: "Pi Update "
                     onClicked: {
                         Serial.update()
-                        Qt.quit()
+
                     }
                 }
 
