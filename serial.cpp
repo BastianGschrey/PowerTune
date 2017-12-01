@@ -286,6 +286,7 @@ void Serial::update()
 {
     QProcess process;
     process.startDetached("/bin/sh", QStringList()<< "/home/pi/update.sh");
+
     qDebug() << "Update PowerTune.";
 }
 void Serial::handleTimeout()

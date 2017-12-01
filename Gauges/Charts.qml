@@ -92,14 +92,15 @@ Item {
                 if(amountOfData > axisX.max){
                     axisX.min++;
                     axisX.max++;
-                }else{
-                    amountOfData++; //This else is just to stop incrementing the variable unnecessarily
-            }
+                }
+                //else{
+                    //amountOfData++; //This else is just to stop incrementing the variable unnecessarily
+            //}
                 //remove all data points that are not visible anymore
                 if (series1.count == 100){
 
-                     //series1.remove(0);
-                     //series2.remove(0);
+                     series1.remove(series1.count-99);
+                     series2.remove(series2.count-99);
 
                     console.log (series1.count);}
  }

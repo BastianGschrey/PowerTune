@@ -184,14 +184,15 @@ Rectangle {
                     }
                 }
 */              //for official raspberry Pi image only !!!!
-                /*
+
                 Button {
                     text: "Pi Update "
                     onClicked: {
                         Serial.update()
+                        Qt.quit()
                     }
                 }
-                */
+
                 Button {
                     text: "Quit"
                     onClicked: {
