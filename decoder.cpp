@@ -112,8 +112,8 @@ void Decoder::decodeAdv(QByteArray serialdata)
     }
     if (units == 1 )
     {
-    packageADV[12] = ((info->Watertemp -80)* 1.8) + 32 ;
-    packageADV[13] = ((info->Intaketemp -80)* 1.8) + 32 ;
+    packageADV[12] = qRound(((info->Watertemp -80)* 1.8) + 32) ;
+    packageADV[13] = qRound(((info->Intaketemp -80)* 1.8) + 32);
     }
     packageADV[14] = info->Knock;
     packageADV[15] = info->BatteryV * 0.1;
@@ -123,7 +123,7 @@ void Decoder::decodeAdv(QByteArray serialdata)
     }
     if (units == 1 )
     {
-    packageADV[16] = info->Speed  * 0.621371;
+    packageADV[16] = qRound(info->Speed  * 0.621371);
     }
     packageADV[17] = info->Iscvduty * 0.001;
     packageADV[18] = info->O2volt;
@@ -178,20 +178,36 @@ void Decoder::decodeAdv(QByteArray serialdata)
     packageADV2[5] = info->Inj; //fc edit shows raw byte
     packageADV2[6] = info->Ign;
     packageADV2[7] = info->Dwell;
-    packageADV2[8] = mul[8] * info->BoostPres + add[8];
+    packageADV2[8] = -760 + info->BoostPres;
     if (packageADV2[8] >= 0x8000)
         packageADV2[8] = (packageADV[8] - 0x8000) * 0.01;
     else
         packageADV2[8] = (1.0 / 2560 + 0.001) * packageADV[8];
     packageADV2[9] = info->BoostDuty *0.005;
+    if (units == 0 )
+    {
     packageADV2[10] = info->Watertemp -80;
     packageADV2[11] = info->Intaketemp -80;
+    }
+    if (units == 1 )
+    {
+    packageADV2[10] = qRound(((info->Watertemp -80)* 1.8) + 32);
+    packageADV2[11] = qRound(((info->Intaketemp -80)* 1.8) + 32);
+
+    }
     packageADV2[12] = info->Knock;
     packageADV2[13] = info->BatteryV *0.1;
+    if (units == 0 )
+    {
     packageADV2[14] = info->Speed;
+    }
+    if (units == 1 )
+    {
+    packageADV2[14] = qRound(info->Speed * 0.621371);
+    }
 //    packageADV2[14] *= speed_correction;
 //    previousSpeed_kph[buf_currentIndex] = packageADV[14];
-    packageADV2[15] = info->MAFactivity; //formula ? 7 raw = 1.12 in FC edit
+    packageADV2[15] = info->MAFactivity *0.16;
     packageADV2[16] = info->O2volt *0.005;
     packageADV2[17] = info->O2volt_2 *0.005;
     packageADV2[18] = info->ThrottleV *0.001;
@@ -215,25 +231,7 @@ void Decoder::decodeAdv(QByteArray serialdata)
     m_dashboard->setO2volt(packageADV2[16]);
     m_dashboard->setO2volt_2(packageADV2[17]);
     m_dashboard->setThrottleV(packageADV2[18]);
-    qDebug() << "1"<< (packageADV2[0]);
-    qDebug() << "2"<< (packageADV2[1]);
-    qDebug() << "3"<< (packageADV2[2]);
-    qDebug() << "4"<< (packageADV2[3]);
-    qDebug() << "5"<< (packageADV2[4]);
-    qDebug() << "6"<< (packageADV2[5]);
-    qDebug() << "7"<< (packageADV2[6]);
-    qDebug() << "8"<< (packageADV2[7]);
-    qDebug() << "9"<< (packageADV2[8]);
-    qDebug() << "10"<< (packageADV2[9]);
-    qDebug() << "11"<< (packageADV2[10]);
-    qDebug() << "12"<< (packageADV2[11]);
-    qDebug() << "13"<< (packageADV2[12]);
-    qDebug() << "14"<< (packageADV2[13]);
-    qDebug() << "15"<< (packageADV2[14]);
-    qDebug() << "mafac"<< (packageADV2[15]);
-    qDebug() << "02v1"<< (packageADV2[16]);
-    qDebug() << "02v2"<< (packageADV2[17]);
-    qDebug() << "throttle"<< (packageADV2[18]);
+
     }
 //Toyota
     if (Model == 3)
@@ -473,7 +471,7 @@ void Decoder::decodeBasic(QByteArray serialdata)
     }
     if (units == 1)
     {
-        packageBasic[7] = ((mul[0] * info->Basic_Watert + add[8])*1.8) + 32 ;
+        packageBasic[7] = qRound(((mul[0] * info->Basic_Watert + add[8])*1.8) + 32) ;
     }
     if (units == 0)
     {
@@ -481,7 +479,7 @@ void Decoder::decodeBasic(QByteArray serialdata)
     }
     if (units == 1)
     {
-    packageBasic[8] = ((mul[0] * info->Basic_Airt + add[8]) *1.8) + 32 ;
+    packageBasic[8] = qRound(((mul[0] * info->Basic_Airt + add[8]) *1.8) + 32) ;
     }
     packageBasic[9] = mul[15] * info->Basic_BattV + add[0];
     if (units == 0)
@@ -656,7 +654,7 @@ void Decoder::decodeFuelBase(QByteArray serialdata, quint8 package)
                // //qDebug() << row << " : " << column;
             }
         }
-        ////qDebug() << fullFuelBase.length();
+
     }
 }
 
@@ -879,7 +877,7 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
     }
     if (units == 1)
     {
-    m_dashboard->setIntaketemp(unit.value(2)* 1.8 + 32);
+    m_dashboard->setIntaketemp(qRound(unit.value(2)* 1.8 + 32));
     }
     if (units == 0)
     {
@@ -887,7 +885,7 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
     }
     if (units == 1)
     {
-    m_dashboard->setWatertemp(unit.value(3)* 1.8 + 32);
+    m_dashboard->setWatertemp(qRound(unit.value(3)* 1.8 + 32));
     }
     if (units == 0)
     {
@@ -908,7 +906,7 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
     }
     if (units == 1)
     {
-    m_dashboard->setMVSS(unit.value(10)*0.621371);
+    m_dashboard->setMVSS(qRound(unit.value(10)*0.621371));
     }
     if (units == 0)
     {
@@ -916,7 +914,7 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
     }
     if (units == 1)
     {
-    m_dashboard->setSVSS(unit.value(11)*0.621371);
+    m_dashboard->setSVSS(qRound(unit.value(11)*0.621371));
     }
     m_dashboard->setInj1((unit.value(12)/3)*2);
     m_dashboard->setInj2((unit.value(13)/3)*2);
@@ -927,34 +925,6 @@ void Decoder::decodeAdaptronic(QModbusDataUnit unit)
     m_dashboard->setIgn3((unit.value(18)/5));
     m_dashboard->setIgn4((unit.value(19)/5));
     m_dashboard->setTRIM((unit.value(20)));
-    //m_dashboard->setpim(packageAdaptronic[1]);
-    //m_dashboard->setairt(packageAdaptronic[2]);
-    //m_dashboard->setWatertemp(packageAdaptronic[3]);
-
-    /*
-    m_dashboard->setRevs(packageADV[0]);
-    m_dashboard->setIntakepress(packageADV[1]);
-    m_dashboard->setPressureV(packageADV[2]);
-    m_dashboard->setThrottleV(packageADV[3]);
-    m_dashboard->setPrimaryinp(packageADV[4]);
-    m_dashboard->setFuelc(packageADV[5]);
-    m_dashboard->setLeadingign(packageADV[6]);
-    m_dashboard->setTrailingign(packageADV[7]);
-    m_dashboard->setFueltemp(packageADV[8]);
-    m_dashboard->setMoilp(packageADV[9]);
-    m_dashboard->setBoosttp(packageADV[10]);
-    m_dashboard->setBoostwg(packageADV[11]);
-    m_dashboard->setWatertemp(packageADV[12]);
-    m_dashboard->setIntaketemp(packageADV[13]);
-    m_dashboard->setKnock(packageADV[14]);
-    m_dashboard->setBatteryV(packageADV[15]);
-    m_dashboard->setSpeed(packageADV[16]);
-    m_dashboard->setIscvduty(packageADV[17]);
-    m_dashboard->setO2volt(packageADV[18]);
-    m_dashboard->setna1(packageADV[19]);
-    m_dashboard->setSecinjpulse(packageADV[20]);
-    m_dashboard->setna2(packageADV[21]);
-*/
 
 
     // Convert absolute pressure in KPA to relative pressure mmhg/Kg/cm2

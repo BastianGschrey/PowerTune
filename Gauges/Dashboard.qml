@@ -11,6 +11,7 @@ Item {
     anchors.fill: parent
     Component.onCompleted: {units.unitadjust()} // adjusts the Gauges to metric or imperial
 
+    property  var unit : Dashboard.units;
 
     //fade in effect for the Gauges (Welcome animation)
 
@@ -395,10 +396,8 @@ Item {
         id: units
         function unitadjust()
         {
-            if (Dashboard.units == "metric") {speedometer.maximumValue = 320, leftgaugeticks.minimumValue =30,leftgaugeticks.maximumValue =110, rightgaugeticks.minimumValue =20,rightgaugeticks.maximumValue = 80};
-            if (Dashboard.units == "imperial") {speedometer.maximumValue = 200,speedoNeedle.value = (Dasboard.speed / 2.597402597402597),leftgaugeticks.minimumValue =60,leftgaugeticks.maximumValue =220, rightgaugeticks.minimumValue = 70,rightgaugeticks.maximumValue = 190};
-
-
+            if (unit == "imperial") {speedometer.maximumValue = 200,speedoNeedle.value = (Dashboard.speed / 2.597402597402597),leftgaugeticks.minimumValue =60,leftgaugeticks.maximumValue =220, rightgaugeticks.minimumValue = 70,rightgaugeticks.maximumValue = 190};
+            if (unit == "metric") {speedometer.maximumValue = 320, leftgaugeticks.minimumValue =30,leftgaugeticks.maximumValue =110, rightgaugeticks.minimumValue =20,rightgaugeticks.maximumValue = 80};
         }
 
     }
