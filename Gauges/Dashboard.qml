@@ -50,6 +50,34 @@ Item {
         duration: 6000
         running: true
     }
+    OpacityAnimator {
+        target: value1;
+        from: 0;
+        to: 1;
+        duration: 6000
+        running: true
+    }
+    OpacityAnimator {
+        target: value2;
+        from: 0;
+        to: 1;
+        duration: 6000
+        running: true
+    }
+    OpacityAnimator {
+        target: value1label;
+        from: 0;
+        to: 1;
+        duration: 6000
+        running: true
+    }
+    OpacityAnimator {
+        target: value2label;
+        from: 0;
+        to: 1;
+        duration: 6000
+        running: true
+    }
 
     //Backround image for the Gauges
     Image {
@@ -71,7 +99,67 @@ Item {
         anchors.centerIn: backround
         color: "transparent"
 
+        //Test
+        Rectangle {
+            color: "transparent"
+            id: test
+            height: scalerect.height /6
+            width: scalerect.width /4.3
+            anchors.left: scalerect.left
+            anchors.leftMargin: scalerect.width /2.6
+            anchors.bottom: scalerect.bottom
+            anchors.bottomMargin: scalerect.height / 3.5 //127
 
+            Text {
+                id: value1label
+                text:"AFR"
+                font.pixelSize: scalerect.width / 45
+                anchors.left: parent.left
+                anchors.leftMargin: scalerect.width / 26
+                anchors.bottom: parent.bottom
+                font.bold: true
+                font.family: "Eurostile"
+                color: "white"
+
+            }
+            Text {
+                id: value1
+                text: Dashboard.auxcalc1
+                font.pixelSize: scalerect.width / 45
+                anchors.right: parent.right
+                anchors.rightMargin: scalerect.width / 26
+                anchors.bottom: parent.bottom
+                font.bold: true
+                font.family: "Eurostile"
+                color: "white"
+
+            }
+            Text {
+                id: value2label
+                text:"Boost"
+                font.pixelSize: scalerect.width / 45
+                anchors.bottom: value1label.top
+                anchors.left: parent.left
+                anchors.leftMargin: scalerect.width / 26
+                font.bold: true
+                font.family: "Eurostile"
+                color: "white"
+
+            }
+            Text {
+                id: value2
+                text:(Dashboard.pim).toFixed(2)
+                font.pixelSize: scalerect.width / 45
+                anchors.right: parent.right
+                anchors.rightMargin: scalerect.width / 26
+                anchors.bottom: value1.top
+                font.bold: true
+                font.family: "Eurostile"
+                color: "white"
+
+            }
+
+        }
         //Small gauge on the left
         Rectangle {
             color: "transparent"
@@ -269,8 +357,7 @@ Item {
         width: parent.width
         height: parent.height
         color: "transparent"
-        //For Later use
-        /*
+
         MouseArea {
             anchors.fill: parent
             acceptedButtons: Qt.LeftButton
@@ -290,7 +377,7 @@ Item {
 
 
         }
-*/
+
         Rectangle {
             id: sourceselect
             visible: false
@@ -398,6 +485,14 @@ Item {
         {
             if (unit == "imperial") {speedometer.maximumValue = 200,speedoNeedle.value = (Dashboard.speed / 2.597402597402597),leftgaugeticks.minimumValue =60,leftgaugeticks.maximumValue =220, rightgaugeticks.minimumValue = 70,rightgaugeticks.maximumValue = 190};
             if (unit == "metric") {speedometer.maximumValue = 320, leftgaugeticks.minimumValue =30,leftgaugeticks.maximumValue =110, rightgaugeticks.minimumValue =20,rightgaugeticks.maximumValue = 80};
+        }
+
+    }
+    Item {
+        id: applysource
+        function sourceapply()
+        {
+
         }
 
     }
