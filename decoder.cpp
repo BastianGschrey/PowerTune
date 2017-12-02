@@ -486,6 +486,17 @@ void Decoder::decodeBasic(QByteArray serialdata)
     }
     else Boost = packageBasic[5] * 0.039370079; // while boost pressure is negative show pressure in inhg
     }
+qDebug() << "inj"<< info->Basic_Injduty;
+qDebug() << "ign"<< info->Basic_IGL ;
+qDebug() << "af"<< info->Basic_IGT;
+qDebug() << "rev"<< info->Basic_RPM;
+qDebug() << "speed"<< info->Basic_KPH;
+qDebug() << "boost"<< info->Basic_Boost;
+qDebug() << "knock"<< info->Basic_Knock;
+qDebug() << "water"<< info->Basic_Watert;
+qDebug() << "air"<< info->Basic_Airt;
+qDebug() << "battery"<< info->Basic_BattV;
+
 
    // m_dashboard->setInjDuty(packageBasic[0]);
     m_dashboard->setLeadingign(packageBasic[1]);

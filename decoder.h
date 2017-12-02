@@ -194,6 +194,27 @@ private:
         fc_Basic_info_t parse(const QByteArray &);
     };
 
+//Nissan and Subaru
+    double packageBasic2[22];
+    struct fc_Basic_info_t2{
+
+        quint16 requesttype;
+        quint16 Basic_Injduty;
+        quint16 Basic_IGL;
+        quint16 Basic_IGT;
+        quint16 Basic_RPM;
+        quint16 Basic_KPH;
+        quint16 Basic_Boost;
+        quint16 Basic_Knock;
+        quint16 Basic_Watert;
+        quint16 Basic_Airt;
+        quint16 Basic_BattV;
+        quint8 checksum;
+
+        fc_Basic_info_t2 parse(const QByteArray &);
+    };
+
+
      double packageRevIdle[16];
 
      struct fc_RevIdle_info_t{

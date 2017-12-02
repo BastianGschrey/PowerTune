@@ -285,9 +285,14 @@ void Serial::closeConnection()
 void Serial::update()
 {
 
-    QProcess process;
-    process.startDetached("/bin/sh", QStringList()<< "/home/pi/update.sh");
-    qDebug() << "Update PowerTune.";
+
+    bool bStatus = false;
+
+      QStringList args;
+      qint64      pid = 0;
+
+      args << "&";
+      bStatus = QProcess::startDetached("/home/pi/update.sh", args, ".", &pid);
 
 }
 void Serial::handleTimeout()
@@ -530,6 +535,7 @@ void Serial::readData(QByteArray serialdata)
         if(serialdata[1] + 1 == serialdata.length())
         {
             if (logging ==1 ){
+                qDebug() << "logging";
                 QString fileName = "OK Messages.txt";
                 QFile mFile(fileName);
                 if(!mFile.open(QFile::Append | QFile::Text)){
