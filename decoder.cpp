@@ -171,34 +171,31 @@ void Decoder::decodeAdv(QByteArray serialdata)
     fc_adv_info_t2* info=reinterpret_cast<fc_adv_info_t2*>(serialdata.data());
 
     packageADV2[0] = info->RPM;
-    packageADV2[1] = mul[1] * info->EngLoad + add[1];
-    packageADV2[2] = mul[2] * info->MAF1V + add[2];
-    packageADV2[3] = mul[3] * info->MAF2V + add[3];
-    packageADV2[4] = mul[4] * info->injms + add[4];
-    packageADV2[5] = mul[5] * info->Inj + add[5];
-    packageADV2[6] = mul[6] * info->Ign + add[6];
-    packageADV2[7] = mul[7] * info->Dwell + add[7];
+    packageADV2[1] = info->EngLoad;
+    packageADV2[2] = info->MAF1V *0.001;
+    packageADV2[3] = info->MAF2V *0.001;
+    packageADV2[4] = info->injms *0.004;
+    packageADV2[5] = info->Inj; //fc edit shows raw byte
+    packageADV2[6] = info->Ign;
+    packageADV2[7] = info->Dwell;
     packageADV2[8] = mul[8] * info->BoostPres + add[8];
     if (packageADV2[8] >= 0x8000)
         packageADV2[8] = (packageADV[8] - 0x8000) * 0.01;
     else
         packageADV2[8] = (1.0 / 2560 + 0.001) * packageADV[8];
-    packageADV2[9] = mul[9] * info->BoostDuty + add[9];
+    packageADV2[9] = info->BoostDuty *0.005;
     packageADV2[10] = info->Watertemp -80;
     packageADV2[11] = info->Intaketemp -80;
-    packageADV2[12] = mul[12] * info->Knock + add[12];
-    packageADV2[13] = mul[13] * info->BatteryV + add[13];
-    packageADV2[14] = mul[14] * info->Speed + add[14];
+    packageADV2[12] = info->Knock;
+    packageADV2[13] = info->BatteryV *0.1;
+    packageADV2[14] = info->Speed;
 //    packageADV2[14] *= speed_correction;
 //    previousSpeed_kph[buf_currentIndex] = packageADV[14];
-    packageADV2[15] = mul[15] * info->MAFactivity + add[15];
-    packageADV2[16] = mul[16] * info->O2volt + add[16];
-    packageADV2[17] = mul[17] * info->O2volt_2 + add[17];
-    packageADV2[18] = mul[18] * info->ThrottleV + add[18];
-    packageADV2[19] = mul[19] * info->na1 + add[19];
-    packageADV2[20] = 0;
-    packageADV2[21] = 0;
- //qDebug() << "Advanced 2";
+    packageADV2[15] = info->MAFactivity; //formula ? 7 raw = 1.12 in FC edit
+    packageADV2[16] = info->O2volt *0.005;
+    packageADV2[17] = info->O2volt_2 *0.005;
+    packageADV2[18] = info->ThrottleV *0.001;
+
     m_dashboard->setRevs(packageADV2[0]);
     m_dashboard->setEngLoad(packageADV2[1]);
     m_dashboard->setMAF1V(packageADV2[2]);
@@ -217,11 +214,28 @@ void Decoder::decodeAdv(QByteArray serialdata)
     m_dashboard->setMAFactivity(packageADV2[15]);
     m_dashboard->setO2volt(packageADV2[16]);
     m_dashboard->setO2volt_2(packageADV2[17]);
-    m_dashboard->setO2volt(packageADV2[18]);
-    m_dashboard->setThrottleV(packageADV2[19]);
-
+    m_dashboard->setThrottleV(packageADV2[18]);
+    qDebug() << "1"<< (packageADV2[0]);
+    qDebug() << "2"<< (packageADV2[1]);
+    qDebug() << "3"<< (packageADV2[2]);
+    qDebug() << "4"<< (packageADV2[3]);
+    qDebug() << "5"<< (packageADV2[4]);
+    qDebug() << "6"<< (packageADV2[5]);
+    qDebug() << "7"<< (packageADV2[6]);
+    qDebug() << "8"<< (packageADV2[7]);
+    qDebug() << "9"<< (packageADV2[8]);
+    qDebug() << "10"<< (packageADV2[9]);
+    qDebug() << "11"<< (packageADV2[10]);
+    qDebug() << "12"<< (packageADV2[11]);
+    qDebug() << "13"<< (packageADV2[12]);
+    qDebug() << "14"<< (packageADV2[13]);
+    qDebug() << "15"<< (packageADV2[14]);
+    qDebug() << "mafac"<< (packageADV2[15]);
+    qDebug() << "02v1"<< (packageADV2[16]);
+    qDebug() << "02v2"<< (packageADV2[17]);
+    qDebug() << "throttle"<< (packageADV2[18]);
     }
-
+//Toyota
     if (Model == 3)
     {
         fc_adv_info_t3* info=reinterpret_cast<fc_adv_info_t3*>(serialdata.data());
@@ -486,16 +500,7 @@ void Decoder::decodeBasic(QByteArray serialdata)
     }
     else Boost = packageBasic[5] * 0.039370079; // while boost pressure is negative show pressure in inhg
     }
-qDebug() << "inj"<< info->Basic_Injduty;
-qDebug() << "ign"<< info->Basic_IGL ;
-qDebug() << "af"<< info->Basic_IGT;
-qDebug() << "rev"<< info->Basic_RPM;
-qDebug() << "speed"<< info->Basic_KPH;
-qDebug() << "boost"<< info->Basic_Boost;
-qDebug() << "knock"<< info->Basic_Knock;
-qDebug() << "water"<< info->Basic_Watert;
-qDebug() << "air"<< info->Basic_Airt;
-qDebug() << "battery"<< info->Basic_BattV;
+
 
 
    // m_dashboard->setInjDuty(packageBasic[0]);
