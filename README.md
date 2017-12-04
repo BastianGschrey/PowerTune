@@ -43,7 +43,8 @@ Raspbian Jessie 2017-04-10
 | Toyota MR2                       | (3S-GTE3)             | <big>__✓__    |                |Tolis Kofoglou  |
 | Nissan Skyline R32 GT-TR BNR32   | (RB26DETT)            |               |   <big>__✓__   |Alpheus Booth   |
   
-| Soon to be tested :              | ECU Variant:          | FC Hako:      | FC Datalogit:  |Confirmed by :  |  
+| Soon to be tested :              | ECU Variant:          | FC Hako:      | FC Datalogit:  |Confirmed by :  | 
+| -------------------------------- |:---------------------:|:-------------:|:--------------:|:--------------:|
 | Nissan Silvia S14                | (SR20DET1)            |               |                |                |
 | Toyota Supra JZA70               | (1JZ-GTE)             |               |                |                |
 
