@@ -39,10 +39,6 @@ Raspbian Jessie 2017-04-10
 * Mazda RX7 FD3S                              (13B-REW)            <big>__✓__       
 * Toyota MR2                                  (3S-GTE3)            <big>__✓__  
 * Nissan Skyline R32 GT-TR                    (RB26DETT)           <big>__✓__     
-  13B-REW
-* Mazda RX7 FD3S                              (13B-REW)            <big>__✓__          
-* Toyota MR2                                  (3S-GTE3)            <big>__✓__         
-* Nissan Skyline R32 GT-TR                    (RB26DETT)                                <big>__✓__    
 
 #### Adaptronic Variants :
 
