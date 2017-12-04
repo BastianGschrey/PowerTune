@@ -18,7 +18,7 @@ Raspbian Jessie 2017-04-10
 
 #### Nissan :
 * RB20DET
-* RB26DET
+* RB26DETT
 * SR20DET1
 * CA18DET
 * RB25DET
