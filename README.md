@@ -57,6 +57,7 @@ Implemented Features :
 * Logging to user selectable txt file for Power FC 
 * Differential Aux input Settings for Power FC (2 for FC Hako / 4 For Datalogit) 
 * GPS for NMEA 0183 compliant devices via Serial (Tested with BU-353S4 GPS Mouse) 
+* Switching between metric and Imperial values
 
 
 <big>_Build a Raspberry Pi image with Buildroot:_</big>
