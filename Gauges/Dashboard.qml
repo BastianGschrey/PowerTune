@@ -113,7 +113,7 @@ Item {
             Text {
                 id: value1label
                 text:"AFR"
-                font.pixelSize: scalerect.width / 45
+                font.pixelSize: scalerect.width / 55
                 anchors.left: parent.left
                 anchors.leftMargin: scalerect.width / 26
                 anchors.bottom: parent.bottom
@@ -125,7 +125,7 @@ Item {
             Text {
                 id: value1
                 text: Dashboard.auxcalc1
-                font.pixelSize: scalerect.width / 45
+                font.pixelSize: scalerect.width / 55
                 anchors.right: parent.right
                 anchors.rightMargin: scalerect.width / 26
                 anchors.bottom: parent.bottom
@@ -137,7 +137,7 @@ Item {
             Text {
                 id: value2label
                 text:"Boost"
-                font.pixelSize: scalerect.width / 45
+                font.pixelSize: scalerect.width / 55
                 anchors.bottom: value1label.top
                 anchors.left: parent.left
                 anchors.leftMargin: scalerect.width / 26
@@ -149,7 +149,7 @@ Item {
             Text {
                 id: value2
                 text:(Dashboard.pim).toFixed(2)
-                font.pixelSize: scalerect.width / 45
+                font.pixelSize: scalerect.width / 55
                 anchors.right: parent.right
                 anchors.rightMargin: scalerect.width / 26
                 anchors.bottom: value1.top
