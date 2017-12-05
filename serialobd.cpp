@@ -1,4 +1,30 @@
 #include "serialobd.h"
+#include "dashboard.h"
+#include "serial.h"
+
+QString Portnameselect;
+
+
+
+SerialOBD::SerialOBD(QObject *parent)
+    : QObject(parent)
+    , m_dashboard(Q_NULLPTR)
+{
+
+}
+SerialOBD::SerialOBD(DashBoard *dashboard, QObject *parent)
+    : QObject(parent)
+    , m_dashboard(dashboard)
+{
+
+}
+
+void SerialOBD::SelectPort(const QString &portName)
+{
+    Portnameselect = portName;
+    qDebug() << "Port Connected!"<< portName;
+
+}
 
 void SerialOBD::ConnectToSerialPort()
 {
@@ -14,23 +40,8 @@ void SerialOBD::ConnectToSerialPort()
     QByteArray data;
     QRegExp regExOk(".*OK.*");
 
-
-    availablePorts = serialInfo.availablePorts();
-
-    //Make sure serial connects to the corrent device
-    if(!availablePorts.empty()){
-        qDebug() << "1st Port Detected: " << availablePorts.at(0).portName();
-        while(availablePorts.at(0).portName() != "ttyUSB0"){
-            qDebug() << availablePorts.at(0).portName();
-            QThread::msleep(500);
-        }
-        m_serial.setPortName("ttyUSB0");
-    }
-    else
-        qDebug() << "EMPTY PORT LIST...";//make sure the ports list is not empty
-
     //Set all the port settings
-    //m_serial.setPortName(portName);
+    m_serial.setPortName(Portnameselect);
     m_serial.setBaudRate(QSerialPort::Baud38400);
     m_serial.setDataBits(QSerialPort::Data8);
     m_serial.setParity(QSerialPort::NoParity);
@@ -242,15 +253,19 @@ void SerialOBD::HexToDecimal(QByteArray sRPM, QByteArray sSpeed, QByteArray sFue
 
     //report the values recieved to instrumentcluster class
     if(RPM > 100)
+        m_dashboard->setRevs(RPM);
         emit obdRPM(RPM);
     if(Speed > 0)
+        m_dashboard->setSpeed(Speed);
         emit obdMPH(Speed);
     if(FuelStatus > 0 )
         emit obdFuelStatus(FuelStatus);
     if(EngineCoolantTemp > 0)
+        m_dashboard->setWatertemp(EngineCoolantTemp);
         emit obdCoolantTemp(EngineCoolantTemp);
     if(TroubleCode != "")
         emit obdTroubleCode(TroubleCode);
+
 
     //when this array is entirely false, this will set the cluster values to "off" state
     if(ArrayEngineOff[0] == true && ArrayEngineOff[1] == true && ArrayEngineOff[2] == true)

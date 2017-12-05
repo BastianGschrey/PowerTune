@@ -347,18 +347,7 @@ Rectangle {
             }
         }
     }
-    // make another grid
-    /*
-    Item {
-        visible: { (ecuSelect.currentIndex == "1") ? false: true; }
-        Row {
-            x: 50
-            y: 200
-            spacing: 5
 
-        }
-    }
-*/
     //Functions
     Item {
         //Function to automatically connect at Startup , function is called from COmbobox Serialname component.oncompleted
@@ -388,7 +377,7 @@ Rectangle {
         {
 
             if (loggerswitch.checked == true) logger.loggeron = 1, Serial.startLogging(logfilenameSelect.text, loggeron.valueOf());
-            if (loggerswitch.checked == false) logger.loggeron = 0,Serial.stopLogging(logfilenameSelect.text, loggeron.valueOf());
+            if (loggerswitch.checked == false) logger.loggeron = 0,Serial.stopLogging(loggeron.valueOf());
         }
     }
     Item {
@@ -405,7 +394,7 @@ Rectangle {
         id: functconnect
         function connectfunc()
         {
-            if (ecuSelect.currentIndex == 2)  Work.start(serialName.currentText);//serialName.currentText
+            if (ecuSelect.currentIndex == 2) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Work.start(serialName.currentText);
             else Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
         }
     }

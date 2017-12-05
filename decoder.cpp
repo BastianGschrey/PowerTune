@@ -255,11 +255,27 @@ void Decoder::decodeAdv(QByteArray serialdata)
             packageADV3[8] = (1.0 / 2560 + 0.001) * packageADV3[8];
 */
         packageADV3[9] = mul[9] * info->BoostDuty3 + add[9];
+        if (units == 0 )
+        {
         packageADV3[10] = info->Watertemp3 -80;
         packageADV3[11] = info->Intaketemp3 -80;
+        }
+        if (units == 1 )
+        {
+        packageADV3[10] = qRound(((info->Watertemp3 -80)* 1.8) + 32);
+        packageADV3[11] = qRound(((info->Intaketemp3 -80)* 1.8) + 32);
+
+        }
         packageADV3[12] = info->Knock3;
         packageADV3[13] = info->BatteryV3 *0.1;
-        packageADV3[14] = mul[14] * info->Speed3 + add[14];
+        if (units == 0 )
+        {
+        packageADV3[14] = info->Speed3;
+        }
+        if (units == 1 )
+        {
+        packageADV3[14] = qRound(info->Speed3 * 0.621371);
+        }
        // packageADV3[14] *= speed_correction;
         //previousSpeed_kph[buf_currentIndex] = packageADV[14];
 //        packageADV3[15] = mul[15] * info->Iscvduty + add[15];
@@ -270,48 +286,22 @@ void Decoder::decodeAdv(QByteArray serialdata)
         packageADV3[20] = 0;
         packageADV3[21] = 0;
 
- //qDebug() << "Advanced 3";
-    m_dashboard->setRevs(packageADV3[0]); //correct
-    m_dashboard->setIntakepress(packageADV3[1]); //correct
-    m_dashboard->setPressureV(packageADV3[2]); //correct
-    m_dashboard->setThrottleV(packageADV3[3]); //correct
-    m_dashboard->setPrimaryinp(packageADV3[4]); //correct
-    m_dashboard->setFuelc(packageADV3[5]); //correct
+
+    m_dashboard->setRevs(packageADV3[0]);
+    m_dashboard->setIntakepress(packageADV3[1]);
+    m_dashboard->setPressureV(packageADV3[2]);
+    m_dashboard->setThrottleV(packageADV3[3]);
+    m_dashboard->setPrimaryinp(packageADV3[4]);
+    m_dashboard->setFuelc(packageADV3[5]);
     m_dashboard->setLeadingign(packageADV3[6]);
     m_dashboard->setTrailingign(packageADV3[7]);
     m_dashboard->setpim(packageADV3[8]);
-    m_dashboard->setWatertemp(packageADV3[10]);  //correct
-    m_dashboard->setIntaketemp(packageADV3[11]); //verified
-    m_dashboard->setKnock(packageADV3[12]); //correct
-    m_dashboard->setBatteryV(packageADV3[13]); //correct
-    m_dashboard->setSpeed(packageADV3[14]); //correct
-  //  m_dashboard->setIscvduty(packageADV3[17]);
-  //  m_dashboard->setO2volt(packageADV3[18]);
-  //  m_dashboard->setna1(packageADV3[19]);
-  //  m_dashboard->setSecinjpulse(packageADV3[20]);
-  //  m_dashboard->setna2(packageADV3[21]);
- //qDebug() << "0"<< packageADV3[0];
-    //qDebug() << "1"<< packageADV3[1];
-  //qDebug() << "2"<< packageADV3[2];
-  //qDebug() << "3"<< packageADV3[3];
-  //qDebug() << "4"<< packageADV3[4];
-  //qDebug() << "5"<< packageADV3[5];
-  //qDebug() << "6"<< packageADV3[6];
-  //qDebug() << "7"<< packageADV3[7];
-  //qDebug() << "8"<< packageADV3[8];
-  //qDebug() << "9"<< packageADV3[9];
-  //qDebug() << "10"<< packageADV3[10];
-  //qDebug() << "11"<< packageADV3[11];
-  //qDebug() << "12"<< packageADV3[12];
-  //qDebug() << "13"<< packageADV3[13];
-  //qDebug() << "14"<< packageADV3[14];
-  //qDebug() << "15"<< packageADV3[15];
-  //qDebug() << "16"<< packageADV3[16];
-  //qDebug() << "17"<< packageADV3[17];
-  //qDebug() << "18"<< packageADV3[18];
-  //qDebug() << "19"<< packageADV3[19];
-  //qDebug() << "20"<< packageADV3[20];
-  //qDebug() << "22"<< packageADV3[21];
+    m_dashboard->setWatertemp(packageADV3[10]);
+    m_dashboard->setIntaketemp(packageADV3[11]);
+    m_dashboard->setKnock(packageADV3[12]);
+    m_dashboard->setBatteryV(packageADV3[13]);
+    m_dashboard->setSpeed(packageADV3[14]);
+
 
     }
 
@@ -526,13 +516,6 @@ void Decoder::decodeRevIdle(QByteArray serialdata)
     packageRevIdle[5] = info->IdleEL;
     packageRevIdle[6] = info->IdleAC;
 
-    //    ui->lineRevlim->setText (QString::number(packageRevIdle[0]));
-    //    ui->lineFCAE->setText (QString::number(packageRevIdle[1]));
-    //    ui->lineFCEL->setText (QString::number(packageRevIdle[2]));
-    //    ui->lineFCAC->setText (QString::number(packageRevIdle[3]));
-    //    ui->lineIdleAE->setText (QString::number(packageRevIdle[4]));
-    //    ui->lineIdleEL->setText (QString::number(packageRevIdle[5]));
-    //    ui->lineIdleAC->setText (QString::number(packageRevIdle[6]));
 }
 
 void Decoder::decodeTurboTrans(QByteArray serialdata)
@@ -549,15 +532,6 @@ void Decoder::decodeTurboTrans(QByteArray serialdata)
     packageTurboTrans[7] = mul[36] * info->HighRPM2;
     packageTurboTrans[8] = mul[36] * info->HighRPM3;
 
-    //    ui->lineTPS01->setText (QString::number(packageTurboTrans[0]));
-    //    ui->lineTPS02->setText (QString::number(packageTurboTrans[1]));
-    //    ui->lineTPS03->setText (QString::number(packageTurboTrans[2]));
-    //    ui->lineLowRPM1->setText (QString::number(packageTurboTrans[3]));
-    //    ui->lineLowRPM2->setText (QString::number(packageTurboTrans[4]));
-    //    ui->lineLowRPM3->setText (QString::number(packageTurboTrans[5]));
-    //    ui->lineHighRPM1->setText (QString::number(packageTurboTrans[6]));
-    //    ui->lineHighRPM2->setText (QString::number(packageTurboTrans[7]));
-    //    ui->lineHighRPM3->setText (QString::number(packageTurboTrans[8]));
 }
 
 void Decoder::decodeLeadIgn(QByteArray serialdata, quint8 column)

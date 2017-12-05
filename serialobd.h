@@ -12,10 +12,17 @@
 #include "pids.h"
 
 
+class DashBoard;
+
 class SerialOBD : public QObject
 {
     Q_OBJECT
 public:
+    explicit SerialOBD(QObject *parent = 0);
+    explicit SerialOBD(DashBoard *dashboard, QObject *parent = 0);
+    Q_INVOKABLE void SelectPort(const QString &portName);
+
+
 
     void RequestClusterData();
     void ParseAndReportClusterData(QByteArray data);
@@ -43,6 +50,7 @@ public slots:
 private:
     PIDs PID;
     QSerialPort m_serial;
+    DashBoard *m_dashboard;
 
     bool ArrayEngineOff[3] = {false};
     int m_tCodeCounter = 0;
