@@ -115,26 +115,28 @@ The image currently has a boot time of approx 17 seconds until PowerTune is star
 About the image :
 The username and password are :
 
-user: root
-pw: root
+user: pi
+pw: raspberry
 
 Not all linux commands are supported and there is no need to use sudo 
 
 Should you wish to use Wlan :
 
-quit powertune 
+* quit PowerTune 
 
-login with username and password
+* Log in with user and password from above
+* Switch to root user
+`$ sudo su root`
 
-Type the following :
+* Type the following:
 
-$nano /etc/network/wpa_supplicant.conf
+`$ wpa_passphrase "YourSSIDHere" "YourPasswordHere" >> /etc/wpa_supplicant/wpa_supplicant.conf`
 
-Enter your WLAN SSID and Password 
+* Replace your WLAN SSID and Password Above
 
-Press "Ctrl+x" then press "y" to save
+*Pro-tip: edit the file and delete the line: #psk=YourPasswordHere*
 
-$reboot
+`$ reboot`
 
 Now your pi will always log into WLAN at boot 
 
@@ -143,7 +145,7 @@ Now your pi will always log into WLAN at boot
 
 
 On a fresh Debian Stretch image build QT5.8 
-i made some scripts here :
+I made some scripts here :
 ```
 https://github.com/MarkusIppy/QT5.x-raspbian-stretch
 ```
@@ -253,7 +255,7 @@ Test if the script works:
 ```
 $ sudo systemctl start PowerTune.service
 ```
-If PowerTune is launching , quit PowerTune
+If PowerTune is launching, quit PowerTune
 
 Now enable the script 
 
