@@ -15,7 +15,8 @@ SOURCES += main.cpp \
     serialport.cpp \
     appsettings.cpp \
     gopro.cpp \
-    gps.cpp
+    gps.cpp \
+    serialobd.cpp
 
 RESOURCES += qml.qrc
 
@@ -32,7 +33,10 @@ HEADERS += \
     serialport.h \
     appsettings.h \
     gopro.h \
-    gps.h
+    gps.h \
+    instrumentcluster.h \
+    pids.h \
+    serialobd.h
 
 FORMS +=
 

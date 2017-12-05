@@ -2,9 +2,11 @@ import QtQuick 2.8
 import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Styles 1.4
+import QtQuick.Controls 1.4
 import QtQuick.Extras 1.4
 import Qt.labs.settings 1.0
 import "CreateBarGaugeScript.js" as BarGaugeScript
+
 
 
 
@@ -13,30 +15,84 @@ Rectangle {
     id: mainrectangle
     width: parent.width
     height: parent.height
-    color: "black"
+    color: "transparent"
 
     MouseArea {
-        anchors.fill: parent
-        acceptedButtons: Qt.LeftButton
+        anchors.fill: mainrectangle
+        acceptedButtons: Qt.RightButton
+
         onClicked: pieMenu.popup(mouseX, mouseY)
-
     }
-
-
     PieMenu {
         id: pieMenu
 
         MenuItem {
-            text: "Add gauge"
-
-            onTriggered: BarGaugeScript.createbarGaugeObjects();
+            text: "Action 1"
+            onTriggered: print("Action 1")
         }
-
         MenuItem {
-            text: "remove gauge"
-
+            text: "Action 2"
+            onTriggered: print("Action 2")
+        }
+        MenuItem {
+            text: "Action 3"
+            onTriggered: print("Action 3")
         }
     }
+
+    //PieMenu {
+      //  id: pieMenu
+
+       // MenuItem {
+         //   text: "Add gauge"
+
+           // onTriggered: BarGaugeScript.createbarGaugeObjects();
+        // }
+
+       // MenuItem {
+        //    text: "remove gauge"
+
+       // }
+    }
+
+    /*
+    ListModel {
+        id : sourcelist
+        ListElement {text:"RPM" }
+        ListElement {text:"PIM" }
+        ListElement {text:"PIM Voltage" }
+        ListElement {text:"Throttle Voltage" }
+        ListElement {text:"Primary Injector Pulse width" }
+        ListElement {text:"Fuel Temp" }
+        ListElement {text:"IGN 1" }
+        ListElement {text:"IGN 2" }
+        ListElement {text:"Fuel Temp" }
+        ListElement {text:"Metering Oil Pump" }
+        ListElement {text:"Boost TP" }
+        ListElement {text:"Boost WG" }
+        ListElement {text:"WaterTemp" }
+        ListElement {text:"Intake Temp" }
+        ListElement {text:"Knock" }
+        ListElement {text:"Battery Voltage" }
+        ListElement {text:"Speed" }
+        ListElement {text:"ISCV Duty" }
+        ListElement {text:"O2 Voltage" }
+        ListElement {text:"na1" }
+        ListElement {text:"Secinjpulse" }
+        ListElement {text:"Injector Duty" }
+        ListElement {text:"Engline Load" }
+        ListElement {text:"MAF1 Voltage" }
+        ListElement {text:"MAF2 Voltage" }
+        ListElement {text:"injms" }
+        ListElement {text:"Inj" }
+        ListElement {text:"Ign" }
+        ListElement {text:"Dwell" }
+        ListElement {text:"Boost Pressure" }
+        ListElement {text:"Boost Duty" }
+        ListElement {text:"MAF Activity" }
+        ListElement {text:"O2 Volt2" }
+    }
+*/
 /*
     ListModel {
         id: sourceList
@@ -178,4 +234,3 @@ Rectangle {
         id: listViewSourceSelect
         model: listModelSourceSelect
     }*/
-}

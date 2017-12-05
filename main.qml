@@ -42,7 +42,10 @@ ApplicationWindow {
             id: fourthPageLoader
             source: ""
         }
-
+        Loader {
+            id: testLoader
+            source: "qrc:/Gauges/DynamicDash.qml"
+        }
 
         Item {
             id:lastPage

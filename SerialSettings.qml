@@ -101,7 +101,7 @@ Rectangle {
                     id: ecuSelect
                     width: 200
 
-                    model: [ "PowerFC", "Adaptronic"]//[ "PowerFC", "Adaptronic","Dicktator","PowerMods"]
+                    model: [ "PowerFC", "Adaptronic", "OBD ELM"]//[ "PowerFC", "Adaptronic","Dicktator","PowerMods"]
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
@@ -157,17 +157,13 @@ Rectangle {
                 Button {
                     id: connectButton
                     text: "Connect"
-                    onClicked: {
-                        // console.log (serialName.currentText);
-                        Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
-
-                    }
+                    onClicked: {functconnect.connectfunc();}
                 }
                 Button {
                     id: disconnectButton
                     text: "Disconnect"
                     onClicked: {
-                        Serial.closeConnection(),GPS.stopGPScom();
+                        functdisconnect.disconnectfunc();
                     }
                 }
 
@@ -370,7 +366,7 @@ Rectangle {
         function auto()
         {
             // if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex);
-            if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
+            if (connectAtStart.checked == true) functconnect.connectfunc();//Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
 
         }
     }
@@ -405,18 +401,28 @@ Rectangle {
         }
     }
     Item {
-        //Function to transmit GoPro rec status on off
-        id: goproRec
-        property var recording: 0
-        function rec()
+        //function to Connect
+        id: functconnect
+        function connectfunc()
         {
+            if (ecuSelect.currentIndex == 2)  Work.start(serialName.currentText);//serialName.currentText
+            else Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
+        }
+    }
 
-            if (record.checked == true) goproRec.recording = 1, GoPro.goprorec(recording.valueOf());
-            if (record.checked == false) goproRec.recording = 0,GoPro.goprorec(recording.valueOf());
+    //function to Disconnect
+    Item {
+
+        id: functdisconnect
+        function disconnectfunc()
+        {
+            if (ecuSelect.currentIndex == 2) Work.stop();
+            else Serial.closeConnection(),GPS.stopGPScom();
 
 
         }
     }
+
     //Function to select Dash1
     Item {
         id: select1

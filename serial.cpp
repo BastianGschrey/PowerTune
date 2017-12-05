@@ -73,6 +73,7 @@ Serial::Serial(QObject *parent) :
     m_dashBoard(Q_NULLPTR),
     m_gopro(Q_NULLPTR),
     m_gps(Q_NULLPTR),
+//    m_obd(Q_NULLPTR),
     m_bytesWritten(0),
     lastRequest(nullptr),
     modbusDevice(nullptr)
@@ -86,6 +87,7 @@ Serial::Serial(QObject *parent) :
     m_appSettings = new AppSettings(this);
     m_gopro = new GoPro(this);
     m_gps = new GPS(m_dashBoard, this);
+//    m_obd = new SerialOBD(this);
     connect(m_decoder,SIGNAL(sig_adaptronicReadFinished()),this,SLOT(AdaptronicStartStream()));
     QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
     if (engine == Q_NULLPTR)
@@ -95,6 +97,7 @@ Serial::Serial(QObject *parent) :
     engine->rootContext()->setContextProperty("AppSettings", m_appSettings);
     engine->rootContext()->setContextProperty("GoPro", m_gopro);
     engine->rootContext()->setContextProperty("GPS", m_gps);
+//    engine->rootContext()->setContextProperty("OBD", m_obd);
 }
 
 void Serial::initSerialPort()
@@ -182,7 +185,7 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
 
         //qDebug() << "Initial request to PowerFc"<< requestIndex;
 
-       Serial::sendRequest(requestIndex);
+        Serial::sendRequest(requestIndex);
 
 
 
@@ -216,8 +219,13 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
         }
 
     }
-    //Dicktator
+    //OBD
     if (ecuSelect == 2)
+    {
+        //m_obd->ConnectToSerialPort();
+    }
+    //Dicktator
+    if (ecuSelect == 3)
     {
 
         initSerialPort();
@@ -241,29 +249,7 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
             m_dashBoard->setSerialStat(QString("Connected to Serialport"));
         }
     }
-    //PowertMods
-    if (ecuSelect == 3)
-    {
 
-        initSerialPort();
-        m_serialport->setPortName(portName);
-        m_serialport->setBaudRate(QSerialPort::Baud115200);
-        m_serialport->setParity(QSerialPort::NoParity);
-        m_serialport->setDataBits(QSerialPort::Data8);
-        m_serialport->setStopBits(QSerialPort::OneStop);
-        m_serialport->setFlowControl(QSerialPort::NoFlowControl);;
-
-        //qDebug() << "Try to open SerialPort:";
-        if(m_serialport->open(QIODevice::ReadWrite) == false)
-        {
-            m_dashBoard->setSerialStat(m_serialport->errorString());
-            //qDebug() << "Open Serial port failed: " << m_serialport->errorString();
-        }
-        else
-        {
-            m_dashBoard->setSerialStat(QString("Connected to Serialport"));
-        }
-}
 }
 void Serial::closeConnection()
 {
@@ -276,7 +262,7 @@ void Serial::closeConnection()
         modbusDevice->disconnectDevice();
         //qDebug() << "device disconnected";
     }
-    if(ecu == 2){
+    if(ecu == 3){
         m_serialport->close();
         //qDebug() << "Connection closed.";
     }
@@ -288,11 +274,11 @@ void Serial::update()
 
     bool bStatus = false;
 
-      QStringList args;
-      qint64      pid = 0;
+    QStringList args;
+    qint64      pid = 0;
 
-      args << "&";
-      bStatus = QProcess::startDetached("/home/pi/update.sh", args, ".", &pid);
+    args << "&";
+    bStatus = QProcess::startDetached("/home/pi/update.sh", args, ".", &pid);
 
 }
 void Serial::handleTimeout()
@@ -362,7 +348,7 @@ void Serial::readyToRead()
 
 
     }
-    if(ecu == 2) //Dicktator ECU
+    if(ecu == 3) //Dicktator ECU
     {
         m_readData = m_serialport->readAll();
         //qDebug() << "ready read slot e"<<m_readData.toHex();
@@ -385,7 +371,7 @@ void Serial::dicktatorECU(const QByteArray &buffer)
     QByteArrayMatcher startmatcher(startpattern);
     QByteArray endpattern("END");
     QByteArrayMatcher endmatcher(endpattern);
-//    //qDebug() << "Dicktator ecu" <<m_buffer;
+    //    //qDebug() << "Dicktator ecu" <<m_buffer;
     int pos = 0;
     while((pos = startmatcher.indexIn(m_buffer, pos)) != -1)
     {
@@ -400,7 +386,7 @@ void Serial::dicktatorECU(const QByteArray &buffer)
         if (pos == 0 ) break;
     }
     int pos2 = 0;
-/*    if((pos2 = endmatcher.indexIn(m_buffer, pos2)) != -1)
+    /*    if((pos2 = endmatcher.indexIn(m_buffer, pos2)) != -1)
     {
 
 
@@ -410,24 +396,24 @@ void Serial::dicktatorECU(const QByteArray &buffer)
 
         //qDebug() << "found end of message at " << pos2;
         //qDebug() << "current " << m_buffer;
-/*        if (m_buffer.length() > 33)
+        /*        if (m_buffer.length() > 33)
         {
         m_buffer.remove(33,m_buffer.length()-33);
  */    if (pos2 > 30)
-       {
+        {
 
-         //qDebug() << "pos2 is not where it is expected" << pos2;
-         m_buffer.remove(0,pos2-30);
-         //qDebug() << "removed all the shit " << m_buffer;
+            //qDebug() << "pos2 is not where it is expected" << pos2;
+            m_buffer.remove(0,pos2-30);
+            //qDebug() << "removed all the shit " << m_buffer;
         }
 
-       if (pos2 == 30 )
-       {
-           m_dicktatorMsg = m_buffer;
-           m_buffer.clear();
-           m_decoder->decodeDicktator(m_dicktatorMsg);
-           break;
-}
+        if (pos2 == 30 )
+        {
+            m_dicktatorMsg = m_buffer;
+            m_buffer.clear();
+            m_decoder->decodeDicktator(m_dicktatorMsg);
+            break;
+        }
     }
 
 }
@@ -442,18 +428,18 @@ void Serial::apexiECU(const QByteArray &buffer)
         m_timer.start(5000);
     }
     m_buffer.append(buffer);
-/*
+    /*
     if (Bytesexpected < m_buffer.length())
     {
         //qDebug() << "clearing"<< Bytesexpected <<m_buffer.length();
         m_buffer.clear();
     }
 */
-//    //qDebug() << "current buffer"<<m_buffer.toHex();
-//    //qDebug() << "buffer length"<<m_buffer.length()<< "Expected"<< Bytesexpected;
+    //    //qDebug() << "current buffer"<<m_buffer.toHex();
+    //    //qDebug() << "buffer length"<<m_buffer.length()<< "Expected"<< Bytesexpected;
     QByteArray startpattern = m_writeData.left(1);
     QByteArrayMatcher startmatcher(startpattern);
-//    //qDebug() << "Expected Start"<< startpattern;// <<"Start"<< startpattern;
+    //    //qDebug() << "Expected Start"<< startpattern;// <<"Start"<< startpattern;
 
     int pos = 0;
     while((pos = startmatcher.indexIn(m_buffer, pos)) != -1)
@@ -465,19 +451,19 @@ void Serial::apexiECU(const QByteArray &buffer)
             m_buffer.remove(0, pos); //remove all bytes before Identifier
             //qDebug() << "removed all bytes before the expected response start" << m_buffer.toHex();
             if (m_buffer.length() > Bytesexpected)
-              {
-               //qDebug() << "message too long " << m_buffer.toHex();
-               m_buffer.remove(Bytesexpected,m_buffer.length() );
-               //qDebug() << "removed extra bytes after message" << m_buffer.toHex();
-              }
+            {
+                //qDebug() << "message too long " << m_buffer.toHex();
+                m_buffer.remove(Bytesexpected,m_buffer.length() );
+                //qDebug() << "removed extra bytes after message" << m_buffer.toHex();
+            }
         }
 
         if (pos == 0 )
         {
 
-             //Bytesexpected = m_buffer[1]+1;
-             ////qDebug() << "Message begin as expected , changing bytes expected" << Bytesexpected;
-             break;
+            //Bytesexpected = m_buffer[1]+1;
+            ////qDebug() << "Message begin as expected , changing bytes expected" << Bytesexpected;
+            break;
         }
 
 
@@ -491,7 +477,7 @@ void Serial::apexiECU(const QByteArray &buffer)
         //m_buffer.remove(0,Bytesexpected); // remove extracted message from the buffer
         m_buffer.clear();
         // Process to calculate checksum not evaluated at the moment , for later use
-/*
+        /*
         int checksum = 255; //calculated checksum from serial message 0xFF - each byte in message (except the last byte)
         recvchecksumhex = QByteArray::number(m_apexiMsg[m_apexiMsg[1]], 16).right(2); // reading the checksum byte , convert to Hex , and cut to 2 positions
         recvchecksumhex = recvchecksumhex.rightJustified(2, '0'); // If the checksumbyte is less than 2 positions , prepend a 0 for example if value is 0x9 turn it into 0x09
@@ -507,14 +493,14 @@ void Serial::apexiECU(const QByteArray &buffer)
         if (checksumhex == recvchecksumhex)
         {
 */
- //           //qDebug() << "Checksum matches expected Checksum " << checksumhex << " " << recvchecksumhex;
-            m_timer.stop();
-            if(requestIndex <= 5){requestIndex++;}
-            else{requestIndex = 2;}
-            readData(m_apexiMsg);
-            m_apexiMsg.clear();
-            Serial::sendRequest(requestIndex);
-//        }
+        //           //qDebug() << "Checksum matches expected Checksum " << checksumhex << " " << recvchecksumhex;
+        m_timer.stop();
+        if(requestIndex <= 5){requestIndex++;}
+        else{requestIndex = 2;}
+        readData(m_apexiMsg);
+        m_apexiMsg.clear();
+        Serial::sendRequest(requestIndex);
+        //        }
 
     }
 }
@@ -628,7 +614,7 @@ void Serial::writeRequestPFC(QByteArray p_request)
 void Serial::sendRequest(int requestIndex)
 {
     switch (requestIndex){
-/*
+    /*
     case 0:
         //First request from (this is what FC Edit does seems to get a 4 or 8 Byte response dependant on Aux inputs ??)
         Serial::writeRequestPFC(QByteArray::fromHex("0102FC"));
@@ -644,7 +630,7 @@ void Serial::sendRequest(int requestIndex)
         Serial::writeRequestPFC(QByteArray::fromHex("F3020A"));
         Bytesexpected = 11;
         break;
-/*
+        /*
     case 2:
         //Serial::getWarConStrFlags();
         Serial::writeRequestPFC(QByteArray::fromHex("D60227"));
@@ -926,7 +912,7 @@ void Serial::sendRequest(int requestIndex)
         Bytesexpected = 11;
         break;
 */
-    //case 58:
+        //case 58:
     case 1:
         //Serial::getSensorStrings();
         Serial::writeRequestPFC(QByteArray::fromHex("DD0220"));
@@ -936,7 +922,7 @@ void Serial::sendRequest(int requestIndex)
 
 
         // Live Data
-        case 2:
+    case 2:
         //Serial::getAdvData();
         Serial::writeRequestPFC(QByteArray::fromHex("F0020D"));
         Bytesexpected = 33;
@@ -1041,3 +1027,5 @@ void Serial::Auxcalc (const QString &unitaux1,const int &an1V0,const int &an2V5,
 
     m_decoder->calculatorAux(aux1min,aux2max,aux3min,aux4max,Auxunit1,Auxunit2);
 }
+
+

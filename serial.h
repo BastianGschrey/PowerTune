@@ -31,6 +31,7 @@ class Decoder;
 class AppSettings;
 class GoPro;
 class GPS;
+class SerialOBD;
 class QModbusClient;
 class QModbusReply;
 
@@ -74,6 +75,7 @@ private:
     AppSettings *m_appSettings;
     GoPro *m_gopro;
     GPS *m_gps;
+    SerialOBD *m_obd;
     QStringList m_portsNames;
     QStringList *m_ecuList;
     qint64      m_bytesWritten;
