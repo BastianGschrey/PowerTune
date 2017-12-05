@@ -731,24 +731,24 @@ void Decoder::decodeInit(QByteArray serialdata)
         Model =3;
     }
 
-/*
+
        //Subaru
-       if ((QString(serialdata).mid(2,8)== "")
+       if (Modelname == "EJ20K   " || Modelname == "EJ207   " )
           {
-           Model =4;
+           Model =2;
        }
        //Honda
-       if ((QString(serialdata).mid(2,8)==== "EJ20K   ")
+       if (Modelname == "B16B    " || Modelname == "B18C    " )
           {
-           Model =5;
+           Model =2;
        }
        //Mitsubishi
-       if ((QString(serialdata).mid(2,8)==== "")
+       if (Modelname == "4G63    ")
           {
-           Model =6;
+           Model =3;
        }
 
-*/
+
 //    ui->linePlatform->setText (QString(serialdata).mid(2,8));
     //qDebug() << "Model ="<<Model;
     //qDebug() << "Model name ="<<(QString(serialdata).mid(2,8));

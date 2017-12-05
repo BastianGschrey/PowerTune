@@ -18,7 +18,7 @@ Raspbian Jessie 2017-04-10
 
 #### Nissan :
 * RB20DET
-* RB26DET
+* RB26DETT
 * SR20DET1
 * CA18DET
 * RB25DET
@@ -35,9 +35,19 @@ Raspbian Jessie 2017-04-10
 * 3S-GTE
 * 3E-FTE2
 
-#### Tested Vehicles Apexi PFC :              ECU Variant:         FC Hako:             FC Datalogit: 
-* Mazda RX7 FD3S                              (13B-REW)            <big>__✓__          
-* Toyota MR2                                  (3S-GTE3)            <big>__✓__          
+
+
+| Tested Vehicles Apexi PFC :      | ECU Variant:          | FC Hako:      | FC Datalogit:  |Confirmed by :  |
+| -------------------------------- |:---------------------:|:-------------:|:--------------:|:--------------:|
+| Mazda RX7 FD3S                   | (13B-REW)             | <big>__✓__    |                |Markus Ippy     |
+| Toyota MR2                       | (3S-GTE3)             | <big>__✓__    |                |Tolis Kofoglou  |
+| Nissan Skyline R32 GT-TR BNR32   | (RB26DETT)            |               |   <big>__✓__   |Alpheus Booth   |
+  
+| Soon to be tested :              | ECU Variant:          | FC Hako:      | FC Datalogit:  |Confirmed by :  | 
+| -------------------------------- |:---------------------:|:-------------:|:--------------:|:--------------:|
+| Nissan Silvia S14                | (SR20DET1)            |               |                |                |
+| Toyota Supra JZA70               | (1JZ-GTE)             |               |                |                |
+
 
 #### Adaptronic Variants :
 
@@ -46,16 +56,20 @@ Raspbian Jessie 2017-04-10
 * Adaptronic Modular series :
 * All variants
 
-#### Tested Vehicles Adaptronic :              ECU Variant:         
-* FD3S                                         PNP S8*           <big>__✓__       
+
+| Tested Vehicles Adaptronic:      | ECU Variant:          | Variant:      | Confirmed:     |Confirmed by :  |
+| -------------------------------- |:---------------------:|:-------------:|:--------------:|:--------------:|
+| Mazda RX7 FD3S                   | (13B-REW)             | PNP S8*       | <big>__✓__     |Bastian Gschrey |
+   
 
 Implemented Features :
 
 * Remote control GoPro Recording on off
 * Logging to user selectable CSV file for Adaptronic 
 * Logging to user selectable txt file for Power FC 
-* Differential Aux input Settings for Power FC (2 for FC Hako / 4 For Datalogit) 
+* Differential Aux input Settings for Power FC 
 * GPS for NMEA 0183 compliant devices via Serial (Tested with BU-353S4 GPS Mouse) 
+* Switching between metric and Imperial values
 
 
 <big>_Build a Raspberry Pi image with Buildroot:_</big>
