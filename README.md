@@ -59,9 +59,9 @@ Raspbian Jessie 2017-04-10
 * All variants
 
 
-| Tested Vehicles Adaptronic:      | ECU Variant:          | Variant:      | Confirmed:     |Confirmed by :  |
-| -------------------------------- |:---------------------:|:-------------:|:--------------:|:--------------:|
-| Mazda RX7 FD3S                   | (13B-REW)             | PNP S8*       | <big>__✓__     |Bastian Gschrey |
+| Tested Vehicles Adaptronic:      | ECU Variant:          | Variant:            | Confirmed:     |Confirmed by :  |
+| -------------------------------- |:---------------------:|:-------------------:|:--------------:|:--------------:|
+| Mazda RX7 FD3S                   | (13B-REW)             | Select Plugin S8*   | <big>__✓__     |Bastian Gschrey |
    
 
 Implemented Features :
