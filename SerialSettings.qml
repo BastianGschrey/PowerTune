@@ -101,7 +101,8 @@ Rectangle {
                     id: ecuSelect
                     width: 200
 
-                    model: [ "PowerFC", "Adaptronic", "OBD ELM"]//[ "PowerFC", "Adaptronic","Dicktator","PowerMods"]
+                    model: [ "PowerFC", "Adaptronic"]
+                   // model: [ "PowerFC", "Adaptronic", "OBD ELM"]
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
