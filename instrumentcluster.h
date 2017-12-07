@@ -1,3 +1,10 @@
+/*
+ * OBD Communication by Claudio Tejada
+ * Original code can be found on https://github.com/cjtejada/QtDigitalInstrumentCluster
+ *
+*/
+
+
 #ifndef INSTRUMENTCLUSTER_H
 #define INSTRUMENTCLUSTER_H
 

@@ -1,3 +1,9 @@
+/*
+ * OBD Communication by Claudio Tejada
+ * Original code can be found on https://github.com/cjtejada/QtDigitalInstrumentCluster
+ *
+*/
+
 #include "serialobd.h"
 #include "dashboard.h"
 #include "serial.h"
@@ -28,7 +34,7 @@ void SerialOBD::SelectPort(const QString &portName)
 
 void SerialOBD::ConnectToSerialPort()
 {
-    qDebug() << "OBD ";
+
     //ParseAndReportClusterData("OPPED\r\r>10C0D2F0511\rS");//For testing purposes
 
     //triggers if engine has been turned off
@@ -117,6 +123,8 @@ void SerialOBD::ParseAndReportClusterData(QByteArray data)
 
     if(!dataTemp.exactMatch(data) && !TCodeRegEx.exactMatch(data))
         data = "";
+
+
 
     if(dataTemp.exactMatch(data)){
 
