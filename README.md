@@ -3,7 +3,7 @@ PowerTune is a Modern Gauge Display for written in QT5.8 and supports the follow
 
 Apexi Power FC 
 Adaptronic Select ECU 
-OBD II
+OBD II (implementation not finalised)
 
 
 Testet Platforms :
