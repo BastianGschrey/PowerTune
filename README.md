@@ -43,7 +43,7 @@ Raspbian Jessie 2017-04-10
 | -------------------------------- |:---------------------:|:-------------:|:--------------:|:--------------:|
 | Mazda RX7 FD3S                   | (13B-REW)             | <big>__✓__    |                |Markus Ippy     |
 | Toyota MR2                       | (3S-GTE3)             | <big>__✓__    |                |Tolis Kofoglou  |
-| Nissan Skyline R32 GT-TR BNR32   | (RB26DETT)            |               |   <big>__✓__   |Alpheus Booth   |
+| Nissan Skyline R32 GT-R BNR32   | (RB26DETT)            |               |   <big>__✓__   |Alpheus Booth   |
   
 | Soon to be tested :              | ECU Variant:          | FC Hako:      | FC Datalogit:  |Confirmed by :  | 
 | -------------------------------- |:---------------------:|:-------------:|:--------------:|:--------------:|
