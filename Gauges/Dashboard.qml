@@ -124,7 +124,7 @@ Item {
             }
             Text {
                 id: value1
-                text: Dashboard.auxcalc1
+                text: (Dashboard.auxcalc1).toFixed(1)
                 font.pixelSize: scalerect.width / 55
                 anchors.right: parent.right
                 anchors.rightMargin: scalerect.width / 26
