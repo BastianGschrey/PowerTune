@@ -250,7 +250,7 @@ Item {
             minimumValue: 0
             maximumValue: 20
 
-            value: Dashboard.auxcalc1
+            value: (Dashboard.auxcalc1).toFixed(1)
             Behavior on value {
                 NumberAnimation {
                     duration: 5
