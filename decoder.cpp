@@ -694,7 +694,7 @@ void Decoder::decodeInit(QByteArray serialdata)
     }
 
     //Nissan
-    if (Modelname == "RB20DET " || Modelname == "RB26DETT" || Modelname == "SR20DET1" || Modelname == "CA18DET " || Modelname == "RB25DET ")
+    if (Modelname == "RB20DET " || Modelname == "RB26DETT" || Modelname == "SR20DET1" || Modelname == "SR20DET2"  || Modelname == "CA18DET " || Modelname == "RB25DET ")
     {
         Model =2;
     }
