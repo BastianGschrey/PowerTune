@@ -84,6 +84,8 @@ Item {
 
 
                timeline++;
+               amountOfData++; //This else is just to stop incrementing the variable unnecessarily
+
                 //series1.append(timeline, 3000);
                 //series2.append(timeline, 250);
                 series1.append(timeline, Dashboard.revs);
@@ -93,16 +95,16 @@ Item {
                     axisX.min++;
                     axisX.max++;
                 }
-                //else{
-                    //amountOfData++; //This else is just to stop incrementing the variable unnecessarily
-            //}
-                //remove all data points that are not visible anymore
-                if (series1.count == 100){
 
-                     series1.remove(series1.count-99);
-                     series2.remove(series2.count-99);
+
+                //remove all data points that are not visible anymore
+               if (series1.count > 100){
+
+                   series1.remove(0);
+                   series2.remove(0);
 
                     console.log (series1.count);}
+
  }
 }
 }
