@@ -12,7 +12,7 @@ ApplicationWindow {
     minimumWidth: 800
     minimumHeight: 480
     // visibility: "FullScreen"
-    title: qsTr("PowerTune ") + Dashboard.Platform + "Beta 19"
+    title: qsTr("PowerTune ") + Dashboard.Platform + " Beta 20"
     color: "black"
     SwipeView {
         id: view
