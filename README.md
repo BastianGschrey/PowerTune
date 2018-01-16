@@ -4,6 +4,7 @@ PowerTune is a Modern Gauge Display for written in QT5.8 and supports the follow
 Apexi Power FC 
 Adaptronic Select ECU 
 OBD II (implementation not finalised)
+Nissan Consult (Untested)
 
 
 Testet Platforms :
@@ -43,7 +44,7 @@ Raspbian Jessie 2017-04-10
 | -------------------------------- |:---------------------:|:-------------:|:--------------:|:--------------:|
 | Mazda RX7 FD3S                   | (13B-REW)             | <big>__✓__    |                |Markus Ippy     |
 | Toyota MR2                       | (3S-GTE3)             | <big>__✓__    |                |Tolis Kofoglou  |
-| Nissan Skyline R32 GT-R BNR32   | (RB26DETT)            |               |   <big>__✓__   |Alpheus Booth   |
+| Nissan Skyline R32 GT-R BNR32   | (RB26DETT)             |                |   <big>__✓__  |Alpheus Booth   |
   
 | Soon to be tested :              | ECU Variant:          | FC Hako:      | FC Datalogit:  |Confirmed by :  | 
 | -------------------------------- |:---------------------:|:-------------:|:--------------:|:--------------:|
@@ -63,7 +64,13 @@ Raspbian Jessie 2017-04-10
 | -------------------------------- |:---------------------:|:-------------------:|:--------------:|:--------------:|
 | Mazda RX7 FD3S                   | (13B-REW)             | Select Plugin S8*   | <big>__✓__     |Bastian Gschrey |
    
+#### Nissan Consult :
 
+| Soon to be tested :             | ECU Variant:          | Variant:            | Confirmed:     |Confirmed by :  |
+| --------------------------------|:---------------------:|:-------------------:|:--------------:|:--------------:|
+| Nissan Silvia S14               | (SR20DET1)            | Nistune             |                |                |
+  
+  
 Implemented Features :
 
 * Remote control GoPro Recording on off
