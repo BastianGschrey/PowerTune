@@ -1,10 +1,10 @@
 # PowerTune
 PowerTune is a Modern Gauge Display for written in QT5.8 and supports the following ECU's:
 
-Apexi Power FC 
-Adaptronic Select ECU 
-OBD II (implementation not finalised)
-Nissan Consult (Untested)
+* Apexi Power FC 
+* Adaptronic Select ECU 
+* OBD II (implementation not finalised)
+* Nissan Consult (Untested)
 
 
 Testet Platforms :
