@@ -20,6 +20,7 @@
 
 #include "serial.h"
 #include "serialobd.h"
+#include "nissanconsultcom.h"
 #include "decoder.h"
 #include "dashboard.h"
 #include "serialport.h"
@@ -75,6 +76,7 @@ Serial::Serial(QObject *parent) :
     m_gopro(Q_NULLPTR),
     m_gps(Q_NULLPTR),
     m_obd(Q_NULLPTR),
+    m_nissanconsultcom(Q_NULLPTR),
     m_bytesWritten(0),
     lastRequest(nullptr),
     modbusDevice(nullptr)
@@ -88,6 +90,7 @@ Serial::Serial(QObject *parent) :
     m_appSettings = new AppSettings(this);
     m_gopro = new GoPro(this);
     m_gps = new GPS(m_dashBoard, this);
+    m_nissanconsultcom = new NissanconsultCom(m_dashBoard, this);
     m_obd = new SerialOBD(m_dashBoard, this);
     connect(m_decoder,SIGNAL(sig_adaptronicReadFinished()),this,SLOT(AdaptronicStartStream()));
     QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
@@ -98,6 +101,7 @@ Serial::Serial(QObject *parent) :
     engine->rootContext()->setContextProperty("AppSettings", m_appSettings);
     engine->rootContext()->setContextProperty("GoPro", m_gopro);
     engine->rootContext()->setContextProperty("GPS", m_gps);
+    engine->rootContext()->setContextProperty("NissanconsultCom", m_nissanconsultcom);
     engine->rootContext()->setContextProperty("OBD", m_obd);
 }
 
@@ -216,8 +220,15 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
     {
     m_obd->SelectPort(portName);
     }
-    //Dicktator
+    //Nissan Consult
     if (ecuSelect == 3)
+    {
+        m_nissanconsultcom->LiveReqMsg(1,0,0,0,1,0,0,1,1,1,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0);
+        m_nissanconsultcom->openConnection(portName);
+
+    }
+    //Dicktator
+    if (ecuSelect == 5)
     {
 
         initSerialPort();

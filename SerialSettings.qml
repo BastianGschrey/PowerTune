@@ -102,7 +102,7 @@ Rectangle {
                     width: 200
 
                     //model: [ "PowerFC", "Adaptronic"]
-                    model: [ "PowerFC", "Adaptronic", "OBD ELM"]
+                    model: [ "PowerFC", "Adaptronic", "OBD ELM" , "Nissan Consult"]
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }

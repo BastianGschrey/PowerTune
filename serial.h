@@ -27,6 +27,7 @@
 
 class SerialPort;
 class DashBoard;
+class NissanconsultCom;
 class Decoder;
 class AppSettings;
 class GoPro;
@@ -73,6 +74,7 @@ private:
     Decoder *m_decoder;
     DashBoard *m_dashBoard;
     AppSettings *m_appSettings;
+    NissanconsultCom* m_nissanconsultcom;
     GoPro *m_gopro;
     GPS *m_gps;
     SerialOBD *m_obd;
