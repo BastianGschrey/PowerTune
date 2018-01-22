@@ -439,7 +439,7 @@ Rectangle {
             if (dash1.currentIndex == "3") {firstPageLoader.source = "qrc:/Gauges/GPS.qml"};
             if (dash1.currentIndex == "4") {firstPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
             if (dash1.currentIndex == "5") {firstPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
-            if (dash1.currentIndex == "6") {firstPageLoader.source = "qrc:/Gauges/Dash1.qml"};
+            if (dash1.currentIndex == "6") {firstPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
 
         }
 
@@ -454,7 +454,7 @@ Rectangle {
             if (dash2.currentIndex == "3") {secondPageLoader.source = "qrc:/Gauges/GPS.qml"};
             if (dash2.currentIndex == "4") {secondPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
             if (dash2.currentIndex == "5") {secondPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
-            if (dash2.currentIndex == "6") {secondPageLoader.source = "qrc:/Gauges/Dash1.qml"};
+            if (dash2.currentIndex == "6") {secondPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
 
         }
 
@@ -469,7 +469,7 @@ Rectangle {
             if (dash3.currentIndex == "3") {thirdPageLoader.source = "qrc:/Gauges/GPS.qml"};
             if (dash3.currentIndex == "4") {thirdPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
             if (dash3.currentIndex == "5") {thirdPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
-            if (dash3.currentIndex == "6") {thirdPageLoader.source = "qrc:/Gauges/Dash1.qml"};
+            if (dash3.currentIndex == "6") {thirdPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
 
         }
 
@@ -484,7 +484,7 @@ Rectangle {
             if (dash4.currentIndex == "3") {fourthPageLoader.source = "qrc:/Gauges/GPS.qml"};
             if (dash4.currentIndex == "4") {fourthPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
             if (dash4.currentIndex == "5") {fourthPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
-            if (dash4.currentIndex == "6") {fourthPageLoader.source = "qrc:/Gauges/Dash1.qml"};
+            if (dash4.currentIndex == "6") {fourthPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
 
         }
 
@@ -542,7 +542,7 @@ Rectangle {
             ComboBox {
                 id: dash1
                 width: 180
-                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","test"]
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select1.selDash1() }
                 Component.onCompleted: {select1.selDash1() }
@@ -551,7 +551,7 @@ Rectangle {
             ComboBox {
                 id: dash2
                 width: 180
-                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","test"]
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select2.selDash2() }
                 Component.onCompleted: {select2.selDash2() }
@@ -560,7 +560,7 @@ Rectangle {
             ComboBox {
                 id: dash3
                 width: 180
-                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","test"]
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select3.selDash3() }
                 Component.onCompleted: {select3.selDash3() }
@@ -568,7 +568,7 @@ Rectangle {
             ComboBox {
                 id: dash4
                 width: 180
-                model:  ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","test"]
+                model:  ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select4.selDash4() }
                 Component.onCompleted: {select4.selDash4() }
