@@ -14,6 +14,13 @@ Item {
     property  var unit : Dashboard.units;
 
     //fade in effect for the Gauges (Welcome animation)
+    OpacityAnimator {
+        target: intro;
+        from: 1;
+        to: 0;
+        duration: 400
+        running: true
+    }
 
     OpacityAnimator {
         target: leftgaugeticks;
@@ -43,13 +50,16 @@ Item {
         duration: 6000
         running: true
     }
+
     OpacityAnimator {
-        target: speedoNeedle;
+        id: speedoopacity
+        target: speedoNeedlemph;
         from: 0;
         to: 1;
         duration: 6000
         running: true
     }
+
     OpacityAnimator {
         target: value1;
         from: 0;
@@ -301,11 +311,20 @@ Item {
             }
             // Speedo Needle animation
             GaugeNeedle_minus180to90  {
-                id: speedoNeedle
+                //visible: false
+                id: speedoNeedlekph
                 anchors.verticalCenterOffset: 0
                 anchors.centerIn: parent
                 value: Dashboard.speed / 4.155844155844156
-               //(Dashboard.speed / 2.597402597402597) vale to show correct in Miles on 200 MPH max
+
+            }
+            GaugeNeedle_minus180to90  {
+                //visible: false
+                id: speedoNeedlemph
+                anchors.verticalCenterOffset: 0
+                anchors.centerIn: parent
+                value: Dashboard.speed / 2.597402597402597
+
 
             }
         }
@@ -344,7 +363,6 @@ Item {
 
             GaugeNeedle_minus90to180  {
                 id: revneedele
-
                 anchors.verticalCenterOffset: 0
                 anchors.centerIn: parent
                 value: Dashboard.revs *0.0077
@@ -484,8 +502,8 @@ Item {
         id: units
         function unitadjust()
         {
-            if (unit == "imperial") {speedometer.maximumValue = 320,leftgaugeticks.minimumValue =40,leftgaugeticks.maximumValue =220, rightgaugeticks.minimumValue = 40,rightgaugeticks.maximumValue = 190};
-            if (unit == "metric") {speedometer.maximumValue = 320,leftgaugeticks.minimumValue =30,leftgaugeticks.maximumValue =110, rightgaugeticks.minimumValue =20,rightgaugeticks.maximumValue = 80};
+            if (unit == "imperial") {speedoopacity.target = speedoNeedlemph,speedometer.maximumValue = 200,speedoNeedlemph.visible = true, speedoNeedlekph.visible = false,revneedele.visible = true; leftgaugeticks.minimumValue =40,leftgaugeticks.maximumValue =220, rightgaugeticks.minimumValue = 40,rightgaugeticks.maximumValue = 190};
+            if (unit == "metric") {speedoopacity.target = speedoNeedlekph,speedometer.maximumValue = 320,speedoNeedlemph.visible = false, speedoNeedlekph.visible = true,leftgaugeticks.minimumValue =30,leftgaugeticks.maximumValue =110, rightgaugeticks.minimumValue =20,rightgaugeticks.maximumValue = 80};
         }
 
 
@@ -498,5 +516,10 @@ Item {
         }
 
     }
-
+Rectangle
+{
+    id: intro
+    anchors.fill: view
+    color: "black"
+}
 }
