@@ -118,6 +118,9 @@ class DashBoard : public QObject
     Q_PROPERTY(QString Platform READ Platform WRITE setPlatform NOTIFY PlatformChanged)
 
     Q_PROPERTY(QString SerialStat READ SerialStat WRITE setSerialStat NOTIFY SerialStatChanged)
+    Q_PROPERTY(QString RecvData READ RecvData WRITE setRecvData NOTIFY RecvDataChanged)
+    Q_PROPERTY(QString TimeoutStat READ TimeoutStat WRITE setTimeoutStat NOTIFY TimeoutStatChanged)
+    Q_PROPERTY(QString RunStat READ RunStat WRITE setRunStat NOTIFY RunStatChanged)
 
 
     //Adaptronic extra
@@ -277,6 +280,9 @@ public:
     void setPlatform(const QString &Platform);
 
     void setSerialStat(const QString &SerialStat);
+    void setRecvData(const QString &RecvData);
+    void setTimeoutStat(const QString &TimeoutStat);
+    void setRunStat(const QString &RunStat);
 
     // GPS
 
@@ -431,6 +437,9 @@ public:
     QString Platform() const;
 
     QString SerialStat() const;
+    QString RecvData() const;
+    QString TimeoutStat() const;
+    QString RunStat() const;
 
     // GPS
 
@@ -581,6 +590,9 @@ signals:
     void PlatformChanged(QString Platform);
 
     void SerialStatChanged(QString SerialStat);
+    void RecvDataChanged(QString RecvData);
+    void TimeoutStatChanged(QString TimeoutStat);
+    void RunStatChanged(QString RunStat);
 
     // GPS
 
@@ -738,6 +750,9 @@ private:
     QString m_Platform;
 
     QString m_SerialStat;
+    QString m_RecvData;
+    QString m_TimeoutStat;
+    QString m_RunStat;
 
 
     //Adaptronic extra

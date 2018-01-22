@@ -229,6 +229,21 @@ Rectangle {
                     color: "red"
                     text: Dashboard.SerialStat
                 }
+                Text
+                {
+                    color: "blue"
+                    text: Dashboard.RecvData
+                }
+                Text
+                {
+                    color: "purple"
+                    text: Dashboard.TimeoutStat
+                }
+                Text
+                {
+                    color: "purple"
+                    text: Dashboard.RunStat
+                }
                 Grid {
                     visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
                     rows: 10

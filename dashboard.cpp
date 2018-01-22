@@ -893,6 +893,30 @@ void DashBoard::setSerialStat(const QString &SerialStat)
     emit SerialStatChanged(SerialStat);
 }
 
+void DashBoard::setRecvData(const QString &RecvData)
+{
+    if (m_RecvData == RecvData)
+        return;
+    m_RecvData = RecvData;
+    emit RecvDataChanged(RecvData);
+}
+
+void DashBoard::setTimeoutStat(const QString &TimeoutStat)
+{
+    if (m_TimeoutStat == TimeoutStat)
+        return;
+    m_TimeoutStat = TimeoutStat;
+    emit TimeoutStatChanged(TimeoutStat);
+}
+
+void DashBoard::setRunStat(const QString &RunStat)
+{
+    if (m_RunStat == RunStat)
+        return;
+    m_RunStat = RunStat;
+    emit RunStatChanged(RunStat);
+}
+
 // GPS
 
 
@@ -1203,6 +1227,9 @@ QString DashBoard::SensorString8() const { return m_SensorString8; }
 QString DashBoard::Platform() const { return m_Platform; }
 
 QString DashBoard::SerialStat() const { return m_SerialStat; }
+QString DashBoard::RecvData() const { return m_RecvData; }
+QString DashBoard::TimeoutStat() const { return m_TimeoutStat; }
+QString DashBoard::RunStat() const { return m_RunStat; }
 
 
 //GPS

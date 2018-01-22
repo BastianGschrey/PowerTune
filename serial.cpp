@@ -154,7 +154,6 @@ void Serial::clear() const
 //function to open serial port
 void Serial::openConnection(const QString &portName, const int &ecuSelect, const int &interfaceSelect, const int &loggingSelect)
 {
-
     ecu = ecuSelect;
     interface = interfaceSelect;
     logging = loggingSelect;
@@ -278,8 +277,10 @@ void Serial::update()
 
 }
 void Serial::handleTimeout()
-{
+{   
+    m_dashBoard->setTimeoutStat(QString("Is Timeout : Y"));
 
+/*
     QString fileName = "Errors.txt";
     QFile mFile(fileName);
     if(!mFile.open(QFile::Append | QFile::Text)){
@@ -290,7 +291,22 @@ void Serial::handleTimeout()
     Serial::clear();
     m_serialport->flush();
     m_readData.clear();
-    Serial::sendRequest(requestIndex);
+    */
+    m_timer.stop();
+    m_serialport->close();
+    if(m_serialport->open(QIODevice::ReadWrite) == false)
+        {
+            m_dashBoard->setSerialStat(m_serialport->errorString());
+        }
+        else
+        {
+            m_dashBoard->setSerialStat(QString("Connected to Serialport"));
+        }
+
+        requestIndex = 0;
+        m_readData.clear();
+
+        Serial::sendRequest(requestIndex);
 }
 
 void Serial::handleError(QSerialPort::SerialPortError serialPortError)
@@ -312,10 +328,13 @@ void Serial::handleError(QSerialPort::SerialPortError serialPortError)
 
 void Serial::readyToRead()
 {
-
     if(ecu == 0)
     {
         m_readData = m_serialport->readAll();
+
+        m_dashBoard->setRecvData(QString("Receive Data : " + m_readData.toHex()));
+        //m_dashBoard->setRunStat(QString("Process : START"));
+
         Serial::apexiECU(m_readData);
     }
 
@@ -384,18 +403,21 @@ void Serial::dicktatorECU(const QByteArray &buffer)
 
 void Serial::apexiECU(const QByteArray &buffer)
 {
-    if (Bytesexpected != m_buffer.length())
+    /*(if (Bytesexpected != m_buffer.length())
     {
         m_timer.start(5000);
     }
+    */
     m_buffer.append(buffer);
 
+	
     QByteArray startpattern = m_writeData.left(1);
     QByteArrayMatcher startmatcher(startpattern);
-
+    
     int pos = 0;
     while((pos = startmatcher.indexIn(m_buffer, pos)) != -1)
     {
+    	m_dashBoard->setRunStat(m_buffer.toHex());
         if (pos !=0)
         {
             m_buffer.remove(0, pos);
@@ -412,9 +434,29 @@ void Serial::apexiECU(const QByteArray &buffer)
 
 
     }
+    
+    /*
+    while(m_buffer.length() >= Bytesexpected)
+    {
+    	if (m_buffer[0] == m_writeData[0] && m_buffer[1] == m_writeData[1])
+    	{
+    		if (m_buffer.length() > Bytesexpected)
+    		{
+    			m_buffer = m_buffer.left(Bytesexpected);
+    		}
+    		
+    		break;
+    	}
+    	else
+    		m_buffer.remove(0, 2);
+    }
+    */
+    
 
     if (m_buffer.length() == Bytesexpected)
     {
+        m_dashBoard->setTimeoutStat(QString("Is Timeout : N"));
+
         m_apexiMsg =  m_buffer;
         m_buffer.clear();
         m_timer.stop();
@@ -424,7 +466,6 @@ void Serial::apexiECU(const QByteArray &buffer)
         m_apexiMsg.clear();
         Serial::sendRequest(requestIndex);
         //        }
-
     }
 }
 
@@ -497,7 +538,7 @@ void Serial::readData(QByteArray serialdata)
             if(requesttype == 0x8D){m_decoder->decodeFuelInjectors(serialdata);}
         }
         serialdata.clear();
-        \
+        
 
     }
 
@@ -873,6 +914,8 @@ void Serial::sendRequest(int requestIndex)
 
         break;
     }
+    
+    m_timer.start(5000);
 }
 
 

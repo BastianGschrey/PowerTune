@@ -6,8 +6,7 @@ import QtQuick.Controls.Styles 1.4
 
 Item {
 
-    width: parent.width
-    height:parent.height
+ anchors.fill: parent
 
     Rectangle {
         id:racedashwindow

@@ -8,8 +8,8 @@ import QtQuick.Extras 1.4
 
 
 Item {
-    width: parent.width
-    height: parent.height
+  //  width: parent.width
+  //  height: parent.height
     //color: "black"
 
 

@@ -305,6 +305,7 @@ Item {
                 anchors.verticalCenterOffset: 0
                 anchors.centerIn: parent
                 value: Dashboard.speed / 4.155844155844156
+               //(Dashboard.speed / 2.597402597402597) vale to show correct in Miles on 200 MPH max
 
             }
         }
@@ -483,9 +484,10 @@ Item {
         id: units
         function unitadjust()
         {
-            if (unit == "imperial") {speedometer.maximumValue = 200,speedoNeedle.value = (Dashboard.speed / 2.597402597402597),leftgaugeticks.minimumValue =60,leftgaugeticks.maximumValue =220, rightgaugeticks.minimumValue = 70,rightgaugeticks.maximumValue = 190};
-            if (unit == "metric") {speedometer.maximumValue = 320, leftgaugeticks.minimumValue =30,leftgaugeticks.maximumValue =110, rightgaugeticks.minimumValue =20,rightgaugeticks.maximumValue = 80};
+            if (unit == "imperial") {speedometer.maximumValue = 320,leftgaugeticks.minimumValue =40,leftgaugeticks.maximumValue =220, rightgaugeticks.minimumValue = 40,rightgaugeticks.maximumValue = 190};
+            if (unit == "metric") {speedometer.maximumValue = 320,leftgaugeticks.minimumValue =30,leftgaugeticks.maximumValue =110, rightgaugeticks.minimumValue =20,rightgaugeticks.maximumValue = 80};
         }
+
 
     }
     Item {
