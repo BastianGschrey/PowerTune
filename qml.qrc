@@ -49,6 +49,7 @@
         <file>Gauges/CreateBarGaugeScript.js</file>
         <file>Gauges/GPS.qml</file>
         <file>Gauges/RaceDash.qml</file>
+        <file>GPSTracks/Zwartkops.qml</file>
         <file>graphics/Racedash800x480.png</file>
         <file>graphics/MainDash.png</file>
         <file>Gauges/GaugeNeedle_minus90to180.qml</file>
