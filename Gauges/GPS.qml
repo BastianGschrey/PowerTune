@@ -2,23 +2,36 @@ import QtQuick 2.8
 import QtQuick.Controls 2.1
 import QtGraphicalEffects 1.0
 import Qt.labs.settings 1.0
+import QtQuick.Layouts 1.1
 
 
 Rectangle {
     id: gpswindow
     width: parent.width
     height: parent.height
-    color: "grey"
+  //  color: "grey"
+    Rectangle {
+        id: mapwindow
+        width: parent.width / 2.4
+        height: width
 
+        Loader {
+            id: trackloader
+            anchors.fill: parent
+            source: "qrc:/GPSTracks/Zwartkops.qml"
+
+        }
+}
         Grid {
             rows: 6
             columns: 2
             spacing: 5
+            anchors.left: mapwindow.right
 
             Text { text: "Time: "
-            font.pixelSize: gpswindow.width /20
-            font.bold: true
-            font.family: "Eurostile"
+                font.pixelSize: gpswindow.width /20
+                font.bold: true
+                font.family: "Eurostile"
             }
             Text { text: Dashboard.gpsTime
                 font.pixelSize: gpswindow.width /20
@@ -66,8 +79,6 @@ Rectangle {
                 font.bold: true
                 font.family: "Eurostile"}
 
-
-
-}
-}
+        }
+    }
 
