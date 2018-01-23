@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick serialport serialbus network charts
+QT += qml quick serialport serialbus network charts location
 CONFIG += c++11
 static {
     QT += svg
@@ -18,6 +18,7 @@ SOURCES += main.cpp \
     gps.cpp \
     serialobd.cpp \
     nissanconsultcom.cpp
+
 
 RESOURCES += qml.qrc
 
@@ -40,8 +41,9 @@ HEADERS += \
     serialobd.h \
     nissanconsultcom.h
 
+
 FORMS +=
 
 DISTFILES += \
-    ../../../Users/Marku/Downloads/Changed Files.zip
+
 
