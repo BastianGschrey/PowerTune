@@ -315,3 +315,43 @@ Reboot your pi and you should see your video at boot
 ```
 $ sudo reboot
 ```
+
+#### if you want to create your own Dashboards here are the possible Sensors ( not every car supports every Sensor):
+
+| QML Sensor Inputs:      	    |  Description            |
+| ------------------------------|:-----------------------:|
+|    Dashboard.revs		          | RPM|
+|    Dashboard.Intakepress	|| 
+|    Dashboard.PressureV	| MAP Sensor Voltage	|
+|    Dashboard.ThrottleV	| Throttle Voltage 	|
+|    Dashboard.Primaryinp	|| 
+|    Dashboard.Fuelc		|| 
+|    Dashboard.Leadingign	| Leading ignition degree |
+|    Dashboard.Trailingign	| Trailing ignition degree |
+|    Dashboard.Fueltemp		| Fueltemp		| 
+|    Dashboard.Moilp		| Oil pump 		| 
+|    Dashboard.Boosttp		| Precontrol Duty % | 
+|    Dashboard.Boostwg		| Wastegate Duty %| 
+|    Dashboard.Watertemp	| Water temperature| 
+|    Dashboard.Intaketemp	| Intake temperature| 
+|    Dashboard.Knock		| Knock| 
+|    Dashboard.BatteryV		| Battery Voltage| 
+|    Dashboard.speed		| Vehicle Speed| 
+|    Dashboard.Iscvduty		| | 
+|    Dashboard.O2volt		| O2 Sensor Voltage| 
+|    Dashboard.O2volt_2		| O2 Sensor2 Voltage| 
+|    Dashboard.Secinjpulse	| Secondary injector pulse width| 
+|    Dashboard.InjDuty		| Injector duty %| 
+|    Dashboard.pim		| | 
+|    Dashboard.EngLoad		| Engine Load %| 
+|    Dashboard.MAF1V		| MAF 1 voltage| 
+|    Dashboard.MAF2V		| MAF 2 voltage| 
+|    Dashboard.injms		| | 
+|    Dashboard.Inj		| | 
+|    Dashboard.Ign		| | 
+|    Dashboard.Dwell		| | 
+|    Dashboard.BoostPres	| | 
+|    Dashboard.BoostDuty	| | 
+|    Dashboard.MAFactivity	| |  
+ 
+
