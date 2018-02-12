@@ -74,10 +74,9 @@ private:
     Decoder *m_decoder;
     DashBoard *m_dashBoard;
     AppSettings *m_appSettings;
-    NissanconsultCom* m_nissanconsultcom;
     GoPro *m_gopro;
     GPS *m_gps;
-    SerialOBD *m_obd;
+    NissanconsultCom* m_nissanconsultcom;
     QStringList m_portsNames;
     QStringList *m_ecuList;
     qint64      m_bytesWritten;

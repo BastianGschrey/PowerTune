@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2018 Markus Ippy
  *
- * Nissan Consult Communication Protocol for PowerTune 
+ * Nissan Consult Communication Protocol for PowerTune
  *
  * This software comes under the GPL (GNU Public License)
  * You may freely copy,distribute etc. this as long as the source code
@@ -108,11 +108,39 @@ NissanconsultCom::NissanconsultCom(DashBoard *dashboard, QObject *parent)
 }
 QByteArray InitECU = (QByteArray::fromHex("FFFFEF"));
 QByteArray Liveread;
+QByteArray Livereply;
+QByteArray Livereplystructure;
+
 
 
 int Livedatarequested = 0;
 int Stoprequested = 0;
 int DTCrequested = 0;
+int requestlenght;
+int messagestructinit =0;
+
+
+int CASPosRPMMSB;
+int CASRefRPM;
+int MAFvoltage;
+int RHMAFvoltage;
+int Coolanttemp;
+int LHO2SensorVolt;
+int RHO2SensorVolt;
+int Speed;
+int BatteryV;
+int ThrottlePos;
+int FUELTEMPSEN;
+int IntakeAirTemp;
+int ExhaustGasTemp;
+int DigitalBitRegister;
+int InjectionTimeLH;
+int IgnitionTiming;
+int AACValve;
+int AFALPHALH;
+int AFALPHARH;
+int AFALPHALHSELFLEARN;
+int AFALPHARHSELFLEARN;
 
 
 //Live Data Request commands
@@ -129,7 +157,7 @@ void NissanconsultCom::LiveReqMsg(const int &val1, const int &val2, const int &v
     Liveread.clear();
     // Build the request message for live Data based on the usser selected Sennsors (Reequest from QML)
 
-    qDebug() <<("bUILD mESSAGE");
+    //qDebug() <<("bUILD mESSAGE");
 
     if (val1 == 1 ) //RPMPosition
     {
@@ -298,7 +326,54 @@ void NissanconsultCom::LiveReqMsg(const int &val1, const int &val2, const int &v
 
     //Terminate Message
     Liveread.append(ConsultData::TerminateMessage);
-    qDebug() <<("Complete Message")<< Liveread.toHex();
+
+    QByteArray Livereply = Liveread;
+    QByteArray Livereplystructure= Liveread;
+    QByteArray sendrequest = (QByteArray::fromHex("5a"));
+    QByteArray replyrequest = (QByteArray::fromHex("a5"));
+
+
+    while (Livereply.contains(sendrequest))
+    {
+        int readrequest = Livereply.indexOf(sendrequest);
+        Livereply.replace(readrequest,1,replyrequest);
+        // replaces all 0x5A with 0xA5
+
+    }
+    // we determine the structure here
+    while (Livereplystructure.contains(sendrequest))
+    {
+        int readrequest = Livereplystructure.indexOf(sendrequest);
+        Livereplystructure.remove(readrequest,1);
+
+    }
+
+    // This will tell the decoder where each message is located in the array
+    CASPosRPMMSB        = Livereplystructure.indexOf((QByteArray::fromHex("01")))+2;
+    CASRefRPM           = Livereplystructure.indexOf((QByteArray::fromHex("02")))+2;
+    MAFvoltage          = Livereplystructure.indexOf((QByteArray::fromHex("04")))+2;
+    RHMAFvoltage        = Livereplystructure.indexOf((QByteArray::fromHex("06")))+2;
+    Coolanttemp         = Livereplystructure.indexOf((QByteArray::fromHex("08")))+2;
+    LHO2SensorVolt      = Livereplystructure.indexOf((QByteArray::fromHex("09")))+2;
+    RHO2SensorVolt      = Livereplystructure.indexOf((QByteArray::fromHex("0a")))+2;
+    Speed               = Livereplystructure.indexOf((QByteArray::fromHex("0b")))+2;
+    BatteryV            = Livereplystructure.indexOf((QByteArray::fromHex("0c")))+2;
+    ThrottlePos         = Livereplystructure.indexOf((QByteArray::fromHex("0d")))+2;
+    FUELTEMPSEN         = Livereplystructure.indexOf((QByteArray::fromHex("0f")))+2;
+    IntakeAirTemp       = Livereplystructure.indexOf((QByteArray::fromHex("11")))+2;
+    ExhaustGasTemp      = Livereplystructure.indexOf((QByteArray::fromHex("12")))+2;
+    DigitalBitRegister  = Livereplystructure.indexOf((QByteArray::fromHex("13")))+2;
+    InjectionTimeLH     = Livereplystructure.indexOf((QByteArray::fromHex("14")))+2;
+    IgnitionTiming      = Livereplystructure.indexOf((QByteArray::fromHex("16")))+2;
+    AACValve            = Livereplystructure.indexOf((QByteArray::fromHex("17")))+2;
+    AFALPHALH           = Livereplystructure.indexOf((QByteArray::fromHex("1a")))+2;
+    AFALPHARH           = Livereplystructure.indexOf((QByteArray::fromHex("1b")))+2;
+    AFALPHALHSELFLEARN  = Livereplystructure.indexOf((QByteArray::fromHex("1c")))+2;
+    AFALPHARHSELFLEARN  = Livereplystructure.indexOf((QByteArray::fromHex("1d")))+2;
+
+    //qDebug() <<("RPM Position")<< CASPosRPMMSB;
+
+    requestlenght = Liveread.length() -1 ; // This tells us how long the initial reply will begfore the first start frame
 }
 
 
@@ -318,8 +393,8 @@ void NissanconsultCom::initSerialPort()
 void NissanconsultCom::openConnection(const QString &portName)
 {
 
-
-    qDebug() <<("Open Consult ")<<portName;
+    ECUinitialized = 0;
+    //qDebug() <<("Open Consult ")<<portName;
     initSerialPort();
     m_serialconsult->setPortName(portName);
     m_serialconsult->setBaudRate(QSerialPort::Baud9600);
@@ -330,11 +405,11 @@ void NissanconsultCom::openConnection(const QString &portName)
 
     if(m_serialconsult->open(QIODevice::ReadWrite) == false)
     {
-        //m_dashBoard->setSerialStat(m_serialconsult->errorString());
+        m_dashboard->setSerialStat(m_serialconsult->errorString());
     }
     else
     {
-        // m_dashBoard->setSerialStat(QString("Connected to Serialport"));
+        m_dashboard->setSerialStat(QString("Connected to Serialport"));
     }
     ECUinitialized = 0;
     NissanconsultCom::InitECU();
@@ -372,7 +447,7 @@ void NissanconsultCom::StopStream()
 void NissanconsultCom::RequestDTC()
 
 {
-    qDebug() <<("Timer Expired ");
+    //qDebug() <<("Timer Expired ");
     m_DTCtimer.stop();
     DTCrequested = 1;
     NissanconsultCom::StopStream();
@@ -384,8 +459,8 @@ void NissanconsultCom::RequestDTC()
 void NissanconsultCom::RequestLiveData()
 
 {
-    m_DTCtimer.start(5000);
-    qDebug() <<("DTCTIMER START ");
+    //m_DTCtimer.start(5000);
+    //qDebug() <<("DTCTIMER START ");
     Livedatarequested = 1;
     DTCrequested = 0;
     m_serialconsult->write(Liveread);
@@ -395,25 +470,29 @@ void NissanconsultCom::readyToRead()
 {
 
     m_readDataConsult = m_serialconsult->readAll();
-    qDebug() <<("Received Data ")<< m_readDataConsult.toHex() ;
-    qDebug() <<("Initstate ")<< ECUinitialized ;
+    //qDebug() <<("Received Data ")<< m_readDataConsult.toHex() ;
 
     if (ECUinitialized == 1)
     {
-        qDebug() <<("Process Raw Message");
+        //qDebug() <<("Process Raw Message");
         NissanconsultCom::ProcessRawMessage(m_readDataConsult);
     }
 
-    if (ECUinitialized == 0 && m_readDataConsult[0] == 0x10)
+    if (ECUinitialized == 0)
     {
-        ECUinitialized = 1;
-        qDebug() <<("Initstate ")<< ECUinitialized ;
-        m_readDataConsult.clear();
-        qDebug() <<("ECU Initialized ");
-        // Send Live Data Stream Request
-        NissanconsultCom::RequestLiveData();
+        QByteArray init = (QByteArray::fromHex("10"));
+        if (m_readDataConsult.contains(init))
+        {
+            ECUinitialized = 1;
+            //qDebug() <<("Initstate ")<< ECUinitialized ;
+            m_readDataConsult.clear();
+            // Request Live Data Stream Request
+            NissanconsultCom::RequestLiveData();
+        }
+
 
     }
+
 
 }
 
@@ -423,39 +502,55 @@ void NissanconsultCom::ProcessRawMessage(const QByteArray &buffer)
 
     QByteArray StartFrame = (QByteArray::fromHex("FF"));
 
-    qDebug() <<("Current Message")<<m_buffer.toHex();
+    //qDebug() <<("Current Message")<<m_buffer.toHex();
+
+
 
     if (m_buffer.contains(StartFrame))
     {
+
         int posstart = m_buffer.indexOf(StartFrame);
-        qDebug() <<("Found Start Frame at position")<<posstart;
-        Expectedlenght =  (posstart+2) + (m_buffer[posstart+1]);
-        int CurrentLenght = m_buffer.length();
-        qDebug() <<("Expexted message Lenght")<<Expectedlenght;
-        qDebug() <<("Current Lenght")<<m_buffer.length();
-        if (m_buffer.length() > Expectedlenght)
+        // remove the all leftovers before the start frame
+        while (posstart > 1)
         {
-            m_consultreply = m_buffer;
-            m_consultreply.remove(Expectedlenght,CurrentLenght);
-            m_buffer.remove(0,Expectedlenght);
+            posstart = m_buffer.indexOf(StartFrame);
+            m_buffer.remove(0,1);
+            //qDebug() <<("current buffer")<<m_buffer.toHex();
+            //qDebug() <<("startframe")<<posstart;
         }
-        if (m_buffer.length() == Expectedlenght)
+
+        if  (posstart == 1)
         {
-            m_consultreply = m_buffer;
+            Expectedlenght = m_buffer[1]+2; // +2 to include the startframe and lenght byte
+            //qDebug() <<("Expectedlenght")<<Expectedlenght;
         }
-        }
-        qDebug() <<("Consultreply")<<m_consultreply.toHex();
-        qDebug() <<("Buffer")<<m_buffer.toHex();
+
+    }
+
+    if (m_buffer.length() > Expectedlenght)
+    {
+        m_consultreply = m_buffer;
+        //qDebug() <<("consultreply original")<<m_consultreply.toHex();
+        m_consultreply.remove(Expectedlenght,m_buffer.length());
+        m_buffer.remove(0,Expectedlenght);
+        //qDebug() <<("consultreply")<<m_consultreply.toHex();
+    }
+
+    if (m_buffer.length() == Expectedlenght)
+    {
+        m_consultreply = m_buffer;
+    }
+
 
     if (Stoprequested ==1)
     {
         QByteArray Stopbyte = (QByteArray::fromHex("CF"));
 
-        qDebug() <<("Current Message")<<m_buffer.toHex();
+        //qDebug() <<("Current Message")<<m_buffer.toHex();
 
         if (m_buffer.contains(Stopbyte))
         {
-            qDebug() <<("Found Stopbyte");
+            //qDebug() <<("Found Stopbyte");
             m_buffer.clear();
             Stoprequested = 0;
 
@@ -479,197 +574,55 @@ void NissanconsultCom::ProcessRawMessage(const QByteArray &buffer)
 
     if (m_consultreply.length() == Expectedlenght)
     {
-        Expectedlenght = 2000;  //Set Expexctedlenght to a ridiculous High value
-        qDebug() <<("Message Lenghth as expected");
+/*
         if (DTCrequested ==1)
         {
             DTCrequested = 0;
             NissanconsultCom::StopStream();
 
-        }
+        }*/
         NissanconsultCom::ProcessMessage(m_consultreply);
-        m_consultreply.clear();
+      //
 
     }
-
-
 }
 
 
 
 void NissanconsultCom::ProcessMessage(QByteArray serialdataconsult)
 {
-    quint8 requesttypeconsult = serialdataconsult[0];
-    qDebug() <<("Check Message Type and send to decoder")<<serialdataconsult.toHex();
 
-       if(requesttypeconsult == 0x25)
-       {
+    //qDebug() <<("Check Message Type and send to decoder")<<serialdataconsult.toHex();
+    m_consultreply.clear();
 
-           // Check what Data is present at which Position in the Message as well as position of Start Frame
-
-           int StartFrame          = serialdataconsult.indexOf(QByteArray::fromHex("FF"));
-           int CASPosRPMMSB        = serialdataconsult.indexOf((QByteArray::fromHex("2500")));
-           int CASRefRPM           = serialdataconsult.indexOf((QByteArray::fromHex("2502")));
-           int MAFvoltage          = serialdataconsult.indexOf((QByteArray::fromHex("2504")));
-           int RHMAFvoltage        = serialdataconsult.indexOf((QByteArray::fromHex("2506")));
-           int Coolanttemp         = serialdataconsult.indexOf((QByteArray::fromHex("2508")));
-           int LHO2SensorVolt      = serialdataconsult.indexOf((QByteArray::fromHex("2509")));
-           int RHO2SensorVolt      = serialdataconsult.indexOf((QByteArray::fromHex("250a")));
-           int Speed               = serialdataconsult.indexOf((QByteArray::fromHex("250b")));
-           int BatteryV            = serialdataconsult.indexOf((QByteArray::fromHex("250c")));
-           int ThrottlePos         = serialdataconsult.indexOf((QByteArray::fromHex("250d")));
-           int FUELTEMPSEN         = serialdataconsult.indexOf((QByteArray::fromHex("250f")));
-           int IntakeAirTemp       = serialdataconsult.indexOf((QByteArray::fromHex("2511")));
-           int ExhaustGasTemp      = serialdataconsult.indexOf((QByteArray::fromHex("2512")));
-           int DigitalBitRegister  = serialdataconsult.indexOf((QByteArray::fromHex("2513")));
-           int InjectionTimeLH     = serialdataconsult.indexOf((QByteArray::fromHex("2514")));
-           int IgnitionTiming      = serialdataconsult.indexOf((QByteArray::fromHex("2516")));
-           int AACValve            = serialdataconsult.indexOf((QByteArray::fromHex("2517")));
-           int AFALPHALH           = serialdataconsult.indexOf((QByteArray::fromHex("251a")));
-           int AFALPHARH           = serialdataconsult.indexOf((QByteArray::fromHex("251b")));
-           int AFALPHALHSELFLEARN  = serialdataconsult.indexOf((QByteArray::fromHex("251c")));
-           int AFALPHARHSELFLEARN  = serialdataconsult.indexOf((QByteArray::fromHex("251d")));
+    if (CASPosRPMMSB >=0)
+    {
+        quint8 RPM = serialdataconsult[CASPosRPMMSB];
+        m_dashboard->setRevs(RPM *12.5);
+    }
+    if (Speed >=0)
+    {
+        quint8 speed = serialdataconsult[Speed];
+        m_dashboard->setSpeed(speed *2);
+    }
 
 
-           int InjectortimeRH      = serialdataconsult.indexOf((QByteArray::fromHex("2522")));
+    serialdataconsult.clear();
 
 
-           //If the Data is present then define on which Position of the StartFrame it can be found
-           // Apply calculations to make convert to human readable format
-           if (CASPosRPMMSB >=0)
-           {
-               quint16 RPM = (((serialdataconsult[StartFrame+CASPosRPMMSB])*256)+(serialdataconsult[StartFrame+CASPosRPMMSB+1])) *12.5;
-               qDebug() <<  "RPM" << RPM ;
-               m_dashboard->setRevs(RPM);
-           }
-           if (CASRefRPM >=0)
-           {
-               quint16 RPMRef = (((serialdataconsult[StartFrame+CASRefRPM])*256)+(serialdataconsult[StartFrame+CASRefRPM+1])) *8;
-               qDebug() <<  "RPMRef" << RPMRef ;
-               //m_dashboard->set(RPMRef);
-           }
-           if (MAFvoltage >=0)
-           {
-               quint16 MAFV = (((serialdataconsult[StartFrame+MAFV])*256)+(serialdataconsult[StartFrame+MAFV+1]))*5; // serialdataconsult[StartFrame+MAFvoltage] * 5;
-               qDebug() <<  "MAF Voltage" << MAFV ;
-               m_dashboard->setMAF1V(MAFV);
-           }
+    // Check what Data is present at which Position in the Message as well as position of Start Frame
 
-           if (RHMAFvoltage >=0)
-           {
-               quint16 MAFVRH = (((serialdataconsult[StartFrame+MAFVRH])*256)+(serialdataconsult[StartFrame+MAFVRH+1]))*5; // serialdataconsult[StartFrame+RHMAFvoltage] * 5;
-               qDebug() <<  "MAFVRH" << MAFVRH ;
-               m_dashboard->setMAF2V(MAFVRH);
-           }
-           if (Coolanttemp >=0)
-           {
-               quint8 Coolant = serialdataconsult[StartFrame+Coolanttemp] -50;
-               qDebug() <<  "Coolant" << Coolant ;
-               m_dashboard->setWatertemp(Coolant);
-           }
-           if (LHO2SensorVolt >=0)
-           {
-               quint8 LHO2SensorV = serialdataconsult[StartFrame+LHO2SensorVolt] *10;
-               qDebug() <<  "LHO2SensorV" << LHO2SensorV ;
-               m_dashboard->setO2volt(LHO2SensorV);
-           }
-           if (RHO2SensorVolt >=0)
-           {
-               quint8 RHO2SensorV = serialdataconsult[StartFrame+RHO2SensorVolt] *10;
-               qDebug() <<  "LHO2SensorV" << RHO2SensorV ;
-               m_dashboard->setO2volt_2(RHO2SensorV);
-           }
-           if (Speed >=0)
-           {
-               quint8 SpeedKPH = serialdataconsult[StartFrame+Speed] *2;
-               qDebug() <<  "SpeedKPH" << SpeedKPH ;
-               m_dashboard->setSpeed(SpeedKPH);
-           }
-           if (BatteryV >=0)
-           {
-               quint8 Battery = serialdataconsult[StartFrame+BatteryV];
-               qDebug() <<  "Battery" << Battery *80;
-               m_dashboard->setBatteryV(Battery);
-           }
-           if (ThrottlePos >=0)
-           {
-               quint8 TPSV = serialdataconsult[StartFrame+ThrottlePos] *20;
-               qDebug() <<  "TPSV" << TPSV ;
-               m_dashboard->setThrottleV(TPSV);
-           }
-           if (FUELTEMPSEN >=0)
-           {
-               quint8 Fueltemp = serialdataconsult[StartFrame+FUELTEMPSEN] -50;
-               qDebug() <<  "Fueltemp" << Fueltemp ;
-               m_dashboard->setFueltemp(Fueltemp);
-           }
-           if (IntakeAirTemp >=0)
-           {
-               quint8 IntakeAirT = serialdataconsult[StartFrame+IntakeAirTemp] -50;
-               qDebug() <<  "IntakeAirT" << IntakeAirT ;
-               m_dashboard->setIntaketemp(IntakeAirT);
-           }
-           if (ExhaustGasTemp >=0)
-           {
-               quint8 EGT = serialdataconsult[StartFrame+ExhaustGasTemp] *20;
-               qDebug() <<  "IntakeAirT" << EGT ;
-               //m_dashboard->setRevs(RPMRef);
-           }
-           if (DigitalBitRegister  >=0)
-           {
-               quint8 DigitalBitReg = serialdataconsult[StartFrame+DigitalBitReg];
-               qDebug() <<  "DigitalBitReg" << DigitalBitReg ;
-               //m_dashboard->setRevs(RPMRef);
-           }
-           if (InjectionTimeLH  >=0)
-           {
-               quint16 InjTimeLH = (((serialdataconsult[StartFrame+InjectionTimeLH])*256)+(serialdataconsult[StartFrame+InjectionTimeLH+1])) /100 ; // serialdataconsult[StartFrame+InjectionTimeLH] /100;
-               qDebug() <<  "InjTimeLH" << InjTimeLH ;
-               //m_dashboard->setRevs(RPMRef);
-           }
-           if (IgnitionTiming  >=0)
-           {
-               quint8 IgnTiming = 110 - serialdataconsult[StartFrame+IgnitionTiming];
-               qDebug() <<  "IgnTiming" << IgnTiming ;
-               m_dashboard->setIgn(IgnTiming);
-           }
-           if (AACValve  >=0)
-           {
-               quint8 IdleAirValve = serialdataconsult[StartFrame+AACValve] /2;
-               qDebug() <<  "AACValve" << AACValve ;
-               //m_dashboard->setRevs(RPMRef);
-           }
-           if (AFALPHALH  >=0)
-           {
-               quint8 AFLHALPHA = serialdataconsult[StartFrame+AFALPHALH];
-               qDebug() <<  "AFLHALPHA" << AFLHALPHA ;
-               //m_dashboard->setRevs(RPMRef);
-           }
-           if (AFALPHARH  >=0)
-           {
-               quint8 AFRHALPHA = serialdataconsult[StartFrame+AFALPHARH];
-               qDebug() <<  "AFRHALPHA" << AFRHALPHA ;
-               //m_dashboard->setRevs(RPMRef);
-           }
-           if (AFALPHALHSELFLEARN >=0)
-           {
-               quint8 AFALPHASELFLEARNLH = serialdataconsult[StartFrame+AFALPHALHSELFLEARN];
-               qDebug() <<  "AFALPHASELFLEARNLH" << AFALPHASELFLEARNLH ;
-               //m_dashboard->setRevs(RPMRef);
-           }
-           if (AFALPHARHSELFLEARN  >=0)
-           {
-               quint8  AFALPHASELFLEARNRH = serialdataconsult[StartFrame+AFALPHARHSELFLEARN];
-               qDebug() <<  "AFALPHASELFLEARNRH" << AFALPHASELFLEARNRH ;
-               //m_dashboard->setRevs(RPMRef);
-           }
-           if (InjectortimeRH  >=0)
-           {
-               quint16  InjtimeRH = serialdataconsult[StartFrame+InjectortimeRH] /100;
-               qDebug() <<  "InjtimeRH" << InjtimeRH ;
-               //m_dashboard->setRevs(RPMRef);
-           }
-           /*
+    //  int StartFrame          = Livereplystructure.indexOf(QByteArray::fromHex("FF"));
+
+
+
+    //           int InjectortimeRH      = serialdataconsult.indexOf((QByteArray::fromHex("22")));
+
+
+    //If the Data is present then define on which Position of the StartFrame it can be found
+    // Apply calculations to make convert to human readable format
+
+    /*
 
 
        AACValve
@@ -710,10 +663,10 @@ void NissanconsultCom::ProcessMessage(QByteArray serialdataconsult)
 
 
        */
-       }
-        //if(requesttypeconsult == 0x2E){m_decodernissanconsult->decodeDTCConsult(serialdataconsult);}
-        //if(requesttypeconsult == 0x2E){NissanconsultCom::StopStream();}
-        //serialdataconsult.clear();
+
+    //if(requesttypeconsult == 0x2E){m_decodernissanconsult->decodeDTCConsult(serialdataconsult);}
+    //if(requesttypeconsult == 0x2E){NissanconsultCom::StopStream();}
+    //
 
 
 }

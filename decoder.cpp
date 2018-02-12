@@ -16,7 +16,7 @@
 
 #include <QFile>
 #include <QTextStream>
-#include <QThread>
+
 
 
 

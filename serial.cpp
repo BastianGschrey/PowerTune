@@ -19,7 +19,6 @@
 
 
 #include "serial.h"
-#include "serialobd.h"
 #include "nissanconsultcom.h"
 #include "decoder.h"
 #include "dashboard.h"
@@ -30,7 +29,6 @@
 #include <QDebug>
 #include <QTime>
 #include <QTimer>
-#include <QThread>
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QQmlContext>
@@ -75,7 +73,6 @@ Serial::Serial(QObject *parent) :
     m_dashBoard(Q_NULLPTR),
     m_gopro(Q_NULLPTR),
     m_gps(Q_NULLPTR),
-    m_obd(Q_NULLPTR),
     m_nissanconsultcom(Q_NULLPTR),
     m_bytesWritten(0),
     lastRequest(nullptr),
@@ -91,7 +88,7 @@ Serial::Serial(QObject *parent) :
     m_gopro = new GoPro(this);
     m_gps = new GPS(m_dashBoard, this);
     m_nissanconsultcom = new NissanconsultCom(m_dashBoard, this);
-    m_obd = new SerialOBD(m_dashBoard, this);
+    //m_obd = new SerialOBD(m_dashBoard, this);
     connect(m_decoder,SIGNAL(sig_adaptronicReadFinished()),this,SLOT(AdaptronicStartStream()));
     QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
     if (engine == Q_NULLPTR)
@@ -102,7 +99,6 @@ Serial::Serial(QObject *parent) :
     engine->rootContext()->setContextProperty("GoPro", m_gopro);
     engine->rootContext()->setContextProperty("GPS", m_gps);
     engine->rootContext()->setContextProperty("NissanconsultCom", m_nissanconsultcom);
-    engine->rootContext()->setContextProperty("OBD", m_obd);
 }
 
 void Serial::initSerialPort()
@@ -217,12 +213,12 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
     //OBD
     if (ecuSelect == 2)
     {
-    m_obd->SelectPort(portName);
+    //m_obd->SelectPort(portName);
     }
     //Nissan Consult
     if (ecuSelect == 3)
     {
-        m_nissanconsultcom->LiveReqMsg(1,0,0,0,1,0,0,1,1,1,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0);
+        m_nissanconsultcom->LiveReqMsg(1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
         m_nissanconsultcom->openConnection(portName);
 
     }
@@ -266,7 +262,7 @@ void Serial::closeConnection()
 void Serial::update()
 {
 
-
+/*
     bool bStatus = false;
 
     QStringList args;
@@ -274,7 +270,7 @@ void Serial::update()
 
     args << "&";
     bStatus = QProcess::startDetached("/home/pi/update.sh", args, ".", &pid);
-
+*/
 }
 void Serial::handleTimeout()
 {   

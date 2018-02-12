@@ -16,8 +16,7 @@ SOURCES += main.cpp \
     appsettings.cpp \
     gopro.cpp \
     gps.cpp \
-    serialobd.cpp \
-    nissanconsultcom.cpp
+    nissanconsultcom.cpp \
 
 
 RESOURCES += qml.qrc
@@ -36,10 +35,7 @@ HEADERS += \
     appsettings.h \
     gopro.h \
     gps.h \
-    instrumentcluster.h \
-    pids.h \
-    serialobd.h \
-    nissanconsultcom.h
+    nissanconsultcom.h \
 
 
 FORMS +=
