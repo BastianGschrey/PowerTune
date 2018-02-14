@@ -101,7 +101,7 @@ void OBD::closeConnection()
 void OBD::handleTimeout()
 {
     m_timer.stop();
-    qDebug() <<("timeou message") << m_buffer;
+    qDebug() <<("timeout message") << m_buffer;
     if(reqquestInd <= 7){reqquestInd++;}
     m_readData.clear();
     m_buffer.clear();
@@ -128,7 +128,6 @@ void OBD::readyToRead()
 {
 
     m_readData = m_serial->readAll();
-    qDebug() <<("reading") << m_readData;
     OBD::messageconstructor(m_readData);
 
 }
@@ -137,75 +136,24 @@ void OBD::messageconstructor(const QByteArray &buffer)
 {
     m_timer.start(5000);
     m_buffer.append(buffer);
-    qDebug() <<("constructed")<<m_buffer;
     QByteArray msgEnd = (QByteArray::fromStdString(">"));
     if (m_buffer.contains(msgEnd))
     {
-         m_timer.stop();
+        m_timer.stop();
         m_message = m_buffer;
         int end = m_message.indexOf(msgEnd);
-        qDebug() <<("found MSG end at pos")<<end;
-        qDebug() <<("raw msg")<<m_message;
         m_message.remove(end+1,m_message.length()-end);
-        qDebug() <<("final msg")<<m_message;
+        qDebug() <<("sending reply for decoding")<<m_message;
         m_buffer.remove(0,end+1);
-        qDebug() <<("buffer - message")<<m_buffer;
-        //m_dashBoard->setSerialStat(m_message);
         readData(m_message);
-        reqquestInd++;
+        if(reqquestInd <= 7)
+        {
+            reqquestInd++;
+        }
+
         OBD::sendRequest(reqquestInd);
     }
 
-
-
-
-    //just for testing
-
-     //m_timer.start(15000);
-
-    /*
-    if (ExpectedBytes != m_buffer.length())
-    {
-        m_timer.start(5000);
-    }
-
-    m_buffer.append(buffer);
-
-    QByteArray startpattern = m_writeData.left(1);
-    QByteArrayMatcher startmatcher(startpattern);
-
-    int pos = 0;
-    while((pos = startmatcher.indexIn(m_buffer, pos)) != -1)
-    {
-        if (pos !=0)
-        {
-            m_buffer.remove(0, pos);
-            if (m_buffer.length() > ExpectedBytes)
-            {
-                m_buffer.remove(ExpectedBytes,m_buffer.length() );
-            }
-        }
-
-        if (pos == 0 )
-        {
-            break;
-        }
-
-
-    }
-
-    if (m_buffer.length() == ExpectedBytes)
-    {
-        m_apexiMsg =  m_buffer;
-        m_buffer.clear();
-        m_timer.stop();
-        if(reqquestInd <= 5){reqquestInd++;}
-        else{reqquestInd = 2;}
-        readData(m_apexiMsg);
-        m_apexiMsg.clear();
-        OBD::sendRequest(reqquestInd);
-    }
-*/
 }
 
 
@@ -213,10 +161,9 @@ void OBD::messageconstructor(const QByteArray &buffer)
 
 void OBD::readData(QByteArray serialdata)
 {
-
+    qDebug() <<("Hex Representation of response")<< serialdata.toHex();
     if( serialdata.length() )
     {
-        //Power FC Decode
         quint8 requesttype = serialdata[0];
 
         //Write all OK Serial Messages to a file
