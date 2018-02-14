@@ -20,6 +20,7 @@
 
 #include "serial.h"
 #include "nissanconsultcom.h"
+#include "obd.h"
 #include "decoder.h"
 #include "dashboard.h"
 #include "serialport.h"
@@ -74,6 +75,7 @@ Serial::Serial(QObject *parent) :
     m_gopro(Q_NULLPTR),
     m_gps(Q_NULLPTR),
     m_nissanconsultcom(Q_NULLPTR),
+    m_OBD(Q_NULLPTR),
     m_bytesWritten(0),
     lastRequest(nullptr),
     modbusDevice(nullptr)
@@ -88,6 +90,7 @@ Serial::Serial(QObject *parent) :
     m_gopro = new GoPro(this);
     m_gps = new GPS(m_dashBoard, this);
     m_nissanconsultcom = new NissanconsultCom(m_dashBoard, this);
+    m_OBD = new OBD(m_dashBoard, this);
     //m_obd = new SerialOBD(m_dashBoard, this);
     connect(m_decoder,SIGNAL(sig_adaptronicReadFinished()),this,SLOT(AdaptronicStartStream()));
     QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
@@ -213,7 +216,7 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
     //OBD
     if (ecuSelect == 2)
     {
-    //m_obd->SelectPort(portName);
+       m_OBD->openConnection(portName);
     }
     //Nissan Consult
     if (ecuSelect == 3)

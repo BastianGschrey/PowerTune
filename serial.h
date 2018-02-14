@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2016 Markus Ippy, Bastian Gschrey, Jan
  *
@@ -28,6 +29,7 @@
 class SerialPort;
 class DashBoard;
 class NissanconsultCom;
+class OBD;
 class Decoder;
 class AppSettings;
 class GoPro;
@@ -77,6 +79,7 @@ private:
     GoPro *m_gopro;
     GPS *m_gps;
     NissanconsultCom* m_nissanconsultcom;
+    OBD* m_OBD;
     QStringList m_portsNames;
     QStringList *m_ecuList;
     qint64      m_bytesWritten;

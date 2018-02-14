@@ -102,7 +102,7 @@ Rectangle {
                     width: 200
 
                     //model: [ "PowerFC", "Adaptronic"]
-                    model: [ "PowerFC", "Adaptronic", "Future use" , "Nissan Consult"]
+                    model: [ "PowerFC", "Adaptronic", "OBDII" , "Nissan Consult"]
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
@@ -410,7 +410,7 @@ Rectangle {
         id: functconnect
         function connectfunc()
         {
-            if (ecuSelect.currentIndex == 2) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Work.start(serialName.currentText);
+            if (ecuSelect.currentIndex == 2) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger());
             else Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
         }
     }

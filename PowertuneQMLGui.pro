@@ -17,6 +17,7 @@ SOURCES += main.cpp \
     gopro.cpp \
     gps.cpp \
     nissanconsultcom.cpp \
+    obd.cpp
 
 
 RESOURCES += qml.qrc
@@ -36,6 +37,7 @@ HEADERS += \
     gopro.h \
     gps.h \
     nissanconsultcom.h \
+    obd.h
 
 
 FORMS +=

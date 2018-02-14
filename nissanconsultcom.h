@@ -108,7 +108,7 @@ public:
 
 
 private:
-     DashBoard *m_dashboard;
+    DashBoard *m_dashboard;
     SerialPort *m_serialconsult;
     QByteArray  m_readDataConsult;
     QByteArray  m_ECUResponsecomplete;
