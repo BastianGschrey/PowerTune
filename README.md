@@ -3,8 +3,8 @@ PowerTune is a Modern Gauge Display for written in QT5.8 and supports the follow
 
 * Apexi Power FC 
 * Adaptronic Select ECU 
-* OBD II (implementation not finalised)
-* Nissan Consult (Untested)
+* OBD II (Serial COM can be established and requesting RPM works so far )
+* Nissan Consult (Currently requests only RPM and Speed , should work now)
 
 
 Testet Platforms :
