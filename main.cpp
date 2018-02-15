@@ -4,6 +4,7 @@
 #include <QtQml>
 #include "serial.h"
 
+
 int main(int argc, char *argv[])
 {
     qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
@@ -11,7 +12,6 @@ int main(int argc, char *argv[])
     app.setOrganizationName("Power-Tune");
     app.setOrganizationDomain("power-tune.org");
     app.setApplicationName("PowerTune");
-
 
     QQmlApplicationEngine engine;
 

@@ -17,7 +17,7 @@
   \author Bastian Gschrey & Markus Ippy
 */
 
-
+#include "serialnmea.h"
 #include "serial.h"
 #include "nissanconsultcom.h"
 #include "obd.h"

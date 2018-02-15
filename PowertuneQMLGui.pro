@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick serialport serialbus network charts location
+QT += qml quick serialport serialbus network charts location positioning
 CONFIG += c++11
 static {
     QT += svg

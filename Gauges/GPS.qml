@@ -18,7 +18,8 @@ Rectangle {
         Loader {
             id: trackloader
             anchors.fill: parent
-            source: "qrc:/GPSTracks/Zwartkops.qml"
+            //source: "qrc:/GPSTracks/Zwartkops.qml"
+            source: "qrc:/GPSTracks/UtahMotorsportCampusBig.qml"
 
         }
 }

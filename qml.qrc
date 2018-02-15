@@ -56,5 +56,9 @@
         <file>Gauges/GaugeNeedle_minus180to90.qml</file>
         <file>Gauges/Charts.qml</file>
         <file>Gauges/RaceDashApexi.qml</file>
+        <file>GPSTracks/test.qml</file>
+        <file>GPSTracks/UtahMotorsportCampusEAST.qml</file>
+        <file>GPSTracks/UtahMotorsportCampusWest.qml</file>
+        <file>GPSTracks/UtahMotorsportCampusBig.qml</file>
     </qresource>
 </RCC>
