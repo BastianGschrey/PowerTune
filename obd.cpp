@@ -1,3 +1,11 @@
+/*
+* file obd.cpp
+* Copyright (C) 2018 Markus Ippy
+*
+* Communications class for OBD2 Live readouts
+*
+* No warranty is made or implied. You use this program at your own risk.
+*/
 #include "obd.h"
 #include "serialport.h"
 #include "dashboard.h"
@@ -15,11 +23,10 @@
 
 
 int reqquestInd = 0; //ID for requested data type Power FC
-int ExpectedBytes;
-QByteArray checksumh;
-QByteArray recvchecksumh;
-
-
+bool ok;
+quint16 RPM;
+quint8 SPEED;
+//
 
 OBD::OBD(QObject *parent)
     : QObject(parent)
@@ -66,6 +73,8 @@ void OBD::clear() const
 void OBD::openConnection(const QString &portName)
 {
 
+
+
     qDebug() <<("Opening Port")<<portName;
 
     initSerialPort();
@@ -79,12 +88,12 @@ void OBD::openConnection(const QString &portName)
 
     if(m_serial->open(QIODevice::ReadWrite) == false)
     {
-       qDebug() <<("not open");//m_dashBoard->setSerialStat(m_serial->errorString());
+       qDebug() <<("not open");m_dashboard->setSerialStat(m_serial->errorString());
     }
     else
     {
         qDebug() <<("open");
-       //m_dashBoard->setSerialStat(QString("Connected to Serialport"));
+       m_dashboard->setSerialStat(QString("Connected to Serialport"));
     }
 
     reqquestInd = 0;
@@ -102,7 +111,6 @@ void OBD::handleTimeout()
 {
     m_timer.stop();
     qDebug() <<("timeout message") << m_buffer;
-    if(reqquestInd <= 7){reqquestInd++;}
     m_readData.clear();
     m_buffer.clear();
     OBD::sendRequest(reqquestInd);
@@ -118,7 +126,7 @@ void OBD::handleError(QSerialPort::SerialPortError serialPortError)
         QTextStream out(&mFile);
         out << "Serial Error " << (m_serial->errorString()) <<endl;
         mFile.close();
-        //m_dashBoard->setSerialStat(m_serial->errorString());
+        m_dashboard->setSerialStat(m_serial->errorString());
 
     }
 }
@@ -145,11 +153,25 @@ void OBD::messageconstructor(const QByteArray &buffer)
         m_message.remove(end+1,m_message.length()-end);
         qDebug() <<("sending reply for decoding")<<m_message;
         m_buffer.remove(0,end+1);
-        readData(m_message);
-        if(reqquestInd <= 7)
+        if (m_message.contains(QByteArray::fromStdString("7E8")))
         {
-            reqquestInd++;
+            m_message.replace("7E8","");
+            m_message.replace(" ",""); //remove whitespace
+            m_message.replace("\r\r>",""); //remove end string
+            //int value = QString("AA110011").toInt(NULL, 16);
+
         }
+        else
+        {
+        m_message.replace("\r\r>",""); //remove end string
+        m_dashboard->setSerialStat(m_message);//update serialstatus
+        }
+
+        readData(m_message);
+
+        //This is just a temporary solution....
+        if(reqquestInd <= 8){reqquestInd++;}
+        else reqquestInd =8;
 
         OBD::sendRequest(reqquestInd);
     }
@@ -161,29 +183,109 @@ void OBD::messageconstructor(const QByteArray &buffer)
 
 void OBD::readData(QByteArray serialdata)
 {
-    qDebug() <<("Hex Representation of response")<< serialdata.toHex();
+
+
+    int requesttype = (serialdata.mid(4,2)).toInt(&ok,16);
+    qDebug() <<("requesttype ")<< requesttype;
     if( serialdata.length() )
     {
-        quint8 requesttype = serialdata[0];
 
-        //Write all OK Serial Messages to a file
-        if(serialdata[1] + 1 == serialdata.length())
-        {
-/*
             switch (requesttype) {
-            case APEXI::DATA::Advance:
-                m_decoderapexi->decodeAdv(serialdata);
+            case PIDS::SupportedPids0to20:
+                //Still need to ad calculations
                 break;
+            case PIDS::Monitorstatus:
+                //Still need to ad calculations
+                break;
+
+            case PIDS::FreezeDTC:
+                //Still need to ad calculations
+                break;
+
+            case PIDS::FuelsystemStatus:
+                //Still need to ad calculations
+                break;
+
+            case PIDS::CalcEngLoad:
+                //LOAD = (serialdata.mid(6,2)).toInt(&ok,16);
+                //m_dashboard->setEngLoad(LOAD/255);
+                break;
+
+            case PIDS::EngCoolantTemp:
+                //COOLANT = (serialdata.mid(6,2)).toInt(&ok,16);
+                //m_dashboard->setEngLoad(COOLANT-40);
+                break;
+
+            case PIDS::ShortTermFueltrimB1:
+                //Still need to ad calculations
+                break;
+
+            case PIDS::LongTermFueltrimB1:
+                //Still need to ad calculations
+                break;
+
+            case PIDS::ShortTermFueltrimB2:
+                //Still need to ad calculations
+                break;
+
+            case PIDS::LongTermFueltrimB2:
+                //Still need to ad calculations
+                break;
+
+            case PIDS::FuelPressure:
+                //FUELPR = (serialdata.mid(6,2)).toInt(&ok,16);
+                //m_dashboard->setEngLoad(FUELPR*3); // value in KPA
+                break;
+
+            case PIDS::IntakeManifoldPress:
+                //MAP = (serialdata.mid(6,2)).toInt(&ok,16);
+                //m_dashboard->setMAP(MAP); // value in KPA
+                break;
+
+            case PIDS::EngineRPM:
+                RPM = (serialdata.mid(6,4)).toInt(&ok,16);
+                m_dashboard->setRevs(RPM/4);
+
+                break;
+
+            case PIDS::VehicleSpeed:
+                SPEED = (serialdata.mid(6,2)).toInt(&ok,16);
+                m_dashboard->setSpeed(SPEED);
+                break;
+
+            case PIDS::TimingAdvance:
+                //IGNT = (serialdata.mid(6,2)).toInt(&ok,16);
+                //m_dashboard->setIgn((IGNT/2)-64);
+                break;
+
+            case PIDS::IntakeAirTemp:
+                //IAT = (serialdata.mid(6,2)).toInt(&ok,16);
+                //m_dashboard->setIntaketemp(IAT-40);
+                break;
+
+            case PIDS::MAFrate:
+                //Still need to ad calculations
+                break;
+            case PIDS::ThrottlePosition:
+                //Still need to ad calculations
+                break;
+            case PIDS::ComsecAirStatus:
+                //Still need to ad calculations
+                break;
+
+            case PIDS::OxygenSenspresent:
+                //Still need to ad calculations
+                break;
+
+            case PIDS::O2sensor1:
+                //Still need to ad calculations
+                break;
+
+
             default:
                 break;
             }
-*/
 
-
-         //   if(requesttype == APEXI::DATA::Advance) {m_decoderapexi->decodeAdv(serialdata);}
-
-
-       }
         serialdata.clear();
 
     }
@@ -205,14 +307,14 @@ void OBD::writeRequest(QByteArray p_request)
     qDebug() << "Sending Request" << p_request;
     m_writeData = p_request;
     qint64 bytesWritten = m_serial->write(p_request);
-    ////m_dashBoard->setSerialStat(QString("Sending Request " + p_request.toHex()));
+    m_dashboard->setSerialStat(QString("Sending Request " + p_request.toHex()));
 
     //Action to be implemented
     if (bytesWritten == -1) {
-     //   //m_dashBoard->setSerialStat(m_serial->errorString());
+        m_dashboard->setSerialStat(m_serial->errorString());
         //qDebug() << "Write request to port failed" << (m_serial->errorString());
     } else if (bytesWritten != m_writeData.size()) {
-     //   //m_dashBoard->setSerialStat(m_serial->errorString());
+       m_dashboard->setSerialStat(m_serial->errorString());
         //qDebug() << "could not write complete request to port" << (m_serial->errorString());
     }
 
@@ -266,7 +368,7 @@ void OBD::sendRequest(int reqquestInd)
            qDebug() <<("Check if ELM communication is OK ");
            break;
        case 7:
-           // Test communication
+           // Request supported PIDS
            OBD::writeRequest(QByteArray::fromStdString("0100\r"));
            qDebug() <<("Request supported pids ");
            break;
@@ -275,6 +377,11 @@ void OBD::sendRequest(int reqquestInd)
            OBD::writeRequest(QByteArray::fromStdString("010C\r"));
            qDebug() <<("Request RPM ");
            break;
+       case 9:
+        // Test Speed
+        OBD::writeRequest(QByteArray::fromStdString("010D\r"));
+        qDebug() <<("Request Speed ");
+        break;
 // PID requests
 
         break;

@@ -1,3 +1,11 @@
+/*
+* file obd.h
+* Copyright (C) 2018 Markus Ippy
+*
+* Communications class for OBD2 Live readouts
+*
+* No warranty is made or implied. You use this program at your own risk.
+*/
 #ifndef OBD_H
 #define OBD_H
 
@@ -8,19 +16,33 @@
 
 
 
-namespace APEXI {
-    namespace DATA {
-        enum ENUM {
-            Advance=0xF0,
-            MapIndex=0xDB,
-            SensorData=0xDE,
-            BaiscData=0xDA,
-            AuxData=0x00
 
-       };
-    }
+namespace PIDS {
+enum ENUM {
+    SupportedPids0to20	= 0x00,
+    Monitorstatus 		= 0x01,
+    FreezeDTC 			= 0x02,
+    FuelsystemStatus 	= 0x03,
+    CalcEngLoad 		= 0x04,
+    EngCoolantTemp 		= 0x05,
+    ShortTermFueltrimB1 = 0x06,
+    LongTermFueltrimB1 	= 0x07,
+    ShortTermFueltrimB2 = 0x08,
+    LongTermFueltrimB2  = 0x09,
+    FuelPressure		= 0x0A,
+    IntakeManifoldPress = 0x0B,
+    EngineRPM			= 0x0C,
+    VehicleSpeed	    = 0x0D,
+    TimingAdvance 		= 0x0E,
+    IntakeAirTemp		= 0x0F,
+    MAFrate				= 0x10,
+    ThrottlePosition	= 0x11,
+    ComsecAirStatus		= 0x12,
+    OxygenSenspresent	= 0x13,
+    O2sensor1			= 0x14
+
+};
 }
-
 
 class SerialPort;
 class DashBoard;
