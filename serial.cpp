@@ -54,6 +54,7 @@ int logging; // 0 Logging off , 1 Logging to file
 int loggingstatus;
 int Bytesexpected;
 int Bytes;
+int connectclicked =0;
 QString Logfilename;
 QByteArray checksumhex;
 QByteArray recvchecksumhex;
@@ -234,7 +235,11 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
     //UDP reveiver
     if (ecuSelect == 4)
     {
+        if (connectclicked == 0;)
+        {
         m_udpreceiver->startreceiver();
+        connectclicked == 1;
+        }
 
     }
 
