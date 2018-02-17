@@ -31,6 +31,7 @@ class DashBoard;
 class NissanconsultCom;
 class OBD;
 class Sensors;
+class udpreceiver;
 class Decoder;
 class AppSettings;
 class GoPro;
@@ -81,6 +82,7 @@ private:
     NissanconsultCom* m_nissanconsultcom;
     OBD* m_OBD;
     Sensors *m_sensors;
+    udpreceiver *m_udpreceiver;
     QStringList m_portsNames;
     QStringList *m_ecuList;
     qint64      m_bytesWritten;

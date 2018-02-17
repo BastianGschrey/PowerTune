@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     gps.cpp \
     nissanconsultcom.cpp \
     obd.cpp \
-    sensors.cpp
+    sensors.cpp \
+    udpreceiver.cpp
 
 
 RESOURCES += qml.qrc
@@ -39,7 +40,8 @@ HEADERS += \
     gps.h \
     nissanconsultcom.h \
     obd.h \
-    sensors.h
+    sensors.h \
+    udpreceiver.h
 
 
 FORMS +=

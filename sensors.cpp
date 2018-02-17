@@ -85,21 +85,19 @@ PressureSensor->start();
 }
 
 
-
-
-
 void Sensors::updateCompass()
 {
 
     QString text_compass;
     compass_reading = Compass->reading();
     if(compass_reading != 0) {
-        text_compass = QDateTime::currentDateTime().toString() +
-                + " Compass:  azimuth = " + QString::number(compass_reading->azimuth())
+        m_dashboard->setcompass(compass_reading->azimuth());
+        /*
+         text_compass = " Compass:  azimuth = " + QString::number(compass_reading->azimuth())
                 + " Calibration level = " + QString::number(compass_reading->calibrationLevel());
 
         qDebug() << "Compass"<< text_compass;
-
+        */
     }
     else {
         text_compass = "\nCompass: UNAVAILABLE";
@@ -114,15 +112,15 @@ void Sensors::updateAccel()
     qreal accelz;
     QString text_accel;
     accel_reading = Accelerometer->reading();
-   // m_dashboard->setaccelx(accel_reading->x());
-   // m_dashboard->setaccely(accel_reading->y());
-   // m_dashboard->setaccelz(accel_reading->z());
+;
     if(accel_reading != 0) {
-        text_accel = QDateTime::currentDateTime().toString() +
+        m_dashboard->setaccelx(accel_reading->x());
+        m_dashboard->setaccely(accel_reading->y());
+        m_dashboard->setaccelz(accel_reading->z());
+        /*text_accel = QDateTime::currentDateTime().toString() +
                 + "Acceleration  x = " + QString::number(accel_reading->x())+ "y ="
                 + QString::number(accel_reading->y())+ "z ="+ QString::number(accel_reading->z());
-
-
+*/
     }
     else {
         text_accel = "Accelerometer: UNAVAILABLE";

@@ -20,6 +20,7 @@
 #include "serialnmea.h"
 #include "serial.h"
 #include "sensors.h"
+#include "udpreceiver.h"
 #include "nissanconsultcom.h"
 #include "obd.h"
 #include "decoder.h"
@@ -81,6 +82,7 @@ Serial::Serial(QObject *parent) :
     m_nissanconsultcom(Q_NULLPTR),
     m_OBD(Q_NULLPTR),
     m_sensors(Q_NULLPTR),
+    m_udpreceiver(Q_NULLPTR),
     m_bytesWritten(0),
     lastRequest(nullptr),
     modbusDevice(nullptr)
@@ -97,6 +99,7 @@ Serial::Serial(QObject *parent) :
     m_nissanconsultcom = new NissanconsultCom(m_dashBoard, this);
     m_OBD = new OBD(m_dashBoard, this);
     m_sensors = new Sensors(m_dashBoard, this);
+    m_udpreceiver = new udpreceiver(m_dashBoard, this);
     connect(m_decoder,SIGNAL(sig_adaptronicReadFinished()),this,SLOT(AdaptronicStartStream()));
     QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
     if (engine == Q_NULLPTR)
@@ -155,7 +158,7 @@ void Serial::clear() const
 //function to open serial port
 void Serial::openConnection(const QString &portName, const int &ecuSelect, const int &interfaceSelect, const int &loggingSelect)
 {
-    //m_sensors->Comp();
+
     ecu = ecuSelect;
     interface = interfaceSelect;
     logging = loggingSelect;
@@ -228,6 +231,13 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
         m_nissanconsultcom->openConnection(portName);
 
     }
+    //UDP reveiver
+    if (ecuSelect == 4)
+    {
+        m_udpreceiver->startreceiver();
+
+    }
+
     //Dicktator
     if (ecuSelect == 5)
     {
