@@ -147,6 +147,18 @@ DashBoard::DashBoard(QObject *parent)
   //units
     , m_units("unit")
 
+  //Sensors
+    , m_accelx(0)
+    , m_accely(0)
+    , m_accelz(0)
+    , m_gyrox(0)
+    , m_gyroy(0)
+    , m_gyroz(0)
+    , m_compass(0)
+    , m_ambitemp(0)
+    , m_ambipress(0)
+
+
 {
 }
 
@@ -819,8 +831,6 @@ void DashBoard::setPlatform(const QString &Platform)
 
 //Sensor Strings
 
-//Sensor Strings
-
 void DashBoard::setSensorString1(const QString &SensorString1)
 {
     if (m_SensorString1 == SensorString1)
@@ -1110,8 +1120,70 @@ void DashBoard::setTRIM(const qreal &TRIM)
     emit TRIMChanged(TRIM);
 }
 
-
-// GPS
+//Qsensors
+void DashBoard::setaccelx(const qreal &accelx)
+{
+    if (m_accelx == accelx)
+        return;
+    m_accelx = accelx;
+    emit accelxChanged(accelx);
+}
+void DashBoard::setaccely(const qreal &accely)
+{
+    if (m_accely == accely)
+        return;
+    m_accely = accely;
+    emit accelyChanged(accely);
+}
+void DashBoard::setaccelz(const qreal &accelz)
+{
+    if (m_accelz == accelz)
+        return;
+    m_accelz = accelz;
+    emit accelzChanged(accelz);
+}
+void DashBoard::setgyrox(const qreal &gyrox)
+{
+    if (m_gyrox == gyrox)
+        return;
+    m_gyrox = gyrox;
+    emit gyroxChanged(gyrox);
+}
+void DashBoard::setgyroy(const qreal &gyroy)
+{
+    if (m_gyroy == gyroy)
+        return;
+    m_gyroy = gyroy;
+    emit gyroyChanged(gyroy);
+}
+void DashBoard::setgyroz(const qreal &gyroz)
+{
+    if (m_gyroz == gyroz)
+        return;
+    m_gyroz = gyroz;
+    emit gyrozChanged(gyroz);
+}
+void DashBoard::setcompass(const qreal &compass)
+{
+    if (m_compass == compass)
+        return;
+    m_compass = compass;
+    emit compassChanged(compass);
+}
+void DashBoard::setambitemp(const qreal &ambitemp)
+{
+    if (m_ambitemp == ambitemp)
+        return;
+    m_ambitemp = ambitemp;
+    emit ambitempChanged(ambitemp);
+}
+void DashBoard::setambipress(const qreal &ambipress)
+{
+    if (m_ambipress == ambipress)
+        return;
+    m_ambipress = ambipress;
+    emit ambipressChanged(ambipress);
+}
 
 
 
@@ -1265,4 +1337,14 @@ qreal DashBoard::Ign3() const { return m_Ign3; }
 qreal DashBoard::Ign4() const { return m_Ign4; }
 qreal DashBoard::TRIM() const { return m_TRIM; }
 
+// Qsensors
+qreal DashBoard::accelx() const { return m_accelx; }
+qreal DashBoard::accely() const { return m_accely; }
+qreal DashBoard::accelz() const { return m_accelz; }
+qreal DashBoard::gyrox() const { return m_gyrox; }
+qreal DashBoard::gyroy() const { return m_gyroy; }
+qreal DashBoard::gyroz() const { return m_gyroz; }
+qreal DashBoard::compass() const { return m_compass; }
+qreal DashBoard::ambitemp() const { return m_ambitemp; }
+qreal DashBoard::ambipress() const { return m_ambipress; }
 
