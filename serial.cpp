@@ -447,24 +447,6 @@ void Serial::apexiECU(const QByteArray &buffer)
 
     }
     
-    /*
-    while(m_buffer.length() >= Bytesexpected)
-    {
-    	if (m_buffer[0] == m_writeData[0] && m_buffer[1] == m_writeData[1])
-    	{
-    		if (m_buffer.length() > Bytesexpected)
-    		{
-    			m_buffer = m_buffer.left(Bytesexpected);
-    		}
-    		
-    		break;
-    	}
-    	else
-    		m_buffer.remove(0, 2);
-    }
-    */
-    
-
     if (m_buffer.length() == Bytesexpected)
     {
         m_dashBoard->setTimeoutStat(QString("Is Timeout : N"));

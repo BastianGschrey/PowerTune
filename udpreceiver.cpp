@@ -22,11 +22,12 @@ udpreceiver::udpreceiver(DashBoard *dashboard, QObject *parent)
 
 void udpreceiver::startreceiver()
 {
-udpSocket = new QUdpSocket(this);
-udpSocket->bind(45454, QUdpSocket::ShareAddress);
-connect(udpSocket, SIGNAL(readyRead()),
-        this, SLOT(processPendingDatagrams()));
+    udpSocket = new QUdpSocket(this);
+    udpSocket->bind(45454, QUdpSocket::ShareAddress);
+    connect(udpSocket, SIGNAL(readyRead()),
+            this, SLOT(processPendingDatagrams()));
 }
+
 void udpreceiver::processPendingDatagrams()
 {
 
