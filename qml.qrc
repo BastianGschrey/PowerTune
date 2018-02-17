@@ -60,5 +60,6 @@
         <file>GPSTracks/UtahMotorsportCampusEAST.qml</file>
         <file>GPSTracks/UtahMotorsportCampusWest.qml</file>
         <file>GPSTracks/UtahMotorsportCampusBig.qml</file>
+        <file>Gauges/ForceMeter.qml</file>
     </qresource>
 </RCC>

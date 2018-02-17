@@ -63,8 +63,8 @@ Rectangle {
             height: parent.height / 20
             width: height
             radius: width*0.5
-            x:((forcecircle.height / 2) - (ball.height /2)) + ((forcecircle.height / 4) * Dashboard.revs)
-            y: ((forcecircle.height / 2) - (ball.height /2)) + ((forcecircle.height / 4) * Dashboard.Knock)
+            x:((forcecircle.height / 2) - (ball.height /2)) + ((forcecircle.height / 4) * Dashboard.accelx)
+            y: ((forcecircle.height / 2) - (ball.height /2)) + ((forcecircle.height / 4) * Dashboard.accely)
 
         }
     }
