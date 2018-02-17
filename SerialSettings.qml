@@ -2,6 +2,8 @@ import QtQuick 2.8
 import QtQuick.Controls 2.1
 import Qt.labs.settings 1.0
 import QtQuick.VirtualKeyboard 2.1
+import QtSensors 5.0
+
 
 Rectangle {
     id: windowbackround
@@ -18,6 +20,12 @@ Rectangle {
         Settings {
             property alias connectAtStartUp: connectAtStart.checked
             property alias gpsswitch: gpsswitch.checked
+            property alias accelswitch: accelsens.checked
+            property alias gyrowitch:  gyrosense.checked
+            property alias compassswitch: compass.checked
+            property alias tempswitch: tempsense.checked
+            property alias pressureswitch:pressuresens.checked
+
             property alias serialPortName: serialName.currentText
             property alias gpsPortName: serialNameGPS.currentText
             property alias gpsPortNameindex: serialNameGPS.currentIndex
@@ -47,6 +55,14 @@ Rectangle {
             property alias password: goPropass.text
             property alias unitSelector: unitSelect.currentIndex
 
+        }
+
+        Item {
+            id: sensors
+            Component.onCompleted: {
+                var types = QmlSensors.sensorTypes();
+                console.log(types.join(", "));
+            }
         }
 
         Row {
@@ -173,7 +189,7 @@ Rectangle {
                     text: "Open Dashselect"
                     onClicked: {dashselector.visible = true}
                 }
-/*
+                /*
                 Button {
                     text: "Clear"
                     onClicked: {
@@ -181,7 +197,7 @@ Rectangle {
                     }
                 }
 */              //for official raspberry Pi image only !!!!
-/*
+                /*
                 Button {
                     text: "Pi Update "
                     onClicked: {
@@ -222,8 +238,49 @@ Rectangle {
                     id: gpsswitch
                     text: qsTr("GPS")
                     onCheckedChanged: {autoconnectGPS.auto()}
-                    //Component.onCompleted: {autoconnectGPS.auto()}
                 }
+                Switch {
+                    id: accelsens
+                    text: qsTr("Accelerometer")
+                    onCheckedChanged:
+                    {if (accelsens.checked == true){Sens.Accel()};
+                    }
+
+                }
+                Switch {
+                    id: gyrosense
+                    text: qsTr("Gyro Sensor")
+                    onCheckedChanged:
+                    {
+
+                        if (gyrosense.checked == true){Sens.Gyro()};
+                    }
+                }
+                Switch {
+                    id: compass
+                    text: qsTr("Compass")
+                    onCheckedChanged:{
+                        if (compass.checked == true){Sens.Comp()};
+                    }
+                }
+                Switch {
+                    id: pressuresens
+                    text: qsTr("Pressure Sensor")
+                    onCheckedChanged:{
+
+                        if (pressuresens.checked == true){Sens.Pressure()};
+                    }
+                }
+                Switch {
+                    id: tempsense
+                    text: qsTr("Temperature Sensor")
+                    onCheckedChanged:{
+
+                        if (tempsense.checked == true){Sens.Temperature()};
+                    }
+                }
+
+
                 Text
                 {
                     color: "red"

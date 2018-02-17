@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick serialport serialbus network charts location positioning
+QT += qml quick serialport serialbus network charts location positioning sensors
 CONFIG += c++11
 static {
     QT += svg
@@ -17,7 +17,8 @@ SOURCES += main.cpp \
     gopro.cpp \
     gps.cpp \
     nissanconsultcom.cpp \
-    obd.cpp
+    obd.cpp \
+    sensors.cpp
 
 
 RESOURCES += qml.qrc
@@ -37,7 +38,8 @@ HEADERS += \
     gopro.h \
     gps.h \
     nissanconsultcom.h \
-    obd.h
+    obd.h \
+    sensors.h
 
 
 FORMS +=

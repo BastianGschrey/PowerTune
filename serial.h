@@ -30,6 +30,7 @@ class SerialPort;
 class DashBoard;
 class NissanconsultCom;
 class OBD;
+class Sensors;
 class Decoder;
 class AppSettings;
 class GoPro;
@@ -58,7 +59,6 @@ public:
 
 public slots:
     void getPorts();
-    void getEcus();
 
 public:
     void writeRequestPFC(QByteArray);
@@ -80,6 +80,7 @@ private:
     GPS *m_gps;
     NissanconsultCom* m_nissanconsultcom;
     OBD* m_OBD;
+    Sensors *m_sensors;
     QStringList m_portsNames;
     QStringList *m_ecuList;
     qint64      m_bytesWritten;

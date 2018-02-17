@@ -19,6 +19,7 @@
 
 #include "serialnmea.h"
 #include "serial.h"
+#include "sensors.h"
 #include "nissanconsultcom.h"
 #include "obd.h"
 #include "decoder.h"
@@ -39,6 +40,9 @@
 #include <QTextStream>
 #include <QByteArrayMatcher>
 #include <QProcess>
+
+
+
 
 
 
@@ -76,6 +80,7 @@ Serial::Serial(QObject *parent) :
     m_gps(Q_NULLPTR),
     m_nissanconsultcom(Q_NULLPTR),
     m_OBD(Q_NULLPTR),
+    m_sensors(Q_NULLPTR),
     m_bytesWritten(0),
     lastRequest(nullptr),
     modbusDevice(nullptr)
@@ -91,7 +96,7 @@ Serial::Serial(QObject *parent) :
     m_gps = new GPS(m_dashBoard, this);
     m_nissanconsultcom = new NissanconsultCom(m_dashBoard, this);
     m_OBD = new OBD(m_dashBoard, this);
-    //m_obd = new SerialOBD(m_dashBoard, this);
+    m_sensors = new Sensors(m_dashBoard, this);
     connect(m_decoder,SIGNAL(sig_adaptronicReadFinished()),this,SLOT(AdaptronicStartStream()));
     QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
     if (engine == Q_NULLPTR)
@@ -102,6 +107,7 @@ Serial::Serial(QObject *parent) :
     engine->rootContext()->setContextProperty("GoPro", m_gopro);
     engine->rootContext()->setContextProperty("GPS", m_gps);
     engine->rootContext()->setContextProperty("NissanconsultCom", m_nissanconsultcom);
+    engine->rootContext()->setContextProperty("Sens", m_sensors);
 }
 
 void Serial::initSerialPort()
@@ -119,12 +125,8 @@ void Serial::initSerialPort()
 
 
 }
-void Serial::getEcus()
-{
-    QStringList EcuList;
-    EcuList.append("PowerFC");
-    EcuList.append("Adaptronic");
-}
+
+
 
 
 /*void Serial::setEcus(QStringList ECUList)
@@ -153,6 +155,7 @@ void Serial::clear() const
 //function to open serial port
 void Serial::openConnection(const QString &portName, const int &ecuSelect, const int &interfaceSelect, const int &loggingSelect)
 {
+    //m_sensors->Comp();
     ecu = ecuSelect;
     interface = interfaceSelect;
     logging = loggingSelect;
