@@ -235,10 +235,10 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
     //UDP reveiver
     if (ecuSelect == 4)
     {
-        if (connectclicked == 0;)
+        if (connectclicked == 0)
         {
         m_udpreceiver->startreceiver();
-        connectclicked == 1;
+        connectclicked = 1;
         }
 
     }
