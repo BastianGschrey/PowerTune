@@ -19,7 +19,10 @@ SOURCES += main.cpp \
     nissanconsultcom.cpp \
     obd.cpp \
     sensors.cpp \
-    udpreceiver.cpp
+    udpreceiver.cpp \
+    datalogger.cpp \
+    HaltechCAN.cpp \
+    AdaptronicCAN.cpp
 
 
 RESOURCES += qml.qrc
@@ -41,7 +44,10 @@ HEADERS += \
     nissanconsultcom.h \
     obd.h \
     sensors.h \
-    udpreceiver.h
+    udpreceiver.h \
+    datalogger.h \
+    HaltechCAN.h \
+    AdaptronicCAN.h
 
 
 FORMS +=

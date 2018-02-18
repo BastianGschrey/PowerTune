@@ -202,6 +202,7 @@ void NissanconsultCom::LiveReqMsg(const int &val1, const int &val2, const int &v
     {
         Liveread.append(ConsultData::LiveDataRequest);
         Liveread.append(ConsultData::LHO2Volt);
+
     }
     if (val7 == 1 )
     {

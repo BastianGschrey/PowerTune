@@ -37,6 +37,9 @@ Sensors::Sensors(DashBoard *dashboard, QObject *parent)
     , Compass(Q_NULLPTR)
     , compass_reading(Q_NULLPTR)
     , accel_reading(Q_NULLPTR)
+    , gyro_reading(Q_NULLPTR)
+    , press_reading(Q_NULLPTR)
+    , temp_reading(Q_NULLPTR)
     , AmbientTemperatureSensor(Q_NULLPTR)
     , PressureSensor(Q_NULLPTR)
 {
@@ -107,9 +110,7 @@ void Sensors::updateCompass()
 }
 void Sensors::updateAccel()
 {
-    qreal accelx;
-    qreal accely;
-    qreal accelz;
+
     QString text_accel;
     accel_reading = Accelerometer->reading();
 ;
@@ -130,15 +131,26 @@ void Sensors::updateAccel()
 }
 void Sensors::updateGyro()
 {
-
+    gyro_reading = Gyroscope->reading();
+    if(accel_reading != 0) {
+        m_dashboard->setgyrox(gyro_reading->x());
+        m_dashboard->setgyroy(gyro_reading->y());
+        m_dashboard->setgyroz(gyro_reading->z());
+    }
 }
 void Sensors::updateAmbientSens()
 {
-
+    temp_reading = AmbientTemperatureSensor->reading();
+    if(temp_reading != 0) {
+        m_dashboard->setambitemp(temp_reading->temperature());
+    }
 }
 void Sensors::updatePressureSens()
 {
-
+    press_reading = PressureSensor->reading();
+    if(press_reading != 0) {
+        m_dashboard->setambitemp(press_reading->pressure());
+    }
 }
 void Sensors::error(int)
 {

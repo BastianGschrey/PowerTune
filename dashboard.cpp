@@ -158,6 +158,9 @@ DashBoard::DashBoard(QObject *parent)
     , m_ambitemp(0)
     , m_ambipress(0)
 
+ //   ,m_TimeoutStat("----")
+ //   ,m_RecvData("----")
+
 
 {
 }

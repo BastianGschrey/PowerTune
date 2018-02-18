@@ -18,11 +18,14 @@
 */
 
 #include "serialnmea.h"
+#include "datalogger.h"
 #include "serial.h"
 #include "sensors.h"
 #include "udpreceiver.h"
 #include "nissanconsultcom.h"
 #include "obd.h"
+#include "AdaptronicCAN.h"
+#include "HaltechCAN.h"
 #include "decoder.h"
 #include "dashboard.h"
 #include "serialport.h"
@@ -83,8 +86,11 @@ Serial::Serial(QObject *parent) :
     m_nissanconsultcom(Q_NULLPTR),
     m_OBD(Q_NULLPTR),
     m_sensors(Q_NULLPTR),
+    m_haltechCANV2(Q_NULLPTR),
+    m_adaptronicCAN(Q_NULLPTR),
     m_udpreceiver(Q_NULLPTR),
     m_bytesWritten(0),
+    m_datalogger(0),
     lastRequest(nullptr),
     modbusDevice(nullptr)
 
@@ -100,7 +106,10 @@ Serial::Serial(QObject *parent) :
     m_nissanconsultcom = new NissanconsultCom(m_dashBoard, this);
     m_OBD = new OBD(m_dashBoard, this);
     m_sensors = new Sensors(m_dashBoard, this);
+    m_haltechCANV2 = new HaltechCAN(m_dashBoard, this);
+    m_adaptronicCAN = new AdaptronicCAN(m_dashBoard, this);
     m_udpreceiver = new udpreceiver(m_dashBoard, this);
+    m_datalogger = new datalogger(m_dashBoard, this);
     connect(m_decoder,SIGNAL(sig_adaptronicReadFinished()),this,SLOT(AdaptronicStartStream()));
     QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
     if (engine == Q_NULLPTR)
@@ -112,6 +121,7 @@ Serial::Serial(QObject *parent) :
     engine->rootContext()->setContextProperty("GPS", m_gps);
     engine->rootContext()->setContextProperty("NissanconsultCom", m_nissanconsultcom);
     engine->rootContext()->setContextProperty("Sens", m_sensors);
+    engine->rootContext()->setContextProperty("Logger", m_datalogger);
 }
 
 void Serial::initSerialPort()
@@ -242,9 +252,30 @@ void Serial::openConnection(const QString &portName, const int &ecuSelect, const
         }
 
     }
+    //Adaptronic ModularCAN protocol
+    if (ecuSelect == 5)
+    {
+        if (connectclicked == 0)
+        {
+        m_adaptronicCAN->openCAN();
+        connectclicked = 1;
+        }
+
+    }
+    //Haltech V2 CAN protocol
+    if (ecuSelect == 6)
+    {
+        if (connectclicked == 0)
+        {
+        m_haltechCANV2->openCAN();
+        connectclicked = 1;
+        }
+
+    }
+
 
     //Dicktator
-    if (ecuSelect == 5)
+    if (ecuSelect == 9)
     {
 
         initSerialPort();
@@ -275,7 +306,7 @@ void Serial::closeConnection()
     if(ecu == 1){
         modbusDevice->disconnectDevice();
     }
-    if(ecu == 3){
+    if(ecu == 9){
         m_serialport->close();
     }
 }
@@ -370,7 +401,7 @@ void Serial::readyToRead()
 
 
     }
-    if(ecu == 3) //Dicktator ECU
+    if(ecu == 9) //Dicktator ECU
     {
         m_readData = m_serialport->readAll();
         Serial::dicktatorECU(m_readData);

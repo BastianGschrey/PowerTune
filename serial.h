@@ -29,8 +29,11 @@
 class SerialPort;
 class DashBoard;
 class NissanconsultCom;
+class datalogger;
 class OBD;
 class Sensors;
+class AdaptronicCAN;
+class HaltechCAN;
 class udpreceiver;
 class Decoder;
 class AppSettings;
@@ -79,9 +82,12 @@ private:
     AppSettings *m_appSettings;
     GoPro *m_gopro;
     GPS *m_gps;
+    datalogger *m_datalogger;
     NissanconsultCom* m_nissanconsultcom;
     OBD* m_OBD;
     Sensors *m_sensors;
+    HaltechCAN *m_haltechCANV2;
+    AdaptronicCAN *m_adaptronicCAN;
     udpreceiver *m_udpreceiver;
     QStringList m_portsNames;
     QStringList *m_ecuList;

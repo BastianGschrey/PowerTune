@@ -12,7 +12,7 @@ ApplicationWindow {
     minimumWidth: 800
     minimumHeight: 480
     // visibility: "FullScreen"
-    title: qsTr("PowerTune ") + Dashboard.Platform + " Beta 22"
+    title: qsTr("PowerTune ") + Dashboard.Platform + " Beta 23"
     color: "black"
     SwipeView {
         id: view
@@ -42,7 +42,10 @@ ApplicationWindow {
             id: fourthPageLoader
             source: ""
         }
-
+        Loader {
+            id: test
+            source: "qrc:/Gauges/SensorTest.qml"
+        }
         Item {
             id:lastPage
             Settings{}

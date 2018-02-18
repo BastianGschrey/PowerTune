@@ -25,6 +25,7 @@ QByteArray serialdata;
 QByteArray fullFuelBase;
 qreal AN1AN2calc;
 qreal AN3AN4calc;
+qreal test;
 
 //QBitArray flagArray;
 QString Logfile;
@@ -153,8 +154,6 @@ void Decoder::decodeAdv(QByteArray serialdata)
     m_dashboard->setna1(packageADV[19]);
     m_dashboard->setSecinjpulse(packageADV[20]);
     m_dashboard->setna2(packageADV[21]);
-
-
 
 
 //    //qDebug() << "Time passed since last call"<< startTime.msecsTo(QTime::currentTime());
