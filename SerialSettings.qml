@@ -251,7 +251,7 @@ Rectangle {
                 Switch {
                     id: record
                     text: qsTr("GoPro rec")
-                    onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
+                    onCheckedChanged: {transferSettings.sendSettings(),GoPro.goprorec()}
                 }
                 Switch {
                     id: gpsswitch
