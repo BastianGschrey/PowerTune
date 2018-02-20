@@ -56,15 +56,15 @@ void HaltechCAN::readyToRead()
             view = m_canDevice->interpretErrorFrame(frame);
         else
             view = frame.toString();
-
+/*
         const QString time = QString::fromLatin1("%1.%2  ")
                 .arg(frame.timeStamp().seconds(), 10, 10, QLatin1Char(' '))
                 .arg(frame.timeStamp().microSeconds() / 100, 4, 10, QLatin1Char('0'));
 // Just for testing  end
 
-        qDebug() << time << view;
-
-// This section will be used to decode the received Frames currently shows only the the raw payload of a Adress
+//        qDebug() << time << view;
+*/
+// This section decodes the recevied Payload accordung to the frame ID
 
         QByteArray splitpayload = frame.payload();
         payload* info=reinterpret_cast<payload*>(splitpayload.data());
@@ -77,7 +77,7 @@ void HaltechCAN::readyToRead()
 
         case 0x360:
              m_dashboard->setRevs(pkgpayload[0]);
-            //m_dashboard->setMAP(pkgpayload[1]*0.1);
+             m_dashboard->setMAP(pkgpayload[1]*0.1);
             //m_dashboard->setTPS(pkgpayload[2]*0.1);
             //m_dashboard->setCoolantPressure(pkgpayload[3]*0.1);
             break;
@@ -88,10 +88,10 @@ void HaltechCAN::readyToRead()
             //m_dashboard->Wastegate Pressure (pkgpayload[3]*0.1)
             break;
         case 0x362:
-            //Inj Primary Duty Cycle(pkgpayload[0]*0.1)
-            //Inj Secondary Duty Cycle(pkgpayload[1]*0.1)
-            //Leading Ign Angle(pkgpayload[2]*0.1)
-            //Trailing Ign Angle(pkgpayload[3]*0.1)
+            m_dashboard->setInj1(pkgpayload[0]*0.1);
+            m_dashboard->setInj2(pkgpayload[1]*0.1);
+            m_dashboard->setLeadingign(pkgpayload[2]*0.1);
+            m_dashboard->setTrailingign(pkgpayload[3]*0.1);
             break;
         case 0x363:
             //Wheel Slip(pkgpayload[0]*0.1)
@@ -130,7 +130,7 @@ void HaltechCAN::readyToRead()
             //Wheel speed RR(pkgpayload[3]*0.1)
             break;
         case 0x36D:
-            //Wheelspeed front (pkgpayload[0]*0.1)
+            //Wheelspeed front(pkgpayload[0]*0.1)
             //Wheelspeed rear(pkgpayload[1]*0.1)
             //Exhaust CAM Angle 1(pkgpayload[2]*0.1)
             //Exhaust CAM ANgle 2(pkgpayload[3]*0.1)
@@ -146,7 +146,7 @@ void HaltechCAN::readyToRead()
             //Timed Duty output 2(pkgpayload[3]*0.1)
             break;
         case 0x370:
-            //Wheelspeed General (pkgpayload[0]*0.1)
+            m_dashboard->setSpeed(pkgpayload[0]*0.1);
             //Gear (pkgpayload[1])
             //Intake CAM Angle 1 (pkgpayload[2]*0.1)
             //Intake CAM Angle 2 (pkgpayload[3]*0.1)
@@ -157,7 +157,7 @@ void HaltechCAN::readyToRead()
             //Fuel FLow Differential(pkgpayload[2])
             break;
         case 0x372:
-            //Battery Voltage(pkgpayload[0]*0.1)
+            m_dashboard->setBatteryV(pkgpayload[0]*0.1);
             //Air Temp Sensor2(pkgpayload[1]*0.1)
             //Target Boost Level (pkgpayload[2]*0.1)
             //Barometric Pressure(pkgpayload[3]*0.1)
@@ -181,9 +181,9 @@ void HaltechCAN::readyToRead()
             //EGT12(pkgpayload[3]*0.1)
             break;
         case 0x3E0:
-            //Coolant Temp(pkgpayload[0]*0.1)
-            //Air Temp(pkgpayload[1]*0.1)
-            //Fuel Temp(pkgpayload[2]*0.1)
+            m_dashboard->setWatertemp(pkgpayload[0]*0.1);
+            m_dashboard->setIntaketemp(pkgpayload[1]*0.1);
+            m_dashboard->setFueltemp(pkgpayload[2]*0.1);
             //Oil Temp(pkgpayload[3]*0.1)
             break;
         case 0x3E1:

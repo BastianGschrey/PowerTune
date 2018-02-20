@@ -84,10 +84,10 @@ void AdaptronicCAN::readyToRead()
             //"Voltage_EMAP_ext"(pkgpayload[3]/1000)
             break;
         case 0x301:
-            //"Voltage_TPS1"(pkgpayload[0]/1000)
+            m_dashboard->setThrottleV(pkgpayload[0]/1000);
             //"Voltage_TPS2"(pkgpayload[1]/1000)
-            //"Voltage_O2_1"(pkgpayload[2]/1000)
-            //"Voltage_O2_2"(pkgpayload[3]/1000)
+            m_dashboard->setO2volt(pkgpayload[2]/1000);
+            m_dashboard->setO2volt_2(pkgpayload[3]/1000);
             break;
         case 0x302:
             //"Voltage_ECT"(pkgpayload[0]/1000)
@@ -117,42 +117,50 @@ void AdaptronicCAN::readyToRead()
             //"Mini Ana In #2 V1"(pkgpayload[1]/1000)
             //"Mini Ana In #2 V2"(pkgpayload[2]/1000)
             //"Mini Ana In #2 V3"(pkgpayload[3]/1000)
-            break; case 0x307:
+            break;
+        case 0x307:
             //"Mini Ana In #2 V4"(pkgpayload[0]/1000)
             //"Mini Ana In #2 5V out"(pkgpayload[1]/1000)
             //"Mini Ana In #3 V1"(pkgpayload[2]/1000)
             //"Mini Ana In #3 V2"(pkgpayload[3]/1000)
-            break; case 0x308:
+            break;
+        case 0x308:
             //"Mini Ana In #3 V3"(pkgpayload[0]/1000)
             //"Mini Ana In #3 V4"(pkgpayload[1]/1000)
             //"Mini Ana In #3 5V out"(pkgpayload[2]/1000)
             //"Mini Ana In #4 V1"(pkgpayload[3]/1000)
-            break; case 0x309:
+            break;
+        case 0x309:
             //"Mini Ana In #4 V2"(pkgpayload[0]/1000)
             //"Mini Ana In #4 V3"(pkgpayload[1]/1000)
             //"Mini Ana In #4 V4"(pkgpayload[2]/1000)
             //"Mini Ana In #4 5V out"(pkgpayload[3]/1000)
-            break; case 0x30A:
+            break;
+        case 0x30A:
             //"Analogue Voltage 40"(pkgpayload[0]/1000)
             //"Analogue Voltage 41"(pkgpayload[1]/1000)
             //"Analogue Voltage 42"(pkgpayload[2]/1000)
             //"Analogue Voltage 43"(pkgpayload[3]/1000)
-            break; case 0x30B:
+            break;
+        case 0x30B:
             //"Analogue Voltage 44"(pkgpayload[0]/1000)
             //"Analogue Voltage 45"(pkgpayload[1]/1000)
             //"Analogue Voltage 46"(pkgpayload[2]/1000)
             //"Analogue Voltage 47"(pkgpayload[3]/1000)
-            break; case 0x30C:
+            break;
+        case 0x30C:
             //"Analogue Voltage 48"(pkgpayload[0]/1000)
             //"Analogue Voltage 49"(pkgpayload[1]/1000)
             //"Analogue Voltage 50"(pkgpayload[2]/1000)
             //"Analogue Voltage 51"(pkgpayload[3]/1000)
-            break; case 0x30D:
+            break;
+        case 0x30D:
             //"Analogue Voltage 52"(pkgpayload[0]/1000)
             //"Analogue Voltage 53"(pkgpayload[1]/1000)
             //"Analogue Voltage 54"(pkgpayload[2]/1000)
             //"Analogue Voltage 55"(pkgpayload[3]/1000)
-            break; case 0x30E:
+            break;
+        case 0x30E:
             //"Analogue Voltage 56"(pkgpayload[0]/1000)
             //"Analogue Voltage 57"(pkgpayload[1]/1000)
             //"Analogue Voltage 58"(pkgpayload[2]/1000)
@@ -170,59 +178,58 @@ void AdaptronicCAN::readyToRead()
             //"Period for cyl 2"(pkgpayload[2]/1000)
             //"Period for cyl 3"(pkgpayload[3]/1000)
             break;
-
-
-            break; case 0x311:
+        case 0x311:
             //"Period for cyl 4"(pkgpayload[0]/1000)
             //"Period for cyl 5"(pkgpayload[1]/1000)
             //"Period for cyl 6"(pkgpayload[2]/1000)
             //"Period for cyl 7"(pkgpayload[3]/1000)
-            break; case 0x312:
+            break;
+        case 0x312:
             //"Period for cyl 8"(pkgpayload[0]/1000)
             //"Period for cyl 9"(pkgpayload[1]/1000)
             //"Period for cyl 10"(pkgpayload[2]/1000)
             //"Period for cyl 11"(pkgpayload[3]/1000)
-            break; case 0x313:
+            break;
+        case 0x313:
             //"Period for cyl 12"(pkgpayload[0]/1000)
             //"Period for cyl 13"(pkgpayload[1]/1000)
             //"Period for cyl 14"(pkgpayload[2]/1000)
             //"Period for cyl 15"(pkgpayload[3]/1000)
-            break; case 0x314:
+            break;
+        case 0x314:
             //"Period for cyl 16"(pkgpayload[0]/1000)
             //"CAS3 period"(pkgpayload[1]/100)
             //"CAS3 low time"(pkgpayload[2]/100)
             //"CAS3 frequency"(pkgpayload[3]/10)
-            break; case 0x315:
+            break;
+
+        case 0x315:
             //"VSS1 period"(pkgpayload[0]/0.1)
             //"VSS1 frequency"(pkgpayload[1]/10)
             //"VSS2 period"(pkgpayload[2]/0.1)
             //"VSS2 frequency"(pkgpayload[3]/10)
-            break; case 0x316:
+            break;
+        case 0x316:
             //"VSS3 period"(pkgpayload[0]/0.1)
             //"VSS3 frequency"(pkgpayload[1]/10)
             //"VSS4 period"(pkgpayload[2]/0.1)
             //"VSS4 frequency"(pkgpayload[3]/10)
-            break; case 0x317:
+            break;
+        case 0x317:
             //"VVT1 raw angle"(pkgpayload[0]/10)
             //"VVT2 raw angle"(pkgpayload[1]/10)
             //"VVT3 raw angle"(pkgpayload[2]/10)
             //"VVT4 raw angle"(pkgpayload[3]/10)
             break;
         case 0x318:
-            qDebug() << "Accelerometer X :" << pkgpayload[0]/1000;
-            qDebug() << "Accelerometer Y :" << pkgpayload[1]/1000;
-            qDebug() << "Accelerometer Z :" << pkgpayload[2]/1000;
-            qDebug() << "Yaw Rate :" << pkgpayload[3]/10;
-            //m_dashboard->setaccelx(pkgpayload[0] /1000);
-            //m_dashboard->setaccelx(pkgpayload[1] /1000);
-            //m_dashboard->setaccelx(pkgpayload[2] /1000);
-            //m_dashboard->setgyrox(pkgpayload[3]/10);
+            m_dashboard->setaccelx(pkgpayload[0]/1000);
+            m_dashboard->setaccely(pkgpayload[1]/1000);
+            m_dashboard->setaccelz(pkgpayload[2]/1000);
+            m_dashboard->setgyrox(pkgpayload[3]/10); //Yaw
             break;
         case 0x319:
-            qDebug() << "Pitch :" << pkgpayload[0]/10;
-            qDebug() << "Roll :" << pkgpayload[1]/10;
-            //m_dashboard->setgyroy(pkgpayload[0]/10); //Pitch
-            //m_dashboard->setgyroz(pkgpayload[1]/10); //Roll
+            m_dashboard->setgyroy(pkgpayload[0]/10); //Pitch
+            m_dashboard->setgyroz(pkgpayload[1]/10); //Roll
             break;
         case 0x31A:
             //"GPS Long low"(pkgpayload[0])
@@ -677,7 +684,7 @@ void AdaptronicCAN::readyToRead()
         case 0x365:
             qDebug() << "MAT :" << pkgpayload[0]/10;
             qDebug() << "Oil T :" << pkgpayload[1]/10;
-            qDebug() << "Fuel T :" << pkgpayload[2]/10;
+            m_dashboard->setFueltemp(pkgpayload[2]/10);
             qDebug() << "Oil P  :" << pkgpayload[3]/10;
             break;
 
@@ -693,7 +700,7 @@ void AdaptronicCAN::readyToRead()
             qDebug() << "0-5V Ext 2 :" << pkgpayload[0]/10;
             qDebug() << "Sens GND V (GND off):" << pkgpayload[1]/1000;
             qDebug() << "Ethanol Content :" << pkgpayload[2]/10;
-            qDebug() << "Vehicle speed  :" << pkgpayload[3]/10;
+            m_dashboard->setSpeed(pkgpayload[3]/10);
             break;
 
         case 0x368:
@@ -1049,8 +1056,8 @@ void AdaptronicCAN::readyToRead()
             //"Spark split"(pkgpayload[3]/10)
             break;
         case 0x3A3:
-            //"Ignition timing"(pkgpayload[0]/10)
-            //"Ignition timing (trail)"(pkgpayload[1]/10)
+            m_dashboard->setLeadingign(pkgpayload[0]/10);
+            m_dashboard->setTrailingign(pkgpayload[1]/10);
             //"Advance metric (raw)"(pkgpayload[2])
             //"Advance metric (filt)"(pkgpayload[3])
             break;
