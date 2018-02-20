@@ -149,7 +149,7 @@ void Sensors::updatePressureSens()
 {
     press_reading = PressureSensor->reading();
     if(press_reading != 0) {
-        m_dashboard->setambitemp(press_reading->pressure());
+        m_dashboard->setambipress(press_reading->pressure());
     }
 }
 void Sensors::error(int)
