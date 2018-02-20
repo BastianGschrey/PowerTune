@@ -52,7 +52,6 @@
 
 int requestIndex = 0; //ID for requested data type Power FC
 int ecu =3; //0=apex, 1=adaptronic;2= OBD; 3= Dicktator ECU
-int interface; // 0=fcHako, 1=fc-datalogIt
 int logging; // 0 Logging off , 1 Logging to file
 int loggingstatus;
 int Bytesexpected;
@@ -167,11 +166,10 @@ void Serial::clear() const
 
 
 //function to open serial port
-void Serial::openConnection(const QString &portName, const int &ecuSelect, const int &interfaceSelect, const int &loggingSelect)
+void Serial::openConnection(const QString &portName, const int &ecuSelect, const int &loggingSelect)
 {
 
     ecu = ecuSelect;
-    interface = interfaceSelect;
     logging = loggingSelect;
 
 

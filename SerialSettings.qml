@@ -74,28 +74,39 @@ Rectangle {
                 columns: 2
                 spacing: 5
                 // [0]
-                Text { text: "ECU Serial Port: " }
+                Text {
+                text: "ECU Serial Port: "
+                visible: { (ecuSelect.currentIndex >= "4") ? false: true; }
+                }
                 ComboBox {
                     id: serialName
                     width: 200
-
                     model: Serial.portsNames
+                    visible: { (ecuSelect.currentIndex >= "4") ? false: true; }
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setBaudRate( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true; autoconnect.auto();logger.datalogger() }
                 }
-                Text { text: "GPS Port: " }
+                Text {
+                text: "GPS Port: "
+                visible: { (gpsswitch.checked == true ) ? true:false; }
+                }
                 ComboBox {
                     id: serialNameGPS
                     width: 200
                     model: Serial.portsNames
+                    visible: { (gpsswitch.checked == true ) ? true:false; }
 
                 }
-                Text { text: "GPS Baud: " }
+                Text {
+                text: "GPS Baud: "
+                visible: { (gpsswitch.checked == true ) ? true:false; }
+                }
                 ComboBox {
                     id: serialGPSBaud
                     width: 200
                     model: [ "2400", "4800", "9600", "14400", "19200", "38400", "57600", "115200"]
+                    visible: { (gpsswitch.checked == true ) ? true:false; }
                     Component.onCompleted: {autoconnectGPS.auto()}
 
                 }
@@ -116,14 +127,13 @@ Rectangle {
 
                     id: ecuSelect
                     width: 200
-
-                    //model: [ "PowerFC", "Adaptronic"]
                     model: [ "PowerFC", "Adaptronic Select Modbus", "OBDII" , "Nissan Consult","UDP Receiver port 45454","CAN Adaptronic Modular","CAN Haltech V2"]
+
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
                 }
-
+/*
                 Text {
                     id: textloggingSelect
                     visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
@@ -139,7 +149,7 @@ Rectangle {
                     onCurrentIndexChanged: if (initialized) AppSettings.setLogging( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getLogging(); initialized = true }
                 }
-
+*/
                 Text { text: "GoPro Variant :" }
                 ComboBox {
                     id: goProSelect
@@ -174,12 +184,21 @@ Rectangle {
                 Button {
                     id: connectButton
                     text: "Connect"
-                    onClicked: {functconnect.connectfunc();}
+                    onClicked: {
+                        functconnect.connectfunc();
+                    connectButton.enabled =false;
+                    ecuSelect.enabled = false;
+                    disconnectButton.enabled = true;
+                    }
                 }
                 Button {
                     id: disconnectButton
                     text: "Disconnect"
+                    enabled: false
                     onClicked: {
+                        connectButton.enabled = true;
+                        disconnectButton.enabled = false;
+                        ecuSelect.enabled = true;
                         functdisconnect.disconnectfunc();
                     }
                 }
@@ -467,8 +486,8 @@ Rectangle {
         id: functconnect
         function connectfunc()
         {
-            if (ecuSelect.currentIndex == 2) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger());
-            else Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
+            if (ecuSelect.currentIndex == 2) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex,logger.datalogger());
+            else Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, logger.datalogger()),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
         }
     }
 
@@ -478,10 +497,7 @@ Rectangle {
         id: functdisconnect
         function disconnectfunc()
         {
-            if (ecuSelect.currentIndex == 2) Work.stop();
-            else Serial.closeConnection(),GPS.stopGPScom();
-
-
+             Serial.closeConnection(),GPS.stopGPScom();
         }
     }
 

@@ -54,7 +54,7 @@ public:
 
     Q_INVOKABLE void clear() const;
     Q_INVOKABLE void initSerialPort();
-    Q_INVOKABLE void openConnection(const QString &portName, const int &ecuSelect, const int &interfaceSelect, const int &loggingSelect);
+    Q_INVOKABLE void openConnection(const QString &portName, const int &ecuSelect, const int &loggingSelect);
     Q_INVOKABLE void closeConnection();   
     Q_INVOKABLE void update();
     Q_INVOKABLE void startLogging(const QString &logfilenameSelect, const int &loggeron);
