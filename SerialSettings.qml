@@ -244,14 +244,10 @@ Rectangle {
                     onCheckedChanged: logger.datalogger()
                 }
 
-
-
-
-
                 Switch {
                     id: record
                     text: qsTr("GoPro rec")
-                    onCheckedChanged: {transferSettings.sendSettings(),GoPro.goprorec()}
+                    onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                 }
                 Switch {
                     id: gpsswitch
@@ -460,6 +456,30 @@ Rectangle {
             if (gpsswitch.checked == true)GPS.startGPScom(serialNameGPS.currentText);
             if (gpsswitch.checked == false)GPS.stopGPScom();
         }
+    }
+
+    Item {
+
+        //Function to transmit GoPro rec status on off
+
+        id: goproRec
+
+        property var recording: 0
+
+        function rec()
+
+        {
+
+            if (record.checked == true) goproRec.recording = 1, GoPro.goprorec(recording.valueOf());
+
+            if (record.checked == false) goproRec.recording = 0,GoPro.goprorec(recording.valueOf());
+
+
+
+
+
+        }
+
     }
     Item {
         //Logger on off function
