@@ -100,7 +100,7 @@ void AdaptronicSelect::readyToRead()
         auto reply = qobject_cast<QModbusReply *>(sender());
         if(!reply)
             return;
-        if(reply->error() == QmodbusDevice::NoError){
+        if(reply->error() == QModbusDevice::NoError){
             const QModbusDataUnit unit = reply->result();
             AdaptronicSelect::decodeAdaptronic(unit);
 
