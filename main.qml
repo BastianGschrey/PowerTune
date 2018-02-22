@@ -20,6 +20,11 @@ ApplicationWindow {
         currentIndex: 0
         anchors.fill: parent
  
+        Item {
+            id:test1
+            Settings{}
+        }
+
         Loader {
 
             id: firstPageLoader

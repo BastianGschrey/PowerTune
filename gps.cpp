@@ -1,6 +1,6 @@
 #include "gps.h"
 #include "dashboard.h"
-#include "serial.h"
+#include "connect.h"
 #include "QStringList"
 
 

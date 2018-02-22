@@ -81,7 +81,7 @@ Rectangle {
                 ComboBox {
                     id: serialName
                     width: 200
-                    model: Serial.portsNames
+                    model: Connect.portsNames
                     visible: { (ecuSelect.currentIndex >= "4") ? false: true; }
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setBaudRate( currentIndex )
@@ -94,7 +94,7 @@ Rectangle {
                 ComboBox {
                     id: serialNameGPS
                     width: 200
-                    model: Serial.portsNames
+                    model: Connect.portsNames
                     visible: { (gpsswitch.checked == true ) ? true:false; }
 
                 }
@@ -119,8 +119,8 @@ Rectangle {
 
                     model: [ "Metric","Imperial"]
                     property bool initialized: false
-                    Component.onCompleted: { Decoder.setUnits(currentIndex) }
-                    onCurrentIndexChanged: { Decoder.setUnits(currentIndex) }
+                   // Component.onCompleted: { Decoder.setUnits(currentIndex) }
+                    //onCurrentIndexChanged: { Decoder.setUnits(currentIndex) }
                 }
                 Text { text: "ECU Selection:" }
                 ComboBox {
@@ -212,7 +212,7 @@ Rectangle {
                 Button {
                     text: "Clear"
                     onClicked: {
-                        Serial.clear()
+                        Connect.clear()
                     }
                 }
 */              //for official raspberry Pi image only !!!!
@@ -220,7 +220,7 @@ Rectangle {
                 Button {
                     text: "Pi Update "
                     onClicked: {
-                        Serial.update()
+                        Connect.update()
 
                     }
                 }
@@ -446,8 +446,8 @@ Rectangle {
         id: autoconnect
         function auto()
         {
-            // if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex);
-            if (connectAtStart.checked == true) functconnect.connectfunc();//Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
+            // if (connectAtStart.checked == true) Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex);
+            if (connectAtStart.checked == true) functconnect.connectfunc();//Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Connect.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
 
         }
     }
@@ -468,8 +468,8 @@ Rectangle {
         function datalogger()
         {
 
-            if (loggerswitch.checked == true) logger.loggeron = 1, Serial.startLogging(logfilenameSelect.text, loggeron.valueOf());
-            if (loggerswitch.checked == false) logger.loggeron = 0,Serial.stopLogging(loggeron.valueOf());
+            //if (loggerswitch.checked == true) logger.loggeron = 1, Connect.startLogging(logfilenameSelect.text, loggeron.valueOf());
+           // if (loggerswitch.checked == false) logger.loggeron = 0,Connect.stopLogging(loggeron.valueOf());
         }
     }
     Item {
@@ -486,8 +486,8 @@ Rectangle {
         id: functconnect
         function connectfunc()
         {
-            if (ecuSelect.currentIndex == 2) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex,logger.datalogger());
-            else Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, logger.datalogger()),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
+            if (ecuSelect.currentIndex == 2) Connect.openConnection(serialName.currentText, ecuSelect.currentIndex,logger.datalogger());
+            else Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, logger.datalogger()),Connect.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
         }
     }
 
@@ -497,7 +497,7 @@ Rectangle {
         id: functdisconnect
         function disconnectfunc()
         {
-             Serial.closeConnection(),GPS.stopGPScom();
+             Connect.closeConnection(),GPS.stopGPScom();
         }
     }
 
