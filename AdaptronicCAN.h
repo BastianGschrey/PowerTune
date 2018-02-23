@@ -22,8 +22,8 @@ class AdaptronicCAN : public QObject
     Q_OBJECT
 public:
 
-    explicit AdaptronicCAN(QObject *parent = 0);
-    explicit AdaptronicCAN(DashBoard *dashboard, QObject *parent = 0);
+    explicit AdaptronicCAN(QObject *parent = nullptr);
+    explicit AdaptronicCAN(DashBoard *dashboard, QObject *parent = nullptr);
     ~AdaptronicCAN();
 
 
