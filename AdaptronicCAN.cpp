@@ -10,6 +10,7 @@
 #include "AdaptronicCAN.h"
 #include "dashboard.h"
 #include <QDebug>
+#include <QtEndian>
 
 AdaptronicCAN::AdaptronicCAN(QObject *parent)
     : QObject(parent)
@@ -97,8 +98,8 @@ void AdaptronicCAN::readyToRead()
 
         // This section will be used to decode the received Frames currently shows only the the raw payload of a Adress
         QByteArray splitpayload = frame.payload();
-        payload* info=reinterpret_cast<payload*>(splitpayload.data(), 4);
-        pkgpayload[0] = info->CH1;
+        payload* info=reinterpret_cast<payload*>(splitpayload.data());
+        pkgpayload[0] = qFromBigEndian(info->CH1);
         pkgpayload[1] = info->CH2;
         pkgpayload[2] = info->CH3;
         pkgpayload[3] = info->CH4;
