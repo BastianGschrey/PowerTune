@@ -50,6 +50,7 @@ void AdaptronicCAN::openCAN()
         if(m_canDevice->connectDevice()){
             qDebug() << m_canDevice->state();
             qDebug() << m_canDevice;
+            qDebug() << "device connected!";
             //connect(m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));
             connect(m_canDevice, &QCanBusDevice::framesReceived, this, &AdaptronicCAN::readyToRead);
             //connect(m_canDevice, &QCanBusDevice::framesReceived,this, &AdaptronicCAN::readyToRead);
@@ -75,6 +76,8 @@ void AdaptronicCAN::closeConnection()
 }
 void AdaptronicCAN::readyToRead()
 {
+    qDebug() << "Event Ready to Read"!;
+
     if (!m_canDevice)
         qDebug() << m_canDevice;
         qDebug() << "no device, exiting...";
