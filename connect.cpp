@@ -21,7 +21,7 @@
 #include "connect.h"
 #include "sensors.h"
 #include "udpreceiver.h"
-#include "adaptronicselect.h"
+#include "AdaptronicSelect.h"
 #include "AdaptronicCAN.h"
 #include "Apexi.h"
 #include "HaltechCAN.h"
