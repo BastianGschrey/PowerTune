@@ -37,8 +37,15 @@ void AdaptronicCAN::openCAN()
     if (QCanBus::instance()->plugins().contains(QStringLiteral("socketcan")))
     {
 
-        QCanBusDevice *m_canDevice = QCanBus::instance()->createDevice(
-                    QStringLiteral("socketcan"), QStringLiteral("can0"));
+        QCanBusDevice *m_canDevice = QCanBus::instance()->createDevice(QStringLiteral("socketcan"),
+                                                                       QStringLiteral("can0"));
+
+        if (!m_canDevice) {
+            qDebug() << ("Error creating device");
+            return;
+        }
+
+
 
         m_canDevice->connectDevice();
         qDebug() << m_canDevice->state();
@@ -49,6 +56,12 @@ void AdaptronicCAN::openCAN()
 
 
 }
+
+
+
+
+
+
 void AdaptronicCAN::closeConnection()
 {
     disconnect(m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));

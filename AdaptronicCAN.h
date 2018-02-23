@@ -36,15 +36,15 @@ public:
 
 private:
 
-    QCanBusDevice *m_canDevice;
-        DashBoard *m_dashboard;
-    double pkgpayload[8];
-    struct payload{
-       quint16 CH1;
-       quint16 CH2;
-       quint16 CH3;
-       quint16 CH4;
-       payload parse(const QByteArray &);
+   QCanBusDevice *m_canDevice = nullptr;
+   DashBoard *m_dashboard;
+   double pkgpayload[8];
+   struct payload{
+   quint16 CH1;
+   quint16 CH2;
+   quint16 CH3;
+   quint16 CH4;
+   payload parse(const QByteArray &);
    };
 
 signals:
