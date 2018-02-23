@@ -97,7 +97,7 @@ void AdaptronicCAN::readyToRead()
 
         // This section will be used to decode the received Frames currently shows only the the raw payload of a Adress
         QByteArray splitpayload = frame.payload();
-        payload* info=reinterpret_cast<payload*>(splitpayload.data());
+        payload* info=reinterpret_cast<payload*>(splitpayload.data(), 4);
         pkgpayload[0] = info->CH1;
         pkgpayload[1] = info->CH2;
         pkgpayload[2] = info->CH3;
@@ -688,6 +688,7 @@ void AdaptronicCAN::readyToRead()
             break;
         case 0x361:
             qDebug() << "IMAP :" << pkgpayload[0]/10;
+            m_dashboard->setMAP(pkgpayload[0]/10);
             qDebug() << "IMAP2 :" << pkgpayload[1]/10;
             qDebug() << "EMAP :" << pkgpayload[2]/10;
             qDebug() << "EMAP2  :" << pkgpayload[3]/10;
