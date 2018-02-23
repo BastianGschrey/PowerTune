@@ -45,7 +45,7 @@ void HaltechCAN::openCAN()
 }
 void HaltechCAN::closeConnection()
 {
-    disconnect(this->m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));
+    disconnect(m_canDevice, &QCanBusDevice::framesReceived,this, &HaltechCAN::readyToRead);
     m_canDevice->disconnectDevice();
     delete m_canDevice;
 }
