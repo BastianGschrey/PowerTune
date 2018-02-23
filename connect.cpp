@@ -32,7 +32,7 @@
 #include "Apexi.h"
 #include "AdaptronicSelect.h"
 #include "dashboard.h"
-#include "Serialport.h"
+#include "serialport.h"
 #include "appsettings.h"
 #include "gopro.h"
 #include "gps.h"
