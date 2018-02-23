@@ -12,7 +12,7 @@ ApplicationWindow {
     minimumWidth: 800
     minimumHeight: 480
     // visibility: "FullScreen"
-    title: qsTr("PowerTune ") + Dashboard.Platform + " Beta 23"
+    title: qsTr("PowerTune ") + Dashboard.Platform + " Beta 24"
     color: "black"
     SwipeView {
         id: view
@@ -20,10 +20,6 @@ ApplicationWindow {
         currentIndex: 0
         anchors.fill: parent
  
-        Item {
-            id:test1
-            Settings{}
-        }
 
         Loader {
 

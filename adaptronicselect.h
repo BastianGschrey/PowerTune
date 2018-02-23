@@ -28,6 +28,7 @@ private:
 
 public slots:
      void openConnection(const QString &portName);
+     void closeConnection();
      void AdaptronicStartStream();
      void setUnits(const int &unitSelect);
      void readyToRead();

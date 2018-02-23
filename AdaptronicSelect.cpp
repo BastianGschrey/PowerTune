@@ -1,68 +1,15 @@
 #include "AdaptronicSelect.h"
-#include "dashboard.h"
 #include "connect.h"
 #include "serialport.h"
-#include <QtSerialPort/QSerialPort>
+#include "dashboard.h"
+#include "appsettings.h"
+#include <QDebug>
+#include <QThread>
+//#include <QSerialPort>
+//#include <QSerialPortInfo>
 #include <QModbusRtuSerialMaster>
-#include <QModbusClient>
-#include <QModbusReply>
-
-
-
-AdaptronicSelect::AdaptronicSelect(QObject *parent)
-    : QObject(parent)
-    , m_dashboard(Q_NULLPTR)
-
-{
-}
-
-AdaptronicSelect::AdaptronicSelect(DashBoard *dashboard, QObject *parent)
-    : QObject(parent)
-    , m_dashboard(dashboard)
-    , lastRequest(nullptr)
-    , modbusDevice(nullptr)
-
-{
-
-    //connect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
-
-
-}
-
 
 int units2;
-
-
-
-
-//function to open serial port
-void AdaptronicSelect::openConnection(const QString &portName)
-{
-    modbusDevice = new QModbusRtuSerialMaster(this);
-    connect(this,SIGNAL(sig_adaptronicReadFinished()),this,SLOT(AdaptronicStartStream()));
-
-    if (!modbusDevice)
-        return;
-
-    if (modbusDevice->state() != QModbusDevice::ConnectedState)
-    {
-/*
-        modbusDevice->setConnectionParameter(QModbusDevice::SerialPortNameParameter,portName);
-        modbusDevice->setConnectionParameter(QModbusDevice::SerialBaudRateParameter,57600);
-        modbusDevice->setConnectionParameter(QModbusDevice::SerialDataBitsParameter,8);
-        modbusDevice->setConnectionParameter(QModbusDevice::SerialParityParameter,0);
-        modbusDevice->setConnectionParameter(QModbusDevice::SerialStopBitsParameter,1);
-        modbusDevice->setTimeout(200);
-        modbusDevice->setNumberOfRetries(10);
-        modbusDevice->connectDevice();
-*/
-        AdaptronicSelect::AdaptronicStartStream();
-
-    }
-
-
-}
-
 AdaptronicSelect::~AdaptronicSelect()
 {
 
@@ -71,6 +18,69 @@ AdaptronicSelect::~AdaptronicSelect()
     delete modbusDevice;
 
 }
+
+AdaptronicSelect::AdaptronicSelect(DashBoard *dashboard, QObject *parent)
+    : QObject(parent),
+      m_dashboard(dashboard),
+      lastRequest(nullptr),
+      modbusDevice(nullptr)
+
+    {
+
+    }
+
+
+
+
+//function to open serial port
+void AdaptronicSelect::openConnection(const QString &portName)
+{
+
+    if (!modbusDevice)
+    {
+    modbusDevice = new QModbusRtuSerialMaster(this);
+    connect(this,SIGNAL(sig_adaptronicReadFinished()),this,SLOT(AdaptronicStartStream()));
+    qDebug() << "Modbusdevice created" ;
+    }
+
+     {
+
+
+
+        if (modbusDevice->state() != QModbusDevice::ConnectedState)
+        {
+            modbusDevice->setConnectionParameter(QModbusDevice::SerialPortNameParameter,portName);
+            modbusDevice->setConnectionParameter(QModbusDevice::SerialBaudRateParameter,57600);
+            modbusDevice->setConnectionParameter(QModbusDevice::SerialDataBitsParameter,8);
+            modbusDevice->setConnectionParameter(QModbusDevice::SerialParityParameter,0);
+            modbusDevice->setConnectionParameter(QModbusDevice::SerialStopBitsParameter,1);
+            modbusDevice->setTimeout(200);
+            modbusDevice->setNumberOfRetries(10);
+            modbusDevice->connectDevice();
+            if (modbusDevice->state() != QModbusDevice::ConnectedState)
+            {
+                delete modbusDevice;
+                modbusDevice = nullptr;
+            }
+            else
+            AdaptronicSelect::AdaptronicStartStream();
+
+       }
+
+    }
+
+}
+
+void AdaptronicSelect::closeConnection()
+{
+    if (modbusDevice) {
+        modbusDevice->disconnectDevice();
+        delete modbusDevice;
+        modbusDevice = nullptr;
+    }
+}
+
+
 // Adaptronic streaming comms
 
 void AdaptronicSelect::AdaptronicStartStream()
@@ -82,7 +92,6 @@ void AdaptronicSelect::AdaptronicStartStream()
         delete reply;
 
 }
-
 
 void AdaptronicSelect::setUnits(const int &unitSelect)
 {
@@ -116,7 +125,7 @@ void AdaptronicSelect::decodeAdaptronic(QModbusDataUnit unit)
 
  if (units2 == 0)
  {
-     //qDebug() << "i am at 0 " ;
+
     m_dashboard->setSpeed(unit.value(10)); // <-This is for the "main" speedo KMH
  }
  if (units2 == 1)

@@ -20,6 +20,7 @@ private:
 public slots:
      void processPendingDatagrams();
      void startreceiver();
+     void closeConnection();
 signals:
 
 

@@ -37,7 +37,7 @@ public:
 
 public slots:
     void openCAN();
-
+    void closeConnection();
 public:
 
 

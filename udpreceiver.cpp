@@ -28,6 +28,11 @@ void udpreceiver::startreceiver()
             this, SLOT(processPendingDatagrams()));
 }
 
+void udpreceiver::closeConnection()
+{
+    udpSocket->close();
+    delete udpSocket;
+}
 void udpreceiver::processPendingDatagrams()
 {
 

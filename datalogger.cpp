@@ -6,8 +6,8 @@
 
 // Run this as a thread and update every 50 ms
 // still need to find a way to make this configurable
-
-
+QTime loggerStartT;
+QString Log;
 
 datalogger::datalogger(QObject *parent)
     : QObject(parent)
@@ -26,25 +26,36 @@ datalogger::datalogger(DashBoard *dashboard, QObject *parent)
 
 void datalogger::startLog(QString Logfilename)
 {
-
+        connect(&m_updatetimer, &QTimer::timeout, this, &datalogger::updateLog);
+        Log = Logfilename;
+        loggerStartT = QTime::currentTime();
+        m_updatetimer.start(100);
+        datalogger::createHeader();
 }
 
-void datalogger::updateLog(QString Logfilename)
+void datalogger::stopLog()
+{
+    m_updatetimer.stop();
+}
+
+void datalogger::updateLog()
 {
 
-    QString filename = Logfilename + ".csv";
+    m_updatetimer.start(50);
+    QString filename = Log + ".csv";
     QFile file( filename );
 
     if ( file.open(QIODevice::ReadWrite) )
     {
         {
-            QString fileName = Logfilename + ".csv";
+            QString fileName = Log + ".csv";
             //qDebug() << Logfile;
             QFile mFile(fileName);
             if(!mFile.open(QFile::Append | QFile::Text)){
             }
             QTextStream out(&mFile);
-            out << m_dashboard->revs() << ","
+            out << (loggerStartT.msecsTo(QTime::currentTime())) << ","
+                << m_dashboard->revs() << ","
                 << m_dashboard->Intakepress()  << ","
                 << m_dashboard->PressureV()  << ","
                 << m_dashboard->ThrottleV()  << ","
@@ -144,24 +155,21 @@ void datalogger::updateLog(QString Logfilename)
 
 
 
-void datalogger::createHeader(QString Logfilename)
+void datalogger::createHeader()
 {
-    QString Logfile = Logfilename+".txt";
-    //loggerStartTime.restart();
-    QString filename = Logfilename + ".txt";
+
+    QString filename = Log + ".csv";
     QFile file( filename );
    // qDebug() << "update Log";
     if ( file.open(QIODevice::ReadWrite) )
     {
         {
-            QString fileName = Logfile;
-            //qDebug() << Logfile;
-            QFile mFile(fileName);
+            QString fileName = Log + ".csv";
+                        QFile mFile(fileName);
             if(!mFile.open(QFile::Append | QFile::Text)){
-                //qDebug() << "Could not open Adaptronic Loggerfile for writing";
-            }
+                           }
             QTextStream out(&mFile);
-            out << "Time ms"
+            out     << "Time ms" << ","
                     << "RPM" << ","
                     << "Intakepress"  << ","
                     << "PressureV"  << ","

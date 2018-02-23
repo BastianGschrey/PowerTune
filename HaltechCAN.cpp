@@ -42,7 +42,12 @@ void HaltechCAN::openCAN()
     else
         qDebug() << "Could not connect to Haltech CAN device";
 }
-
+void HaltechCAN::closeConnection()
+{
+    disconnect(this->m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));
+    m_canDevice->disconnectDevice();
+    delete m_canDevice;
+}
 void HaltechCAN::readyToRead()
 {
     if (!m_canDevice)

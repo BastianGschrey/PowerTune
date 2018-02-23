@@ -33,17 +33,27 @@ AdaptronicCAN::~AdaptronicCAN()
 void AdaptronicCAN::openCAN()
 {
 
-    //Check if the plugin is available
+
     if (QCanBus::instance()->plugins().contains(QStringLiteral("socketcan")))
     {
+
         QCanBusDevice *m_canDevice = QCanBus::instance()->createDevice(
                     QStringLiteral("socketcan"), QStringLiteral("can0"));
+
         m_canDevice->connectDevice();
         connect(m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));
-        qDebug() << "Successfully connected to socketcan ";
+
     }
-    else
-        qDebug() << "Could not connect to Adaptronic CAN device";
+
+
+}
+void AdaptronicCAN::closeConnection()
+{
+    disconnect(m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));
+    if (m_canDevice->ConnectedState)
+    m_canDevice->disconnectDevice();
+
+
 }
 void AdaptronicCAN::readyToRead()
 {

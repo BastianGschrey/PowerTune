@@ -23,8 +23,6 @@ QString Logfile;
 QString Auxname1;
 QString Auxname2;
 qreal odometer;
-QTime startTime = QTime::currentTime();
-QTime loggerStartTime = QTime::currentTime();
 int Model = 0;
 int Logging =3;
 int Loggerstat;
@@ -73,7 +71,9 @@ Apexi::Apexi(DashBoard *dashboard, QObject *parent)
 void Apexi::initSerialPort()
 {
     if (m_serialport)
+    {
         delete m_serialport;
+    }
     m_serialport = new SerialPort(this);
     connect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
     connect(m_serialport, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
@@ -108,18 +108,24 @@ void Apexi::openConnection(const QString &portName)
     if(m_serialport->open(QIODevice::ReadWrite) == false)
     {
         m_dashboard->setSerialStat(m_serialport->errorString());
+        Apexi::closeConnection();
     }
     else
     {
         m_dashboard->setSerialStat(QString("Connected to Serialport"));
+        requestIndex = 0;
+        Apexi::sendRequest(requestIndex);
     }
 
-    requestIndex = 0;
 
-    Apexi::sendRequest(requestIndex);
 }
 void Apexi::closeConnection()
 {
+    disconnect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
+    disconnect(m_serialport, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
+            this, &Apexi::handleError);
+    disconnect(m_serialport, &QSerialPort::bytesWritten, this, &Apexi::handleBytesWritten);
+    disconnect(&m_timer, &QTimer::timeout, this, &Apexi::handleTimeout);
     m_serialport->close();
 }
 
@@ -759,9 +765,9 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
 
 
         //    //qDebug() << "Time passed since last call"<< startTime.msecsTo(QTime::currentTime());
-        odometer += ((startTime.msecsTo(QTime::currentTime())) * ((packageADV[16]) / 3600000)); // Odometer
-        m_dashboard->setOdo(odometer);
-        startTime.restart();
+        //odometer += ((startTime.msecsTo(QTime::currentTime())) * ((packageADV[16]) / 3600000)); // Odometer
+        //m_dashboard->setOdo(odometer);
+       // startTime.restart();
 
 
     }
@@ -953,29 +959,6 @@ void Apexi::decodeSensor(QByteArray rawmessagedata)
     m_dashboard->setFlag14(flagArray[13]);
     m_dashboard->setFlag15(flagArray[14]);
     m_dashboard->setFlag16(flagArray[15]);
-
-
-    if (Loggerstat ==1 && Model >= 1)
-    {
-        QString fileName = Logfile;
-        QFile mFile(fileName);
-        if(!mFile.open(QFile::Append | QFile::Text)){
-            //qDebug() << "Could not open file for writing";
-        }
-        QTextStream out(&mFile);
-        out.setFieldAlignment(QTextStream::AlignLeft);
-        out.setFieldWidth(8);
-        out << (loggerStartTime.msecsTo(QTime::currentTime()))<< packageBasic[0]<< packageBasic[1]<< packageBasic[2] << packageBasic[3] << packageBasic[4] << packageBasic[5] << packageBasic[6]<< packageBasic[7]<< packageBasic[8]
-            << packageBasic[9] << packageSens[0] << packageSens[1] << packageSens[2] << packageSens[3] << packageSens[4] << packageSens[5] << packageSens[6] << packageSens[7]
-            << flagArray[0] << flagArray[1] << flagArray[2] << flagArray[3] << flagArray[4] << flagArray[5] << flagArray[6] << flagArray[7] << flagArray[8] << flagArray[9] << flagArray[10] << flagArray[11] << flagArray[12] << flagArray[13] << flagArray[14] << flagArray[15]
-            << AN1AN2calc << AN3AN4calc
-               // << packageAux2[0] << packageAux2[1] << packageAux2[2] << packageAux2[3]<< packageAux2[4] << packageAux2[5] << packageAux2[6] << packageAux2[7]
-            << packageMap[0] << packageMap[1] << packageADV[0] << packageADV[1] << packageADV[2] << packageADV[3] << packageADV[4] << packageADV[5] << packageADV[6] << packageADV[7]
-            << packageADV[8] << packageADV[9] << packageADV[10] << packageADV[11] << packageADV[12] << packageADV[13] << packageADV[14] << packageADV[15] << packageADV[16] << packageADV[17] << packageADV[18]
-
-            << packageADV[19] << packageADV[20] << packageADV[21] <<m_dashboard->gpsTime() << qSetFieldWidth(0) << endl <<qSetFieldWidth(8);
-        mFile.close();
-    }
 
 
 }

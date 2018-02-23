@@ -36,21 +36,12 @@ Rectangle {
             //property alias gpsBaud: serialGPSBaud.currentText
             // property alias gpsBaudindex: serialGPSBaud.currentIndex
             property alias ecuType: ecuSelect.currentText
-            //property alias powerFcInterface: interfaceSelect.currentText
             property alias auxunit1: unitaux1.text
             property alias aux1: an1V0.text
             property alias aux2: an2V5.text
             property alias auxunit2: unitaux2.text
             property alias aux3: an3V0.text
             property alias aux4: an4V5.text
-            /*
-            property alias auxunit3: unitaux3.text
-            property alias aux5: an5V0.text
-            property alias aux6: an6V5.text
-            property alias auxunit4: unitaux4.text
-            property alias aux7: an7V0.text
-            property alias aux8: an8V5.text
-*/
             property alias goProVariant: goProSelect.currentIndex
             property alias password: goPropass.text
             property alias unitSelector: unitSelect.currentIndex
@@ -119,8 +110,7 @@ Rectangle {
 
                     model: [ "Metric","Imperial"]
                     property bool initialized: false
-                   // Component.onCompleted: { Decoder.setUnits(currentIndex) }
-                    //onCurrentIndexChanged: { Decoder.setUnits(currentIndex) }
+
                 }
                 Text { text: "ECU Selection:" }
                 ComboBox {
@@ -173,6 +163,14 @@ Rectangle {
                     text: qsTr("DataLog")
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhPreferLowercase | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
                     //enterKeyAction: EnterKeyAction.Next
+                }
+                Text
+                {
+                    text: "Serial Status:"
+                }
+                TextField {
+                    text: qsTr(Dashboard.SerialStat)
+
                 }
             }
 
@@ -295,12 +293,13 @@ Rectangle {
                     }
                 }
 
-
+              /*
                 Text
                 {
                     color: "red"
                     text: Dashboard.SerialStat
                 }
+
                 Text
                 {
                     color: "blue"
@@ -316,6 +315,7 @@ Rectangle {
                     color: "purple"
                     text: Dashboard.RunStat
                 }
+                */
                 Grid {
                     visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
                     rows: 10
@@ -488,8 +488,8 @@ Rectangle {
         function datalogger()
         {
 
-            //if (loggerswitch.checked == true) logger.loggeron = 1, Connect.startLogging(logfilenameSelect.text, loggeron.valueOf());
-           // if (loggerswitch.checked == false) logger.loggeron = 0,Connect.stopLogging(loggeron.valueOf());
+            if (loggerswitch.checked == true) logger.loggeron = 1, Logger.startLog(logfilenameSelect.text);
+            if (loggerswitch.checked == false) logger.loggeron = 0,Logger.stopLog();
         }
     }
     Item {
@@ -506,8 +506,8 @@ Rectangle {
         id: functconnect
         function connectfunc()
         {
-            if (ecuSelect.currentIndex == 2) Connect.openConnection(serialName.currentText, ecuSelect.currentIndex,logger.datalogger());
-            else Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, logger.datalogger()),Connect.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
+             Connect.openConnection(serialName.currentText, ecuSelect.currentIndex,logger.datalogger());
+            //else Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, logger.datalogger()),Connect.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
         }
     }
 

@@ -395,7 +395,7 @@ void Nissanconsult::openConnection(const QString &portName)
 {
 
     ECUinitialized = 0;
-    //qDebug() <<("Open Consult ")<<portName;
+
     initSerialPort();
     m_serialconsult->setPortName(portName);
     m_serialconsult->setBaudRate(QSerialPort::Baud9600);
@@ -407,21 +407,25 @@ void Nissanconsult::openConnection(const QString &portName)
     if(m_serialconsult->open(QIODevice::ReadWrite) == false)
     {
         m_dashboard->setSerialStat(m_serialconsult->errorString());
+        Nissanconsult::closeConnection();
     }
     else
     {
         m_dashboard->setSerialStat(QString("Connected to Serialport"));
+        ECUinitialized = 0;
+        Nissanconsult::InitECU();
     }
-    ECUinitialized = 0;
-    Nissanconsult::InitECU();
+
 
 }
 
 void Nissanconsult::closeConnection()
 
 {
-    m_serialconsult->close();
 
+      m_serialconsult->close();
+      disconnect(this->m_serialconsult,SIGNAL(readyRead()),this,SLOT(readyToRead()));
+      disconnect(&m_DTCtimer, &QTimer::timeout, this, &Nissanconsult::RequestDTC);
 
 }
 

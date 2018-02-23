@@ -113,29 +113,6 @@ Connect::~Connect()
 
 
 }
-/*
-void Connect::initConnectPort()
-{
-    if (m_Connectport)
-        delete m_Connectport;
-    m_Connectport = new ConnectPort(this);
-    connect(this->m_Connectport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
- //   connect(m_Connectport, static_cast<void (QConnectPort::*)(QConnectPort::ConnectPortError)>(&QConnectPort::error),
-//            this, &Connect::handleError);
-
-    m_readData.clear();
-    //m_timer.start(5000);
-
-
-}
-*/
-
-
-
-/*void Connect::setEcus(QStringList ECUList)
-{
-
-}*/
 
 void Connect::getPorts()
 {
@@ -173,7 +150,7 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
     //Adaptronic
     if (ecuSelect == 1)
     {
-         m_adaptronicselect->openConnection(portName);
+       m_adaptronicselect->openConnection(portName);
 
     }
     //OBD
@@ -184,28 +161,24 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
     //Nissan Consult
     if (ecuSelect == 3)
     {
-        ;m_nissanconsult->LiveReqMsg(1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-        ;m_nissanconsult->openConnection(portName);
+        m_nissanconsult->LiveReqMsg(1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+        m_nissanconsult->openConnection(portName);
 
     }
     //UDP reveiver
     if (ecuSelect == 4)
     {
-        if (connectclicked == 0)
-        {
+
         m_udpreceiver->startreceiver();
-        connectclicked = 1;
-        }
+
 
     }
     //Adaptronic ModularCAN protocol
     if (ecuSelect == 5)
     {
-        if (connectclicked == 0)
-        {
+
         m_adaptronicCAN->openCAN();
-        connectclicked = 1;
-        }
+
 
     }
     //Haltech V2 CAN protocol
@@ -246,14 +219,54 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
 void Connect::closeConnection()
 {
 
-    if(ecu == 0){
-    //    m_Connectport->close();
+
+    //Apexi
+    if (ecu == 0)
+    {
+
+        m_apexi->closeConnection();
+
     }
-    if(ecu == 1){
-        //modbusDevice->disconnectDevice();
+
+
+    //Adaptronic Select
+    if (ecu == 1)
+    {
+         m_adaptronicselect->closeConnection();
+
     }
-    if(ecu == 9){
-     //   m_Connectport->close();
+    //OBD
+    if (ecu == 2)
+    {
+       m_OBD->closeConnection();
+    }
+    //Nissan Consult
+    if (ecu == 3)
+    {
+        m_nissanconsult->closeConnection();
+
+    }
+    //UDP reveiver
+    if (ecu == 4)
+    {
+
+        m_udpreceiver->closeConnection();
+
+
+    }
+    //Adaptronic ModularCAN protocol
+    if (ecu == 5)
+    {
+
+        m_adaptronicCAN->closeConnection();
+
+    }
+    //Haltech V2 CAN protocol
+    if (ecu == 6)
+    {
+
+        m_haltechCANV2->closeConnection();
+
     }
 }
 
