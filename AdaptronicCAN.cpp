@@ -37,7 +37,7 @@ void AdaptronicCAN::openCAN()
     if (QCanBus::instance()->plugins().contains(QStringLiteral("socketcan")))
     {
         QString errorString;
-        QCanBusDevice *m_canDevice = QCanBus::instance()->createDevice(QStringLiteral("socketcan"),
+        m_canDevice = QCanBus::instance()->createDevice(QStringLiteral("socketcan"),
                                                                        QStringLiteral("can0"),&errorString);
 
         if (!m_canDevice) {
@@ -53,7 +53,6 @@ void AdaptronicCAN::openCAN()
             qDebug() << "device connected!";
             //connect(m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));
             connect(m_canDevice, &QCanBusDevice::framesReceived, this, &AdaptronicCAN::readyToRead);
-            //connect(m_canDevice, &QCanBusDevice::framesReceived,this, &AdaptronicCAN::readyToRead);
         }
 
     }
