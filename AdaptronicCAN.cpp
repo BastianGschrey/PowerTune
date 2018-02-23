@@ -59,9 +59,9 @@ void AdaptronicCAN::closeConnection()
 }
 void AdaptronicCAN::readyToRead()
 {
-    /*if (!m_canDevice)
+    if (!m_canDevice)
         qDebug() << "no device, exiting...";
-        return;*/
+        return;
 
     while (m_canDevice->framesAvailable()) {
         qDebug() << "Frames available";
