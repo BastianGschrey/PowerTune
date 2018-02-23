@@ -36,9 +36,9 @@ void AdaptronicCAN::openCAN()
 
     if (QCanBus::instance()->plugins().contains(QStringLiteral("socketcan")))
     {
-
+        QString errorString;
         QCanBusDevice *m_canDevice = QCanBus::instance()->createDevice(QStringLiteral("socketcan"),
-                                                                       QStringLiteral("can0"));
+                                                                       QStringLiteral("can0"),&errorString);
 
         if (!m_canDevice) {
             qDebug() << ("Error creating device");
