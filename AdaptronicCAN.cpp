@@ -42,6 +42,7 @@ void AdaptronicCAN::openCAN()
 
         m_canDevice->connectDevice();
         connect(m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));
+        //connect(m_canDevice, &QCanBusDevice::framesReceived,this, &AdaptronicCAN::readyToRead);
 
     }
 
