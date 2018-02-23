@@ -41,6 +41,7 @@ void AdaptronicCAN::openCAN()
                     QStringLiteral("socketcan"), QStringLiteral("can0"));
 
         m_canDevice->connectDevice();
+        debug() << m_canDevice->state();
         connect(m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));
         //connect(m_canDevice, &QCanBusDevice::framesReceived,this, &AdaptronicCAN::readyToRead);
 
