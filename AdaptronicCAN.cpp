@@ -100,9 +100,9 @@ void AdaptronicCAN::readyToRead()
         QByteArray splitpayload = frame.payload();
         payload* info=reinterpret_cast<payload*>(splitpayload.data());
         pkgpayload[0] = qFromBigEndian(info->CH1);
-        pkgpayload[1] = info->CH2;
-        pkgpayload[2] = info->CH3;
-        pkgpayload[3] = info->CH4;
+        pkgpayload[1] = qFromBigEndian(info->CH2);
+        pkgpayload[2] = qFromBigEndian(info->CH3);
+        pkgpayload[3] = qFromBigEndian(info->CH4);
 
 
         switch(frame.frameId()) {
