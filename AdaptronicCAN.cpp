@@ -80,7 +80,6 @@ void AdaptronicCAN::readyToRead()
     }
 
     while (m_canDevice->framesAvailable()) {
-        qDebug() << "Frames available";
         const QCanBusFrame frame = m_canDevice->readFrame();
         // Just for testing  start
         QString view;
