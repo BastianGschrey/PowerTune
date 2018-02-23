@@ -60,9 +60,11 @@ void AdaptronicCAN::closeConnection()
 void AdaptronicCAN::readyToRead()
 {
     if (!m_canDevice)
+        qDebug() << "no device, exiting...";
         return;
 
     while (m_canDevice->framesAvailable()) {
+        qDebug() << "Frames available";
         const QCanBusFrame frame = m_canDevice->readFrame();
         // Just for testing  start
         QString view;
