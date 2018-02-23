@@ -133,6 +133,7 @@ void AdaptronicCAN::readyToRead()
         case 0x304:
             //"Voltage_Ext2"(pkgpayload[0]/1000)
             //"Voltage_12V"(pkgpayload[1]/1000)
+            m_dashboard->setBatteryV(pkgpayload[1]/1000);
             //"Voltage_5V"(pkgpayload[2]/1000)
             //"Voltage_SGND current"(pkgpayload[3]/1000)
             break;
