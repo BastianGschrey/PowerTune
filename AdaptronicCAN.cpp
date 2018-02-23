@@ -50,7 +50,8 @@ void AdaptronicCAN::openCAN()
         if(m_canDevice->connectDevice()){
             qDebug() << m_canDevice->state();
             qDebug() << m_canDevice;
-            connect(m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));
+            //connect(m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));
+            connect(m_canDevice, &QCanBusDevice::framesReceived, this, &AdaptronicCAN::readyToRead);
             //connect(m_canDevice, &QCanBusDevice::framesReceived,this, &AdaptronicCAN::readyToRead);
         }
 
