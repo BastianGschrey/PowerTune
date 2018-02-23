@@ -78,10 +78,11 @@ void AdaptronicCAN::readyToRead()
 {
     qDebug() << "Event Ready to Read";
 
-    if (!m_canDevice)
+    if (!m_canDevice){
         qDebug() << m_canDevice;
         qDebug() << "no device, exiting...";
         return;
+    }
 
     while (m_canDevice->framesAvailable()) {
         qDebug() << "Frames available";
