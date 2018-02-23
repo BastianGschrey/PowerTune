@@ -75,11 +75,7 @@ void AdaptronicCAN::closeConnection()
 }
 void AdaptronicCAN::readyToRead()
 {
-    qDebug() << "Event Ready to Read";
-
     if (!m_canDevice){
-        qDebug() << m_canDevice;
-        qDebug() << "no device, exiting...";
         return;
     }
 
