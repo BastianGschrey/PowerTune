@@ -36,7 +36,8 @@ void HaltechCAN::openCAN()
         QCanBusDevice *m_canDevice = QCanBus::instance()->createDevice(
                     QStringLiteral("socketcan"), QStringLiteral("can0"));
         m_canDevice->connectDevice();
-        connect(this->m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));
+        connect(m_canDevice, &QCanBusDevice::framesReceived,this, &HaltechCAN::readyToRead);
+        //connect(this->m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));
         qDebug() << "Successfully connected to socketcan ";
     }
     else
