@@ -82,19 +82,19 @@ void AdaptronicCAN::readyToRead()
 
     while (m_canDevice->framesAvailable()) {
         const QCanBusFrame frame = m_canDevice->readFrame();
-        // Just for testing  start
+        /*// Just for testing  start
         QString view;
         if (frame.frameType() == QCanBusFrame::ErrorFrame)
             view = m_canDevice->interpretErrorFrame(frame);
         else
-            view = frame.toString();
+            view = frame.toString();*/
 
         const QString time = QString::fromLatin1("%1.%2  ")
                 .arg(frame.timeStamp().seconds(), 10, 10, QLatin1Char(' '))
                 .arg(frame.timeStamp().microSeconds() / 100, 4, 10, QLatin1Char('0'));
         // Just for testing  end
 
-        qDebug() << time << view;
+        //qDebug() << time << view;
 
         // This section will be used to decode the received Frames currently shows only the the raw payload of a Adress
         QByteArray splitpayload = frame.payload();
@@ -689,11 +689,11 @@ void AdaptronicCAN::readyToRead()
             //"EMAP ext"(pkgpayload[3]/10)
             break;
         case 0x361:
-            qDebug() << "IMAP :" << pkgpayload[0]/10;
+            //qDebug() << "IMAP :" << pkgpayload[0]/10;
             m_dashboard->setMAP(pkgpayload[0]/10);
-            qDebug() << "IMAP2 :" << pkgpayload[1]/10;
-            qDebug() << "EMAP :" << pkgpayload[2]/10;
-            qDebug() << "EMAP2  :" << pkgpayload[3]/10;
+            //qDebug() << "IMAP2 :" << pkgpayload[1]/10;
+            //qDebug() << "EMAP :" << pkgpayload[2]/10;
+            //qDebug() << "EMAP2  :" << pkgpayload[3]/10;
             break;
         case 0x362:
             //"Pressure ratio"(pkgpayload[0]/10)
@@ -709,37 +709,37 @@ void AdaptronicCAN::readyToRead()
             break;
 
         case 0x364:
-            qDebug() << "LAMBDA payload" << pkgpayload[0]/10;
+            //qDebug() << "LAMBDA payload" << pkgpayload[0]/10;
             break;
 
 
         case 0x365:
-            qDebug() << "MAT :" << pkgpayload[0]/10;
-            qDebug() << "Oil T :" << pkgpayload[1]/10;
+            //qDebug() << "MAT :" << pkgpayload[0]/10;
+            //qDebug() << "Oil T :" << pkgpayload[1]/10;
             m_dashboard->setFueltemp(pkgpayload[2]/10);
-            qDebug() << "Oil P  :" << pkgpayload[3]/10;
+            //qDebug() << "Oil P  :" << pkgpayload[3]/10;
             break;
 
 
         case 0x366:
-            qDebug() << "Diff Fuel P" << pkgpayload[0]/10;
-            qDebug() << "Servo pos:" << pkgpayload[1]/10;
-            qDebug() << "Fuel T :" << pkgpayload[2]/10;
-            qDebug() << "0-5V Ext 1 :" << pkgpayload[3]/10;
+            //qDebug() << "Diff Fuel P" << pkgpayload[0]/10;
+            //qDebug() << "Servo pos:" << pkgpayload[1]/10;
+            //qDebug() << "Fuel T :" << pkgpayload[2]/10;
+            //qDebug() << "0-5V Ext 1 :" << pkgpayload[3]/10;
             break;
 
         case 0x367:
-            qDebug() << "0-5V Ext 2 :" << pkgpayload[0]/10;
-            qDebug() << "Sens GND V (GND off):" << pkgpayload[1]/1000;
-            qDebug() << "Ethanol Content :" << pkgpayload[2]/10;
+            //qDebug() << "0-5V Ext 2 :" << pkgpayload[0]/10;
+            //qDebug() << "Sens GND V (GND off):" << pkgpayload[1]/1000;
+            //qDebug() << "Ethanol Content :" << pkgpayload[2]/10;
             m_dashboard->setSpeed(pkgpayload[3]/10);
             break;
 
         case 0x368:
-            qDebug() << "Gear number :" << pkgpayload[0];
-            qDebug() << "Driven speed:" << pkgpayload[1]/10;
-            qDebug() << "Ground speed :" << pkgpayload[2]/10;
-            qDebug() << "Spd diff (drive-gnd)  :" << pkgpayload[3]/10;
+            //qDebug() << "Gear number :" << pkgpayload[0];
+            //qDebug() << "Driven speed:" << pkgpayload[1]/10;
+            //qDebug() << "Ground speed :" << pkgpayload[2]/10;
+            //qDebug() << "Spd diff (drive-gnd)  :" << pkgpayload[3]/10;
             break;
         case 0x369:
             //"Spd diff drive (L-R)"(pkgpayload[0]/10)
