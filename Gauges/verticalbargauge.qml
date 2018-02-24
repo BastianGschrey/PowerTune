@@ -44,7 +44,7 @@ Rectangle {
 
             Text {
                 id: gaugetextfield
-                text:"empty "
+                text:"empty"
                 font.pixelSize: (parent.height / 3)
                 anchors.top : parent.top
                 // anchors.top : parent.top
