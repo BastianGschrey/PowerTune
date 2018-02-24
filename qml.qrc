@@ -40,13 +40,11 @@
         <file>Gauges/Dashboard.qml</file>
         <file>Gauges/Dashboard_Imperial.qml</file>
         <file>Gauges/PFCSensors.qml</file>
-        <file>Gauges/DynamicDash.qml</file>
         <file>Gauges/HalfGauges_metric.qml</file>
         <file>Gauges/BarGauge.qml</file>
         <file>AuxInput.qml</file>
         <file>Gauges/RoundGaugeSpeedMetric.qml</file>
         <file>Gauges/GaugeRoundREV.qml</file>
-        <file>Gauges/CreateBarGaugeScript.js</file>
         <file>Gauges/GPS.qml</file>
         <file>Gauges/RaceDash.qml</file>
         <file>GPSTracks/Zwartkops.qml</file>
@@ -62,5 +60,7 @@
         <file>GPSTracks/UtahMotorsportCampusBig.qml</file>
         <file>Gauges/ForceMeter.qml</file>
         <file>Gauges/SensorTest.qml</file>
+        <file>Gauges/verticalbargauge.qml</file>
+        <file>Gauges/createverticalbargauge.js</file>
     </qresource>
 </RCC>

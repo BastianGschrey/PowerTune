@@ -3,20 +3,20 @@ import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Extras 1.4
-
+import "qrc:/Gauges/createverticalbargauge.js" as CreateVerticalGaugeScript
 
 
 
 Item {
-  //  width: parent.width
-  //  height: parent.height
-    //color: "black"
+id: adaptronicDash
+//Component.onCompleted: CreateVerticalGaugeScript.createVerticalGauge(300,10,10,"rpm","RPM","Dashboard.revs");
+Component.onCompleted: CreateVerticalGaugeScript.createVerticalGauge(300,10,100,"map","MAP","Dashboard.MAP");
 
 
-//Left Row with 7 Bars
 
 
-    Rectangle {
+
+   /* Rectangle {
         id: rev
         width: parent.width /3.2
         height: parent.height /7
@@ -924,5 +924,5 @@ Gauge {
     }
 }
 }
-
+*/
  }
