@@ -12,7 +12,7 @@ function createVerticalGauge(setWidth,setX,setY,setID,setText,setValue) {
 
 function finishCreation(setWidth,setX,setY,setID,setText,setValue) {
     if (component.status == Component.Ready) {
-        gauge = component.createObject(adaptronicDash, {"id": setID, "gaugetext": setText+ " " + setValue,
+        gauge = component.createObject(adaptronicDash, {"id": setID, "gaugetext": setValue,
                                            "x": setX, "y": setY});
         gauge.width = setWidth;
         if (gauge == null) {
