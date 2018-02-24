@@ -31,7 +31,7 @@ Rectangle {
                 minorTickmarkCount: 4
                 tickmarkStepSize : 5000
                 minimumValue: 0
-                maximumValue: 10000
+                //maximumValue: 1000
 
                 Behavior on value {
                     NumberAnimation {
