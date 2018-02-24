@@ -55,8 +55,8 @@ Rectangle {
             }
               style: GaugeStyle {
                 valueBar: Rectangle {
-                   implicitWidth:  rev.height /3
-                    color: Qt.rgba(revgauge.value / revgauge.maximumValue, 0, 1 - revgauge.value / revgauge.maximumValue, 1)
+                   implicitWidth:  parent.height /3
+                    color: Qt.rgba(gauge.value / gauge.maximumValue, 0, 1 - gauge.value / gauge.maximumValue, 1)
                 }
             }
       }
