@@ -1,23 +1,22 @@
 var component;
 var gauge;
 
-function createVerticalGauge(setWidth,setX,setY,setID,setText,SetValueObject,SerValueProperty) {
+function createVerticalGauge(setWidth,setX,setY,setMaxValue,setID,SetValueObject,SetValueProperty) {
     component = Qt.createComponent("verticalbargauge.qml");
-    console.log(SetValueObject)
+    console.log(setMaxValue)
     if (component.status == Component.Ready)
-        finishCreation(setWidth,setX,setY,setID,setText,SetValueObject,SerValueProperty);
+        finishCreation(setWidth,setX,setY,setMaxValue,setID,SetValueObject,SetValueProperty);
     else
         component.statusChanged.connect(finishCreation);
 }
 
-function finishCreation(setWidth,setX,setY,setID,setText,SetValueObject,SerValueProperty) {
-    console.log(SetValueObject);
+function finishCreation(setWidth,setX,setY,setMaxValue,setID,SetValueObject,SetValueProperty) {
+    console.log(setMaxValue)
     if (component.status == Component.Ready) {
-        gauge = component.createObject(adaptronicDash, {"id": setID,
-                                           "gaugetext": Qt.binding(function(){return SetValueObject[SerValueProperty]}),
+        gauge = component.createObject(adaptronicDash, {"id": setID, "gaugemaxvalue": setMaxValue,
+                                           "gaugetext": Qt.binding(function(){return SetValueObject[SetValueProperty]}),
                                            "x": setX, "y": setY});
         gauge.width = setWidth;
-        console.log(SetValueObject);
         if (gauge == null) {
             // Error Handling
             //console.log("Error creating object");

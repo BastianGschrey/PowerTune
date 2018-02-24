@@ -5,13 +5,14 @@ import QtQml.Models 2.2
 
 
 Rectangle {
-        id: rev
+        id: initialID
         width: 100
         height: 80
         color: "transparent"
         antialiasing: false
         Drag.active: dragArea.drag.active
         property alias gaugetext: gaugetextfield.text
+        property alias gaugemaxvalue: gauge.maximumValue
 
         MouseArea {
                   id: dragArea
@@ -20,26 +21,23 @@ Rectangle {
                   anchors.centerIn: parent
                   drag.target: parent
                   drag.axis: Drag.XAndYAxis
-                  onClicked: pieMenu.popup(mouseX, mouseY), console.log("clicked")
                 }
 
         Gauge {
-            id: gauge
-            anchors.fill: parent
-            anchors.margins: 10
-            orientation : Qt.Horizontal
-            minorTickmarkCount: 4
-            tickmarkStepSize : 5000
-            //labelStepSize: 50
-            minimumValue: 0
-            maximumValue: 10000
+                id: gauge
+                anchors.fill: parent
+                anchors.margins: 10
+                orientation : Qt.Horizontal
+                minorTickmarkCount: 4
+                tickmarkStepSize : 5000
+                minimumValue: 0
+                maximumValue: 10000
 
-            //value: Dashboard.revs
-            Behavior on value {
-                NumberAnimation {
-                    duration: 5
-                }
-            }
+                Behavior on value {
+                    NumberAnimation {
+                        duration: 5
+                        }
+                    }
 
 
             Text {
