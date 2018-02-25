@@ -13,7 +13,7 @@ function createVerticalGauge(setWidth,setX,setY,setMaxValue,setID,SetValueObject
 function finishCreation(setWidth,setX,setY,setMaxValue,setID,SetValueObject,SetValueProperty) {
     console.log(setMaxValue)
     if (component.status == Component.Ready) {
-        gauge = component.createObject(adaptronicDash, {"id": setID, "gaugemaxvalue": setMaxValue,
+        gauge = component.createObject(adaptronicDash, {"id": setID, "gaugemaxvalue": 20000,
                                            "gaugetext": Qt.binding(function(){return SetValueObject[SetValueProperty]}),
                                            "x": setX, "y": setY});
         gauge.width = setWidth;
