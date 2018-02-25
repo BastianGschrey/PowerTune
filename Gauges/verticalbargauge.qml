@@ -36,7 +36,7 @@ Rectangle {
             minimumValue: 0
             maximumValue: 10000
 
-            //value: Dashboard.revs
+            value: Dashboard.MAP
             Behavior on value {
                 NumberAnimation {
                     duration: 5
@@ -53,7 +53,7 @@ Rectangle {
             }
               style: GaugeStyle {
                 valueBar: Rectangle {
-                   implicitWidth:  rev.height /3
+                   implicitWidth:  10
                     color: Qt.rgba(gauge.value / gauge.maximumValue, 0, 1 - gauge.value / gauge.maximumValue, 1)
                 }
             }
