@@ -253,16 +253,16 @@ void AdaptronicCAN::readyToRead()
             //"VVT4 raw angle"(pkgpayload[3]/10)
             break;
         case 0x318:
-            m_dashboard->setaccelx(pkgpayload[0]/1000);
+            m_dashboard->setaccelx(99);
 
             m_dashboard->setaccely(pkgpayload[1]/1000);
             m_dashboard->setaccelz(pkgpayload[2]/1000);
-            m_dashboard->setgyrox(pkgpayload[3]/10); //Yaw
+            //m_dashboard->setgyrox(pkgpayload[3]/10); //Yaw
             break;
         case 0x319:
-            m_dashboard->setgyroy(pkgpayload[0]/10); //Pitch
+            //m_dashboard->setgyroy(pkgpayload[0]/10); //Pitch
             //qDebug() << (pkgpayload[0]/10);
-            m_dashboard->setgyroz(pkgpayload[1]/10); //Roll
+            //m_dashboard->setgyroz(pkgpayload[1]/10); //Roll
             qDebug() << (pkgpayload[1]/10);
             break;
         case 0x31A:
