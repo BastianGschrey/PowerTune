@@ -10,7 +10,7 @@ Rectangle {
         height: 80
         color: "transparent"
         antialiasing: false
-        Drag.active: dragArea.drag.active
+        //Drag.active: dragArea.drag.active
 
         property alias gaugetext: gaugetextfield.text
         property alias gaugevalue: gauge.value
@@ -18,14 +18,16 @@ Rectangle {
 
 
         MouseArea {
-                  id: dragArea
+                  id: mouseArea
                   width: parent.width
                   height: parent.height + 10 // easier to get
                   anchors.centerIn: parent
-                  drag.target: parent
-                  drag.axis: Drag.XAndYAxis
+                  //drag.target: parent
+                  //drag.axis: Drag.XAndYAxis
                   //onClicked: pieMenu.popup(mouseX, mouseY), console.log("clicked")
                 }
+
+
 
         Gauge {
             id: gauge

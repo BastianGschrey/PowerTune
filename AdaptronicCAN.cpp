@@ -254,7 +254,7 @@ void AdaptronicCAN::readyToRead()
             break;
         case 0x318:
             m_dashboard->setaccelx(pkgpayload[0]/1000);
-            qDebug() << (pkgpayload[0]/1000);
+            //qDebug() << (pkgpayload[0]/1000);
             m_dashboard->setaccely(pkgpayload[1]/1000);
             m_dashboard->setaccelz(pkgpayload[2]/1000);
             //m_dashboard->setgyrox(pkgpayload[3]/10); //Yaw
