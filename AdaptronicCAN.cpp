@@ -711,12 +711,17 @@ void AdaptronicCAN::readyToRead()
             break;
 
         case 0x364:
-            //qDebug() << "LAMBDA payload" << pkgpayload[0]/10;
+            //"TPS 4 (DBW)"(pkgpayload[0]/100)
+            m_dashboard->setLAMBDA(pkgpayload[1]/1000.00);
+            //"Lambda 1"(pkgpayload[1]/100)
+            //"Lambda 1)"(pkgpayload[2]/100)
+            //"ECT"(pkgpayload[3]/100)
             break;
 
 
         case 0x365:
             //qDebug() << "MAT :" << pkgpayload[0]/10;
+            m_dashboard->setIntaketemp(pkgpayload[1]/10);
             //qDebug() << "Oil T :" << pkgpayload[1]/10;
             m_dashboard->setFueltemp(pkgpayload[2]/10);
             //qDebug() << "Oil P  :" << pkgpayload[3]/10;

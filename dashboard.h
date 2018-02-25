@@ -141,7 +141,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal Ign3 READ Ign3 WRITE setIgn3 NOTIFY Ign3Changed)
     Q_PROPERTY(qreal Ign4 READ Ign4 WRITE setIgn4 NOTIFY Ign4Changed)
     Q_PROPERTY(qreal TRIM READ TRIM WRITE setTRIM NOTIFY TRIMChanged)
-
+    Q_PROPERTY(qreal LAMBDA READ LAMBDA WRITE setLAMBDA NOTIFY LAMBDAChanged)
 
     //GPS Strings
 
@@ -328,6 +328,7 @@ public:
     void setIgn3(const qreal &Ign3);
     void setIgn4(const qreal &Ign4);
     void setTRIM(const qreal &TRIM);
+    void setLAMBDA(const qreal &LAMBDA);
 
 
 //qsensors
@@ -491,6 +492,7 @@ public:
     qreal Ign3() const;
     qreal Ign4() const;
     qreal TRIM() const;
+    qreal LAMBDA() const;
 
     //qsensors
 
@@ -658,6 +660,7 @@ signals:
     void Ign3Changed(qreal Ign3);
     void Ign4Changed(qreal Ign4);
     void TRIMChanged(qreal TRIM);
+    void LAMBDAChanged(qreal LAMBDA);
 
 
     void accelxChanged(qreal accelx);
@@ -815,6 +818,7 @@ private:
     qreal m_Ign3;
     qreal m_Ign4;
     qreal m_TRIM;
+    qreal m_LAMBDA;
 
     // GPS
 
