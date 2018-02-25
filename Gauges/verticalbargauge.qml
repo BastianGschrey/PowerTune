@@ -36,7 +36,7 @@ Rectangle {
             //labelStepSize: 50
             minimumValue: 0
             maximumValue: 400
-            tickmarkStepSize : 200
+            tickmarkStepSize : maximumValue / 4
 
             //value: Dashboard.MAP
             Behavior on value {
