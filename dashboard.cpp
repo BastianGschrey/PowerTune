@@ -136,6 +136,7 @@ DashBoard::DashBoard(QObject *parent)
     , m_Ign4(0)
     , m_TRIM(0)
     , m_LAMBDA(0)
+    , m_LAMBDATarget(0)
 
     //GPS Strings
     , m_gpsTime ("0")
@@ -1132,6 +1133,15 @@ void DashBoard::setLAMBDA(const qreal &LAMBDA)
     emit LAMBDAChanged(LAMBDA);
 }
 
+void DashBoard::setLAMBDATarget(const qreal &LAMBDATarget)
+{
+    if (m_LAMBDATarget == LAMBDATarget)
+        return;
+    m_LAMBDATarget = LAMBDATarget;
+    emit LAMBDATargetChanged(LAMBDATarget);
+}
+
+
 //Qsensors
 void DashBoard::setaccelx(const qreal &accelx)
 {
@@ -1349,6 +1359,7 @@ qreal DashBoard::Ign3() const { return m_Ign3; }
 qreal DashBoard::Ign4() const { return m_Ign4; }
 qreal DashBoard::TRIM() const { return m_TRIM; }
 qreal DashBoard::LAMBDA() const { return m_LAMBDA; }
+qreal DashBoard::LAMBDATarget() const { return m_LAMBDATarget; }
 
 // Qsensors
 qreal DashBoard::accelx() const { return m_accelx; }

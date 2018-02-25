@@ -16,6 +16,7 @@ Component.onCompleted:
     CreateVerticalGaugeScript.createVerticalGauge(320,80,10,230,20,"V","BatV",Dashboard,"BatteryV"),
     CreateVerticalGaugeScript.createVerticalGauge(320,80,10,340,130,"°C Coolant","Coolant",Dashboard,"Watertemp"),
     CreateVerticalGaugeScript.createVerticalGauge(320,80,465,10,2,"λ","Lambda",Dashboard,"LAMBDA"),
-    CreateVerticalGaugeScript.createVerticalGauge(320,80,465,120,2,"°C Air","IAT",Dashboard,"IntakeTemp");
+    CreateVerticalGaugeScript.createVerticalGauge(320,80,465,120,2,"λ Target","Lambda Target",Dashboard,"Intaketemp"),
+    CreateVerticalGaugeScript.createVerticalGauge(320,80,465,230,100,"°C Air","IAT",Dashboard,"Intaketemp");
 
  }
