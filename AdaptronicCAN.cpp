@@ -87,14 +87,14 @@ void AdaptronicCAN::readyToRead()
         if (frame.frameType() == QCanBusFrame::ErrorFrame)
             view = m_canDevice->interpretErrorFrame(frame);
         else
-            view = frame.toString();*/
+            view = frame.toString();
 
         const QString time = QString::fromLatin1("%1.%2  ")
                 .arg(frame.timeStamp().seconds(), 10, 10, QLatin1Char(' '))
                 .arg(frame.timeStamp().microSeconds() / 100, 4, 10, QLatin1Char('0'));
-        // Just for testing  end
+         Just for testing  end
 
-        //qDebug() << time << view;
+        qDebug() << time << view;*/
 
         // This section will be used to decode the received Frames currently shows only the the raw payload of a Adress
         QByteArray splitpayload = frame.payload();
