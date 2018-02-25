@@ -261,7 +261,7 @@ void AdaptronicCAN::readyToRead()
             break;
         case 0x319:
             m_dashboard->setgyroy(pkgpayload[0]/10); //Pitch
-            qDebug() << (pkgpayload[0]/10);
+            //qDebug() << (pkgpayload[0]/10);
             m_dashboard->setgyroz(pkgpayload[1]/10); //Roll
             qDebug() << (pkgpayload[1]/10);
             break;
