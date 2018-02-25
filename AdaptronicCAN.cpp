@@ -692,7 +692,7 @@ void AdaptronicCAN::readyToRead()
             //qDebug() << "IMAP :" << pkgpayload[0]/10;
             m_dashboard->setMAP(pkgpayload[0]/10);
             m_dashboard->setpim((pkgpayload[0]/10));
-            qDebug() << (pkgpayload[0]/10);
+            //qDebug() << (pkgpayload[0]/10);
             //qDebug() << "IMAP2 :" << pkgpayload[1]/10;
             //qDebug() << "EMAP :" << pkgpayload[2]/10;
             //qDebug() << "EMAP2  :" << pkgpayload[3]/10;
@@ -720,8 +720,8 @@ void AdaptronicCAN::readyToRead()
 
 
         case 0x365:
-            //qDebug() << "MAT :" << pkgpayload[0]/10;
-            m_dashboard->setIntaketemp(pkgpayload[1]/10);
+            qDebug() << "MAT :" << pkgpayload[0]/10;
+            m_dashboard->setIntaketemp(pkgpayload[0]/10);
             //qDebug() << "Oil T :" << pkgpayload[1]/10;
             m_dashboard->setFueltemp(pkgpayload[2]/10);
             //qDebug() << "Oil P  :" << pkgpayload[3]/10;
