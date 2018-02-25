@@ -13,7 +13,9 @@ Rectangle {
         Drag.active: dragArea.drag.active
 
         property alias gaugetext: gaugetextfield.text
+        property alias gaugevalue: gauge.value
         property alias gaugemaxvalue: gauge.maximumValue
+
 
         MouseArea {
                   id: dragArea
@@ -36,7 +38,7 @@ Rectangle {
             minimumValue: 0
             maximumValue: 10000
 
-            value: Dashboard.MAP
+            //value: Dashboard.MAP
             Behavior on value {
                 NumberAnimation {
                     duration: 5

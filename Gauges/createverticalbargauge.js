@@ -15,6 +15,7 @@ function finishCreation(setWidth,setX,setY,setMaxValue,setID,SetValueObject,SetV
     if (component.status == Component.Ready) {
         gauge = component.createObject(adaptronicDash, {"id": setID,
                                            "gaugetext": Qt.binding(function(){return SetValueObject[SetValueProperty]}),
+                                           "gaugevalue": Qt.binding(function(){return SetValueObject[SetValueProperty]}),
                                            "x": setX, "y": setY});
         gauge.width = setWidth;
         if (gauge == null) {
