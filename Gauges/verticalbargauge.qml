@@ -33,10 +33,10 @@ Rectangle {
             anchors.margins: 10
             orientation : Qt.Horizontal
             minorTickmarkCount: 4
-            tickmarkStepSize : 5000
             //labelStepSize: 50
             minimumValue: 0
             maximumValue: 400
+            tickmarkStepSize : 200
 
             //value: Dashboard.MAP
             Behavior on value {

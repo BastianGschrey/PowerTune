@@ -9,7 +9,8 @@ import "qrc:/Gauges/createverticalbargauge.js" as CreateVerticalGaugeScript
 
 Item {
 id: adaptronicDash
-//Component.onCompleted: CreateVerticalGaugeScript.createVerticalGauge(300,10,10,"rpm","RPM","Dashboard.revs");
+//Component.onCompleted: CreateVerticalGaugeScript.createVerticalGauge(300,10,10,300,"RPM",Dashboard,"revs");
+
 Component.onCompleted: CreateVerticalGaugeScript.createVerticalGauge(300,10,300,300,"MAP",Dashboard,"MAP");
 
  }
