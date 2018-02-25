@@ -720,7 +720,7 @@ void AdaptronicCAN::readyToRead()
 
 
         case 0x365:
-            qDebug() << "MAT :" << pkgpayload[0]/10;
+            //qDebug() << "MAT :" << pkgpayload[0]/10;
             m_dashboard->setIntaketemp(pkgpayload[0]/10);
             //qDebug() << "Oil T :" << pkgpayload[1]/10;
             m_dashboard->setFueltemp(pkgpayload[2]/10);
@@ -897,7 +897,7 @@ void AdaptronicCAN::readyToRead()
             //"Calc Charge temp 2"(pkgpayload[1]/10)
             //"Stoichiometric ratio"(pkgpayload[2]/1000)
             //"Target Lambda"(pkgpayload[3]/10000)
-            m_dashboard->setLAMBDATarget(pkgpayload[3]/10000);
+            m_dashboard->setLAMBDATarget(pkgpayload[3]/1000.00);
             break;
         case 0x382:
             //"Calc fuel mass/cyl 1"(pkgpayload[0]/10)
@@ -1236,6 +1236,7 @@ void AdaptronicCAN::readyToRead()
         case 0x3BA:
             //"Unclipped WG value1"(pkgpayload[0]/100)
             //"Wastegate 1 duty"(pkgpayload[1]/100)
+            m_dashboard->setBoostDuty(pkgpayload[1]/100);
             //"Boost ctrl status"(pkgpayload[2])
             //"Closed lp WG 2 corr"(pkgpayload[3]/100)
             break;
