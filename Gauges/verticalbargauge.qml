@@ -29,6 +29,7 @@ Rectangle {
 
         Gauge {
             id: gauge
+            height: 200
             anchors.fill: parent
             anchors.margins: 10
             orientation : Qt.Horizontal
@@ -55,7 +56,7 @@ Rectangle {
             }
               style: GaugeStyle {
                 valueBar: Rectangle {
-                   implicitWidth:  10
+                   implicitWidth:  20
                     color: Qt.rgba(gauge.value / gauge.maximumValue, 0, 1 - gauge.value / gauge.maximumValue, 1)
                 }
             }

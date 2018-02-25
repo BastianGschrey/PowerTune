@@ -17,8 +17,6 @@ function finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setUnit,setID,S
                                            "gaugetext": Qt.binding(function(){return SetValueObject[SetValueProperty] + " " + setUnit}),
                                            "gaugevalue": Qt.binding(function(){return SetValueObject[SetValueProperty]}),
                                            "x": setX, "y": setY});
-        //gauge.width = setWidth;
-        //gauge.height = setHeight
         if (gauge == null) {
             // Error Handling
             //console.log("Error creating object");

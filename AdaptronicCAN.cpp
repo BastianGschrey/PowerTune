@@ -691,6 +691,7 @@ void AdaptronicCAN::readyToRead()
         case 0x361:
             //qDebug() << "IMAP :" << pkgpayload[0]/10;
             m_dashboard->setMAP(pkgpayload[0]/10);
+            m_dashboard->setpim((pkgpayload[0]/10));
             qDebug() << (pkgpayload[0]/10);
             //qDebug() << "IMAP2 :" << pkgpayload[1]/10;
             //qDebug() << "EMAP :" << pkgpayload[2]/10;
