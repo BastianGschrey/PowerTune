@@ -32,16 +32,18 @@ Sensors::Sensors(QObject *parent)
 Sensors::Sensors(DashBoard *dashboard, QObject *parent)
     : QObject(parent)
     , m_dashboard(dashboard)
+    , Compass(Q_NULLPTR)
     , Accelerometer(Q_NULLPTR)
     , Gyroscope(Q_NULLPTR)
-    , Compass(Q_NULLPTR)
+    , AmbientTemperatureSensor(Q_NULLPTR)
+    , PressureSensor(Q_NULLPTR)
     , compass_reading(Q_NULLPTR)
     , accel_reading(Q_NULLPTR)
     , gyro_reading(Q_NULLPTR)
-    , press_reading(Q_NULLPTR)
     , temp_reading(Q_NULLPTR)
-    , AmbientTemperatureSensor(Q_NULLPTR)
-    , PressureSensor(Q_NULLPTR)
+    , press_reading(Q_NULLPTR)
+
+
 {
 }
 void Sensors::Comp()

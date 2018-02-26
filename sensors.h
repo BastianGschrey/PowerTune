@@ -37,16 +37,19 @@ public slots:
 
 private:
     DashBoard *m_dashboard;
+
+    QCompass *Compass;
     QAccelerometer *Accelerometer;
     QGyroscope *Gyroscope;
-    QCompass *Compass;
     QAmbientTemperatureSensor *AmbientTemperatureSensor;
     QPressureSensor *PressureSensor;
     QCompassReading *compass_reading;
     QAccelerometerReading *accel_reading;
     QGyroscopeReading *gyro_reading;
-    QPressureReading *press_reading;
     QAmbientTemperatureReading *temp_reading;
+    QPressureReading *press_reading;
+
+
 
 
 };
