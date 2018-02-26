@@ -82,7 +82,6 @@ Rectangle {
                 text: "GPS Port: "
                 visible: { (gpsswitch.checked == true ) ? true:false; }
                 }
-
                 ComboBox {
                     id: serialNameGPS
                     width: 200
@@ -111,7 +110,8 @@ Rectangle {
 
                     model: [ "Metric","Imperial"]
                     property bool initialized: false
-
+                    Component.onCompleted: { Connect.setUnits(currentIndex) }
+                    onCurrentIndexChanged: { Connect.setUnits(currentIndex) }
 
                 }
                 Text { text: "ECU Selection:" }
@@ -208,7 +208,11 @@ Rectangle {
                     text: "Open Dashselect"
                     onClicked: {dashselector.visible = true}
                 }
-
+                Button {
+                    id: senhatsel
+                    text: "Senshat"
+                    onClicked: {senhatselector.visible = true}
+                }
                 /*
                 Button {
                     text: "Clear"
@@ -257,7 +261,6 @@ Rectangle {
                     text: qsTr("GPS")
                     onCheckedChanged: {autoconnectGPS.auto()}
                 }
-
 
               /*
                 Text
@@ -408,7 +411,8 @@ Rectangle {
         id: autoconnect
         function auto()
         {
-
+            // if (connectAtStart.checked == true) Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex);
+            if (connectAtStart.checked == true) functconnect.connectfunc(),connectButton.enabled =false,ecuSelect.enabled = false,disconnectButton.enabled = true;;//Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Connect.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
 
         }
     }
@@ -471,7 +475,7 @@ Rectangle {
         id: functconnect
         function connectfunc()
         {
-
+             Connect.openConnection(serialName.currentText, ecuSelect.currentIndex);
             //else Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, logger.datalogger()),Connect.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
         }
     }

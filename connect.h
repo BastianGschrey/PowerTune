@@ -51,7 +51,7 @@ class Connect : public QObject
 public:
     ~Connect();
     explicit Connect(QObject *parent = 0);
-
+    Q_INVOKABLE void setUnits(const int &units);
     Q_INVOKABLE void clear() const;
     Q_INVOKABLE void openConnection(const QString &portName, const int &ecuSelect);
     Q_INVOKABLE void closeConnection();

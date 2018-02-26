@@ -115,7 +115,7 @@ private:
     QByteArray  m_buffer;
     QByteArray  m_consultreply;
     QTimer      m_DTCtimer;
-
+    int         m_units;
 
 signals:
 
