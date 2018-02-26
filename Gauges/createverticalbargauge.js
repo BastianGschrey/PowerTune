@@ -10,7 +10,6 @@ function createVerticalGauge(setWidth,setHeight,setX,setY,setMaxValue,setUnit,se
 }
 
 function finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setUnit,setID,SetValueObject,SetValueProperty) {
-    console.log(setHeight)
     if (component.status == Component.Ready) {
         gauge = component.createObject(adaptronicDash, {"id": setID, "width": setWidth, "height": setHeight,
                                            "gaugemaxvalue": setMaxValue,
