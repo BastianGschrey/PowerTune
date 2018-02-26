@@ -76,12 +76,13 @@ Rectangle {
                     visible: { (ecuSelect.currentIndex >= "4") ? false: true; }
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setBaudRate( currentIndex )
-                    Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true; autoconnect.auto();logger.datalogger() }
+                    Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true; autoconnect.auto(); }
                 }
                 Text {
                 text: "GPS Port: "
                 visible: { (gpsswitch.checked == true ) ? true:false; }
                 }
+
                 ComboBox {
                     id: serialNameGPS
                     width: 200
@@ -110,8 +111,7 @@ Rectangle {
 
                     model: [ "Metric","Imperial"]
                     property bool initialized: false
-                    //Component.onCompleted: { Decoder.setUnits(currentIndex) }
-                    //onCurrentIndexChanged: { Decoder.setUnits(currentIndex) }
+
 
                 }
                 Text { text: "ECU Selection:" }
@@ -208,6 +208,7 @@ Rectangle {
                     text: "Open Dashselect"
                     onClicked: {dashselector.visible = true}
                 }
+
                 /*
                 Button {
                     text: "Clear"
@@ -241,7 +242,9 @@ Rectangle {
                 Switch {
                     id: loggerswitch
                     text: qsTr("Data Logger")
+                    Component.onCompleted: {logger.datalogger()}
                     onCheckedChanged: logger.datalogger()
+
                 }
 
                 Switch {
@@ -254,46 +257,7 @@ Rectangle {
                     text: qsTr("GPS")
                     onCheckedChanged: {autoconnectGPS.auto()}
                 }
-                Switch {
-                    id: accelsens
-                    text: qsTr("Accelerometer")
-                    onCheckedChanged:
-                    {if (accelsens.checked == true){Sens.Accel()};
-                    }
 
-                }
-                Switch {
-                    id: gyrosense
-                    text: qsTr("Gyro Sensor")
-                    onCheckedChanged:
-                    {
-
-                        if (gyrosense.checked == true){Sens.Gyro()};
-                    }
-                }
-                Switch {
-                    id: compass
-                    text: qsTr("Compass")
-                    onCheckedChanged:{
-                        if (compass.checked == true){Sens.Comp()};
-                    }
-                }
-                Switch {
-                    id: pressuresens
-                    text: qsTr("Pressure Sensor")
-                    onCheckedChanged:{
-
-                        if (pressuresens.checked == true){Sens.Pressure()};
-                    }
-                }
-                Switch {
-                    id: tempsense
-                    text: qsTr("Temperature Sensor")
-                    onCheckedChanged:{
-
-                        if (tempsense.checked == true){Sens.Temperature()};
-                    }
-                }
 
               /*
                 Text
@@ -444,8 +408,7 @@ Rectangle {
         id: autoconnect
         function auto()
         {
-            // if (connectAtStart.checked == true) Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex);
-            if (connectAtStart.checked == true) functconnect.connectfunc();//Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Connect.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
+
 
         }
     }
@@ -508,7 +471,7 @@ Rectangle {
         id: functconnect
         function connectfunc()
         {
-             Connect.openConnection(serialName.currentText, ecuSelect.currentIndex,logger.datalogger());
+
             //else Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, logger.datalogger()),Connect.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
         }
     }
@@ -682,6 +645,67 @@ Rectangle {
 
     }
 
+    Rectangle{
+
+        id: senhatselector
+        visible: false
+        width: parent.width
+        height: parent.height
+        color: "grey"
+
+        Grid {
+            rows: 6
+            columns: 2
+            spacing: 5
+            Switch {
+                id: accelsens
+                text: qsTr("Accelerometer")
+                onCheckedChanged:
+                {if (accelsens.checked == true){Sens.Accel()};
+                }
+
+            }
+            Switch {
+                id: gyrosense
+                text: qsTr("Gyro Sensor")
+                onCheckedChanged:
+                {
+
+                    if (gyrosense.checked == true){Sens.Gyro()};
+                }
+            }
+            Switch {
+                id: compass
+                text: qsTr("Compass")
+                onCheckedChanged:{
+                    if (compass.checked == true){Sens.Comp()};
+                }
+            }
+            Switch {
+                id: pressuresens
+                text: qsTr("Pressure Sensor")
+                onCheckedChanged:{
+
+                    if (pressuresens.checked == true){Sens.Pressure()};
+                }
+            }
+            Switch {
+                id: tempsense
+                text: qsTr("Temperature Sensor")
+                onCheckedChanged:{
+
+                    if (tempsense.checked == true){Sens.Temperature()};
+                }
+            }
+            Button {
+                id: closedsenshatselector
+                text: "Apply"
+                onClicked: {senhatselector.visible = false}
+            }
+
+
+        }
+    }
 }
 
 

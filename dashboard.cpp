@@ -1,5 +1,6 @@
 #include <dashboard.h>
 #include <QStringList>
+#include <QDebug>
 
 
 
@@ -247,7 +248,10 @@ void DashBoard::setFueltemp(const qreal &Fueltemp)
 {
     if (m_Fueltemp == Fueltemp)
         return;
-    m_Fueltemp = Fueltemp;
+    if (m_units == "metric")
+    {m_Fueltemp = Fueltemp;}
+    if (m_units == "imperial")
+    {m_Fueltemp = qRound(Fueltemp * 1.8 + 32);}
     emit FueltempChanged(Fueltemp);
 }
 
@@ -279,7 +283,11 @@ void DashBoard::setWatertemp(const qreal &Watertemp)
 {
     if (m_Watertemp == Watertemp)
         return;
-    m_Watertemp = Watertemp;
+    if (m_units == "metric")
+    {m_Watertemp = Watertemp;}
+    if (m_units == "imperial")
+    {m_Watertemp = qRound(Watertemp * 1.8 + 32);}
+
     emit WatertempChanged(Watertemp);
 }
 
@@ -287,7 +295,11 @@ void DashBoard::setIntaketemp(const qreal &Intaketemp)
 {
     if (m_Intaketemp == Intaketemp)
         return;
-    m_Intaketemp = Intaketemp;
+    if (m_units == "metric")
+    { m_Intaketemp = Intaketemp;}
+    if (m_units == "imperial")
+    {m_Intaketemp = qRound(Intaketemp * 1.8 + 32);}
+
     emit IntaketempChanged(Intaketemp);
 }
 
@@ -311,7 +323,10 @@ void DashBoard::setSpeed(const qreal &speed)
 {
     if (m_speed == speed)
         return;
-    m_speed = speed;
+    if (m_units == "metric")
+    {m_speed = speed;}
+    if (m_units == "imperial")
+    {m_speed = qRound(speed * 0.621371);}
     emit speedChanged(speed);
 }
 
@@ -995,8 +1010,6 @@ void DashBoard::setunits (const QString &units)
 //Adaptronic extra
 
 
-
-
 void DashBoard::setMAP(const qreal &MAP)
 {
     if (m_MAP == MAP)
@@ -1041,7 +1054,11 @@ void DashBoard::setMVSS(const qreal &MVSS)
 {
     if (m_MVSS == MVSS)
         return;
-    m_MVSS = MVSS;
+    if (m_units == "metric")
+    { m_MVSS= MVSS;}
+    if (m_units == "imperial")
+    {m_MVSS = qRound(MVSS * 0.621371);}
+
     emit MVSSChanged(MVSS);
 }
 
@@ -1049,7 +1066,10 @@ void DashBoard::setSVSS(const qreal &SVSS)
 {
     if (m_SVSS == SVSS)
         return;
-    m_SVSS = SVSS;
+    if (m_units == "metric")
+    { m_SVSS= SVSS;}
+    if (m_units == "imperial")
+    {m_SVSS = qRound(SVSS * 0.621371);}
     emit SVSSChanged(SVSS);
 }
 
@@ -1196,7 +1216,11 @@ void DashBoard::setambitemp(const qreal &ambitemp)
 {
     if (m_ambitemp == ambitemp)
         return;
-    m_ambitemp = ambitemp;
+
+    if (m_units == "metric")
+    { m_ambitemp = ambitemp;}
+    if (m_units == "imperial")
+    {m_ambitemp = qRound(ambitemp * 1.8 + 32);
     emit ambitempChanged(ambitemp);
 }
 void DashBoard::setambipress(const qreal &ambipress)

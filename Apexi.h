@@ -353,48 +353,6 @@ private:
          quint16 fuelBase[800];
      };
 
-
-
- // Dicktator ECU
-     double packageDicktator[33];
-
-     struct dicktator_info_t{
-
-         quint8 msgS;
-         quint8 msgT;
-         quint8 msgA;
-         quint8 msgR;
-         quint8 msgT1;
-         quint8 b5;
-         quint8 b6;
-         quint8 b7;
-         quint8 b8;
-         quint8 b9;
-         quint8 b10;
-         quint8 b11;
-         quint8 b12;
-         quint8 b13;
-         quint16 boost;
-         quint8 b16;
-         quint8 b17;
-         quint8 b18;
-         quint8 b19;
-         quint8 b20;
-         quint8 b21;
-         quint8 b22;
-         quint8 b23;
-         quint8 b24;
-         quint8 b25;
-         quint8 b26;
-         quint8 b27;
-         quint8 b28;
-         quint8 b29;
-         quint8 msgE;
-         quint8 msgN;
-         quint8 msgD;
-         dicktator_info_t parse(const QByteArray &);
-    };
-
 public:
     explicit Apexi(QObject *parent = 0);
      explicit Apexi(DashBoard *dashboard, QObject *parent = 0);
@@ -410,6 +368,7 @@ private:
      QByteArray  m_buffer;
      QByteArray  m_apexiMsg;
      QByteArray  m_writeData;
+
 public slots:
      void readyToRead();
      void handleTimeout();
@@ -423,7 +382,7 @@ public slots:
      void sendRequest(int requestIndex);
      void writeRequestPFC(QByteArray);
      void readData(QByteArray rawmessagedata);
-     void setUnits(const int &unitSelect);
+
      void decodeAdv(QByteArray rawmessagedata);
      void decodeSensor(QByteArray rawmessagedata);
      void Auxcalc (const QString &unitaux1,const int &an1V0,const int &an2V5,const QString &unitaux2,const int &an3V0,const int &an4V5);

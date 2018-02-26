@@ -54,7 +54,7 @@
 
 
 
-int ecu =3; //0=apex, 1=adaptronic;2= OBD; 3= Dicktator ECU
+
 int logging; // 0 Logging off , 1 Logging to file
 int connectclicked =0;
 QByteArray checksumhex;
@@ -113,6 +113,7 @@ Connect::~Connect()
 
 
 }
+
 
 void Connect::getPorts()
 {

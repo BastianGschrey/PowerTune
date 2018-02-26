@@ -9,7 +9,7 @@
 //#include <QSerialPortInfo>
 #include <QModbusRtuSerialMaster>
 
-int units2;
+
 AdaptronicSelect::~AdaptronicSelect()
 {
 
@@ -93,15 +93,7 @@ void AdaptronicSelect::AdaptronicStartStream()
 
 }
 
-void AdaptronicSelect::setUnits(const int &unitSelect)
-{
-    units2 = unitSelect;
-    if (units2 == 0 )
-    {m_dashboard->setunits("metric");}
-    if (units2 == 1 )
-    {m_dashboard->setunits("imperial");}
 
-}
 
 void AdaptronicSelect::readyToRead()
 {
@@ -123,62 +115,12 @@ void AdaptronicSelect::decodeAdaptronic(QModbusDataUnit unit)
     int Boostconv;
 
 
- if (units2 == 0)
- {
 
-    m_dashboard->setSpeed(unit.value(10)); // <-This is for the "main" speedo KMH
- }
- if (units2 == 1)
- {
-    m_dashboard->setSpeed(unit.value(10)*0.621371); // <-This is for the "main" speedo in MPH
- }
-    m_dashboard->setRevs(unit.value(0));
-    m_dashboard->setMAP(unit.value(1));
-    if (units2 == 0)
-    {
-    m_dashboard->setIntaketemp(unit.value(2));
-    }
-    if (units2 == 1)
-    {
-    m_dashboard->setIntaketemp(qRound(unit.value(2)* 1.8 + 32));
-    }
-    if (units2 == 0)
-    {
-    m_dashboard->setWatertemp(unit.value(3));
-    }
-    if (units2 == 1)
-    {
-    m_dashboard->setWatertemp(qRound(unit.value(3)* 1.8 + 32));
-    }
-    if (units2 == 0)
-    {
-    m_dashboard->setAUXT(unit.value(4));
-    }
-    if (units2 == 1)
-    {
-    m_dashboard->setAUXT(unit.value(4)* 1.8 + 32);
-    }
     m_dashboard->setauxcalc1(unit.value(5)/2570.00);
     m_dashboard->setKnock(unit.value(6)/256);
     m_dashboard->setTPS(unit.value(7));
     m_dashboard->setIdleValue(unit.value(8));
     m_dashboard->setBatteryV(unit.value(9)/10);
-    if (units2 == 0)
-    {
-    m_dashboard->setMVSS(unit.value(10));
-    }
-    if (units2 == 1)
-    {
-    m_dashboard->setMVSS(qRound(unit.value(10)*0.621371));
-    }
-    if (units2 == 0)
-    {
-    m_dashboard->setSVSS(unit.value(11));
-    }
-    if (units2 == 1)
-    {
-    m_dashboard->setSVSS(qRound(unit.value(11)*0.621371));
-    }
     m_dashboard->setInj1((unit.value(12)/3)*2);
     m_dashboard->setInj2((unit.value(13)/3)*2);
     m_dashboard->setInj3((unit.value(14)/3)*2);

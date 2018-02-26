@@ -17,6 +17,7 @@ public:
 private:
      DashBoard *m_dashboard;
      QUdpSocket *udpSocket = nullptr;
+
 public slots:
      void processPendingDatagrams();
      void startreceiver();

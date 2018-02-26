@@ -19,7 +19,7 @@ ApplicationWindow {
 
         currentIndex: 0
         anchors.fill: parent
- 
+
 
         Loader {
 

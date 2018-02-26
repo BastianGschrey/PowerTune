@@ -10,8 +10,6 @@
 #include <QTextStream>
 
 
-
-int units =0;// 0 Metric / 1 Imperial
 QByteArray rawmessagedata;
 QByteArray fullFuelBase;
 qreal AN1AN2calc;
@@ -67,6 +65,7 @@ Apexi::Apexi(DashBoard *dashboard, QObject *parent)
     , m_dashboard(dashboard)
 {
 }
+
 
 void Apexi::initSerialPort()
 {
@@ -685,14 +684,6 @@ void Apexi::Auxcalc (const QString &unitaux1,const int &an1V0,const int &an2V5,c
 }
 
 
-void Apexi::setUnits(const int &unitSelect)
-{
-    units = unitSelect;
-    if (units == 0 )
-    {m_dashboard->setunits("metric");}
-    if (units == 1 )
-    {m_dashboard->setunits("imperial");}
-}
 
 
 void Apexi::decodeAdv(QByteArray rawmessagedata)
@@ -714,26 +705,6 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         packageADV[9] = info->Moilp;     //Value lower by 10 compared to FC Edit
         packageADV[10] = info->Boosttp / 2.56;    // (FC edit shows just raw value
         packageADV[11] = info->Boostwg / 2.56;     // (FC edit shows just raw value
-        if (units == 0 )
-        {
-            packageADV[12] = info->Watertemp -80;
-            packageADV[13] = info->Intaketemp -80;
-        }
-        if (units == 1 )
-        {
-            packageADV[12] = qRound(((info->Watertemp -80)* 1.8) + 32) ;
-            packageADV[13] = qRound(((info->Intaketemp -80)* 1.8) + 32);
-        }
-        packageADV[14] = info->Knock;
-        packageADV[15] = info->BatteryV * 0.1;
-        if (units == 0 )
-        {
-            packageADV[16] = info->Speed ;
-        }
-        if (units == 1 )
-        {
-            packageADV[16] = qRound(info->Speed  * 0.621371);
-        }
         packageADV[17] = info->Iscvduty * 0.001;
         packageADV[18] = info->O2volt;
         packageADV[19] = info->na1;
@@ -790,29 +761,7 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         else
             packageADV2[8] = (1.0 / 2560 + 0.001) * packageADV[8];
         packageADV2[9] = info->BoostDuty *0.005;
-        if (units == 0 )
-        {
-            packageADV2[10] = info->Watertemp -80;
-            packageADV2[11] = info->Intaketemp -80;
-        }
-        if (units == 1 )
-        {
-            packageADV2[10] = qRound(((info->Watertemp -80)* 1.8) + 32);
-            packageADV2[11] = qRound(((info->Intaketemp -80)* 1.8) + 32);
 
-        }
-        packageADV2[12] = info->Knock;
-        packageADV2[13] = info->BatteryV *0.1;
-        if (units == 0 )
-        {
-            packageADV2[14] = info->Speed;
-        }
-        if (units == 1 )
-        {
-            packageADV2[14] = qRound(info->Speed * 0.621371);
-        }
-        //    packageADV2[14] *= speed_correction;
-        //    previousSpeed_kph[buf_currentIndex] = packageADV[14];
         packageADV2[15] = info->MAFactivity *0.16;
         packageADV2[16] = info->O2volt *0.005;
         packageADV2[17] = info->O2volt_2 *0.005;
@@ -861,27 +810,7 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
             packageADV3[8] = (1.0 / 2560 + 0.001) * packageADV3[8];
 */
         packageADV3[9] = mul[9] * info->BoostDuty3 + add[9];
-        if (units == 0 )
-        {
-            packageADV3[10] = info->Watertemp3 -80;
-            packageADV3[11] = info->Intaketemp3 -80;
-        }
-        if (units == 1 )
-        {
-            packageADV3[10] = qRound(((info->Watertemp3 -80)* 1.8) + 32);
-            packageADV3[11] = qRound(((info->Intaketemp3 -80)* 1.8) + 32);
 
-        }
-        packageADV3[12] = info->Knock3;
-        packageADV3[13] = info->BatteryV3 *0.1;
-        if (units == 0 )
-        {
-            packageADV3[14] = info->Speed3;
-        }
-        if (units == 1 )
-        {
-            packageADV3[14] = qRound(info->Speed3 * 0.621371);
-        }
         // packageADV3[14] *= speed_correction;
         //previousSpeed_kph[buf_currentIndex] = packageADV[14];
         //        packageADV3[15] = mul[15] * info->Iscvduty + add[15];
@@ -1005,49 +934,12 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
     packageBasic[1] = mul[0] * info->Basic_IGL + add[6];
     packageBasic[2] = mul[0] * info->Basic_IGT + add[6];
     packageBasic[3] = mul[0] * info->Basic_RPM + add[0];
-    if (units == 0)
-    {
-        packageBasic[4] = mul[0] * info->Basic_KPH + add[0];
-    }
-    if (units == 1)
-    {
-        packageBasic[4] = (mul[0] * info->Basic_KPH + add[0]) * 0.621371;
-    }
-    packageBasic[5] = mul[0] * info->Basic_Boost -760;
-    packageBasic[6] = mul[0] * info->Basic_Knock + add[0];
-    if (units == 0)
-    {
-        packageBasic[7] = mul[0] * info->Basic_Watert + add[8];
-    }
-    if (units == 1)
-    {
-        packageBasic[7] = qRound(((mul[0] * info->Basic_Watert + add[8])*1.8) + 32) ;
-    }
-    if (units == 0)
-    {
-        packageBasic[8] = mul[0] * info->Basic_Airt + add[8];
-    }
-    if (units == 1)
-    {
-        packageBasic[8] = qRound(((mul[0] * info->Basic_Airt + add[8]) *1.8) + 32) ;
-    }
-    packageBasic[9] = mul[15] * info->Basic_BattV + add[0];
-    if (units == 0)
-    {
+
         if (packageBasic[5] >= 0) // while boost pressure is positive multiply by 0.01 to show kg/cm2
         {
             Boost = packageBasic[5] *0.01;
         }
         else Boost = packageBasic[5]; // while boost pressure is negative show pressure in mmhg
-    }
-    if (units == 1)
-    {
-        if (packageBasic[5] >= 0) // while boost pressure is positive multiply by 0.01 to show PSI
-        {
-            Boost = packageBasic[5] * 0.142233;
-        }
-        else Boost = packageBasic[5] * 0.039370079; // while boost pressure is negative show pressure in inhg
-    }
 
 
 
