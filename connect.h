@@ -69,11 +69,11 @@ private:
     GPS *m_gps;
     AdaptronicSelect *m_adaptronicselect;
     Apexi *m_apexi;
-    HaltechCAN *m_haltechCANV2;
-    AdaptronicCAN *m_adaptronicCAN;
     Nissanconsult* m_nissanconsult;
     OBD* m_OBD;
     Sensors *m_sensors;
+    HaltechCAN *m_haltechCANV2;
+    AdaptronicCAN *m_adaptronicCAN;
     udpreceiver *m_udpreceiver;
     datalogger *m_datalogger;
     QStringList m_portsNames;

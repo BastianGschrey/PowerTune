@@ -390,11 +390,10 @@ public slots:
      void decodeAux(QByteArray rawmessagedata);
      void decodeMap(QByteArray rawmessagedata);
      void decodeBasic(QByteArray rawmessagedata);
-     void decodeVersion(QByteArray rawmessagedata);
+    // void decodeVersion(QByteArray rawmessagedata);
      void decodeInit(QByteArray rawmessagedata);
      void decodeSensorStrings(QByteArray rawmessagedata);
      void calculatorAux(int aux1min,int aux2max,int aux3min,int aux4max,QString Auxunit1,QString Auxunit2);
-     //void loggerApexi();
 
 
 signals:

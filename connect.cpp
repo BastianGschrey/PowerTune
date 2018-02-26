@@ -325,7 +325,7 @@ void Connect::readyToRead()
 
 
     }
-    /*
+
     if(ecu == 9) //Dicktator ECU
     {
         m_readData = m_Connectport->readAll();

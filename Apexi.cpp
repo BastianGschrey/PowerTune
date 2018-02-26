@@ -255,10 +255,11 @@ void Apexi::readData(QByteArray rawmessagedata)
         case ID::Init:
             Apexi::decodeInit(rawmessagedata);
             break;
+       /*
         case ID::Version:
             Apexi::decodeVersion(rawmessagedata);
             break;
-
+       */
         default:
             break;
         }
@@ -1153,11 +1154,12 @@ void Apexi::decodeInjOverlap(QByteArray rawmessagedata)
 
 
 }
-*/
+
 void Apexi::decodeVersion(QByteArray rawmessagedata)
 {
     //    ui->lineVersion->setText (QString(rawmessagedata).mid(2,5));
 }
+*/
 void Apexi::decodeInit(QByteArray rawmessagedata)
 {
     QString Modelname = QString(rawmessagedata).mid(2,8);
