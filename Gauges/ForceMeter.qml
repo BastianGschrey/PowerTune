@@ -1,16 +1,15 @@
 import QtQuick 2.8
 
-Rectangle {
+Item {
     id: mainwindow
     width: parent.width
     height: parent.height
-    color: "black"
+
 
     Rectangle {
         id: forcecircle
         height: mainwindow.height
         width: mainwindow.height
-        color: "Black"
 
         Rectangle {
             width: forcecircle.height

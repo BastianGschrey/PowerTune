@@ -9,6 +9,7 @@ Item {
     width: parent.width
     height:parent.height
     property  var unit : Dashboard.units;
+
     Component.onCompleted: {units.unitadjust()} // adjusts the Gauges to metric or imperial
 
 
