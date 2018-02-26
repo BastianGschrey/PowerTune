@@ -54,7 +54,7 @@
 
 
 
-int ecu; //0=apex, 1=adaptronic;2= OBD; 3= Dicktator ECU
+
 int logging; // 0 Logging off , 1 Logging to file
 int connectclicked =0;
 QByteArray checksumhex;
@@ -114,22 +114,7 @@ Connect::~Connect()
 
 }
 
-void Connect::setUnits(const int &units)
-{
-    switch (units)
-    {
-    case 0:
-        m_dashBoard->setunits("metric");
-        break;
-    case 1:
-        m_dashBoard->setunits("imperial");
-        break;
 
-    default:
-        break;
-    }
-
-}
 void Connect::getPorts()
 {
     QStringList PortList;

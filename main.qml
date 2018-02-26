@@ -43,7 +43,10 @@ ApplicationWindow {
             id: fourthPageLoader
             source: ""
         }
-
+        Loader {
+            id: test
+            source: "qrc:/Gauges/SensorTest.qml"
+        }
         Item {
             id:lastPage
             Settings{}

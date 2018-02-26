@@ -53,7 +53,7 @@ private:
        quint16 CH4;
        payload parse(const QByteArray &);
     };
-    int         m_units;
+
 
 
 signals:

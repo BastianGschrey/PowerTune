@@ -39,7 +39,6 @@ private:
      QModbusDataUnit readRequest() const;
 
 
-
 signals:
     void sig_adaptronicReadFinished();
 

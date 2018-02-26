@@ -353,8 +353,6 @@ private:
          quint16 fuelBase[800];
      };
 
-
-
 public:
     explicit Apexi(QObject *parent = 0);
      explicit Apexi(DashBoard *dashboard, QObject *parent = 0);
@@ -384,6 +382,7 @@ public slots:
      void sendRequest(int requestIndex);
      void writeRequestPFC(QByteArray);
      void readData(QByteArray rawmessagedata);
+
      void decodeAdv(QByteArray rawmessagedata);
      void decodeSensor(QByteArray rawmessagedata);
      void Auxcalc (const QString &unitaux1,const int &an1V0,const int &an2V5,const QString &unitaux2,const int &an3V0,const int &an4V5);

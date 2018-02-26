@@ -115,19 +115,12 @@ void AdaptronicSelect::decodeAdaptronic(QModbusDataUnit unit)
     int Boostconv;
 
 
-    m_dashboard->setSpeed(unit.value(10)); // <-This is for the "main" speedo KMH
-    m_dashboard->setRevs(unit.value(0));
-    m_dashboard->setMAP(unit.value(1));
-    m_dashboard->setIntaketemp(unit.value(2));
-    m_dashboard->setWatertemp(unit.value(3));
-    m_dashboard->setAUXT(unit.value(4));
+
     m_dashboard->setauxcalc1(unit.value(5)/2570.00);
     m_dashboard->setKnock(unit.value(6)/256);
     m_dashboard->setTPS(unit.value(7));
     m_dashboard->setIdleValue(unit.value(8));
     m_dashboard->setBatteryV(unit.value(9)/10);
-    m_dashboard->setMVSS(unit.value(10));
-    m_dashboard->setSVSS(unit.value(11));
     m_dashboard->setInj1((unit.value(12)/3)*2);
     m_dashboard->setInj2((unit.value(13)/3)*2);
     m_dashboard->setInj3((unit.value(14)/3)*2);
