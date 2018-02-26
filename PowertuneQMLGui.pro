@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick serialport serialbus network charts location positioning
+QT += qml quick serialport serialbus network charts location positioning sensors
 CONFIG += c++11
 static {
     QT += svg
@@ -9,15 +9,21 @@ static {
 
 
 SOURCES += main.cpp \
-    serial.cpp \
     dashboard.cpp \
-    decoder.cpp \
     serialport.cpp \
     appsettings.cpp \
     gopro.cpp \
     gps.cpp \
-    nissanconsultcom.cpp \
-    obd.cpp
+    obd.cpp \
+    sensors.cpp \
+    udpreceiver.cpp \
+    datalogger.cpp \
+    HaltechCAN.cpp \
+    AdaptronicCAN.cpp \
+    Apexi.cpp \
+    Nissanconsult.cpp \
+    AdaptronicSelect.cpp \
+    connect.cpp
 
 
 RESOURCES += qml.qrc
@@ -29,19 +35,25 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    serial.h \
     dashboard.h \
-    decoder.h \
     serialport.h \
     appsettings.h \
     gopro.h \
     gps.h \
-    nissanconsultcom.h \
-    obd.h
+    obd.h \
+    sensors.h \
+    udpreceiver.h \
+    datalogger.h \
+    HaltechCAN.h \
+    AdaptronicCAN.h \
+    Apexi.h \
+    Nissanconsult.h \
+    AdaptronicSelect.h \
+    connect.h
 
 
 FORMS +=
 
-DISTFILES += \
+DISTFILES +=
 
 

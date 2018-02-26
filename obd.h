@@ -80,6 +80,7 @@ private:
     QByteArray  m_buffer;
     QByteArray  m_message;
     QByteArray  m_writeData;
+    int         m_units;
 
 signals:
     void sig_finished();

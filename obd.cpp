@@ -88,23 +88,28 @@ void OBD::openConnection(const QString &portName)
 
     if(m_serial->open(QIODevice::ReadWrite) == false)
     {
-       qDebug() <<("not open");m_dashboard->setSerialStat(m_serial->errorString());
+       m_dashboard->setSerialStat(m_serial->errorString());
+       OBD::closeConnection();
+
     }
     else
     {
-        qDebug() <<("open");
-       m_dashboard->setSerialStat(QString("Connected to Serialport"));
+        reqquestInd = 0;
+        OBD::sendRequest(reqquestInd);
     }
 
-    reqquestInd = 0;
-    OBD::sendRequest(reqquestInd);
 
 }
 
 void OBD::closeConnection()
 
 {
-    m_serial->close();
+        disconnect(this->m_serial,SIGNAL(readyRead()),this,SLOT(readyToRead()));
+        disconnect(m_serial, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
+                this, &OBD::handleError);
+        disconnect(m_serial, &QSerialPort::bytesWritten, this, &OBD::handleBytesWritten);
+        disconnect(&m_timer, &QTimer::timeout, this, &OBD::handleTimeout);
+        m_serial->close();
 }
 
 void OBD::handleTimeout()

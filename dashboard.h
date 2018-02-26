@@ -141,7 +141,8 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal Ign3 READ Ign3 WRITE setIgn3 NOTIFY Ign3Changed)
     Q_PROPERTY(qreal Ign4 READ Ign4 WRITE setIgn4 NOTIFY Ign4Changed)
     Q_PROPERTY(qreal TRIM READ TRIM WRITE setTRIM NOTIFY TRIMChanged)
-
+    Q_PROPERTY(qreal LAMBDA READ LAMBDA WRITE setLAMBDA NOTIFY LAMBDAChanged)
+    Q_PROPERTY(qreal LAMBDATarget READ LAMBDATarget WRITE setLAMBDATarget NOTIFY LAMBDATargetChanged)
 
     //GPS Strings
 
@@ -156,6 +157,16 @@ class DashBoard : public QObject
     //Units ( metric /imperial select
     Q_PROPERTY(QString units READ units WRITE setunits NOTIFY unitsChanged)
 
+    //Qsensors
+    Q_PROPERTY(qreal accelx READ accelx WRITE setaccelx NOTIFY accelxChanged)
+    Q_PROPERTY(qreal accely READ accely WRITE setaccely NOTIFY accelyChanged)
+    Q_PROPERTY(qreal accelz READ accelz WRITE setaccelz NOTIFY accelzChanged)
+    Q_PROPERTY(qreal gyrox READ gyrox WRITE setgyrox NOTIFY gyroxChanged)
+    Q_PROPERTY(qreal gyroy READ gyroy WRITE setgyroy NOTIFY gyroyChanged)
+    Q_PROPERTY(qreal gyroz READ gyroz WRITE setgyroz NOTIFY gyrozChanged)
+    Q_PROPERTY(qreal compass READ compass WRITE setcompass NOTIFY compassChanged)
+    Q_PROPERTY(qreal ambitemp READ ambitemp WRITE setambitemp NOTIFY ambitempChanged)
+    Q_PROPERTY(qreal ambipress READ ambipress WRITE setambipress NOTIFY ambipressChanged)
 
 
 
@@ -318,8 +329,20 @@ public:
     void setIgn3(const qreal &Ign3);
     void setIgn4(const qreal &Ign4);
     void setTRIM(const qreal &TRIM);
+    void setLAMBDA(const qreal &LAMBDA);
+    void setLAMBDATarget(const qreal &LAMBDATarget);
 
 
+//qsensors
+    void setaccelx(const qreal &accelx);
+    void setaccely(const qreal &accely);
+    void setaccelz(const qreal &accelz);
+    void setgyrox(const qreal &gyrox);
+    void setgyroy(const qreal &gyroy);
+    void setgyroz(const qreal &gyroz);
+    void setcompass(const qreal &compass);
+    void setambitemp(const qreal &ambitemp);
+    void setambipress(const qreal &ambipress);
 
 
 
@@ -471,6 +494,21 @@ public:
     qreal Ign3() const;
     qreal Ign4() const;
     qreal TRIM() const;
+    qreal LAMBDA() const;
+    qreal LAMBDATarget() const;
+
+    //qsensors
+
+    qreal accelx() const;
+    qreal accely() const;
+    qreal accelz() const;
+    qreal gyrox() const;
+    qreal gyroy() const;
+    qreal gyroz() const;
+    qreal compass() const;
+    qreal ambitemp() const;
+    qreal ambipress() const;
+
 
 signals:
 
@@ -625,8 +663,19 @@ signals:
     void Ign3Changed(qreal Ign3);
     void Ign4Changed(qreal Ign4);
     void TRIMChanged(qreal TRIM);
+    void LAMBDAChanged(qreal LAMBDA);
+    void LAMBDATargetChanged(qreal LAMBDATarget);
 
 
+    void accelxChanged(qreal accelx);
+    void accelyChanged(qreal accely);
+    void accelzChanged(qreal accelz);
+    void gyroxChanged(qreal gyrox);
+    void gyroyChanged(qreal gyroy);
+    void gyrozChanged(qreal gyroz);
+    void compassChanged(qreal compass);
+    void ambitempChanged(qreal ambitemp);
+    void ambipressChanged(qreal ambipress);
 
 
 private:
@@ -773,6 +822,8 @@ private:
     qreal m_Ign3;
     qreal m_Ign4;
     qreal m_TRIM;
+    qreal m_LAMBDA;
+    qreal m_LAMBDATarget;
 
     // GPS
 
@@ -786,6 +837,18 @@ private:
     //Units
 
     QString m_units;
+
+    //qsensors
+
+    qreal m_accelx;
+    qreal m_accely;
+    qreal m_accelz;
+    qreal m_gyrox;
+    qreal m_gyroy;
+    qreal m_gyroz;
+    qreal m_compass;
+    qreal m_ambitemp;
+    qreal m_ambipress;
 
 
 };

@@ -1,6 +1,6 @@
 #include "gps.h"
 #include "dashboard.h"
-#include "serial.h"
+#include "connect.h"
 #include "QStringList"
 
 
@@ -365,7 +365,7 @@ void GPS::startGPScom(const QString &portName)
 
     com = new QSerialPort(this);
     serialBuffer = "";
-    //qDebug() <<"StartGPS"<< portName ;
+    qDebug() <<"StartGPS"<< portName ;
 
 
 
@@ -378,7 +378,7 @@ void GPS::startGPScom(const QString &portName)
     com->setStopBits(QSerialPort::OneStop);
    // QObject::connect(com, SIGNAL(readyRead()), this, SLOT(readSerial()));
     connect(this->com,SIGNAL(readyRead()),this, SLOT(readSerial()));
-    connected =1;
+
 
 
     for (int var = 0; var < 1000; ++var) {
@@ -405,10 +405,12 @@ void GPS::startGPScom(const QString &portName)
 
 void GPS::stopGPScom()
 {
+    /*
     if (connected == 1)
     {
      connected =0;
      com->close();
     }
+    */
 }
 

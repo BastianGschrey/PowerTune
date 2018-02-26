@@ -2,7 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QtQml>
-#include "serial.h"
+#include "connect.h"
 
 
 int main(int argc, char *argv[])
@@ -16,8 +16,8 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
 
-    qmlRegisterType<Serial>("com.powertune", 1, 0, "SerialObject");
-    engine.rootContext()->setContextProperty("Serial", new Serial(&engine));
+    qmlRegisterType<Connect>("com.powertune", 1, 0, "ConnectObject");
+    engine.rootContext()->setContextProperty("Connect", new Connect(&engine));
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 

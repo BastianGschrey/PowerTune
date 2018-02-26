@@ -1,5 +1,6 @@
 #include <dashboard.h>
 #include <QStringList>
+#include <QDebug>
 
 
 
@@ -135,6 +136,8 @@ DashBoard::DashBoard(QObject *parent)
     , m_Ign3(0)
     , m_Ign4(0)
     , m_TRIM(0)
+    , m_LAMBDA(0)
+    , m_LAMBDATarget(0)
 
     //GPS Strings
     , m_gpsTime ("0")
@@ -146,6 +149,21 @@ DashBoard::DashBoard(QObject *parent)
 
   //units
     , m_units("unit")
+
+  //Sensors
+    , m_accelx(0)
+    , m_accely(0)
+    , m_accelz(0)
+    , m_gyrox(0)
+    , m_gyroy(0)
+    , m_gyroz(0)
+    , m_compass(0)
+    , m_ambitemp(0)
+    , m_ambipress(0)
+
+ //   ,m_TimeoutStat("----")
+ //   ,m_RecvData("----")
+
 
 {
 }
@@ -230,7 +248,10 @@ void DashBoard::setFueltemp(const qreal &Fueltemp)
 {
     if (m_Fueltemp == Fueltemp)
         return;
-    m_Fueltemp = Fueltemp;
+    if (m_units == "metric")
+    {m_Fueltemp = Fueltemp;}
+    if (m_units == "imperial")
+    {m_Fueltemp = qRound(Fueltemp * 1.8 + 32);}
     emit FueltempChanged(Fueltemp);
 }
 
@@ -262,7 +283,11 @@ void DashBoard::setWatertemp(const qreal &Watertemp)
 {
     if (m_Watertemp == Watertemp)
         return;
-    m_Watertemp = Watertemp;
+    if (m_units == "metric")
+    {m_Watertemp = Watertemp;}
+    if (m_units == "imperial")
+    {m_Watertemp = qRound(Watertemp * 1.8 + 32);}
+
     emit WatertempChanged(Watertemp);
 }
 
@@ -270,7 +295,11 @@ void DashBoard::setIntaketemp(const qreal &Intaketemp)
 {
     if (m_Intaketemp == Intaketemp)
         return;
-    m_Intaketemp = Intaketemp;
+    if (m_units == "metric")
+    { m_Intaketemp = Intaketemp;}
+    if (m_units == "imperial")
+    {m_Intaketemp = qRound(Intaketemp * 1.8 + 32);}
+
     emit IntaketempChanged(Intaketemp);
 }
 
@@ -294,7 +323,10 @@ void DashBoard::setSpeed(const qreal &speed)
 {
     if (m_speed == speed)
         return;
-    m_speed = speed;
+    if (m_units == "metric")
+    {m_speed = speed;}
+    if (m_units == "imperial")
+    {m_speed = qRound(speed * 0.621371);}
     emit speedChanged(speed);
 }
 
@@ -819,8 +851,6 @@ void DashBoard::setPlatform(const QString &Platform)
 
 //Sensor Strings
 
-//Sensor Strings
-
 void DashBoard::setSensorString1(const QString &SensorString1)
 {
     if (m_SensorString1 == SensorString1)
@@ -980,8 +1010,6 @@ void DashBoard::setunits (const QString &units)
 //Adaptronic extra
 
 
-
-
 void DashBoard::setMAP(const qreal &MAP)
 {
     if (m_MAP == MAP)
@@ -1026,7 +1054,11 @@ void DashBoard::setMVSS(const qreal &MVSS)
 {
     if (m_MVSS == MVSS)
         return;
-    m_MVSS = MVSS;
+    if (m_units == "metric")
+    { m_MVSS= MVSS;}
+    if (m_units == "imperial")
+    {m_MVSS = qRound(MVSS * 0.621371);}
+
     emit MVSSChanged(MVSS);
 }
 
@@ -1034,7 +1066,10 @@ void DashBoard::setSVSS(const qreal &SVSS)
 {
     if (m_SVSS == SVSS)
         return;
-    m_SVSS = SVSS;
+    if (m_units == "metric")
+    { m_SVSS= SVSS;}
+    if (m_units == "imperial")
+    {m_SVSS = qRound(SVSS * 0.621371);}
     emit SVSSChanged(SVSS);
 }
 
@@ -1110,8 +1145,90 @@ void DashBoard::setTRIM(const qreal &TRIM)
     emit TRIMChanged(TRIM);
 }
 
+void DashBoard::setLAMBDA(const qreal &LAMBDA)
+{
+    if (m_LAMBDA == LAMBDA)
+        return;
+    m_LAMBDA = LAMBDA;
+    emit LAMBDAChanged(LAMBDA);
+}
 
-// GPS
+void DashBoard::setLAMBDATarget(const qreal &LAMBDATarget)
+{
+    if (m_LAMBDATarget == LAMBDATarget)
+        return;
+    m_LAMBDATarget = LAMBDATarget;
+    emit LAMBDATargetChanged(LAMBDATarget);
+}
+
+
+//Qsensors
+void DashBoard::setaccelx(const qreal &accelx)
+{
+    if (m_accelx == accelx)
+        return;
+    m_accelx = accelx;
+    emit accelxChanged(accelx);
+}
+void DashBoard::setaccely(const qreal &accely)
+{
+    if (m_accely == accely)
+        return;
+    m_accely = accely;
+    emit accelyChanged(accely);
+}
+void DashBoard::setaccelz(const qreal &accelz)
+{
+    if (m_accelz == accelz)
+        return;
+    m_accelz = accelz;
+    emit accelzChanged(accelz);
+}
+void DashBoard::setgyrox(const qreal &gyrox)
+{
+    if (m_gyrox == gyrox)
+        return;
+    m_gyrox = gyrox;
+    emit gyroxChanged(gyrox);
+}
+void DashBoard::setgyroy(const qreal &gyroy)
+{
+    if (m_gyroy == gyroy)
+        return;
+    m_gyroy = gyroy;
+    emit gyroyChanged(gyroy);
+}
+void DashBoard::setgyroz(const qreal &gyroz)
+{
+    if (m_gyroz == gyroz)
+        return;
+    m_gyroz = gyroz;
+    emit gyrozChanged(gyroz);
+}
+void DashBoard::setcompass(const qreal &compass)
+{
+    if (m_compass == compass)
+        return;
+    m_compass = compass;
+    emit compassChanged(compass);
+}
+void DashBoard::setambitemp(const qreal &ambitemp)
+{
+    if (m_ambitemp == ambitemp)
+        return;
+    if (m_units == "metric")
+    { m_ambitemp = ambitemp;}
+    if (m_units == "imperial")
+    {m_ambitemp = qRound(ambitemp * 1.8 + 32);}
+    emit ambitempChanged(ambitemp);
+}
+void DashBoard::setambipress(const qreal &ambipress)
+{
+    if (m_ambipress == ambipress)
+        return;
+    m_ambipress = ambipress;
+    emit ambipressChanged(ambipress);
+}
 
 
 
@@ -1264,5 +1381,17 @@ qreal DashBoard::Ign2() const { return m_Ign2; }
 qreal DashBoard::Ign3() const { return m_Ign3; }
 qreal DashBoard::Ign4() const { return m_Ign4; }
 qreal DashBoard::TRIM() const { return m_TRIM; }
+qreal DashBoard::LAMBDA() const { return m_LAMBDA; }
+qreal DashBoard::LAMBDATarget() const { return m_LAMBDATarget; }
 
+// Qsensors
+qreal DashBoard::accelx() const { return m_accelx; }
+qreal DashBoard::accely() const { return m_accely; }
+qreal DashBoard::accelz() const { return m_accelz; }
+qreal DashBoard::gyrox() const { return m_gyrox; }
+qreal DashBoard::gyroy() const { return m_gyroy; }
+qreal DashBoard::gyroz() const { return m_gyroz; }
+qreal DashBoard::compass() const { return m_compass; }
+qreal DashBoard::ambitemp() const { return m_ambitemp; }
+qreal DashBoard::ambipress() const { return m_ambipress; }
 

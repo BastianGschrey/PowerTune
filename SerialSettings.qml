@@ -2,6 +2,8 @@ import QtQuick 2.8
 import QtQuick.Controls 2.1
 import Qt.labs.settings 1.0
 import QtQuick.VirtualKeyboard 2.1
+import QtSensors 5.0
+
 
 Rectangle {
     id: windowbackround
@@ -18,6 +20,12 @@ Rectangle {
         Settings {
             property alias connectAtStartUp: connectAtStart.checked
             property alias gpsswitch: gpsswitch.checked
+            property alias accelswitch: accelsens.checked
+            property alias gyrowitch:  gyrosense.checked
+            property alias compassswitch: compass.checked
+            property alias tempswitch: tempsense.checked
+            property alias pressureswitch:pressuresens.checked
+
             property alias serialPortName: serialName.currentText
             property alias gpsPortName: serialNameGPS.currentText
             property alias gpsPortNameindex: serialNameGPS.currentIndex
@@ -28,25 +36,24 @@ Rectangle {
             //property alias gpsBaud: serialGPSBaud.currentText
             // property alias gpsBaudindex: serialGPSBaud.currentIndex
             property alias ecuType: ecuSelect.currentText
-            //property alias powerFcInterface: interfaceSelect.currentText
             property alias auxunit1: unitaux1.text
             property alias aux1: an1V0.text
             property alias aux2: an2V5.text
             property alias auxunit2: unitaux2.text
             property alias aux3: an3V0.text
             property alias aux4: an4V5.text
-            /*
-            property alias auxunit3: unitaux3.text
-            property alias aux5: an5V0.text
-            property alias aux6: an6V5.text
-            property alias auxunit4: unitaux4.text
-            property alias aux7: an7V0.text
-            property alias aux8: an8V5.text
-*/
             property alias goProVariant: goProSelect.currentIndex
             property alias password: goPropass.text
             property alias unitSelector: unitSelect.currentIndex
 
+        }
+
+        Item {
+            id: sensors
+            Component.onCompleted: {
+                var types = QmlSensors.sensorTypes();
+                console.log(types.join(", "));
+            }
         }
 
         Row {
@@ -58,28 +65,39 @@ Rectangle {
                 columns: 2
                 spacing: 5
                 // [0]
-                Text { text: "ECU Serial Port: " }
+                Text {
+                text: "ECU Serial Port: "
+                visible: { (ecuSelect.currentIndex >= "4") ? false: true; }
+                }
                 ComboBox {
                     id: serialName
                     width: 200
-
-                    model: Serial.portsNames
+                    model: Connect.portsNames
+                    visible: { (ecuSelect.currentIndex >= "4") ? false: true; }
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setBaudRate( currentIndex )
-                    Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true; autoconnect.auto();logger.datalogger() }
+                    Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true; autoconnect.auto(); }
                 }
-                Text { text: "GPS Port: " }
+                Text {
+                text: "GPS Port: "
+                visible: { (gpsswitch.checked == true ) ? true:false; }
+                }
                 ComboBox {
                     id: serialNameGPS
                     width: 200
-                    model: Serial.portsNames
+                    model: Connect.portsNames
+                    visible: { (gpsswitch.checked == true ) ? true:false; }
 
                 }
-                Text { text: "GPS Baud: " }
+                Text {
+                text: "GPS Baud: "
+                visible: { (gpsswitch.checked == true ) ? true:false; }
+                }
                 ComboBox {
                     id: serialGPSBaud
                     width: 200
                     model: [ "2400", "4800", "9600", "14400", "19200", "38400", "57600", "115200"]
+                    visible: { (gpsswitch.checked == true ) ? true:false; }
                     Component.onCompleted: {autoconnectGPS.auto()}
 
                 }
@@ -92,22 +110,22 @@ Rectangle {
 
                     model: [ "Metric","Imperial"]
                     property bool initialized: false
-                    Component.onCompleted: { Decoder.setUnits(currentIndex) }
-                    onCurrentIndexChanged: { Decoder.setUnits(currentIndex) }
+                    Component.onCompleted: { Connect.setUnits(currentIndex) }
+                    onCurrentIndexChanged: { Connect.setUnits(currentIndex) }
+
                 }
                 Text { text: "ECU Selection:" }
                 ComboBox {
 
                     id: ecuSelect
                     width: 200
+                    model: [ "PowerFC", "Adaptronic Select Modbus", "OBDII" , "Nissan Consult","UDP Receiver port 45454","CAN Adaptronic Modular","CAN Haltech V2"]
 
-                    //model: [ "PowerFC", "Adaptronic"]
-                    model: [ "PowerFC", "Adaptronic", "OBDII" , "Nissan Consult"]
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
                 }
-
+/*
                 Text {
                     id: textloggingSelect
                     visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
@@ -123,7 +141,7 @@ Rectangle {
                     onCurrentIndexChanged: if (initialized) AppSettings.setLogging( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getLogging(); initialized = true }
                 }
-
+*/
                 Text { text: "GoPro Variant :" }
                 ComboBox {
                     id: goProSelect
@@ -148,6 +166,14 @@ Rectangle {
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhPreferLowercase | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
                     //enterKeyAction: EnterKeyAction.Next
                 }
+                Text
+                {
+                    text: "Serial Status:"
+                }
+                TextField {
+                    text: qsTr(Dashboard.SerialStat)
+
+                }
             }
 
             Grid {
@@ -158,12 +184,21 @@ Rectangle {
                 Button {
                     id: connectButton
                     text: "Connect"
-                    onClicked: {functconnect.connectfunc();}
+                    onClicked: {
+                        functconnect.connectfunc();
+                    connectButton.enabled =false;
+                    ecuSelect.enabled = false;
+                    disconnectButton.enabled = true;
+                    }
                 }
                 Button {
                     id: disconnectButton
                     text: "Disconnect"
+                    enabled: false
                     onClicked: {
+                        connectButton.enabled = true;
+                        disconnectButton.enabled = false;
+                        ecuSelect.enabled = true;
                         functdisconnect.disconnectfunc();
                     }
                 }
@@ -173,19 +208,24 @@ Rectangle {
                     text: "Open Dashselect"
                     onClicked: {dashselector.visible = true}
                 }
-/*
+                Button {
+                    id: senhatsel
+                    text: "Senshat"
+                    onClicked: {senhatselector.visible = true}
+                }
+                /*
                 Button {
                     text: "Clear"
                     onClicked: {
-                        Serial.clear()
+                        Connect.clear()
                     }
                 }
 */              //for official raspberry Pi image only !!!!
-/*
+                /*
                 Button {
                     text: "Pi Update "
                     onClicked: {
-                        Serial.update()
+                        Connect.update()
 
                     }
                 }
@@ -206,12 +246,10 @@ Rectangle {
                 Switch {
                     id: loggerswitch
                     text: qsTr("Data Logger")
+                    Component.onCompleted: {logger.datalogger()}
                     onCheckedChanged: logger.datalogger()
+
                 }
-
-
-
-
 
                 Switch {
                     id: record
@@ -222,13 +260,15 @@ Rectangle {
                     id: gpsswitch
                     text: qsTr("GPS")
                     onCheckedChanged: {autoconnectGPS.auto()}
-                    //Component.onCompleted: {autoconnectGPS.auto()}
                 }
+
+              /*
                 Text
                 {
                     color: "red"
                     text: Dashboard.SerialStat
                 }
+
                 Text
                 {
                     color: "blue"
@@ -244,6 +284,7 @@ Rectangle {
                     color: "purple"
                     text: Dashboard.RunStat
                 }
+                */
                 Grid {
                     visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
                     rows: 10
@@ -370,8 +411,8 @@ Rectangle {
         id: autoconnect
         function auto()
         {
-            // if (connectAtStart.checked == true) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex);
-            if (connectAtStart.checked == true) functconnect.connectfunc();//Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
+            // if (connectAtStart.checked == true) Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex);
+            if (connectAtStart.checked == true) functconnect.connectfunc(),connectButton.enabled =false,ecuSelect.enabled = false,disconnectButton.enabled = true;;//Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Connect.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
 
         }
     }
@@ -385,6 +426,30 @@ Rectangle {
             if (gpsswitch.checked == false)GPS.stopGPScom();
         }
     }
+
+    Item {
+
+        //Function to transmit GoPro rec status on off
+
+        id: goproRec
+
+        property var recording: 0
+
+        function rec()
+
+        {
+
+            if (record.checked == true) goproRec.recording = 1, GoPro.goprorec(recording.valueOf());
+
+            if (record.checked == false) goproRec.recording = 0,GoPro.goprorec(recording.valueOf());
+
+
+
+
+
+        }
+
+    }
     Item {
         //Logger on off function
         id: logger
@@ -392,8 +457,8 @@ Rectangle {
         function datalogger()
         {
 
-            if (loggerswitch.checked == true) logger.loggeron = 1, Serial.startLogging(logfilenameSelect.text, loggeron.valueOf());
-            if (loggerswitch.checked == false) logger.loggeron = 0,Serial.stopLogging(loggeron.valueOf());
+            if (loggerswitch.checked == true) logger.loggeron = 1, Logger.startLog(logfilenameSelect.text);
+            if (loggerswitch.checked == false) logger.loggeron = 0,Logger.stopLog();
         }
     }
     Item {
@@ -410,8 +475,8 @@ Rectangle {
         id: functconnect
         function connectfunc()
         {
-            if (ecuSelect.currentIndex == 2) Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger());
-            else Serial.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Serial.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
+             Connect.openConnection(serialName.currentText, ecuSelect.currentIndex);
+            //else Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, logger.datalogger()),Connect.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
         }
     }
 
@@ -421,10 +486,7 @@ Rectangle {
         id: functdisconnect
         function disconnectfunc()
         {
-            if (ecuSelect.currentIndex == 2) Work.stop();
-            else Serial.closeConnection(),GPS.stopGPScom();
-
-
+             Connect.closeConnection(),GPS.stopGPScom();
         }
     }
 
@@ -440,6 +502,7 @@ Rectangle {
             if (dash1.currentIndex == "4") {firstPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
             if (dash1.currentIndex == "5") {firstPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
             if (dash1.currentIndex == "6") {firstPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
+            if (dash1.currentIndex == "7") {firstPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
 
         }
 
@@ -455,6 +518,7 @@ Rectangle {
             if (dash2.currentIndex == "4") {secondPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
             if (dash2.currentIndex == "5") {secondPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
             if (dash2.currentIndex == "6") {secondPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
+            if (dash2.currentIndex == "7") {secondPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
 
         }
 
@@ -470,6 +534,7 @@ Rectangle {
             if (dash3.currentIndex == "4") {thirdPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
             if (dash3.currentIndex == "5") {thirdPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
             if (dash3.currentIndex == "6") {thirdPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
+            if (dash3.currentIndex == "7") {thirdPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
 
         }
 
@@ -485,6 +550,7 @@ Rectangle {
             if (dash4.currentIndex == "4") {fourthPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
             if (dash4.currentIndex == "5") {fourthPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
             if (dash4.currentIndex == "6") {fourthPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
+            if (dash4.currentIndex == "7") {fourthPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
 
         }
 
@@ -542,7 +608,7 @@ Rectangle {
             ComboBox {
                 id: dash1
                 width: 180
-                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi"]
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select1.selDash1() }
                 Component.onCompleted: {select1.selDash1() }
@@ -551,7 +617,7 @@ Rectangle {
             ComboBox {
                 id: dash2
                 width: 180
-                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi"]
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select2.selDash2() }
                 Component.onCompleted: {select2.selDash2() }
@@ -560,7 +626,7 @@ Rectangle {
             ComboBox {
                 id: dash3
                 width: 180
-                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi"]
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select3.selDash3() }
                 Component.onCompleted: {select3.selDash3() }
@@ -568,7 +634,7 @@ Rectangle {
             ComboBox {
                 id: dash4
                 width: 180
-                model:  ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi"]
+                model:  ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select4.selDash4() }
                 Component.onCompleted: {select4.selDash4() }
@@ -583,6 +649,67 @@ Rectangle {
 
     }
 
+    Rectangle{
+
+        id: senhatselector
+        visible: false
+        width: parent.width
+        height: parent.height
+        color: "grey"
+
+        Grid {
+            rows: 6
+            columns: 2
+            spacing: 5
+            Switch {
+                id: accelsens
+                text: qsTr("Accelerometer")
+                onCheckedChanged:
+                {if (accelsens.checked == true){Sens.Accel()};
+                }
+
+            }
+            Switch {
+                id: gyrosense
+                text: qsTr("Gyro Sensor")
+                onCheckedChanged:
+                {
+
+                    if (gyrosense.checked == true){Sens.Gyro()};
+                }
+            }
+            Switch {
+                id: compass
+                text: qsTr("Compass")
+                onCheckedChanged:{
+                    if (compass.checked == true){Sens.Comp()};
+                }
+            }
+            Switch {
+                id: pressuresens
+                text: qsTr("Pressure Sensor")
+                onCheckedChanged:{
+
+                    if (pressuresens.checked == true){Sens.Pressure()};
+                }
+            }
+            Switch {
+                id: tempsense
+                text: qsTr("Temperature Sensor")
+                onCheckedChanged:{
+
+                    if (tempsense.checked == true){Sens.Temperature()};
+                }
+            }
+            Button {
+                id: closedsenshatselector
+                text: "Apply"
+                onClicked: {senhatselector.visible = false}
+            }
+
+
+        }
+    }
 }
 
 

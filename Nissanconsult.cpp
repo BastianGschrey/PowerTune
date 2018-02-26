@@ -9,7 +9,7 @@
  *
  * No warranty is made or implied. You use this program at your own risk.
 
-  \file nissanconsultcom.h
+  \file Nissanconsult.h
   \brief request and receive messages from Nissan Consult ECU’s
   \author Markus Ippy
  */
@@ -82,9 +82,9 @@ FPCM F/P Voltage 				Dual 			0x52, 0x53
 */
 
 
-#include "nissanconsultcom.h"
+#include "Nissanconsult.h"
 #include "dashboard.h"
-#include "serial.h"
+#include "connect.h"
 #include "serialport.h"
 #include <QDebug>
 #include <QSerialPort>
@@ -94,14 +94,14 @@ FPCM F/P Voltage 				Dual 			0x52, 0x53
 
 
 
-NissanconsultCom::NissanconsultCom(QObject *parent)
+Nissanconsult::Nissanconsult(QObject *parent)
     : QObject(parent)
     , m_dashboard(Q_NULLPTR)
 
 {
 
 }
-NissanconsultCom::NissanconsultCom(DashBoard *dashboard, QObject *parent)
+Nissanconsult::Nissanconsult(DashBoard *dashboard, QObject *parent)
     : QObject(parent)
     , m_dashboard(dashboard)
 {
@@ -148,7 +148,7 @@ int AFALPHARHSELFLEARN;
 
 int ECUinitialized = 0;
 int Expectedlenght;
-void NissanconsultCom::LiveReqMsg(const int &val1, const int &val2, const int &val3, const int &val4, const int &val5, const int &val6, const int &val7, const int &val8, const int &val9, const int &val10, const int &val11, const int &val12, const int &val13, const int &val14, const int &val15, const int &val16, const int &val17, const int &val18, const int &val19, const int &val20, const int &val21, const int &val22, const int &val23, const int &val24, const int &val25, const int &val26, const int &val27, const int &val28, const int &val29)
+void Nissanconsult::LiveReqMsg(const int &val1, const int &val2, const int &val3, const int &val4, const int &val5, const int &val6, const int &val7, const int &val8, const int &val9, const int &val10, const int &val11, const int &val12, const int &val13, const int &val14, const int &val15, const int &val16, const int &val17, const int &val18, const int &val19, const int &val20, const int &val21, const int &val22, const int &val23, const int &val24, const int &val25, const int &val26, const int &val27, const int &val28, const int &val29)
 
 {
 
@@ -202,6 +202,7 @@ void NissanconsultCom::LiveReqMsg(const int &val1, const int &val2, const int &v
     {
         Liveread.append(ConsultData::LiveDataRequest);
         Liveread.append(ConsultData::LHO2Volt);
+
     }
     if (val7 == 1 )
     {
@@ -377,24 +378,24 @@ void NissanconsultCom::LiveReqMsg(const int &val1, const int &val2, const int &v
 }
 
 
-void NissanconsultCom::initSerialPort()
+void Nissanconsult::initSerialPort()
 {
     if (m_serialconsult)
         delete m_serialconsult;
     m_serialconsult = new SerialPort(this);
     connect(this->m_serialconsult,SIGNAL(readyRead()),this,SLOT(readyToRead()));
-    connect(&m_DTCtimer, &QTimer::timeout, this, &NissanconsultCom::RequestDTC);
+    connect(&m_DTCtimer, &QTimer::timeout, this, &Nissanconsult::RequestDTC);
 
 
 }
 
 
 //function to open serial port
-void NissanconsultCom::openConnection(const QString &portName)
+void Nissanconsult::openConnection(const QString &portName)
 {
 
     ECUinitialized = 0;
-    //qDebug() <<("Open Consult ")<<portName;
+
     initSerialPort();
     m_serialconsult->setPortName(portName);
     m_serialconsult->setBaudRate(QSerialPort::Baud9600);
@@ -406,57 +407,61 @@ void NissanconsultCom::openConnection(const QString &portName)
     if(m_serialconsult->open(QIODevice::ReadWrite) == false)
     {
         m_dashboard->setSerialStat(m_serialconsult->errorString());
+        Nissanconsult::closeConnection();
     }
     else
     {
         m_dashboard->setSerialStat(QString("Connected to Serialport"));
+        ECUinitialized = 0;
+        Nissanconsult::InitECU();
     }
-    ECUinitialized = 0;
-    NissanconsultCom::InitECU();
+
 
 }
 
-void NissanconsultCom::closeConnection()
+void Nissanconsult::closeConnection()
 
 {
-    m_serialconsult->close();
 
+      m_serialconsult->close();
+      disconnect(this->m_serialconsult,SIGNAL(readyRead()),this,SLOT(readyToRead()));
+      disconnect(&m_DTCtimer, &QTimer::timeout, this, &Nissanconsult::RequestDTC);
 
 }
 
 
-void NissanconsultCom::InitECU()
+void Nissanconsult::InitECU()
 
 {
     ECUinitialized = 0;
     m_serialconsult->write(QByteArray::fromHex("FFFFEF"));
 }
 /*
-void NissanconsultCom::clear() const
+void Nissanconsult::clear() const
 {
     m_serialconsult->clear();
 }
 */
-void NissanconsultCom::StopStream()
+void Nissanconsult::StopStream()
 
 {
     m_serialconsult->write(QByteArray::fromHex("30"));
     Stoprequested = 1;
 }
 
-void NissanconsultCom::RequestDTC()
+void Nissanconsult::RequestDTC()
 
 {
     //qDebug() <<("Timer Expired ");
     m_DTCtimer.stop();
     DTCrequested = 1;
-    NissanconsultCom::StopStream();
+    Nissanconsult::StopStream();
     Livedatarequested = 0;
 
 
 }
 
-void NissanconsultCom::RequestLiveData()
+void Nissanconsult::RequestLiveData()
 
 {
     //m_DTCtimer.start(5000);
@@ -466,7 +471,7 @@ void NissanconsultCom::RequestLiveData()
     m_serialconsult->write(Liveread);
 
 }
-void NissanconsultCom::readyToRead()
+void Nissanconsult::readyToRead()
 {
 
     m_readDataConsult = m_serialconsult->readAll();
@@ -475,7 +480,7 @@ void NissanconsultCom::readyToRead()
     if (ECUinitialized == 1)
     {
         //qDebug() <<("Process Raw Message");
-        NissanconsultCom::ProcessRawMessage(m_readDataConsult);
+        Nissanconsult::ProcessRawMessage(m_readDataConsult);
     }
 
     if (ECUinitialized == 0)
@@ -487,7 +492,7 @@ void NissanconsultCom::readyToRead()
             //qDebug() <<("Initstate ")<< ECUinitialized ;
             m_readDataConsult.clear();
             // Request Live Data Stream Request
-            NissanconsultCom::RequestLiveData();
+            Nissanconsult::RequestLiveData();
         }
 
 
@@ -496,7 +501,7 @@ void NissanconsultCom::readyToRead()
 
 }
 
-void NissanconsultCom::ProcessRawMessage(const QByteArray &buffer)
+void Nissanconsult::ProcessRawMessage(const QByteArray &buffer)
 {
     m_buffer.append(buffer);
 
@@ -564,7 +569,7 @@ void NissanconsultCom::ProcessRawMessage(const QByteArray &buffer)
             if (Livedatarequested ==1 )
             {
 
-                NissanconsultCom::RequestLiveData();;
+                Nissanconsult::RequestLiveData();;
 
             }
         }
@@ -578,10 +583,10 @@ void NissanconsultCom::ProcessRawMessage(const QByteArray &buffer)
         if (DTCrequested ==1)
         {
             DTCrequested = 0;
-            NissanconsultCom::StopStream();
+            Nissanconsult::StopStream();
 
         }*/
-        NissanconsultCom::ProcessMessage(m_consultreply);
+        Nissanconsult::ProcessMessage(m_consultreply);
       //
 
     }
@@ -589,7 +594,7 @@ void NissanconsultCom::ProcessRawMessage(const QByteArray &buffer)
 
 
 
-void NissanconsultCom::ProcessMessage(QByteArray serialdataconsult)
+void Nissanconsult::ProcessMessage(QByteArray serialdataconsult)
 {
 
     //qDebug() <<("Check Message Type and send to decoder")<<serialdataconsult.toHex();
@@ -665,7 +670,7 @@ void NissanconsultCom::ProcessMessage(QByteArray serialdataconsult)
        */
 
     //if(requesttypeconsult == 0x2E){m_decodernissanconsult->decodeDTCConsult(serialdataconsult);}
-    //if(requesttypeconsult == 0x2E){NissanconsultCom::StopStream();}
+    //if(requesttypeconsult == 0x2E){Nissanconsult::StopStream();}
     //
 
 

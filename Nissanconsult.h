@@ -9,14 +9,14 @@
  *
  * No warranty is made or implied. You use this program at your own risk.
 
-  \file nissanconsultcom.h
+  \file Nissanconsult.h
   \brief request and receive messages from Nissan Consult ECU’s
   \author Markus Ippy
  */
 
 
-#ifndef NISSANCONSULTCOM_H
-#define NISSANCONSULTCOM_H
+#ifndef NISSANCONSULT_H
+#define NISSANCONSULT_H
 #include <QtSerialPort/QSerialPort>
 #include <QTimer>
 
@@ -88,15 +88,15 @@ class SerialPort;
 
 
 
-class NissanconsultCom : public QObject
+class Nissanconsult : public QObject
 {
     Q_OBJECT
 
 public:
 
 
-    explicit NissanconsultCom(QObject *parent = 0);
-    explicit NissanconsultCom(DashBoard *dashboard, QObject *parent = 0);
+    explicit Nissanconsult(QObject *parent = 0);
+    explicit Nissanconsult(DashBoard *dashboard, QObject *parent = 0);
     Q_INVOKABLE void initSerialPort();
     Q_INVOKABLE void openConnection(const QString &portName);
     Q_INVOKABLE void closeConnection();
@@ -115,6 +115,7 @@ private:
     QByteArray  m_buffer;
     QByteArray  m_consultreply;
     QTimer      m_DTCtimer;
+    int         m_units;
 
 signals:
 
@@ -133,4 +134,4 @@ public slots:
 
 };
 
-#endif // NISSANCONSULTCOM_H
+#endif // NISSANCONSULT_H

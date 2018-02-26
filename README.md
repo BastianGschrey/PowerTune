@@ -1,10 +1,20 @@
 # PowerTune
 PowerTune is a Modern Gauge Display for written in QT5.8 and supports the following ECU's:
 
-* Apexi Power FC 
-* Adaptronic Select ECU 
-* OBD II (Currently displays RPM and Speed in KPH via Serial OBD ELM237 )
-* Nissan Consult (Currently requests only RPM and Speed , should work now but no car to test available )
+
+#### Serial Communication ECU's
+
+* Apexi Power FC  (via Serialport)
+* Adaptronic Select ECU (via Modbus)
+* Nissan Consult (Currently requests only RPM and Speed , should work now)
+
+#### CAN BUS Communication ECU's (via Linux SocketCAN)
+* Adaptronic Select ECU (Adaptronic CAN Protocol)
+* Haltech CAN V2 Protocol comapatible ECU's 
+
+#### OBD ELM237
+
+* OBD II (Serial ELM2377 Cable only)
 
 
 Testet Platforms :
@@ -12,6 +22,7 @@ Testet Platforms :
 Ubuntu 17.04 
 Windows 10 
 Raspbian Jessie 2017-04-10
+Raspbian Stretch
 
 
 #### Implemented PowerFC variants:
@@ -63,6 +74,9 @@ Raspbian Jessie 2017-04-10
 | Tested Vehicles Adaptronic:      | ECU Variant:          | Variant:            | Confirmed:     |Confirmed by :  |
 | -------------------------------- |:---------------------:|:-------------------:|:--------------:|:--------------:|
 | Mazda RX7 FD3S                   | (13B-REW)             | Select Plugin S8*   | <big>__✓__     |Bastian Gschrey |
+
+
+
    
 #### Nissan Consult :
 
@@ -70,6 +84,13 @@ Raspbian Jessie 2017-04-10
 | --------------------------------|:---------------------:|:-------------------:|:--------------:|:--------------:|
 | Nissan Silvia S14               | (SR20DET1)            | Nistune             |                |                |
   
+  
+ #### Haltech :
+
+
+| Tested Vehicles Adaptronic:      | ECU Variant:          | Variant:            | Confirmed:     |Confirmed by :  |
+| -------------------------------- |:---------------------:|:-------------------:|:--------------:|:--------------:|
+|                 |            |   |      | | 
   
 Implemented Features :
 
