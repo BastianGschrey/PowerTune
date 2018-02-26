@@ -110,6 +110,8 @@ Rectangle {
 
                     model: [ "Metric","Imperial"]
                     property bool initialized: false
+                    //Component.onCompleted: { Decoder.setUnits(currentIndex) }
+                    //onCurrentIndexChanged: { Decoder.setUnits(currentIndex) }
 
                 }
                 Text { text: "ECU Selection:" }
