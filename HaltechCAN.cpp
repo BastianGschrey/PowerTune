@@ -9,6 +9,7 @@
 
 #include "HaltechCAN.h"
 #include "dashboard.h"
+#include <QtEndian>
 #include <QDebug>
 
 HaltechCAN::HaltechCAN(QObject *parent)
@@ -72,12 +73,12 @@ void HaltechCAN::readyToRead()
 */
 // This section decodes the recevied Payload accordung to the frame ID
 
-        QByteArray splitpayload = frame.payload();
+       QByteArray splitpayload = frame.payload();
         payload* info=reinterpret_cast<payload*>(splitpayload.data());
-        pkgpayload[0] = info->CH1;
-        pkgpayload[1] = info->CH2;
-        pkgpayload[2] = info->CH3;
-        pkgpayload[3] = info->CH4;
+        pkgpayload[0] = qFromBigEndian(info->CH1);
+        pkgpayload[1] = qFromBigEndian(info->CH2);
+        pkgpayload[2] = qFromBigEndian(info->CH3);
+	      pkgpayload[3] = qFromBigEndian(info->CH4);
 
         switch(frame.frameId()) {
 
