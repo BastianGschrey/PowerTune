@@ -117,9 +117,9 @@ void Sensors::updateAccel()
     accel_reading = Accelerometer->reading();
 ;
     if(accel_reading != 0) {
-        m_dashboard->setaccelx(accel_reading->x());
-        m_dashboard->setaccely(accel_reading->y());
-        m_dashboard->setaccelz(accel_reading->z());
+        m_dashboard->setaccelx(accel_reading->x()*0.10197162129779);
+        m_dashboard->setaccely(accel_reading->y()*0.10197162129779);
+        m_dashboard->setaccelz(accel_reading->z()*0.10197162129779);
         /*text_accel = QDateTime::currentDateTime().toString() +
                 + "Acceleration  x = " + QString::number(accel_reading->x())+ "y ="
                 + QString::number(accel_reading->y())+ "z ="+ QString::number(accel_reading->z());
