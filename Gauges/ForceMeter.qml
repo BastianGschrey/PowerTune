@@ -8,13 +8,36 @@ Item {
 
     Rectangle {
         id: forcecircle
-        height: mainwindow.height
-        width: mainwindow.height
+        height: mainwindow.height/1.5
+        width: height
+        color: "black"
+        anchors.centerIn: parent
 
+        Text {
+        id: lattxt
+        text:  "Lateral    G:          " +(Dashboard.accely).toFixed(2)
+        color: "white"
+        anchors.bottom: longtxt.top
+        anchors.horizontalCenter: forcecircle.horizontalCenter
+        font.bold: true
+        font.family: "Eurostile"
+        font.pixelSize: forcecircle.width / 20
+        }
+        Text {
+        id: longtxt
+        text: "Longitudinal G:    " + (Dashboard.accelx).toFixed(2)
+        color: "white"
+        anchors.bottom: forcecircle.top
+        anchors.bottomMargin: forcecircle.width /50
+        anchors.horizontalCenter: forcecircle.horizontalCenter
+        font.bold: true
+        font.family: "Eurostile"
+        font.pixelSize: forcecircle.width / 20
+        }
         Rectangle {
             width: forcecircle.height
             height: width
-            color: "transparent"
+            color: "black"
             border.color: "white"
             border.width: forcecircle.height/100
             radius: width*0.5
@@ -29,7 +52,7 @@ Item {
             border.color: "white"
             border.width: forcecircle.height/100
             radius: width*0.5
-            anchors.centerIn: parent
+            anchors.centerIn: forcecircle
 
         }
         Rectangle {
@@ -40,19 +63,38 @@ Item {
             border.color: "white"
             border.width: forcecircle.height/100
             radius: width*0.5
-            anchors.centerIn: parent
+            anchors.centerIn: forcecircle
 
         }
 
         Rectangle {
-            //0.5 G
             width: forcecircle.height/4
             height: width
             color: "transparent"
             border.color: "white"
             border.width: forcecircle.height/100
             radius: width*0.5
-            anchors.centerIn: parent
+            anchors.centerIn: forcecircle
+
+        }
+        Rectangle {
+            //line in x
+            width: forcecircle.height
+            height: forcecircle.height/100
+            color: "transparent"
+            border.color: "white"
+            border.width: forcecircle.height/100
+            anchors.centerIn: forcecircle
+
+        }
+        Rectangle {
+            //line in x
+            width: forcecircle.height /100
+            height: forcecircle.height
+            color: "transparent"
+            border.color: "white"
+            border.width: forcecircle.height/100
+            anchors.centerIn: forcecircle
 
         }
 
