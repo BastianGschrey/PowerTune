@@ -5,6 +5,7 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Extras 1.4
 
 
+
 Rectangle {
         id: initalID
         width: 100
@@ -16,6 +17,7 @@ Rectangle {
         property alias gaugetext: gaugetextfield.text
         property alias gaugevalue: gauge.value
         property alias gaugemaxvalue: gauge.maximumValue
+        property alias gaugeminvalue: gauge.minimumValue
 
 
 
@@ -26,16 +28,16 @@ Rectangle {
                   anchors.centerIn: parent
                   //drag.target: parent
                   //drag.axis: Drag.XAndYAxis
-                  onClicked: touchmenu.popup(mouseX, mouseY)
+                  //onClicked: touchmenu.popup(mouseX, mouseY)
                 }
 
-        Menu {
+        /*Menu {
                id: touchmenu
                y: fileButton.height
 
                MenuItem {
                    text: "Change datasource"
-                   onTriggered: sourcemenu.popup(), console.log("clicked")
+                   onTriggered: sourcemenu.popup()
                }
                MenuItem {
                    text: "Increase size"
@@ -55,8 +57,10 @@ Rectangle {
             }
             MenuItem {
                 text: "Fuel Pressure"
+                onTriggered: gaugetext = Dashboard.FuelPress, gaugevalue = 300, gaugemaxvalue = 600
+
             }
-        }
+        }*/
 
         Gauge {
             id: gauge
