@@ -733,6 +733,7 @@ void AdaptronicCAN::readyToRead()
 
         case 0x366:
             //qDebug() << "Diff Fuel P" << pkgpayload[0]/10;
+            m_dashboard->setFuelPress(pkgpayload[0]/10);
             //qDebug() << "Servo pos:" << pkgpayload[1]/10;
             //qDebug() << "Fuel T :" << pkgpayload[2]/10;
             //qDebug() << "0-5V Ext 1 :" << pkgpayload[3]/10;

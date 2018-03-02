@@ -1,7 +1,9 @@
 import QtQuick 2.8
+import QtGraphicalEffects 1.0
+import QtQuick.Controls 2.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Extras 1.4
-import QtQml.Models 2.2
+
 
 
 Rectangle {
@@ -15,6 +17,8 @@ Rectangle {
         property alias gaugetext: gaugetextfield.text
         property alias gaugevalue: gauge.value
         property alias gaugemaxvalue: gauge.maximumValue
+        property alias gaugeminvalue: gauge.minimumValue
+
 
 
         MouseArea {
@@ -24,10 +28,39 @@ Rectangle {
                   anchors.centerIn: parent
                   //drag.target: parent
                   //drag.axis: Drag.XAndYAxis
-                  //onClicked: pieMenu.popup(mouseX, mouseY), console.log("clicked")
+                  //onClicked: touchmenu.popup(mouseX, mouseY)
                 }
 
+        /*Menu {
+               id: touchmenu
+               y: fileButton.height
 
+               MenuItem {
+                   text: "Change datasource"
+                   onTriggered: sourcemenu.popup()
+               }
+               MenuItem {
+                   text: "Increase size"
+               }
+               MenuItem {
+                   text: "Decrease size"
+               }
+           }
+
+        Menu{
+            id: sourcemenu
+            MenuItem {
+                text: "RPM"
+            }
+            MenuItem {
+                text: "MAP"
+            }
+            MenuItem {
+                text: "Fuel Pressure"
+                onTriggered: gaugetext = Dashboard.FuelPress, gaugevalue = 300, gaugemaxvalue = 600
+
+            }
+        }*/
 
         Gauge {
             id: gauge

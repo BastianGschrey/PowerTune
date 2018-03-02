@@ -1,18 +1,19 @@
 var component;
 var gauge;
 
-function createVerticalGauge(setWidth,setHeight,setX,setY,setMaxValue,setUnit,setID,SetValueObject,SetValueProperty) {
+function createVerticalGauge(setWidth,setHeight,setX,setY,setMinValue,setMaxValue,setUnit,setID,SetValueObject,SetValueProperty) {
     component = Qt.createComponent("verticalbargauge.qml");
     if (component.status == Component.Ready)
-        finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setUnit,setID,SetValueObject,SetValueProperty);
+        finishCreation(setWidth,setHeight,setX,setY,setMinValue,setMaxValue,setUnit,setID,SetValueObject,SetValueProperty);
     else
         component.statusChanged.connect(finishCreation);
 }
 
-function finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setUnit,setID,SetValueObject,SetValueProperty) {
+function finishCreation(setWidth,setHeight,setX,setY,setMinValue,setMaxValue,setUnit,setID,SetValueObject,SetValueProperty) {
     if (component.status == Component.Ready) {
         gauge = component.createObject(adaptronicDash, {"id": setID, "width": setWidth, "height": setHeight,
                                            "gaugemaxvalue": setMaxValue,
+                                           "gaugeminvalue": setMinValue,
                                            "gaugetext": Qt.binding(function(){return SetValueObject[SetValueProperty] + " " + setUnit}),
                                            "gaugevalue": Qt.binding(function(){return SetValueObject[SetValueProperty]}),
                                            "x": setX, "y": setY});
