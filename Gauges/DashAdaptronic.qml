@@ -20,8 +20,8 @@ Component.onCompleted:
 
     //right Column
     CreateVerticalGaugeScript.createVerticalGauge(320,80,465,0,0,2,"λ","Lambda",Dashboard,"LAMBDA"),
-    CreateVerticalGaugeScript.createVerticalGauge(320,80,465,90,0,2,"λ Target","Lambda Target",Dashboard,"Intaketemp"),
+    CreateVerticalGaugeScript.createVerticalGauge(320,80,465,90,0,2,"λ Target","Lambda Target",Dashboard,"LAMBDATarget"),
     CreateVerticalGaugeScript.createVerticalGauge(320,80,465,180,0,100,"°C Air","IAT",Dashboard,"Intaketemp"),
     CreateVerticalGaugeScript.createVerticalGauge(320,80,465,270,0,100,"%DC Wastegate","WGDC",Dashboard,"BoostDuty"),
-    CreateVerticalGaugeScript.createVerticalGauge(320,80,465,360,0,100,"kPa Fuel Pressure","FueLPress",Dashboard,"FuelPress");
+    CreateVerticalGaugeScript.createVerticalGauge(320,80,465,360,0,500,"kPa Fuel Pressure","FueLPress",Dashboard,"FuelPress");
  }
