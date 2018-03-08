@@ -719,6 +719,7 @@ void AdaptronicCAN::readyToRead()
             //"Lambda 1"(pkgpayload[1]/100)
             //"Lambda 1)"(pkgpayload[2]/100)
             //"ECT"(pkgpayload[3]/100)
+            m_dashboard->setWatertemp(pkgpayload[3]/10.00);
             break;
 
 
