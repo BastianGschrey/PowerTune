@@ -20,12 +20,15 @@ public:
 
 public slots:
 
-//void updateLog();
-//void createHeader();
+    void calculate();
+    void start();
+
+
 
 private:
     DashBoard *m_dashboard;
     QTimer      m_updatetimer;
+
 };
 
 

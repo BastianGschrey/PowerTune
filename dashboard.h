@@ -169,6 +169,12 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal ambitemp READ ambitemp WRITE setambitemp NOTIFY ambitempChanged)
     Q_PROPERTY(qreal ambipress READ ambipress WRITE setambipress NOTIFY ambipressChanged)
 
+    //Calculations
+    Q_PROPERTY(qreal Gear READ Gear WRITE setGear NOTIFY GearChanged)
+    Q_PROPERTY(qreal Power READ Power WRITE setPower NOTIFY PowerChanged)
+    Q_PROPERTY(qreal Torque READ Torque WRITE setTorque NOTIFY TorqueChanged)
+    Q_PROPERTY(qreal AccelTimer READ AccelTimer WRITE setAccelTimer NOTIFY AccelTimerChanged)
+    Q_PROPERTY(qreal Weight READ AccelTimer WRITE setWeight NOTIFY WeightChanged)
 
 
 public:
@@ -346,7 +352,12 @@ public:
     void setambitemp(const qreal &ambitemp);
     void setambipress(const qreal &ambipress);
 
-
+// calculations
+    void setGear(const qreal &Gear);
+    void setPower(const qreal &Power);
+    void setTorque(const qreal &Torque);
+    void setAccelTimer(const qreal &AccelTimer);
+    void setWeight(const qreal &Weight);
 
     qreal Odo() const;
 
@@ -512,6 +523,12 @@ public:
     qreal ambitemp() const;
     qreal ambipress() const;
 
+    //calculations
+    qreal Gear() const;
+    qreal Power() const;
+    qreal Torque() const;
+    qreal AccelTimer() const;
+    qreal Weight() const;
 
 signals:
 
@@ -680,6 +697,12 @@ signals:
     void ambitempChanged(qreal ambitemp);
     void ambipressChanged(qreal ambipress);
 
+    // calculations
+    void GearChanged(qreal Gear);
+    void PowerChanged(qreal Power);
+    void TorqueChanged(qreal Torque);
+    void AccelTimerChanged(qreal AccelTimer);
+    void WeightChanged(qreal Weight);
 
 private:
     // Odometer
@@ -853,6 +876,14 @@ private:
     qreal m_compass;
     qreal m_ambitemp;
     qreal m_ambipress;
+
+    //calculations
+
+    qreal m_Gear;
+    qreal m_Power;
+    qreal m_Torque;
+    qreal m_AccelTimer;
+    qreal m_Weight;
 
 
 };
