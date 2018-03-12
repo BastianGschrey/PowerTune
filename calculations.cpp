@@ -119,6 +119,7 @@ void calculations::calculate()
 
         }
     }
+
 /*
     //calculate acceleration in G without speedo
     //Metric Calculation
@@ -126,7 +127,7 @@ void calculations::calculate()
     {
     if (m_dashboard->speed() > PreviousSpeed)
     {
-    m_dashboard->setaccely(((((m_dashboard->speed() - PreviousSpeed) *1000) / 3600 )/ (25 * 0.001))*0.10197162129779);
+    m_dashboard->setaccely((((m_dashboard->speed() - PreviousSpeed) *0.277778) / (25 * 0.001))*0.10197162129779);
    // qDebug() << "G force "<< m_dashboard->accely();
     }
     }
@@ -134,7 +135,7 @@ void calculations::calculate()
     {
     if (m_dashboard->speed() > PreviousSpeed)
     {
-    m_dashboard->setaccely((((((m_dashboard->speed() - PreviousSpeed)*1.60934) *1000) / 3600 )/ (25 * 0.001))*0.10197162129779);
+    m_dashboard->setaccely(((((m_dashboard->speed() - PreviousSpeed)* 1.60934) *0.277778) / (25 * 0.001))*0.10197162129779);
     //qDebug() << "G force "<< m_dashboard->accely();
     }
     }

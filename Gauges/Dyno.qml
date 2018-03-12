@@ -6,6 +6,8 @@ Item {
     anchors.fill: parent
     property double finalPower
     property double finalTorque
+    property int finalTorqueRPM
+    property int finalPowerRPM
     property double previousrpm
     property var powertext
     property var torquetext
@@ -32,7 +34,7 @@ Item {
                 id: startButton
                 text: "Start"
                 onClicked: {
-                    if (refreshTimer.running == false) refreshTimer.running = true, previousrpm = Dashboard.revs, finalPower =0, finalTorque =0;
+                    if (refreshTimer.running == false) refreshTimer.running = true, previousrpm = Dashboard.revs, finalPower =0, finalTorque =0, finalTorqueRPM = 0, finalPowerRPM =0,startButton.enabled =false;
 
 
                 }
@@ -41,7 +43,7 @@ Item {
                 id: stopButton
                 text: "clear"
                 onClicked: {
-                    series2.clear(),series1.clear();
+                    series2.clear(),series1.clear(),startButton.enabled =true;
 
                 }
             }
@@ -71,14 +73,14 @@ Item {
 
         SplineSeries {
             id: series1
-            name: "Power " + finalPower + " " + powertext
+            name: "Power " + finalPower + " " + powertext +" @" + finalPowerRPM + " RPM"
             axisX: axisX
             axisY: axisY1
         }
 
         SplineSeries {
             id: series2
-            name: "Torque " + finalTorque + " " + torquetext
+            name: "Torque " + finalTorque + " " + torquetext +" @" + finalTorqueRPM + " RPM"
             axisX: axisX
             axisY: axisY1
         }
@@ -102,14 +104,13 @@ Item {
             previousrpm = Dashboard.revs
 
             if (finalPower < Dashboard.Power)
-            {finalPower = Dashboard.Power}
+            {finalPower = (Dashboard.Power).toFixed(1),finalPowerRPM = Dashboard.revs}
             if (finalTorque < Dashboard.Torque)
-            {finalTorque = Dashboard.Torque}
-
+            {finalTorque = (Dashboard.Torque).toFixed(1) ,finalTorqueRPM = Dashboard.revs}
             series1.append(Dashboard.revs, Dashboard.Power);
             series2.append(Dashboard.revs, Dashboard.Torque);
             }
-            if (previousrpm > Dashboard.revs) {refreshTimer.running = false}
+            if (previousrpm > Dashboard.revs) {refreshTimer.running = false,startButton.enabled =true}
 
         }
     }
