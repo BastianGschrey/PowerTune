@@ -7,16 +7,22 @@ Item {
     property double finalPower
     property double finalTorque
     property double previousrpm
-
-
+    property var powertext
+    property var torquetext
+    property var unit : Dashboard.units;
+    Component.onCompleted: {units.unitadjust()} // adjusts the Gauges to metric or imperial
 
     ChartView {
-        title: "Virtual Dyno"
+        title: "PowerTune Virtual Dyno V1.0"
+        titleColor: "white"
+        titleFont.pixelSize: parent.width /40
         id: chartView
         theme: ChartView.ChartThemeDark
         anchors.fill: parent
         legend.visible: true
-        antialiasing: false
+        legend.font.pixelSize: parent.width /40
+        antialiasing: true
+
 
         Row {
             x: 5
@@ -42,28 +48,37 @@ Item {
         }
         ValueAxis {
             id: axisX
+            titleText: "RPM"
+            titleFont.pixelSize: parent.width /50
+            titleFont.bold: true
             min: 0
-            max: 10000
-            tickCount: 11
+            max: 9000
+            tickCount: 10
+            labelFormat: "%.0f";
+
         }
 
         ValueAxis {
             id: axisY1
+            titleText: "Torque " + "(" + torquetext + ")" + " / Power "+ "(" +powertext + ")"
+            titleFont.pixelSize: parent.width /50
             min: 0
-            max: 700
+            max: 500
+            labelFormat: "%.0f";
+
         }
 
 
         SplineSeries {
             id: series1
-            name: "Power"
+            name: "Power " + finalPower + " " + powertext
             axisX: axisX
             axisY: axisY1
         }
 
         SplineSeries {
             id: series2
-            name: "Torque"
+            name: "Torque " + finalTorque + " " + torquetext
             axisX: axisX
             axisY: axisY1
         }
@@ -97,5 +112,16 @@ Item {
             if (previousrpm > Dashboard.revs) {refreshTimer.running = false}
 
         }
+    }
+
+    Item {
+        id: units
+        function unitadjust()
+        {
+            if (unit == "imperial") {powertext = "HP",torquetext = "ft-lbs"};
+            if (unit == "metric") {powertext = "KW",torquetext = "NM"};
+        }
+
+
     }
 }

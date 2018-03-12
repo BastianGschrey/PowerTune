@@ -119,7 +119,7 @@ void calculations::calculate()
 
         }
     }
-
+/*
     //calculate acceleration in G without speedo
     //Metric Calculation
     if (m_dashboard->units()  == "metric")
@@ -140,7 +140,7 @@ void calculations::calculate()
     }
 
     PreviousSpeed = m_dashboard->speed();
-
+*/
 
 }
 
