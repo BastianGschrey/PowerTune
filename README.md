@@ -55,6 +55,8 @@ Raspbian Stretch
 | -------------------------------- |:---------------------:|:-------------:|:--------------:|:--------------:|
 | Mazda RX7 FD3S                   | (13B-REW)             | <big>__✓__    |                |Markus Ippy     |
 | Toyota MR2                       | (3S-GTE3)             | <big>__✓__    |                |Tolis Kofoglou  |
+| Toyota MR2                       | (3S-GTE )             |                |                |  |  
+| Nissan Skyline R33 GTST ENR33   | (RB25DETT)             |                |   <big>__✓__  |  |  
 | Nissan Skyline R32 GT-R BNR32   | (RB26DETT)             |                |   <big>__✓__  |Alpheus Booth   |
   
 | Soon to be tested :              | ECU Variant:          | FC Hako:      | FC Datalogit:  |Confirmed by :  | 
