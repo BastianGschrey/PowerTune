@@ -1176,7 +1176,7 @@ void Apexi::decodeInit(QByteArray rawmessagedata)
     }
 
     //Toyota
-    if (Modelname == "4E-FTE2 " || Modelname == "1JZ-GTE "||Modelname == "1JZ-GTE3"|| Modelname == "1ZZ-FRE " || Modelname == "2jZ-GTE1" || Modelname == "2ZZ-GE  " || Modelname == "3S-GE   " || Modelname == "3S-GTE3 " || Modelname == " 3S-GTE " || Modelname == "3E-FTE2 ")
+    if (Modelname == "4E-FTE2 " || Modelname == "1JZ-GTE "||Modelname == "1JZ-GTE3"|| Modelname == "1ZZ-FRE " || Modelname == "2jZ-GTE1" || Modelname == "2ZZ-GE  " || Modelname == "3S-GE   " || Modelname == "3S-GTE3 " || Modelname == "3S-GTE  " || Modelname == "3E-FTE2 ")
     {
         Model =3;
     }
