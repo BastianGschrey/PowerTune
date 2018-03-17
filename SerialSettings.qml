@@ -62,6 +62,8 @@ Rectangle {
             y: 5
             spacing: 5
             Grid {
+                anchors.top :parent.top
+                anchors.topMargin: parent.height / 20
                 rows: 10
                 columns: 2
                 spacing: 5
@@ -193,7 +195,8 @@ Rectangle {
                 rows: 10
                 columns: 2
                 spacing: 5
-
+                anchors.top :parent.top
+                anchors.topMargin: parent.height / 20
                 Button {
                     id: connectButton
                     text: "Connect"

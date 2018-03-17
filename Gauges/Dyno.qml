@@ -27,14 +27,14 @@ Item {
 
 
         Row {
-            x: 5
-            y: 5
+            anchors.top :parent.top
+            anchors.topMargin: parent.height / 20
             spacing: 5
             Button {
                 id: startButton
                 text: "Start"
                 onClicked: {
-                    if (refreshTimer.running == false) refreshTimer.running = true, previousrpm = Dashboard.revs, finalPower =0, finalTorque =0, finalTorqueRPM = 0, finalPowerRPM =0,startButton.enabled =false;
+                    if (refreshTimer.running == false) refreshTimer.running = true ,series2.clear(),series1.clear(), previousrpm = Dashboard.revs, finalPower =0, finalTorque =0, finalTorqueRPM = 0, finalPowerRPM =0,startButton.enabled =false;
 
 
                 }
