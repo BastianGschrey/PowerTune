@@ -164,7 +164,12 @@ DashBoard::DashBoard(QObject *parent)
 
  //   ,m_TimeoutStat("----")
  //   ,m_RecvData("----")
-
+    //calculations
+    , m_Gear(0)
+    , m_Power(0)
+    , m_Torque(0)
+    , m_AccelTimer(0)
+    , m_Weight(0)
 
 {
 }
@@ -1239,7 +1244,43 @@ void DashBoard::setambipress(const qreal &ambipress)
     emit ambipressChanged(ambipress);
 }
 
+//Calculations
 
+void DashBoard::setGear(const qreal &Gear)
+{
+    if (m_Gear == Gear)
+        return;
+    m_Gear = Gear;
+    emit GearChanged(Gear);
+}
+void DashBoard::setPower(const qreal &Power)
+{
+    if (m_Power == Power)
+        return;
+    m_Power = Power;
+    emit PowerChanged(Power);
+}
+void DashBoard::setTorque(const qreal &Torque)
+{
+    if (m_Torque == Torque)
+        return;
+    m_Torque = Torque;
+    emit TorqueChanged(Torque);
+}
+void DashBoard::setAccelTimer(const qreal &AccelTimer)
+{
+    if (m_AccelTimer == AccelTimer)
+        return;
+    m_AccelTimer = AccelTimer;
+    emit AccelTimerChanged(AccelTimer);
+}
+void DashBoard::setWeight(const qreal &Weight)
+{
+    if (m_Weight == Weight)
+        return;
+    m_Weight = Weight;
+    emit WeightChanged(Weight);
+}
 
 
 // Odometer
@@ -1405,3 +1446,9 @@ qreal DashBoard::compass() const { return m_compass; }
 qreal DashBoard::ambitemp() const { return m_ambitemp; }
 qreal DashBoard::ambipress() const { return m_ambipress; }
 
+//calculations
+qreal DashBoard::Gear() const { return m_Gear; }
+qreal DashBoard::Power() const { return m_Power; }
+qreal DashBoard::Torque() const { return m_Torque; }
+qreal DashBoard::AccelTimer() const { return m_AccelTimer; }
+qreal DashBoard::Weight() const { return m_Weight; }

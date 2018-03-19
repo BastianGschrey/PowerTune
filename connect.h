@@ -24,6 +24,7 @@
 #include <QObject>
 #include <QModbusDataUnit>
 #include <QTimer>
+#include "calculations.h"
 
 
 class SerialPort;
@@ -36,6 +37,7 @@ class HaltechCAN;
 class Nissanconsult;
 class OBD;
 class datalogger;
+class calculations;
 class udpreceiver;
 class AppSettings;
 class GoPro;
@@ -52,10 +54,15 @@ public:
     ~Connect();
     explicit Connect(QObject *parent = 0);
     Q_INVOKABLE void setUnits(const int &units);
+    Q_INVOKABLE void setWeight(const int &weight);
     Q_INVOKABLE void clear() const;
     Q_INVOKABLE void openConnection(const QString &portName, const int &ecuSelect);
     Q_INVOKABLE void closeConnection();
     Q_INVOKABLE void update();
+
+
+
+
 
 public:
 
@@ -76,8 +83,11 @@ private:
     AdaptronicCAN *m_adaptronicCAN;
     udpreceiver *m_udpreceiver;
     datalogger *m_datalogger;
+    calculations *m_calculations;
     QStringList m_portsNames;
     QStringList *m_ecuList;
+    QThread* CALCThread;
+
 
 
 signals:

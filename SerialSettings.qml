@@ -44,6 +44,7 @@ Rectangle {
             property alias aux4: an4V5.text
             property alias goProVariant: goProSelect.currentIndex
             property alias password: goPropass.text
+            property alias vehicleweight: weight.text
             property alias unitSelector: unitSelect.currentIndex
 
         }
@@ -61,6 +62,8 @@ Rectangle {
             y: 5
             spacing: 5
             Grid {
+                anchors.top :parent.top
+                anchors.topMargin: parent.height / 20
                 rows: 10
                 columns: 2
                 spacing: 5
@@ -110,8 +113,9 @@ Rectangle {
 
                     model: [ "Metric","Imperial"]
                     property bool initialized: false
-                    Component.onCompleted: { Connect.setUnits(currentIndex) }
-                    onCurrentIndexChanged: { Connect.setUnits(currentIndex) }
+                    Component.onCompleted: { Connect.setUnits(currentIndex);changeweighttext.changetext()}
+                    onCurrentIndexChanged: { Connect.setUnits(currentIndex);changeweighttext.changetext()}
+
 
                 }
                 Text { text: "ECU Selection:" }
@@ -168,10 +172,21 @@ Rectangle {
                 }
                 Text
                 {
+                    id: weighttext
+                    text: "Weight:"
+                }
+                TextField {
+                    id: weight
+                    inputMethodHints: Qt.ImhDigitsOnly
+                    Component.onCompleted: { Connect.setWeight(weight.text) }
+                }
+                Text
+                {
                     text: "Serial Status:"
                 }
                 TextField {
                     text: qsTr(Dashboard.SerialStat)
+
 
                 }
             }
@@ -180,12 +195,13 @@ Rectangle {
                 rows: 10
                 columns: 2
                 spacing: 5
-
+                anchors.top :parent.top
+                anchors.topMargin: parent.height / 20
                 Button {
                     id: connectButton
                     text: "Connect"
                     onClicked: {
-                        functconnect.connectfunc();
+                    functconnect.connectfunc();
                     connectButton.enabled =false;
                     ecuSelect.enabled = false;
                     disconnectButton.enabled = true;
@@ -412,8 +428,7 @@ Rectangle {
         function auto()
         {
             // if (connectAtStart.checked == true) Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex);
-            if (connectAtStart.checked == true) functconnect.connectfunc(),connectButton.enabled =false,ecuSelect.enabled = false,disconnectButton.enabled = true;;//Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Connect.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
-
+            if (connectAtStart.checked == true) functconnect.connectfunc(),connectButton.enabled =false,ecuSelect.enabled = false,disconnectButton.enabled = true;//Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),Connect.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
         }
     }
     Item {
@@ -426,7 +441,14 @@ Rectangle {
             if (gpsswitch.checked == false)GPS.stopGPScom();
         }
     }
-
+    Item {
+        id: changeweighttext
+        function changetext()
+        {
+            if  (unitSelect.currentIndex == 0) weighttext.text = "Weight kg";
+            if  (unitSelect.currentIndex == 1) weighttext.text = "Weight lbs";
+        }
+    }
     Item {
 
         //Function to transmit GoPro rec status on off
@@ -475,7 +497,7 @@ Rectangle {
         id: functconnect
         function connectfunc()
         {
-             Connect.openConnection(serialName.currentText, ecuSelect.currentIndex);
+             Connect.openConnection(serialName.currentText, ecuSelect.currentIndex ,weight.currentText);
             //else Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, logger.datalogger()),Connect.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
         }
     }
@@ -503,6 +525,7 @@ Rectangle {
             if (dash1.currentIndex == "5") {firstPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
             if (dash1.currentIndex == "6") {firstPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
             if (dash1.currentIndex == "7") {firstPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
+            if (dash1.currentIndex == "8") {firstPageLoader.source = "qrc:/Gauges/Dyno.qml"};
 
         }
 
@@ -519,6 +542,7 @@ Rectangle {
             if (dash2.currentIndex == "5") {secondPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
             if (dash2.currentIndex == "6") {secondPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
             if (dash2.currentIndex == "7") {secondPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
+            if (dash2.currentIndex == "8") {secondPageLoader.source = "qrc:/Gauges/Dyno.qml"};
 
         }
 
@@ -535,6 +559,7 @@ Rectangle {
             if (dash3.currentIndex == "5") {thirdPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
             if (dash3.currentIndex == "6") {thirdPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
             if (dash3.currentIndex == "7") {thirdPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
+            if (dash3.currentIndex == "8") {thirdPageLoader.source = "qrc:/Gauges/Dyno.qml"};
 
         }
 
@@ -551,6 +576,7 @@ Rectangle {
             if (dash4.currentIndex == "5") {fourthPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
             if (dash4.currentIndex == "6") {fourthPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
             if (dash4.currentIndex == "7") {fourthPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
+            if (dash4.currentIndex == "8") {fourthPageLoader.source = "qrc:/Gauges/Dyno.qml"};
 
         }
 
@@ -608,7 +634,7 @@ Rectangle {
             ComboBox {
                 id: dash1
                 width: 180
-                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force"]
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select1.selDash1() }
                 Component.onCompleted: {select1.selDash1() }
@@ -617,7 +643,7 @@ Rectangle {
             ComboBox {
                 id: dash2
                 width: 180
-                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force"]
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select2.selDash2() }
                 Component.onCompleted: {select2.selDash2() }
@@ -626,7 +652,7 @@ Rectangle {
             ComboBox {
                 id: dash3
                 width: 180
-                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force"]
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select3.selDash3() }
                 Component.onCompleted: {select3.selDash3() }
@@ -634,7 +660,7 @@ Rectangle {
             ComboBox {
                 id: dash4
                 width: 180
-                model:  ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force"]
+                model:  ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select4.selDash4() }
                 Component.onCompleted: {select4.selDash4() }

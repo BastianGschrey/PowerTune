@@ -19,6 +19,7 @@
 
 #include "datalogger.h"
 #include "connect.h"
+#include "calculations.h"
 #include "sensors.h"
 #include "udpreceiver.h"
 #include "AdaptronicSelect.h"
@@ -75,25 +76,33 @@ Connect::Connect(QObject *parent) :
     m_haltechCANV2(Q_NULLPTR),
     m_adaptronicCAN(Q_NULLPTR),
     m_udpreceiver(Q_NULLPTR),
-    m_datalogger(Q_NULLPTR)
+    m_datalogger(Q_NULLPTR),
+    m_calculations(Q_NULLPTR)
 
 {
 
     getPorts();
     m_dashBoard = new DashBoard(this);
-   // m_decoder = new Decoder(m_dashBoard, this);
     m_appSettings = new AppSettings(this);
     m_gopro = new GoPro(this);
     m_gps = new GPS(m_dashBoard, this);
     m_adaptronicselect= new AdaptronicSelect(m_dashBoard, this);
     m_apexi= new Apexi(m_dashBoard, this);
-    ;m_nissanconsult = new Nissanconsult(m_dashBoard, this);
+    m_nissanconsult = new Nissanconsult(m_dashBoard, this);
     m_OBD = new OBD(m_dashBoard, this);
     m_sensors = new Sensors(m_dashBoard, this);
     m_haltechCANV2 = new HaltechCAN(m_dashBoard, this);
     m_adaptronicCAN = new AdaptronicCAN(m_dashBoard, this);
     m_udpreceiver = new udpreceiver(m_dashBoard, this);
     m_datalogger = new datalogger(m_dashBoard, this);
+    m_calculations = new calculations(m_dashBoard, this);
+//    m_calculations = new calculations;
+    m_calculations->start();
+/*
+    CALCThread = new QThread;
+    m_calculations->moveToThread(CALCThread);
+    CALCThread->start();
+*/
     QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
     if (engine == Q_NULLPTR)
         return;
@@ -104,6 +113,7 @@ Connect::Connect(QObject *parent) :
     engine->rootContext()->setContextProperty("Nissanconsult",m_nissanconsult);
     engine->rootContext()->setContextProperty("Sens", m_sensors);
     engine->rootContext()->setContextProperty("Logger", m_datalogger);
+   // engine->rootContext()->setContextProperty("Calculations", m_calculations);
 }
 
 
@@ -130,6 +140,12 @@ void Connect::setUnits(const int &units)
     }
 
 }
+
+void Connect::setWeight(const int &weight)
+{
+    m_dashBoard->setWeight(weight);
+    qDebug() << "weight" << m_dashBoard->Weight();
+}
 void Connect::getPorts()
 {
     QStringList PortList;
@@ -138,7 +154,7 @@ void Connect::getPorts()
         PortList.append(info.portName());
     }
     setPortsNames(PortList);
-    // Check available ports evry 1000 ms
+    // Check available ports every 1000 ms
     QTimer::singleShot(1000, this, SLOT(getPorts()));
 }
 //function for flushing all Connect buffers
@@ -151,6 +167,7 @@ void Connect::clear() const
 //function to open Connect port
 void Connect::openConnection(const QString &portName, const int &ecuSelect)
 {
+
 
     ecu = ecuSelect;
 

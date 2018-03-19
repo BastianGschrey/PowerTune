@@ -154,7 +154,7 @@ void HaltechCAN::readyToRead()
             break;
         case 0x370:
             m_dashboard->setSpeed(pkgpayload[0]*0.1);
-            //Gear (pkgpayload[1])
+            m_dashboard->setGear(pkgpayload[1]);
             //Intake CAM Angle 1 (pkgpayload[2]*0.1)
             //Intake CAM Angle 2 (pkgpayload[3]*0.1)
             break;

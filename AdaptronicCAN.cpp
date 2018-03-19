@@ -254,16 +254,13 @@ void AdaptronicCAN::readyToRead()
             break;
         case 0x318:
             m_dashboard->setaccelx(pkgpayload[0]/1000);
-            //qDebug() << (pkgpayload[0]/1000);
             m_dashboard->setaccely(pkgpayload[1]/1000);
             m_dashboard->setaccelz(pkgpayload[2]/1000);
-            //m_dashboard->setgyrox(pkgpayload[3]/10); //Yaw
+            m_dashboard->setgyrox(pkgpayload[3]/10); //Yaw
             break;
         case 0x319:
-            //m_dashboard->setgyroy(pkgpayload[0]/10); //Pitch
-            //qDebug() << (pkgpayload[0]/10);
-            //m_dashboard->setgyroz(pkgpayload[1]/10); //Roll
-            //qDebug() << (pkgpayload[1]/10);
+            m_dashboard->setgyroy(pkgpayload[0]/10); //Pitch
+            m_dashboard->setgyroz(pkgpayload[1]/10); //Roll
             break;
         case 0x31A:
             //"GPS Long low"(pkgpayload[0])
@@ -763,7 +760,7 @@ void AdaptronicCAN::readyToRead()
             break;
 
         case 0x368:
-            //qDebug() << "Gear number :" << pkgpayload[0];
+            m_dashboard->setGear(pkgpayload[0]);
             //qDebug() << "Driven speed:" << pkgpayload[1]/10;
             //qDebug() << "Ground speed :" << pkgpayload[2]/10;
             //qDebug() << "Spd diff (drive-gnd)  :" << pkgpayload[3]/10;

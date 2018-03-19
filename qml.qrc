@@ -62,5 +62,7 @@
         <file>Gauges/SensorTest.qml</file>
         <file>Gauges/verticalbargauge.qml</file>
         <file>Gauges/createverticalbargauge.js</file>
+        <file>Gauges/Dyno.qml</file>
+        <file>Gauges/Camera.qml</file>
     </qresource>
 </RCC>

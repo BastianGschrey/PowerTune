@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick serialport serialbus network charts location positioning sensors
+QT += qml quick serialport serialbus network charts location positioning sensors concurrent
 CONFIG += c++11
 static {
     QT += svg
@@ -23,7 +23,8 @@ SOURCES += main.cpp \
     Apexi.cpp \
     Nissanconsult.cpp \
     AdaptronicSelect.cpp \
-    connect.cpp
+    connect.cpp \
+    calculations.cpp
 
 
 RESOURCES += qml.qrc
@@ -49,7 +50,8 @@ HEADERS += \
     Apexi.h \
     Nissanconsult.h \
     AdaptronicSelect.h \
-    connect.h
+    connect.h \
+    calculations.h
 
 
 FORMS +=
