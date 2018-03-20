@@ -51,18 +51,18 @@ Raspbian Stretch
 
 
 
-| Tested Vehicles Apexi PFC :      | ECU Variant:          | FC Hako:      | FC Datalogit:  |Confirmed by :  |
-| -------------------------------- |:---------------------:|:-------------:|:--------------:|:--------------:|
-| Mazda RX7 FD3S                   | (13B-REW)             | <big>__✓__    |                |Markus Ippy     |
-| Toyota MR2                       | (3S-GTE3)             | <big>__✓__    |                |Tolis Kofoglou  |
-| Toyota MR2                       | (3S-GTE )             |                |                |  |  
-| Nissan Skyline R33 GTST ENR33   | (RB25DETT)             |                |   <big>__✓__  |  |  
-| Nissan Skyline R32 GT-R BNR32   | (RB26DETT)             |                |   <big>__✓__  |Alpheus Booth   |
+| Tested Vehicles Apexi PFC :      | ECU Variant:          | FC Hako:      | FC Datalogit:  |Confirmed by :    |
+| -------------------------------- |:---------------------:|:-------------:|:--------------:|:----------------:|
+| Mazda RX7 FD3S                   | (13B-REW)             | <big>__✓__    |                |Markus Ippy       |
+| Toyota MR2                       | (3S-GTE3)             | <big>__✓__    |                |Tolis Kofoglou    |
+| Toyota MR2                       | (3S-GTE )             |                |   <big>__✓__  |Juan Pena         |  
+| Nissan Skyline R33 GTST ENR33   | (RB25DETT)             |                |   <big>__✓__  |Michael Kwaaitaal |  
+| Nissan Skyline R32 GT-R BNR32   | (RB26DETT)             |                |   <big>__✓__  |Alpheus Booth     |
   
-| Soon to be tested :              | ECU Variant:          | FC Hako:      | FC Datalogit:  |Confirmed by :  | 
-| -------------------------------- |:---------------------:|:-------------:|:--------------:|:--------------:|
-| Nissan Silvia S14                | (SR20DET1)            |               |                |                |
-| Toyota Supra JZA70               | (1JZ-GTE)             |               |                |                |
+| Soon to be tested :              | ECU Variant:          | FC Hako:      | FC Datalogit:  |Confirmed by :    | 
+| -------------------------------- |:---------------------:|:-------------:|:--------------:|:----------------:|
+| Nissan Silvia S14                | (SR20DET1)            |               |                |                  |
+| Toyota Supra JZA70               | (1JZ-GTE)             |               |                |                  |
 
 
 #### Adaptronic Variants :
@@ -73,9 +73,10 @@ Raspbian Stretch
 * All variants
 
 
-| Tested Vehicles Adaptronic:      | ECU Variant:          | Variant:            | Confirmed:     |Confirmed by :  |
-| -------------------------------- |:---------------------:|:-------------------:|:--------------:|:--------------:|
-| Mazda RX7 FD3S                   | (13B-REW)             | Select Plugin S8*   | <big>__✓__     |Bastian Gschrey |
+| Tested Vehicles Adaptronic:      | ECU Variant:               | Interface:    | Confirmed:     |Confirmed by :    |
+| -------------------------------- |:--------------------------:|:-------------:|:--------------:|:----------------:|
+| Mazda RX7 FD3S                   | (13B-REW) Select Plugin S8*| Serial        | <big>__✓__     |Bastian Gschrey   |
+| Mazda RX7 FD3S                   | (13B-REW) Modular          | CAN (PICAN2)  | <big>__✓__     |Bastian Gschrey   |
 
 
 
@@ -97,8 +98,7 @@ Raspbian Stretch
 Implemented Features :
 
 * Remote control GoPro Recording on off
-* Logging to user selectable CSV file for Adaptronic 
-* Logging to user selectable txt file for Power FC 
+* Logging to CSV file 
 * Differential Aux input Settings for Power FC 
 * GPS for NMEA 0183 compliant devices via Serial (Tested with BU-353S4 GPS Mouse) 
 * Switching between metric and Imperial values
