@@ -98,8 +98,7 @@ Raspbian Stretch
 Implemented Features :
 
 * Remote control GoPro Recording on off
-* Logging to user selectable CSV file for Adaptronic 
-* Logging to user selectable txt file for Power FC 
+* Logging to CSV file 
 * Differential Aux input Settings for Power FC 
 * GPS for NMEA 0183 compliant devices via Serial (Tested with BU-353S4 GPS Mouse) 
 * Switching between metric and Imperial values
