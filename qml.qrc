@@ -3,9 +3,6 @@
         <file>main.qml</file>
         <file>SerialSettings.qml</file>
         <file>graphics/Tacho_Mitte.png</file>
-        <file>Settings.qml</file>
-        <file>GuiSettings.qml</file>
-        <file>DecodingSettings.qml</file>
         <file>Gauges/DashboardGaugeStyle.qml</file>
         <file>Gauges/GaugeNeedle.qml</file>
         <file>Gauges/RevGauge.qml</file>
@@ -19,7 +16,6 @@
         <file>Gauges/Dashboard.qml</file>
         <file>Gauges/PFCSensors.qml</file>
         <file>Gauges/BarGauge.qml</file>
-        <file>AuxInput.qml</file>
         <file>Gauges/RoundGaugeSpeedMetric.qml</file>
         <file>Gauges/GaugeRoundREV.qml</file>
         <file>Gauges/GPS.qml</file>

@@ -52,7 +52,7 @@ ApplicationWindow {
 
         Item {
             id:lastPage
-            Settings{}
+            SerialSettings{}
         }
     }
 
