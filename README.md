@@ -73,10 +73,10 @@ Raspbian Stretch
 * All variants
 
 
-| Tested Vehicles Adaptronic:      | ECU Variant:          | Variant:            | Confirmed:     |Confirmed by :  |
-| -------------------------------- |:---------------------:|:-------------------:|:--------------:|:--------------:|
-| Mazda RX7 FD3S                   | (13B-REW)             | Select Plugin S8*   | <big>__✓__     |Bastian Gschrey |
-| Mazda RX7 FD3S                   | (13B-REW)             | Modular             | <big>__✓__     |Bastian Gschrey |
+| Tested Vehicles Adaptronic:      | ECU Variant:               | Interface:    | Confirmed:     |Confirmed by :    |
+| -------------------------------- |:--------------------------:|:-------------:|:--------------:|:----------------:|
+| Mazda RX7 FD3S                   | (13B-REW) Select Plugin S8*| Serial        | <big>__✓__     |Bastian Gschrey   |
+| Mazda RX7 FD3S                   | (13B-REW) Modular          | CAN (PICAN2)  | <big>__✓__     |Bastian Gschrey   |
 
 
 
