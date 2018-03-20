@@ -1,30 +1,13 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>graphics/background.png</file>
-        <file>graphics/Dial.qml</file>
-        <file>graphics/needle.png</file>
-        <file>graphics/needle_shadow.png</file>
-        <file>graphics/overlay.png</file>
-        <file>graphics/quit.png</file>
-        <file>graphics/QuitButton.qml</file>
         <file>SerialSettings.qml</file>
         <file>graphics/Tacho_Mitte.png</file>
         <file>Settings.qml</file>
         <file>GuiSettings.qml</file>
         <file>DecodingSettings.qml</file>
-        <file>Gauges/AirTempGaugeInnerRingF.qml</file>
-        <file>Gauges/BoostGaugeInnerRing.qml</file>
         <file>Gauges/DashboardGaugeStyle.qml</file>
-        <file>Gauges/Fullgauge180Needle.qml</file>
         <file>Gauges/GaugeNeedle.qml</file>
-        <file>Gauges/HalfGaugeStyle.qml</file>
-        <file>Gauges/HalfGaugeWaterDegC.qml</file>
-        <file>Gauges/HalfGaugeWaterDegF.qml</file>
-        <file>Gauges/HalfNeedle.qml</file>
-        <file>Gauges/Needle180deg.qml</file>
-        <file>Gauges/Needle90degrTopright.qml</file>
-        <file>Gauges/Needle90Left.qml</file>
         <file>Gauges/RevGauge.qml</file>
         <file>Gauges/RevGaugeInnerRing.qml</file>
         <file>Gauges/RevGaugeNeedle.qml</file>
@@ -32,15 +15,9 @@
         <file>Gauges/SpeedGaugeInnerRing_Imperial.qml</file>
         <file>Gauges/SpeedGaugeNeedle.qml</file>
         <file>Gauges/TachometerStyle.qml</file>
-        <file>Gauges/TempGauge.qml</file>
-        <file>Gauges/WaterGaugeInnerRingF.qml</file>
-        <file>Gauges/Dash1.qml</file>
-        <file>Gauges/Dash2.qml</file>
         <file>Gauges/DashAdaptronic.qml</file>
         <file>Gauges/Dashboard.qml</file>
-        <file>Gauges/Dashboard_Imperial.qml</file>
         <file>Gauges/PFCSensors.qml</file>
-        <file>Gauges/HalfGauges_metric.qml</file>
         <file>Gauges/BarGauge.qml</file>
         <file>AuxInput.qml</file>
         <file>Gauges/RoundGaugeSpeedMetric.qml</file>

@@ -687,6 +687,8 @@ Rectangle {
             rows: 6
             columns: 2
             spacing: 5
+            anchors.top :parent.top
+            anchors.topMargin: parent.height / 20
             Switch {
                 id: accelsens
                 text: qsTr("Accelerometer")
