@@ -51,18 +51,18 @@ Raspbian Stretch
 
 
 
-| Tested Vehicles Apexi PFC :      | ECU Variant:          | FC Hako:      | FC Datalogit:  |Confirmed by :  |
-| -------------------------------- |:---------------------:|:-------------:|:--------------:|:--------------:|
-| Mazda RX7 FD3S                   | (13B-REW)             | <big>__✓__    |                |Markus Ippy     |
-| Toyota MR2                       | (3S-GTE3)             | <big>__✓__    |                |Tolis Kofoglou  |
-| Toyota MR2                       | (3S-GTE )             |                |                |  |  
-| Nissan Skyline R33 GTST ENR33   | (RB25DETT)             |                |   <big>__✓__  |  |  
-| Nissan Skyline R32 GT-R BNR32   | (RB26DETT)             |                |   <big>__✓__  |Alpheus Booth   |
+| Tested Vehicles Apexi PFC :      | ECU Variant:          | FC Hako:      | FC Datalogit:  |Confirmed by :    |
+| -------------------------------- |:---------------------:|:-------------:|:--------------:|:----------------:|
+| Mazda RX7 FD3S                   | (13B-REW)             | <big>__✓__    |                |Markus Ippy       |
+| Toyota MR2                       | (3S-GTE3)             | <big>__✓__    |                |Tolis Kofoglou    |
+| Toyota MR2                       | (3S-GTE )             |                |               |Juan Pena          |  
+| Nissan Skyline R33 GTST ENR33   | (RB25DETT)             |                |   <big>__✓__  |Michael Kwaaitaal |  
+| Nissan Skyline R32 GT-R BNR32   | (RB26DETT)             |                |   <big>__✓__  |Alpheus Booth     |
   
-| Soon to be tested :              | ECU Variant:          | FC Hako:      | FC Datalogit:  |Confirmed by :  | 
-| -------------------------------- |:---------------------:|:-------------:|:--------------:|:--------------:|
-| Nissan Silvia S14                | (SR20DET1)            |               |                |                |
-| Toyota Supra JZA70               | (1JZ-GTE)             |               |                |                |
+| Soon to be tested :              | ECU Variant:          | FC Hako:      | FC Datalogit:  |Confirmed by :    | 
+| -------------------------------- |:---------------------:|:-------------:|:--------------:|:----------------:|
+| Nissan Silvia S14                | (SR20DET1)            |               |                |                  |
+| Toyota Supra JZA70               | (1JZ-GTE)             |               |                |                  |
 
 
 #### Adaptronic Variants :
@@ -76,6 +76,7 @@ Raspbian Stretch
 | Tested Vehicles Adaptronic:      | ECU Variant:          | Variant:            | Confirmed:     |Confirmed by :  |
 | -------------------------------- |:---------------------:|:-------------------:|:--------------:|:--------------:|
 | Mazda RX7 FD3S                   | (13B-REW)             | Select Plugin S8*   | <big>__✓__     |Bastian Gschrey |
+| Mazda RX7 FD3S                   | (13B-REW)             | Modular             | <big>__✓__     |Bastian Gschrey |
 
 
 
