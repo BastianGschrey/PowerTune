@@ -55,7 +55,7 @@ Raspbian Stretch
 | -------------------------------- |:---------------------:|:-------------:|:--------------:|:----------------:|
 | Mazda RX7 FD3S                   | (13B-REW)             | <big>__✓__    |                |Markus Ippy       |
 | Toyota MR2                       | (3S-GTE3)             | <big>__✓__    |                |Tolis Kofoglou    |
-| Toyota MR2                       | (3S-GTE )             |                |               |Juan Pena          |  
+| Toyota MR2                       | (3S-GTE )             |                |   <big>__✓__  |Juan Pena         |  
 | Nissan Skyline R33 GTST ENR33   | (RB25DETT)             |                |   <big>__✓__  |Michael Kwaaitaal |  
 | Nissan Skyline R32 GT-R BNR32   | (RB26DETT)             |                |   <big>__✓__  |Alpheus Booth     |
   
