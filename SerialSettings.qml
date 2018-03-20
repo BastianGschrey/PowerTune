@@ -221,7 +221,7 @@ Rectangle {
 
                 Button {
                     id: oppendashselect
-                    text: "Open Dashselect"
+                    text: "Dash select"
                     onClicked: {dashselector.visible = true}
                 }
                 Button {
