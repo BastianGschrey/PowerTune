@@ -4,20 +4,11 @@
         <file>SerialSettings.qml</file>
         <file>graphics/Tacho_Mitte.png</file>
         <file>Gauges/DashboardGaugeStyle.qml</file>
-        <file>Gauges/GaugeNeedle.qml</file>
-        <file>Gauges/RevGauge.qml</file>
-        <file>Gauges/RevGaugeInnerRing.qml</file>
-        <file>Gauges/RevGaugeNeedle.qml</file>
-        <file>Gauges/SpeedGaugeInnerRing.qml</file>
-        <file>Gauges/SpeedGaugeInnerRing_Imperial.qml</file>
-        <file>Gauges/SpeedGaugeNeedle.qml</file>
         <file>Gauges/TachometerStyle.qml</file>
         <file>Gauges/DashAdaptronic.qml</file>
         <file>Gauges/Dashboard.qml</file>
         <file>Gauges/PFCSensors.qml</file>
         <file>Gauges/BarGauge.qml</file>
-        <file>Gauges/RoundGaugeSpeedMetric.qml</file>
-        <file>Gauges/GaugeRoundREV.qml</file>
         <file>Gauges/GPS.qml</file>
         <file>Gauges/RaceDash.qml</file>
         <file>GPSTracks/Zwartkops.qml</file>
