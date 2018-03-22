@@ -34,7 +34,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal O2volt READ O2volt WRITE setO2volt NOTIFY O2voltChanged)
     Q_PROPERTY(qreal na1 READ na1 WRITE setna1 NOTIFY na1Changed)
     Q_PROPERTY(qreal Secinjpulse READ Secinjpulse WRITE setSecinjpulse NOTIFY SecinjpulseChanged)
-    Q_PROPERTY(qreal na2 READ Intaketemp WRITE setna2 NOTIFY na2Changed)
+    Q_PROPERTY(qreal na2 READ na2 WRITE setna2 NOTIFY na2Changed)
     Q_PROPERTY(qreal InjDuty READ InjDuty WRITE setInjDuty NOTIFY InjDutyChanged)
     Q_PROPERTY(qreal pim READ pim WRITE setpim NOTIFY pimChanged)
 
