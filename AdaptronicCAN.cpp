@@ -717,25 +717,15 @@ void AdaptronicCAN::readyToRead()
             //"Lambda 1)"(pkgpayload[2]/100)
             //"ECT"(pkgpayload[3]/100)
             //Check if water is cold
-            if((pkgpayload[3]/10.00) >= 0){
-                m_dashboard->setWatertemp(0);
-            }
-            else{
-                m_dashboard->setWatertemp(pkgpayload[3]/10);
-            }
+            m_dashboard->setWatertemp(pkgpayload[3]/10);
             break;
 
 
         case 0x365:
             //qDebug() << "MAT :" << pkgpayload[0]/10;
             //check is air is cold
-            if((pkgpayload[0]/10) >= 0){
-                m_dashboard->setIntaketemp(0);
-            }
-            else{
-                m_dashboard->setIntaketemp(pkgpayload[0]/10);
-            }
-            break;
+            m_dashboard->setIntaketemp(pkgpayload[0]/10);
+
 
             //m_dashboard->setIntaketemp(pkgpayload[0]/10);
             //qDebug() << "Oil T :" << pkgpayload[1]/10;
