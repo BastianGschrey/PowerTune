@@ -59,7 +59,7 @@ void datalogger::updateLog()
                 << m_dashboard->Intakepress()  << ","
                 << m_dashboard->PressureV()  << ","
                 << m_dashboard->ThrottleV()  << ","
-                << m_dashboard->Primaryinp () << ","
+                << m_dashboard->Primaryinp() << ","
                 << m_dashboard->Fuelc()  << ","
                 << m_dashboard->Leadingign()  << ","
                 << m_dashboard->Trailingign() << ","
