@@ -31,24 +31,36 @@ HaltechCAN::~HaltechCAN()
 
 void HaltechCAN::openCAN()
 {
-    //Check if the plugin is available
     if (QCanBus::instance()->plugins().contains(QStringLiteral("socketcan")))
     {
-        QCanBusDevice *m_canDevice = QCanBus::instance()->createDevice(
-                    QStringLiteral("socketcan"), QStringLiteral("can0"));
-        m_canDevice->connectDevice();
-        connect(m_canDevice, &QCanBusDevice::framesReceived,this, &HaltechCAN::readyToRead);
-        //connect(this->m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));
-        qDebug() << "Successfully connected to socketcan ";
+        QString errorString;
+        m_canDevice = QCanBus::instance()->createDevice(QStringLiteral("socketcan"),
+                                                                       QStringLiteral("can0"),&errorString);
+
+        if (!m_canDevice) {
+            qDebug() << ("Error creating device");
+            return;
+        }
+
+
+
+        if(m_canDevice->connectDevice()){
+            qDebug() << m_canDevice->state();
+            qDebug() << m_canDevice;
+            qDebug() << "device connected!";
+            //connect(m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));
+            connect(m_canDevice, &QCanBusDevice::framesReceived, this, &HaltechCAN::readyToRead);
+        }
+
     }
-    else
-        qDebug() << "Could not connect to Haltech CAN device";
 }
 void HaltechCAN::closeConnection()
 {
-    disconnect(m_canDevice, &QCanBusDevice::framesReceived,this, &HaltechCAN::readyToRead);
+    disconnect(m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));
+    if (m_canDevice)
     m_canDevice->disconnectDevice();
-    delete m_canDevice;
+
+
 }
 void HaltechCAN::readyToRead()
 {

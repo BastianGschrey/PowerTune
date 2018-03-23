@@ -33,8 +33,6 @@ AdaptronicCAN::~AdaptronicCAN()
 
 void AdaptronicCAN::openCAN()
 {
-
-
     if (QCanBus::instance()->plugins().contains(QStringLiteral("socketcan")))
     {
         QString errorString;
@@ -57,8 +55,6 @@ void AdaptronicCAN::openCAN()
         }
 
     }
-
-
 }
 
 
@@ -69,7 +65,7 @@ void AdaptronicCAN::openCAN()
 void AdaptronicCAN::closeConnection()
 {
     disconnect(m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));
-    if (m_canDevice->ConnectedState)
+    if (m_canDevice)
     m_canDevice->disconnectDevice();
 
 
