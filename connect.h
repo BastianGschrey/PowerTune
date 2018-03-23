@@ -53,6 +53,7 @@ class Connect : public QObject
 public:
     ~Connect();
     explicit Connect(QObject *parent = 0);
+    Q_INVOKABLE void setSreenbrightness(const int &brightness);
     Q_INVOKABLE void setUnits(const int &units);
     Q_INVOKABLE void setWeight(const int &weight);
     Q_INVOKABLE void clear() const;

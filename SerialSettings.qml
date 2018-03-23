@@ -3,6 +3,7 @@ import QtQuick.Controls 2.1
 import Qt.labs.settings 1.0
 import QtQuick.VirtualKeyboard 2.1
 import QtSensors 5.0
+import QtQuick.Controls.Styles 1.4
 
 
 Rectangle {
@@ -229,14 +230,7 @@ Rectangle {
                     text: "Senshat"
                     onClicked: {senhatselector.visible = true}
                 }
-                /*
-                Button {
-                    text: "Clear"
-                    onClicked: {
-                        Connect.clear()
-                    }
-                }
-*/              //for official raspberry Pi image only !!!!
+            //for official raspberry Pi image only !!!!
                 /*
                 Button {
                     text: "Pi Update "
@@ -251,9 +245,9 @@ Rectangle {
                     onClicked: {
                         Qt.quit()
                     }
+
+
                 }
-
-
 
                 Switch {
                     id: connectAtStart
@@ -276,6 +270,14 @@ Rectangle {
                     id: gpsswitch
                     text: qsTr("GPS")
                     onCheckedChanged: {autoconnectGPS.auto()}
+                }
+                Slider {
+                    id:brightness
+                    stepSize: 1
+                    from: 1
+                    value: 25
+                    to: 255
+                    onPositionChanged: Connect.setSreenbrightness(brightness.value);//console.log(brighness.value);
                 }
 
               /*
@@ -734,6 +736,7 @@ Rectangle {
                 text: "Apply"
                 onClicked: {senhatselector.visible = false}
             }
+
 
 
         }

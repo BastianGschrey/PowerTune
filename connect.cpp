@@ -124,6 +124,16 @@ Connect::~Connect()
 
 }
 
+void Connect::setSreenbrightness(const int &brightness)
+{
+//This works only on raspberry pi
+QFile f("/sys/class/backlight/rpi_backlight/brightness");
+f.open(QIODevice::WriteOnly | QIODevice::Truncate);
+QTextStream out(&f);
+out << brightness;
+//f.write(test);
+
+}
 void Connect::setUnits(const int &units)
 {
     switch (units)
@@ -217,11 +227,9 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
     //Haltech V2 CAN protocol
     if (ecuSelect == 6)
     {
-        if (connectclicked == 0)
-        {
+
         m_haltechCANV2->openCAN();
-        connectclicked = 1;
-        }
+
 
     }
 
