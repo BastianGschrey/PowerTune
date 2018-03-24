@@ -334,17 +334,6 @@ void Connect::closeConnection()
 void Connect::update()
 {
 
-/*
-    bool bStatus = false;
-
-    QStringList args;
-    qint64      pid = 0;
-
-    args << "&";
-    bStatus = QProcess::startDetached("/home/pi/updatePowerTune.sh", args, ".", &pid);
-
-*/
-    //QProcess process;
     qDebug() << "Starting Update";
     QProcess *process = new QProcess(this);
     connect(process , SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(updatefinished(int, QProcess::ExitStatus)));
@@ -365,13 +354,14 @@ void Connect::updatefinished(int code , QProcess::ExitStatus status)
 {
    if (code == 0)
    {
+       qDebug() << "process done ";
        QString path = "/home/pi/build/PowertuneQMLGui";
        if (QFileInfo::exists(path))
        {
            bool ok;
            if(ok)
            {
-               qDebug() << "update succsesfull";
+               qDebug() << "update succsesful";
 
            }
        }
