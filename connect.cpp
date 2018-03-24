@@ -333,17 +333,16 @@ void Connect::closeConnection()
 
 void Connect::update()
 {
-    m_dashBoard->setSerialStat("Starting Update");
+    m_dashBoard->setSerialStat("Update started");
     QProcess *process = new QProcess(this);
-    connect(process , SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(updatefinished(int exitCode, QProcess::ExitStatus exitStatus)));
-
+    connect(process , SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(updatefinished(int, QProcess::ExitStatus)));
     process->start("/home/pi/updatePowerTune.sh");
     process->waitForFinished(6000000); // 10 minutes time before timeout
 }
-void Connect::updatefinished(int code, QProcess::ExitStatus status)
+void Connect::updatefinished(int exitCode, QProcess::ExitStatus exitStatus)
 {
-    qDebug() << "code" <<code;
-    qDebug() << "status" <<status;
+    qDebug() << "code" <<exitCode;
+    qDebug() << "status" <<exitStatus;
     QString fileName = "/home/pi/build/PowertuneQMLGui";
     QFile file(fileName);
     if(QFileInfo::exists(fileName))

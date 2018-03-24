@@ -98,7 +98,7 @@ signals:
     void sig_portsNamesChanged(QStringList portsNames);
 
 public slots:
-    void updatefinished(int code, QProcess::ExitStatus status);
+    void updatefinished(int exitCode, QProcess::ExitStatus exitStatus);
     void getPorts();
     void setPortsNames(QStringList portsNames)
     {
