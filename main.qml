@@ -19,14 +19,14 @@ ApplicationWindow {
 
         currentIndex: 0
         anchors.fill: parent
-
+/*
         Loader {
 
             id: sensor
             source: "qrc:/Gauges/SensorTest.qml"
 
         }
-
+*/
         Loader {
 
             id: firstPageLoader
