@@ -147,7 +147,7 @@ void Connect::setSreenbrightness(const int &brightness)
 
 //This works only on raspberry pi
 QFile f("/sys/class/backlight/rpi_backlight/brightness");
-f.close();
+//f.close();
 f.open(QIODevice::WriteOnly | QIODevice::Truncate);
 QTextStream out(&f);
 out << brightness;
