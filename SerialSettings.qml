@@ -230,14 +230,14 @@ Rectangle {
                     onClicked: {senhatselector.visible = true}
                 }
             //for official raspberry Pi image only !!!!
-
+/*
                 Button {
                     id: updateButton
                     text: "Pi Update "
                     onClicked: { updateButton.enabled =false,Connect.update();
                     }
                 }
-
+*/
                 Button {
                     text: "Quit"
                     onClicked: {
