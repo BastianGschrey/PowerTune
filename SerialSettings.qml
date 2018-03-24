@@ -45,15 +45,13 @@ Rectangle {
             property alias password: goPropass.text
             property alias vehicleweight: weight.text
             property alias unitSelector: unitSelect.currentIndex
-            Component.onCompleted: brightness.value = brightnessselect;
 
         }
 
         Item {
-            id: sensors
-            Component.onCompleted: {
-                var types = QmlSensors.sensorTypes();
-                console.log(types.join(", "));
+            id: init
+            Component.onCompleted:
+            {if (Dashboard.screen == "1") {brightness.visible = true,brightness.value = brightnessselect};
             }
         }
 
@@ -276,8 +274,8 @@ Rectangle {
                     from: 20
                     to: 255
                     //value: brightnessselect
-                    //visible: false
-                    Component.onCompleted: Connect.checkifraspberrypi(),Connect.setSreenbrightness(brightness.value);
+                    visible: false
+                    Component.onCompleted: Connect.setSreenbrightness(brightness.value);
                     onPositionChanged: Connect.setSreenbrightness(brightness.value);
                 }
 

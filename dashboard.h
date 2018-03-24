@@ -174,8 +174,10 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal Power READ Power WRITE setPower NOTIFY PowerChanged)
     Q_PROPERTY(qreal Torque READ Torque WRITE setTorque NOTIFY TorqueChanged)
     Q_PROPERTY(qreal AccelTimer READ AccelTimer WRITE setAccelTimer NOTIFY AccelTimerChanged)
-    Q_PROPERTY(qreal Weight READ AccelTimer WRITE setWeight NOTIFY WeightChanged)
+    Q_PROPERTY(qreal Weight READ Weight WRITE setWeight NOTIFY WeightChanged)
 
+    //Official Pi screen present screen
+    Q_PROPERTY(qreal screen READ screen WRITE setscreen NOTIFY screenChanged)
 
 public:
     DashBoard(QObject *parent = 0);
@@ -359,6 +361,9 @@ public:
     void setAccelTimer(const qreal &AccelTimer);
     void setWeight(const qreal &Weight);
 
+//Official Pi screen present screen
+    void setscreen(const qreal &screen);
+
     qreal Odo() const;
 
     // Advanced Info FD3S
@@ -529,6 +534,10 @@ public:
     qreal Torque() const;
     qreal AccelTimer() const;
     qreal Weight() const;
+
+
+    //Official Pi screen present screen
+     qreal screen() const;
 
 signals:
 
@@ -703,6 +712,9 @@ signals:
     void TorqueChanged(qreal Torque);
     void AccelTimerChanged(qreal AccelTimer);
     void WeightChanged(qreal Weight);
+
+    //Official Pi screen present screen
+    void screenChanged(qreal screen);
 
 private:
     // Odometer
@@ -884,6 +896,9 @@ private:
     qreal m_Torque;
     qreal m_AccelTimer;
     qreal m_Weight;
+
+    //Official Pi screen present screen
+    qreal m_screen;
 
 
 };

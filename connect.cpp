@@ -97,13 +97,7 @@ Connect::Connect(QObject *parent) :
     m_udpreceiver = new udpreceiver(m_dashBoard, this);
     m_datalogger = new datalogger(m_dashBoard, this);
     m_calculations = new calculations(m_dashBoard, this);
-//    m_calculations = new calculations;
-    m_calculations->start();
-/*
-    CALCThread = new QThread;
-    m_calculations->moveToThread(CALCThread);
-    CALCThread->start();
-*/
+
     QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
     if (engine == Q_NULLPTR)
         return;
@@ -132,13 +126,12 @@ void Connect::checkifraspberrypi()
       bool ok;
       if(ok)
       {
-          qDebug() << "Raspberry pi brightness file found";
-
+       m_dashBoard->setscreen(1);
       }
   }
   else
   {
-      qDebug() << "This is not a rasperry pi";
+      m_dashBoard->setscreen(0);
   }
 }
 

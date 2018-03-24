@@ -14,6 +14,10 @@ ApplicationWindow {
     title: qsTr("PowerTune ") + Dashboard.Platform + " Beta 24"
     // visibility: "FullScreen"
     color: "black"
+    Item {
+        id: name
+        Component.onCompleted: Connect.checkifraspberrypi()
+    }
     SwipeView {
         id: view
 
