@@ -340,9 +340,10 @@ void Connect::update()
     process->start("/home/pi/updatePowerTune.sh");
     process->waitForFinished(6000000); // 10 minutes time before timeout
 }
-void Connect::updatefinished(int, QProcess::ExitStatus status)
+void Connect::updatefinished(int code, QProcess::ExitStatus status)
 {
-
+    qDebug() << "code" <<code;
+    qDebug() << "status" <<status;
     QString fileName = "/home/pi/build/PowertuneQMLGui";
     QFile file(fileName);
     if(QFileInfo::exists(fileName))
