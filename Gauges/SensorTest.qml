@@ -1,5 +1,6 @@
 import QtQuick 2.8
 import QtQuick.Controls 2.1
+import QtQuick.Extras 1.4
 
 Item {
     id: sensorwindow
@@ -9,7 +10,22 @@ Rectangle {
     anchors.fill: parent
     color: "grey"
 
+    PieMenu {
+        id: pieMenu
 
+        MenuItem {
+            text: "Action 1"
+            onTriggered: print("Action 1")
+        }
+        MenuItem {
+            text: "Action 2"
+            onTriggered: print("Action 2")
+        }
+        MenuItem {
+            text: "Action 3"
+            onTriggered: print("Action 3")
+        }
+    }
 
     Grid {
         rows: 9

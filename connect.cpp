@@ -132,13 +132,13 @@ void Connect::checkifraspberrypi()
       bool ok;
       if(ok)
       {
-          qDebug() << "Connected to the Database !";
+          qDebug() << "Raspberry pi brightness file found";
 
       }
   }
   else
   {
-      qDebug() << "Database doesn't exists !";
+      qDebug() << "This is not a rasperry pi";
   }
 }
 
@@ -147,9 +147,11 @@ void Connect::setSreenbrightness(const int &brightness)
 
 //This works only on raspberry pi
 QFile f("/sys/class/backlight/rpi_backlight/brightness");
+f.close();
 f.open(QIODevice::WriteOnly | QIODevice::Truncate);
 QTextStream out(&f);
 out << brightness;
+qDebug() << brightness;
 f.close();
 }
 void Connect::setUnits(const int &units)

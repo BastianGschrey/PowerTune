@@ -11,22 +11,22 @@ ApplicationWindow {
     height: 480
     minimumWidth: 800
     minimumHeight: 480
-    // visibility: "FullScreen"
     title: qsTr("PowerTune ") + Dashboard.Platform + " Beta 24"
+    // visibility: "FullScreen"
     color: "black"
     SwipeView {
         id: view
 
         currentIndex: 0
         anchors.fill: parent
-/*
+
         Loader {
 
             id: sensor
             source: "qrc:/Gauges/SensorTest.qml"
 
         }
-*/
+
         Loader {
 
             id: firstPageLoader
