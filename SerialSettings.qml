@@ -14,11 +14,10 @@ Rectangle {
 
     property  int test1: 0
     property  var gpscom
-
-
     Item {
         id: powerTuneSettings
         Settings {
+            property int brightnessselect: brightness.value
             property alias connectAtStartUp: connectAtStart.checked
             property alias gpsswitch: gpsswitch.checked
             property alias accelswitch: accelsens.checked
@@ -26,7 +25,6 @@ Rectangle {
             property alias compassswitch: compass.checked
             property alias tempswitch: tempsense.checked
             property alias pressureswitch:pressuresens.checked
-
             property alias serialPortName: serialName.currentText
             property alias gpsPortName: serialNameGPS.currentText
             property alias gpsPortNameindex: serialNameGPS.currentIndex
@@ -47,7 +45,7 @@ Rectangle {
             property alias password: goPropass.text
             property alias vehicleweight: weight.text
             property alias unitSelector: unitSelect.currentIndex
-            //property alias brightnessselect: brightness.value
+            Component.onCompleted: brightness.value = brightnessselect;
 
         }
 
@@ -272,17 +270,18 @@ Rectangle {
                     text: qsTr("GPS")
                     onCheckedChanged: {autoconnectGPS.auto()}
                 }
-                /*
+
                 Slider {
                     id:brightness
                     stepSize: 5
                     from: 20
                     to: 255
+                    //value: brightnessselect
                     //visible: false
                     Component.onCompleted: Connect.checkifraspberrypi();
-                    onPositionChanged: Connect.setSreenbrightness(brightness.value);//console.log(brighness.value);
+                    onPositionChanged: Connect.setSreenbrightness(brightness.value);
                 }
-               */
+
               /*
                 Text
                 {
