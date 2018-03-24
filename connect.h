@@ -24,6 +24,7 @@
 #include <QObject>
 #include <QModbusDataUnit>
 #include <QTimer>
+#include <QProcess>
 #include "calculations.h"
 
 
@@ -89,6 +90,7 @@ private:
     QStringList m_portsNames;
     QStringList *m_ecuList;
     QThread* CALCThread;
+    QProcess process;
 
 
 
@@ -96,6 +98,7 @@ signals:
     void sig_portsNamesChanged(QStringList portsNames);
 
 public slots:
+    void updatefinished(int code , QProcess::ExitStatus status);
     void getPorts();
     void setPortsNames(QStringList portsNames)
     {

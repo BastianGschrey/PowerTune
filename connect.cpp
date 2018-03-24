@@ -344,11 +344,14 @@ void Connect::update()
     bStatus = QProcess::startDetached("/home/pi/updatePowerTune.sh", args, ".", &pid);
 
 */
-    QProcess process;
+    //QProcess process;
     qDebug() << "Starting Update";
-    process.start("/home/pi/updatePowerTune.sh");
-    process.waitForFinished(6000000); // 10 minutes time
-    qDebug() <<"Process state"  <<process.state();
+    QProcess *process = new QProcess(this);
+    connect(process , SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(updatefinished(int, QProcess::ExitStatus)));
+
+    process->start("/home/pi/updatePowerTune.sh");
+    process->waitForFinished(6000000); // 10 minutes time
+    qDebug() <<"Process state"  <<process->state();
     //qDebug() <<"Finished"  <<process.state();
 /*
     QString output = process.readAllStandardOutput();
@@ -357,6 +360,11 @@ void Connect::update()
     qDebug() << err;
 */
 
+}
+void Connect::updatefinished(int code , QProcess::ExitStatus status)
+{
+   ;
+    qDebug() <<"Update finish status"<< code;
 }
 /*
 void Connect::handleError(QConnectPort::ConnectPortError ConnectPortError)
