@@ -333,40 +333,29 @@ void Connect::closeConnection()
 
 void Connect::update()
 {
-
-    qDebug() << "Starting Update";
+    m_dashBoard->setSerialStat("Starting Update");
     QProcess *process = new QProcess(this);
     connect(process , SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(updatefinished(int, QProcess::ExitStatus)));
 
     process->start("/home/pi/updatePowerTune.sh");
-    process->waitForFinished(6000000); // 10 minutes time
-    qDebug() <<"Process state"  <<process->state();
-    //qDebug() <<"Finished"  <<process.state();
-/*
-    QString output = process.readAllStandardOutput();
-    qDebug() << output;
-    QString err = process.readAllStandardError();
-    qDebug() << err;
-*/
-
+    process->waitForFinished(6000000); // 10 minutes time before timeout
 }
-void Connect::updatefinished(int code , QProcess::ExitStatus status)
+void Connect::updatefinished(int, QProcess::ExitStatus status)
 {
-    QString fileName = "/home/pi/build/PowertuneQMLGui";
-    QFile file(fileName);
-    if(QFileInfo::exists(fileName))
+    if (status == 0)
     {
-        qDebug () << "file exists";
-        file.close();
+        QString fileName = "/home/pi/build/PowertuneQMLGui";
+        QFile file(fileName);
+        if(QFileInfo::exists(fileName))
+        {
+            m_dashBoard->setSerialStat("Update Successful");
+            file.close();
+        }
     }
-   /*
-   if (code == 0)
-   {
-       qDebug() << "process done ";
-   }
-   else
-   qDebug() <<"Update script unsuccsefull";
-*/
+    else
+    {
+        m_dashBoard->setSerialStat("Update Unsuccessful");
+    }
 }
 /*
 void Connect::handleError(QConnectPort::ConnectPortError ConnectPortError)
