@@ -47,7 +47,7 @@ Rectangle {
             property alias password: goPropass.text
             property alias vehicleweight: weight.text
             property alias unitSelector: unitSelect.currentIndex
-            property alias brightnessselect: brightness.value
+            //property alias brightnessselect: brightness.value
 
         }
 
