@@ -335,7 +335,7 @@ void Connect::update()
 {
     m_dashBoard->setSerialStat("Starting Update");
     QProcess *process = new QProcess(this);
-    connect(process , SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(updatefinished(int, QProcess::ExitStatus)));
+    connect(process , SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(updatefinished(int exitCode, QProcess::ExitStatus exitStatus)));
 
     process->start("/home/pi/updatePowerTune.sh");
     process->waitForFinished(6000000); // 10 minutes time before timeout
