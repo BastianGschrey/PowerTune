@@ -334,7 +334,7 @@ void Connect::closeConnection()
 void Connect::update()
 {
 
-
+/*
     bool bStatus = false;
 
     QStringList args;
@@ -342,6 +342,15 @@ void Connect::update()
 
     args << "&";
     bStatus = QProcess::startDetached("/home/pi/updatePowerTune.sh", args, ".", &pid);
+
+*/
+    QProcess process;
+    process.start("/home/pi/updatePowerTune.sh");
+    process.waitForFinished();
+    QString output = process.readAllStandardOutput();
+    qDebug() << output;
+    QString err = process.readAllStandardError();
+    qDebug() << err;
 
 }
 /*
