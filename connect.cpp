@@ -342,15 +342,13 @@ void Connect::update()
 }
 void Connect::updatefinished(int, QProcess::ExitStatus status)
 {
-    if (status == 0)
+
+    QString fileName = "/home/pi/build/PowertuneQMLGui";
+    QFile file(fileName);
+    if(QFileInfo::exists(fileName))
     {
-        QString fileName = "/home/pi/build/PowertuneQMLGui";
-        QFile file(fileName);
-        if(QFileInfo::exists(fileName))
-        {
-            m_dashBoard->setSerialStat("Update Successful");
-            file.close();
-        }
+        m_dashBoard->setSerialStat("Update Successful");
+        file.close();
     }
     else
     {
