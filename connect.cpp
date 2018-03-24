@@ -363,8 +363,26 @@ void Connect::update()
 }
 void Connect::updatefinished(int code , QProcess::ExitStatus status)
 {
-   ;
-    qDebug() <<"Update finish status"<< code;
+   if (code == 0)
+   {
+       QString path = "/home/pi/build/PowertuneQMLGui";
+       if (QFileInfo::exists(path))
+       {
+           bool ok;
+           if(ok)
+           {
+               qDebug() << "update succsesfull";
+
+           }
+       }
+       else
+       {
+           qDebug() << "update failed";
+       }
+   }
+   else
+   qDebug() <<"Update script unsuccsefull";
+
 }
 /*
 void Connect::handleError(QConnectPort::ConnectPortError ConnectPortError)
