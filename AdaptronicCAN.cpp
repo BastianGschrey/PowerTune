@@ -900,7 +900,7 @@ void AdaptronicCAN::readyToRead()
             //"Calc Charge temp 2"(pkgpayload[1]/10)
             //"Stoichiometric ratio"(pkgpayload[2]/1000)
             //"Target Lambda"(pkgpayload[3]/10000)
-            m_dashboard->setLAMBDATarget(pkgpayload[3]/1000.00);
+            m_dashboard->setLAMBDATarget(pkgpayload[3]/10000.00);
             break;
         case 0x382:
             //"Calc fuel mass/cyl 1"(pkgpayload[0]/10)
