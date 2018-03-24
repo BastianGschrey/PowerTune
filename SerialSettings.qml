@@ -276,7 +276,6 @@ Rectangle {
                     id:brightness
                     stepSize: 5
                     from: 20
-                    value: 240
                     to: 255
                     //visible: false
                     Component.onCompleted: Connect.checkifraspberrypi();
