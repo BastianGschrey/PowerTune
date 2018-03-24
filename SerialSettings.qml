@@ -278,7 +278,7 @@ Rectangle {
                     to: 255
                     //value: brightnessselect
                     //visible: false
-                    Component.onCompleted: Connect.checkifraspberrypi();
+                    Component.onCompleted: Connect.checkifraspberrypi(),Connect.setSreenbrightness(brightness.value);
                     onPositionChanged: Connect.setSreenbrightness(brightness.value);
                 }
 
