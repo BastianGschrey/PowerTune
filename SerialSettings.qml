@@ -273,10 +273,12 @@ Rectangle {
                 }
                 Slider {
                     id:brightness
-                    stepSize: 1
-                    from: 1
+                    stepSize: 5
+                    from: 10
                     value: 25
                     to: 255
+                    //visible: false
+                    Component.onCompleted: Connect.checkifraspberrypi();
                     onPositionChanged: Connect.setSreenbrightness(brightness.value);//console.log(brighness.value);
                 }
 

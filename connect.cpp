@@ -45,6 +45,7 @@
 #include <QQmlContext>
 #include <QQmlApplicationEngine>
 #include <QFile>
+#include <QFileInfo>
 #include <QTextStream>
 #include <QByteArrayMatcher>
 #include <QProcess>
@@ -123,16 +124,33 @@ Connect::~Connect()
 
 
 }
+void Connect::checkifraspberrypi()
+{
+  QString path = "/sys/class/backlight/rpi_backlight/brightness";
+  if (QFileInfo::exists(path))
+  {
+      bool ok;
+      if(ok)
+      {
+          qDebug() << "Connected to the Database !";
+
+      }
+  }
+  else
+  {
+      qDebug() << "Database doesn't exists !";
+  }
+}
 
 void Connect::setSreenbrightness(const int &brightness)
 {
+
 //This works only on raspberry pi
 QFile f("/sys/class/backlight/rpi_backlight/brightness");
 f.open(QIODevice::WriteOnly | QIODevice::Truncate);
 QTextStream out(&f);
 out << brightness;
-//f.write(test);
-
+f.close();
 }
 void Connect::setUnits(const int &units)
 {
