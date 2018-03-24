@@ -272,6 +272,7 @@ Rectangle {
                     text: qsTr("GPS")
                     onCheckedChanged: {autoconnectGPS.auto()}
                 }
+                /*
                 Slider {
                     id:brightness
                     stepSize: 5
@@ -281,7 +282,7 @@ Rectangle {
                     Component.onCompleted: Connect.checkifraspberrypi();
                     onPositionChanged: Connect.setSreenbrightness(brightness.value);//console.log(brighness.value);
                 }
-
+               */
               /*
                 Text
                 {

@@ -151,7 +151,7 @@ QFile f("/sys/class/backlight/rpi_backlight/brightness");
 f.open(QIODevice::WriteOnly | QIODevice::Truncate);
 QTextStream out(&f);
 out << brightness;
-qDebug() << brightness;
+//qDebug() << brightness;
 f.close();
 }
 void Connect::setUnits(const int &units)
