@@ -345,13 +345,17 @@ void Connect::update()
 
 */
     QProcess process;
+    qDebug() << "Starting Update";
     process.start("/home/pi/updatePowerTune.sh");
     process.waitForFinished(6000000); // 10 minutes time
+    qDebug() <<"Process state"  <<process.state();
+    //qDebug() <<"Finished"  <<process.state();
+/*
     QString output = process.readAllStandardOutput();
     qDebug() << output;
     QString err = process.readAllStandardError();
     qDebug() << err;
-
+*/
 
 }
 /*
