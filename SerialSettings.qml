@@ -230,7 +230,7 @@ Rectangle {
                     onClicked: {senhatselector.visible = true}
                 }
             //for official raspberry Pi image only !!!!
-                /*
+
                 Button {
                     text: "Pi Update "
                     onClicked: {
@@ -238,7 +238,7 @@ Rectangle {
 
                     }
                 }
-*/
+
                 Button {
                     text: "Quit"
                     onClicked: {

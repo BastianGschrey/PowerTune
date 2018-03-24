@@ -334,15 +334,15 @@ void Connect::closeConnection()
 void Connect::update()
 {
 
-/*
+
     bool bStatus = false;
 
     QStringList args;
     qint64      pid = 0;
 
     args << "&";
-    bStatus = QProcess::startDetached("/home/pi/update.sh", args, ".", &pid);
-*/
+    bStatus = QProcess::startDetached("/home/pi/updatePowerTune.sh", args, ".", &pid);
+
 }
 /*
 void Connect::handleError(QConnectPort::ConnectPortError ConnectPortError)
