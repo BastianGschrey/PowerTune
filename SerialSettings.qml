@@ -47,6 +47,7 @@ Rectangle {
             property alias password: goPropass.text
             property alias vehicleweight: weight.text
             property alias unitSelector: unitSelect.currentIndex
+            property alias brightnessselect: brightness.value
 
         }
 
@@ -274,8 +275,8 @@ Rectangle {
                 Slider {
                     id:brightness
                     stepSize: 5
-                    from: 10
-                    value: 25
+                    from: 20
+                    value: 240
                     to: 255
                     //visible: false
                     Component.onCompleted: Connect.checkifraspberrypi();
