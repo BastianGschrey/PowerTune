@@ -123,17 +123,13 @@ void Connect::checkifraspberrypi()
   QString path = "/sys/class/backlight/rpi_backlight/brightness";
   if (QFileInfo::exists(path))
   {
-      bool ok;
-      if(ok)
-      {
+
        m_dashBoard->setscreen(1);
-       qDebug() << "screen found";
-      }
+
   }
   else
   {
       m_dashBoard->setscreen(0);
-      qDebug() << "screen not found";
   }
 }
 
