@@ -127,11 +127,13 @@ void Connect::checkifraspberrypi()
       if(ok)
       {
        m_dashBoard->setscreen(1);
+       qDebug() << "screen found";
       }
   }
   else
   {
       m_dashBoard->setscreen(0);
+      qDebug() << "screen not found";
   }
 }
 
