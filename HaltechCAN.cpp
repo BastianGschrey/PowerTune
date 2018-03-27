@@ -177,7 +177,7 @@ void HaltechCAN::readyToRead()
             break;
         case 0x372:
             m_dashboard->setBatteryV(pkgpayload[0]*0.1);
-            //Air Temp Sensor2(pkgpayload[1]*0.1)
+            //Air Temp Sensor2((pkgpayload[1]*0.1)-273.15)
             //Target Boost Level (pkgpayload[2]*0.1)
             //Barometric Pressure(pkgpayload[3]*0.1)
             break;
@@ -200,14 +200,14 @@ void HaltechCAN::readyToRead()
             //EGT12(pkgpayload[3]*0.1)
             break;
         case 0x3E0:
-            m_dashboard->setWatertemp(pkgpayload[0]*0.1);
-            m_dashboard->setIntaketemp(pkgpayload[1]*0.1);
-            m_dashboard->setFueltemp(pkgpayload[2]*0.1);
-            //Oil Temp(pkgpayload[3]*0.1)
+            m_dashboard->setWatertemp((pkgpayload[0]*0.1)-273.15);
+            m_dashboard->setIntaketemp((pkgpayload[1]*0.1)-273.15);
+            m_dashboard->setFueltemp((pkgpayload[2]*0.1)-273.15);
+            //Oil Temp((pkgpayload[3]*0.1)-273.15)
             break;
         case 0x3E1:
-            //Transmission Oil Temp (pkgpayload[0]*0.1)
-            //Diff oil temp (pkgpayload[1]*0.1)
+            //Transmission Oil Temp ((pkgpayload[0]*0.1)-273.15)
+            //Diff oil temp ((pkgpayload[1]*0.1)-273.15)
             //Fuel Composition(pkgpayload[2]*0.1)
             break;
         case 0x3E2:
