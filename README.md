@@ -88,13 +88,15 @@ Raspbian Stretch
 | Nissan Silvia S14               | (SR20DET1)            | Nistune             |                |                |
   
   
- #### Haltech :
+ #### Haltech V2 Protocol:
 
 
-| Tested Vehicles Adaptronic:      | ECU Variant:          | Variant:            | Confirmed:     |Confirmed by :  |
+| Tested Vehicles :                | ECU Variant:          | Interface:          | Confirmed:     |Confirmed by :  |
 | -------------------------------- |:---------------------:|:-------------------:|:--------------:|:--------------:|
-|                 |            |   |      | | 
+| Mazda RX7 FD3S                   |Adaptronic Modular     | CAN (PICAN2)        | <big>__✓__     |Bastian Gschrey |
   
+  
+
 Implemented Features :
 
 * Remote control GoPro Recording on off
