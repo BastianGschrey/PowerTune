@@ -15,7 +15,7 @@ id: adaptronicDash
 //createVerticalGauge(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec)
 Component.onCompleted:
     CreateSquareGaugeScript.createSquareGauge(200,150,10,180,300,0,"kPa","MAP",true,false,false,"Dashboard","MAP","MAP"),
-    CreateSquareGaugeScript.createSquareGauge(165,150,220,180,300,0,"λ","Lambda",false,false,true,"Dashboard","LAMBDA","LAMBDATarget"),
+    CreateSquareGaugeScript.createSquareGauge(165,150,220,180,300,2,"λ","Lambda",false,false,true,"Dashboard","LAMBDA","LAMBDATarget"),
     CreateSquareGaugeScript.createSquareGauge(200,120,10,340,150,0,"°C","MAT",false,true,false,"Dashboard","Intaketemp","Intaketemp"),
     CreateSquareGaugeScript.createSquareGauge(340,120,220,340,300,0,"°C","ECT",false,true,false,"Dashboard","Watertemp","Watertemp"),
     CreateSquareGaugeScript.createSquareGauge(165,150,395,180,100,0,"%","WG DC%",false,true,false,"Dashboard","BoostDuty","BoostDuty"),
@@ -52,30 +52,30 @@ property int rpm: Dashboard.revs
                      }
                  }
              }
+             Image {
+                 height: 200
+                 width: 800
+                  source: "/graphics/vertrevcanvas.png"
+             }
 
+             Text {
+                 x: 0
+                 y: 43
+                 font.pixelSize: 70
+                 font.bold: true
+                 color: "white"
+                 text: rpm
+                 horizontalAlignment: Text.AlignLeft
+                 font.letterSpacing: 3
+                 font.wordSpacing: 0
+                 font.family: "Verdana"
+
+             }
 
 
          }
 
-         Image {
-             height: 200
-             width: 800
-              source: "/graphics/vertrevcanvas.png"
-         }
 
-         Text {
-             x: 0
-             y: 43
-             font.pixelSize: 70
-             font.bold: true
-             color: "white"
-             text: rpm
-             horizontalAlignment: Text.AlignLeft
-             font.letterSpacing: 3
-             font.wordSpacing: 0
-             font.family: "Verdana"
-
-         }
 
 }
 

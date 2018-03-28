@@ -17,9 +17,10 @@ Rectangle {
         property alias vertgaugevisible: vertgauge.visible
         property alias horigaugevisible: horizgauge.visible
         property alias secvaluevisible: secondaryvaluetextfield.visible
+        property alias secvalue: secondaryvaluetextfield.text
+        property alias maintextvalue: mainvaluetextfield.text
 
-        property real mainvalue
-        property real secvalue
+        property double mainvalue
         property int maxvalue
 
         Rectangle {
@@ -57,7 +58,6 @@ Rectangle {
             font.pixelSize: 50
             font.family: "Eurostile"
             color: "white"
-            text: parent.mainvalue
         }
 
         Text {
@@ -79,12 +79,10 @@ Rectangle {
             anchors.bottomMargin: 10
             anchors.right: parent.right
             anchors.rightMargin: 10
-            //width: parent.width / 3
             height: parent.height * 0.2
             font.pixelSize: 28
             font.family: "Eurostile"
             color: "white"
-            text: parent.secvalue
         }
 
         Gauge {

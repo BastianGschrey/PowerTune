@@ -18,8 +18,9 @@ function createSquareGauge(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,
 function finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec) {
     if (component.status == Component.Ready) {
         gauge = component.createObject(adaptronicDash, {"id": setID, "title":setID, "width": setWidth, "height": setHeight,
-                                           "mainvalue": Qt.binding(function(){return SetValueObject[SetValuePropertyMain].toFixed(setDecPlace)}),
+                                           "maintextvalue": Qt.binding(function(){return SetValueObject[SetValuePropertyMain].toFixed(setDecPlace)}),
                                            "secvalue": Qt.binding(function(){return SetValueObject[SetValuePropertySec].toFixed(setDecPlace)}),
+                                           "mainvalue": Qt.binding(function(){return SetValueObject[SetValuePropertyMain]}),
                                            "maxvalue": setMaxValue,
                                            "mainunit": setUnit,
                                            "vertgaugevisible": setVertGaugeVis,
