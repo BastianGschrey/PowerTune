@@ -21,6 +21,62 @@ Component.onCompleted:
     CreateSquareGaugeScript.createSquareGauge(165,150,395,180,100,0,"%","WG DC%",false,true,false,"Dashboard","BoostDuty","BoostDuty"),
     CreateSquareGaugeScript.createSquareGauge(215,280,570,180,500,0,"kPa","FuelP",true,false,false,"Dashboard","FuelPress","FuelPress");
 
+property int rpm: Dashboard.revs
+
+         Gauge {
+             id: gauge
+             width: 800
+             height: 200
+
+             tickmarkStepSize: 0
+             minorTickmarkCount: 0
+             tickmarkAlignment: Qt.AlignBottom
+             orientation: Qt.Horizontal
+
+             value: parent.rpm
+             minimumValue: 0
+             maximumValue: 9000
+
+             style: GaugeStyle {
+
+                 valueBar: Rectangle {
+
+                     width: 200
+                     color: Qt.rgba(gauge.value / gauge.maximumValue, 0, 1 - gauge.value / gauge.maximumValue, 1)
+                 }
+
+                 background: Item {
+
+                     Rectangle {
+                         color: "yellow"
+                     }
+                 }
+             }
 
 
- }
+
+         }
+
+         Image {
+             height: 200
+             width: 800
+              source: "/graphics/vertrevcanvas.png"
+         }
+
+         Text {
+             x: 0
+             y: 43
+             font.pixelSize: 70
+             font.bold: true
+             color: "white"
+             text: rpm
+             horizontalAlignment: Text.AlignLeft
+             font.letterSpacing: 3
+             font.wordSpacing: 0
+             font.family: "Verdana"
+
+         }
+
+}
+
+

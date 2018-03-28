@@ -18,9 +18,9 @@ Rectangle {
         property alias horigaugevisible: horizgauge.visible
         property alias secvaluevisible: secondaryvaluetextfield.visible
 
-        property real mainvalue: 123
-        property real secvalue: 67
-        property int maxvalue: 300
+        property real mainvalue
+        property real secvalue
+        property int maxvalue
 
         Rectangle {
             id: titlebar

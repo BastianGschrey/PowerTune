@@ -7,5 +7,6 @@
         <file>graphics/overlay.png</file>
         <file>graphics/quit.png</file>
         <file>graphics/QuitButton.qml</file>
+	//<file>graphics/vertrevcanvas.png</file>
     </qresource>
 </RCC>
