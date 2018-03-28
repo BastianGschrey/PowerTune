@@ -17,7 +17,7 @@ Rectangle {
     Item {
         id: powerTuneSettings
         Settings {
-            property int brightnessselect: brightness.value
+            property alias brightnessselect: brightness.value
             property alias connectAtStartUp: connectAtStart.checked
             property alias gpsswitch: gpsswitch.checked
             property alias accelswitch: accelsens.checked
@@ -46,14 +46,10 @@ Rectangle {
             property alias vehicleweight: weight.text
             property alias unitSelector: unitSelect.currentIndex
 
+
         }
 
-        Item {
-            id: init
-            Component.onCompleted:
-            {if (Dashboard.screen == "1") {brightness.visible = true,brightness.value = brightnessselect};
-            }
-        }
+
 
         Row {
             x: 5
@@ -274,7 +270,7 @@ Rectangle {
                     from: 20
                     to: 255
                     //value: brightnessselect
-                    visible: false
+                    //visible: false
                     Component.onCompleted: Connect.setSreenbrightness(brightness.value);
                     onPositionChanged: Connect.setSreenbrightness(brightness.value);
                 }
