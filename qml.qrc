@@ -28,5 +28,8 @@
         <file>Gauges/createverticalbargauge.js</file>
         <file>Gauges/Dyno.qml</file>
         <file>Gauges/Camera.qml</file>
+        <file>Gauges/squaregauge.qml</file>
+        <file>Gauges/createsquaregauge.js</file>
+        <file>Gauges/fueltechdashboard.qml</file>
     </qresource>
 </RCC>

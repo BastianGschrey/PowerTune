@@ -7,7 +7,7 @@ import QtQuick.Extras 1.4
 
 
 Rectangle {
-        id: initalID
+        id: initialID
         width: 100
         height: 80
         color: "transparent"
@@ -20,48 +20,6 @@ Rectangle {
         property alias gaugeminvalue: gauge.minimumValue
 
 
-
-        MouseArea {
-                  id: mouseArea
-                  width: parent.width
-                  height: parent.height + 10 // easier to get
-                  anchors.centerIn: parent
-                  //drag.target: parent
-                  //drag.axis: Drag.XAndYAxis
-                  //onClicked: touchmenu.popup(mouseX, mouseY)
-                }
-
-        /*Menu {
-               id: touchmenu
-               y: fileButton.height
-
-               MenuItem {
-                   text: "Change datasource"
-                   onTriggered: sourcemenu.popup()
-               }
-               MenuItem {
-                   text: "Increase size"
-               }
-               MenuItem {
-                   text: "Decrease size"
-               }
-           }
-
-        Menu{
-            id: sourcemenu
-            MenuItem {
-                text: "RPM"
-            }
-            MenuItem {
-                text: "MAP"
-            }
-            MenuItem {
-                text: "Fuel Pressure"
-                onTriggered: gaugetext = Dashboard.FuelPress, gaugevalue = 300, gaugemaxvalue = 600
-
-            }
-        }*/
-
         Gauge {
             id: gauge
             height: 200
@@ -70,8 +28,8 @@ Rectangle {
             orientation : Qt.Horizontal
             minorTickmarkCount: 4
             //labelStepSize: 50
-            minimumValue: 0
-            maximumValue: 400
+            //minimumValue: 0
+            //maximumValue: 400
             tickmarkStepSize : maximumValue / 4
 
             //value: Dashboard.MAP

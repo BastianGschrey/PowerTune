@@ -1,3 +1,4 @@
+//Creates instances of verticalbargauge, usable at runtime
 var component;
 var gauge;
 

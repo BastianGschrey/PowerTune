@@ -527,6 +527,8 @@ Rectangle {
             if (dash1.currentIndex == "6") {firstPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
             if (dash1.currentIndex == "7") {firstPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
             if (dash1.currentIndex == "8") {firstPageLoader.source = "qrc:/Gauges/Dyno.qml"};
+            if (dash1.currentIndex == "9") {firstPageLoader.source = "qrc:/Gauges/fueltechdashboard.qml"};
+
 
         }
 
@@ -544,6 +546,7 @@ Rectangle {
             if (dash2.currentIndex == "6") {secondPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
             if (dash2.currentIndex == "7") {secondPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
             if (dash2.currentIndex == "8") {secondPageLoader.source = "qrc:/Gauges/Dyno.qml"};
+            if (dash2.currentIndex == "9") {secondPageLoader.source = "qrc:/Gauges/fueltechdashboard.qml"};
 
         }
 
@@ -561,6 +564,7 @@ Rectangle {
             if (dash3.currentIndex == "6") {thirdPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
             if (dash3.currentIndex == "7") {thirdPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
             if (dash3.currentIndex == "8") {thirdPageLoader.source = "qrc:/Gauges/Dyno.qml"};
+            if (dash3.currentIndex == "9") {thirdPageLoader.source = "qrc:/Gauges/fueltechdashboard.qml"};
 
         }
 
@@ -578,6 +582,7 @@ Rectangle {
             if (dash4.currentIndex == "6") {fourthPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
             if (dash4.currentIndex == "7") {fourthPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
             if (dash4.currentIndex == "8") {fourthPageLoader.source = "qrc:/Gauges/Dyno.qml"};
+            if (dash4.currentIndex == "9") {fourthPageLoader.source = "qrc:/Gauges/fueltechdashboard.qml"};
 
         }
 
@@ -635,7 +640,7 @@ Rectangle {
             ComboBox {
                 id: dash1
                 width: 180
-                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno"]
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select1.selDash1() }
                 Component.onCompleted: {select1.selDash1() }
@@ -644,7 +649,7 @@ Rectangle {
             ComboBox {
                 id: dash2
                 width: 180
-                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno"]
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select2.selDash2() }
                 Component.onCompleted: {select2.selDash2() }
@@ -653,7 +658,7 @@ Rectangle {
             ComboBox {
                 id: dash3
                 width: 180
-                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno"]
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select3.selDash3() }
                 Component.onCompleted: {select3.selDash3() }
@@ -661,7 +666,7 @@ Rectangle {
             ComboBox {
                 id: dash4
                 width: 180
-                model:  ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno"]
+                model:  ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select4.selDash4() }
                 Component.onCompleted: {select4.selDash4() }
