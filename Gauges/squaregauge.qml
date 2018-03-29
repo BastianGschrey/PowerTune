@@ -19,9 +19,11 @@ Rectangle {
         property alias secvaluevisible: secondaryvaluetextfield.visible
         property alias secvalue: secondaryvaluetextfield.text
         property alias maintextvalue: mainvaluetextfield.text
+        property alias mainvalue: mainvaluetextfield.text
+        property alias maxvalue: vertgauge.maximumValue
 
-        property double mainvalue
-        property int maxvalue
+        //property double mainvalue
+        //property int maxvalue
 
         Rectangle {
             id: titlebar
@@ -98,7 +100,7 @@ Rectangle {
             minorTickmarkCount: 0
             tickmarkAlignment: Qt.AlignRight
             value: parent.mainvalue
-            maximumValue: parent.maxvalue
+            //maximumValue: parent.maxvalue
 
             style: GaugeStyle {
                 valueBar: Rectangle {
