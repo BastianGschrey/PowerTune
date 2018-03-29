@@ -18,9 +18,9 @@ Rectangle {
         property alias horigaugevisible: horizgauge.visible
         property alias secvaluevisible: secondaryvaluetextfield.visible
         property alias secvalue: secondaryvaluetextfield.text
-        property alias maintextvalue: mainvaluetextfield.text
-        property alias mainvalue: mainvaluetextfield.text
-        property alias maxvalue: vertgauge.maximumValue
+        //property alias maintextvalue: mainvaluetextfield.text
+        //property alias mainvalue: mainvaluetextfield.text
+        //property alias maxvalue: vertgauge.maximumValue
 
         //property double mainvalue
         //property int maxvalue
