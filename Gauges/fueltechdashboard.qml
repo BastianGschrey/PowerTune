@@ -45,13 +45,37 @@ id: fueltechDash
                  }
              }*/
 
+            Gauge {
+                id: testGauge
+                height: 180
+                width: 180
+                x: 10
+                y: 10
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 10
+                anchors.left: parent.left
+                anchors.leftMargin: 10
+                anchors.horizontalCenter: parent.horizontalCenter
+                orientation: Qt.Horizontal
+                tickmarkStepSize : 0
+                minorTickmarkCount: 0
+                tickmarkAlignment: Qt.AlignRight
+                value: 20
+                style: GaugeStyle {
+                    valueBar: Rectangle {
+                        implicitWidth: 25
+                        color: "blue"
+                    }
+                }
+            }
 
 
-             Image {
+
+             /*Image {
                  height: 200
                  width: 800
                   source: "/graphics/vertrevcanvas.png"
-             }
+             }*/
 
 
              Text {
