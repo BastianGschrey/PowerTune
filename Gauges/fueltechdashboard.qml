@@ -10,7 +10,7 @@ import "qrc:/Gauges/createsquaregauge.js" as CreateSquareGaugeScript
 
 
 Item {
-id: adaptronicDash
+/*id: adaptronicDash
 //prototype of function:
 //createVerticalGauge(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec)
 Component.onCompleted:
@@ -20,7 +20,7 @@ Component.onCompleted:
     CreateSquareGaugeScript.createSquareGauge(340,120,220,340,300,0,"°C","ECT",false,true,false,"Dashboard","Watertemp","Watertemp"),
     CreateSquareGaugeScript.createSquareGauge(165,150,395,180,100,0,"%","WG DC%",false,true,false,"Dashboard","BoostDuty","BoostDuty"),
     CreateSquareGaugeScript.createSquareGauge(215,280,570,180,500,0,"kPa","FuelP",true,false,false,"Dashboard","FuelPress","FuelPress");
-/*
+
 property int rpm: Dashboard.revs
 
          Gauge {
