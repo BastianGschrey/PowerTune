@@ -17,6 +17,7 @@ function createSquareGauge(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,
 
 function finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec) {
     if (component.status == Component.Ready) {
+        console.log("creating object");
         gauge = component.createObject(fueltechDash, {"id": setID, "title":setID, "width": setWidth, "height": setHeight,
                                            "maintextvalue": Qt.binding(function(){return SetValueObject[SetValuePropertyMain].toFixed(setDecPlace)}),
                                            "secvalue": Qt.binding(function(){return SetValueObject[SetValuePropertySec].toFixed(setDecPlace)}),
