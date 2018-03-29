@@ -52,7 +52,7 @@ property int rpm: Dashboard.revs
                      }
                  }
              }
-             Image {
+             /*Image {
                  height: 200
                  width: 800
                   source: "/graphics/vertrevcanvas.png"
@@ -70,7 +70,7 @@ property int rpm: Dashboard.revs
                  font.wordSpacing: 0
                  font.family: "Verdana"
 
-             }
+             }*/
 
 
          }
