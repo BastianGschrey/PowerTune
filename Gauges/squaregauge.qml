@@ -99,7 +99,7 @@ Rectangle {
             tickmarkStepSize : 0
             minorTickmarkCount: 0
             tickmarkAlignment: Qt.AlignRight
-            value: parent.mainvalue
+            //value: parent.mainvalue
             //maximumValue: parent.maxvalue
 
             style: GaugeStyle {
@@ -125,7 +125,7 @@ Rectangle {
             minorTickmarkCount: 0
             tickmarkAlignment: Qt.AlignRight
             //value: parent.mainvalue
-            maximumValue: parent.maxvalue
+            //maximumValue: parent.maxvalue
 
             style: GaugeStyle {
                 valueBar: Rectangle {
