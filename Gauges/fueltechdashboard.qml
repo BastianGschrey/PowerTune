@@ -23,7 +23,7 @@ Component.onCompleted:
 
 property int rpm: Dashboard.revs
 */
-        /* Gauge {
+         Gauge {
              id: gauge
              width: 800
              height: 200
@@ -57,7 +57,7 @@ property int rpm: Dashboard.revs
                  width: 800
                   source: "/graphics/vertrevcanvas.png"
              }
-}*/
+               }
              Text {
                  x: 0
                  y: 43
@@ -72,7 +72,7 @@ property int rpm: Dashboard.revs
              }
 
 
-         }
+}
 
 
 

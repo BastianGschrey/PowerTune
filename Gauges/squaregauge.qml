@@ -42,7 +42,7 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pixelSize: 23
                 font.bold: true
-                font.family: "Verdana"
+                //font.family: "Verdana"
                 color: "white"
 
             }
@@ -56,7 +56,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: 50
-            font.family: "Eurostile"
+            //font.family: "Eurostile"
             color: "white"
         }
 
@@ -67,7 +67,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
 
             font.pixelSize: 28
-            font.family: "Eurostile"
+            //font.family: "Eurostile"
             font.bold: true
             color: "white"
         }
@@ -81,7 +81,7 @@ Rectangle {
             anchors.rightMargin: 10
             height: parent.height * 0.2
             font.pixelSize: 28
-            font.family: "Eurostile"
+            //font.family: "Eurostile"
             color: "white"
         }
 
