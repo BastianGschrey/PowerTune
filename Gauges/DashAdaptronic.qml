@@ -12,7 +12,7 @@ id: adaptronicDash
 //createVerticalGauge(Width,height,X,Y,MINVALUE,MAXVALUE,Unit,GAUGE-ID,DATASOURCE,DATA)
 Component.onCompleted:
     //left column
-    CreateVerticalGaugeScript.createVerticalGauge(320,80,10,0,0,8000,0,"RPM","RPM",Dashboard,"revs"),
+    CreateVerticalGaugeScript.createVerticalGauge(320,80,10,0,0,8000,0,"RPM","RPM",Dashboard,"rpm"),
     CreateVerticalGaugeScript.createVerticalGauge(320,80,10,90,0,400,0,"kPa","MAP",Dashboard,"MAP"),
     CreateVerticalGaugeScript.createVerticalGauge(320,80,10,180,0,20,2,"V","BatV",Dashboard,"BatteryV"),
     CreateVerticalGaugeScript.createVerticalGauge(320,80,10,270,0,130,0,"°C Coolant","Coolant",Dashboard,"Watertemp"),

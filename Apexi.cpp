@@ -718,7 +718,7 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         packageADV[20] = info->Secinjpulse * 0.001;
         packageADV[21] = info->na2;
 
-        m_dashboard->setRevs(packageADV[0]);
+        m_dashboard->setrpm(packageADV[0]);
         m_dashboard->setIntakepress(packageADV[1]);
         m_dashboard->setPressureV(packageADV[2]);
         m_dashboard->setThrottleV(packageADV[3]);
@@ -778,7 +778,7 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         packageADV2[17] = info->O2volt_2 *0.005;
         packageADV2[18] = info->ThrottleV *0.001;
 
-        m_dashboard->setRevs(packageADV2[0]);
+        m_dashboard->setrpm(packageADV2[0]);
         m_dashboard->setEngLoad(packageADV2[1]);
         m_dashboard->setMAF1V(packageADV2[2]);
         m_dashboard->setMAF2V(packageADV2[3]);
@@ -838,7 +838,7 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         packageADV3[21] = 0;
 
 
-        m_dashboard->setRevs(packageADV3[0]);
+        m_dashboard->setrpm(packageADV3[0]);
         m_dashboard->setIntakepress(packageADV3[1]);
         m_dashboard->setPressureV(packageADV3[2]);
         m_dashboard->setThrottleV(packageADV3[3]);
@@ -968,7 +968,7 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
     // m_dashboard->setInjDuty(packageBasic[0]);
     m_dashboard->setLeadingign(packageBasic[1]);
     m_dashboard->setTrailingign(packageBasic[2]);
-    m_dashboard->setRevs(packageBasic[3]);
+    m_dashboard->setrpm(packageBasic[3]);
     m_dashboard->setSpeed(packageBasic[4]);
     m_dashboard->setpim(Boost);
     m_dashboard->setKnock(packageBasic[6]);

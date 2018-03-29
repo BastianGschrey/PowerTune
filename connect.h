@@ -39,7 +39,6 @@ class Nissanconsult;
 class OBD;
 class datalogger;
 class calculations;
-class udpreceiver;
 class AppSettings;
 class GoPro;
 class GPS;
@@ -84,7 +83,6 @@ private:
     Sensors *m_sensors;
     HaltechCAN *m_haltechCANV2;
     AdaptronicCAN *m_adaptronicCAN;
-    udpreceiver *m_udpreceiver;
     datalogger *m_datalogger;
     calculations *m_calculations;
     QStringList m_portsNames;

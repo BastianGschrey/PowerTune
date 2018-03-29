@@ -34,7 +34,7 @@ Item {
                 id: startButton
                 text: "Start"
                 onClicked: {
-                    if (refreshTimer.running == false) refreshTimer.running = true ,series2.clear(),series1.clear(), previousrpm = Dashboard.revs, finalPower =0, finalTorque =0, finalTorqueRPM = 0, finalPowerRPM =0,startButton.enabled =false;
+                    if (refreshTimer.running == false) refreshTimer.running = true ,series2.clear(),series1.clear(), previousrpm = Dashboard.rpm, finalPower =0, finalTorque =0, finalTorqueRPM = 0, finalPowerRPM =0,startButton.enabled =false;
 
 
                 }
@@ -98,19 +98,19 @@ Item {
         repeat: true
         onTriggered: {
 
-            if (previousrpm <= Dashboard.revs)
+            if (previousrpm <= Dashboard.rpm)
             {
 
-            previousrpm = Dashboard.revs
+            previousrpm = Dashboard.rpm
 
             if (finalPower < Dashboard.Power)
-            {finalPower = (Dashboard.Power).toFixed(1),finalPowerRPM = Dashboard.revs}
+            {finalPower = (Dashboard.Power).toFixed(1),finalPowerRPM = Dashboard.rpm}
             if (finalTorque < Dashboard.Torque)
-            {finalTorque = (Dashboard.Torque).toFixed(1) ,finalTorqueRPM = Dashboard.revs}
-            series1.append(Dashboard.revs, Dashboard.Power);
-            series2.append(Dashboard.revs, Dashboard.Torque);
+            {finalTorque = (Dashboard.Torque).toFixed(1) ,finalTorqueRPM = Dashboard.rpm}
+            series1.append(Dashboard.rpm, Dashboard.Power);
+            series2.append(Dashboard.rpm, Dashboard.Torque);
             }
-            if (previousrpm > Dashboard.revs) {refreshTimer.running = false,startButton.enabled =true}
+            if (previousrpm > Dashboard.rpm) {refreshTimer.running = false,startButton.enabled =true}
 
         }
     }

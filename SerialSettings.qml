@@ -270,7 +270,7 @@ Rectangle {
                     from: 20
                     to: 255
                     //value: brightnessselect
-                    //visible: false
+                    visible: Dashboard.screen
                     Component.onCompleted: Connect.setSreenbrightness(brightness.value);
                     onPositionChanged: Connect.setSreenbrightness(brightness.value);
                 }

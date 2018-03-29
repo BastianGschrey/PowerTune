@@ -95,7 +95,7 @@ void HaltechCAN::readyToRead()
         switch(frame.frameId()) {
 
         case 0x360:
-             m_dashboard->setRevs(pkgpayload[0]);
+             m_dashboard->setrpm(pkgpayload[0]);
              m_dashboard->setMAP(pkgpayload[1]*0.1);
             //m_dashboard->setTPS(pkgpayload[2]*0.1);
             //m_dashboard->setCoolantPressure(pkgpayload[3]*0.1);

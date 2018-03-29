@@ -55,7 +55,7 @@ void datalogger::updateLog()
             }
             QTextStream out(&mFile);
             out << (loggerStartT.msecsTo(QTime::currentTime())) << ","
-                << m_dashboard->revs() << ","
+                << m_dashboard->rpm() << ","
                 << m_dashboard->Intakepress()  << ","
                 << m_dashboard->PressureV()  << ","
                 << m_dashboard->ThrottleV()  << ","

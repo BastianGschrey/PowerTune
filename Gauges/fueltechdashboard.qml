@@ -19,7 +19,7 @@ Component.onCompleted:
     CreateSquareGaugeScript.createSquareGauge(200,120,10,340,150,0,"°C","MAT",false,true,false,"Dashboard","Intaketemp","Intaketemp"),
     CreateSquareGaugeScript.createSquareGauge(340,120,220,340,300,0,"°C","ECT",false,true,false,"Dashboard","Watertemp","Watertemp"),
     CreateSquareGaugeScript.createSquareGauge(165,150,395,180,100,0,"%","WG DC%",false,true,false,"Dashboard","BoostDuty","BoostDuty"),
-    CreateSquareGaugeScript.createSquareGauge(215,280,570,180,500,0,"kPa","FuelP",true,false,false,"Dashboard","FuelPress","FuelPress");
+    CreateSquareGaugeScript.createSquareGauge(215,280,570,180,500,0,"kPa","FuelP",true,false,false,"Dashboard","FuelPress","FuelPress");*/
 
          Gauge {
              id: revgauge
@@ -60,13 +60,13 @@ Component.onCompleted:
                  font.pixelSize: 70
                  font.bold: true
                  color: "white"
-                 text: Dashboard.revs
+                 text: Dashboard.rpm
                  horizontalAlignment: Text.AlignLeft
                  font.letterSpacing: 3
                  font.wordSpacing: 0
              }
 
-*/
+
 }
 
 

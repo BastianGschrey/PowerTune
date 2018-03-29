@@ -344,7 +344,7 @@ Item {
                 id: revcounterticks
                 height: parent.height
                 width: height
-                value: Dashboard.revs
+                value: Dashboard.rpm
                 anchors.verticalCenter: parent.verticalCenter
                 maximumValue: 10
 
@@ -365,7 +365,7 @@ Item {
                 id: revneedele
                 anchors.verticalCenterOffset: 0
                 anchors.centerIn: parent
-                value: Dashboard.revs *0.0077
+                value: Dashboard.rpm *0.0077
 
             }
         }
