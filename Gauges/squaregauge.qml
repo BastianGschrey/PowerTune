@@ -44,7 +44,7 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pixelSize: 23
                 font.bold: true
-                //font.family: "Verdana"
+                font.family: "Eurostile"
                 color: "white"
 
             }
@@ -58,7 +58,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: 50
-            //font.family: "Eurostile"
+            font.family: "Eurostile"
             color: "white"
         }
 
@@ -69,7 +69,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
 
             font.pixelSize: 28
-            //font.family: "Eurostile"
+            font.family: "Eurostile"
             font.bold: true
             color: "white"
         }
@@ -83,7 +83,7 @@ Rectangle {
             anchors.rightMargin: 10
             height: parent.height * 0.2
             font.pixelSize: 28
-            //font.family: "Eurostile"
+            font.family: "Eurostile"
             color: "white"
         }
 
@@ -124,7 +124,7 @@ Rectangle {
             tickmarkStepSize : 0
             minorTickmarkCount: 0
             tickmarkAlignment: Qt.AlignRight
-            value: parent.mainvalue
+            //value: parent.mainvalue
             maximumValue: parent.maxvalue
 
             style: GaugeStyle {
