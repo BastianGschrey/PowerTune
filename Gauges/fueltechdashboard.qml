@@ -76,6 +76,5 @@ property int rpm: Dashboard.revs
 
 
 
-}
 
 
