@@ -21,8 +21,8 @@ id: fueltechDash
     CreateSquareGaugeScript.createSquareGauge(165,150,395,180,100,0,"%","WG DC%",false,true,false,"Dashboard","BoostDuty","BoostDuty"),
     CreateSquareGaugeScript.createSquareGauge(215,280,570,180,500,0,"kPa","FuelP",true,false,false,"Dashboard","FuelPress","FuelPress");*/
 
-         /*Gauge {
-             id: gauge
+         Gauge {
+             id: revgauge
              width: 800
              height: 200
 
@@ -40,17 +40,12 @@ id: fueltechDash
                  valueBar: Rectangle {
 
                      width: 200
-                     color: Qt.rgba(gauge.value / gauge.maximumValue, 0, 1 - gauge.value / gauge.maximumValue, 1)
+                     color: Qt.rgba(revgauge.value / revgauge.maximumValue, 0, 1 - revgauge.value / revgauge.maximumValue, 1)
                  }
 
-                 background: Item {
-
-                     Rectangle {
-                         color: "yellow"
-                     }
                  }
              }
-         }*/
+
 
 
              Image {
