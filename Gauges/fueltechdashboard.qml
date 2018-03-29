@@ -10,7 +10,7 @@ import "qrc:/Gauges/createsquaregauge.js" as CreateSquareGaugeScript
 
 
 Item {
-/*id: adaptronicDash
+id: adaptronicDash
 //prototype of function:
 //createVerticalGauge(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec)
 Component.onCompleted:
@@ -22,7 +22,7 @@ Component.onCompleted:
     CreateSquareGaugeScript.createSquareGauge(215,280,570,180,500,0,"kPa","FuelP",true,false,false,"Dashboard","FuelPress","FuelPress");
 
 property int rpm: Dashboard.revs
-
+/*
          Gauge {
              id: gauge
              width: 800
