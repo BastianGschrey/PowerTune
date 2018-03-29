@@ -27,6 +27,7 @@ function finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,set
                                            "horigaugevisible": setHoriGaugeVis,
                                            "secvaluevisible": setSecValueVis,
                                            "x": setX, "y": setY});
+        console.log("creating object");
         if (gauge == null) {
             // Error Handling
             console.log("Error creating object");
