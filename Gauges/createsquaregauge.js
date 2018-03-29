@@ -22,11 +22,11 @@ function finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,set
                                            //"maintextvalue": Qt.binding(function(){return SetValueObject[SetValuePropertyMain].toFixed(setDecPlace)}),
                                            //"mainvalue": Qt.binding(function(){return SetValueObject[SetValuePropertyMain]}),
                                            //"secvalue": Qt.binding(function(){return SetValueObject[SetValuePropertySec].toFixed(setDecPlace)}),
-                                           "maxvalue": setMaxValue,
+                                           //"maxvalue": setMaxValue,
                                            "mainunit": setUnit,
-                                           "vertgaugevisible": setVertGaugeVis,
-                                           "horigaugevisible": setHoriGaugeVis,
-                                           "secvaluevisible": setSecValueVis,
+                                           //"vertgaugevisible": setVertGaugeVis,
+                                           //"horigaugevisible": setHoriGaugeVis,
+                                           //"secvaluevisible": setSecValueVis,
                                            "x": setX, "y": setY});
         console.log("creating object done");
         if (gauge == null) {
