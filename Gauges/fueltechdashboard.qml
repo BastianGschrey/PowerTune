@@ -5,7 +5,7 @@ import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Extras 1.4
-import "qrc:/Gauges/createsquaregauge.js" as CreateSquareGaugeScript
+//import "qrc:/Gauges/createsquaregauge.js" as CreateSquareGaugeScript
 
 
 
@@ -30,7 +30,7 @@ id: fueltechDash
              tickmarkAlignment: Qt.AlignBottom
              orientation: Qt.Horizontal
 
-             value: Dashboard.revs
+             value: 2000
              minimumValue: 0
              maximumValue: 9000
 
