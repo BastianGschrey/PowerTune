@@ -52,12 +52,14 @@ property int rpm: Dashboard.revs
                      }
                  }
              }*/
+
              Image {
                  height: 200
                  width: 800
                   source: "/graphics/vertrevcanvas.png"
              }
-               }
+
+
              Text {
                  x: 0
                  y: 43
@@ -68,7 +70,6 @@ property int rpm: Dashboard.revs
                  horizontalAlignment: Text.AlignLeft
                  font.letterSpacing: 3
                  font.wordSpacing: 0
-
              }
 
 
