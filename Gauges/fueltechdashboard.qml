@@ -9,88 +9,95 @@ import QtQuick.Controls.Styles 1.4
 
 
 Item {
-id: fueltechDash
-//prototype of function:
-//createVerticalGauge(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec)
-/*Component.onCompleted:
-    CreateSquareGaugeScript.createSquareGauge(200,150,10,180,300,0,"kPa","MAP",true,false,false,"Dashboard","MAP","MAP"),
-    CreateSquareGaugeScript.createSquareGauge(165,150,220,180,300,2,"λ","Lambda",false,false,true,"Dashboard","LAMBDA","LAMBDATarget"),
-    CreateSquareGaugeScript.createSquareGauge(200,120,10,340,150,0,"°C","MAT",false,true,false,"Dashboard","Intaketemp","Intaketemp"),
-    CreateSquareGaugeScript.createSquareGauge(340,120,220,340,300,0,"°C","ECT",false,true,false,"Dashboard","Watertemp","Watertemp"),
-    CreateSquareGaugeScript.createSquareGauge(165,150,395,180,100,0,"%","WG DC%",false,true,false,"Dashboard","BoostDuty","BoostDuty"),
-    CreateSquareGaugeScript.createSquareGauge(215,280,570,180,500,0,"kPa","FuelP",true,false,false,"Dashboard","FuelPress","FuelPress");*/
+    anchors.fill: parent
 
-         /*Gauge {
-             id: revgauge
-             width: 800
-             height: 200
+    Rectangle {
+           id: fueltechDash
+           width: parent.width
+           height: parent.height
+           color: "black"
+           //prototype of function:
+           //createVerticalGauge(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec)
+           /*Component.onCompleted:
+               CreateSquareGaugeScript.createSquareGauge(200,150,10,180,300,0,"kPa","MAP",true,false,false,"Dashboard","MAP","MAP"),
+               CreateSquareGaugeScript.createSquareGauge(165,150,220,180,300,2,"λ","Lambda",false,false,true,"Dashboard","LAMBDA","LAMBDATarget"),
+               CreateSquareGaugeScript.createSquareGauge(200,120,10,340,150,0,"°C","MAT",false,true,false,"Dashboard","Intaketemp","Intaketemp"),
+               CreateSquareGaugeScript.createSquareGauge(340,120,220,340,300,0,"°C","ECT",false,true,false,"Dashboard","Watertemp","Watertemp"),
+               CreateSquareGaugeScript.createSquareGauge(165,150,395,180,100,0,"%","WG DC%",false,true,false,"Dashboard","BoostDuty","BoostDuty"),
+               CreateSquareGaugeScript.createSquareGauge(215,280,570,180,500,0,"kPa","FuelP",true,false,false,"Dashboard","FuelPress","FuelPress");*/
 
-             tickmarkStepSize: 0
-             minorTickmarkCount: 0
-             tickmarkAlignment: Qt.AlignBottom
-             orientation: Qt.Horizontal
+                    /*Gauge {
+                        id: revgauge
+                        width: 800
+                        height: 200
 
-             value: 2000
-             minimumValue: 0
-             maximumValue: 9000
+                        tickmarkStepSize: 0
+                        minorTickmarkCount: 0
+                        tickmarkAlignment: Qt.AlignBottom
+                        orientation: Qt.Horizontal
 
-             style: GaugeStyle {
+                        value: 2000
+                        minimumValue: 0
+                        maximumValue: 9000
 
-                 valueBar: Rectangle {
+                        style: GaugeStyle {
 
-                     width: 200
-                     color: Qt.rgba(revgauge.value / revgauge.maximumValue, 0, 1 - revgauge.value / revgauge.maximumValue, 1)
-                 }
+                            valueBar: Rectangle {
 
-                 }
-             }*/
+                                width: 200
+                                color: Qt.rgba(revgauge.value / revgauge.maximumValue, 0, 1 - revgauge.value / revgauge.maximumValue, 1)
+                            }
 
-            Gauge {
-                id: testGauge
-                height: 180
-                width: 180
-                x: 10
-                y: 10
-                anchors.bottom: parent.bottom
-                anchors.bottomMargin: 10
-                anchors.left: parent.left
-                anchors.leftMargin: 10
-                anchors.horizontalCenter: parent.horizontalCenter
-                orientation: Qt.Horizontal
-                tickmarkStepSize : 0
-                minorTickmarkCount: 0
-                tickmarkAlignment: Qt.AlignRight
-                value: 20
-                style: GaugeStyle {
-                    valueBar: Rectangle {
-                        implicitWidth: 25
-                        color: "blue"
-                    }
-                }
-            }
+                            }
+                        }*/
 
-
-
-             /*Image {
-                 height: 200
-                 width: 800
-                  source: "/graphics/vertrevcanvas.png"
-             }*/
+                       Gauge {
+                           id: testGauge
+                           height: 180
+                           width: 180
+                           x: 10
+                           y: 10
+                           anchors.bottom: parent.bottom
+                           anchors.bottomMargin: 10
+                           anchors.left: parent.left
+                           anchors.leftMargin: 10
+                           anchors.horizontalCenter: parent.horizontalCenter
+                           orientation: Qt.Horizontal
+                           tickmarkStepSize : 0
+                           minorTickmarkCount: 0
+                           tickmarkAlignment: Qt.AlignRight
+                           value: 20
+                           style: GaugeStyle {
+                               valueBar: Rectangle {
+                                   implicitWidth: 25
+                                   color: "blue"
+                               }
+                           }
+                       }
 
 
-             Text {
-                 x: 0
-                 y: 43
-                 font.pixelSize: 70
-                 font.bold: true
-                 color: "white"
-                 text: Dashboard.revs
-                 horizontalAlignment: Text.AlignLeft
-                 font.letterSpacing: 3
-                 font.wordSpacing: 0
-             }
+
+                        /*Image {
+                            height: 200
+                            width: 800
+                             source: "/graphics/vertrevcanvas.png"
+                        }*/
 
 
+                        Text {
+                            x: 0
+                            y: 43
+                            font.pixelSize: 70
+                            font.bold: true
+                            color: "white"
+                            text: Dashboard.revs
+                            horizontalAlignment: Text.AlignLeft
+                            font.letterSpacing: 3
+                            font.wordSpacing: 0
+                        }
+
+
+           }
 }
 
 
