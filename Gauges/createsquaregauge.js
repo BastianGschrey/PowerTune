@@ -24,9 +24,9 @@ function finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,set
                                            "mainvalue": Qt.binding(function(){return SetValueObject[SetValuePropertyMain]}),
                                            "maxvalue": setMaxValue,
                                            "mainunit": setUnit,
-                                           "vertgaugevisible": setVertGaugeVis,
-                                           "horigaugevisible": setHoriGaugeVis,
-                                           "secvaluevisible": setSecValueVis,
+                                           //"vertgaugevisible": setVertGaugeVis,
+                                           //"horigaugevisible": setHoriGaugeVis,
+                                           //"secvaluevisible": setSecValueVis,
                                            "x": setX, "y": setY});
         console.log("creating object done");
         if (gauge == null) {
