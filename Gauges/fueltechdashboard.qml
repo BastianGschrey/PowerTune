@@ -33,7 +33,7 @@ property int rpm: Dashboard.revs
              tickmarkAlignment: Qt.AlignBottom
              orientation: Qt.Horizontal
 
-             value: parent.rpm
+             value: 5000
              minimumValue: 0
              maximumValue: 9000
 
