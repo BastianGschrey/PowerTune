@@ -179,6 +179,12 @@ class DashBoard : public QObject
     //Official Pi screen present screen
     Q_PROPERTY(bool screen READ screen WRITE setscreen NOTIFY screenChanged)
 
+    //User Dashboard Stringlist dashsetup
+
+    Q_PROPERTY(QStringList dashsetup READ dashsetup WRITE setdashsetup NOTIFY dashsetupChanged)
+
+
+
 public:
     DashBoard(QObject *parent = 0);
 
@@ -364,6 +370,10 @@ public:
 //Official Pi screen present screen
     void setscreen(const bool &screen);
 
+ //User Dashboard Stringlist dashsetup
+
+    void setdashsetup(const QStringList &dashsetup);
+
     qreal Odo() const;
 
     // Advanced Info FD3S
@@ -537,7 +547,11 @@ public:
 
 
     //Official Pi screen present screen
-     qreal screen() const;
+     bool screen() const;
+
+     //User Dashboard Stringlist
+
+     QStringList dashsetup() const;
 
 signals:
 
@@ -714,7 +728,12 @@ signals:
     void WeightChanged(qreal Weight);
 
     //Official Pi screen present screen
-    void screenChanged(qreal screen);
+    void screenChanged(bool screen);
+
+
+    //User Dashboard Stringlist
+
+    void dashsetupChanged(QStringList dashsetup);
 
 private:
     // Odometer
@@ -898,7 +917,10 @@ private:
     qreal m_Weight;
 
     //Official Pi screen present screen
-    qreal m_screen;
+    bool m_screen;
+    //User Dashboard Stringlist  dashsetup
+
+    QStringList m_dashsetup;
 
 
 };

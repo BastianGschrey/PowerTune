@@ -1285,6 +1285,9 @@ void DashBoard::setWeight(const qreal &Weight)
     emit WeightChanged(Weight);
 }
 
+
+
+
 //Official Pi screen present screen
 void DashBoard::setscreen(const bool &screen)
 {
@@ -1294,6 +1297,13 @@ void DashBoard::setscreen(const bool &screen)
     emit screenChanged(screen);
 }
 
+void DashBoard::setdashsetup(const QStringList &dashsetup)
+{
+    if (m_dashsetup == dashsetup)
+        return;
+    m_dashsetup = dashsetup;
+    emit dashsetupChanged(dashsetup);
+}
 
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
@@ -1466,4 +1476,7 @@ qreal DashBoard::AccelTimer() const { return m_AccelTimer; }
 qreal DashBoard::Weight() const { return m_Weight; }
 
 //Official Pi screen present screen
-qreal DashBoard::screen() const { return m_screen; }
+bool DashBoard::screen() const { return m_screen; }
+
+//User Dashboard Stringlist
+QStringList DashBoard::dashsetup() const { return m_dashsetup; }
