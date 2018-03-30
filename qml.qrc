@@ -6,7 +6,6 @@
         <file>Gauges/DashboardGaugeStyle.qml</file>
         <file>Gauges/TachometerStyle.qml</file>
         <file>Gauges/DashAdaptronic.qml</file>
-        <file>Gauges/Dashboard.qml</file>
         <file>Gauges/PFCSensors.qml</file>
         <file>Gauges/BarGauge.qml</file>
         <file>Gauges/GPS.qml</file>
@@ -33,5 +32,6 @@
         <file>Gauges/fueltechdashboard.qml</file>
         <file>graphics/vertrevcanvas.png</file>
         <file>Gauges/dashfromfile.qml</file>
+        <file>Gauges/Cluster.qml</file>
     </qresource>
 </RCC>

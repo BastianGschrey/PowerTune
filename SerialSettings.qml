@@ -569,7 +569,7 @@ Rectangle {
         id: select4
         function selDash4()
         {
-            if (dash4.currentIndex == "0") {fourthPageLoader.source = "qrc:/Gauges/Dashboard.qml"};
+            if (dash4.currentIndex == "0") {fourthPageLoader.source = "qrc:/Gauges/Cluster.qml"};
             if (dash4.currentIndex == "1") {fourthPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
             if (dash4.currentIndex == "2") {fourthPageLoader.source = "qrc:/Gauges/Charts.qml"};
             if (dash4.currentIndex == "3") {fourthPageLoader.source = "qrc:/Gauges/GPS.qml"};

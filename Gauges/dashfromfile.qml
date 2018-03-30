@@ -12,6 +12,7 @@ import QtQuick.Controls 2.1
 import QtQuick.Controls.Styles 1.4
 import "qrc:/Gauges/createsquaregauge.js" as CreateSquareGaugeScript
 
+//once this works implement it in fueltechdashboard
 Item {
 //Call Connect.cpp and read the UserDash.txt file ==> Works
 Item {
@@ -30,17 +31,14 @@ visible:false
 Button{
     id: button
     anchors.centerIn: parent
-    onClicked : CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),dashvalue.textAt(8),dashvalue.textAt(9),dashvalue.textAt(10),dashvalue.textAt(11),dashvalue.textAt(12),dashvalue.textAt(13));
+     onClicked :CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),dashvalue.textAt(8),dashvalue.textAt(9),dashvalue.textAt(10),dashvalue.textAt(11),dashvalue.textAt(12),dashvalue.textAt(13));
 
 }
-
 /*
-  Connect C++ Signal dashsetupChanged to a slot in QML , when slot is triggered create the gauge with the calues from the stringlist. ==> Help Needed
-Connections {
-
-    target: Dashboard
-    ondashsetupChanged : CreateSquareGaugeScript.createSquareGauge(val1,val2,val3,val4,val5,val6,val7,val8,val9,val10,val11,val12,val13,val14),
+//Replace Button with this , for some reason the ondashsetupChanged signal isn't found
+Connections{
+target: Mysignal
+ondashsetupChanged: CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),dashvalue.textAt(8),dashvalue.textAt(9),dashvalue.textAt(10),dashvalue.textAt(11),dashvalue.textAt(12),dashvalue.textAt(13));
 }
 */
-
 }
