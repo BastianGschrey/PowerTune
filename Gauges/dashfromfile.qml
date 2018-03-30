@@ -10,7 +10,7 @@ import QtQuick 2.8
 import QtQuick.Extras 1.4
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Styles 1.4
-//import "qrc:/Gauges/createsquaregauge.js" as CreateSquareGaugeScript
+import "qrc:/Gauges/createsquaregauge.js" as CreateSquareGaugeScript
 
 Item {
 //Call Connect.cpp and read the UserDash.txt file ==> Works
@@ -18,15 +18,21 @@ Item {
 Component.onCompleted: Connect.readdashsetup()
 }
 
-//This is just for testing , will only show the last line of the file is read
+//Needto replace the combobox with a ListModel but this seems to work for now ( very shitty workarround)
 ComboBox{
-id: justcheckingifthestringlistisreceived
+id: dashvalue
 width: 200
 model: Dashboard.dashsetup
+visible:false
 }
 
-//
+//Replace the button with a slot that is linked to the signal dashsetupChanged (this will setup a new gauge everytime a line in the text file is read )
+Button{
+    id: button
+    anchors.centerIn: parent
+    onClicked : CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),dashvalue.textAt(8),dashvalue.textAt(9),dashvalue.textAt(10),dashvalue.textAt(11),dashvalue.textAt(12),dashvalue.textAt(13));
 
+}
 
 /*
   Connect C++ Signal dashsetupChanged to a slot in QML , when slot is triggered create the gauge with the calues from the stringlist. ==> Help Needed
