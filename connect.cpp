@@ -131,7 +131,6 @@ void Connect::checkifraspberrypi()
 
 void Connect::readdashsetup()
 {
-    qDebug()<<"c++ file read";
     QString path = "UserDash.txt";// this is just for testing
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
@@ -142,7 +141,6 @@ void Connect::readdashsetup()
           QString line = in.readLine();
           QStringList list = line.split(QRegExp("\\,"));
           m_dashBoard->setdashsetup(list);
-          qDebug()<< list;
        }
        inputFile.close();
     }
