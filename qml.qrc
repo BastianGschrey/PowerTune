@@ -32,5 +32,6 @@
         <file>Gauges/createsquaregauge.js</file>
         <file>Gauges/fueltechdashboard.qml</file>
         <file>graphics/vertrevcanvas.png</file>
+        <file>Gauges/dashfromfile.qml</file>
     </qresource>
 </RCC>

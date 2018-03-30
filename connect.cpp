@@ -141,7 +141,7 @@ void Connect::readdashsetup()
        {
           QString line = in.readLine();
           QStringList list = line.split(QRegExp("\\,"));
-          //m_dashBoard->setdashsetup(list);
+          m_dashBoard->setdashsetup(list);
           qDebug()<< list;
        }
        inputFile.close();
