@@ -4,12 +4,39 @@ import QtQuick 2.8
 import QtQuick.Extras 1.4
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Styles 1.4
-//import "qrc:/Gauges/createsquaregauge.js" as CreateSquareGaugeScript
+import "qrc:/Gauges/createsquaregauge.js" as CreateSquareGaugeScript
 
 
 
 Item {
 id: fueltechDash
+
+
+//Needto replace the combobox with a ListModel but this seems to work for now ( very shitty workarround)
+ComboBox{
+id: dashvalue
+width: 200
+model: Dashboard.dashsetup
+visible:false
+}
+
+//This slot is called every time a line from the UserDash.txt has been read
+Connections{
+target: Dashboard
+onDashsetupChanged: CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),dashvalue.textAt(8),dashvalue.textAt(9),dashvalue.textAt(10),dashvalue.textAt(11),dashvalue.textAt(12),dashvalue.textAt(13));
+}
+
+//Call Connect.cpp and read the UserDash.txt file ==> Works
+Item {
+Component.onCompleted: Connect.readdashsetup()
+}
+
+
+
+
+
+
+//
 /*
 //prototype of function:
 //createVerticalGauge(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec)

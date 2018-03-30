@@ -1,7 +1,6 @@
 #ifndef DASHBOARD_H
 #define DASHBOARD_H
 
-#endif // DASHBOARD_H
 #include <QStringList>
 #include <QObject>
 
@@ -924,3 +923,5 @@ private:
 
 
 };
+
+#endif // DASHBOARD_H
