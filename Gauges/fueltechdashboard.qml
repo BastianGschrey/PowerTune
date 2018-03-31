@@ -17,13 +17,14 @@ ComboBox{
 id: dashvalue
 width: 200
 model: Dashboard.dashsetup
-visible:false
+visible:true
 }
 
 //This slot is called every time a line from the UserDash.txt has been read
 Connections{
 target: Dashboard
-onDashsetupChanged: CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),dashvalue.textAt(8),dashvalue.textAt(9),dashvalue.textAt(10),dashvalue.textAt(11),dashvalue.textAt(12),dashvalue.textAt(13));
+//CreateSquareGaugeScript.createSquareGauge                                                                           (215,280,570,180,500,0,"kPa","FuelP",true,false,false,"Dashboard","FuelPress","FuelPress");
+onDashsetupChanged: CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),true,false,false,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13));
 }
 
 //Call Connect.cpp and read the UserDash.txt file ==> Works
