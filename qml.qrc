@@ -27,10 +27,10 @@
         <file>Gauges/createverticalbargauge.js</file>
         <file>Gauges/Dyno.qml</file>
         <file>Gauges/Camera.qml</file>
-        <file>Gauges/squaregauge.qml</file>
         <file>Gauges/createsquaregauge.js</file>
-        <file>Gauges/fueltechdashboard.qml</file>
         <file>graphics/vertrevcanvas.png</file>
         <file>Gauges/Cluster.qml</file>
+        <file>Gauges/Squaregauge.qml</file>
+        <file>Gauges/Fueltechdashboard.qml</file>
     </qresource>
 </RCC>

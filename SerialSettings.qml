@@ -523,7 +523,7 @@ Rectangle {
             if (dash1.currentIndex == "6") {firstPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
             if (dash1.currentIndex == "7") {firstPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
             if (dash1.currentIndex == "8") {firstPageLoader.source = "qrc:/Gauges/Dyno.qml"};
-            if (dash1.currentIndex == "9") {firstPageLoader.source = "qrc:/Gauges/fueltechdashboard.qml"};
+            if (dash1.currentIndex == "9") {firstPageLoader.source = "qrc:/Gauges/Fueltechdashboard.qml"};
 
 
         }
@@ -542,7 +542,7 @@ Rectangle {
             if (dash2.currentIndex == "6") {secondPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
             if (dash2.currentIndex == "7") {secondPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
             if (dash2.currentIndex == "8") {secondPageLoader.source = "qrc:/Gauges/Dyno.qml"};
-            if (dash2.currentIndex == "9") {secondPageLoader.source = "qrc:/Gauges/fueltechdashboard.qml"};
+            if (dash2.currentIndex == "9") {secondPageLoader.source = "qrc:/Gauges/Fueltechdashboard.qml"};
 
         }
 
@@ -560,7 +560,7 @@ Rectangle {
             if (dash3.currentIndex == "6") {thirdPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
             if (dash3.currentIndex == "7") {thirdPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
             if (dash3.currentIndex == "8") {thirdPageLoader.source = "qrc:/Gauges/Dyno.qml"};
-            if (dash3.currentIndex == "9") {thirdPageLoader.source = "qrc:/Gauges/fueltechdashboard.qml"};
+            if (dash3.currentIndex == "9") {thirdPageLoader.source = "qrc:/Gauges/Fueltechdashboard.qml"};
 
         }
 
@@ -578,7 +578,7 @@ Rectangle {
             if (dash4.currentIndex == "6") {fourthPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
             if (dash4.currentIndex == "7") {fourthPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
             if (dash4.currentIndex == "8") {fourthPageLoader.source = "qrc:/Gauges/Dyno.qml"};
-            if (dash4.currentIndex == "9") {fourthPageLoader.source = "qrc:/Gauges/fueltechdashboard.qml"};
+            if (dash4.currentIndex == "9") {fourthPageLoader.source = "qrc:/Gauges/Fueltechdashboard.qml"};
 
         }
 

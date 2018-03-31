@@ -7,27 +7,45 @@ import QtQuick.Controls.Styles 1.4
 import "qrc:/Gauges/createsquaregauge.js" as CreateSquareGaugeScript
 
 
-
-
 Item {
-id: fueltechDash
+    id: fueltechDash
+    anchors.fill: parent
 
-property var val1: false
-property var val2: false
-property var val3: false
+    property var val1: false
+    property var val2: false
+    property var val3: false
 
-//Needto replace the combobox with a ListModel but this seems to work for now ( very shitty workarround)
-ComboBox{
-id: dashvalue
-width: 200
-model: Dashboard.dashsetup
-visible:true
+    Connections{
+        target: Dashboard
+        onDashsetupChanged: {
+            //Need to do this nicer but it works
+            if (dashvalue.textAt(8) == "true") {val1 = true};
+            if (dashvalue.textAt(8) == "false") {val1 = false};
+            if (dashvalue.textAt(9) == "true") {val2 = true};
+            if (dashvalue.textAt(9) == "false") {val2 = false};
+            if (dashvalue.textAt(10) == "true") {val3 = true};
+            if (dashvalue.textAt(10) == "false") {val3 = false};
+            console.log("received");
+           // CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13));
+        }
+    }
+    ComboBox{
+        id: dashvalue
+        width: 200
+        model: Dashboard.dashsetup
+        visible:false
+        Component.onCompleted: Connect.readdashsetup()
+    }
+
+    Squaregauge{}
 }
+/*
+//Needto replace the combobox with a ListModel but this seems to work for now ( very shitty workarround)
+
 
 //This slot is called every time a line from the UserDash.txt has been read
 Connections{
 target: Dashboard
-//CreateSquareGaugeScript.createSquareGauge                                                                           (215,280,570,180,500,0,"kPa","FuelP",true,false,false,"Dashboard","FuelPress","FuelPress");
 onDashsetupChanged: {
     //Need to do this nicer but it works
     if (dashvalue.textAt(8) == "true") {val1 = true};
@@ -36,7 +54,7 @@ onDashsetupChanged: {
     if (dashvalue.textAt(9) == "false") {val2 = false};
     if (dashvalue.textAt(10) == "true") {val3 = true};
     if (dashvalue.textAt(10) == "false") {val3 = false};
-    CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13));
+ //   CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13));
 }
 }
 
@@ -93,7 +111,7 @@ Component.onCompleted: Connect.readdashsetup()
 
 }
 
-
+*/
 
 
 
