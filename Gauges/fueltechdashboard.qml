@@ -59,7 +59,7 @@ Component.onCompleted:
              tickmarkAlignment: Qt.AlignBottom
              orientation: Qt.Horizontal
 
-             value: 2000
+             value: Dashboard.rpm
              minimumValue: 0
              maximumValue: 9000
 
