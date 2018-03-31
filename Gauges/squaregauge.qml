@@ -17,13 +17,10 @@ Rectangle {
         property alias vertgaugevisible: vertgauge.visible
         property alias horigaugevisible: horizgauge.visible
         property alias secvaluevisible: secondaryvaluetextfield.visible
-        property alias secvalue: secondaryvaluetextfield.text
-        //property alias maintextvalue: mainvaluetextfield.text
-        //property alias mainvalue: mainvaluetextfield.text
-        //property alias maxvalue: vertgauge.maximumValue
 
-        //property double mainvalue
-        //property int maxvalue
+        property real mainvalue
+        property real secvalue
+        property int maxvalue
 
         Rectangle {
             id: titlebar
@@ -44,7 +41,7 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pixelSize: 23
                 font.bold: true
-                font.family: "Eurostile"
+                font.family: "Verdana"
                 color: "white"
 
             }
@@ -60,6 +57,7 @@ Rectangle {
             font.pixelSize: 50
             font.family: "Eurostile"
             color: "white"
+            text: parent.mainvalue
         }
 
         Text {
@@ -81,10 +79,12 @@ Rectangle {
             anchors.bottomMargin: 10
             anchors.right: parent.right
             anchors.rightMargin: 10
+            //width: parent.width / 3
             height: parent.height * 0.2
             font.pixelSize: 28
             font.family: "Eurostile"
             color: "white"
+            text: parent.secvalue
         }
 
         Gauge {
@@ -99,8 +99,8 @@ Rectangle {
             tickmarkStepSize : 0
             minorTickmarkCount: 0
             tickmarkAlignment: Qt.AlignRight
-            //value: parent.mainvalue
-            //maximumValue: parent.maxvalue
+            value: parent.mainvalue
+            maximumValue: parent.maxvalue
 
             style: GaugeStyle {
                 valueBar: Rectangle {
@@ -124,8 +124,8 @@ Rectangle {
             tickmarkStepSize : 0
             minorTickmarkCount: 0
             tickmarkAlignment: Qt.AlignRight
-            //value: parent.mainvalue
-            //maximumValue: parent.maxvalue
+            value: parent.mainvalue
+            maximumValue: parent.maxvalue
 
             style: GaugeStyle {
                 valueBar: Rectangle {
@@ -138,3 +138,4 @@ Rectangle {
 
 
 }
+
