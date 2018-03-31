@@ -25,8 +25,9 @@ Item {
             if (dashvalue.textAt(9) == "false") {val2 = false};
             if (dashvalue.textAt(10) == "true") {val3 = true};
             if (dashvalue.textAt(10) == "false") {val3 = false};
-            console.log("received");
-           // CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13));
+            //CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13));
+            //call script without setting MaxValue
+            CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13));
         }
     }
     ComboBox{
@@ -37,7 +38,24 @@ Item {
         Component.onCompleted: Connect.readdashsetup()
     }
 
-    Squaregauge{}
+
+    /* // This causes segmentation fault
+    Squaregauge{
+        id: setID
+        title: "title"
+        width: 400
+        height: 200
+        mainvalue: Dashboard.rpm
+        secvalue: Dashboard.rpm
+        // maxvalue: 10000  // Passing this parameter causes crash on Raspberry Pi
+        mainunit: "RPM"
+        vertgaugevisible: false
+        horigaugevisible: true
+        secvaluevisible: true
+        x: 100
+        y: 100
+
+    }*/
 }
 /*
 //Needto replace the combobox with a ListModel but this seems to work for now ( very shitty workarround)
