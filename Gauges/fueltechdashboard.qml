@@ -8,9 +8,13 @@ import "qrc:/Gauges/createsquaregauge.js" as CreateSquareGaugeScript
 
 
 
+
 Item {
 id: fueltechDash
 
+property var val1: false
+property var val2: false
+property var val3: false
 
 //Needto replace the combobox with a ListModel but this seems to work for now ( very shitty workarround)
 ComboBox{
@@ -24,30 +28,22 @@ visible:true
 Connections{
 target: Dashboard
 //CreateSquareGaugeScript.createSquareGauge                                                                           (215,280,570,180,500,0,"kPa","FuelP",true,false,false,"Dashboard","FuelPress","FuelPress");
-onDashsetupChanged: CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),true,false,false,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13));
+onDashsetupChanged: {
+    //Need to do this nicer but it works
+    if (dashvalue.textAt(8) == "true") {val1 = true};
+    if (dashvalue.textAt(8) == "false") {val1 = false};
+    if (dashvalue.textAt(9) == "true") {val2 = true};
+    if (dashvalue.textAt(9) == "false") {val2 = false};
+    if (dashvalue.textAt(10) == "true") {val3 = true};
+    if (dashvalue.textAt(10) == "false") {val3 = false};
+    CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13));
+}
 }
 
 //Call Connect.cpp and read the UserDash.txt file ==> Works
 Item {
 Component.onCompleted: Connect.readdashsetup()
 }
-
-
-
-
-
-
-//
-/*
-//prototype of function:
-//createVerticalGauge(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec)
-Component.onCompleted:
-    CreateSquareGaugeScript.createSquareGauge(200,150,10,180,300,0,"kPa","MAP",true,false,false,"Dashboard","MAP","MAP"),
-    CreateSquareGaugeScript.createSquareGauge(165,150,220,180,300,2,"λ","Lambda",false,false,true,"Dashboard","LAMBDA","LAMBDATarget"),
-    CreateSquareGaugeScript.createSquareGauge(200,120,10,340,150,0,"°C","MAT",false,true,false,"Dashboard","Intaketemp","Intaketemp"),
-    CreateSquareGaugeScript.createSquareGauge(340,120,220,340,300,0,"°C","ECT",false,true,false,"Dashboard","Watertemp","Watertemp"),
-    CreateSquareGaugeScript.createSquareGauge(165,150,395,180,100,0,"%","WG DC%",false,true,false,"Dashboard","BoostDuty","BoostDuty"),
-    CreateSquareGaugeScript.createSquareGauge(215,280,570,180,500,0,"kPa","FuelP",true,false,false,"Dashboard","FuelPress","FuelPress");*/
 
          Gauge {
              id: revgauge
