@@ -14,6 +14,51 @@ Item {
     property var val1: false
     property var val2: false
     property var val3: false
+/*
+    Gauge {
+        id: revgauge
+        width: 800
+        height: 200
+
+        tickmarkStepSize: 0
+        minorTickmarkCount: 0
+        tickmarkAlignment: Qt.AlignBottom
+        orientation: Qt.Horizontal
+
+        value: Dashboard.rpm
+        minimumValue: 0
+        maximumValue: 9000
+
+        style: GaugeStyle {
+
+            valueBar: Rectangle {
+
+                width: 200
+                color: Qt.rgba(revgauge.value / revgauge.maximumValue, 0, 1 - revgauge.value / revgauge.maximumValue, 1)
+               }
+
+            }
+        }
+*/
+
+        Image {
+            height: 200
+            width: 800
+             source: "/graphics/vertrevcanvas.png"
+        }
+
+
+        Text {
+            x: 0
+            y: 43
+            font.pixelSize: 70
+            font.bold: true
+            color: "white"
+            text: Dashboard.rpm
+            horizontalAlignment: Text.AlignLeft
+            font.letterSpacing: 3
+            font.wordSpacing: 0
+        }
 
     Connections{
         target: Dashboard
@@ -39,23 +84,6 @@ Item {
     }
 
 
-    /* // This causes segmentation fault
-    Squaregauge{
-        id: setID
-        title: "title"
-        width: 400
-        height: 200
-        mainvalue: Dashboard.rpm
-        secvalue: Dashboard.rpm
-        // maxvalue: 10000  // Passing this parameter causes crash on Raspberry Pi
-        mainunit: "RPM"
-        vertgaugevisible: false
-        horigaugevisible: true
-        secvaluevisible: true
-        x: 100
-        y: 100
-
-    }*/
 }
 /*
 //Needto replace the combobox with a ListModel but this seems to work for now ( very shitty workarround)
@@ -81,53 +109,7 @@ Item {
 Component.onCompleted: Connect.readdashsetup()
 }
 
-         Gauge {
-             id: revgauge
-             width: 800
-             height: 200
 
-             tickmarkStepSize: 0
-             minorTickmarkCount: 0
-             tickmarkAlignment: Qt.AlignBottom
-             orientation: Qt.Horizontal
-
-             value: Dashboard.rpm
-             minimumValue: 0
-             maximumValue: 9000
-
-             style: GaugeStyle {
-
-                 valueBar: Rectangle {
-
-                     width: 200
-                     color: Qt.rgba(revgauge.value / revgauge.maximumValue, 0, 1 - revgauge.value / revgauge.maximumValue, 1)
-                    }
-
-                 }
-             }
-
-
-             Image {
-                 height: 200
-                 width: 800
-                  source: "/graphics/vertrevcanvas.png"
-             }
-
-
-             Text {
-                 x: 0
-                 y: 43
-                 font.pixelSize: 70
-                 font.bold: true
-                 color: "white"
-                 text: Dashboard.rpm
-                 horizontalAlignment: Text.AlignLeft
-                 font.letterSpacing: 3
-                 font.wordSpacing: 0
-             }
-
-
-}
 
 */
 
