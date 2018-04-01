@@ -4,7 +4,7 @@ var component;
 var gauge;
 
 function createSquareGauge(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec) {
-    component = Qt.createComponent("squaregauge.qml");
+    component = Qt.createComponent("Squaregauge.qml");
     if (component.status == Component.Ready){
         console.log("component ready");
         finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec);
