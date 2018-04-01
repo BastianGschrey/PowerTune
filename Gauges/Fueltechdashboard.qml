@@ -4,74 +4,76 @@ import QtQuick 2.8
 import QtQuick.Extras 1.4
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Styles 1.4
-//import "qrc:/Gauges/createsquaregauge.js" as CreateSquareGaugeScript
-
+import "qrc:/Gauges/createsquaregauge.js" as CreateSquareGaugeScript
 
 
 Item {
-id: fueltechDash
-/*
-//prototype of function:
-//createVerticalGauge(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec)
-Component.onCompleted:
-    CreateSquareGaugeScript.createSquareGauge(200,150,10,180,300,0,"kPa","MAP",true,false,false,"Dashboard","MAP","MAP"),
-    CreateSquareGaugeScript.createSquareGauge(165,150,220,180,300,2,"λ","Lambda",false,false,true,"Dashboard","LAMBDA","LAMBDATarget"),
-    CreateSquareGaugeScript.createSquareGauge(200,120,10,340,150,0,"°C","MAT",false,true,false,"Dashboard","Intaketemp","Intaketemp"),
-    CreateSquareGaugeScript.createSquareGauge(340,120,220,340,300,0,"°C","ECT",false,true,false,"Dashboard","Watertemp","Watertemp"),
-    CreateSquareGaugeScript.createSquareGauge(165,150,395,180,100,0,"%","WG DC%",false,true,false,"Dashboard","BoostDuty","BoostDuty"),
-    CreateSquareGaugeScript.createSquareGauge(215,280,570,180,500,0,"kPa","FuelP",true,false,false,"Dashboard","FuelPress","FuelPress");
+    id: fueltechDash
+    anchors.fill: parent
 
-         Gauge {
-             id: revgauge
-             width: 800
-             height: 200
-
-             tickmarkStepSize: 0
-             minorTickmarkCount: 0
-             tickmarkAlignment: Qt.AlignBottom
-             orientation: Qt.Horizontal
-
-             value: 2000
-             minimumValue: 0
-             maximumValue: 9000
-
-             style: GaugeStyle {
-
-                 valueBar: Rectangle {
-
-                     width: 200
-                     color: Qt.rgba(revgauge.value / revgauge.maximumValue, 0, 1 - revgauge.value / revgauge.maximumValue, 1)
-                    }
-
-                 }
-             }
+    property var val1: false
+    property var val2: false
+    property var val3: false
+    Gauge {
+        id: gauge
+        height: parent.height
+        width: parent.width /1.01
+        x:0
+        minorTickmarkCount: 0
+        tickmarkStepSize : 9000
+        orientation : Qt.Horizontal
+        minimumValue: 0
+        maximumValue: 9000
+        value: Dashboard.rpm
+        style: GaugeStyle {
+            valueBar: Rectangle {
+                width:  200
+                color: Qt.rgba(gauge.value / gauge.maximumValue, 0, 1 - gauge.value / gauge.maximumValue, 1)
+            }
+        }
+    }
+        Image {
+            id: coverimage
+            height: 200
+            width: fueltechDash.width
+             source: "/graphics/vertrevcanvas.png"
+        }
 
 
-             Image {
-                 height: 200
-                 width: 800
-                  source: "/graphics/vertrevcanvas.png"
-             }
+        Text {
+            x: 0
+            y: 43
+            font.pixelSize: 70
+            font.bold: true
+            color: "white"
+            text: Dashboard.rpm
+            horizontalAlignment: Text.AlignLeft
+            font.letterSpacing: 3
+            font.wordSpacing: 0
+        }
+
+    Connections{
+        target: Dashboard
+        onDashsetupChanged: {
+            //Need to do this nicer but it works
+            if (dashvalue.textAt(8) == "true") {val1 = true};
+            if (dashvalue.textAt(8) == "false") {val1 = false};
+            if (dashvalue.textAt(9) == "true") {val2 = true};
+            if (dashvalue.textAt(9) == "false") {val2 = false};
+            if (dashvalue.textAt(10) == "true") {val3 = true};
+            if (dashvalue.textAt(10) == "false") {val3 = false};
+            CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13));
+
+        }
+    }
+    ComboBox{
+        id: dashvalue
+        width: 200
+        model: Dashboard.dashsetup
+        visible:false
+        Component.onCompleted: Connect.readdashsetup()
+    }
 
 
-             Text {
-                 x: 0
-                 y: 43
-                 font.pixelSize: 70
-                 font.bold: true
-                 color: "white"
-                 text: Dashboard.revs
-                 horizontalAlignment: Text.AlignLeft
-                 font.letterSpacing: 3
-                 font.wordSpacing: 0
-             }
 
-*/
 }
-
-
-
-
-
-
-

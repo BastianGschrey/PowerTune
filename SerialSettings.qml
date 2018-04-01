@@ -166,6 +166,16 @@ Rectangle {
                 }
                 Text
                 {
+                    text: "Odmeter"
+                }
+                TextField {
+                    id: odometer
+                    text: qsTr("1000")
+                    inputMethodHints: Qt.ImhDigitsOnly
+                    //enterKeyAction: EnterKeyAction.Next
+                }
+                Text
+                {
                     id: weighttext
                     text: "Weight:"
                 }
@@ -270,7 +280,7 @@ Rectangle {
                     from: 20
                     to: 255
                     //value: brightnessselect
-                    //visible: false
+                    visible: Dashboard.screen
                     Component.onCompleted: Connect.setSreenbrightness(brightness.value);
                     onPositionChanged: Connect.setSreenbrightness(brightness.value);
                 }
@@ -514,7 +524,7 @@ Rectangle {
         id: select1
         function selDash1()
         {
-            if (dash1.currentIndex == "0") {firstPageLoader.source = "qrc:/Gauges/Dashboard.qml"};
+            if (dash1.currentIndex == "0") {firstPageLoader.source = "qrc:/Gauges/Cluster.qml"};
             if (dash1.currentIndex == "1") {firstPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
             if (dash1.currentIndex == "2") {firstPageLoader.source = "qrc:/Gauges/Charts.qml"};
             if (dash1.currentIndex == "3") {firstPageLoader.source = "qrc:/Gauges/GPS.qml"};
@@ -533,7 +543,7 @@ Rectangle {
         id: select2
         function selDash2()
         {
-            if (dash2.currentIndex == "0") {secondPageLoader.source = "qrc:/Gauges/Dashboard.qml"};
+            if (dash2.currentIndex == "0") {secondPageLoader.source = "qrc:/Gauges/Cluster.qml"};
             if (dash2.currentIndex == "1") {secondPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
             if (dash2.currentIndex == "2") {secondPageLoader.source = "qrc:/Gauges/Charts.qml"};
             if (dash2.currentIndex == "3") {secondPageLoader.source = "qrc:/Gauges/GPS.qml"};
@@ -551,7 +561,7 @@ Rectangle {
         id: select3
         function selDash3()
         {
-            if (dash3.currentIndex == "0") {thirdPageLoader.source = "qrc:/Gauges/Dashboard.qml"};
+            if (dash3.currentIndex == "0") {thirdPageLoader.source = "qrc:/Gauges/Cluster.qml"};
             if (dash3.currentIndex == "1") {thirdPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
             if (dash3.currentIndex == "2") {thirdPageLoader.source = "qrc:/Gauges/Charts.qml"};
             if (dash3.currentIndex == "3") {thirdPageLoader.source = "qrc:/Gauges/GPS.qml"};
@@ -569,7 +579,7 @@ Rectangle {
         id: select4
         function selDash4()
         {
-            if (dash4.currentIndex == "0") {fourthPageLoader.source = "qrc:/Gauges/Dashboard.qml"};
+            if (dash4.currentIndex == "0") {fourthPageLoader.source = "qrc:/Gauges/Cluster.qml"};
             if (dash4.currentIndex == "1") {fourthPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
             if (dash4.currentIndex == "2") {fourthPageLoader.source = "qrc:/Gauges/Charts.qml"};
             if (dash4.currentIndex == "3") {fourthPageLoader.source = "qrc:/Gauges/GPS.qml"};
@@ -742,5 +752,8 @@ Rectangle {
         }
     }
 }
+
+
+
 
 

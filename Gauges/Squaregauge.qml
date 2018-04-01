@@ -18,12 +18,12 @@ Rectangle {
         property alias horigaugevisible: horizgauge.visible
         property alias secvaluevisible: secondaryvaluetextfield.visible
         property alias secvalue: secondaryvaluetextfield.text
-        //property alias maintextvalue: mainvaluetextfield.text
-        //property alias mainvalue: mainvaluetextfield.text
-        //property alias maxvalue: vertgauge.maximumValue
+        property alias maintextvalue: mainvaluetextfield.text
+        property alias mainvalue: mainvaluetextfield.text
+        property alias maxvalue: vertgauge.maximumValue
 
-        //property double mainvalue
-        //property int maxvalue
+        property double mainvalue
+        property int maxvalue
 
         Rectangle {
             id: titlebar
@@ -96,13 +96,27 @@ Rectangle {
             anchors.left: parent.left
             anchors.leftMargin: 10
             orientation: Qt.Vertical
-            tickmarkStepSize : 0
             minorTickmarkCount: 0
             tickmarkAlignment: Qt.AlignRight
-            //value: parent.mainvalue
-            //maximumValue: parent.maxvalue
+            value: parent.mainvalue
+            maximumValue: parent.maxvalue
 
             style: GaugeStyle {
+                tickmarkLabel: Text {
+                font.pixelSize: 14
+                color: "transparent"
+                }
+                tickmark: Item {
+                    implicitWidth: 18
+                    implicitHeight: 1
+
+                    Rectangle {
+                        color: "transparent"
+                        anchors.fill: parent
+                        anchors.leftMargin: 3
+                        anchors.rightMargin: 3
+                    }
+                }
                 valueBar: Rectangle {
                     implicitWidth: 25
                     color: "#9f9f9f"
@@ -121,13 +135,28 @@ Rectangle {
             anchors.leftMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
             orientation: Qt.Horizontal
-            tickmarkStepSize : 0
             minorTickmarkCount: 0
             tickmarkAlignment: Qt.AlignRight
-            //value: parent.mainvalue
-            //maximumValue: parent.maxvalue
+            value: parent.mainvalue
+            maximumValue: parent.maxvalue
 
             style: GaugeStyle {
+
+                tickmarkLabel: Text {
+                font.pixelSize: 14
+                color: "transparent"
+                }
+                tickmark: Item {
+                    implicitWidth: 18
+                    implicitHeight: 1
+
+                    Rectangle {
+                        color: "transparent"
+                        anchors.fill: parent
+                        anchors.leftMargin: 3
+                        anchors.rightMargin: 3
+                    }
+                }
                 valueBar: Rectangle {
                     implicitWidth: 25
                     color: "#9f9f9f"
@@ -135,6 +164,4 @@ Rectangle {
             }
 
         }
-
-
 }
