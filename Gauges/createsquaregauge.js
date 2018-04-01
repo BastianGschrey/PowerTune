@@ -2,7 +2,7 @@
 
 var component;
 var gauge;
-/*
+
 function createSquareGauge(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec) {
     component = Qt.createComponent("Squaregauge.qml");
     if (component.status == Component.Ready){
@@ -35,9 +35,9 @@ function finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,set
         console.log("Error loading component:", component.errorString());
     }
 }
-*/
-// Testing without setting the Maxvalue
 
+// Testing without setting the Maxvalue
+/*
 function createSquareGauge(setWidth,setHeight,setX,setY,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec) {
     component = Qt.createComponent("Squaregauge.qml");
     if (component.status == Component.Ready){
@@ -70,3 +70,4 @@ function finishCreation(setWidth,setHeight,setX,setY,setDecPlace,setUnit,setID,s
         console.log("Error loading component:", component.errorString());
     }
 }
+*/

@@ -19,20 +19,12 @@ Item {
         height: parent.height
         width: parent.width /1.01
         x:0
-
         minorTickmarkCount: 0
         tickmarkStepSize : 9000
-        //labelStepSize: 9000
         orientation : Qt.Horizontal
         minimumValue: 0
         maximumValue: 9000
-
         value: Dashboard.rpm
-  /*      Behavior on value {
-            NumberAnimation {
-                duration: 5
-            }
-        }*/
         style: GaugeStyle {
             valueBar: Rectangle {
                 width:  200
@@ -70,9 +62,9 @@ Item {
             if (dashvalue.textAt(9) == "false") {val2 = false};
             if (dashvalue.textAt(10) == "true") {val3 = true};
             if (dashvalue.textAt(10) == "false") {val3 = false};
-            //CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13));
+            CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13));
             //call script without setting MaxValue
-            CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13));
+            //CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13));
         }
     }
     ComboBox{
@@ -82,6 +74,25 @@ Item {
         visible:false
         Component.onCompleted: Connect.readdashsetup()
     }
+/*
+    Squaregauge{
+
+        id: "title"
+        title:"text"
+        width: 200
+        height: 200
+        mainvalue: Dashboard.rpm
+        secvalue: Dashboard.rpm
+       // maxvalue: 1000
+        mainunit: "hello"
+        vertgaugevisible: true
+        horigaugevisible: true
+        secvaluevisible: true
+        x: 10
+        y: 10
+
+
+    }*/
 
 
 }

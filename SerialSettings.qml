@@ -166,6 +166,16 @@ Rectangle {
                 }
                 Text
                 {
+                    text: "Odmeter"
+                }
+                TextField {
+                    id: odometer
+                    text: qsTr("1000")
+                    inputMethodHints: Qt.ImhDigitsOnly
+                    //enterKeyAction: EnterKeyAction.Next
+                }
+                Text
+                {
                     id: weighttext
                     text: "Weight:"
                 }
