@@ -249,7 +249,7 @@ void OBD::readData(QByteArray serialdata)
 
             case PIDS::EngineRPM:
                 RPM = (serialdata.mid(6,4)).toInt(&ok,16);
-                m_dashboard->setRevs(RPM/4);
+                m_dashboard->setrpm(RPM/4);
 
                 break;
 

@@ -58,7 +58,7 @@ void calculations::calculate()
     // Calculate selected Gear from gearratio
     //120, 70, 45, 35, 26
 
-    gearratio = m_dashboard->revs() / m_dashboard->speed();
+    gearratio = m_dashboard->rpm() / m_dashboard->speed();
     if (gearratio == gear1)
        {
        m_dashboard->SetGear(1);
@@ -95,7 +95,7 @@ void calculations::calculate()
         Power = ((weight * m_dashboard->accely()) * m_dashboard->speed()) * 0.0031107;
         //To calculate Torque in Nm when set to Metric
         //Power (kW) * 9549 / rotational speed (rpm)
-        Torque =  (Power * 9549) / m_dashboard->revs();
+        Torque =  (Power * 9549) / m_dashboard->rpm();
         //qDebug() << "metric Power" <<Power;
         if (Power >= 1)
         {
@@ -111,7 +111,7 @@ void calculations::calculate()
         Power = weight * m_dashboard->accely() * m_dashboard->speed() * 0.003054;
         //To calculate Torque in ft-lb when set to Imperial
         // Power (hp) * 5252 / rotational speed (rpm)
-        Torque =  (Power * 5252) / m_dashboard->revs();
+        Torque =  (Power * 5252) / m_dashboard->rpm();
         if (Power >= 1)
         {
             m_dashboard->setPower(Power);

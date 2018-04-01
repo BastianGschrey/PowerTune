@@ -39,7 +39,6 @@ class Nissanconsult;
 class OBD;
 class datalogger;
 class calculations;
-class udpreceiver;
 class AppSettings;
 class GoPro;
 class GPS;
@@ -55,6 +54,7 @@ public:
     ~Connect();
     explicit Connect(QObject *parent = 0);
     Q_INVOKABLE void checkifraspberrypi();
+    Q_INVOKABLE void readdashsetup();
     Q_INVOKABLE void setSreenbrightness(const int &brightness);
     Q_INVOKABLE void setUnits(const int &units);
     Q_INVOKABLE void setWeight(const int &weight);
@@ -84,7 +84,6 @@ private:
     Sensors *m_sensors;
     HaltechCAN *m_haltechCANV2;
     AdaptronicCAN *m_adaptronicCAN;
-    udpreceiver *m_udpreceiver;
     datalogger *m_datalogger;
     calculations *m_calculations;
     QStringList m_portsNames;

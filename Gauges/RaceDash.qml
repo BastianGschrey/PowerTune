@@ -25,7 +25,7 @@ Item {
             minimumValue: 0
             maximumValue: 9000
 
-            value: Dashboard.revs
+            value: Dashboard.rpm
             Behavior on value {
                 NumberAnimation {
                     duration: 5
@@ -52,43 +52,43 @@ Item {
             spacing: 20
             StatusIndicator {
                 color: "green"
-                active: { (Dashboard.revs > "3000") ? true: false; }
+                active: { (Dashboard.rpm > "3000") ? true: false; }
             }
             StatusIndicator {
                 color: "green"
-                active: { (Dashboard.revs > "4000") ? true: false; }
+                active: { (Dashboard.rpm > "4000") ? true: false; }
             }
             StatusIndicator {
                 color: "yellow"
-                active: { (Dashboard.revs > "5000") ? true: false; }
+                active: { (Dashboard.rpm > "5000") ? true: false; }
             }
             StatusIndicator {
                 color: "yellow"
-                active: { (Dashboard.revs > "6000") ? true: false; }
+                active: { (Dashboard.rpm > "6000") ? true: false; }
             }
             StatusIndicator {
                 color: "red"
-                active: { (Dashboard.revs > "7900") ? true: false; }
+                active: { (Dashboard.rpm > "7900") ? true: false; }
             }
             StatusIndicator {
                 color: "red"
-                active: { (Dashboard.revs > "7900") ? true: false; }
+                active: { (Dashboard.rpm > "7900") ? true: false; }
             }
             StatusIndicator {
                 color: "yellow"
-                active: { (Dashboard.revs > "6000") ? true: false; }
+                active: { (Dashboard.rpm > "6000") ? true: false; }
             }
             StatusIndicator {
                 color: "yellow"
-                active: { (Dashboard.revs > "5000") ? true: false; }
+                active: { (Dashboard.rpm > "5000") ? true: false; }
             }
             StatusIndicator {
                 color: "green"
-                active: { (Dashboard.revs > "4000") ? true: false; }
+                active: { (Dashboard.rpm > "4000") ? true: false; }
             }
             StatusIndicator {
                 color: "green"
-                active: { (Dashboard.revs > "3000") ? true: false; }
+                active: { (Dashboard.rpm > "3000") ? true: false; }
             }
         }
 
@@ -193,7 +193,7 @@ Item {
 
         }
         Text {
-            text:" RPM : " + Dashboard.revs
+            text:" RPM : " + Dashboard.rpm
             font.pixelSize: 32
             y: 160
             x: 190

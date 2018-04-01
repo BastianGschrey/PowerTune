@@ -1,7 +1,6 @@
 #ifndef DASHBOARD_H
 #define DASHBOARD_H
 
-#endif // DASHBOARD_H
 #include <QStringList>
 #include <QObject>
 
@@ -13,7 +12,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal Odo READ Odo WRITE setOdo NOTIFY OdoChanged)
 
     // Advanced Info
-    Q_PROPERTY(qreal revs READ revs WRITE setRevs NOTIFY revsChanged)
+    Q_PROPERTY(qreal rpm READ rpm WRITE setrpm NOTIFY rpmChanged)
     Q_PROPERTY(qreal Intakepress READ Intakepress WRITE setIntakepress NOTIFY IntakepressChanged)
     Q_PROPERTY(qreal PressureV READ PressureV WRITE setPressureV NOTIFY PressureVChanged)
     Q_PROPERTY(qreal ThrottleV READ ThrottleV WRITE setThrottleV NOTIFY ThrottleVChanged)
@@ -177,7 +176,13 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal Weight READ Weight WRITE setWeight NOTIFY WeightChanged)
 
     //Official Pi screen present screen
-    Q_PROPERTY(qreal screen READ screen WRITE setscreen NOTIFY screenChanged)
+    Q_PROPERTY(bool screen READ screen WRITE setscreen NOTIFY screenChanged)
+
+    //User Dashboard Stringlist dashsetup
+
+    Q_PROPERTY(QStringList dashsetup READ dashsetup WRITE setdashsetup NOTIFY dashsetupChanged)
+
+
 
 public:
     DashBoard(QObject *parent = 0);
@@ -187,7 +192,7 @@ public:
 
 
     // Advanced Info
-    void setRevs(const qreal &revs);
+    void setrpm(const qreal &rpm);
     void setIntakepress(const qreal &Intakepress);
     void setPressureV(const qreal &PressureV);
     void setThrottleV(const qreal &ThrottleV);
@@ -362,12 +367,16 @@ public:
     void setWeight(const qreal &Weight);
 
 //Official Pi screen present screen
-    void setscreen(const qreal &screen);
+    void setscreen(const bool &screen);
+
+ //User Dashboard Stringlist dashsetup
+
+    void setdashsetup(const QStringList &dashsetup);
 
     qreal Odo() const;
 
     // Advanced Info FD3S
-    qreal revs() const;
+    qreal rpm() const;
     qreal Intakepress() const;
     qreal PressureV() const;
     qreal ThrottleV() const;
@@ -537,7 +546,11 @@ public:
 
 
     //Official Pi screen present screen
-     qreal screen() const;
+     bool screen() const;
+
+     //User Dashboard Stringlist
+
+     QStringList dashsetup() const;
 
 signals:
 
@@ -546,7 +559,7 @@ signals:
 
 
     // Advanced Info
-    void revsChanged(qreal revs);
+    void rpmChanged(qreal rpm);
     void IntakepressChanged(qreal Intakepress);
     void PressureVChanged(qreal PressureV);
     void ThrottleVChanged(qreal ThrottleV);
@@ -714,7 +727,12 @@ signals:
     void WeightChanged(qreal Weight);
 
     //Official Pi screen present screen
-    void screenChanged(qreal screen);
+    void screenChanged(bool screen);
+
+
+    //User Dashboard Stringlist
+
+    void dashsetupChanged(QStringList dashsetup);
 
 private:
     // Odometer
@@ -722,7 +740,7 @@ private:
     qreal m_Odo;
 
     // Advanced Info
-    qreal m_revs;
+    qreal m_rpm;
     qreal m_Intakepress;
     qreal m_PressureV;
     qreal m_ThrottleV;
@@ -898,7 +916,12 @@ private:
     qreal m_Weight;
 
     //Official Pi screen present screen
-    qreal m_screen;
+    bool m_screen;
+    //User Dashboard Stringlist  dashsetup
+
+    QStringList m_dashsetup;
 
 
 };
+
+#endif // DASHBOARD_H

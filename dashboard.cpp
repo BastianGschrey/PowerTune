@@ -11,7 +11,7 @@ DashBoard::DashBoard(QObject *parent)
     //  Odometer
 
 
-    , m_revs(0)
+    , m_rpm(0)
     , m_Intakepress(0)
     , m_PressureV(0)
     , m_ThrottleV(0)
@@ -189,12 +189,12 @@ void DashBoard::setOdo(const qreal &Odo)
 }
 
 // Advanced Info FD3S
-void DashBoard::setRevs(const qreal &revs)
+void DashBoard::setrpm(const qreal &rpm)
 {
-    if (m_revs == revs)
+    if (m_rpm == rpm)
         return;
-    m_revs = revs;
-    emit revsChanged(revs);
+    m_rpm = rpm;
+    emit rpmChanged(rpm);
 }
 
 void DashBoard::setIntakepress(const qreal &Intakepress)
@@ -1285,8 +1285,11 @@ void DashBoard::setWeight(const qreal &Weight)
     emit WeightChanged(Weight);
 }
 
+
+
+
 //Official Pi screen present screen
-void DashBoard::setscreen(const qreal &screen)
+void DashBoard::setscreen(const bool &screen)
 {
     if (m_screen == screen)
         return;
@@ -1294,12 +1297,19 @@ void DashBoard::setscreen(const qreal &screen)
     emit screenChanged(screen);
 }
 
+void DashBoard::setdashsetup(const QStringList &dashsetup)
+{
+    if (m_dashsetup == dashsetup)
+        return;
+    m_dashsetup = dashsetup;
+    emit dashsetupChanged(dashsetup);
+}
 
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
 
 // Advanced Info
-qreal DashBoard::revs() const { return m_revs; }
+qreal DashBoard::rpm() const { return m_rpm; }
 qreal DashBoard::Intakepress() const { return m_Intakepress; }
 qreal DashBoard::PressureV() const { return m_PressureV; }
 qreal DashBoard::ThrottleV() const { return m_ThrottleV; }
@@ -1466,4 +1476,7 @@ qreal DashBoard::AccelTimer() const { return m_AccelTimer; }
 qreal DashBoard::Weight() const { return m_Weight; }
 
 //Official Pi screen present screen
-qreal DashBoard::screen() const { return m_screen; }
+bool DashBoard::screen() const { return m_screen; }
+
+//User Dashboard Stringlist
+QStringList DashBoard::dashsetup() const { return m_dashsetup; }

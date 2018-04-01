@@ -21,7 +21,6 @@
 #include "connect.h"
 #include "calculations.h"
 #include "sensors.h"
-#include "udpreceiver.h"
 #include "AdaptronicSelect.h"
 #include "AdaptronicCAN.h"
 #include "Apexi.h"
@@ -76,7 +75,6 @@ Connect::Connect(QObject *parent) :
     m_sensors(Q_NULLPTR),
     m_haltechCANV2(Q_NULLPTR),
     m_adaptronicCAN(Q_NULLPTR),
-    m_udpreceiver(Q_NULLPTR),
     m_datalogger(Q_NULLPTR),
     m_calculations(Q_NULLPTR)
 
@@ -94,7 +92,6 @@ Connect::Connect(QObject *parent) :
     m_sensors = new Sensors(m_dashBoard, this);
     m_haltechCANV2 = new HaltechCAN(m_dashBoard, this);
     m_adaptronicCAN = new AdaptronicCAN(m_dashBoard, this);
-    m_udpreceiver = new udpreceiver(m_dashBoard, this);
     m_datalogger = new datalogger(m_dashBoard, this);
     m_calculations = new calculations(m_dashBoard, this);
 
@@ -108,7 +105,6 @@ Connect::Connect(QObject *parent) :
     engine->rootContext()->setContextProperty("Nissanconsult",m_nissanconsult);
     engine->rootContext()->setContextProperty("Sens", m_sensors);
     engine->rootContext()->setContextProperty("Logger", m_datalogger);
-   // engine->rootContext()->setContextProperty("Calculations", m_calculations);
 }
 
 
@@ -124,27 +120,46 @@ void Connect::checkifraspberrypi()
   if (QFileInfo::exists(path))
   {
 
-       m_dashBoard->setscreen(1);
+       m_dashBoard->setscreen(true);
 
   }
   else
   {
-      m_dashBoard->setscreen(0);
+      m_dashBoard->setscreen(false);
   }
+}
+
+void Connect::readdashsetup()
+{
+    QString path = "UserDash.txt";// this is just for testing
+    QFile inputFile(path);
+    if (inputFile.open(QIODevice::ReadOnly))
+    {
+       QTextStream in(&inputFile);
+       while (!in.atEnd())
+       {
+          QString line = in.readLine();
+          QStringList list = line.split(QRegExp("\\,"));
+          m_dashBoard->setdashsetup(list);
+       }
+       inputFile.close();
+    }
+
 }
 
 void Connect::setSreenbrightness(const int &brightness)
 {
 
-//This works only on raspberry pi
-QFile f("/sys/class/backlight/rpi_backlight/brightness");
-//f.close();
-f.open(QIODevice::WriteOnly | QIODevice::Truncate);
-QTextStream out(&f);
-out << brightness;
-//qDebug() << brightness;
-f.close();
+    //This works only on raspberry pi
+    QFile f("/sys/class/backlight/rpi_backlight/brightness");
+    //f.close();
+    f.open(QIODevice::WriteOnly | QIODevice::Truncate);
+    QTextStream out(&f);
+    out << brightness;
+    //qDebug() << brightness;
+    f.close();
 }
+
 void Connect::setUnits(const int &units)
 {
     switch (units)
@@ -219,14 +234,8 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
         m_nissanconsult->openConnection(portName);
 
     }
-    //UDP reveiver
-    if (ecuSelect == 4)
-    {
-
-        m_udpreceiver->startreceiver();
 
 
-    }
     //Adaptronic ModularCAN protocol
     if (ecuSelect == 5)
     {
@@ -298,14 +307,7 @@ void Connect::closeConnection()
         m_nissanconsult->closeConnection();
 
     }
-    //UDP reveiver
-    if (ecu == 4)
-    {
 
-        m_udpreceiver->closeConnection();
-
-
-    }
     //Adaptronic ModularCAN protocol
     if (ecu == 5)
     {

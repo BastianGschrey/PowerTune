@@ -78,19 +78,7 @@ void AdaptronicCAN::readyToRead()
 
     while (m_canDevice->framesAvailable()) {
         const QCanBusFrame frame = m_canDevice->readFrame();
-        /*// Just for testing  start
-        QString view;
-        if (frame.frameType() == QCanBusFrame::ErrorFrame)
-            view = m_canDevice->interpretErrorFrame(frame);
-        else
-            view = frame.toString();
 
-        const QString time = QString::fromLatin1("%1.%2  ")
-                .arg(frame.timeStamp().seconds(), 10, 10, QLatin1Char(' '))
-                .arg(frame.timeStamp().microSeconds() / 100, 4, 10, QLatin1Char('0'));
-         Just for testing  end
-
-        qDebug() << time << view;*/
 
         // This section will be used to decode the received Frames currently shows only the the raw payload of a Adress
         QByteArray splitpayload = frame.payload();
@@ -200,7 +188,7 @@ void AdaptronicCAN::readyToRead()
             //"Analogue Voltage 63"(pkgpayload[3]/1000)
             break;
         case 0x310:
-            m_dashboard->setRevs(pkgpayload[0]);
+            m_dashboard->setrpm(pkgpayload[0]);
             //"Period for cyl 1"(pkgpayload[1]/1000)
             //"Period for cyl 2"(pkgpayload[2]/1000)
             //"Period for cyl 3"(pkgpayload[3]/1000)

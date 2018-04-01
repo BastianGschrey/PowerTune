@@ -116,7 +116,7 @@ void AdaptronicSelect::decodeAdaptronic(QModbusDataUnit unit)
 
 
     m_dashboard->setSpeed(unit.value(10)); // <-This is for the "main" speedo KMH
-    m_dashboard->setRevs(unit.value(0));
+    m_dashboard->setrpm(unit.value(0));
     m_dashboard->setMAP(unit.value(1));
     m_dashboard->setIntaketemp(unit.value(2));
     m_dashboard->setWatertemp(unit.value(3));

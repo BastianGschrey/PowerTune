@@ -16,7 +16,6 @@ SOURCES += main.cpp \
     gps.cpp \
     obd.cpp \
     sensors.cpp \
-    udpreceiver.cpp \
     datalogger.cpp \
     HaltechCAN.cpp \
     AdaptronicCAN.cpp \
@@ -43,7 +42,6 @@ HEADERS += \
     gps.h \
     obd.h \
     sensors.h \
-    udpreceiver.h \
     datalogger.h \
     HaltechCAN.h \
     AdaptronicCAN.h \

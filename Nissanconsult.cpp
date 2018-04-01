@@ -603,7 +603,7 @@ void Nissanconsult::ProcessMessage(QByteArray serialdataconsult)
     if (CASPosRPMMSB >=0)
     {
         quint8 RPM = serialdataconsult[CASPosRPMMSB];
-        m_dashboard->setRevs(RPM *12.5);
+        m_dashboard->setrpm(RPM *12.5);
     }
     if (Speed >=0)
     {
