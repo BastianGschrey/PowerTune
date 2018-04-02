@@ -47,11 +47,19 @@ Rectangle {
             property alias password: goPropass.text
             property alias vehicleweight: weight.text
             property alias unitSelector: unitSelect.currentIndex
+            property alias odometervalue: odometer.text
 
 
         }
 
-
+        Connections{
+            target: Dashboard
+            onOdoChanged:{odometer.text = (Dashboard.Odo).toFixed(3) }
+            //onWatertempChanged: { if (Dashboard.Watertemp > watertemp.text) {alarm.play()};}
+            //onRpmChanged: { if (Dashboard.rpm > revs.text) {alarm.play()};}
+            //onKnockChanged: { if (Dashboard.Knock > knock.text) {alarm.play()};}
+            //onBoostPresChanged: { if (Dashboard.BoostPres > boost.text) {alarm.play()};}
+        }
 
         Row {
             x: 5
@@ -166,7 +174,7 @@ Rectangle {
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhPreferLowercase | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
                     //enterKeyAction: EnterKeyAction.Next
                 }
-                /*
+
                 Text
                 {
                     text: "Odmeter"
@@ -176,7 +184,7 @@ Rectangle {
                     text: qsTr("1000")
                     inputMethodHints: Qt.ImhDigitsOnly
                     //enterKeyAction: EnterKeyAction.Next
-                }*/
+                }
                 Text
                 {
                     id: weighttext
@@ -185,7 +193,7 @@ Rectangle {
                 TextField {
                     id: weight
                     inputMethodHints: Qt.ImhDigitsOnly
-                    Component.onCompleted: { Connect.setWeight(weight.text) }
+
                 }
                 Text
                 {
@@ -507,6 +515,8 @@ Rectangle {
         id: functconnect
         function connectfunc()
         {
+             Connect.setOdometer(odometer.text)
+             Connect.setWeight(weight.text);
              Connect.openConnection(serialName.currentText, ecuSelect.currentIndex ,weight.currentText);
             //else Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, logger.datalogger()),Connect.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
         }

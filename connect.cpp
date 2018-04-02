@@ -180,7 +180,12 @@ void Connect::setUnits(const int &units)
 void Connect::setWeight(const int &weight)
 {
     m_dashBoard->setWeight(weight);
-    qDebug() << "weight" << m_dashBoard->Weight();
+}
+
+void Connect::setOdometer(const qreal &Odometer)
+{
+    m_dashBoard->setOdo(Odometer);
+    m_calculations->start();
 }
 void Connect::getPorts()
 {
@@ -280,7 +285,7 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
 void Connect::closeConnection()
 {
 
-
+    m_calculations->stop();
     //Apexi
     if (ecu == 0)
     {

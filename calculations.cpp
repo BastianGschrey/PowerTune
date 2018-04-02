@@ -12,9 +12,12 @@
 
 qreal Power;
 qreal Torque;
-int PreviousSpeed;
+qreal odometer;
+QTime startTime = QTime::currentTime();
 int weight; //just set this to 1300 for testing
 int gearratio;
+int odoisset;
+int PreviousSpeed;
 int Gear1;
 int Gear2;
 int Gear3;
@@ -40,10 +43,15 @@ calculations::calculations(DashBoard *dashboard, QObject *parent)
 void calculations::start()
 {
     connect(&m_updatetimer, &QTimer::timeout, this, &calculations::calculate);
-    //loggerStartT = QTime::currentTime();
+    odometer = m_dashboard->Odo();
     m_updatetimer.start(25);
 
 }
+void calculations::stop()
+{
+    m_updatetimer.stop();
+}
+
 
 void calculations::calculate()
 {
@@ -85,6 +93,12 @@ void calculations::calculate()
        }
 
   */
+
+    //Odometer
+    odometer += ((startTime.msecsTo(QTime::currentTime())) * ((m_dashboard->speed()) / 3600000)); // Odometer
+    m_dashboard->setOdo(odometer);
+    startTime.restart(); //(QTime::currentTime())
+    qDebug() << "odo" << odometer;
     // Virtual Dyno to calculate Wheel Power and Wheel Torque
 
 

@@ -21,7 +21,6 @@ qreal test;
 QString Logfile;
 QString Auxname1;
 QString Auxname2;
-qreal odometer;
 int Model = 0;
 int Logging =3;
 int Loggerstat;

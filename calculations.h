@@ -22,6 +22,7 @@ public slots:
 
     void calculate();
     void start();
+    void stop();
 
 
 
