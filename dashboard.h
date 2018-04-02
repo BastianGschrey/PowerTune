@@ -9,45 +9,45 @@ class DashBoard : public QObject
     Q_OBJECT
 
     // Odometer
-    Q_PROPERTY(qreal Odo READ Odo WRITE setOdo NOTIFY OdoChanged)
+    Q_PROPERTY(qreal Odo READ Odo WRITE setOdo NOTIFY odoChanged)
 
     // Advanced Info
     Q_PROPERTY(qreal rpm READ rpm WRITE setrpm NOTIFY rpmChanged)
-    Q_PROPERTY(qreal Intakepress READ Intakepress WRITE setIntakepress NOTIFY IntakepressChanged)
-    Q_PROPERTY(qreal PressureV READ PressureV WRITE setPressureV NOTIFY PressureVChanged)
-    Q_PROPERTY(qreal ThrottleV READ ThrottleV WRITE setThrottleV NOTIFY ThrottleVChanged)
-    Q_PROPERTY(qreal Primaryinp READ Primaryinp WRITE setPrimaryinp NOTIFY PrimaryinpChanged)
-    Q_PROPERTY(qreal Fuelc READ Fuelc WRITE setFuelc NOTIFY FuelcChanged)
-    Q_PROPERTY(qreal Leadingign READ Leadingign WRITE setLeadingign NOTIFY LeadingignChanged)
-    Q_PROPERTY(qreal Trailingign READ Trailingign WRITE setTrailingign NOTIFY TrailingignChanged)
-    Q_PROPERTY(qreal Fueltemp READ Fueltemp WRITE setFueltemp NOTIFY FueltempChanged)
-    Q_PROPERTY(qreal Moilp READ Moilp WRITE setMoilp NOTIFY MoilpChanged)
-    Q_PROPERTY(qreal Boosttp READ Boosttp WRITE setBoosttp NOTIFY BoosttpChanged)
-    Q_PROPERTY(qreal Boostwg READ Boostwg WRITE setBoostwg NOTIFY BoostwgChanged)
-    Q_PROPERTY(qreal Watertemp READ Watertemp WRITE setWatertemp NOTIFY WatertempChanged)
-    Q_PROPERTY(qreal Intaketemp READ Intaketemp WRITE setIntaketemp NOTIFY IntaketempChanged)
-    Q_PROPERTY(qreal Knock READ Knock WRITE setKnock NOTIFY KnockChanged)
-    Q_PROPERTY(qreal BatteryV READ BatteryV WRITE setBatteryV NOTIFY BatteryVChanged)
+    Q_PROPERTY(qreal Intakepress READ Intakepress WRITE setIntakepress NOTIFY intakepressChanged)
+    Q_PROPERTY(qreal PressureV READ PressureV WRITE setPressureV NOTIFY pressureVChanged)
+    Q_PROPERTY(qreal ThrottleV READ ThrottleV WRITE setThrottleV NOTIFY throttleVChanged)
+    Q_PROPERTY(qreal Primaryinp READ Primaryinp WRITE setPrimaryinp NOTIFY primaryinpChanged)
+    Q_PROPERTY(qreal Fuelc READ Fuelc WRITE setFuelc NOTIFY fuelcChanged)
+    Q_PROPERTY(qreal Leadingign READ Leadingign WRITE setLeadingign NOTIFY leadingignChanged)
+    Q_PROPERTY(qreal Trailingign READ Trailingign WRITE setTrailingign NOTIFY trailingignChanged)
+    Q_PROPERTY(qreal Fueltemp READ Fueltemp WRITE setFueltemp NOTIFY fueltempChanged)
+    Q_PROPERTY(qreal Moilp READ Moilp WRITE setMoilp NOTIFY moilpChanged)
+    Q_PROPERTY(qreal Boosttp READ Boosttp WRITE setBoosttp NOTIFY boosttpChanged)
+    Q_PROPERTY(qreal Boostwg READ Boostwg WRITE setBoostwg NOTIFY boostwgChanged)
+    Q_PROPERTY(qreal Watertemp READ Watertemp WRITE setWatertemp NOTIFY watertempChanged)
+    Q_PROPERTY(qreal Intaketemp READ Intaketemp WRITE setIntaketemp NOTIFY intaketempChanged)
+    Q_PROPERTY(qreal Knock READ Knock WRITE setKnock NOTIFY knockChanged)
+    Q_PROPERTY(qreal BatteryV READ BatteryV WRITE setBatteryV NOTIFY batteryVChanged)
     Q_PROPERTY(qreal speed READ speed WRITE setSpeed NOTIFY speedChanged)
-    Q_PROPERTY(qreal Iscvduty READ Iscvduty WRITE setIscvduty NOTIFY IscvdutyChanged)
-    Q_PROPERTY(qreal O2volt READ O2volt WRITE setO2volt NOTIFY O2voltChanged)
+    Q_PROPERTY(qreal Iscvduty READ Iscvduty WRITE setIscvduty NOTIFY iscvdutyChanged)
+    Q_PROPERTY(qreal O2volt READ O2volt WRITE setO2volt NOTIFY o2voltChanged)
     Q_PROPERTY(qreal na1 READ na1 WRITE setna1 NOTIFY na1Changed)
-    Q_PROPERTY(qreal Secinjpulse READ Secinjpulse WRITE setSecinjpulse NOTIFY SecinjpulseChanged)
+    Q_PROPERTY(qreal Secinjpulse READ Secinjpulse WRITE setSecinjpulse NOTIFY secinjpulseChanged)
     Q_PROPERTY(qreal na2 READ na2 WRITE setna2 NOTIFY na2Changed)
-    Q_PROPERTY(qreal InjDuty READ InjDuty WRITE setInjDuty NOTIFY InjDutyChanged)
+    Q_PROPERTY(qreal InjDuty READ InjDuty WRITE setInjDuty NOTIFY injDutyChanged)
     Q_PROPERTY(qreal pim READ pim WRITE setpim NOTIFY pimChanged)
 
-    Q_PROPERTY(qreal EngLoad READ EngLoad WRITE setEngLoad NOTIFY EngLoadChanged)
-    Q_PROPERTY(qreal MAF1V READ MAF1V WRITE setMAF1V NOTIFY MAF1VChanged)
-    Q_PROPERTY(qreal MAF2V READ MAF2V WRITE setMAF2V NOTIFY MAF2VChanged)
+    Q_PROPERTY(qreal EngLoad READ EngLoad WRITE setEngLoad NOTIFY engLoadChanged)
+    Q_PROPERTY(qreal MAF1V READ MAF1V WRITE setMAF1V NOTIFY mAF1VChanged)
+    Q_PROPERTY(qreal MAF2V READ MAF2V WRITE setMAF2V NOTIFY mAF2VChanged)
     Q_PROPERTY(qreal injms READ injms WRITE setinjms NOTIFY injmsChanged)
-    Q_PROPERTY(qreal Inj READ Inj WRITE setInj NOTIFY InjChanged)
-    Q_PROPERTY(qreal Ign READ Ign WRITE setIgn NOTIFY IgnChanged)
-    Q_PROPERTY(qreal Dwell READ Dwell WRITE setDwell NOTIFY DwellChanged)
-    Q_PROPERTY(qreal BoostPres READ BoostPres WRITE setBoostPres NOTIFY BoostPresChanged)
-    Q_PROPERTY(qreal BoostDuty READ BoostDuty WRITE setBoostDuty NOTIFY BoostDutyChanged)
-    Q_PROPERTY(qreal MAFactivity READ MAFactivity WRITE setMAFactivity NOTIFY MAFactivityChanged)
-    Q_PROPERTY(qreal O2volt_2 READ O2volt_2 WRITE setO2volt_2 NOTIFY O2volt_2Changed)
+    Q_PROPERTY(qreal Inj READ Inj WRITE setInj NOTIFY injChanged)
+    Q_PROPERTY(qreal Ign READ Ign WRITE setIgn NOTIFY ignChanged)
+    Q_PROPERTY(qreal Dwell READ Dwell WRITE setDwell NOTIFY dwellChanged)
+    Q_PROPERTY(qreal BoostPres READ BoostPres WRITE setBoostPres NOTIFY boostPresChanged)
+    Q_PROPERTY(qreal BoostDuty READ BoostDuty WRITE setBoostDuty NOTIFY boostDutyChanged)
+    Q_PROPERTY(qreal MAFactivity READ MAFactivity WRITE setMAFactivity NOTIFY mAFactivityChanged)
+    Q_PROPERTY(qreal O2volt_2 READ O2volt_2 WRITE setO2volt_2 NOTIFY o2volt_2Changed)
 
     // Sensor Voltage
     Q_PROPERTY(qreal sens1 READ sens1 WRITE setsens1 NOTIFY sens1Changed)
@@ -67,82 +67,82 @@ class DashBoard : public QObject
 
     // Flags
 
-    Q_PROPERTY(qreal Flag1 READ Flag1 WRITE setFlag1 NOTIFY Flag1Changed)
-    Q_PROPERTY(qreal Flag2 READ Flag2 WRITE setFlag2 NOTIFY Flag2Changed)
-    Q_PROPERTY(qreal Flag3 READ Flag3 WRITE setFlag3 NOTIFY Flag3Changed)
-    Q_PROPERTY(qreal Flag4 READ Flag4 WRITE setFlag4 NOTIFY Flag4Changed)
-    Q_PROPERTY(qreal Flag5 READ Flag5 WRITE setFlag5 NOTIFY Flag5Changed)
-    Q_PROPERTY(qreal Flag6 READ Flag6 WRITE setFlag6 NOTIFY Flag6Changed)
-    Q_PROPERTY(qreal Flag7 READ Flag7 WRITE setFlag7 NOTIFY Flag7Changed)
-    Q_PROPERTY(qreal Flag8 READ Flag8 WRITE setFlag8 NOTIFY Flag8Changed)
-    Q_PROPERTY(qreal Flag9 READ Flag9 WRITE setFlag9 NOTIFY Flag9Changed)
-    Q_PROPERTY(qreal Flag10 READ Flag10 WRITE setFlag10 NOTIFY Flag10Changed)
-    Q_PROPERTY(qreal Flag11 READ Flag11 WRITE setFlag11 NOTIFY Flag11Changed)
-    Q_PROPERTY(qreal Flag12 READ Flag12 WRITE setFlag12 NOTIFY Flag12Changed)
-    Q_PROPERTY(qreal Flag13 READ Flag13 WRITE setFlag13 NOTIFY Flag13Changed)
-    Q_PROPERTY(qreal Flag14 READ Flag14 WRITE setFlag14 NOTIFY Flag14Changed)
-    Q_PROPERTY(qreal Flag15 READ Flag15 WRITE setFlag15 NOTIFY Flag15Changed)
-    Q_PROPERTY(qreal Flag16 READ Flag16 WRITE setFlag16 NOTIFY Flag16Changed)
+    Q_PROPERTY(qreal Flag1 READ Flag1 WRITE setFlag1 NOTIFY flag1Changed)
+    Q_PROPERTY(qreal Flag2 READ Flag2 WRITE setFlag2 NOTIFY flag2Changed)
+    Q_PROPERTY(qreal Flag3 READ Flag3 WRITE setFlag3 NOTIFY flag3Changed)
+    Q_PROPERTY(qreal Flag4 READ Flag4 WRITE setFlag4 NOTIFY flag4Changed)
+    Q_PROPERTY(qreal Flag5 READ Flag5 WRITE setFlag5 NOTIFY flag5Changed)
+    Q_PROPERTY(qreal Flag6 READ Flag6 WRITE setFlag6 NOTIFY flag6Changed)
+    Q_PROPERTY(qreal Flag7 READ Flag7 WRITE setFlag7 NOTIFY flag7Changed)
+    Q_PROPERTY(qreal Flag8 READ Flag8 WRITE setFlag8 NOTIFY flag8Changed)
+    Q_PROPERTY(qreal Flag9 READ Flag9 WRITE setFlag9 NOTIFY flag9Changed)
+    Q_PROPERTY(qreal Flag10 READ Flag10 WRITE setFlag10 NOTIFY flag10Changed)
+    Q_PROPERTY(qreal Flag11 READ Flag11 WRITE setFlag11 NOTIFY flag11Changed)
+    Q_PROPERTY(qreal Flag12 READ Flag12 WRITE setFlag12 NOTIFY flag12Changed)
+    Q_PROPERTY(qreal Flag13 READ Flag13 WRITE setFlag13 NOTIFY flag13Changed)
+    Q_PROPERTY(qreal Flag14 READ Flag14 WRITE setFlag14 NOTIFY flag14Changed)
+    Q_PROPERTY(qreal Flag15 READ Flag15 WRITE setFlag15 NOTIFY flag15Changed)
+    Q_PROPERTY(qreal Flag16 READ Flag16 WRITE setFlag16 NOTIFY flag16Changed)
 
     //Flag Strings
-    Q_PROPERTY(QString FlagString1 READ FlagString1 WRITE setFlagString1 NOTIFY FlagString1Changed)
-    Q_PROPERTY(QString FlagString2 READ FlagString2 WRITE setFlagString2 NOTIFY FlagString2Changed)
-    Q_PROPERTY(QString FlagString3 READ FlagString3 WRITE setFlagString3 NOTIFY FlagString3Changed)
-    Q_PROPERTY(QString FlagString4 READ FlagString4 WRITE setFlagString4 NOTIFY FlagString4Changed)
-    Q_PROPERTY(QString FlagString5 READ FlagString5 WRITE setFlagString5 NOTIFY FlagString5Changed)
-    Q_PROPERTY(QString FlagString6 READ FlagString6 WRITE setFlagString6 NOTIFY FlagString6Changed)
-    Q_PROPERTY(QString FlagString7 READ FlagString7 WRITE setFlagString7 NOTIFY FlagString7Changed)
-    Q_PROPERTY(QString FlagString8 READ FlagString8 WRITE setFlagString8 NOTIFY FlagString8Changed)
-    Q_PROPERTY(QString FlagString9 READ FlagString9 WRITE setFlagString9 NOTIFY FlagString9Changed)
-    Q_PROPERTY(QString FlagString10 READ FlagString10 WRITE setFlagString10 NOTIFY FlagString10Changed)
-    Q_PROPERTY(QString FlagString11 READ FlagString11 WRITE setFlagString11 NOTIFY FlagString11Changed)
-    Q_PROPERTY(QString FlagString12 READ FlagString12 WRITE setFlagString12 NOTIFY FlagString12Changed)
-    Q_PROPERTY(QString FlagString13 READ FlagString13 WRITE setFlagString13 NOTIFY FlagString13Changed)
-    Q_PROPERTY(QString FlagString14 READ FlagString14 WRITE setFlagString14 NOTIFY FlagString14Changed)
-    Q_PROPERTY(QString FlagString15 READ FlagString15 WRITE setFlagString15 NOTIFY FlagString15Changed)
-    Q_PROPERTY(QString FlagString16 READ FlagString16 WRITE setFlagString16 NOTIFY FlagString16Changed)
+    Q_PROPERTY(QString FlagString1 READ FlagString1 WRITE setFlagString1 NOTIFY flagString1Changed)
+    Q_PROPERTY(QString FlagString2 READ FlagString2 WRITE setFlagString2 NOTIFY flagString2Changed)
+    Q_PROPERTY(QString FlagString3 READ FlagString3 WRITE setFlagString3 NOTIFY flagString3Changed)
+    Q_PROPERTY(QString FlagString4 READ FlagString4 WRITE setFlagString4 NOTIFY flagString4Changed)
+    Q_PROPERTY(QString FlagString5 READ FlagString5 WRITE setFlagString5 NOTIFY flagString5Changed)
+    Q_PROPERTY(QString FlagString6 READ FlagString6 WRITE setFlagString6 NOTIFY flagString6Changed)
+    Q_PROPERTY(QString FlagString7 READ FlagString7 WRITE setFlagString7 NOTIFY flagString7Changed)
+    Q_PROPERTY(QString FlagString8 READ FlagString8 WRITE setFlagString8 NOTIFY flagString8Changed)
+    Q_PROPERTY(QString FlagString9 READ FlagString9 WRITE setFlagString9 NOTIFY flagString9Changed)
+    Q_PROPERTY(QString FlagString10 READ FlagString10 WRITE setFlagString10 NOTIFY flagString10Changed)
+    Q_PROPERTY(QString FlagString11 READ FlagString11 WRITE setFlagString11 NOTIFY flagString11Changed)
+    Q_PROPERTY(QString FlagString12 READ FlagString12 WRITE setFlagString12 NOTIFY flagString12Changed)
+    Q_PROPERTY(QString FlagString13 READ FlagString13 WRITE setFlagString13 NOTIFY flagString13Changed)
+    Q_PROPERTY(QString FlagString14 READ FlagString14 WRITE setFlagString14 NOTIFY flagString14Changed)
+    Q_PROPERTY(QString FlagString15 READ FlagString15 WRITE setFlagString15 NOTIFY flagString15Changed)
+    Q_PROPERTY(QString FlagString16 READ FlagString16 WRITE setFlagString16 NOTIFY flagString16Changed)
 
 
     // Sensor Strings
 
-    Q_PROPERTY(QString SensorString1 READ SensorString1 WRITE setSensorString1 NOTIFY SensorString1Changed)
-    Q_PROPERTY(QString SensorString2 READ SensorString2 WRITE setSensorString2 NOTIFY SensorString2Changed)
-    Q_PROPERTY(QString SensorString3 READ SensorString3 WRITE setSensorString3 NOTIFY SensorString3Changed)
-    Q_PROPERTY(QString SensorString4 READ SensorString4 WRITE setSensorString4 NOTIFY SensorString4Changed)
-    Q_PROPERTY(QString SensorString5 READ SensorString5 WRITE setSensorString5 NOTIFY SensorString5Changed)
-    Q_PROPERTY(QString SensorString6 READ SensorString6 WRITE setSensorString6 NOTIFY SensorString6Changed)
-    Q_PROPERTY(QString SensorString7 READ SensorString7 WRITE setSensorString7 NOTIFY SensorString7Changed)
-    Q_PROPERTY(QString SensorString8 READ SensorString8 WRITE setSensorString8 NOTIFY SensorString8Changed)
+    Q_PROPERTY(QString SensorString1 READ SensorString1 WRITE setSensorString1 NOTIFY sensorString1Changed)
+    Q_PROPERTY(QString SensorString2 READ SensorString2 WRITE setSensorString2 NOTIFY sensorString2Changed)
+    Q_PROPERTY(QString SensorString3 READ SensorString3 WRITE setSensorString3 NOTIFY sensorString3Changed)
+    Q_PROPERTY(QString SensorString4 READ SensorString4 WRITE setSensorString4 NOTIFY sensorString4Changed)
+    Q_PROPERTY(QString SensorString5 READ SensorString5 WRITE setSensorString5 NOTIFY sensorString5Changed)
+    Q_PROPERTY(QString SensorString6 READ SensorString6 WRITE setSensorString6 NOTIFY sensorString6Changed)
+    Q_PROPERTY(QString SensorString7 READ SensorString7 WRITE setSensorString7 NOTIFY sensorString7Changed)
+    Q_PROPERTY(QString SensorString8 READ SensorString8 WRITE setSensorString8 NOTIFY sensorString8Changed)
 
-    Q_PROPERTY(QString Platform READ Platform WRITE setPlatform NOTIFY PlatformChanged)
+    Q_PROPERTY(QString Platform READ Platform WRITE setPlatform NOTIFY platformChanged)
 
-    Q_PROPERTY(QString SerialStat READ SerialStat WRITE setSerialStat NOTIFY SerialStatChanged)
-    Q_PROPERTY(QString RecvData READ RecvData WRITE setRecvData NOTIFY RecvDataChanged)
-    Q_PROPERTY(QString TimeoutStat READ TimeoutStat WRITE setTimeoutStat NOTIFY TimeoutStatChanged)
-    Q_PROPERTY(QString RunStat READ RunStat WRITE setRunStat NOTIFY RunStatChanged)
+    Q_PROPERTY(QString SerialStat READ SerialStat WRITE setSerialStat NOTIFY serialStatChanged)
+    Q_PROPERTY(QString RecvData READ RecvData WRITE setRecvData NOTIFY recvDataChanged)
+    Q_PROPERTY(QString TimeoutStat READ TimeoutStat WRITE setTimeoutStat NOTIFY timeoutStatChanged)
+    Q_PROPERTY(QString RunStat READ RunStat WRITE setRunStat NOTIFY runStatChanged)
 
 
     //Adaptronic extra
 
-    Q_PROPERTY(qreal MAP READ MAP WRITE setMAP NOTIFY MAPChanged)
-    Q_PROPERTY(qreal AUXT READ AUXT WRITE setAUXT NOTIFY AUXTChanged)
-    Q_PROPERTY(qreal AFR READ AFR WRITE setAFR NOTIFY AFRChanged)
-    Q_PROPERTY(qreal TPS READ TPS WRITE setTPS NOTIFY TPSChanged)
-    Q_PROPERTY(qreal IdleValue READ IdleValue WRITE setIdleValue NOTIFY IdleValueChanged)
-    Q_PROPERTY(qreal MVSS READ MVSS WRITE setMVSS NOTIFY MVSSChanged)
-    Q_PROPERTY(qreal SVSS READ SVSS WRITE setSVSS NOTIFY SVSSChanged)
-    Q_PROPERTY(qreal Inj1 READ Inj1 WRITE setInj1 NOTIFY Inj1Changed)
-    Q_PROPERTY(qreal Inj2 READ Inj2 WRITE setInj2 NOTIFY Inj2Changed)
-    Q_PROPERTY(qreal Inj3 READ Inj3 WRITE setInj3 NOTIFY Inj3Changed)
-    Q_PROPERTY(qreal Inj4 READ Inj4 WRITE setInj4 NOTIFY Inj4Changed)
-    Q_PROPERTY(qreal Ign1 READ Ign1 WRITE setIgn1 NOTIFY Ign1Changed)
-    Q_PROPERTY(qreal Ign2 READ Ign2 WRITE setIgn2 NOTIFY Ign2Changed)
-    Q_PROPERTY(qreal Ign3 READ Ign3 WRITE setIgn3 NOTIFY Ign3Changed)
-    Q_PROPERTY(qreal Ign4 READ Ign4 WRITE setIgn4 NOTIFY Ign4Changed)
-    Q_PROPERTY(qreal TRIM READ TRIM WRITE setTRIM NOTIFY TRIMChanged)
-    Q_PROPERTY(qreal LAMBDA READ LAMBDA WRITE setLAMBDA NOTIFY LAMBDAChanged)
-    Q_PROPERTY(qreal LAMBDATarget READ LAMBDATarget WRITE setLAMBDATarget NOTIFY LAMBDATargetChanged)
-    Q_PROPERTY(qreal FuelPress READ FuelPress WRITE setFuelPress NOTIFY FuelPressChanged)
+    Q_PROPERTY(qreal MAP READ MAP WRITE setMAP NOTIFY mAPChanged)
+    Q_PROPERTY(qreal AUXT READ AUXT WRITE setAUXT NOTIFY aUXTChanged)
+    Q_PROPERTY(qreal AFR READ AFR WRITE setAFR NOTIFY aFRChanged)
+    Q_PROPERTY(qreal TPS READ TPS WRITE setTPS NOTIFY tPSChanged)
+    Q_PROPERTY(qreal IdleValue READ IdleValue WRITE setIdleValue NOTIFY idleValueChanged)
+    Q_PROPERTY(qreal MVSS READ MVSS WRITE setMVSS NOTIFY mVSSChanged)
+    Q_PROPERTY(qreal SVSS READ SVSS WRITE setSVSS NOTIFY sVSSChanged)
+    Q_PROPERTY(qreal Inj1 READ Inj1 WRITE setInj1 NOTIFY inj1Changed)
+    Q_PROPERTY(qreal Inj2 READ Inj2 WRITE setInj2 NOTIFY inj2Changed)
+    Q_PROPERTY(qreal Inj3 READ Inj3 WRITE setInj3 NOTIFY inj3Changed)
+    Q_PROPERTY(qreal Inj4 READ Inj4 WRITE setInj4 NOTIFY inj4Changed)
+    Q_PROPERTY(qreal Ign1 READ Ign1 WRITE setIgn1 NOTIFY ign1Changed)
+    Q_PROPERTY(qreal Ign2 READ Ign2 WRITE setIgn2 NOTIFY ign2Changed)
+    Q_PROPERTY(qreal Ign3 READ Ign3 WRITE setIgn3 NOTIFY ign3Changed)
+    Q_PROPERTY(qreal Ign4 READ Ign4 WRITE setIgn4 NOTIFY ign4Changed)
+    Q_PROPERTY(qreal TRIM READ TRIM WRITE setTRIM NOTIFY tRIMChanged)
+    Q_PROPERTY(qreal LAMBDA READ LAMBDA WRITE setLAMBDA NOTIFY lAMBDAChanged)
+    Q_PROPERTY(qreal LAMBDATarget READ LAMBDATarget WRITE setLAMBDATarget NOTIFY lAMBDATargetChanged)
+    Q_PROPERTY(qreal FuelPress READ FuelPress WRITE setFuelPress NOTIFY fuelPressChanged)
 
     //GPS Strings
 
@@ -169,11 +169,11 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal ambipress READ ambipress WRITE setambipress NOTIFY ambipressChanged)
 
     //Calculations
-    Q_PROPERTY(qreal Gear READ Gear WRITE setGear NOTIFY GearChanged)
-    Q_PROPERTY(qreal Power READ Power WRITE setPower NOTIFY PowerChanged)
-    Q_PROPERTY(qreal Torque READ Torque WRITE setTorque NOTIFY TorqueChanged)
-    Q_PROPERTY(qreal AccelTimer READ AccelTimer WRITE setAccelTimer NOTIFY AccelTimerChanged)
-    Q_PROPERTY(qreal Weight READ Weight WRITE setWeight NOTIFY WeightChanged)
+    Q_PROPERTY(qreal Gear READ Gear WRITE setGear NOTIFY gearChanged)
+    Q_PROPERTY(qreal Power READ Power WRITE setPower NOTIFY powerChanged)
+    Q_PROPERTY(qreal Torque READ Torque WRITE setTorque NOTIFY torqueChanged)
+    Q_PROPERTY(qreal AccelTimer READ AccelTimer WRITE setAccelTimer NOTIFY accelTimerChanged)
+    Q_PROPERTY(qreal Weight READ Weight WRITE setWeight NOTIFY weightChanged)
 
     //Official Pi screen present screen
     Q_PROPERTY(bool screen READ screen WRITE setscreen NOTIFY screenChanged)
@@ -555,44 +555,44 @@ public:
 signals:
 
     //Odometer
-    void OdoChanged(qreal Odo);
+    void odoChanged(qreal Odo);
 
 
     // Advanced Info
     void rpmChanged(qreal rpm);
-    void IntakepressChanged(qreal Intakepress);
-    void PressureVChanged(qreal PressureV);
-    void ThrottleVChanged(qreal ThrottleV);
-    void PrimaryinpChanged(qreal Primaryinp);
-    void FuelcChanged(qreal Fuelc);
-    void LeadingignChanged(qreal Leadingign);
-    void TrailingignChanged(qreal Trailingign);
-    void FueltempChanged(qreal Fueltemp);
-    void MoilpChanged(qreal Moilp);
-    void BoosttpChanged(qreal Boosttp);
-    void BoostwgChanged(qreal Boostwg);
-    void WatertempChanged(qreal Watertemp);
-    void IntaketempChanged(qreal Intaketemp);
-    void KnockChanged(qreal Knock);
+    void intakepressChanged(qreal Intakepress);
+    void pressureVChanged(qreal PressureV);
+    void throttleVChanged(qreal ThrottleV);
+    void primaryinpChanged(qreal Primaryinp);
+    void fuelcChanged(qreal Fuelc);
+    void leadingignChanged(qreal Leadingign);
+    void trailingignChanged(qreal Trailingign);
+    void fueltempChanged(qreal Fueltemp);
+    void moilpChanged(qreal Moilp);
+    void boosttpChanged(qreal Boosttp);
+    void boostwgChanged(qreal Boostwg);
+    void watertempChanged(qreal Watertemp);
+    void intaketempChanged(qreal Intaketemp);
+    void knockChanged(qreal Knock);
     void speedChanged(qreal speed);
-    void BatteryVChanged(qreal BatteryV);
-    void IscvdutyChanged(qreal Iscvduty);
-    void O2voltChanged(qreal O2volt);
+    void batteryVChanged(qreal BatteryV);
+    void iscvdutyChanged(qreal Iscvduty);
+    void o2voltChanged(qreal O2volt);
     void na1Changed(qreal na1);
-    void SecinjpulseChanged(qreal Secinjpulse);
+    void secinjpulseChanged(qreal Secinjpulse);
     void na2Changed(qreal na2);
-    void InjDutyChanged(qreal InjDuty);
-    void EngLoadChanged(qreal EngLoad);
-    void MAF1VChanged(qreal MAF1V);
-    void MAF2VChanged(qreal MAF2V);
+    void injDutyChanged(qreal InjDuty);
+    void engLoadChanged(qreal EngLoad);
+    void mAF1VChanged(qreal MAF1V);
+    void mAF2VChanged(qreal MAF2V);
     void injmsChanged(qreal injms);
-    void InjChanged(qreal Inj);
-    void IgnChanged(qreal Ign);
-    void DwellChanged(qreal Dwell);
-    void BoostPresChanged(qreal BoostPres);
-    void BoostDutyChanged(qreal BoostDuty);
-    void MAFactivityChanged(qreal MAFactivity);
-    void O2volt_2Changed(qreal O2volt_2);
+    void injChanged(qreal Inj);
+    void ignChanged(qreal Ign);
+    void dwellChanged(qreal Dwell);
+    void boostPresChanged(qreal BoostPres);
+    void boostDutyChanged(qreal BoostDuty);
+    void mAFactivityChanged(qreal MAFactivity);
+    void o2volt_2Changed(qreal O2volt_2);
 
 
     //Boost
@@ -619,60 +619,60 @@ signals:
 
     //Flags
 
-    void Flag1Changed(qreal Flag1);
-    void Flag2Changed(qreal Flag2);
-    void Flag3Changed(qreal Flag3);
-    void Flag4Changed(qreal Flag4);
-    void Flag5Changed(qreal Flag5);
-    void Flag6Changed(qreal Flag6);
-    void Flag7Changed(qreal Flag7);
-    void Flag8Changed(qreal Flag8);
-    void Flag9Changed(qreal Flag9);
-    void Flag10Changed(qreal Flag10);
-    void Flag11Changed(qreal Flag11);
-    void Flag12Changed(qreal Flag12);
-    void Flag13Changed(qreal Flag13);
-    void Flag14Changed(qreal Flag14);
-    void Flag15Changed(qreal Flag15);
-    void Flag16Changed(qreal Flag16);
+    void flag1Changed(qreal Flag1);
+    void flag2Changed(qreal Flag2);
+    void flag3Changed(qreal Flag3);
+    void flag4Changed(qreal Flag4);
+    void flag5Changed(qreal Flag5);
+    void flag6Changed(qreal Flag6);
+    void flag7Changed(qreal Flag7);
+    void flag8Changed(qreal Flag8);
+    void flag9Changed(qreal Flag9);
+    void flag10Changed(qreal Flag10);
+    void flag11Changed(qreal Flag11);
+    void flag12Changed(qreal Flag12);
+    void flag13Changed(qreal Flag13);
+    void flag14Changed(qreal Flag14);
+    void flag15Changed(qreal Flag15);
+    void flag16Changed(qreal Flag16);
 
     //Flag Strings
 
-    void FlagString1Changed(QString FlagString1);
-    void FlagString2Changed(QString FlagString2);
-    void FlagString3Changed(QString FlagString3);
-    void FlagString4Changed(QString FlagString4);
-    void FlagString5Changed(QString FlagString5);
-    void FlagString6Changed(QString FlagString6);
-    void FlagString7Changed(QString FlagString7);
-    void FlagString8Changed(QString FlagString8);
-    void FlagString9Changed(QString FlagString9);
-    void FlagString10Changed(QString FlagString10);
-    void FlagString11Changed(QString FlagString11);
-    void FlagString12Changed(QString FlagString12);
-    void FlagString13Changed(QString FlagString13);
-    void FlagString14Changed(QString FlagString14);
-    void FlagString15Changed(QString FlagString15);
-    void FlagString16Changed(QString FlagString16);
+    void flagString1Changed(QString FlagString1);
+    void flagString2Changed(QString FlagString2);
+    void flagString3Changed(QString FlagString3);
+    void flagString4Changed(QString FlagString4);
+    void flagString5Changed(QString FlagString5);
+    void flagString6Changed(QString FlagString6);
+    void flagString7Changed(QString FlagString7);
+    void flagString8Changed(QString FlagString8);
+    void flagString9Changed(QString FlagString9);
+    void flagString10Changed(QString FlagString10);
+    void flagString11Changed(QString FlagString11);
+    void flagString12Changed(QString FlagString12);
+    void flagString13Changed(QString FlagString13);
+    void flagString14Changed(QString FlagString14);
+    void flagString15Changed(QString FlagString15);
+    void flagString16Changed(QString FlagString16);
 
     //Sensor Strings
 
-    void SensorString1Changed(QString SensorString1);
-    void SensorString2Changed(QString SensorString2);
-    void SensorString3Changed(QString SensorString3);
-    void SensorString4Changed(QString SensorString4);
-    void SensorString5Changed(QString SensorString5);
-    void SensorString6Changed(QString SensorString6);
-    void SensorString7Changed(QString SensorString7);
-    void SensorString8Changed(QString SensorString8);
+    void sensorString1Changed(QString SensorString1);
+    void sensorString2Changed(QString SensorString2);
+    void sensorString3Changed(QString SensorString3);
+    void sensorString4Changed(QString SensorString4);
+    void sensorString5Changed(QString SensorString5);
+    void sensorString6Changed(QString SensorString6);
+    void sensorString7Changed(QString SensorString7);
+    void sensorString8Changed(QString SensorString8);
 
     //Platfrom String
-    void PlatformChanged(QString Platform);
+    void platformChanged(QString Platform);
 
-    void SerialStatChanged(QString SerialStat);
-    void RecvDataChanged(QString RecvData);
-    void TimeoutStatChanged(QString TimeoutStat);
-    void RunStatChanged(QString RunStat);
+    void serialStatChanged(QString SerialStat);
+    void recvDataChanged(QString RecvData);
+    void timeoutStatChanged(QString TimeoutStat);
+    void runStatChanged(QString RunStat);
 
     // GPS
 
@@ -689,25 +689,25 @@ signals:
 
     //Adaptronic extra
 
-    void MAPChanged(qreal MAP);
-    void AUXTChanged(qreal AUXT);
-    void AFRChanged(qreal AFR);
-    void TPSChanged(qreal TPS);
-    void IdleValueChanged(qreal IdleValue);
-    void MVSSChanged(qreal MVSS);
-    void SVSSChanged(qreal SVSS);
-    void Inj1Changed(qreal Inj1);
-    void Inj2Changed(qreal Inj2);
-    void Inj3Changed(qreal Inj3);
-    void Inj4Changed(qreal Inj4);
-    void Ign1Changed(qreal Ign1);
-    void Ign2Changed(qreal Ign2);
-    void Ign3Changed(qreal Ign3);
-    void Ign4Changed(qreal Ign4);
-    void TRIMChanged(qreal TRIM);
-    void LAMBDAChanged(qreal LAMBDA);
-    void LAMBDATargetChanged(qreal LAMBDATarget);
-    void FuelPressChanged(qreal FuelPress);
+    void mAPChanged(qreal MAP);
+    void aUXTChanged(qreal AUXT);
+    void aFRChanged(qreal AFR);
+    void tPSChanged(qreal TPS);
+    void idleValueChanged(qreal IdleValue);
+    void mVSSChanged(qreal MVSS);
+    void sVSSChanged(qreal SVSS);
+    void inj1Changed(qreal Inj1);
+    void inj2Changed(qreal Inj2);
+    void inj3Changed(qreal Inj3);
+    void inj4Changed(qreal Inj4);
+    void ign1Changed(qreal Ign1);
+    void ign2Changed(qreal Ign2);
+    void ign3Changed(qreal Ign3);
+    void ign4Changed(qreal Ign4);
+    void tRIMChanged(qreal TRIM);
+    void lAMBDAChanged(qreal LAMBDA);
+    void lAMBDATargetChanged(qreal LAMBDATarget);
+    void fuelPressChanged(qreal FuelPress);
 
     void accelxChanged(qreal accelx);
     void accelyChanged(qreal accely);
@@ -720,11 +720,11 @@ signals:
     void ambipressChanged(qreal ambipress);
 
     // calculations
-    void GearChanged(qreal Gear);
-    void PowerChanged(qreal Power);
-    void TorqueChanged(qreal Torque);
-    void AccelTimerChanged(qreal AccelTimer);
-    void WeightChanged(qreal Weight);
+    void gearChanged(qreal Gear);
+    void powerChanged(qreal Power);
+    void torqueChanged(qreal Torque);
+    void accelTimerChanged(qreal AccelTimer);
+    void weightChanged(qreal Weight);
 
     //Official Pi screen present screen
     void screenChanged(bool screen);

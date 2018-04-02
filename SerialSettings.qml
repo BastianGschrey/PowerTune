@@ -4,6 +4,8 @@ import Qt.labs.settings 1.0
 import QtQuick.VirtualKeyboard 2.1
 import QtSensors 5.0
 import QtQuick.Controls.Styles 1.4
+//import QtMultimedia 5.6
+//import QtAudioEngine 1.0
 
 
 Rectangle {
@@ -164,6 +166,7 @@ Rectangle {
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhPreferLowercase | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
                     //enterKeyAction: EnterKeyAction.Next
                 }
+                /*
                 Text
                 {
                     text: "Odmeter"
@@ -173,7 +176,7 @@ Rectangle {
                     text: qsTr("1000")
                     inputMethodHints: Qt.ImhDigitsOnly
                     //enterKeyAction: EnterKeyAction.Next
-                }
+                }*/
                 Text
                 {
                     id: weighttext
@@ -686,7 +689,68 @@ Rectangle {
 
 
     }
+/*
+  //Warning Settings by Craig Shoesmith
+    Rectangle{
 
+        id: warningsettings
+        visible: false
+        width: parent.width
+        height: parent.height
+        color: "grey"
+
+        Grid {
+            rows:3
+            columns: 4
+            spacing: 5
+            Text { text: "WaterTemp" }
+            Text { text: "Boost" }
+            Text { text: "Revs" }
+            Text { text: "Knock" }
+            TextField {
+                id: watertemp
+                width: 180
+                inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            }
+            TextField {
+                id: boost
+                width: 180
+                inputMethodHints: Qt.ImhDigitsOnly
+            }
+            TextField {
+                id: revs
+                width: 180
+                inputMethodHints: Qt.ImhDigitsOnly
+            }
+            TextField {
+                id: knock
+                width: 180
+                inputMethodHints: Qt.ImhDigitsOnly
+            }
+
+            SoundEffect {
+                id: alarm
+                source: "/audio/alarm_beep (2).wav"
+            }
+            //You can pack all the connections into 1 as they are all on the same target
+            Connections{
+                target: Dashboard
+                onWatertempChanged: { if (Dashboard.Watertemp > watertemp.text) {alarm.play()};}
+                onRpmChanged: { if (Dashboard.rpm > revs.text) {alarm.play()};}
+                onKnockChanged: { if (Dashboard.Knock > knock.text) {alarm.play()};}
+                onBoostPresChanged: { if (Dashboard.BoostPres > boost.text) {alarm.play()};}
+            }
+
+            Button {
+                id: closewarningsettings
+                text: "Apply"
+                onClicked: {warningsettings.visible = false}
+
+            }
+        }
+}
+*/
+//Sensehat Sensors
     Rectangle{
 
         id: senhatselector

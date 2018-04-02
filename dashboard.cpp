@@ -185,7 +185,7 @@ void DashBoard::setOdo(const qreal &Odo)
     if (m_Odo == Odo)
         return;
     m_Odo = Odo;
-    emit OdoChanged(Odo);
+    emit odoChanged(Odo);
 }
 
 // Advanced Info FD3S
@@ -202,7 +202,7 @@ void DashBoard::setIntakepress(const qreal &Intakepress)
     if (m_Intakepress == Intakepress)
         return;
     m_Intakepress = Intakepress;
-    emit IntakepressChanged(Intakepress);
+    emit intakepressChanged(Intakepress);
 }
 
 void DashBoard::setPressureV(const qreal &PressureV)
@@ -210,7 +210,7 @@ void DashBoard::setPressureV(const qreal &PressureV)
     if (m_PressureV == PressureV)
         return;
     m_PressureV = PressureV;
-    emit PressureVChanged(PressureV);
+    emit pressureVChanged(PressureV);
 }
 
 void DashBoard::setThrottleV(const qreal &ThrottleV)
@@ -218,7 +218,7 @@ void DashBoard::setThrottleV(const qreal &ThrottleV)
     if (m_ThrottleV == ThrottleV)
         return;
     m_ThrottleV= ThrottleV;
-    emit ThrottleVChanged(ThrottleV);
+    emit throttleVChanged(ThrottleV);
 }
 
 void DashBoard::setPrimaryinp(const qreal &Primaryinp)
@@ -226,7 +226,7 @@ void DashBoard::setPrimaryinp(const qreal &Primaryinp)
     if (m_Primaryinp == Primaryinp)
         return;
     m_Primaryinp= Primaryinp;
-    emit PrimaryinpChanged(Primaryinp);
+    emit primaryinpChanged(Primaryinp);
 }
 
 void DashBoard::setFuelc(const qreal &Fuelc)
@@ -234,7 +234,7 @@ void DashBoard::setFuelc(const qreal &Fuelc)
     if (m_Fuelc == Fuelc)
         return;
     m_Fuelc= Fuelc;
-    emit FuelcChanged(Fuelc);
+    emit fuelcChanged(Fuelc);
 }
 
 void DashBoard::setLeadingign(const qreal &Leadingign)
@@ -242,7 +242,7 @@ void DashBoard::setLeadingign(const qreal &Leadingign)
     if (m_Leadingign == Leadingign)
         return;
     m_Leadingign= Leadingign;
-    emit LeadingignChanged(Leadingign);
+    emit leadingignChanged(Leadingign);
 }
 
 void DashBoard::setTrailingign(const qreal &Trailingign)
@@ -250,7 +250,7 @@ void DashBoard::setTrailingign(const qreal &Trailingign)
     if (m_Trailingign == Trailingign)
         return;
     m_Trailingign= Trailingign;
-    emit TrailingignChanged(Trailingign);
+    emit trailingignChanged(Trailingign);
 }
 
 void DashBoard::setFueltemp(const qreal &Fueltemp)
@@ -261,7 +261,7 @@ void DashBoard::setFueltemp(const qreal &Fueltemp)
     {m_Fueltemp = Fueltemp;}
     if (m_units == "imperial")
     {m_Fueltemp = qRound(Fueltemp * 1.8 + 32);}
-    emit FueltempChanged(Fueltemp);
+    emit fueltempChanged(Fueltemp);
 }
 
 void DashBoard::setMoilp(const qreal &Moilp)
@@ -269,7 +269,7 @@ void DashBoard::setMoilp(const qreal &Moilp)
     if (m_Moilp == Moilp)
         return;
     m_Moilp = Moilp;
-    emit MoilpChanged(Moilp);
+    emit moilpChanged(Moilp);
 }
 
 void DashBoard::setBoosttp(const qreal &Boosttp)
@@ -277,7 +277,7 @@ void DashBoard::setBoosttp(const qreal &Boosttp)
     if (m_Boosttp == Boosttp)
         return;
     m_Boosttp = Boosttp;
-    emit BoosttpChanged(Boosttp);
+    emit boosttpChanged(Boosttp);
 }
 
 void DashBoard::setBoostwg(const qreal &Boostwg)
@@ -285,7 +285,7 @@ void DashBoard::setBoostwg(const qreal &Boostwg)
     if (m_Boostwg == Boostwg)
         return;
     m_Boostwg = Boostwg;
-    emit BoostwgChanged(Boostwg);
+    emit boostwgChanged(Boostwg);
 }
 
 void DashBoard::setWatertemp(const qreal &Watertemp)
@@ -297,7 +297,7 @@ void DashBoard::setWatertemp(const qreal &Watertemp)
     if (m_units == "imperial")
     {m_Watertemp = qRound(Watertemp * 1.8 + 32);}
 
-    emit WatertempChanged(Watertemp);
+    emit watertempChanged(Watertemp);
 }
 
 void DashBoard::setIntaketemp(const qreal &Intaketemp)
@@ -309,7 +309,7 @@ void DashBoard::setIntaketemp(const qreal &Intaketemp)
     if (m_units == "imperial")
     {m_Intaketemp = qRound(Intaketemp * 1.8 + 32);}
 
-    emit IntaketempChanged(Intaketemp);
+    emit intaketempChanged(Intaketemp);
 }
 
 void DashBoard::setKnock(const qreal &Knock)
@@ -317,7 +317,7 @@ void DashBoard::setKnock(const qreal &Knock)
     if (m_Knock == Knock)
         return;
     m_Knock = Knock;
-    emit KnockChanged(Knock);
+    emit knockChanged(Knock);
 }
 
 void DashBoard::setBatteryV(const qreal &BatteryV)
@@ -325,7 +325,7 @@ void DashBoard::setBatteryV(const qreal &BatteryV)
     if (m_BatteryV == BatteryV)
         return;
     m_BatteryV = BatteryV;
-    emit BatteryVChanged(BatteryV);
+    emit batteryVChanged(BatteryV);
 }
 
 void DashBoard::setSpeed(const qreal &speed)
@@ -344,7 +344,7 @@ void DashBoard::setIscvduty(const qreal &Iscvduty)
     if (m_Iscvduty == Iscvduty)
         return;
     m_Iscvduty = Iscvduty;
-    emit IscvdutyChanged(Iscvduty);
+    emit iscvdutyChanged(Iscvduty);
 }
 
 void DashBoard::setO2volt(const qreal &O2volt)
@@ -352,7 +352,7 @@ void DashBoard::setO2volt(const qreal &O2volt)
     if (m_O2volt == O2volt)
         return;
     m_O2volt = O2volt;
-    emit O2voltChanged(O2volt);
+    emit o2voltChanged(O2volt);
 }
 void DashBoard::setna1(const qreal &na1)
 {
@@ -367,7 +367,7 @@ void DashBoard::setSecinjpulse(const qreal &Secinjpulse)
     if (m_Secinjpulse == Secinjpulse)
         return;
     m_Secinjpulse = Secinjpulse;
-    emit SecinjpulseChanged(Secinjpulse);
+    emit secinjpulseChanged(Secinjpulse);
 }
 
 void DashBoard::setna2(const qreal &na2)
@@ -383,7 +383,7 @@ void DashBoard::setEngLoad(const qreal &EngLoad)
     if (m_EngLoad == EngLoad)
         return;
     m_EngLoad = EngLoad;
-    emit EngLoadChanged(EngLoad);
+    emit engLoadChanged(EngLoad);
 }
 
 void DashBoard::setMAF1V(const qreal &MAF1V)
@@ -391,7 +391,7 @@ void DashBoard::setMAF1V(const qreal &MAF1V)
     if (m_MAF1V == MAF1V)
         return;
     m_MAF1V = MAF1V;
-    emit MAF1VChanged(MAF1V);
+    emit mAF1VChanged(MAF1V);
 }
 
 void DashBoard::setMAF2V(const qreal &MAF2V)
@@ -399,7 +399,7 @@ void DashBoard::setMAF2V(const qreal &MAF2V)
     if (m_MAF2V == MAF2V)
         return;
     m_MAF2V = MAF2V;
-    emit MAF2VChanged(MAF2V);
+    emit mAF2VChanged(MAF2V);
 }
 
 void DashBoard::setinjms(const qreal &injms)
@@ -415,7 +415,7 @@ void DashBoard::setIgn(const qreal &Ign)
     if (m_Ign == Ign)
         return;
     m_Ign = Ign;
-    emit IgnChanged(Ign);
+    emit ignChanged(Ign);
 }
 
 void DashBoard::setInj(const qreal &Inj)
@@ -423,14 +423,14 @@ void DashBoard::setInj(const qreal &Inj)
     if (m_Inj == Inj)
         return;
     m_Inj = Inj;
-    emit InjChanged(Inj);
+    emit injChanged(Inj);
 }
 void DashBoard::setDwell(const qreal &Dwell)
 {
     if (m_Dwell == Dwell)
         return;
     m_Dwell = Dwell;
-    emit DwellChanged(Dwell);
+    emit dwellChanged(Dwell);
 }
 
 void DashBoard::setBoostPres(const qreal &BoostPres)
@@ -438,7 +438,7 @@ void DashBoard::setBoostPres(const qreal &BoostPres)
     if (m_BoostPres == BoostPres)
         return;
     m_BoostPres = BoostPres;
-    emit BoostPresChanged(BoostPres);
+    emit boostPresChanged(BoostPres);
 }
 
 void DashBoard::setBoostDuty(const qreal &BoostDuty)
@@ -446,7 +446,7 @@ void DashBoard::setBoostDuty(const qreal &BoostDuty)
     if (m_BoostDuty == BoostDuty)
         return;
     m_BoostDuty = BoostDuty;
-    emit BoostDutyChanged(BoostDuty);
+    emit boostDutyChanged(BoostDuty);
 }
 
 void DashBoard::setMAFactivity(const qreal &MAFactivity)
@@ -454,7 +454,7 @@ void DashBoard::setMAFactivity(const qreal &MAFactivity)
     if (m_MAFactivity == MAFactivity)
         return;
     m_MAFactivity = MAFactivity;
-    emit MAFactivityChanged(MAFactivity);
+    emit mAFactivityChanged(MAFactivity);
 }
 
 void DashBoard::setO2volt_2(const qreal &O2volt_2)
@@ -462,7 +462,7 @@ void DashBoard::setO2volt_2(const qreal &O2volt_2)
     if (m_O2volt_2 == O2volt_2)
         return;
     m_O2volt_2 = O2volt_2;
-    emit O2volt_2Changed(O2volt_2);
+    emit o2volt_2Changed(O2volt_2);
 }
 
 
@@ -583,7 +583,7 @@ void DashBoard::setInjDuty(const qreal &InjDuty)
     if (m_InjDuty == InjDuty)
         return;
     m_InjDuty = InjDuty;
-    emit InjDutyChanged(InjDuty);
+    emit injDutyChanged(InjDuty);
 }
 
 
@@ -595,7 +595,7 @@ void DashBoard::setFlag1(const qreal &Flag1)
     if (m_Flag1 == Flag1)
         return;
     m_Flag1 = Flag1;
-    emit Flag1Changed(Flag1);
+    emit flag1Changed(Flag1);
 }
 
 void DashBoard::setFlag2(const qreal &Flag2)
@@ -603,7 +603,7 @@ void DashBoard::setFlag2(const qreal &Flag2)
     if (m_Flag2 == Flag2)
         return;
     m_Flag2 = Flag2;
-    emit Flag2Changed(Flag2);
+    emit flag2Changed(Flag2);
 }
 
 void DashBoard::setFlag3(const qreal &Flag3)
@@ -611,7 +611,7 @@ void DashBoard::setFlag3(const qreal &Flag3)
     if (m_Flag3 == Flag3)
         return;
     m_Flag3 = Flag3;
-    emit Flag3Changed(Flag3);
+    emit flag3Changed(Flag3);
 }
 
 void DashBoard::setFlag4(const qreal &Flag4)
@@ -619,7 +619,7 @@ void DashBoard::setFlag4(const qreal &Flag4)
     if (m_Flag4 == Flag4)
         return;
     m_Flag4 = Flag4;
-    emit Flag4Changed(Flag4);
+    emit flag4Changed(Flag4);
 }
 
 void DashBoard::setFlag5(const qreal &Flag5)
@@ -627,7 +627,7 @@ void DashBoard::setFlag5(const qreal &Flag5)
     if (m_Flag5 == Flag5)
         return;
     m_Flag5 = Flag5;
-    emit Flag5Changed(Flag5);
+    emit flag5Changed(Flag5);
 }
 
 void DashBoard::setFlag6(const qreal &Flag6)
@@ -635,7 +635,7 @@ void DashBoard::setFlag6(const qreal &Flag6)
     if (m_Flag6 == Flag6)
         return;
     m_Flag6 = Flag6;
-    emit Flag6Changed(Flag6);
+    emit flag6Changed(Flag6);
 }
 
 void DashBoard::setFlag7(const qreal &Flag7)
@@ -643,7 +643,7 @@ void DashBoard::setFlag7(const qreal &Flag7)
     if (m_Flag7 == Flag7)
         return;
     m_Flag7 = Flag7;
-    emit Flag7Changed(Flag7);
+    emit flag7Changed(Flag7);
 }
 
 void DashBoard::setFlag8(const qreal &Flag8)
@@ -651,7 +651,7 @@ void DashBoard::setFlag8(const qreal &Flag8)
     if (m_Flag8 == Flag8)
         return;
     m_Flag8 = Flag8;
-    emit Flag8Changed(Flag8);
+    emit flag8Changed(Flag8);
 }
 
 void DashBoard::setFlag9(const qreal &Flag9)
@@ -659,7 +659,7 @@ void DashBoard::setFlag9(const qreal &Flag9)
     if (m_Flag9 == Flag9)
         return;
     m_Flag9 = Flag9;
-    emit Flag9Changed(Flag9);
+    emit flag9Changed(Flag9);
 }
 
 void DashBoard::setFlag10(const qreal &Flag10)
@@ -667,7 +667,7 @@ void DashBoard::setFlag10(const qreal &Flag10)
     if (m_Flag10 == Flag10)
         return;
     m_Flag10 = Flag10;
-    emit Flag10Changed(Flag10);
+    emit flag10Changed(Flag10);
 }
 
 void DashBoard::setFlag11(const qreal &Flag11)
@@ -675,7 +675,7 @@ void DashBoard::setFlag11(const qreal &Flag11)
     if (m_Flag11 == Flag11)
         return;
     m_Flag11 = Flag11;
-    emit Flag11Changed(Flag11);
+    emit flag11Changed(Flag11);
 }
 
 void DashBoard::setFlag12(const qreal &Flag12)
@@ -683,7 +683,7 @@ void DashBoard::setFlag12(const qreal &Flag12)
     if (m_Flag12 == Flag12)
         return;
     m_Flag12 = Flag12;
-    emit Flag12Changed(Flag12);
+    emit flag12Changed(Flag12);
 }
 
 void DashBoard::setFlag13(const qreal &Flag13)
@@ -691,7 +691,7 @@ void DashBoard::setFlag13(const qreal &Flag13)
     if (m_Flag13 == Flag13)
         return;
     m_Flag13 = Flag13;
-    emit Flag13Changed(Flag13);
+    emit flag13Changed(Flag13);
 }
 
 void DashBoard::setFlag14(const qreal &Flag14)
@@ -699,7 +699,7 @@ void DashBoard::setFlag14(const qreal &Flag14)
     if (m_Flag14 == Flag14)
         return;
     m_Flag14 = Flag14;
-    emit Flag14Changed(Flag14);
+    emit flag14Changed(Flag14);
 }
 
 void DashBoard::setFlag15(const qreal &Flag15)
@@ -707,7 +707,7 @@ void DashBoard::setFlag15(const qreal &Flag15)
     if (m_Flag15 == Flag15)
         return;
     m_Flag15 = Flag15;
-    emit Flag15Changed(Flag15);
+    emit flag15Changed(Flag15);
 }
 
 void DashBoard::setFlag16(const qreal &Flag16)
@@ -715,7 +715,7 @@ void DashBoard::setFlag16(const qreal &Flag16)
     if (m_Flag16 == Flag16)
         return;
     m_Flag16 = Flag16;
-    emit Flag16Changed(Flag16);
+    emit flag16Changed(Flag16);
 }
 
 
@@ -726,7 +726,7 @@ void DashBoard::setFlagString1(const QString &FlagString1)
     if (m_FlagString1 == FlagString1)
         return;
     m_FlagString1 = FlagString1;
-    emit FlagString1Changed(FlagString1);
+    emit flagString1Changed(FlagString1);
 }
 
 void DashBoard::setFlagString2(const QString &FlagString2)
@@ -734,7 +734,7 @@ void DashBoard::setFlagString2(const QString &FlagString2)
     if (m_FlagString2 == FlagString2)
         return;
     m_FlagString2 = FlagString2;
-    emit FlagString2Changed(FlagString2);
+    emit flagString2Changed(FlagString2);
 }
 
 void DashBoard::setFlagString3(const QString &FlagString3)
@@ -742,7 +742,7 @@ void DashBoard::setFlagString3(const QString &FlagString3)
     if (m_FlagString3 == FlagString3)
         return;
     m_FlagString3 = FlagString3;
-    emit FlagString3Changed(FlagString3);
+    emit flagString3Changed(FlagString3);
 }
 
 void DashBoard::setFlagString4(const QString &FlagString4)
@@ -750,7 +750,7 @@ void DashBoard::setFlagString4(const QString &FlagString4)
     if (m_FlagString4 == FlagString4)
         return;
     m_FlagString4 = FlagString4;
-    emit FlagString4Changed(FlagString4);
+    emit flagString4Changed(FlagString4);
 }
 
 void DashBoard::setFlagString5(const QString &FlagString5)
@@ -758,7 +758,7 @@ void DashBoard::setFlagString5(const QString &FlagString5)
     if (m_FlagString5 == FlagString5)
         return;
     m_FlagString5 = FlagString5;
-    emit FlagString5Changed(FlagString5);
+    emit flagString5Changed(FlagString5);
 }
 
 void DashBoard::setFlagString6(const QString &FlagString6)
@@ -766,7 +766,7 @@ void DashBoard::setFlagString6(const QString &FlagString6)
     if (m_FlagString6 == FlagString6)
         return;
     m_FlagString6 = FlagString6;
-    emit FlagString6Changed(FlagString6);
+    emit flagString6Changed(FlagString6);
 }
 
 void DashBoard::setFlagString7(const QString &FlagString7)
@@ -774,7 +774,7 @@ void DashBoard::setFlagString7(const QString &FlagString7)
     if (m_FlagString7 == FlagString7)
         return;
     m_FlagString7 = FlagString7;
-    emit FlagString7Changed(FlagString7);
+    emit flagString7Changed(FlagString7);
 }
 
 void DashBoard::setFlagString8(const QString &FlagString8)
@@ -782,7 +782,7 @@ void DashBoard::setFlagString8(const QString &FlagString8)
     if (m_FlagString8 == FlagString8)
         return;
     m_FlagString8 = FlagString8;
-    emit FlagString8Changed(FlagString8);
+    emit flagString8Changed(FlagString8);
 }
 
 void DashBoard::setFlagString9(const QString &FlagString9)
@@ -790,7 +790,7 @@ void DashBoard::setFlagString9(const QString &FlagString9)
     if (m_FlagString9 == FlagString9)
         return;
     m_FlagString9 = FlagString9;
-    emit FlagString9Changed(FlagString9);
+    emit flagString9Changed(FlagString9);
 }
 
 void DashBoard::setFlagString10(const QString &FlagString10)
@@ -798,7 +798,7 @@ void DashBoard::setFlagString10(const QString &FlagString10)
     if (m_FlagString10 == FlagString10)
         return;
     m_FlagString10 = FlagString10;
-    emit FlagString10Changed(FlagString10);
+    emit flagString10Changed(FlagString10);
 }
 
 void DashBoard::setFlagString11(const QString &FlagString11)
@@ -806,7 +806,7 @@ void DashBoard::setFlagString11(const QString &FlagString11)
     if (m_FlagString11 == FlagString11)
         return;
     m_FlagString11 = FlagString11;
-    emit FlagString11Changed(FlagString11);
+    emit flagString11Changed(FlagString11);
 }
 
 void DashBoard::setFlagString12(const QString &FlagString12)
@@ -814,7 +814,7 @@ void DashBoard::setFlagString12(const QString &FlagString12)
     if (m_FlagString12 == FlagString12)
         return;
     m_FlagString12 = FlagString12;
-    emit FlagString12Changed(FlagString12);
+    emit flagString12Changed(FlagString12);
 }
 
 void DashBoard::setFlagString13(const QString &FlagString13)
@@ -822,7 +822,7 @@ void DashBoard::setFlagString13(const QString &FlagString13)
     if (m_FlagString13 == FlagString13)
         return;
     m_FlagString13 = FlagString13;
-    emit FlagString13Changed(FlagString13);
+    emit flagString13Changed(FlagString13);
 }
 
 void DashBoard::setFlagString14(const QString &FlagString14)
@@ -830,7 +830,7 @@ void DashBoard::setFlagString14(const QString &FlagString14)
     if (m_FlagString14 == FlagString14)
         return;
     m_FlagString14 = FlagString14;
-    emit FlagString14Changed(FlagString14);
+    emit flagString14Changed(FlagString14);
 }
 
 void DashBoard::setFlagString15(const QString &FlagString15)
@@ -838,7 +838,7 @@ void DashBoard::setFlagString15(const QString &FlagString15)
     if (m_FlagString15 == FlagString15)
         return;
     m_FlagString15 = FlagString15;
-    emit FlagString15Changed(FlagString15);
+    emit flagString15Changed(FlagString15);
 }
 
 void DashBoard::setFlagString16(const QString &FlagString16)
@@ -846,7 +846,7 @@ void DashBoard::setFlagString16(const QString &FlagString16)
     if (m_FlagString16 == FlagString16)
         return;
     m_FlagString16 = FlagString16;
-    emit FlagString16Changed(FlagString16);
+    emit flagString16Changed(FlagString16);
 }
 
 
@@ -855,7 +855,7 @@ void DashBoard::setPlatform(const QString &Platform)
     if (m_Platform == Platform)
         return;
     m_Platform = Platform;
-    emit PlatformChanged(Platform);
+    emit platformChanged(Platform);
 }
 
 //Sensor Strings
@@ -865,7 +865,7 @@ void DashBoard::setSensorString1(const QString &SensorString1)
     if (m_SensorString1 == SensorString1)
         return;
     m_SensorString1 = SensorString1;
-    emit SensorString1Changed(SensorString1);
+    emit sensorString1Changed(SensorString1);
 }
 
 void DashBoard::setSensorString2(const QString &SensorString2)
@@ -873,7 +873,7 @@ void DashBoard::setSensorString2(const QString &SensorString2)
     if (m_SensorString2 == SensorString2)
         return;
     m_SensorString2 = SensorString2;
-    emit SensorString2Changed(SensorString2);
+    emit sensorString2Changed(SensorString2);
 }
 
 void DashBoard::setSensorString3(const QString &SensorString3)
@@ -881,7 +881,7 @@ void DashBoard::setSensorString3(const QString &SensorString3)
     if (m_SensorString3 == SensorString3)
         return;
     m_SensorString3 = SensorString3;
-    emit SensorString3Changed(SensorString3);
+    emit sensorString3Changed(SensorString3);
 }
 
 void DashBoard::setSensorString4(const QString &SensorString4)
@@ -889,7 +889,7 @@ void DashBoard::setSensorString4(const QString &SensorString4)
     if (m_SensorString4 == SensorString4)
         return;
     m_SensorString4 = SensorString4;
-    emit SensorString4Changed(SensorString4);
+    emit sensorString4Changed(SensorString4);
 }
 
 void DashBoard::setSensorString5(const QString &SensorString5)
@@ -897,7 +897,7 @@ void DashBoard::setSensorString5(const QString &SensorString5)
     if (m_SensorString5 == SensorString5)
         return;
     m_SensorString5 = SensorString5;
-    emit SensorString5Changed(SensorString5);
+    emit sensorString5Changed(SensorString5);
 }
 
 void DashBoard::setSensorString6(const QString &SensorString6)
@@ -905,7 +905,7 @@ void DashBoard::setSensorString6(const QString &SensorString6)
     if (m_SensorString6 == SensorString6)
         return;
     m_SensorString6 = SensorString6;
-    emit SensorString6Changed(SensorString6);
+    emit sensorString6Changed(SensorString6);
 }
 
 void DashBoard::setSensorString7(const QString &SensorString7)
@@ -913,7 +913,7 @@ void DashBoard::setSensorString7(const QString &SensorString7)
     if (m_SensorString7 == SensorString7)
         return;
     m_SensorString7 = SensorString7;
-    emit SensorString7Changed(SensorString7);
+    emit sensorString7Changed(SensorString7);
 }
 
 void DashBoard::setSensorString8(const QString &SensorString8)
@@ -921,7 +921,7 @@ void DashBoard::setSensorString8(const QString &SensorString8)
     if (m_SensorString8 == SensorString8)
         return;
     m_SensorString8 = SensorString8;
-    emit SensorString8Changed(SensorString8);
+    emit sensorString8Changed(SensorString8);
 }
 
 void DashBoard::setSerialStat(const QString &SerialStat)
@@ -929,7 +929,7 @@ void DashBoard::setSerialStat(const QString &SerialStat)
     if (m_SerialStat == SerialStat)
         return;
     m_SerialStat = SerialStat;
-    emit SerialStatChanged(SerialStat);
+    emit serialStatChanged(SerialStat);
 }
 
 void DashBoard::setRecvData(const QString &RecvData)
@@ -937,7 +937,7 @@ void DashBoard::setRecvData(const QString &RecvData)
     if (m_RecvData == RecvData)
         return;
     m_RecvData = RecvData;
-    emit RecvDataChanged(RecvData);
+    emit recvDataChanged(RecvData);
 }
 
 void DashBoard::setTimeoutStat(const QString &TimeoutStat)
@@ -945,7 +945,7 @@ void DashBoard::setTimeoutStat(const QString &TimeoutStat)
     if (m_TimeoutStat == TimeoutStat)
         return;
     m_TimeoutStat = TimeoutStat;
-    emit TimeoutStatChanged(TimeoutStat);
+    emit timeoutStatChanged(TimeoutStat);
 }
 
 void DashBoard::setRunStat(const QString &RunStat)
@@ -953,7 +953,7 @@ void DashBoard::setRunStat(const QString &RunStat)
     if (m_RunStat == RunStat)
         return;
     m_RunStat = RunStat;
-    emit RunStatChanged(RunStat);
+    emit runStatChanged(RunStat);
 }
 
 // GPS
@@ -1024,7 +1024,7 @@ void DashBoard::setMAP(const qreal &MAP)
     if (m_MAP == MAP)
         return;
     m_MAP = MAP;
-    emit MAPChanged(MAP);
+    emit mAPChanged(MAP);
 }
 
 void DashBoard::setAUXT(const qreal &AUXT)
@@ -1032,7 +1032,7 @@ void DashBoard::setAUXT(const qreal &AUXT)
     if (m_AUXT == AUXT)
         return;
     m_AUXT = AUXT;
-    emit AUXTChanged(AUXT);
+    emit aUXTChanged(AUXT);
 }
 
 void DashBoard::setAFR(const qreal &AFR)
@@ -1040,7 +1040,7 @@ void DashBoard::setAFR(const qreal &AFR)
     if (m_AFR == AFR)
         return;
     m_AFR = AFR;
-    emit AFRChanged(AFR);
+    emit aFRChanged(AFR);
 }
 
 void DashBoard::setTPS(const qreal &TPS)
@@ -1048,7 +1048,7 @@ void DashBoard::setTPS(const qreal &TPS)
     if (m_TPS == TPS)
         return;
     m_TPS = TPS;
-    emit TPSChanged(TPS);
+    emit tPSChanged(TPS);
 }
 
 void DashBoard::setIdleValue(const qreal &IdleValue)
@@ -1056,7 +1056,7 @@ void DashBoard::setIdleValue(const qreal &IdleValue)
     if (m_IdleValue == IdleValue)
         return;
     m_IdleValue = IdleValue;
-    emit IdleValueChanged(IdleValue);
+    emit idleValueChanged(IdleValue);
 }
 
 void DashBoard::setMVSS(const qreal &MVSS)
@@ -1068,7 +1068,7 @@ void DashBoard::setMVSS(const qreal &MVSS)
     if (m_units == "imperial")
     {m_MVSS = qRound(MVSS * 0.621371);}
 
-    emit MVSSChanged(MVSS);
+    emit mVSSChanged(MVSS);
 }
 
 void DashBoard::setSVSS(const qreal &SVSS)
@@ -1079,7 +1079,7 @@ void DashBoard::setSVSS(const qreal &SVSS)
     { m_SVSS= SVSS;}
     if (m_units == "imperial")
     {m_SVSS = qRound(SVSS * 0.621371);}
-    emit SVSSChanged(SVSS);
+    emit sVSSChanged(SVSS);
 }
 
 void DashBoard::setInj1(const qreal &Inj1)
@@ -1087,7 +1087,7 @@ void DashBoard::setInj1(const qreal &Inj1)
     if (m_Inj1 == Inj1)
         return;
     m_Inj1 = Inj1;
-    emit Inj1Changed(Inj1);
+    emit inj1Changed(Inj1);
 }
 
 void DashBoard::setInj2(const qreal &Inj2)
@@ -1095,7 +1095,7 @@ void DashBoard::setInj2(const qreal &Inj2)
     if (m_Inj2 == Inj2)
         return;
     m_Inj2 = Inj2;
-    emit Inj2Changed(Inj2);
+    emit inj2Changed(Inj2);
 }
 
 void DashBoard::setInj3(const qreal &Inj3)
@@ -1103,7 +1103,7 @@ void DashBoard::setInj3(const qreal &Inj3)
     if (m_Inj3 == Inj3)
         return;
     m_Inj3 = Inj3;
-    emit Inj3Changed(Inj3);
+    emit inj3Changed(Inj3);
 }
 
 void DashBoard::setInj4(const qreal &Inj4)
@@ -1111,7 +1111,7 @@ void DashBoard::setInj4(const qreal &Inj4)
     if (m_Inj4 == Inj4)
         return;
     m_Inj4 = Inj4;
-    emit Inj4Changed(Inj4);
+    emit inj4Changed(Inj4);
 }
 
 void DashBoard::setIgn1(const qreal &Ign1)
@@ -1119,7 +1119,7 @@ void DashBoard::setIgn1(const qreal &Ign1)
     if (m_Ign1 == Ign1)
         return;
     m_Ign1 = Ign1;
-    emit Ign1Changed(Ign1);
+    emit ign1Changed(Ign1);
 }
 
 void DashBoard::setIgn2(const qreal &Ign2)
@@ -1127,7 +1127,7 @@ void DashBoard::setIgn2(const qreal &Ign2)
     if (m_Ign2 == Ign2)
         return;
     m_Ign2 = Ign2;
-    emit Ign2Changed(Ign2);
+    emit ign2Changed(Ign2);
 }
 
 void DashBoard::setIgn3(const qreal &Ign3)
@@ -1135,7 +1135,7 @@ void DashBoard::setIgn3(const qreal &Ign3)
     if (m_Ign3 == Ign3)
         return;
     m_Ign3 = Ign3;
-    emit Ign3Changed(Ign3);
+    emit ign3Changed(Ign3);
 }
 
 void DashBoard::setIgn4(const qreal &Ign4)
@@ -1143,7 +1143,7 @@ void DashBoard::setIgn4(const qreal &Ign4)
     if (m_Ign4 == Ign4)
         return;
     m_Ign4 = Ign4;
-    emit Ign4Changed(Ign4);
+    emit ign4Changed(Ign4);
 }
 
 void DashBoard::setTRIM(const qreal &TRIM)
@@ -1151,7 +1151,7 @@ void DashBoard::setTRIM(const qreal &TRIM)
     if (m_TRIM == TRIM)
         return;
     m_TRIM = TRIM;
-    emit TRIMChanged(TRIM);
+    emit tRIMChanged(TRIM);
 }
 
 void DashBoard::setLAMBDA(const qreal &LAMBDA)
@@ -1159,7 +1159,7 @@ void DashBoard::setLAMBDA(const qreal &LAMBDA)
     if (m_LAMBDA == LAMBDA)
         return;
     m_LAMBDA = LAMBDA;
-    emit LAMBDAChanged(LAMBDA);
+    emit lAMBDAChanged(LAMBDA);
 }
 
 void DashBoard::setLAMBDATarget(const qreal &LAMBDATarget)
@@ -1167,7 +1167,7 @@ void DashBoard::setLAMBDATarget(const qreal &LAMBDATarget)
     if (m_LAMBDATarget == LAMBDATarget)
         return;
     m_LAMBDATarget = LAMBDATarget;
-    emit LAMBDATargetChanged(LAMBDATarget);
+    emit lAMBDATargetChanged(LAMBDATarget);
 }
 
 void DashBoard::setFuelPress(const qreal &FuelPress)
@@ -1175,7 +1175,7 @@ void DashBoard::setFuelPress(const qreal &FuelPress)
     if(m_FuelPress == FuelPress)
         return;
     m_FuelPress = FuelPress;
-    emit FuelPressChanged(FuelPress);
+    emit fuelPressChanged(FuelPress);
 }
 
 
@@ -1254,35 +1254,35 @@ void DashBoard::setGear(const qreal &Gear)
     if (m_Gear == Gear)
         return;
     m_Gear = Gear;
-    emit GearChanged(Gear);
+    emit gearChanged(Gear);
 }
 void DashBoard::setPower(const qreal &Power)
 {
     if (m_Power == Power)
         return;
     m_Power = Power;
-    emit PowerChanged(Power);
+    emit powerChanged(Power);
 }
 void DashBoard::setTorque(const qreal &Torque)
 {
     if (m_Torque == Torque)
         return;
     m_Torque = Torque;
-    emit TorqueChanged(Torque);
+    emit torqueChanged(Torque);
 }
 void DashBoard::setAccelTimer(const qreal &AccelTimer)
 {
     if (m_AccelTimer == AccelTimer)
         return;
     m_AccelTimer = AccelTimer;
-    emit AccelTimerChanged(AccelTimer);
+    emit accelTimerChanged(AccelTimer);
 }
 void DashBoard::setWeight(const qreal &Weight)
 {
     if (m_Weight == Weight)
         return;
     m_Weight = Weight;
-    emit WeightChanged(Weight);
+    emit weightChanged(Weight);
 }
 
 
