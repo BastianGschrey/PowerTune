@@ -109,7 +109,7 @@ void calculations::calculate()
     m_dashboard->setOdo(odometer);
     m_dashboard->setTrip(tripmeter);
     startTime.restart(); //(QTime::currentTime())
-    qDebug() << "odo" << odometer;
+
     // Virtual Dyno to calculate Wheel Power and Wheel Torque
 
 
