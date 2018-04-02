@@ -9,7 +9,8 @@ DashBoard::DashBoard(QObject *parent)
 
 
 
-
+    , m_Odo(0)
+    , m_Trip(0)
     , m_rpm(0)
     , m_Intakepress(0)
     , m_PressureV(0)
