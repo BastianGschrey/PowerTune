@@ -8,7 +8,6 @@ DashBoard::DashBoard(QObject *parent)
     : QObject(parent)
 
 
-    //  Odometer
 
 
     , m_rpm(0)
@@ -186,6 +185,15 @@ void DashBoard::setOdo(const qreal &Odo)
         return;
     m_Odo = Odo;
     emit odoChanged(Odo);
+}
+
+// Tripmeter
+void DashBoard::setTrip(const qreal &Trip)
+{
+    if (m_Trip == Trip)
+        return;
+    m_Trip = Trip;
+    emit tripChanged(Trip);
 }
 
 // Advanced Info FD3S
@@ -1307,6 +1315,9 @@ void DashBoard::setdashsetup(const QStringList &dashsetup)
 
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
+
+// Tripmeter
+qreal DashBoard::Trip() const { return m_Trip; }
 
 // Advanced Info
 qreal DashBoard::rpm() const { return m_rpm; }

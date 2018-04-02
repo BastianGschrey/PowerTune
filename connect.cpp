@@ -105,6 +105,7 @@ Connect::Connect(QObject *parent) :
     engine->rootContext()->setContextProperty("Nissanconsult",m_nissanconsult);
     engine->rootContext()->setContextProperty("Sens", m_sensors);
     engine->rootContext()->setContextProperty("Logger", m_datalogger);
+    engine->rootContext()->setContextProperty("Calculations", m_calculations);
 }
 
 

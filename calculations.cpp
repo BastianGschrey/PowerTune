@@ -13,6 +13,8 @@
 qreal Power;
 qreal Torque;
 qreal odometer;
+qreal tripmeter;
+qreal traveleddistance;
 QTime startTime = QTime::currentTime();
 int weight; //just set this to 1300 for testing
 int gearratio;
@@ -44,12 +46,18 @@ void calculations::start()
 {
     connect(&m_updatetimer, &QTimer::timeout, this, &calculations::calculate);
     odometer = m_dashboard->Odo();
+    tripmeter = m_dashboard->Trip();
     m_updatetimer.start(25);
 
 }
 void calculations::stop()
 {
     m_updatetimer.stop();
+}
+void calculations::resettrip()
+{
+    tripmeter = 0;
+    m_dashboard->setTrip(0);
 }
 
 
@@ -95,8 +103,11 @@ void calculations::calculate()
   */
 
     //Odometer
-    odometer += ((startTime.msecsTo(QTime::currentTime())) * ((m_dashboard->speed()) / 3600000)); // Odometer
+    traveleddistance = ((startTime.msecsTo(QTime::currentTime())) * ((m_dashboard->speed()) / 3600000)); // Odometer
+    odometer += traveleddistance;
+    tripmeter += traveleddistance;
     m_dashboard->setOdo(odometer);
+    m_dashboard->setTrip(tripmeter);
     startTime.restart(); //(QTime::currentTime())
     qDebug() << "odo" << odometer;
     // Virtual Dyno to calculate Wheel Power and Wheel Torque

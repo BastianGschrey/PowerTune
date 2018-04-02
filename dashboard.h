@@ -11,6 +11,8 @@ class DashBoard : public QObject
     // Odometer
     Q_PROPERTY(qreal Odo READ Odo WRITE setOdo NOTIFY odoChanged)
 
+    //Tripmeter
+    Q_PROPERTY(qreal Trip READ Trip WRITE setTrip NOTIFY tripChanged)
     // Advanced Info
     Q_PROPERTY(qreal rpm READ rpm WRITE setrpm NOTIFY rpmChanged)
     Q_PROPERTY(qreal Intakepress READ Intakepress WRITE setIntakepress NOTIFY intakepressChanged)
@@ -189,8 +191,8 @@ public:
 
     // Odometer
     void setOdo(const qreal &Odo);
-
-
+    //Tripmeter
+    void setTrip(const qreal &Trip);
     // Advanced Info
     void setrpm(const qreal &rpm);
     void setIntakepress(const qreal &Intakepress);
@@ -375,6 +377,10 @@ public:
 
     qreal Odo() const;
 
+    //Tripmeter
+
+    qreal Trip() const;
+
     // Advanced Info FD3S
     qreal rpm() const;
     qreal Intakepress() const;
@@ -556,8 +562,8 @@ signals:
 
     //Odometer
     void odoChanged(qreal Odo);
-
-
+    //Tripmeter
+    void tripChanged(qreal Trip);
     // Advanced Info
     void rpmChanged(qreal rpm);
     void intakepressChanged(qreal Intakepress);
@@ -738,6 +744,10 @@ private:
     // Odometer
 
     qreal m_Odo;
+
+    // Tripmeter
+
+    qreal m_Trip;
 
     // Advanced Info
     qreal m_rpm;

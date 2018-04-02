@@ -48,13 +48,15 @@ Rectangle {
             property alias vehicleweight: weight.text
             property alias unitSelector: unitSelect.currentIndex
             property alias odometervalue: odometer.text
+            property alias tripmetervalue: tripmeter.text
 
 
         }
 
         Connections{
             target: Dashboard
-            onOdoChanged:{odometer.text = (Dashboard.Odo).toFixed(3) }
+            onOdoChanged:{odometer.text = (Dashboard.Odo).toFixed(0) }
+            onTripChanged:{tripmeter.text = (Dashboard.Trip).toFixed(1) }
             //onWatertempChanged: { if (Dashboard.Watertemp > watertemp.text) {alarm.play()};}
             //onRpmChanged: { if (Dashboard.rpm > revs.text) {alarm.play()};}
             //onKnockChanged: { if (Dashboard.Knock > knock.text) {alarm.play()};}
@@ -174,17 +176,26 @@ Rectangle {
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhPreferLowercase | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
                     //enterKeyAction: EnterKeyAction.Next
                 }
-
                 Text
                 {
-                    text: "Odmeter"
+                    text: "Odo:"
                 }
                 TextField {
                     id: odometer
-                    text: qsTr("1000")
+                    text: qsTr("0")
                     inputMethodHints: Qt.ImhDigitsOnly
                     //enterKeyAction: EnterKeyAction.Next
                 }
+                Text
+                {
+                    text: "Trip:"
+                }
+                TextField{
+                    id: tripmeter
+                    readOnly: true
+                    text: "0"
+                }
+
                 Text
                 {
                     id: weighttext
@@ -243,6 +254,11 @@ Rectangle {
                     id: senhatsel
                     text: "Senshat"
                     onClicked: {senhatselector.visible = true}
+                }
+                Button {
+                    id: resettrip
+                    text: "Trip Reset"
+                    onClicked: {Calculations.resettrip()}
                 }
             //for official raspberry Pi image only !!!!
 /*
