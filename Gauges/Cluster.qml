@@ -10,6 +10,13 @@ Item {
     id: view
     anchors.fill: parent
     Component.onCompleted: {units.unitadjust()} // adjusts the Gauges to metric or imperial
+    /*
+    Connections{
+    target: Dashboard
+    onUnitsChanged: {units.unitadjust()}
+    }*/
+
+    //adjusts the Gauges to metric or imperial
 
     property  var unit : Dashboard.units;
 
@@ -169,6 +176,82 @@ Item {
 
             }
 
+        }
+        Rectangle{
+            id: odotrip
+            //height: scalerect.height /6
+            height: scalerect.height /15
+            width: scalerect.width /3.5
+            anchors.left: scalerect.left
+            anchors.leftMargin: scalerect.width / 2.75
+            anchors.bottom: scalerect.bottom
+            anchors.bottomMargin: scalerect.height / 5
+            color: "transparent"
+
+
+            Text {
+                id: tripname
+                text:"Trip "
+                font.pixelSize: scalerect.width / 60
+                anchors.right: trip.left
+                anchors.bottom: odotrip.bottom
+                font.family: "Eurostile"
+                color: "grey"
+
+            }
+            Text {
+                id: trip
+                text:(Dashboard.Trip).toFixed(1)
+                font.pixelSize: scalerect.width / 55
+                anchors.right: tripunits.left
+                anchors.bottom: odotrip.bottom
+                font.bold: true
+                font.family: "Eurostile"
+                color: "grey"
+
+            }
+            Text {
+                id: tripunits
+                text:" km"
+                font.pixelSize: scalerect.width / 60
+                anchors.right: parent.right
+                anchors.bottom: odotrip.bottom
+                //font.bold: true
+                font.family: "Eurostile"
+                color: "grey"
+
+            }
+            Text {
+                id: odoname
+                text:"Total "
+                font.pixelSize: scalerect.width / 60
+                anchors.left: parent.left
+                anchors.bottom: odotrip.bottom
+                font.family: "Eurostile"
+                color: "grey"
+
+            }
+            Text {
+                id: odo
+                text: (Dashboard.Odo).toFixed(0)
+                font.pixelSize: scalerect.width / 55
+                anchors.left: odoname.right
+                anchors.bottom: odotrip.bottom
+                font.bold: true
+                font.family: "Eurostile"
+                color: "grey"
+
+            }
+            Text {
+                id: odounit
+                text:" km"
+                font.pixelSize: scalerect.width / 60
+                anchors.left: odo.right
+                anchors.bottom: odotrip.bottom
+                font.family: "Eurostile"
+                color: "grey"
+
+            }
         }
         //Small gauge on the left
         Rectangle {
@@ -371,6 +454,7 @@ Item {
         }
     }
 
+
     Rectangle {
         id: touchsurface
         width: parent.width
@@ -501,8 +585,8 @@ Item {
         id: units
         function unitadjust()
         {
-            if (unit == "imperial") {speedoopacity.target = speedoNeedlemph,speedometer.maximumValue = 200,speedoNeedlemph.visible = true, speedoNeedlekph.visible = false,revneedele.visible = true; leftgaugeticks.minimumValue =40,leftgaugeticks.maximumValue =220, rightgaugeticks.minimumValue = 40,rightgaugeticks.maximumValue = 190};
-            if (unit == "metric") {speedoopacity.target = speedoNeedlekph,speedometer.maximumValue = 320,speedoNeedlemph.visible = false, speedoNeedlekph.visible = true,leftgaugeticks.minimumValue =30,leftgaugeticks.maximumValue =110, rightgaugeticks.minimumValue =20,rightgaugeticks.maximumValue = 80};
+            if (unit == "imperial") {speedoopacity.target = speedoNeedlemph,speedometer.maximumValue = 200,speedoNeedlemph.visible = true, speedoNeedlekph.visible = false,revneedele.visible = true; leftgaugeticks.minimumValue =40,leftgaugeticks.maximumValue =220, rightgaugeticks.minimumValue = 40,rightgaugeticks.maximumValue = 190,tripunits.text = " mi",odounit.text = " mi" };
+            if (unit == "metric") {speedoopacity.target = speedoNeedlekph,speedometer.maximumValue = 320,speedoNeedlemph.visible = false, speedoNeedlekph.visible = true,leftgaugeticks.minimumValue =30,leftgaugeticks.maximumValue =110, rightgaugeticks.minimumValue =20,rightgaugeticks.maximumValue = 80,tripunits.text = " km" ,odounit.text = " km"};
         }
 
 
