@@ -184,7 +184,89 @@ class DashBoard : public QObject
 
     Q_PROPERTY(QStringList dashsetup READ dashsetup WRITE setdashsetup NOTIFY dashsetupChanged)
 
+    Q_PROPERTY(qreal accelpedpos READ accelpedpos WRITE setaccelpedpos NOTIFY accelpedposChanged)
+    Q_PROPERTY(qreal airtempensor2 READ airtempensor2 WRITE setairtempensor2 NOTIFY airtempensor2Changed)
+    Q_PROPERTY(qreal antilaglauchswitch READ antilaglauchswitch WRITE setantilaglauchswitch NOTIFY antilaglauchswitchChanged)
+    Q_PROPERTY(qreal antilaglaunchon READ antilaglaunchon WRITE setantilaglaunchon NOTIFY antilaglaunchonChanged)
+    Q_PROPERTY(qreal auxrevlimitswitch READ auxrevlimitswitch WRITE setauxrevlimitswitch NOTIFY auxrevlimitswitchChanged)
+    Q_PROPERTY(qreal avfueleconomy READ avfueleconomy WRITE setavfueleconomy NOTIFY avfueleconomyChanged)
+    Q_PROPERTY(qreal battlight READ battlight WRITE setbattlight NOTIFY battlightChanged)
+    Q_PROPERTY(qreal boostcontrol READ boostcontrol WRITE setboostcontrol NOTIFY boostcontrolChanged)
+    Q_PROPERTY(qreal brakepress READ brakepress WRITE setbrakepress NOTIFY brakepressChanged)
+    Q_PROPERTY(qreal clutchswitchstate READ clutchswitchstate WRITE setclutchswitchstate NOTIFY clutchswitchstateChanged)
+    Q_PROPERTY(qreal coolantpress READ coolantpress WRITE setcoolantpress NOTIFY coolantpressChanged)
+    Q_PROPERTY(qreal decelcut READ decelcut WRITE setdecelcut NOTIFY decelcutChanged)
+    Q_PROPERTY(qreal diffoiltemp READ diffoiltemp WRITE setdiffoiltemp NOTIFY diffoiltempChanged)
+    Q_PROPERTY(qreal distancetoempty READ distancetoempty WRITE setdistancetoempty NOTIFY distancetoemptyChanged)
+    Q_PROPERTY(qreal egt1 READ egt1 WRITE setegt1 NOTIFY egt1Changed)
+    Q_PROPERTY(qreal egt2 READ egt2 WRITE setegt2 NOTIFY egt2Changed)
+    Q_PROPERTY(qreal egt3 READ egt3 WRITE setegt3 NOTIFY egt3Changed)
+    Q_PROPERTY(qreal egt4 READ egt4 WRITE setegt4 NOTIFY egt4Changed)
+    Q_PROPERTY(qreal egt5 READ egt5 WRITE setegt5 NOTIFY egt5Changed)
+    Q_PROPERTY(qreal egt6 READ egt6 WRITE setegt6 NOTIFY egt6Changed)
+    Q_PROPERTY(qreal egt7 READ egt7 WRITE setegt7 NOTIFY egt7Changed)
+    Q_PROPERTY(qreal egt8 READ egt8 WRITE setegt8 NOTIFY egt8Changed)
+    Q_PROPERTY(qreal egt9 READ egt9 WRITE setegt9 NOTIFY egt9Changed)
+    Q_PROPERTY(qreal egt10 READ egt10 WRITE setegt10 NOTIFY egt10Changed)
+    Q_PROPERTY(qreal egt11 READ egt11 WRITE setegt11 NOTIFY egt11Changed)
+    Q_PROPERTY(qreal egt12 READ egt12 WRITE setegt12 NOTIFY egt12Changed)
+    Q_PROPERTY(qreal excamangle1 READ excamangle1 WRITE setexcamangle1 NOTIFY excamangle1Changed)
+    Q_PROPERTY(qreal excamangle2 READ excamangle2 WRITE setexcamangle2 NOTIFY excamangle2Changed)
+    Q_PROPERTY(qreal flatshiftstate READ flatshiftstate WRITE setflatshiftstate NOTIFY flatshiftstateChanged)
+    Q_PROPERTY(qreal fuelclevel READ fuelclevel WRITE setfuelclevel NOTIFY fuelclevelChanged)
+    Q_PROPERTY(qreal fuelcomposition READ fuelcomposition WRITE setfuelcomposition NOTIFY fuelcompositionChanged)
+    Q_PROPERTY(qreal fuelconsrate READ fuelconsrate WRITE setfuelconsrate NOTIFY fuelconsrateChanged)
+    Q_PROPERTY(qreal fuelcutperc READ fuelcutperc WRITE setfuelcutperc NOTIFY fuelcutpercChanged)
 
+    Q_PROPERTY(qreal fuelflow READ fuelflow WRITE setfuelflow NOTIFY fuelflowChanged)
+    Q_PROPERTY(qreal fuelflowdiff READ fuelflowdiff WRITE setfuelflowdiff NOTIFY fuelflowdiffChanged)
+    Q_PROPERTY(qreal fuelflowret READ fuelflowret WRITE setfuelflowret NOTIFY fuelflowretChanged)
+    Q_PROPERTY(qreal fueltrimlongtbank1 READ fueltrimlongtbank1 WRITE setfueltrimlongtbank1 NOTIFY fueltrimlongtbank1Changed)
+    Q_PROPERTY(qreal fueltrimlongtbank2 READ fueltrimlongtbank2 WRITE setfueltrimlongtbank2 NOTIFY fueltrimlongtbank2Changed)
+    Q_PROPERTY(qreal fueltrimshorttbank1 READ fueltrimshorttbank1 WRITE setfueltrimshorttbank1 NOTIFY fueltrimshorttbank1Changed)
+    Q_PROPERTY(qreal fueltrimshorttbank2 READ fueltrimshorttbank2 WRITE setfueltrimshorttbank2 NOTIFY fueltrimshorttbank2Changed)
+    Q_PROPERTY(qreal gearswitch READ gearswitch WRITE setgearswitch NOTIFY gearswitchChanged)
+    Q_PROPERTY(qreal handbrake READ handbrake WRITE sethandbrake NOTIFY handbrakeChanged)
+    Q_PROPERTY(qreal highbeam READ highbeam WRITE sethighbeam NOTIFY highbeamChanged)
+    Q_PROPERTY(qreal homeccounter READ homeccounter WRITE sethomeccounter NOTIFY homeccounterChanged)
+    Q_PROPERTY(qreal incamangle1 READ incamangle1 WRITE setincamangle1 NOTIFY incamangle1Changed)
+    Q_PROPERTY(qreal incamangle2 READ incamangle2 WRITE setincamangle2 NOTIFY incamangle2Changed)
+    Q_PROPERTY(qreal knocklevlogged1 READ knocklevlogged1 WRITE setknocklevlogged1 NOTIFY knocklevlogged1Changed)
+    Q_PROPERTY(qreal knocklevlogged2 READ knocklevlogged2 WRITE setknocklevlogged2 NOTIFY knocklevlogged2Changed)
+    Q_PROPERTY(qreal knockretardbank1 READ knockretardbank1 WRITE setknockretardbank1 NOTIFY knockretardbank1Changed)
+    Q_PROPERTY(qreal knockretardbank2 READ knockretardbank2 WRITE setknockretardbank2 NOTIFY knockretardbank2Changed)
+    Q_PROPERTY(qreal lambda2 READ lambda2 WRITE setlambda2 NOTIFY lambda2Changed)
+    Q_PROPERTY(qreal lambda3 READ lambda3 WRITE setlambda3 NOTIFY lambda3Changed)
+    Q_PROPERTY(qreal lambda4 READ lambda4 WRITE setlambda4 NOTIFY lambda4Changed)
+    Q_PROPERTY(qreal launchcontolfuelenrich READ launchcontolfuelenrich WRITE setlaunchcontolfuelenrich NOTIFY launchcontolfuelenrichChanged)
+    Q_PROPERTY(qreal launchctrolignretard READ launchctrolignretard WRITE setlaunchctrolignretard NOTIFY launchctrolignretardChanged)
+    Q_PROPERTY(qreal leftindicator READ leftindicator WRITE setleftindicator NOTIFY leftindicatorChanged)
+    Q_PROPERTY(qreal limpmode READ limpmode WRITE setlimpmode NOTIFY limpmodeChanged)
+    Q_PROPERTY(qreal mil READ mil WRITE setmil NOTIFY milChanged)
+    Q_PROPERTY(qreal missccount READ missccount WRITE setmissccount NOTIFY missccountChanged)
+    Q_PROPERTY(qreal nosactive READ nosactive WRITE setnosactive NOTIFY nosactiveChanged)
+    Q_PROPERTY(qreal nospress READ nospress WRITE setnospress NOTIFY nospressChanged)
+    Q_PROPERTY(qreal nosswitch READ nosswitch WRITE setnosswitch NOTIFY nosswitchChanged)
+    Q_PROPERTY(qreal oilpres READ oilpres WRITE setoilpres NOTIFY oilpresChanged)
+    Q_PROPERTY(qreal oiltemp READ oiltemp WRITE setoiltemp NOTIFY oiltempChanged)
+    Q_PROPERTY(qreal rallyantilagswitch READ rallyantilagswitch WRITE setrallyantilagswitch NOTIFY rallyantilagswitchChanged)
+    Q_PROPERTY(qreal rightindicator READ rightindicator WRITE setrightindicator NOTIFY rightindicatorChanged)
+    Q_PROPERTY(qreal targetbstlelkpa READ targetbstlelkpa WRITE settargetbstlelkpa NOTIFY targetbstlelkpaChanged)
+    Q_PROPERTY(qreal timeddutyout1 READ timeddutyout1 WRITE settimeddutyout1 NOTIFY timeddutyout1Changed)
+    Q_PROPERTY(qreal timeddutyout2 READ timeddutyout2 WRITE settimeddutyout2 NOTIFY timeddutyout2Changed)
+    Q_PROPERTY(qreal timeddutyoutputactive READ timeddutyoutputactive WRITE settimeddutyoutputactive NOTIFY timeddutyoutputactiveChanged)
+    Q_PROPERTY(qreal torqueredcutactive READ torqueredcutactive WRITE settorqueredcutactive NOTIFY torqueredcutactiveChanged)
+    Q_PROPERTY(qreal torqueredlevelactive READ torqueredlevelactive WRITE settorqueredlevelactive NOTIFY torqueredlevelactiveChanged)
+    Q_PROPERTY(qreal transientthroactive READ transientthroactive WRITE settransientthroactive NOTIFY transientthroactiveChanged)
+    Q_PROPERTY(qreal transoiltemp READ transoiltemp WRITE settransoiltemp NOTIFY transoiltempChanged)
+    Q_PROPERTY(qreal triggerccounter READ triggerccounter WRITE settriggerccounter NOTIFY triggerccounterChanged)
+    Q_PROPERTY(qreal triggersrsinceasthome READ triggersrsinceasthome WRITE settriggersrsinceasthome NOTIFY triggersrsinceasthomeChanged)
+    Q_PROPERTY(qreal turborpm READ turborpm WRITE setturborpm NOTIFY turborpmChanged)
+    Q_PROPERTY(qreal wastegatepress READ wastegatepress WRITE setwastegatepress NOTIFY wastegatepressChanged)
+    Q_PROPERTY(qreal wheeldiff READ wheeldiff WRITE setwheeldiff NOTIFY wheeldiffChanged)
+    Q_PROPERTY(qreal wheelslip READ wheelslip WRITE setwheelslip NOTIFY wheelslipChanged)
+    Q_PROPERTY(qreal wheelspdftleft READ wheelspdftleft WRITE setwheelspdftleft NOTIFY wheelspdftleftChanged)
+    Q_PROPERTY(qreal wheelspdftright READ wheelspdftright WRITE setwheelspdftright NOTIFY wheelspdftrightChanged)
 
 public:
     DashBoard(QObject *parent = 0);
@@ -350,7 +432,7 @@ public:
     void setFuelPress(const qreal &FuelPress);
 
 
-//qsensors
+    //qsensors
     void setaccelx(const qreal &accelx);
     void setaccely(const qreal &accely);
     void setaccelz(const qreal &accelz);
@@ -361,19 +443,102 @@ public:
     void setambitemp(const qreal &ambitemp);
     void setambipress(const qreal &ambipress);
 
-// calculations
+    // calculations
     void setGear(const qreal &Gear);
     void setPower(const qreal &Power);
     void setTorque(const qreal &Torque);
     void setAccelTimer(const qreal &AccelTimer);
     void setWeight(const qreal &Weight);
 
-//Official Pi screen present screen
+    //Official Pi screen present screen
     void setscreen(const bool &screen);
 
- //User Dashboard Stringlist dashsetup
+    //User Dashboard Stringlist dashsetup
 
     void setdashsetup(const QStringList &dashsetup);
+
+    void setaccelpedpos(const qreal &accelpedpos);
+    void setairtempensor2(const qreal &airtempensor2);
+    void setantilaglauchswitch(const qreal &antilaglauchswitch);
+    void setantilaglaunchon(const qreal &antilaglaunchon);
+    void setauxrevlimitswitch(const qreal &auxrevlimitswitch);
+    void setavfueleconomy(const qreal &avfueleconomy);
+    void setbattlight(const qreal &battlight);
+    void setboostcontrol(const qreal &boostcontrol);
+    void setbrakepress(const qreal &brakepress);
+    void setclutchswitchstate(const qreal &clutchswitchstate);
+    void setcoolantpress(const qreal &coolantpress);
+    void setdecelcut(const qreal &decelcut);
+    void setdiffoiltemp(const qreal &diffoiltemp);
+    void setdistancetoempty(const qreal &distancetoempty);
+    void setegt1(const qreal &egt1);
+    void setegt2(const qreal &egt2);
+    void setegt3(const qreal &egt3);
+    void setegt4(const qreal &egt4);
+    void setegt5(const qreal &egt5);
+    void setegt6(const qreal &egt6);
+    void setegt7(const qreal &egt7);
+    void setegt8(const qreal &egt8);
+    void setegt9(const qreal &egt9);
+    void setegt10(const qreal &egt10);
+    void setegt11(const qreal &egt11);
+    void setegt12(const qreal &egt12);
+    void setexcamangle1(const qreal &excamangle1);
+    void setexcamangle2(const qreal &excamangle2);
+    void setflatshiftstate(const qreal &flatshiftstate);
+    void setfuelclevel(const qreal &fuelclevel);
+    void setfuelcomposition(const qreal &fuelcomposition);
+    void setfuelconsrate(const qreal &fuelconsrate);
+    void setfuelcutperc(const qreal &fuelcutperc);
+    void setfuelflow(const qreal &fuelflow);
+    void setfuelflowdiff(const qreal &fuelflowdiff);
+    void setfuelflowret(const qreal &fuelflowret);
+    void setfueltrimlongtbank1(const qreal &fueltrimlongtbank1);
+    void setfueltrimlongtbank2(const qreal &fueltrimlongtbank2);
+    void setfueltrimshorttbank1(const qreal &fueltrimshorttbank1);
+    void setfueltrimshorttbank2(const qreal &fueltrimshorttbank2);
+    void setgearswitch(const qreal &gearswitch);
+    void sethandbrake(const qreal &handbrake);
+    void sethighbeam(const qreal &highbeam);
+    void sethomeccounter(const qreal &homeccounter);
+    void setincamangle1(const qreal &incamangle1);
+    void setincamangle2(const qreal &incamangle2);
+    void setknocklevlogged1(const qreal &knocklevlogged1);
+    void setknocklevlogged2(const qreal &knocklevlogged2);
+    void setknockretardbank1(const qreal &knockretardbank1);
+    void setknockretardbank2(const qreal &knockretardbank2);
+    void setlambda2(const qreal &lambda2);
+    void setlambda3(const qreal &lambda3);
+    void setlambda4(const qreal &lambda4);
+    void setlaunchcontolfuelenrich(const qreal &launchcontolfuelenrich);
+    void setlaunchctrolignretard(const qreal &launchctrolignretard);
+    void setleftindicator(const qreal &leftindicator);
+    void setlimpmode(const qreal &limpmode);
+    void setmil(const qreal &mil);
+    void setmissccount(const qreal &missccount);
+    void setnosactive(const qreal &nosactive);
+    void setnospress(const qreal &nospress);
+    void setnosswitch(const qreal &nosswitch);
+    void setoilpres(const qreal &oilpres);
+    void setoiltemp(const qreal &oiltemp);
+    void setrallyantilagswitch(const qreal &rallyantilagswitch);
+    void setrightindicator(const qreal &rightindicator);
+    void settargetbstlelkpa(const qreal &targetbstlelkpa);
+    void settimeddutyout1(const qreal &timeddutyout1);
+    void settimeddutyout2(const qreal &timeddutyout2);
+    void settimeddutyoutputactive(const qreal &timeddutyoutputactive);
+    void settorqueredcutactive(const qreal &torqueredcutactive);
+    void settorqueredlevelactive(const qreal &torqueredlevelactive);
+    void settransientthroactive(const qreal &transientthroactive);
+    void settransoiltemp(const qreal &transoiltemp);
+    void settriggerccounter(const qreal &triggerccounter);
+    void settriggersrsinceasthome(const qreal &triggersrsinceasthome);
+    void setturborpm(const qreal &turborpm);
+    void setwastegatepress(const qreal &wastegatepress);
+    void setwheeldiff(const qreal &wheeldiff);
+    void setwheelslip(const qreal &wheelslip);
+    void setwheelspdftleft(const qreal &wheelspdftleft);
+    void setwheelspdftright(const qreal &wheelspdftright);
 
     qreal Odo() const;
 
@@ -505,7 +670,7 @@ public:
     QString gpsLongitude() const;
     QString gpsSpeed() const;
     QString gpsVisibleSatelites() const;
-//units
+    //units
     QString units() const;
 
 
@@ -552,11 +717,96 @@ public:
 
 
     //Official Pi screen present screen
-     bool screen() const;
+    bool screen() const;
 
-     //User Dashboard Stringlist
+    //User Dashboard Stringlist
 
-     QStringList dashsetup() const;
+    QStringList dashsetup() const;
+
+    qreal accelpedpos() const;
+    qreal airtempensor2() const;
+    qreal antilaglauchswitch() const;
+    qreal antilaglaunchon() const;
+    qreal auxrevlimitswitch() const;
+    qreal avfueleconomy() const;
+    qreal battlight() const;
+    qreal boostcontrol() const;
+    qreal brakepress() const;
+    qreal clutchswitchstate() const;
+    qreal coolantpress() const;
+    qreal decelcut() const;
+    qreal diffoiltemp() const;
+    qreal distancetoempty() const;
+    qreal egt1() const;
+    qreal egt2() const;
+    qreal egt3() const;
+    qreal egt4() const;
+    qreal egt5() const;
+    qreal egt6() const;
+    qreal egt7() const;
+    qreal egt8() const;
+    qreal egt9() const;
+    qreal egt10() const;
+    qreal egt11() const;
+    qreal egt12() const;
+    qreal excamangle1() const;
+    qreal excamangle2() const;
+    qreal flatshiftstate() const;
+    qreal fuelclevel() const;
+    qreal fuelcomposition() const;
+    qreal fuelconsrate() const;
+    qreal fuelcutperc() const;
+    qreal fuelflow() const;
+    qreal fuelflowdiff() const;
+    qreal fuelflowret() const;
+    qreal fueltrimlongtbank1() const;
+    qreal fueltrimlongtbank2() const;
+    qreal fueltrimshorttbank1() const;
+    qreal fueltrimshorttbank2() const;
+    qreal gearswitch() const;
+    qreal handbrake() const;
+    qreal highbeam() const;
+    qreal homeccounter() const;
+    qreal incamangle1() const;
+    qreal incamangle2() const;
+    qreal knocklevlogged1() const;
+    qreal knocklevlogged2() const;
+    qreal knockretardbank1() const;
+    qreal knockretardbank2() const;
+    qreal lambda2() const;
+    qreal lambda3() const;
+    qreal lambda4() const;
+    qreal launchcontolfuelenrich() const;
+    qreal launchctrolignretard() const;
+    qreal leftindicator() const;
+    qreal limpmode() const;
+    qreal mil() const;
+    qreal missccount() const;
+    qreal nosactive() const;
+    qreal nospress() const;
+    qreal nosswitch() const;
+    qreal oilpres() const;
+    qreal oiltemp() const;
+    qreal rallyantilagswitch() const;
+    qreal rightindicator() const;
+    qreal targetbstlelkpa() const;
+    qreal timeddutyout1() const;
+    qreal timeddutyout2() const;
+    qreal timeddutyoutputactive() const;
+    qreal torqueredcutactive() const;
+    qreal torqueredlevelactive() const;
+    qreal transientthroactive() const;
+    qreal transoiltemp() const;
+    qreal triggerccounter() const;
+    qreal triggersrsinceasthome() const;
+    qreal turborpm() const;
+    qreal wastegatepress() const;
+    qreal wheeldiff() const;
+    qreal wheelslip() const;
+    qreal wheelspdftleft() const;
+    qreal wheelspdftright() const;
+
+
 
 signals:
 
@@ -739,6 +989,89 @@ signals:
     //User Dashboard Stringlist
 
     void dashsetupChanged(QStringList dashsetup);
+
+    void accelpedposChanged(qreal accelpedpos);
+    void airtempensor2Changed(qreal airtempensor2);
+    void antilaglauchswitchChanged(qreal antilaglauchswitch);
+    void antilaglaunchonChanged(qreal antilaglaunchon);
+    void auxrevlimitswitchChanged(qreal auxrevlimitswitch);
+    void avfueleconomyChanged(qreal avfueleconomy);
+    void battlightChanged(qreal battlight);
+    void boostcontrolChanged(qreal boostcontrol);
+    void brakepressChanged(qreal brakepress);
+    void clutchswitchstateChanged(qreal clutchswitchstate);
+    void coolantpressChanged(qreal coolantpress);
+    void decelcutChanged(qreal decelcut);
+    void diffoiltempChanged(qreal diffoiltemp);
+    void distancetoemptyChanged(qreal distancetoempty);
+    void egt1Changed(qreal egt1);
+    void egt2Changed(qreal egt2);
+    void egt3Changed(qreal egt3);
+    void egt4Changed(qreal egt4);
+    void egt5Changed(qreal egt5);
+    void egt6Changed(qreal egt6);
+    void egt7Changed(qreal egt7);
+    void egt8Changed(qreal egt8);
+    void egt9Changed(qreal egt9);
+    void egt10Changed(qreal egt10);
+    void egt11Changed(qreal egt11);
+    void egt12Changed(qreal egt12);
+    void excamangle1Changed(qreal excamangle1);
+    void excamangle2Changed(qreal excamangle2);
+    void flatshiftstateChanged(qreal flatshiftstate);
+    void fuelclevelChanged(qreal fuelclevel);
+    void fuelcompositionChanged(qreal fuelcomposition);
+    void fuelconsrateChanged(qreal fuelconsrate);
+    void fuelcutpercChanged(qreal fuelcutperc);
+    void fuelflowChanged(qreal fuelflow);
+    void fuelflowdiffChanged(qreal fuelflowdiff);
+    void fuelflowretChanged(qreal fuelflowret);
+    void fueltrimlongtbank1Changed(qreal fueltrimlongtbank1);
+    void fueltrimlongtbank2Changed(qreal fueltrimlongtbank2);
+    void fueltrimshorttbank1Changed(qreal fueltrimshorttbank1);
+    void fueltrimshorttbank2Changed(qreal fueltrimshorttbank2);
+    void gearswitchChanged(qreal gearswitch);
+    void handbrakeChanged(qreal handbrake);
+    void highbeamChanged(qreal highbeam);
+    void homeccounterChanged(qreal homeccounter);
+    void incamangle1Changed(qreal incamangle1);
+    void incamangle2Changed(qreal incamangle2);
+    void knocklevlogged1Changed(qreal knocklevlogged1);
+    void knocklevlogged2Changed(qreal knocklevlogged2);
+    void knockretardbank1Changed(qreal knockretardbank1);
+    void knockretardbank2Changed(qreal knockretardbank2);
+    void lambda2Changed(qreal lambda2);
+    void lambda3Changed(qreal lambda3);
+    void lambda4Changed(qreal lambda4);
+    void launchcontolfuelenrichChanged(qreal launchcontolfuelenrich);
+    void launchctrolignretardChanged(qreal launchctrolignretard);
+    void leftindicatorChanged(qreal leftindicator);
+    void limpmodeChanged(qreal limpmode);
+    void milChanged(qreal mil);
+    void missccountChanged(qreal missccount);
+    void nosactiveChanged(qreal nosactive);
+    void nospressChanged(qreal nospress);
+    void nosswitchChanged(qreal nosswitch);
+    void oilpresChanged(qreal oilpres);
+    void oiltempChanged(qreal oiltemp);
+    void rallyantilagswitchChanged(qreal rallyantilagswitch);
+    void rightindicatorChanged(qreal rightindicator);
+    void targetbstlelkpaChanged(qreal targetbstlelkpa);
+    void timeddutyout1Changed(qreal timeddutyout1);
+    void timeddutyout2Changed(qreal timeddutyout2);
+    void timeddutyoutputactiveChanged(qreal timeddutyoutputactive);
+    void torqueredcutactiveChanged(qreal torqueredcutactive);
+    void torqueredlevelactiveChanged(qreal torqueredlevelactive);
+    void transientthroactiveChanged(qreal transientthroactive);
+    void transoiltempChanged(qreal transoiltemp);
+    void triggerccounterChanged(qreal triggerccounter);
+    void triggersrsinceasthomeChanged(qreal triggersrsinceasthome);
+    void turborpmChanged(qreal turborpm);
+    void wastegatepressChanged(qreal wastegatepress);
+    void wheeldiffChanged(qreal wheeldiff);
+    void wheelslipChanged(qreal wheelslip);
+    void wheelspdftleftChanged(qreal wheelspdftleft);
+    void wheelspdftrightChanged(qreal wheelspdftright);
 
 private:
     // Odometer
@@ -930,6 +1263,89 @@ private:
     //User Dashboard Stringlist  dashsetup
 
     QStringList m_dashsetup;
+
+    qreal m_accelpedpos;
+    qreal m_airtempensor2;
+    qreal m_antilaglauchswitch;
+    qreal m_antilaglaunchon;
+    qreal m_auxrevlimitswitch;
+    qreal m_avfueleconomy;
+    qreal m_battlight;
+    qreal m_boostcontrol;
+    qreal m_brakepress;
+    qreal m_clutchswitchstate;
+    qreal m_coolantpress;
+    qreal m_decelcut;
+    qreal m_diffoiltemp;
+    qreal m_distancetoempty;
+    qreal m_egt1;
+    qreal m_egt2;
+    qreal m_egt3;
+    qreal m_egt4;
+    qreal m_egt5;
+    qreal m_egt6;
+    qreal m_egt7;
+    qreal m_egt8;
+    qreal m_egt9;
+    qreal m_egt10;
+    qreal m_egt11;
+    qreal m_egt12;
+    qreal m_excamangle1;
+    qreal m_excamangle2;
+    qreal m_flatshiftstate;
+    qreal m_fuelclevel;
+    qreal m_fuelcomposition;
+    qreal m_fuelconsrate;
+    qreal m_fuelcutperc;
+    qreal m_fuelflowdiff;
+    qreal m_fuelflowret;
+    qreal m_fueltrimlongtbank1;
+    qreal m_fuelflow;
+    qreal m_fueltrimlongtbank2;
+    qreal m_fueltrimshorttbank1;
+    qreal m_fueltrimshorttbank2;
+    qreal m_gearswitch;
+    qreal m_handbrake;
+    qreal m_highbeam;
+    qreal m_homeccounter;
+    qreal m_incamangle1;
+    qreal m_incamangle2;
+    qreal m_knocklevlogged1;
+    qreal m_knocklevlogged2;
+    qreal m_knockretardbank1;
+    qreal m_knockretardbank2;
+    qreal m_lambda2;
+    qreal m_lambda3;
+    qreal m_lambda4;
+    qreal m_launchcontolfuelenrich;
+    qreal m_launchctrolignretard;
+    qreal m_leftindicator;
+    qreal m_limpmode;
+    qreal m_mil;
+    qreal m_missccount;
+    qreal m_nosactive;
+    qreal m_nospress;
+    qreal m_nosswitch;
+    qreal m_oilpres;
+    qreal m_oiltemp;
+    qreal m_rallyantilagswitch;
+    qreal m_rightindicator;
+    qreal m_targetbstlelkpa;
+    qreal m_timeddutyout1;
+    qreal m_timeddutyout2;
+    qreal m_timeddutyoutputactive;
+    qreal m_torqueredcutactive;
+    qreal m_torqueredlevelactive;
+    qreal m_transientthroactive;
+    qreal m_transoiltemp;
+    qreal m_triggerccounter;
+    qreal m_triggersrsinceasthome;
+    qreal m_turborpm;
+    qreal m_wastegatepress;
+    qreal m_wheeldiff;
+    qreal m_wheelslip;
+    qreal m_wheelspdftleft;
+    qreal m_wheelspdftright;
 
 
 };

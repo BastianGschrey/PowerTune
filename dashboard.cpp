@@ -174,6 +174,89 @@ DashBoard::DashBoard(QObject *parent)
     //Official Pi screen present screen
     , m_screen(0)
 
+    ,  m_accelpedpos(0)
+    ,  m_airtempensor2(0)
+    ,  m_antilaglauchswitch(0)
+    ,  m_antilaglaunchon(0)
+    ,  m_auxrevlimitswitch(0)
+    ,  m_avfueleconomy(0)
+    ,  m_battlight(0)
+    ,  m_boostcontrol(0)
+    ,  m_brakepress(0)
+    ,  m_clutchswitchstate(0)
+    ,  m_coolantpress(0)
+    ,  m_decelcut(0)
+    ,  m_diffoiltemp(0)
+    ,  m_distancetoempty(0)
+    ,  m_egt1(0)
+    ,  m_egt2(0)
+    ,  m_egt3(0)
+    ,  m_egt4(0)
+    ,  m_egt5(0)
+    ,  m_egt6(0)
+    ,  m_egt7(0)
+    ,  m_egt8(0)
+    ,  m_egt9(0)
+    ,  m_egt10(0)
+    ,  m_egt11(0)
+    ,  m_egt12(0)
+    ,  m_excamangle1(0)
+    ,  m_excamangle2(0)
+    ,  m_flatshiftstate(0)
+    ,  m_fuelclevel(0)
+    ,  m_fuelcomposition(0)
+    ,  m_fuelconsrate(0)
+    ,  m_fuelcutperc(0)
+    ,  m_fuelflowdiff(0)
+    ,  m_fuelflowret(0)
+    ,  m_fueltrimlongtbank1(0)
+    ,  m_fuelflow(0)
+    ,  m_fueltrimlongtbank2(0)
+    ,  m_fueltrimshorttbank1(0)
+    ,  m_fueltrimshorttbank2(0)
+    ,  m_gearswitch(0)
+    ,  m_handbrake(0)
+    ,  m_highbeam(0)
+    ,  m_homeccounter(0)
+    ,  m_incamangle1(0)
+    ,  m_incamangle2(0)
+    ,  m_knocklevlogged1(0)
+    ,  m_knocklevlogged2(0)
+    ,  m_knockretardbank1(0)
+    ,  m_knockretardbank2(0)
+    ,  m_lambda2(0)
+    ,  m_lambda3(0)
+    ,  m_lambda4(0)
+    ,  m_launchcontolfuelenrich(0)
+    ,  m_launchctrolignretard(0)
+    ,  m_leftindicator(0)
+    ,  m_limpmode(0)
+    ,  m_mil(0)
+    ,  m_missccount(0)
+    ,  m_nosactive(0)
+    ,  m_nospress(0)
+    ,  m_nosswitch(0)
+    ,  m_oilpres(0)
+    ,  m_oiltemp(0)
+    ,  m_rallyantilagswitch(0)
+    ,  m_rightindicator(0)
+    ,  m_targetbstlelkpa(0)
+    ,  m_timeddutyout1(0)
+    ,  m_timeddutyout2(0)
+    ,  m_timeddutyoutputactive(0)
+    ,  m_torqueredcutactive(0)
+    ,  m_torqueredlevelactive(0)
+    ,  m_transientthroactive(0)
+    ,  m_transoiltemp(0)
+    ,  m_triggerccounter(0)
+    ,  m_triggersrsinceasthome(0)
+    ,  m_turborpm(0)
+    ,  m_wastegatepress(0)
+    ,  m_wheeldiff(0)
+    ,  m_wheelslip(0)
+    ,  m_wheelspdftleft(0)
+    ,  m_wheelspdftright(0)
+
 {
 }
 
@@ -1314,6 +1397,641 @@ void DashBoard::setdashsetup(const QStringList &dashsetup)
     emit dashsetupChanged(dashsetup);
 }
 
+void DashBoard::setaccelpedpos(const qreal &accelpedpos)
+{
+    if (m_accelpedpos == accelpedpos)
+        return;
+    m_accelpedpos = accelpedpos;
+    emit accelpedposChanged(accelpedpos);
+}
+void DashBoard::setairtempensor2(const qreal &airtempensor2)
+{
+    if (m_airtempensor2 == airtempensor2)
+        return;
+    if (m_units == "metric")
+    {m_airtempensor2 = airtempensor2;}
+    if (m_units == "imperial")
+    {m_airtempensor2 = qRound(airtempensor2 * 1.8 + 32);}
+    emit airtempensor2Changed(airtempensor2);
+}
+void DashBoard::setantilaglauchswitch(const qreal &antilaglauchswitch)
+{
+    if (m_antilaglauchswitch == antilaglauchswitch)
+        return;
+    m_antilaglauchswitch = antilaglauchswitch;
+    emit antilaglauchswitchChanged(antilaglauchswitch);
+}
+void DashBoard::setantilaglaunchon(const qreal &antilaglaunchon)
+{
+    if (m_antilaglaunchon == antilaglaunchon)
+        return;
+    m_antilaglaunchon = antilaglaunchon;
+    emit antilaglaunchonChanged(antilaglaunchon);
+}
+void DashBoard::setauxrevlimitswitch(const qreal &auxrevlimitswitch)
+{
+    if (m_auxrevlimitswitch == auxrevlimitswitch)
+        return;
+    m_auxrevlimitswitch = auxrevlimitswitch;
+    emit auxrevlimitswitchChanged(auxrevlimitswitch);
+}
+void DashBoard::setavfueleconomy(const qreal &avfueleconomy)
+{
+    if (m_avfueleconomy == avfueleconomy)
+        return;
+    m_avfueleconomy = avfueleconomy;
+    emit avfueleconomyChanged(avfueleconomy);
+}
+void DashBoard::setbattlight(const qreal &battlight)
+{
+    if (m_battlight == battlight)
+        return;
+    m_battlight = battlight;
+    emit battlightChanged(battlight);
+}
+void DashBoard::setboostcontrol(const qreal &boostcontrol)
+{
+    if (m_boostcontrol == boostcontrol)
+        return;
+    m_boostcontrol = boostcontrol;
+    emit boostcontrolChanged(boostcontrol);
+}
+void DashBoard::setbrakepress(const qreal &brakepress)
+{
+    if (m_brakepress == brakepress)
+        return;
+    m_brakepress = brakepress;
+    emit brakepressChanged(brakepress);
+}
+void DashBoard::setclutchswitchstate(const qreal &clutchswitchstate)
+{
+    if (m_clutchswitchstate == clutchswitchstate)
+        return;
+    m_clutchswitchstate = clutchswitchstate;
+    emit clutchswitchstateChanged(clutchswitchstate);
+}
+void DashBoard::setcoolantpress(const qreal &coolantpress)
+{
+    if (m_coolantpress == coolantpress)
+        return;
+    m_coolantpress = coolantpress;
+    emit coolantpressChanged(coolantpress);
+}
+void DashBoard::setdecelcut(const qreal &decelcut)
+{
+    if (m_decelcut == decelcut)
+        return;
+    m_decelcut = decelcut;
+    emit decelcutChanged(decelcut);
+}
+void DashBoard::setdiffoiltemp(const qreal &diffoiltemp)
+{
+    if (m_diffoiltemp == diffoiltemp)
+        return;
+    if (m_units == "metric")
+    {m_diffoiltemp = diffoiltemp;}
+    if (m_units == "imperial")
+    {m_diffoiltemp = qRound(diffoiltemp * 1.8 + 32);}
+    emit diffoiltempChanged(diffoiltemp);
+}
+void DashBoard::setdistancetoempty(const qreal &distancetoempty)
+{
+    if (m_distancetoempty == distancetoempty)
+        return;
+    m_distancetoempty = distancetoempty;
+    emit distancetoemptyChanged(distancetoempty);
+}
+void DashBoard::setegt1(const qreal &egt1)
+{
+    if (m_egt1 == egt1)
+        return;
+    if (m_units == "metric")
+    {m_egt1 = egt1;}
+    if (m_units == "imperial")
+    {m_egt1 = qRound(egt1 * 1.8 + 32);}
+    emit egt1Changed(egt1);
+}
+void DashBoard::setegt2(const qreal &egt2)
+{
+    if (m_egt2 == egt2)
+        return;
+    if (m_units == "metric")
+    {m_egt2 = egt2;}
+    if (m_units == "imperial")
+    {m_egt2 = qRound(egt2 * 1.8 + 32);}
+    emit egt2Changed(egt2);
+}
+void DashBoard::setegt3(const qreal &egt3)
+{
+    if (m_egt3 == egt3)
+        return;
+    if (m_units == "metric")
+    {m_egt3 = egt3;}
+    if (m_units == "imperial")
+    {m_egt3 = qRound(egt3 * 1.8 + 32);}
+    emit egt3Changed(egt3);
+}
+void DashBoard::setegt4(const qreal &egt4)
+{
+    if (m_egt4 == egt4)
+        return;
+    if (m_units == "metric")
+    {m_egt4 = egt4;}
+    if (m_units == "imperial")
+    {m_egt4 = qRound(egt4 * 1.8 + 32);}
+    emit egt4Changed(egt4);
+}
+void DashBoard::setegt5(const qreal &egt5)
+{
+    if (m_egt5 == egt5)
+        return;
+    if (m_units == "metric")
+    {m_egt5 = egt5;}
+    if (m_units == "imperial")
+    {m_egt5 = qRound(egt5 * 1.8 + 32);}
+    emit egt5Changed(egt5);
+}
+void DashBoard::setegt6(const qreal &egt6)
+{
+    if (m_egt6 == egt6)
+        return;
+    if (m_units == "metric")
+    {m_egt6 = egt6;}
+    if (m_units == "imperial")
+    {m_egt6 = qRound(egt6 * 1.8 + 32);}
+    emit egt6Changed(egt6);
+}
+void DashBoard::setegt7(const qreal &egt7)
+{
+    if (m_egt7 == egt7)
+        return;
+    if (m_units == "metric")
+    {m_egt7 = egt7;}
+    if (m_units == "imperial")
+    {m_egt7 = qRound(egt7 * 1.8 + 32);}
+    emit egt7Changed(egt7);
+}
+void DashBoard::setegt8(const qreal &egt8)
+{
+    if (m_egt8 == egt8)
+        return;
+    if (m_units == "metric")
+    {m_egt8 = egt8;}
+    if (m_units == "imperial")
+    {m_egt8 = qRound(egt8 * 1.8 + 32);}
+    emit egt8Changed(egt8);
+}
+void DashBoard::setegt9(const qreal &egt9)
+{
+    if (m_egt9 == egt9)
+        return;
+    if (m_units == "metric")
+    {m_egt9 = egt9;}
+    if (m_units == "imperial")
+    {m_egt9 = qRound(egt9 * 1.8 + 32);}
+    emit egt9Changed(egt9);
+}
+void DashBoard::setegt10(const qreal &egt10)
+{
+    if (m_egt10 == egt10)
+        return;
+    if (m_units == "metric")
+    {m_egt10 = egt10;}
+    if (m_units == "imperial")
+    {m_egt10 = qRound(egt10 * 1.8 + 32);}
+    emit egt10Changed(egt10);
+}
+void DashBoard::setegt11(const qreal &egt11)
+{
+    if (m_egt11 == egt11)
+        return;
+    if (m_units == "metric")
+    {m_egt11 = egt11;}
+    if (m_units == "imperial")
+    {m_egt11 = qRound(egt11 * 1.8 + 32);}
+    emit egt11Changed(egt11);
+}
+void DashBoard::setegt12(const qreal &egt12)
+{
+    if (m_egt12 == egt12)
+        return;
+    if (m_units == "metric")
+    {m_egt12 = egt12;}
+    if (m_units == "imperial")
+    {m_egt12 = qRound(egt12 * 1.8 + 32);}
+    emit egt12Changed(egt12);
+}
+void DashBoard::setexcamangle1(const qreal &excamangle1)
+{
+    if (m_excamangle1 == excamangle1)
+        return;
+    m_excamangle1 = excamangle1;
+    emit excamangle1Changed(excamangle1);
+}
+void DashBoard::setexcamangle2(const qreal &excamangle2)
+{
+    if (m_excamangle2 == excamangle2)
+        return;
+    m_excamangle2 = excamangle2;
+    emit excamangle2Changed(excamangle2);
+}
+void DashBoard::setflatshiftstate(const qreal &flatshiftstate)
+{
+    if (m_flatshiftstate == flatshiftstate)
+        return;
+    m_flatshiftstate = flatshiftstate;
+    emit flatshiftstateChanged(flatshiftstate);
+}
+void DashBoard::setfuelclevel(const qreal &fuelclevel)
+{
+    if (m_fuelclevel == fuelclevel)
+        return;
+    m_fuelclevel = fuelclevel;
+    emit fuelclevelChanged(fuelclevel);
+}
+void DashBoard::setfuelcomposition(const qreal &fuelcomposition)
+{
+    if (m_fuelcomposition == fuelcomposition)
+        return;
+    m_fuelcomposition = fuelcomposition;
+    emit fuelcompositionChanged(fuelcomposition);
+}
+void DashBoard::setfuelconsrate(const qreal &fuelconsrate)
+{
+    if (m_fuelconsrate == fuelconsrate)
+        return;
+    m_fuelconsrate = fuelconsrate;
+    emit fuelconsrateChanged(fuelconsrate);
+}
+void DashBoard::setfuelcutperc(const qreal &fuelcutperc)
+{
+    if (m_fuelcutperc == fuelcutperc)
+        return;
+    m_fuelcutperc = fuelcutperc;
+    emit fuelcutpercChanged(fuelcutperc);
+}
+void DashBoard::setfuelflow(const qreal &fuelflow)
+{
+    if (m_fuelflow == fuelflow)
+        return;
+    m_fuelflow = fuelflow;
+    emit fuelflowChanged(fuelflow);
+}
+void DashBoard::setfuelflowdiff(const qreal &fuelflowdiff)
+{
+    if (m_fuelflowdiff == fuelflowdiff)
+        return;
+    m_fuelflowdiff = fuelflowdiff;
+    emit fuelflowdiffChanged(fuelflowdiff);
+}
+void DashBoard::setfuelflowret(const qreal &fuelflowret)
+{
+    if (m_fuelflowret == fuelflowret)
+        return;
+    m_fuelflowret = fuelflowret;
+    emit fuelflowretChanged(fuelflowret);
+}
+void DashBoard::setfueltrimlongtbank1(const qreal &fueltrimlongtbank1)
+{
+    if (m_fueltrimlongtbank1 == fueltrimlongtbank1)
+        return;
+    m_fueltrimlongtbank1 = fueltrimlongtbank1;
+    emit fueltrimlongtbank1Changed(fueltrimlongtbank1);
+}
+void DashBoard::setfueltrimlongtbank2(const qreal &fueltrimlongtbank2)
+{
+    if (m_fueltrimlongtbank2 == fueltrimlongtbank2)
+        return;
+    m_fueltrimlongtbank2 = fueltrimlongtbank2;
+    emit fueltrimlongtbank2Changed(fueltrimlongtbank2);
+}
+void DashBoard::setfueltrimshorttbank1(const qreal &fueltrimshorttbank1)
+{
+    if (m_fueltrimshorttbank1 == fueltrimshorttbank1)
+        return;
+    m_fueltrimshorttbank1 = fueltrimshorttbank1;
+    emit fueltrimshorttbank1Changed(fueltrimshorttbank1);
+}
+void DashBoard::setfueltrimshorttbank2(const qreal &fueltrimshorttbank2)
+{
+    if (m_fueltrimshorttbank2 == fueltrimshorttbank2)
+        return;
+    m_fueltrimshorttbank2 = fueltrimshorttbank2;
+    emit fueltrimshorttbank2Changed(fueltrimshorttbank2);
+}
+void DashBoard::setgearswitch(const qreal &gearswitch)
+{
+    if (m_gearswitch == gearswitch)
+        return;
+    m_gearswitch = gearswitch;
+    emit gearswitchChanged(gearswitch);
+}
+void DashBoard::sethandbrake(const qreal &handbrake)
+{
+    if (m_handbrake == handbrake)
+        return;
+    m_handbrake = handbrake;
+    emit handbrakeChanged(handbrake);
+}
+void DashBoard::sethighbeam(const qreal &highbeam)
+{
+    if (m_highbeam == highbeam)
+        return;
+    m_highbeam = highbeam;
+    emit highbeamChanged(highbeam);
+}
+void DashBoard::sethomeccounter(const qreal &homeccounter)
+{
+    if (m_homeccounter == homeccounter)
+        return;
+    m_homeccounter = homeccounter;
+    emit homeccounterChanged(homeccounter);
+}
+void DashBoard::setincamangle1(const qreal &incamangle1)
+{
+  if (m_incamangle1 == incamangle1)
+      return;
+  m_incamangle1 = incamangle1;
+  emit incamangle1Changed(incamangle1);
+}
+void DashBoard::setincamangle2(const qreal &incamangle2)
+{
+  if (m_incamangle2 == incamangle2)
+      return;
+  m_incamangle2 = incamangle2;
+  emit incamangle2Changed(incamangle2);
+}
+void DashBoard::setknocklevlogged1(const qreal &knocklevlogged1)
+{
+  if (m_knocklevlogged1 == knocklevlogged1)
+      return;
+  m_knocklevlogged1 = knocklevlogged1;
+  emit knocklevlogged1Changed(knocklevlogged1);
+}
+void DashBoard::setknocklevlogged2(const qreal &knocklevlogged2)
+{
+  if (m_knocklevlogged2 == knocklevlogged2)
+      return;
+  m_knocklevlogged2 = knocklevlogged2;
+  emit knocklevlogged2Changed(knocklevlogged2);
+}
+void DashBoard::setknockretardbank1(const qreal &knockretardbank1)
+{
+  if (m_knockretardbank1 == knockretardbank1)
+      return;
+  m_knockretardbank1 = knockretardbank1;
+  emit knockretardbank1Changed(knockretardbank1);
+}
+void DashBoard::setknockretardbank2(const qreal &knockretardbank2)
+{
+  if (m_knockretardbank2 == knockretardbank2)
+      return;
+  m_knockretardbank2 = knockretardbank2;
+  emit knockretardbank2Changed(knockretardbank2);
+}
+void DashBoard::setlambda2(const qreal &lambda2)
+{
+  if (m_lambda2 == lambda2)
+      return;
+  m_lambda2 = lambda2;
+  emit lambda2Changed(lambda2);
+}
+void DashBoard::setlambda3(const qreal &lambda3)
+{
+  if (m_lambda3 == lambda3)
+      return;
+  m_lambda3 = lambda3;
+  emit lambda3Changed(lambda3);
+}
+void DashBoard::setlambda4(const qreal &lambda4)
+{
+  if (m_lambda4 == lambda4)
+      return;
+  m_lambda4 = lambda4;
+  emit lambda4Changed(lambda4);
+}
+void DashBoard::setlaunchcontolfuelenrich(const qreal &launchcontolfuelenrich)
+{
+  if (m_launchcontolfuelenrich == launchcontolfuelenrich)
+      return;
+  m_launchcontolfuelenrich = launchcontolfuelenrich;
+  emit launchcontolfuelenrichChanged(launchcontolfuelenrich);
+}
+void DashBoard::setlaunchctrolignretard(const qreal &launchctrolignretard)
+{
+  if (m_launchctrolignretard == launchctrolignretard)
+      return;
+  m_launchctrolignretard = launchctrolignretard;
+  emit launchctrolignretardChanged(launchctrolignretard);
+}
+void DashBoard::setleftindicator(const qreal &leftindicator)
+{
+  if (m_leftindicator == leftindicator)
+      return;
+  m_leftindicator = leftindicator;
+  emit leftindicatorChanged(leftindicator);
+}
+void DashBoard::setlimpmode(const qreal &limpmode)
+{
+  if (m_limpmode == limpmode)
+      return;
+  m_limpmode = limpmode;
+  emit limpmodeChanged(limpmode);
+}
+void DashBoard::setmil(const qreal &mil)
+{
+  if (m_mil == mil)
+      return;
+  m_mil = mil;
+  emit milChanged(mil);
+}
+void DashBoard::setmissccount(const qreal &missccount)
+{
+  if (m_missccount == missccount)
+      return;
+  m_missccount = missccount;
+  emit missccountChanged(missccount);
+}
+void DashBoard::setnosactive(const qreal &nosactive)
+{
+  if (m_nosactive == nosactive)
+      return;
+  m_nosactive = nosactive;
+  emit nosactiveChanged(nosactive);
+}
+void DashBoard::setnospress(const qreal &nospress)
+{
+  if (m_nospress == nospress)
+      return;
+  m_nospress = nospress;
+  emit nospressChanged(nospress);
+}
+void DashBoard::setnosswitch(const qreal &nosswitch)
+{
+  if (m_nosswitch == nosswitch)
+      return;
+  m_nosswitch = nosswitch;
+  emit nosswitchChanged(nosswitch);
+}
+void DashBoard::setoilpres(const qreal &oilpres)
+{
+  if (m_oilpres == oilpres)
+      return;
+  m_oilpres = oilpres;
+  emit oilpresChanged(oilpres);
+}
+void DashBoard::setoiltemp(const qreal &oiltemp)
+{
+  if (m_oiltemp == oiltemp)
+      return;
+  if (m_units == "metric")
+  {m_oiltemp = oiltemp;}
+  if (m_units == "imperial")
+  {m_oiltemp = qRound(oiltemp * 1.8 + 32);}
+  emit oiltempChanged(oiltemp);
+}
+void DashBoard::setrallyantilagswitch(const qreal &rallyantilagswitch)
+{
+  if (m_rallyantilagswitch == rallyantilagswitch)
+      return;
+  m_rallyantilagswitch = rallyantilagswitch;
+  emit rallyantilagswitchChanged(rallyantilagswitch);
+}
+void DashBoard::setrightindicator(const qreal &rightindicator)
+{
+  if (m_rightindicator == rightindicator)
+      return;
+  m_rightindicator = rightindicator;
+  emit rightindicatorChanged(rightindicator);
+}
+void DashBoard::settargetbstlelkpa(const qreal &targetbstlelkpa)
+{
+  if (m_targetbstlelkpa == targetbstlelkpa)
+      return;
+  m_targetbstlelkpa = targetbstlelkpa;
+  emit targetbstlelkpaChanged(targetbstlelkpa);
+}
+void DashBoard::settimeddutyout1(const qreal &timeddutyout1)
+{
+  if (m_timeddutyout1 == timeddutyout1)
+      return;
+  m_timeddutyout1 = timeddutyout1;
+  emit timeddutyout1Changed(timeddutyout1);
+}
+void DashBoard::settimeddutyout2(const qreal &timeddutyout2)
+{
+  if (m_timeddutyout2 == timeddutyout2)
+      return;
+  m_timeddutyout2 = timeddutyout2;
+  emit timeddutyout2Changed(timeddutyout2);
+}
+void DashBoard::settimeddutyoutputactive(const qreal &timeddutyoutputactive)
+{
+  if (m_timeddutyoutputactive == timeddutyoutputactive)
+      return;
+  m_timeddutyoutputactive = timeddutyoutputactive;
+  emit timeddutyoutputactiveChanged(timeddutyoutputactive);
+}
+void DashBoard::settorqueredcutactive(const qreal &torqueredcutactive)
+{
+  if (m_torqueredcutactive == torqueredcutactive)
+      return;
+  m_torqueredcutactive = torqueredcutactive;
+  emit torqueredcutactiveChanged(torqueredcutactive);
+}
+void DashBoard::settorqueredlevelactive(const qreal &torqueredlevelactive)
+{
+  if (m_torqueredlevelactive == torqueredlevelactive)
+      return;
+  m_torqueredlevelactive = torqueredlevelactive;
+  emit torqueredlevelactiveChanged(torqueredlevelactive);
+}
+void DashBoard::settransientthroactive(const qreal &transientthroactive)
+{
+  if (m_transientthroactive == transientthroactive)
+      return;
+  m_transientthroactive = transientthroactive;
+  emit transientthroactiveChanged(transientthroactive);
+}
+void DashBoard::settransoiltemp(const qreal &transoiltemp)
+{
+  if (m_transoiltemp == transoiltemp)
+      return;
+  if (m_units == "metric")
+  {m_transoiltemp = transoiltemp;}
+  if (m_units == "imperial")
+  {m_transoiltemp = qRound(transoiltemp * 1.8 + 32);}
+  emit transoiltempChanged(transoiltemp);
+}
+void DashBoard::settriggerccounter(const qreal &triggerccounter)
+{
+  if (m_triggerccounter == triggerccounter)
+      return;
+  m_triggerccounter = triggerccounter;
+  emit triggerccounterChanged(triggerccounter);
+}
+void DashBoard::settriggersrsinceasthome(const qreal &triggersrsinceasthome)
+{
+  if (m_triggersrsinceasthome == triggersrsinceasthome)
+      return;
+  m_triggersrsinceasthome = triggersrsinceasthome;
+  emit triggersrsinceasthomeChanged(triggersrsinceasthome);
+}
+void DashBoard::setturborpm(const qreal &turborpm)
+{
+  if (m_turborpm == turborpm)
+      return;
+  m_turborpm = turborpm;
+  emit turborpmChanged(turborpm);
+}
+void DashBoard::setwastegatepress(const qreal &wastegatepress)
+{
+  if (m_wastegatepress == wastegatepress)
+      return;
+  m_wastegatepress = wastegatepress;
+  emit wastegatepressChanged(wastegatepress);
+}
+void DashBoard::setwheeldiff(const qreal &wheeldiff)
+{
+  if (m_wheeldiff == wheeldiff)
+      return;
+  if (m_units == "metric")
+  {m_wheeldiff = wheeldiff;}
+  if (m_units == "imperial")
+  {m_wheeldiff = qRound(wheeldiff * 1.8 + 32);}
+  emit wheeldiffChanged(wheeldiff);
+}
+void DashBoard::setwheelslip(const qreal &wheelslip)
+{
+  if (m_wheelslip == wheelslip)
+      return;
+  if (m_units == "metric")
+  {m_wheelslip = wheelslip;}
+  if (m_units == "imperial")
+  {m_wheelslip = qRound(wheelslip * 1.8 + 32);}
+  emit wheelslipChanged(wheelslip);
+}
+void DashBoard::setwheelspdftleft(const qreal &wheelspdftleft)
+{
+  if (m_wheelspdftleft == wheelspdftleft)
+      return;
+  if (m_units == "metric")
+  {m_wheelspdftleft = wheelspdftleft;}
+  if (m_units == "imperial")
+  {m_wheelspdftleft = qRound(wheelspdftleft * 1.8 + 32);}
+  emit wheelspdftleftChanged(wheelspdftleft);
+}
+void DashBoard::setwheelspdftright(const qreal &wheelspdftright)
+{
+  if (m_wheelspdftright == wheelspdftright)
+      return;
+  if (m_units == "metric")
+  {m_wheelspdftright = wheelspdftright;}
+  if (m_units == "imperial")
+  {m_wheelspdftright = qRound(wheelspdftright * 1.8 + 32);}
+  emit wheelspdftrightChanged(wheelspdftright);
+}
+
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
 
@@ -1492,3 +2210,86 @@ bool DashBoard::screen() const { return m_screen; }
 
 //User Dashboard Stringlist
 QStringList DashBoard::dashsetup() const { return m_dashsetup; }
+
+qreal DashBoard::accelpedpos() const { return m_accelpedpos; }
+qreal DashBoard::airtempensor2() const { return m_airtempensor2; }
+qreal DashBoard::antilaglauchswitch() const { return m_antilaglauchswitch; }
+qreal DashBoard::antilaglaunchon() const { return m_antilaglaunchon; }
+qreal DashBoard::auxrevlimitswitch() const { return m_auxrevlimitswitch; }
+qreal DashBoard::avfueleconomy() const { return m_avfueleconomy; }
+qreal DashBoard::battlight() const { return m_battlight; }
+qreal DashBoard::boostcontrol() const { return m_boostcontrol; }
+qreal DashBoard::brakepress() const { return m_brakepress; }
+qreal DashBoard::clutchswitchstate() const { return m_clutchswitchstate; }
+qreal DashBoard::coolantpress() const { return m_coolantpress; }
+qreal DashBoard::decelcut() const { return m_decelcut; }
+qreal DashBoard::diffoiltemp() const { return m_diffoiltemp; }
+qreal DashBoard::distancetoempty() const { return m_distancetoempty; }
+qreal DashBoard::egt1() const { return m_egt1; }
+qreal DashBoard::egt2() const { return m_egt2; }
+qreal DashBoard::egt3() const { return m_egt3; }
+qreal DashBoard::egt4() const { return m_egt4; }
+qreal DashBoard::egt5() const { return m_egt5; }
+qreal DashBoard::egt6() const { return m_egt6; }
+qreal DashBoard::egt7() const { return m_egt7; }
+qreal DashBoard::egt8() const { return m_egt8; }
+qreal DashBoard::egt9() const { return m_egt9; }
+qreal DashBoard::egt10() const { return m_egt10; }
+qreal DashBoard::egt11() const { return m_egt11; }
+qreal DashBoard::egt12() const { return m_egt12; }
+qreal DashBoard::excamangle1() const { return m_excamangle1; }
+qreal DashBoard::excamangle2() const { return m_excamangle2; }
+qreal DashBoard::flatshiftstate() const { return m_flatshiftstate; }
+qreal DashBoard::fuelclevel() const { return m_fuelclevel; }
+qreal DashBoard::fuelcomposition() const { return m_fuelcomposition; }
+qreal DashBoard::fuelconsrate() const { return m_fuelconsrate; }
+qreal DashBoard::fuelcutperc() const { return m_fuelcutperc; }
+qreal DashBoard::fuelflowdiff() const { return m_fuelflowdiff; }
+qreal DashBoard::fuelflowret() const { return m_fuelflowret; }
+qreal DashBoard::fueltrimlongtbank1() const { return m_fueltrimlongtbank1; }
+qreal DashBoard::fuelflow() const { return m_fuelflow; }
+qreal DashBoard::fueltrimlongtbank2() const { return m_fueltrimlongtbank2; }
+qreal DashBoard::fueltrimshorttbank1() const { return m_fueltrimshorttbank1; }
+qreal DashBoard::fueltrimshorttbank2() const { return m_fueltrimshorttbank2; }
+qreal DashBoard::gearswitch() const { return m_gearswitch; }
+qreal DashBoard::handbrake() const { return m_handbrake; }
+qreal DashBoard::highbeam() const { return m_highbeam; }
+qreal DashBoard::homeccounter() const { return m_homeccounter; }
+qreal DashBoard::incamangle1() const { return m_incamangle1; }
+qreal DashBoard::incamangle2() const { return m_incamangle2; }
+qreal DashBoard::knocklevlogged1() const { return m_knocklevlogged1; }
+qreal DashBoard::knocklevlogged2() const { return m_knocklevlogged2; }
+qreal DashBoard::knockretardbank1() const { return m_knockretardbank1; }
+qreal DashBoard::knockretardbank2() const { return m_knockretardbank2; }
+qreal DashBoard::lambda2() const { return m_lambda2; }
+qreal DashBoard::lambda3() const { return m_lambda3; }
+qreal DashBoard::lambda4() const { return m_lambda4; }
+qreal DashBoard::launchcontolfuelenrich() const { return m_launchcontolfuelenrich; }
+qreal DashBoard::launchctrolignretard() const { return m_launchctrolignretard; }
+qreal DashBoard::leftindicator() const { return m_leftindicator; }
+qreal DashBoard::limpmode() const { return m_limpmode; }
+qreal DashBoard::mil() const { return m_mil; }
+qreal DashBoard::missccount() const { return m_missccount; }
+qreal DashBoard::nosactive() const { return m_nosactive; }
+qreal DashBoard::nospress() const { return m_nospress; }
+qreal DashBoard::nosswitch() const { return m_nosswitch; }
+qreal DashBoard::oilpres() const { return m_oilpres; }
+qreal DashBoard::oiltemp() const { return m_oiltemp; }
+qreal DashBoard::rallyantilagswitch() const { return m_rallyantilagswitch; }
+qreal DashBoard::rightindicator() const { return m_rightindicator; }
+qreal DashBoard::targetbstlelkpa() const { return m_targetbstlelkpa; }
+qreal DashBoard::timeddutyout1() const { return m_timeddutyout1; }
+qreal DashBoard::timeddutyout2() const { return m_timeddutyout2; }
+qreal DashBoard::timeddutyoutputactive() const { return m_timeddutyoutputactive; }
+qreal DashBoard::torqueredcutactive() const { return m_torqueredcutactive; }
+qreal DashBoard::torqueredlevelactive() const { return m_torqueredlevelactive; }
+qreal DashBoard::transientthroactive() const { return m_transientthroactive; }
+qreal DashBoard::transoiltemp() const { return m_transoiltemp; }
+qreal DashBoard::triggerccounter() const { return m_triggerccounter; }
+qreal DashBoard::triggersrsinceasthome() const { return m_triggersrsinceasthome; }
+qreal DashBoard::turborpm() const { return m_turborpm; }
+qreal DashBoard::wastegatepress() const { return m_wastegatepress; }
+qreal DashBoard::wheeldiff() const { return m_wheeldiff; }
+qreal DashBoard::wheelslip() const { return m_wheelslip; }
+qreal DashBoard::wheelspdftleft() const { return m_wheelspdftleft; }
+qreal DashBoard::wheelspdftright() const { return m_wheelspdftright; }
