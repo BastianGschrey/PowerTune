@@ -90,21 +90,21 @@ void HaltechCAN::readyToRead()
         pkgpayload[0] = qFromBigEndian(info->CH1);
         pkgpayload[1] = qFromBigEndian(info->CH2);
         pkgpayload[2] = qFromBigEndian(info->CH3);
-	      pkgpayload[3] = qFromBigEndian(info->CH4);
+        pkgpayload[3] = qFromBigEndian(info->CH4);
 
         switch(frame.frameId()) {
 
         case 0x360:
              m_dashboard->setrpm(pkgpayload[0]);
              m_dashboard->setMAP(pkgpayload[1]*0.1);
-            //m_dashboard->setTPS(pkgpayload[2]*0.1);
-            //m_dashboard->setCoolantPressure(pkgpayload[3]*0.1);
+             m_dashboard->setTPS(pkgpayload[2]*0.1);
+             m_dashboard->setcoolantpress(pkgpayload[3]*0.1);
             break;
         case 0x361:
-            //m_dashboard->Fuel Pressure (pkgpayload[0]*0.1)
-            //m_dashboard->Oil Pressure (pkgpayload[1]*0.1)
-            //m_dashboard->Accelerator Pedal (pkgpayload[2]*0.1)
-            //m_dashboard->Wastegate Pressure (pkgpayload[3]*0.1)
+             m_dashboard->setFuelPress(pkgpayload[0]*0.1);
+             m_dashboard->setoilpres(pkgpayload[1]*0.1);
+             m_dashboard->setaccelpedpos(pkgpayload[2]*0.1);
+             m_dashboard->setwastegatepress(pkgpayload[3]*0.1);
             break;
         case 0x362:
             m_dashboard->setInj1(pkgpayload[0]*0.1);
@@ -113,120 +113,120 @@ void HaltechCAN::readyToRead()
             m_dashboard->setTrailingign(pkgpayload[3]*0.1);
             break;
         case 0x363:
-            //Wheel Slip(pkgpayload[0]*0.1)
-            //Wheel diff(pkgpayload[1]*0.1)
-            //Engine Acceleration(pkgpayload[2])
-            //Manifold Pressure2(pkgpayload[3]*0.1)
+            m_dashboard->setwheelslip(pkgpayload[0]*0.1);
+            m_dashboard->setwheeldiff(pkgpayload[1]*0.1);
+            //Engine Acceleration(pkgpayload[2]); // rate of RPM rise per second
+            //Manifold Pressure2(pkgpayload[3]*0.1); //still need to implement this datasource
             break;
         case 0x368:
-            //Lambda1 (pkgpayload[0]*0.001)
-            //Lambda2 (pkgpayload[1]*0.001)
-            //Lambda3 (pkgpayload[2]*0.001)
-            //Lambda4 (pkgpayload[3]*0.001)
+            m_dashboard->setLAMBDA(pkgpayload[0]*0.001);
+            m_dashboard->setlambda2(pkgpayload[1]*0.001);
+            m_dashboard->setlambda3(pkgpayload[2]*0.001);
+            m_dashboard->setlambda4(pkgpayload[3]*0.001);
             break;
         case 0x369:
-            //Misscount (pkgpayload[0])
-            //trigger counter(pkgpayload[1])
-            //Home counter(pkgpayload[2])
-            //Triggers since last home(pkgpayload[3])
+            m_dashboard->setmissccount(pkgpayload[0]);
+            m_dashboard->settriggerccounter(pkgpayload[1]);
+            m_dashboard->sethomeccounter(pkgpayload[2]);
+            m_dashboard->settriggersrsinceasthome(pkgpayload[3]);
             break;
         case 0x36A:
-            //knock Level Logged(pkgpayload[0])
-            //knock level logged2(pkgpayload[1])
-            //knock retard bank1(pkgpayload[2]*0.1)
-            //knock retart bank 2(pkgpayload[3]*0.1)
+            m_dashboard->setknocklevlogged1(pkgpayload[0]);
+            m_dashboard->setknocklevlogged2(pkgpayload[1]);
+            m_dashboard->setknockretardbank1(pkgpayload[2]*0.1);
+            m_dashboard->setknockretardbank2(pkgpayload[3]*0.1);
             break;
         case 0x36B:
-            //Brake Pressure(pkgpayload[0])
-            //NOS Pressure(pkgpayload[1])
-            //Turbo Speed Sensor(pkgpayload[2])
-            //G-Sensor (pkgpayload[3])
+            m_dashboard->setbrakepress(pkgpayload[0]);
+            m_dashboard->setnospress(pkgpayload[1]);
+            m_dashboard->setturborpm(pkgpayload[2]);
+            //G-Sensor (pkgpayload[3]);
             break;
         case 0x36C:
-            //Wheel speed FL(pkgpayload[0]*0.1)
-            //Wheel speed FR(pkgpayload[1]*0.1)
-            //Wheel speed RL(pkgpayload[2]*0.1)
-            //Wheel speed RR(pkgpayload[3]*0.1)
+            m_dashboard->setwheelspdftleft(pkgpayload[0]*0.1);
+            m_dashboard->setwheelspdftright(pkgpayload[1]*0.1);
+            //Wheel speed RL(pkgpayload[2]*0.1);
+            //Wheel speed RR(pkgpayload[3]*0.1);
             break;
         case 0x36D:
-            //Wheelspeed front(pkgpayload[0]*0.1)
-            //Wheelspeed rear(pkgpayload[1]*0.1)
-            //Exhaust CAM Angle 1(pkgpayload[2]*0.1)
-            //Exhaust CAM ANgle 2(pkgpayload[3]*0.1)
+            m_dashboard->setSVSS(pkgpayload[0]*0.1); //wheel speed front
+            m_dashboard->setMVSS(pkgpayload[1]*0.1);//wheel speed rear
+            m_dashboard->setexcamangle1(pkgpayload[2]*0.1);
+            m_dashboard->setexcamangle2(pkgpayload[3]*0.1);
             break;
         case 0x36E:
-            //Fuel cut % (pkgpayload[0]*0.1)
-            //Launch control IGN Retard(pkgpayload[1]*0.1)
-            //Launch control fuel Enrich(pkgpayload[2]*0.1)
+            m_dashboard->setfuelcutperc(pkgpayload[0]*0.1);
+            m_dashboard->setlaunchctrolignretard(pkgpayload[1]*0.1);
+            m_dashboard->setlaunchcontolfuelenrich(pkgpayload[2]*0.1);
             break;
         case 0x36F:
-            //Boost Control outpu (pkgpayload[1]*0.01)
-            //Timed Duty output 1(pkgpayload[2]*0.1)
-            //Timed Duty output 2(pkgpayload[3]*0.1)
+            m_dashboard->setboostcontrol(pkgpayload[1]*0.01);
+            m_dashboard->settimeddutyout1(pkgpayload[2]*0.1);
+            m_dashboard->settimeddutyout2(pkgpayload[3]*0.1);
             break;
         case 0x370:
             m_dashboard->setSpeed(pkgpayload[0]*0.1);
             m_dashboard->setGear(pkgpayload[1]);
-            //Intake CAM Angle 1 (pkgpayload[2]*0.1)
-            //Intake CAM Angle 2 (pkgpayload[3]*0.1)
+            m_dashboard->setincamangle1(pkgpayload[2]*0.1);
+            m_dashboard->setincamangle2(pkgpayload[3]*0.1);
             break;
         case 0x371:
-            //Fuel FLow (pkgpayload[0])
-            //Fuel Flow Return(pkgpayload[1])
-            //Fuel FLow Differential(pkgpayload[2])
+            m_dashboard->setfuelflow(pkgpayload[0]);
+            m_dashboard->setfuelflowret(pkgpayload[1]);
+            m_dashboard->setfuelflowdiff(pkgpayload[2]);
             break;
         case 0x372:
             m_dashboard->setBatteryV(pkgpayload[0]*0.1);
-            //Air Temp Sensor2((pkgpayload[1]*0.1)-273.15)
-            //Target Boost Level (pkgpayload[2]*0.1)
-            //Barometric Pressure(pkgpayload[3]*0.1)
+            m_dashboard->setairtempensor2((pkgpayload[1]*0.1)-273.15);
+            m_dashboard->settargetbstlelkpa(pkgpayload[2]*0.1);
+            m_dashboard->setambipress(pkgpayload[3]*0.1);
             break;
         case 0x373:
-            //EGT1(pkgpayload[0]*0.1)
-            //EGT2(pkgpayload[1]*0.1)
-            //EGT3(pkgpayload[2]*0.1)
-            //EGT4(pkgpayload[3]*0.1)
+            m_dashboard->setegt1(pkgpayload[0]*0.1);
+            m_dashboard->setegt2(pkgpayload[1]*0.1);
+            m_dashboard->setegt3(pkgpayload[2]*0.1);
+            m_dashboard->setegt4(pkgpayload[3]*0.1);
             break;
         case 0x374:
-            //EGT5(pkgpayload[0]*0.1)
-            //EGT6(pkgpayload[1]*0.1)
-            //EGT7(pkgpayload[2]*0.1)
-            //EGT8(pkgpayload[3]*0.1)
+            m_dashboard->setegt5(pkgpayload[0]*0.1);
+            m_dashboard->setegt6(pkgpayload[1]*0.1);
+            m_dashboard->setegt7(pkgpayload[2]*0.1);
+            m_dashboard->setegt8(pkgpayload[3]*0.1);
             break;
         case 0x375:
-            //EGT9(pkgpayload[0]*0.1)
-            //EGT10(pkgpayload[1]*0.1)
-            //EGT11(pkgpayload[2]*0.1)
-            //EGT12(pkgpayload[3]*0.1)
+            m_dashboard->setegt9(pkgpayload[0]*0.1);
+            m_dashboard->setegt10(pkgpayload[1]*0.1);
+            m_dashboard->setegt11(pkgpayload[2]*0.1);
+            m_dashboard->setegt12(pkgpayload[3]*0.1);
             break;
         case 0x3E0:
             m_dashboard->setWatertemp((pkgpayload[0]*0.1)-273.15);
             m_dashboard->setIntaketemp((pkgpayload[1]*0.1)-273.15);
             m_dashboard->setFueltemp((pkgpayload[2]*0.1)-273.15);
-            //Oil Temp((pkgpayload[3]*0.1)-273.15)
+            m_dashboard->setoiltemp((pkgpayload[3]*0.1)-273.15);
             break;
         case 0x3E1:
-            //Transmission Oil Temp ((pkgpayload[0]*0.1)-273.15)
-            //Diff oil temp ((pkgpayload[1]*0.1)-273.15)
-            //Fuel Composition(pkgpayload[2]*0.1)
+            m_dashboard->settransoiltemp((pkgpayload[0]*0.1)-273.15);
+            m_dashboard->setdiffoiltemp((pkgpayload[1]*0.1)-273.15);
+            m_dashboard->setfuelcomposition(pkgpayload[2]*0.1);
             break;
         case 0x3E2:
-            //Fuel composition rate (pkgpayload[1]*0.1)
-            //Average fuel economy(pkgpayload[2]*0.1)
+            m_dashboard->setfuelconsrate(pkgpayload[1]*0.1);
+            m_dashboard->setavfueleconomy(pkgpayload[2]*0.1);
             break;
         case 0x3E3:
-            //Fuel Trim Short Term Bank 1 (pkgpayload[0]*0.1)
-            //Fuel Trim Short Term Bank 2 (pkgpayload[1]*0.1)
-            //Fuel Trim Long Term Bank 1(pkgpayload[2]*0.1)
-            //Fuel Trim Long Term Bank 2(pkgpayload[3]*0.1)
+            m_dashboard->setfueltrimshorttbank1(pkgpayload[0]*0.1);
+            m_dashboard->setfueltrimshorttbank2(pkgpayload[1]*0.1);
+            m_dashboard->setfueltrimlongtbank1(pkgpayload[2]*0.1);
+            m_dashboard->setfueltrimlongtbank2(pkgpayload[3]*0.1);
             break;
         case 0x3E4:
 
             //Bit Flags ( too lazy to do that now )
-            //(pkgpayload[0]*0.1)
-            //(pkgpayload[1]*0.1)
-            //(pkgpayload[2]*0.1)
-            //(pkgpayload[3]*0.1)
+            //(pkgpayload[0]*0.1);
+            //(pkgpayload[1]*0.1);
+            //(pkgpayload[2]*0.1);
+            //(pkgpayload[3]*0.1);
             break;
         }
     }
