@@ -703,9 +703,9 @@ void AdaptronicCAN::readyToRead()
         case 0x365:
 
             m_dashboard->setIntaketemp(pkgpayload[0]/10);
-            m_dashboard->setoiltemp(pkgpayload[1]/10;
+            m_dashboard->setoiltemp(pkgpayload[1]/10);
             m_dashboard->setFueltemp(pkgpayload[2]/10);
-            m_dashboard->setoilpres(pkgpayload[3]/10;
+            m_dashboard->setoilpres(pkgpayload[3]/10);
             break;
 
 
@@ -1638,4 +1638,5 @@ void AdaptronicCAN::readyToRead()
         }
     }
 }
+
 
