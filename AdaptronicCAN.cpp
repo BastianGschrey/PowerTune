@@ -237,9 +237,9 @@ void AdaptronicCAN::readyToRead()
             //"VVT4 raw angle"(pkgpayload[3]/10)
             break;
         case 0x318:
-            m_dashboard->setaccelx(pkgpayload[0]/1000);
-            m_dashboard->setaccely(pkgpayload[1]/1000);
-            m_dashboard->setaccelz(pkgpayload[2]/1000);
+            m_dashboard->setaccelx(pkgpayload[0]/1000); // i am assuming this is ms2 (not specified in Documentatiton
+            m_dashboard->setaccely(pkgpayload[1]/1000); // i am assuming this is ms2 (not specified in Documentatiton
+            m_dashboard->setaccelz(pkgpayload[2]/1000); // i am assuming this is ms2 (not specified in Documentatiton
             m_dashboard->setgyrox(pkgpayload[3]/10); //Yaw
             break;
         case 0x319:
@@ -673,9 +673,7 @@ void AdaptronicCAN::readyToRead()
             //"EMAP ext"(pkgpayload[3]/10)
             break;
         case 0x361:
-            //qDebug() << "IMAP :" << pkgpayload[0]/10;
             m_dashboard->setMAP(pkgpayload[0]/10);
-            m_dashboard->setpim((pkgpayload[0]/10));
             //qDebug() << (pkgpayload[0]/10);
             //qDebug() << "IMAP2 :" << pkgpayload[1]/10;
             //qDebug() << "EMAP :" << pkgpayload[2]/10;
@@ -688,7 +686,7 @@ void AdaptronicCAN::readyToRead()
             //"Pedal 2 / TPS2"(pkgpayload[3]/100)
             break;
         case 0x363:
-            //"TPS overall"(pkgpayload[0]/100)
+            m_dashboard->setTPS(pkgpayload[0]/100);
             //"TPS 1 (DBW)"(pkgpayload[1]/100)
             //"TPS 2 (DBW)"(pkgpayload[2]/100)
             //"TPS 3 (DBW)"(pkgpayload[3]/100)
@@ -697,32 +695,24 @@ void AdaptronicCAN::readyToRead()
         case 0x364:
             //"TPS 4 (DBW)"(pkgpayload[0]/100)
             m_dashboard->setLAMBDA(pkgpayload[1]/1000.00);
-            //"Lambda 1"(pkgpayload[1]/100)
-            //"Lambda 1)"(pkgpayload[2]/100)
-            //"ECT"(pkgpayload[3]/100)
-            //Check if water is cold
+            m_dashboard->setlambda2(pkgpayload[2]/100);
             m_dashboard->setWatertemp(pkgpayload[3]/10);
             break;
 
 
         case 0x365:
-            //qDebug() << "MAT :" << pkgpayload[0]/10;
-            //check is air is cold
+
             m_dashboard->setIntaketemp(pkgpayload[0]/10);
-
-
-            //m_dashboard->setIntaketemp(pkgpayload[0]/10);
-            //qDebug() << "Oil T :" << pkgpayload[1]/10;
+            m_dashboard->setoiltemp(pkgpayload[1]/10;
             m_dashboard->setFueltemp(pkgpayload[2]/10);
-            //qDebug() << "Oil P  :" << pkgpayload[3]/10;
+            m_dashboard->setoilpres(pkgpayload[3]/10;
             break;
 
 
         case 0x366:
-            //qDebug() << "Diff Fuel P" << pkgpayload[0]/10;
             m_dashboard->setFuelPress(pkgpayload[0]/10);
-            //qDebug() << "Servo pos:" << pkgpayload[1]/10;
-            //qDebug() << "Fuel T :" << pkgpayload[2]/10;
+            //qDebug() << "Diff Fuel P" << pkgpayload[1]/10;
+            //qDebug() << "Servo pos:" << pkgpayload[2]/10;
             //qDebug() << "0-5V Ext 1 :" << pkgpayload[3]/10;
             break;
 
@@ -766,7 +756,7 @@ void AdaptronicCAN::readyToRead()
         case 0x36D:
             //"Knock bkg level"(pkgpayload[0]/1000)
             //"KnockMax(bkg removed)"(pkgpayload[1]/1000)
-            //"Baro pressure"(pkgpayload[2]/10)
+            m_dashboard->setambipress(pkgpayload[2]/10);
             //"Temperature bias"(pkgpayload[3])
             break;
         case 0x36E:
