@@ -34,7 +34,7 @@ Item {
             style: GaugeStyle {
                 valueBar: Rectangle {
                     width:  400
-                    color: Qt.rgba(gauge.value / gauge.maximumValue, 0, 1 - gauge.value / gauge.maximumValue, 1)
+                    color: Qt.rgba(gauge.value / gauge.maximumValue, 1.1 - gauge.value / gauge.maximumValue, 0, 1)
                 }
             }
         }

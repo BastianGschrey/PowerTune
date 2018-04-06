@@ -4,8 +4,8 @@ import Qt.labs.settings 1.0
 import QtQuick.VirtualKeyboard 2.1
 import QtSensors 5.0
 import QtQuick.Controls.Styles 1.4
-//import QtMultimedia 5.6
-//import QtAudioEngine 1.0
+import QtMultimedia 5.8
+
 
 
 Rectangle {
@@ -49,19 +49,27 @@ Rectangle {
             property alias unitSelector: unitSelect.currentIndex
             property alias odometervalue: odometer.text
             property alias tripmetervalue: tripmeter.text
+            property alias watertempwarning: watertempwarn.text
+            property alias boostwarning: boostwarn.text
+            property alias rpmwarning: rpmwarn.text
+            property alias knockwarning: knockwarn.text
 
-
+        }
+        SoundEffect {
+            id: warnsound
+            source: "qrc:/Sounds/alarm.wav"
         }
 
         Connections{
             target: Dashboard
             onOdoChanged:{odometer.text = (Dashboard.Odo).toFixed(0) }
             onTripChanged:{tripmeter.text = (Dashboard.Trip).toFixed(1) }
-            //onWatertempChanged: { if (Dashboard.Watertemp > watertemp.text) {alarm.play()};}
-            //onRpmChanged: { if (Dashboard.rpm > revs.text) {alarm.play()};}
-            //onKnockChanged: { if (Dashboard.Knock > knock.text) {alarm.play()};}
-            //onBoostPresChanged: { if (Dashboard.BoostPres > boost.text) {alarm.play()};}
+            onWatertempChanged: { if (Dashboard.Watertemp > watertempwarn.text) {playwarning.start()};}
+            onRpmChanged: { if (Dashboard.rpm > rpmwarn.text) {playwarning.start()};}
+            onKnockChanged: { if (Dashboard.Knock > knockwarn.text) {playwarning.start()};}
+            onBoostPresChanged: { if (Dashboard.BoostPres > boostwarn.text) {playwarning.start()};}
         }
+
 
         Row {
             x: 5
@@ -268,7 +276,10 @@ Rectangle {
                     onClicked: { updateButton.enabled =false,Connect.update();
                     }
                 }
-*/
+*/              Button{
+                text: "Warn Settings"
+                onClicked: warningsettings.visible = true
+                }
                 Button {
                     text: "Quit"
                     onClicked: {
@@ -622,6 +633,15 @@ Rectangle {
         }
 
     }
+    Item {
+        //Function to play warning sound
+        id: playwarning
+        function start()
+        {
+
+            if (warnsound.playing == false) warnsound.play();
+        }
+    }
     // Virtual Keyboard
 
 
@@ -715,7 +735,7 @@ Rectangle {
 
 
     }
-/*
+
   //Warning Settings by Craig Shoesmith
     Rectangle{
 
@@ -734,38 +754,26 @@ Rectangle {
             Text { text: "Revs" }
             Text { text: "Knock" }
             TextField {
-                id: watertemp
+                id: watertempwarn
                 width: 180
                 inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
             }
             TextField {
-                id: boost
+                id: boostwarn
                 width: 180
                 inputMethodHints: Qt.ImhDigitsOnly
             }
             TextField {
-                id: revs
+                id: rpmwarn
                 width: 180
                 inputMethodHints: Qt.ImhDigitsOnly
             }
             TextField {
-                id: knock
+                id: knockwarn
                 width: 180
                 inputMethodHints: Qt.ImhDigitsOnly
             }
 
-            SoundEffect {
-                id: alarm
-                source: "/audio/alarm_beep (2).wav"
-            }
-            //You can pack all the connections into 1 as they are all on the same target
-            Connections{
-                target: Dashboard
-                onWatertempChanged: { if (Dashboard.Watertemp > watertemp.text) {alarm.play()};}
-                onRpmChanged: { if (Dashboard.rpm > revs.text) {alarm.play()};}
-                onKnockChanged: { if (Dashboard.Knock > knock.text) {alarm.play()};}
-                onBoostPresChanged: { if (Dashboard.BoostPres > boost.text) {alarm.play()};}
-            }
 
             Button {
                 id: closewarningsettings
@@ -775,7 +783,7 @@ Rectangle {
             }
         }
 }
-*/
+
 //Sensehat Sensors
     Rectangle{
 

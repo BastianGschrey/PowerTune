@@ -32,5 +32,7 @@
         <file>Gauges/Cluster.qml</file>
         <file>Gauges/Squaregauge.qml</file>
         <file>Gauges/Fueltechdashboard.qml</file>
+        <file>Sounds/nokia-tune.mp3</file>
+        <file>Sounds/alarm.wav</file>
     </qresource>
 </RCC>
