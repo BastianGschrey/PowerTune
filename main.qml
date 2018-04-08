@@ -26,8 +26,8 @@ ApplicationWindow {
 /*
         Loader {
 
-            id: sensor
-            source: "qrc:/Gauges/Camera.qml"
+            id: testing
+            source: "qrc:/Gauges/Mediaplayer.qml"
 
         }
 */

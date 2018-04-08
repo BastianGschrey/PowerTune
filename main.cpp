@@ -4,7 +4,6 @@
 #include <QtQml>
 #include "connect.h"
 
-
 int main(int argc, char *argv[])
 {
     qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
@@ -18,7 +17,6 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<Connect>("com.powertune", 1, 0, "ConnectObject");
     engine.rootContext()->setContextProperty("Connect", new Connect(&engine));
-
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
 
