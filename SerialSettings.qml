@@ -83,10 +83,10 @@ Rectangle {
                 spacing: windowbackround.width /150
                 // [0]
                 Text {
-                text: "ECU Serial Port: "
-                font.pixelSize: windowbackround.width / 55
-                color: "white"
-                visible: { (ecuSelect.currentIndex >= "4") ? false: true; }
+                    text: "ECU Serial Port: "
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
+                    visible: { (ecuSelect.currentIndex >= "4") ? false: true; }
                 }
                 ComboBox {
                     id: serialName
@@ -100,10 +100,10 @@ Rectangle {
                     Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true; autoconnect.auto(); }
                 }
                 Text {
-                text: "GPS Port: "
-                font.pixelSize: windowbackround.width / 55
-                color: "white"
-                visible: { (gpsswitch.checked == true ) ? true:false; }
+                    text: "GPS Port: "
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
+                    visible: { (gpsswitch.checked == true ) ? true:false; }
                 }
                 ComboBox {
                     id: serialNameGPS
@@ -115,10 +115,10 @@ Rectangle {
 
                 }
                 Text {
-                text: "GPS Baud: "
-                font.pixelSize: windowbackround.width / 55
-                color: "white"
-                visible: { (gpsswitch.checked == true ) ? true:false; }
+                    text: "GPS Baud: "
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
+                    visible: { (gpsswitch.checked == true ) ? true:false; }
                 }
                 ComboBox {
                     id: serialGPSBaud
@@ -164,7 +164,7 @@ Rectangle {
                     onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
                 }
-/*
+                /*
                 Text {
                     id: textloggingSelect
                     visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
@@ -303,10 +303,10 @@ Rectangle {
                     height: windowbackround.height /15
                     font.pixelSize: windowbackround.width / 55
                     onClicked: {
-                    functconnect.connectfunc();
-                    connectButton.enabled =false;
-                    ecuSelect.enabled = false;
-                    disconnectButton.enabled = true;
+                        functconnect.connectfunc();
+                        connectButton.enabled =false;
+                        ecuSelect.enabled = false;
+                        disconnectButton.enabled = true;
                     }
                 }
                 Button {
@@ -348,8 +348,8 @@ Rectangle {
                     font.pixelSize: windowbackround.width / 55
                     onClicked: {Calculations.resettrip()}
                 }
-            //for official raspberry Pi image only !!!!
-/*
+                //for official raspberry Pi image only !!!!
+                /*
                 Button {
                     id: updateButton
                     text: "Pi Update "
@@ -357,11 +357,11 @@ Rectangle {
                     }
                 }
 */              Button{
-                text: "Warn Settings"
-                width: windowbackround.width / 5
-                height: windowbackround.height /15
-                font.pixelSize: windowbackround.width / 55
-                onClicked: warningsettings.visible = true
+                    text: "Warn Settings"
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
+                    onClicked: warningsettings.visible = true
                 }
                 Button {
                     text: "Quit"
@@ -422,7 +422,7 @@ Rectangle {
                     onPositionChanged: Connect.setSreenbrightness(brightness.value);
                 }
 
-              /*
+                /*
                 Text
                 {
                     color: "red"
@@ -501,7 +501,7 @@ Rectangle {
                         font.pixelSize: windowbackround.width / 55
                         placeholderText: qsTr("AFR")
                     }
-                                        Text  { text: "AN1-2";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "AN1-2";font.pixelSize: windowbackround.width / 55}
                     TextField {
                         id: an3V0
                         width: windowbackround.width / 10
@@ -528,7 +528,7 @@ Rectangle {
                         font.pixelSize: windowbackround.width / 55
                         placeholderText: qsTr("AFR")
                     }
-                                        Text  { text: "AN3-4";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "AN3-4";font.pixelSize: windowbackround.width / 55}
                     /*
                     Text  { text: "AN5-AN6"; windowbackround.width /12;visible: { (interfaceSelect.currentIndex == "1") ? true: false; }}
                     TextField {
@@ -655,9 +655,9 @@ Rectangle {
         id: functconnect
         function connectfunc()
         {
-             Connect.setOdometer(odometer.text)
-             Connect.setWeight(weight.text);
-             Connect.openConnection(serialName.currentText, ecuSelect.currentIndex ,weight.currentText);
+            Connect.setOdometer(odometer.text)
+            Connect.setWeight(weight.text);
+            Connect.openConnection(serialName.currentText, ecuSelect.currentIndex ,weight.currentText);
             //else Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, logger.datalogger()),Connect.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
         }
     }
@@ -668,7 +668,7 @@ Rectangle {
         id: functdisconnect
         function disconnectfunc()
         {
-             Connect.closeConnection(),GPS.stopGPScom();
+            Connect.closeConnection(),GPS.stopGPScom();
         }
     }
 
@@ -804,11 +804,11 @@ Rectangle {
             Text { text: "Dash1"
                 font.pixelSize: windowbackround.width / 55 }
             Text { text: "Dash2"
-            font.pixelSize: windowbackround.width / 55}
+                font.pixelSize: windowbackround.width / 55}
             Text { text: "Dash3"
-            font.pixelSize: windowbackround.width / 55}
+                font.pixelSize: windowbackround.width / 55}
             Text { text: "Dash4"
-            font.pixelSize: windowbackround.width / 55}
+                font.pixelSize: windowbackround.width / 55}
             ComboBox {
                 id: dash1
                 width: windowbackround.width / 5
@@ -864,7 +864,7 @@ Rectangle {
 
     }
 
-  //Warning Settings by Craig Shoesmith
+    //Warning Settings by Craig Shoesmith
     Rectangle{
 
         id: warningsettings
@@ -876,15 +876,15 @@ Rectangle {
         Grid {
             rows:3
             columns: 4
-            spacing: 5
+            spacing: windowbackround.height /150
             Text { text: "WaterTemp"
-            font.pixelSize: windowbackround.width / 55}
+                font.pixelSize: windowbackround.width / 55}
             Text { text: "Boost"
-            font.pixelSize: windowbackround.width / 55}
+                font.pixelSize: windowbackround.width / 55}
             Text { text: "Revs"
-            font.pixelSize: windowbackround.width / 55}
+                font.pixelSize: windowbackround.width / 55}
             Text { text: "Knock"
-            font.pixelSize: windowbackround.width / 55}
+                font.pixelSize: windowbackround.width / 55}
             TextField {
                 id: watertempwarn
                 width: windowbackround.width / 10
@@ -925,9 +925,9 @@ Rectangle {
 
             }
         }
-}
+    }
 
-//Sensehat Sensors
+    //Sensehat Sensors
     Rectangle{
 
         id: senhatselector
@@ -990,8 +990,6 @@ Rectangle {
                 font.pixelSize: windowbackround.width / 55
                 onClicked: {senhatselector.visible = false}
             }
-
-
 
         }
     }
