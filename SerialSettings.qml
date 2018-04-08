@@ -72,23 +72,27 @@ Rectangle {
 
 
         Row {
-            x: 5
-            y: 5
-            spacing: 5
+            x: windowbackround.width /150
+            y: windowbackround.width /150
+            spacing: windowbackround.width /150
             Grid {
                 anchors.top :parent.top
                 anchors.topMargin: parent.height / 20
-                rows: 10
+                rows: 13
                 columns: 2
-                spacing: 5
+                spacing: windowbackround.width /150
                 // [0]
                 Text {
                 text: "ECU Serial Port: "
+                font.pixelSize: windowbackround.width / 55
+                color: "white"
                 visible: { (ecuSelect.currentIndex >= "4") ? false: true; }
                 }
                 ComboBox {
                     id: serialName
-                    width: 200
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     model: Connect.portsNames
                     visible: { (ecuSelect.currentIndex >= "4") ? false: true; }
                     property bool initialized: false
@@ -97,34 +101,46 @@ Rectangle {
                 }
                 Text {
                 text: "GPS Port: "
+                font.pixelSize: windowbackround.width / 55
+                color: "white"
                 visible: { (gpsswitch.checked == true ) ? true:false; }
                 }
                 ComboBox {
                     id: serialNameGPS
-                    width: 200
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     model: Connect.portsNames
                     visible: { (gpsswitch.checked == true ) ? true:false; }
 
                 }
                 Text {
                 text: "GPS Baud: "
+                font.pixelSize: windowbackround.width / 55
+                color: "white"
                 visible: { (gpsswitch.checked == true ) ? true:false; }
                 }
                 ComboBox {
                     id: serialGPSBaud
-                    width: 200
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     model: [ "2400", "4800", "9600", "14400", "19200", "38400", "57600", "115200"]
                     visible: { (gpsswitch.checked == true ) ? true:false; }
                     Component.onCompleted: {autoconnectGPS.auto()}
 
                 }
 
-                Text { text: "Display units:" }
+                Text {
+                    text: "Display units:"
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
+                }
                 ComboBox {
-
                     id: unitSelect
-                    width: 200
-
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     model: [ "Metric","Imperial"]
                     property bool initialized: false
                     Component.onCompleted: { Connect.setUnits(currentIndex);changeweighttext.changetext()}
@@ -132,11 +148,16 @@ Rectangle {
 
 
                 }
-                Text { text: "ECU Selection:" }
+                Text {
+                    text: "ECU Selection:"
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
+                }
                 ComboBox {
-
                     id: ecuSelect
-                    width: 200
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     model: [ "PowerFC", "Adaptronic Select Modbus", "OBDII" , "Nissan Consult","UDP Receiver port 45454","CAN Adaptronic Modular","CAN Haltech V2"]
 
                     property bool initialized: false
@@ -153,23 +174,39 @@ Rectangle {
                 ComboBox {
                     id: loggerSelect
                     visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
-                    width: 200
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     model: [ "OFF", "ON"]
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setLogging( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getLogging(); initialized = true }
                 }
 */
-                Text { text: "GoPro Variant :" }
+                Text {
+                    text: "GoPro Variant :"
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
+                }
                 ComboBox {
                     id: goProSelect
-                    width: 200
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     model: [ "Hero", "Hero2","Hero3"]
 
                 }
-                Text { text: "GoPro Password :" }
+                Text {
+                    text: "GoPro Password :"
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
+                }
                 TextField {
                     id: goPropass
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                     placeholderText: qsTr("GoPro Password")
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhPreferLowercase | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
                     Component.onCompleted: {transferSettings.sendSettings() }
@@ -177,19 +214,31 @@ Rectangle {
                 Text
                 {
                     text: "Logfile name:"
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                 }
                 TextField {
                     id: logfilenameSelect
                     text: qsTr("DataLog")
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhPreferLowercase | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
                     //enterKeyAction: EnterKeyAction.Next
                 }
                 Text
                 {
                     text: "Odo:"
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                 }
                 TextField {
                     id: odometer
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                     text: qsTr("0")
                     inputMethodHints: Qt.ImhDigitsOnly
                     //enterKeyAction: EnterKeyAction.Next
@@ -197,9 +246,15 @@ Rectangle {
                 Text
                 {
                     text: "Trip:"
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                 }
                 TextField{
                     id: tripmeter
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                     readOnly: true
                     text: "0"
                 }
@@ -207,18 +262,28 @@ Rectangle {
                 Text
                 {
                     id: weighttext
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                     text: "Weight:"
                 }
                 TextField {
                     id: weight
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     inputMethodHints: Qt.ImhDigitsOnly
 
                 }
                 Text
                 {
                     text: "Serial Status:"
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                 }
                 TextField {
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     text: qsTr(Dashboard.SerialStat)
 
 
@@ -226,14 +291,17 @@ Rectangle {
             }
 
             Grid {
-                rows: 10
+                rows: 13
                 columns: 2
-                spacing: 5
+                spacing: windowbackround.width / 150
                 anchors.top :parent.top
                 anchors.topMargin: parent.height / 20
                 Button {
                     id: connectButton
                     text: "Connect"
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     onClicked: {
                     functconnect.connectfunc();
                     connectButton.enabled =false;
@@ -244,6 +312,9 @@ Rectangle {
                 Button {
                     id: disconnectButton
                     text: "Disconnect"
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     enabled: false
                     onClicked: {
                         connectButton.enabled = true;
@@ -256,16 +327,25 @@ Rectangle {
                 Button {
                     id: oppendashselect
                     text: "Dash select"
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     onClicked: {dashselector.visible = true}
                 }
                 Button {
                     id: senhatsel
                     text: "Senshat"
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     onClicked: {senhatselector.visible = true}
                 }
                 Button {
                     id: resettrip
                     text: "Trip Reset"
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     onClicked: {Calculations.resettrip()}
                 }
             //for official raspberry Pi image only !!!!
@@ -278,10 +358,16 @@ Rectangle {
                 }
 */              Button{
                 text: "Warn Settings"
+                width: windowbackround.width / 5
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 onClicked: warningsettings.visible = true
                 }
                 Button {
                     text: "Quit"
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     onClicked: {
                         Qt.quit()
                     }
@@ -291,29 +377,42 @@ Rectangle {
 
                 Switch {
                     id: connectAtStart
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     text: qsTr("Autoconnect")
                 }
                 Switch {
                     id: loggerswitch
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     text: qsTr("Data Logger")
                     Component.onCompleted: {logger.datalogger()}
                     onCheckedChanged: logger.datalogger()
-
                 }
 
                 Switch {
                     id: record
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     text: qsTr("GoPro rec")
                     onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                 }
                 Switch {
                     id: gpsswitch
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     text: qsTr("GPS")
                     onCheckedChanged: {autoconnectGPS.auto()}
                 }
 
                 Slider {
                     id:brightness
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
                     stepSize: 5
                     from: 20
                     to: 255
@@ -350,7 +449,7 @@ Rectangle {
                     visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
                     rows: 10
                     columns: 4
-                    spacing: 5
+                    spacing: windowbackround.width / 150
                     //Just a spacer for now still need to do it properly
                     Text  { text: ""; width: 50}
                     Text  { text: ""; width: 50}
@@ -378,27 +477,35 @@ Rectangle {
                     Text  { text: "AN1-2"; width: 50}
                     TextField {
                         id: an1V0
-                        width: 50
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
                         validator: IntValidator {bottom: 0; top: 1000;}
                         inputMethodHints: Qt.ImhDigitsOnly
                         placeholderText: qsTr("9")
                     }
                     TextField {
                         id: an2V5
-                        width: 50
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
                         validator: IntValidator {bottom: 0; top: 1000;}
                         inputMethodHints: Qt.ImhDigitsOnly
                         placeholderText: qsTr("16")
                     }
                     TextField {
                         id: unitaux1
-                        width: 50
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
                         placeholderText: qsTr("AFR")
                     }
                     Text  { text: "AN3-4"; width: 50}
                     TextField {
                         id: an3V0
-                        width: 50
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
                         validator: IntValidator {bottom: 0; top: 1000;}
                         inputMethodHints: Qt.ImhDigitsOnly
                         placeholderText: qsTr("Value @ 0V")
@@ -406,14 +513,18 @@ Rectangle {
                     }
                     TextField {
                         id: an4V5
-                        width: 50
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
                         validator: IntValidator {bottom: 0; top: 1000;}
                         inputMethodHints: Qt.ImhDigitsOnly
                         placeholderText: qsTr("Value @ 5V")
                     }
                     TextField {
                         id: unitaux2
-                        width: 50
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
                         placeholderText: qsTr("AFR")
                     }
                     /*
@@ -687,14 +798,20 @@ Rectangle {
         Grid {
             rows: 3
             columns: 4
-            spacing: 5
-            Text { text: "Dash1" }
-            Text { text: "Dash2" }
-            Text { text: "Dash3" }
-            Text { text: "Dash4" }
+            spacing: windowbackround.width / 150
+            Text { text: "Dash1"
+                font.pixelSize: windowbackround.width / 55 }
+            Text { text: "Dash2"
+            font.pixelSize: windowbackround.width / 55}
+            Text { text: "Dash3"
+            font.pixelSize: windowbackround.width / 55}
+            Text { text: "Dash4"
+            font.pixelSize: windowbackround.width / 55}
             ComboBox {
                 id: dash1
-                width: 180
+                width: windowbackround.width / 5
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select1.selDash1() }
@@ -703,7 +820,9 @@ Rectangle {
 
             ComboBox {
                 id: dash2
-                width: 180
+                width: windowbackround.width / 5
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select2.selDash2() }
@@ -712,7 +831,9 @@ Rectangle {
 
             ComboBox {
                 id: dash3
-                width: 180
+                width: windowbackround.width / 5
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select3.selDash3() }
@@ -720,7 +841,9 @@ Rectangle {
             }
             ComboBox {
                 id: dash4
-                width: 180
+                width: windowbackround.width / 5
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 model:  ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select4.selDash4() }
@@ -728,6 +851,9 @@ Rectangle {
             }
             Button {
                 id: closedashselector
+                width: windowbackround.width / 10
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 text: "Apply"
                 onClicked: {dashselector.visible = false}
             }
@@ -749,28 +875,40 @@ Rectangle {
             rows:3
             columns: 4
             spacing: 5
-            Text { text: "WaterTemp" }
-            Text { text: "Boost" }
-            Text { text: "Revs" }
-            Text { text: "Knock" }
+            Text { text: "WaterTemp"
+            font.pixelSize: windowbackround.width / 55}
+            Text { text: "Boost"
+            font.pixelSize: windowbackround.width / 55}
+            Text { text: "Revs"
+            font.pixelSize: windowbackround.width / 55}
+            Text { text: "Knock"
+            font.pixelSize: windowbackround.width / 55}
             TextField {
                 id: watertempwarn
-                width: 180
+                width: windowbackround.width / 10
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
             }
             TextField {
                 id: boostwarn
-                width: 180
+                width: windowbackround.width / 10
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 inputMethodHints: Qt.ImhDigitsOnly
             }
             TextField {
                 id: rpmwarn
-                width: 180
+                width: windowbackround.width / 10
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 inputMethodHints: Qt.ImhDigitsOnly
             }
             TextField {
                 id: knockwarn
-                width: 180
+                width: windowbackround.width / 10
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 inputMethodHints: Qt.ImhDigitsOnly
             }
 
@@ -778,6 +916,9 @@ Rectangle {
             Button {
                 id: closewarningsettings
                 text: "Apply"
+                width: windowbackround.width / 10
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 onClicked: {warningsettings.visible = false}
 
             }
@@ -796,7 +937,7 @@ Rectangle {
         Grid {
             rows: 6
             columns: 2
-            spacing: 5
+            spacing: windowbackround.width / 150
             anchors.top :parent.top
             anchors.topMargin: parent.height / 20
             Switch {
@@ -842,6 +983,9 @@ Rectangle {
             Button {
                 id: closedsenshatselector
                 text: "Apply"
+                width: windowbackround.width / 10
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 onClicked: {senhatselector.visible = false}
             }
 
