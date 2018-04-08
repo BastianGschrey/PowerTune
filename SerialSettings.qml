@@ -451,30 +451,30 @@ Rectangle {
                     columns: 4
                     spacing: windowbackround.width / 150
                     //Just a spacer for now still need to do it properly
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
                     //Spacer end
 
 
-                    Text  { text: ""; width: 50}
-                    Text  { text: "0V"; width: 50}
-                    Text  { text: "5V"; width: 50}
-                    Text  { text: "Name"; width: 50}
-                    Text  { text: "AN1-2"; width: 50}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "0V";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "5V";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "Name";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "    ";font.pixelSize: windowbackround.width / 55}
                     TextField {
                         id: an1V0
                         width: windowbackround.width / 10
@@ -493,6 +493,7 @@ Rectangle {
                         inputMethodHints: Qt.ImhDigitsOnly
                         placeholderText: qsTr("16")
                     }
+
                     TextField {
                         id: unitaux1
                         width: windowbackround.width / 10
@@ -500,7 +501,7 @@ Rectangle {
                         font.pixelSize: windowbackround.width / 55
                         placeholderText: qsTr("AFR")
                     }
-                    Text  { text: "AN3-4"; width: 50}
+                                        Text  { text: "AN1-2";font.pixelSize: windowbackround.width / 55}
                     TextField {
                         id: an3V0
                         width: windowbackround.width / 10
@@ -527,46 +528,47 @@ Rectangle {
                         font.pixelSize: windowbackround.width / 55
                         placeholderText: qsTr("AFR")
                     }
+                                        Text  { text: "AN3-4";font.pixelSize: windowbackround.width / 55}
                     /*
-                    Text  { text: "AN5-AN6"; width: 50;visible: { (interfaceSelect.currentIndex == "1") ? true: false; }}
+                    Text  { text: "AN5-AN6"; windowbackround.width /12;visible: { (interfaceSelect.currentIndex == "1") ? true: false; }}
                     TextField {
                         id: an5V0
-                        width: 50
+                        windowbackround.width /12
                         validator: IntValidator {bottom: 0; top: 1000;}
                         placeholderText: qsTr("Value @ 0V")
                         visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
                     }
                     TextField {
                         id: an6V5
-                        width: 50
+                        windowbackround.width /12
                         validator: IntValidator {bottom: 0; top: 1000;}
                         placeholderText: qsTr("Value @ 5V")
                         visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
                     }
                     TextField {
                         id: unitaux3
-                        width: 50
+                        windowbackround.width /12
                         placeholderText: qsTr("AFR")
                         visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
                     }
-                    Text  { text: "AN7-AN8"; width: 50;visible: { (interfaceSelect.currentIndex == "1") ? true: false; }}
+                    Text  { text: "AN7-AN8"; windowbackround.width /12;visible: { (interfaceSelect.currentIndex == "1") ? true: false; }}
                     TextField {
                         id: an7V0
-                        width: 50
+                        windowbackround.width /12
                         validator: IntValidator {bottom: 0; top: 1000;}
                         placeholderText: qsTr("Value @ 0V")
                         visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
                     }
                     TextField {
                         id: an8V5
-                        width: 50
+                        windowbackround.width /12
                         validator: IntValidator {bottom: 0; top: 1000;}
                         placeholderText: qsTr("Value @ 5V")
                         visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
                     }
                     TextField {
                         id: unitaux4
-                        width: 50
+                        windowbackround.width /12
                         placeholderText: qsTr("AFR")
                         visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
                     }
