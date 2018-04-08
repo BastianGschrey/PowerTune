@@ -98,6 +98,15 @@ Rectangle {
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setBaudRate( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true; autoconnect.auto(); }
+                    delegate: ItemDelegate {
+                        width: serialName.width
+                        text: serialName.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: serialName.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: serialName.font.family
+                        font.pointSize: serialName.font.pointSize
+                        highlighted: serialName.highlightedIndex === index
+                        hoverEnabled: serialName.hoverEnabled
+                    }
                 }
                 Text {
                     text: "GPS Port: "
@@ -800,15 +809,17 @@ Rectangle {
         Grid {
             rows: 3
             columns: 4
+            anchors.top: parent.top
+            anchors.topMargin: windowbackround.height /120
             spacing: windowbackround.width / 150
             Text { text: "Dash1"
-                font.pixelSize: windowbackround.width / 55 }
+                font.pixelSize: windowbackround.width / 30 }
             Text { text: "Dash2"
-                font.pixelSize: windowbackround.width / 55}
+                font.pixelSize: windowbackround.width / 30}
             Text { text: "Dash3"
-                font.pixelSize: windowbackround.width / 55}
+                font.pixelSize: windowbackround.width / 30}
             Text { text: "Dash4"
-                font.pixelSize: windowbackround.width / 55}
+                font.pixelSize: windowbackround.width / 30}
             ComboBox {
                 id: dash1
                 width: windowbackround.width / 5
@@ -870,21 +881,22 @@ Rectangle {
         id: warningsettings
         visible: false
         width: parent.width
-        height: parent.height
-        color: "grey"
+        height: parent.height /2.5
+        anchors.bottom: parent.bottom
+        color: "black"
 
         Grid {
             rows:3
             columns: 4
             spacing: windowbackround.height /150
             Text { text: "WaterTemp"
-                font.pixelSize: windowbackround.width / 55}
+                font.pixelSize: windowbackround.width / 55;color:"white"}
             Text { text: "Boost"
-                font.pixelSize: windowbackround.width / 55}
+                font.pixelSize: windowbackround.width / 55;color:"white"}
             Text { text: "Revs"
-                font.pixelSize: windowbackround.width / 55}
+                font.pixelSize: windowbackround.width / 55;color:"white"}
             Text { text: "Knock"
-                font.pixelSize: windowbackround.width / 55}
+                font.pixelSize: windowbackround.width / 55;color:"white"}
             TextField {
                 id: watertempwarn
                 width: windowbackround.width / 10
