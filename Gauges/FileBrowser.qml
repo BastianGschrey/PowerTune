@@ -12,9 +12,23 @@ Rectangle {
         id: playMusic
         source: "qrc:/Sounds/tiltshifted_lost_neon_sun.mp3"
     }
+
+    Image {
+        id: previous
+        anchors.right: playpause.left
+        width: parent.width /10
+        height: width
+        fillMode: Image.PreserveAspectFit
+        source: "qrc:/graphics/previous.png"
+
+  MouseArea {
+        anchors.fill: parent
+
+    }
+  }
     Image {
         id: playpause
-        anchors.right: parent.right
+        anchors.right: next.left
         width: parent.width /10
         height: width
         fillMode: Image.PreserveAspectFit
@@ -32,6 +46,19 @@ Rectangle {
                 playing = true,playpause.source = "/graphics/pause.png"
             }
         }
+    }
+  }
+    Image {
+        id: next
+        anchors.right: parent.right
+        width: parent.width /10
+        height: width
+        fillMode: Image.PreserveAspectFit
+        source: "qrc:/graphics/next.png"
+
+  MouseArea {
+        anchors.fill: parent
+
     }
   }
 
