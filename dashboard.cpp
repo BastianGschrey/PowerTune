@@ -2032,6 +2032,16 @@ void DashBoard::setwheelspdftright(const qreal &wheelspdftright)
   emit wheelspdftrightChanged(wheelspdftright);
 }
 
+void DashBoard::setmusicpath(const QString &musicpath)
+{
+    if (m_musicpath == musicpath)
+        return;
+    m_musicpath = musicpath;
+    emit musicpathChanged(musicpath);
+}
+
+
+
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
 
@@ -2293,3 +2303,4 @@ qreal DashBoard::wheeldiff() const { return m_wheeldiff; }
 qreal DashBoard::wheelslip() const { return m_wheelslip; }
 qreal DashBoard::wheelspdftleft() const { return m_wheelspdftleft; }
 qreal DashBoard::wheelspdftright() const { return m_wheelspdftright; }
+QString DashBoard::musicpath() const { return m_musicpath; }

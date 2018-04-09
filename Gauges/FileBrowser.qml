@@ -19,16 +19,15 @@ Rectangle {
             role: "fileName"
             width: 300
         }
-        model: my_model
-        //This returns only the File or Foldername but not the complete Path
-        onActivated: console.log(my_model.data(index,"filename"))
+        model: Filemodel
+        onActivated: Connect.qmlTreeviewclicked(mp3selector.currentIndex)
     }
 
     MediaPlayer {
         id: playMusic
         autoPlay: false
         volume: 0.5
-        source: "c:/Sleep Away.mp3"
+        source: Dashboard.musicpath
     }
     Rectangle{
         id:playerwindow

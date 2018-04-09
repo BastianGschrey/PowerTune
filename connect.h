@@ -26,6 +26,7 @@
 #include <QTimer>
 #include <QProcess>
 #include "calculations.h"
+#include <QFileSystemModel>
 
 
 class SerialPort;
@@ -59,6 +60,7 @@ public:
     Q_INVOKABLE void setUnits(const int &units);
     Q_INVOKABLE void setWeight(const int &weight);
     Q_INVOKABLE void setOdometer(const qreal &Odometer);
+    Q_INVOKABLE void qmlTreeviewclicked(const QModelIndex &index);
     Q_INVOKABLE void clear() const;
     Q_INVOKABLE void openConnection(const QString &portName, const int &ecuSelect);
     Q_INVOKABLE void closeConnection();
@@ -91,6 +93,8 @@ private:
     QStringList *m_ecuList;
     QThread* CALCThread;
     QProcess process;
+    QFileSystemModel *dirModel;
+    QFileSystemModel *fileModel;
 
 
 

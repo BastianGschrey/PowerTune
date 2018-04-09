@@ -94,6 +94,20 @@ Connect::Connect(QObject *parent) :
     m_adaptronicCAN = new AdaptronicCAN(m_dashBoard, this);
     m_datalogger = new datalogger(m_dashBoard, this);
     m_calculations = new calculations(m_dashBoard, this);
+    QString mPath = "/";
+    // DIRECTORIES
+    dirModel = new QFileSystemModel(this);
+    // Set filter
+    dirModel->setFilter(QDir::NoDotAndDotDot |QDir::AllDirs);
+    // QFileSystemModel requires root path
+    dirModel->setRootPath(mPath);
+    fileModel = new QFileSystemModel(this);
+    // Set filter
+    fileModel->setFilter(QDir::NoDotAndDotDot | QDir::Files);
+    // QFileSystemModel requires root path
+    fileModel->setRootPath(mPath);
+
+
 
     QQmlApplicationEngine *engine = dynamic_cast<QQmlApplicationEngine*>( parent );
     if (engine == Q_NULLPTR)
@@ -106,6 +120,8 @@ Connect::Connect(QObject *parent) :
     engine->rootContext()->setContextProperty("Sens", m_sensors);
     engine->rootContext()->setContextProperty("Logger", m_datalogger);
     engine->rootContext()->setContextProperty("Calculations", m_calculations);
+    engine->rootContext()->setContextProperty("Dirmodel", dirModel);
+    engine->rootContext()->setContextProperty("Filemodel", fileModel);
 }
 
 
@@ -188,6 +204,15 @@ void Connect::setOdometer(const qreal &Odometer)
     m_dashBoard->setOdo(Odometer);
     m_calculations->start();
 }
+void Connect::qmlTreeviewclicked(const QModelIndex &index)
+{
+    QString mPath = dirModel->fileInfo(index).absoluteFilePath();
+    qDebug()<<"current path" << mPath;
+    //ui->listView->setRootIndex(fileModel->setRootPath(mPath));
+    m_dashBoard->setmusicpath(mPath);
+
+}
+
 void Connect::getPorts()
 {
     QStringList PortList;
