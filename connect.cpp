@@ -208,6 +208,7 @@ void Connect::qmlTreeviewclicked(const QModelIndex &index)
 {
     QString mPath = dirModel->fileInfo(index).absoluteFilePath();
     qDebug()<<"current path" << mPath;
+    //fileModel->setRootPath(mPath);
     //ui->listView->setRootIndex(fileModel->setRootPath(mPath));
     m_dashBoard->setmusicpath(mPath);
 

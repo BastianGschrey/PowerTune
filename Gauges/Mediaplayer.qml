@@ -23,6 +23,8 @@ Rectangle {
         onActivated: Connect.qmlTreeviewclicked(mp3selector.currentIndex)
     }
 
+
+
     MediaPlayer {
         id: playMusic
         autoPlay: false
