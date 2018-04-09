@@ -40,10 +40,10 @@ Rectangle {
         onClicked: {
             if(playing == true) {
                 playMusic.stop()
-                playing = false,playpause.source = "/graphics/play.png"
+                playing = false,playpause.source = "/graphics/pause.png"
             } else {
                 playMusic.play()
-                playing = true,playpause.source = "/graphics/pause.png"
+                playing = true,playpause.source = "/graphics/play.png"
             }
         }
     }
