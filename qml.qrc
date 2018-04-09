@@ -34,5 +34,10 @@
         <file>Gauges/Fueltechdashboard.qml</file>
         <file>Sounds/alarm.wav</file>
         <file>Sounds/tiltshifted_lost_neon_sun.mp3</file>
+        <file>Gauges/FileBrowser.qml</file>
+        <file>graphics/next.png</file>
+        <file>graphics/pause.png</file>
+        <file>graphics/play.png</file>
+        <file>graphics/previous.png</file>
     </qresource>
 </RCC>

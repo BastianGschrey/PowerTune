@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick serialport serialbus network charts location positioning sensors multimedia
+QT += qml quick serialport serialbus network charts location positioning sensors multimedia widgets
 
 CONFIG += c++11
 static {
@@ -24,7 +24,7 @@ SOURCES += main.cpp \
     Nissanconsult.cpp \
     AdaptronicSelect.cpp \
     connect.cpp \
-    calculations.cpp
+    calculations.cpp \
 
 
 RESOURCES += qml.qrc
@@ -50,7 +50,7 @@ HEADERS += \
     Nissanconsult.h \
     AdaptronicSelect.h \
     connect.h \
-    calculations.h
+    calculations.h \
 
 
 FORMS +=

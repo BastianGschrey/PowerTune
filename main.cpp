@@ -2,7 +2,9 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QtQml>
+#include <QFileSystemModel>
 #include "connect.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -13,8 +15,11 @@ int main(int argc, char *argv[])
     app.setApplicationName("PowerTune");
 
     QQmlApplicationEngine engine;
-
-
+    //
+    QFileSystemModel model;
+    model.setRootPath("/");
+    engine.rootContext()->setContextProperty("my_model", &model);
+    //
     qmlRegisterType<Connect>("com.powertune", 1, 0, "ConnectObject");
     engine.rootContext()->setContextProperty("Connect", new Connect(&engine));
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
