@@ -1,0 +1,13 @@
+[Unit]
+
+Description=PowerTune
+
+[Service]
+
+Type=simple
+
+ExecStart=/home/pi/start.sh
+
+[Install]
+
+WantedBy=multi-user.target

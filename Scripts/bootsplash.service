@@ -1,0 +1,12 @@
+[Unit]
+Description=BootSplash
+DefaultDependencies=no
+After=local-fs.target
+Before=basic.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/omxplayer -b /home/pi/bootvideo.mp4
+
+[Install]
+WantedBy=getty.target

@@ -207,7 +207,7 @@ void Connect::setOdometer(const qreal &Odometer)
 void Connect::qmlTreeviewclicked(const QModelIndex &index)
 {
     QString mPath = dirModel->fileInfo(index).absoluteFilePath();
-    mPath.remove(0, 2);
+    //mPath.remove(0, 2); //this is needed for windows
     QString mPathnew = "file://" + mPath;
     m_dashBoard->setmusicpath(mPathnew);
 }
