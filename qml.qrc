@@ -32,5 +32,11 @@
         <file>Gauges/Cluster.qml</file>
         <file>Gauges/Squaregauge.qml</file>
         <file>Gauges/Fueltechdashboard.qml</file>
+        <file>Sounds/alarm.wav</file>
+        <file>graphics/next.png</file>
+        <file>graphics/pause.png</file>
+        <file>graphics/play.png</file>
+        <file>graphics/previous.png</file>
+        <file>Gauges/Mediaplayer.qml</file>
     </qresource>
 </RCC>

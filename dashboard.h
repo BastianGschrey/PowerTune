@@ -267,6 +267,8 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal wheelslip READ wheelslip WRITE setwheelslip NOTIFY wheelslipChanged)
     Q_PROPERTY(qreal wheelspdftleft READ wheelspdftleft WRITE setwheelspdftleft NOTIFY wheelspdftleftChanged)
     Q_PROPERTY(qreal wheelspdftright READ wheelspdftright WRITE setwheelspdftright NOTIFY wheelspdftrightChanged)
+   //Path for musicfiles
+    Q_PROPERTY(QString musicpath READ musicpath WRITE setmusicpath NOTIFY musicpathChanged)
 
 public:
     DashBoard(QObject *parent = 0);
@@ -540,6 +542,9 @@ public:
     void setwheelspdftleft(const qreal &wheelspdftleft);
     void setwheelspdftright(const qreal &wheelspdftright);
 
+    void setmusicpath(const QString &musicpath);
+
+
     qreal Odo() const;
 
     //Tripmeter
@@ -805,6 +810,8 @@ public:
     qreal wheelslip() const;
     qreal wheelspdftleft() const;
     qreal wheelspdftright() const;
+
+    QString musicpath() const;
 
 
 
@@ -1072,6 +1079,8 @@ signals:
     void wheelslipChanged(qreal wheelslip);
     void wheelspdftleftChanged(qreal wheelspdftleft);
     void wheelspdftrightChanged(qreal wheelspdftright);
+    void musicpathChanged(QString musicpath);
+
 
 private:
     // Odometer
@@ -1346,6 +1355,8 @@ private:
     qreal m_wheelslip;
     qreal m_wheelspdftleft;
     qreal m_wheelspdftright;
+
+    QString m_musicpath;
 
 
 };

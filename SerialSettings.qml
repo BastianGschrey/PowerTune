@@ -4,8 +4,8 @@ import Qt.labs.settings 1.0
 import QtQuick.VirtualKeyboard 2.1
 import QtSensors 5.0
 import QtQuick.Controls.Styles 1.4
-//import QtMultimedia 5.6
-//import QtAudioEngine 1.0
+import QtMultimedia 5.8
+
 
 
 Rectangle {
@@ -49,74 +49,107 @@ Rectangle {
             property alias unitSelector: unitSelect.currentIndex
             property alias odometervalue: odometer.text
             property alias tripmetervalue: tripmeter.text
+            property alias watertempwarning: watertempwarn.text
+            property alias boostwarning: boostwarn.text
+            property alias rpmwarning: rpmwarn.text
+            property alias knockwarning: knockwarn.text
 
-
+        }
+        SoundEffect {
+            id: warnsound
+            source: "qrc:/Sounds/alarm.wav"
         }
 
         Connections{
             target: Dashboard
             onOdoChanged:{odometer.text = (Dashboard.Odo).toFixed(0) }
             onTripChanged:{tripmeter.text = (Dashboard.Trip).toFixed(1) }
-            //onWatertempChanged: { if (Dashboard.Watertemp > watertemp.text) {alarm.play()};}
-            //onRpmChanged: { if (Dashboard.rpm > revs.text) {alarm.play()};}
-            //onKnockChanged: { if (Dashboard.Knock > knock.text) {alarm.play()};}
-            //onBoostPresChanged: { if (Dashboard.BoostPres > boost.text) {alarm.play()};}
+            onWatertempChanged: { if (Dashboard.Watertemp > watertempwarn.text) {playwarning.start()};}
+            onRpmChanged: { if (Dashboard.rpm > rpmwarn.text) {playwarning.start()};}
+            onKnockChanged: { if (Dashboard.Knock > knockwarn.text) {playwarning.start()};}
+            onBoostPresChanged: { if (Dashboard.BoostPres > boostwarn.text) {playwarning.start()};}
         }
 
+
         Row {
-            x: 5
-            y: 5
-            spacing: 5
+            x: windowbackround.width /150
+            y: windowbackround.width /150
+            spacing: windowbackround.width /150
             Grid {
                 anchors.top :parent.top
                 anchors.topMargin: parent.height / 20
-                rows: 10
+                rows: 13
                 columns: 2
-                spacing: 5
+                spacing: windowbackround.width /150
                 // [0]
                 Text {
-                text: "ECU Serial Port: "
-                visible: { (ecuSelect.currentIndex >= "4") ? false: true; }
+                    text: "ECU Serial Port: "
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
+                    visible: { (ecuSelect.currentIndex >= "4") ? false: true; }
                 }
                 ComboBox {
                     id: serialName
-                    width: 200
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     model: Connect.portsNames
                     visible: { (ecuSelect.currentIndex >= "4") ? false: true; }
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setBaudRate( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true; autoconnect.auto(); }
+                    delegate: ItemDelegate {
+                        width: serialName.width
+                        text: serialName.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: serialName.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: serialName.font.family
+                        font.pointSize: serialName.font.pointSize
+                        highlighted: serialName.highlightedIndex === index
+                        hoverEnabled: serialName.hoverEnabled
+                    }
                 }
                 Text {
-                text: "GPS Port: "
-                visible: { (gpsswitch.checked == true ) ? true:false; }
+                    text: "GPS Port: "
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
+                    visible: { (gpsswitch.checked == true ) ? true:false; }
                 }
                 ComboBox {
                     id: serialNameGPS
-                    width: 200
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     model: Connect.portsNames
                     visible: { (gpsswitch.checked == true ) ? true:false; }
 
                 }
                 Text {
-                text: "GPS Baud: "
-                visible: { (gpsswitch.checked == true ) ? true:false; }
+                    text: "GPS Baud: "
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
+                    visible: { (gpsswitch.checked == true ) ? true:false; }
                 }
                 ComboBox {
                     id: serialGPSBaud
-                    width: 200
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     model: [ "2400", "4800", "9600", "14400", "19200", "38400", "57600", "115200"]
                     visible: { (gpsswitch.checked == true ) ? true:false; }
                     Component.onCompleted: {autoconnectGPS.auto()}
 
                 }
 
-                Text { text: "Display units:" }
+                Text {
+                    text: "Display units:"
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
+                }
                 ComboBox {
-
                     id: unitSelect
-                    width: 200
-
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     model: [ "Metric","Imperial"]
                     property bool initialized: false
                     Component.onCompleted: { Connect.setUnits(currentIndex);changeweighttext.changetext()}
@@ -124,18 +157,23 @@ Rectangle {
 
 
                 }
-                Text { text: "ECU Selection:" }
+                Text {
+                    text: "ECU Selection:"
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
+                }
                 ComboBox {
-
                     id: ecuSelect
-                    width: 200
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     model: [ "PowerFC", "Adaptronic Select Modbus", "OBDII" , "Nissan Consult","UDP Receiver port 45454","CAN Adaptronic Modular","CAN Haltech V2"]
 
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
                 }
-/*
+                /*
                 Text {
                     id: textloggingSelect
                     visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
@@ -145,23 +183,39 @@ Rectangle {
                 ComboBox {
                     id: loggerSelect
                     visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
-                    width: 200
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     model: [ "OFF", "ON"]
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setLogging( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getLogging(); initialized = true }
                 }
 */
-                Text { text: "GoPro Variant :" }
+                Text {
+                    text: "GoPro Variant :"
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
+                }
                 ComboBox {
                     id: goProSelect
-                    width: 200
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     model: [ "Hero", "Hero2","Hero3"]
 
                 }
-                Text { text: "GoPro Password :" }
+                Text {
+                    text: "GoPro Password :"
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
+                }
                 TextField {
                     id: goPropass
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                     placeholderText: qsTr("GoPro Password")
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhPreferLowercase | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
                     Component.onCompleted: {transferSettings.sendSettings() }
@@ -169,19 +223,31 @@ Rectangle {
                 Text
                 {
                     text: "Logfile name:"
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                 }
                 TextField {
                     id: logfilenameSelect
                     text: qsTr("DataLog")
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhPreferLowercase | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
                     //enterKeyAction: EnterKeyAction.Next
                 }
                 Text
                 {
                     text: "Odo:"
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                 }
                 TextField {
                     id: odometer
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                     text: qsTr("0")
                     inputMethodHints: Qt.ImhDigitsOnly
                     //enterKeyAction: EnterKeyAction.Next
@@ -189,9 +255,15 @@ Rectangle {
                 Text
                 {
                     text: "Trip:"
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                 }
                 TextField{
                     id: tripmeter
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                     readOnly: true
                     text: "0"
                 }
@@ -199,18 +271,28 @@ Rectangle {
                 Text
                 {
                     id: weighttext
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                     text: "Weight:"
                 }
                 TextField {
                     id: weight
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     inputMethodHints: Qt.ImhDigitsOnly
 
                 }
                 Text
                 {
                     text: "Serial Status:"
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
                 }
                 TextField {
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     text: qsTr(Dashboard.SerialStat)
 
 
@@ -218,24 +300,30 @@ Rectangle {
             }
 
             Grid {
-                rows: 10
+                rows: 13
                 columns: 2
-                spacing: 5
+                spacing: windowbackround.width / 150
                 anchors.top :parent.top
                 anchors.topMargin: parent.height / 20
                 Button {
                     id: connectButton
                     text: "Connect"
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     onClicked: {
-                    functconnect.connectfunc();
-                    connectButton.enabled =false;
-                    ecuSelect.enabled = false;
-                    disconnectButton.enabled = true;
+                        functconnect.connectfunc();
+                        connectButton.enabled =false;
+                        ecuSelect.enabled = false;
+                        disconnectButton.enabled = true;
                     }
                 }
                 Button {
                     id: disconnectButton
                     text: "Disconnect"
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     enabled: false
                     onClicked: {
                         connectButton.enabled = true;
@@ -248,29 +336,47 @@ Rectangle {
                 Button {
                     id: oppendashselect
                     text: "Dash select"
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     onClicked: {dashselector.visible = true}
                 }
                 Button {
                     id: senhatsel
                     text: "Senshat"
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     onClicked: {senhatselector.visible = true}
                 }
                 Button {
                     id: resettrip
                     text: "Trip Reset"
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     onClicked: {Calculations.resettrip()}
                 }
-            //for official raspberry Pi image only !!!!
-/*
+                //for official raspberry Pi image only !!!!
+                /*
                 Button {
                     id: updateButton
                     text: "Pi Update "
                     onClicked: { updateButton.enabled =false,Connect.update();
                     }
                 }
-*/
+*/              Button{
+                    text: "Warn Settings"
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
+                    onClicked: warningsettings.visible = true
+                }
                 Button {
                     text: "Quit"
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     onClicked: {
                         Qt.quit()
                     }
@@ -280,29 +386,42 @@ Rectangle {
 
                 Switch {
                     id: connectAtStart
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     text: qsTr("Autoconnect")
                 }
                 Switch {
                     id: loggerswitch
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     text: qsTr("Data Logger")
                     Component.onCompleted: {logger.datalogger()}
                     onCheckedChanged: logger.datalogger()
-
                 }
 
                 Switch {
                     id: record
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     text: qsTr("GoPro rec")
                     onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                 }
                 Switch {
                     id: gpsswitch
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
                     text: qsTr("GPS")
                     onCheckedChanged: {autoconnectGPS.auto()}
                 }
 
                 Slider {
                     id:brightness
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
                     stepSize: 5
                     from: 20
                     to: 255
@@ -312,7 +431,7 @@ Rectangle {
                     onPositionChanged: Connect.setSreenbrightness(brightness.value);
                 }
 
-              /*
+                /*
                 Text
                 {
                     color: "red"
@@ -339,55 +458,64 @@ Rectangle {
                     visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
                     rows: 10
                     columns: 4
-                    spacing: 5
+                    spacing: windowbackround.width / 150
                     //Just a spacer for now still need to do it properly
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
-                    Text  { text: ""; width: 50}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
                     //Spacer end
 
 
-                    Text  { text: ""; width: 50}
-                    Text  { text: "0V"; width: 50}
-                    Text  { text: "5V"; width: 50}
-                    Text  { text: "Name"; width: 50}
-                    Text  { text: "AN1-2"; width: 50}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "0V";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "5V";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "Name";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "    ";font.pixelSize: windowbackround.width / 55}
                     TextField {
                         id: an1V0
-                        width: 50
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
                         validator: IntValidator {bottom: 0; top: 1000;}
                         inputMethodHints: Qt.ImhDigitsOnly
                         placeholderText: qsTr("9")
                     }
                     TextField {
                         id: an2V5
-                        width: 50
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
                         validator: IntValidator {bottom: 0; top: 1000;}
                         inputMethodHints: Qt.ImhDigitsOnly
                         placeholderText: qsTr("16")
                     }
+
                     TextField {
                         id: unitaux1
-                        width: 50
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
                         placeholderText: qsTr("AFR")
                     }
-                    Text  { text: "AN3-4"; width: 50}
+                    Text  { text: "AN1-2";font.pixelSize: windowbackround.width / 55}
                     TextField {
                         id: an3V0
-                        width: 50
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
                         validator: IntValidator {bottom: 0; top: 1000;}
                         inputMethodHints: Qt.ImhDigitsOnly
                         placeholderText: qsTr("Value @ 0V")
@@ -395,56 +523,61 @@ Rectangle {
                     }
                     TextField {
                         id: an4V5
-                        width: 50
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
                         validator: IntValidator {bottom: 0; top: 1000;}
                         inputMethodHints: Qt.ImhDigitsOnly
                         placeholderText: qsTr("Value @ 5V")
                     }
                     TextField {
                         id: unitaux2
-                        width: 50
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
                         placeholderText: qsTr("AFR")
                     }
+                    Text  { text: "AN3-4";font.pixelSize: windowbackround.width / 55}
                     /*
-                    Text  { text: "AN5-AN6"; width: 50;visible: { (interfaceSelect.currentIndex == "1") ? true: false; }}
+                    Text  { text: "AN5-AN6"; windowbackround.width /12;visible: { (interfaceSelect.currentIndex == "1") ? true: false; }}
                     TextField {
                         id: an5V0
-                        width: 50
+                        windowbackround.width /12
                         validator: IntValidator {bottom: 0; top: 1000;}
                         placeholderText: qsTr("Value @ 0V")
                         visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
                     }
                     TextField {
                         id: an6V5
-                        width: 50
+                        windowbackround.width /12
                         validator: IntValidator {bottom: 0; top: 1000;}
                         placeholderText: qsTr("Value @ 5V")
                         visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
                     }
                     TextField {
                         id: unitaux3
-                        width: 50
+                        windowbackround.width /12
                         placeholderText: qsTr("AFR")
                         visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
                     }
-                    Text  { text: "AN7-AN8"; width: 50;visible: { (interfaceSelect.currentIndex == "1") ? true: false; }}
+                    Text  { text: "AN7-AN8"; windowbackround.width /12;visible: { (interfaceSelect.currentIndex == "1") ? true: false; }}
                     TextField {
                         id: an7V0
-                        width: 50
+                        windowbackround.width /12
                         validator: IntValidator {bottom: 0; top: 1000;}
                         placeholderText: qsTr("Value @ 0V")
                         visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
                     }
                     TextField {
                         id: an8V5
-                        width: 50
+                        windowbackround.width /12
                         validator: IntValidator {bottom: 0; top: 1000;}
                         placeholderText: qsTr("Value @ 5V")
                         visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
                     }
                     TextField {
                         id: unitaux4
-                        width: 50
+                        windowbackround.width /12
                         placeholderText: qsTr("AFR")
                         visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
                     }
@@ -531,9 +664,9 @@ Rectangle {
         id: functconnect
         function connectfunc()
         {
-             Connect.setOdometer(odometer.text)
-             Connect.setWeight(weight.text);
-             Connect.openConnection(serialName.currentText, ecuSelect.currentIndex ,weight.currentText);
+            Connect.setOdometer(odometer.text)
+            Connect.setWeight(weight.text);
+            Connect.openConnection(serialName.currentText, ecuSelect.currentIndex ,weight.currentText);
             //else Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, logger.datalogger()),Connect.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
         }
     }
@@ -544,7 +677,7 @@ Rectangle {
         id: functdisconnect
         function disconnectfunc()
         {
-             Connect.closeConnection(),GPS.stopGPScom();
+            Connect.closeConnection(),GPS.stopGPScom();
         }
     }
 
@@ -563,6 +696,7 @@ Rectangle {
             if (dash1.currentIndex == "7") {firstPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
             if (dash1.currentIndex == "8") {firstPageLoader.source = "qrc:/Gauges/Dyno.qml"};
             if (dash1.currentIndex == "9") {firstPageLoader.source = "qrc:/Gauges/Fueltechdashboard.qml"};
+            if (dash1.currentIndex == "10"){firstPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
 
 
         }
@@ -582,6 +716,7 @@ Rectangle {
             if (dash2.currentIndex == "7") {secondPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
             if (dash2.currentIndex == "8") {secondPageLoader.source = "qrc:/Gauges/Dyno.qml"};
             if (dash2.currentIndex == "9") {secondPageLoader.source = "qrc:/Gauges/Fueltechdashboard.qml"};
+            if (dash2.currentIndex == "10"){secondPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
 
         }
 
@@ -600,6 +735,7 @@ Rectangle {
             if (dash3.currentIndex == "7") {thirdPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
             if (dash3.currentIndex == "8") {thirdPageLoader.source = "qrc:/Gauges/Dyno.qml"};
             if (dash3.currentIndex == "9") {thirdPageLoader.source = "qrc:/Gauges/Fueltechdashboard.qml"};
+            if (dash3.currentIndex == "10"){thirdPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
 
         }
 
@@ -618,9 +754,19 @@ Rectangle {
             if (dash4.currentIndex == "7") {fourthPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
             if (dash4.currentIndex == "8") {fourthPageLoader.source = "qrc:/Gauges/Dyno.qml"};
             if (dash4.currentIndex == "9") {fourthPageLoader.source = "qrc:/Gauges/Fueltechdashboard.qml"};
+            if (dash4.currentIndex == "10") {fourthPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
 
         }
 
+    }
+    Item {
+        //Function to play warning sound
+        id: playwarning
+        function start()
+        {
+
+            if (warnsound.playing == false) warnsound.play();
+        }
     }
     // Virtual Keyboard
 
@@ -667,15 +813,23 @@ Rectangle {
         Grid {
             rows: 3
             columns: 4
-            spacing: 5
-            Text { text: "Dash1" }
-            Text { text: "Dash2" }
-            Text { text: "Dash3" }
-            Text { text: "Dash4" }
+            anchors.top: parent.top
+            anchors.topMargin: windowbackround.height /120
+            spacing: windowbackround.width / 150
+            Text { text: "Dash1"
+                font.pixelSize: windowbackround.width / 30 }
+            Text { text: "Dash2"
+                font.pixelSize: windowbackround.width / 30}
+            Text { text: "Dash3"
+                font.pixelSize: windowbackround.width / 30}
+            Text { text: "Dash4"
+                font.pixelSize: windowbackround.width / 30}
             ComboBox {
                 id: dash1
-                width: 180
-                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech"]
+                width: windowbackround.width / 5
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech","Mediaplayer"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select1.selDash1() }
                 Component.onCompleted: {select1.selDash1() }
@@ -683,8 +837,10 @@ Rectangle {
 
             ComboBox {
                 id: dash2
-                width: 180
-                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech"]
+                width: windowbackround.width / 5
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech","Mediaplayer"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select2.selDash2() }
                 Component.onCompleted: {select2.selDash2() }
@@ -692,22 +848,29 @@ Rectangle {
 
             ComboBox {
                 id: dash3
-                width: 180
-                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech"]
+                width: windowbackround.width / 5
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech","Mediaplayer"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select3.selDash3() }
                 Component.onCompleted: {select3.selDash3() }
             }
             ComboBox {
                 id: dash4
-                width: 180
-                model:  ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech"]
+                width: windowbackround.width / 5
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech","Mediaplayer"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select4.selDash4() }
                 Component.onCompleted: {select4.selDash4() }
             }
             Button {
                 id: closedashselector
+                width: windowbackround.width / 10
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 text: "Apply"
                 onClicked: {dashselector.visible = false}
             }
@@ -715,68 +878,72 @@ Rectangle {
 
 
     }
-/*
-  //Warning Settings by Craig Shoesmith
+
+    //Warning Settings by Craig Shoesmith
     Rectangle{
 
         id: warningsettings
         visible: false
         width: parent.width
-        height: parent.height
-        color: "grey"
+        height: parent.height /2.5
+        anchors.bottom: parent.bottom
+        color: "black"
 
         Grid {
             rows:3
             columns: 4
-            spacing: 5
-            Text { text: "WaterTemp" }
-            Text { text: "Boost" }
-            Text { text: "Revs" }
-            Text { text: "Knock" }
+            spacing: windowbackround.height /150
+            Text { text: "WaterTemp"
+                font.pixelSize: windowbackround.width / 55;color:"white"}
+            Text { text: "Boost"
+                font.pixelSize: windowbackround.width / 55;color:"white"}
+            Text { text: "Revs"
+                font.pixelSize: windowbackround.width / 55;color:"white"}
+            Text { text: "Knock"
+                font.pixelSize: windowbackround.width / 55;color:"white"}
             TextField {
-                id: watertemp
-                width: 180
+                id: watertempwarn
+                width: windowbackround.width / 10
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
             }
             TextField {
-                id: boost
-                width: 180
+                id: boostwarn
+                width: windowbackround.width / 10
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 inputMethodHints: Qt.ImhDigitsOnly
             }
             TextField {
-                id: revs
-                width: 180
+                id: rpmwarn
+                width: windowbackround.width / 10
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 inputMethodHints: Qt.ImhDigitsOnly
             }
             TextField {
-                id: knock
-                width: 180
+                id: knockwarn
+                width: windowbackround.width / 10
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 inputMethodHints: Qt.ImhDigitsOnly
             }
 
-            SoundEffect {
-                id: alarm
-                source: "/audio/alarm_beep (2).wav"
-            }
-            //You can pack all the connections into 1 as they are all on the same target
-            Connections{
-                target: Dashboard
-                onWatertempChanged: { if (Dashboard.Watertemp > watertemp.text) {alarm.play()};}
-                onRpmChanged: { if (Dashboard.rpm > revs.text) {alarm.play()};}
-                onKnockChanged: { if (Dashboard.Knock > knock.text) {alarm.play()};}
-                onBoostPresChanged: { if (Dashboard.BoostPres > boost.text) {alarm.play()};}
-            }
 
             Button {
                 id: closewarningsettings
                 text: "Apply"
+                width: windowbackround.width / 10
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 onClicked: {warningsettings.visible = false}
 
             }
         }
-}
-*/
-//Sensehat Sensors
+    }
+
+    //Sensehat Sensors
     Rectangle{
 
         id: senhatselector
@@ -788,7 +955,7 @@ Rectangle {
         Grid {
             rows: 6
             columns: 2
-            spacing: 5
+            spacing: windowbackround.width / 150
             anchors.top :parent.top
             anchors.topMargin: parent.height / 20
             Switch {
@@ -834,10 +1001,11 @@ Rectangle {
             Button {
                 id: closedsenshatselector
                 text: "Apply"
+                width: windowbackround.width / 10
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
                 onClicked: {senhatselector.visible = false}
             }
-
-
 
         }
     }
