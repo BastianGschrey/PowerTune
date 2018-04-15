@@ -1163,7 +1163,7 @@ void Apexi::decodeInit(QByteArray rawmessagedata)
 {
     QString Modelname = QString(rawmessagedata).mid(2,8);
     //Mazda
-    if (Modelname == "13B-REW ")
+    if (Modelname == "13B-REW "|| Modelname == "13B     ")
     {
         Model =1;
     }
