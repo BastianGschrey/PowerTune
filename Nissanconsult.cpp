@@ -24,7 +24,6 @@ INITIALISATION 			0xFF 0xFF 0xEF
 SELF DIAGNOSTIC 0		xD1
 ERASE ERROR CODES 		0xC1
 ECU INFO 				0xD0
-
 Data Name 						Byte 		Register No (hex) 			Scaling
 CAS Position (RPM) 				MSB 			0x00 					See LSB
 CAS Position (RPM) 				LSB 			0x01 					Value * 12.5 (RPM)
@@ -142,13 +141,14 @@ int AFALPHALH;
 int AFALPHARH;
 int AFALPHALHSELFLEARN;
 int AFALPHARHSELFLEARN;
+int Expectedlenght;
 
 
 //Live Data Request commands
 
 
 int ECUinitialized = 0;
-int Expectedlenght;
+
 void Nissanconsult::LiveReqMsg(const int &val1, const int &val2, const int &val3, const int &val4, const int &val5, const int &val6, const int &val7, const int &val8, const int &val9, const int &val10, const int &val11, const int &val12, const int &val13, const int &val14, const int &val15, const int &val16, const int &val17, const int &val18, const int &val19, const int &val20, const int &val21, const int &val22, const int &val23, const int &val24, const int &val25, const int &val26, const int &val27, const int &val28, const int &val29)
 
 {
@@ -481,7 +481,7 @@ void Nissanconsult::readyToRead()
 
     if (ECUinitialized == 1)
     {
-        //qDebug() <<("Process Raw Message");
+        qDebug() <<"Process Raw Message" << m_readDataConsult.toHex();
         Nissanconsult::ProcessRawMessage(m_readDataConsult);
     }
 
@@ -509,7 +509,9 @@ void Nissanconsult::ProcessRawMessage(const QByteArray &buffer)
 
     QByteArray StartFrame = (QByteArray::fromHex("FF"));
 
-    //qDebug() <<("Current Message")<<m_buffer.toHex();
+    qDebug() <<("Current Message")<<m_buffer.toHex();
+    qDebug() <<("Lenght of message ")<<m_buffer.length();
+    qDebug() <<("Expected Lenght")<< Expectedlenght;
 
 
 
@@ -522,14 +524,11 @@ void Nissanconsult::ProcessRawMessage(const QByteArray &buffer)
         {
             posstart = m_buffer.indexOf(StartFrame);
             m_buffer.remove(0,1);
-            //qDebug() <<("current buffer")<<m_buffer.toHex();
-            //qDebug() <<("startframe")<<posstart;
         }
 
         if  (posstart == 1)
         {
             Expectedlenght = m_buffer[1]+2; // +2 to include the startframe and lenght byte
-            //qDebug() <<("Expectedlenght")<<Expectedlenght;
         }
 
     }
@@ -537,10 +536,8 @@ void Nissanconsult::ProcessRawMessage(const QByteArray &buffer)
     if (m_buffer.length() > Expectedlenght)
     {
         m_consultreply = m_buffer;
-        //qDebug() <<("consultreply original")<<m_consultreply.toHex();
         m_consultreply.remove(Expectedlenght,m_buffer.length());
         m_buffer.remove(0,Expectedlenght);
-        //qDebug() <<("consultreply")<<m_consultreply.toHex();
     }
 
     if (m_buffer.length() == Expectedlenght)
@@ -600,30 +597,15 @@ void Nissanconsult::ProcessMessage(QByteArray serialdataconsult)
 {
     m_consultreply.clear();
 
-    if (CASPosRPMMSB >=0)
-    {
         m_dashboard->setrpm(((serialdataconsult[CASPosRPMMSB]*256.0)+serialdataconsult[CASPosRPMLSB])*12.5);
-    }
-    if (Speed >=0)
-    {
         m_dashboard->setSpeed(serialdataconsult[Speed] *2);
-    }
+        m_dashboard->setWatertemp(serialdataconsult[Coolanttemp] -50);
+        m_dashboard->setBatteryV(serialdataconsult[BatteryV] * 0.80);
+        m_dashboard->setIntaketemp(serialdataconsult[IntakeAirTemp] -50);
 
 
     serialdataconsult.clear();
 
-
-    // Check what Data is present at which Position in the Message as well as position of Start Frame
-
-    //  int StartFrame          = Livereplystructure.indexOf(QByteArray::fromHex("FF"));
-
-
-
-    //           int InjectortimeRH      = serialdataconsult.indexOf((QByteArray::fromHex("22")));
-
-
-    //If the Data is present then define on which Position of the StartFrame it can be found
-    // Apply calculations to make convert to human readable format
 
     /*
 
