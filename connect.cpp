@@ -122,6 +122,7 @@ Connect::Connect(QObject *parent) :
     engine->rootContext()->setContextProperty("Calculations", m_calculations);
     engine->rootContext()->setContextProperty("Dirmodel", dirModel);
     engine->rootContext()->setContextProperty("Filemodel", fileModel);
+    engine->rootContext()->setContextProperty("Apexi", m_apexi);  
 }
 
 
@@ -260,7 +261,7 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
     //Nissan Consult
     if (ecuSelect == 3)
     {
-        m_nissanconsult->LiveReqMsg(1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+        //m_nissanconsult->LiveReqMsg(1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
         m_nissanconsult->openConnection(portName);
 
     }

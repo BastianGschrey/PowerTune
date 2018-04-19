@@ -53,6 +53,36 @@ Rectangle {
             property alias boostwarning: boostwarn.text
             property alias rpmwarning: rpmwarn.text
             property alias knockwarning: knockwarn.text
+            property alias protocol : protocol.currentIndex
+            property alias consultRPM : consRPM.checkState
+            property alias consultRPMREF : consRPMREF.checkState
+            property alias consultMAFVolt : consMAFVolt.checkState
+            property alias consultRHMAFVolt : consRHMAFVolt.checkState
+            property alias consultCoolantTemp : consCoolantTemp.checkState
+            property alias consultLHO2Volt : consLHO2Volt.checkState
+            property alias consultRHO2Volt : consRHO2Volt.checkState
+            property alias consultSpeed : consSpeed.checkState
+            property alias consultBattvolt: consBattvolt.checkState
+            property alias consultTPS: consTPS.checkState
+            property alias consultFuelTemp: consFuelTemp.checkState
+            property alias consultIAT: consIAT.checkState
+            property alias consultEGT: consEGT.checkState
+            property alias consultDigitalBitReg: consDigitalBitReg.checkState
+            property alias consultInjectTimeLH: consInjectTimeLH.checkState
+            property alias consultIGNTiming: consIGNTiming.checkState
+            property alias consultAACValve: consAACValve.checkState
+            property alias consultAFALPHALH: consAFALPHALH.checkState
+            property alias consultAFALPHARH: consAFALPHARH.checkState
+            property alias consultAFALPHASELFLEARNLH: consAFALPHASELFLEARNLH.checkState
+            property alias consultAFALPHASELFLEARNRH: consAFALPHASELFLEARNRH.checkState
+            property alias consultDigitalControlReg1: consDigitalControlReg1.checkState
+            property alias consultDigitalControlReg2: consDigitalControlReg2.checkState
+            property alias consultMRFCMNT: consMRFCMNT.checkState
+            property alias consultInjecttimeRH: consInjecttimeRH.checkState
+            property alias consultWasteGate: consWasteGate.checkState
+            property alias consultMAPVolt: consMAPVolt.checkState
+            property alias consultEngineMount: consEngineMount.checkState
+            property alias consultPositionCounter: consPositionCounter.checkState
 
         }
         SoundEffect {
@@ -172,6 +202,24 @@ Rectangle {
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
+                }
+                                Text {
+                    text: "Protocol Type:"
+                    font.pixelSize: windowbackround.width / 55
+                    color: "white"
+                    visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
+                }
+                ComboBox {
+                    id: protocol
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
+                    model: [ "New", "Old"]
+                    visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
+
+                    property bool initialized: false
+                    onCurrentIndexChanged: {Apexi.SetProtocol(currentIndex)}
+                    Component.onCompleted: {Apexi.SetProtocol(currentIndex)}
                 }
                 /*
                 Text {
@@ -316,6 +364,7 @@ Rectangle {
                         connectButton.enabled =false;
                         ecuSelect.enabled = false;
                         disconnectButton.enabled = true;
+                        consultset.enabled = false;
                     }
                 }
                 Button {
@@ -329,6 +378,7 @@ Rectangle {
                         connectButton.enabled = true;
                         disconnectButton.enabled = false;
                         ecuSelect.enabled = true;
+                        consultset.enabled = true;
                         functdisconnect.disconnectfunc();
                     }
                 }
@@ -357,6 +407,16 @@ Rectangle {
                     font.pixelSize: windowbackround.width / 55
                     onClicked: {Calculations.resettrip()}
                 }
+                Button {
+                    id: consultset
+                    visible: { (ecuSelect.currentIndex == 3 ) ? true:false; }
+                    text: "Consult Settings"
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
+                    onClicked: {consultrequestselect.visible = true}
+                }
+
                 //for official raspberry Pi image only !!!!
                 /*
                 Button {
@@ -365,7 +425,8 @@ Rectangle {
                     onClicked: { updateButton.enabled =false,Connect.update();
                     }
                 }
-*/              Button{
+*/
+                Button{
                     text: "Warn Settings"
                     width: windowbackround.width / 5
                     height: windowbackround.height /15
@@ -664,10 +725,10 @@ Rectangle {
         id: functconnect
         function connectfunc()
         {
-            Connect.setOdometer(odometer.text)
+            Nissanconsult.LiveReqMsg(consRPM.checkState,consRPMREF.checkState,consMAFVolt.checkState,consRHMAFVolt.checkState,consCoolantTemp.checkState,consLHO2Volt.checkState,consRHO2Volt.checkState,consSpeed.checkState,consBattvolt.checkState,consTPS.checkState,consFuelTemp.checkState,consIAT.checkState,consEGT.checkState,consDigitalBitReg.checkState,consInjectTimeLH.checkState,consIGNTiming.checkState,consAACValve.checkState,consAFALPHALH.checkState,consAFALPHARH.checkState,consAFALPHASELFLEARNLH.checkState,consAFALPHASELFLEARNRH.checkState,consDigitalControlReg1.checkState,consDigitalControlReg2.checkState,consMRFCMNT.checkState,consInjecttimeRH.checkState,consWasteGate.checkState,consMAPVolt.checkState,consEngineMount.checkState,consPositionCounter.checkState);
+            Connect.setOdometer(odometer.text);
             Connect.setWeight(weight.text);
             Connect.openConnection(serialName.currentText, ecuSelect.currentIndex ,weight.currentText);
-            //else Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, logger.datalogger()),Connect.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
         }
     }
 
@@ -942,7 +1003,148 @@ Rectangle {
             }
         }
     }
+    //Nissan Consult requests
+    Rectangle{
+        id: consultrequestselect
+        visible: false
+        width: parent.width
+        height: parent.height
+        color: "grey"
+        Grid {
+            rows: 10
+            columns: 4
 
+            CheckBox {
+                id: consRPM
+                text: qsTr("RPM")
+                //Component.onCompleted: console.log (consRPM.checkState);
+            }
+            CheckBox {
+                id: consRPMREF
+                text: qsTr("RPMREF")
+            }
+            CheckBox {
+                id: consMAFVolt
+                text: qsTr("MAF Voltage")
+            }
+            CheckBox {
+                id: consRHMAFVolt
+                text: qsTr("RH MAF Voltage")
+            }
+            CheckBox {
+                id: consCoolantTemp
+                text: qsTr("Coolant Temp")
+            }
+            CheckBox {
+                id: consLHO2Volt
+                text: qsTr("LH O2 Voltage")
+            }
+            CheckBox {
+                id: consRHO2Volt
+                text: qsTr("LH O2 Voltage")
+            }
+            CheckBox {
+                id: consSpeed
+                text: qsTr("Speed")
+            }
+//
+            CheckBox {
+                id: consBattvolt
+                text: qsTr("Battery Voltage")
+            }
+            CheckBox {
+                id: consTPS
+                text: qsTr("TPS")
+            }
+            CheckBox {
+                id: consFuelTemp
+                text: qsTr("Fuel Temp.")
+            }
+            CheckBox {
+                id: consIAT
+                text: qsTr("Intake Air Temp.")
+            }
+            CheckBox {
+                id: consEGT
+                text: qsTr("EGT")
+            }
+            CheckBox {
+                id: consDigitalBitReg
+                text: qsTr("Digital Bit Register")
+            }
+            CheckBox {
+                id: consInjectTimeLH
+                text: qsTr("Inj Time LH")
+            }
+            CheckBox {
+                id: consIGNTiming
+                text: qsTr("IgnitionTiming")
+            }
+            CheckBox {
+                id: consAACValve
+                text: qsTr("AACValve")
+            }
+            CheckBox {
+                id: consAFALPHALH
+                text: qsTr("AF ALPHA LH")
+            }
+            CheckBox {
+                id: consAFALPHARH
+                text: qsTr("AF ALPHA RH")
+            }
+            CheckBox {
+                id: consAFALPHASELFLEARNLH
+                text: qsTr("AF ALPHA SELFLEARN LH")
+            }
+            CheckBox {
+                id: consAFALPHASELFLEARNRH
+                text: qsTr("AF ALPHA SELFLEARN RH")
+            }
+            CheckBox {
+                id: consDigitalControlReg1
+                text: qsTr("Digital Control Reg1")
+            }
+            CheckBox {
+                id: consDigitalControlReg2
+                text: qsTr("Digital Control Reg2")
+            }
+            CheckBox {
+                id: consMRFCMNT
+                text: qsTr("MRFCMNT")
+            }
+            CheckBox {
+                id: consInjecttimeRH
+                text: qsTr("Injector Time RH")
+            }
+            CheckBox {
+                id: consWasteGate
+                text: qsTr("WasteGate")
+            }
+            CheckBox {
+                id: consMAPVolt
+                text: qsTr("MAP Voltage")
+            }
+            CheckBox {
+                id: consEngineMount
+                text: qsTr("EngineMount")
+            }
+            CheckBox {
+                id: consPositionCounter
+                text: qsTr("Position Counter")
+            }
+            Button {
+                id: closeconsultsettings
+                text: "Apply"
+                width: windowbackround.width / 10
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
+                onClicked: {consultrequestselect.visible = false}
+
+            }
+        }
+    }
+
+//
     //Sensehat Sensors
     Rectangle{
 
