@@ -158,8 +158,6 @@ void Nissanconsult::LiveReqMsg(const int &val1, const int &val2, const int &val3
     Liveread.clear();
     // Build the request message for live Data based on the usser selected Sennsors (Reequest from QML)
 
-    //qDebug() <<("bUILD mESSAGE");
-
     if (val1 == 2) //RPMPosition
     {
         Liveread.append(ConsultData::LiveDataRequest);
@@ -183,8 +181,6 @@ void Nissanconsult::LiveReqMsg(const int &val1, const int &val2, const int &val3
         Liveread.append(ConsultData::LiveDataRequest);
         Liveread.append(ConsultData::MAFVoltLSB);
     }
-
-
 
     if (val4 == 2)
     {
@@ -328,7 +324,6 @@ void Nissanconsult::LiveReqMsg(const int &val1, const int &val2, const int &val3
 
     //Terminate Message
     Liveread.append(ConsultData::TerminateMessage);
-    qDebug() << Liveread.toHex();
     QByteArray Livereply = Liveread;
     QByteArray Livereplystructure= Liveread;
     QByteArray sendrequest = (QByteArray::fromHex("5a"));
@@ -374,7 +369,6 @@ void Nissanconsult::LiveReqMsg(const int &val1, const int &val2, const int &val3
     AFALPHALHSELFLEARN  = Livereplystructure.indexOf((QByteArray::fromHex("1c")))+2;
     AFALPHARHSELFLEARN  = Livereplystructure.indexOf((QByteArray::fromHex("1d")))+2;
 
-    //qDebug() <<("RPM Position")<< CASPosRPMMSB;
 
     requestlenght = Liveread.length() -1 ; // This tells us how long the initial reply will begfore the first start frame
 }
@@ -454,7 +448,6 @@ void Nissanconsult::StopStream()
 void Nissanconsult::RequestDTC()
 
 {
-    //qDebug() <<("Timer Expired ");
     m_DTCtimer.stop();
     DTCrequested = 1;
     Nissanconsult::StopStream();
@@ -467,7 +460,6 @@ void Nissanconsult::RequestLiveData()
 
 {
     //m_DTCtimer.start(5000);
-    //qDebug() <<("DTCTIMER START ");
     Livedatarequested = 1;
     DTCrequested = 0;
     m_serialconsult->write(Liveread);
@@ -477,11 +469,9 @@ void Nissanconsult::readyToRead()
 {
 
     m_readDataConsult = m_serialconsult->readAll();
-    //qDebug() <<("Received Data ")<< m_readDataConsult.toHex() ;
 
     if (ECUinitialized == 1)
     {
-        qDebug() <<"Process Raw Message" << m_readDataConsult.toHex();
         Nissanconsult::ProcessRawMessage(m_readDataConsult);
     }
 
@@ -509,9 +499,9 @@ void Nissanconsult::ProcessRawMessage(const QByteArray &buffer)
 
     QByteArray StartFrame = (QByteArray::fromHex("FF"));
 
-    qDebug() <<("Current Message")<<m_buffer.toHex();
-    qDebug() <<("Lenght of message ")<<m_buffer.length();
-    qDebug() <<("Expected Lenght")<< Expectedlenght;
+  //  qDebug() <<("Current Message")<<m_buffer.toHex();
+  //  qDebug() <<("Lenght of message ")<<m_buffer.length();
+  //  qDebug() <<("Expected Lenght")<< Expectedlenght;
 
 
 
