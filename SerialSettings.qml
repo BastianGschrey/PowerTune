@@ -1012,125 +1012,153 @@ Rectangle {
         color: "grey"
         Grid {
             rows: 10
-            columns: 4
+            columns: 3
 
             CheckBox {
                 id: consRPM
                 text: qsTr("RPM")
-                //Component.onCompleted: console.log (consRPM.checkState);
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consRPMREF
                 text: qsTr("RPMREF")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consMAFVolt
                 text: qsTr("MAF Voltage")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consRHMAFVolt
                 text: qsTr("RH MAF Voltage")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consCoolantTemp
                 text: qsTr("Coolant Temp")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consLHO2Volt
                 text: qsTr("LH O2 Voltage")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consRHO2Volt
                 text: qsTr("LH O2 Voltage")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consSpeed
                 text: qsTr("Speed")
+                font.pixelSize: windowbackround.width / 55
             }
 //
             CheckBox {
                 id: consBattvolt
                 text: qsTr("Battery Voltage")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consTPS
                 text: qsTr("TPS")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consFuelTemp
                 text: qsTr("Fuel Temp.")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consIAT
                 text: qsTr("Intake Air Temp.")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consEGT
                 text: qsTr("EGT")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consDigitalBitReg
                 text: qsTr("Digital Bit Register")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consInjectTimeLH
                 text: qsTr("Inj Time LH")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consIGNTiming
                 text: qsTr("IgnitionTiming")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consAACValve
                 text: qsTr("AACValve")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consAFALPHALH
                 text: qsTr("AF ALPHA LH")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consAFALPHARH
                 text: qsTr("AF ALPHA RH")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consAFALPHASELFLEARNLH
                 text: qsTr("AF ALPHA SELFLEARN LH")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consAFALPHASELFLEARNRH
                 text: qsTr("AF ALPHA SELFLEARN RH")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consDigitalControlReg1
                 text: qsTr("Digital Control Reg1")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consDigitalControlReg2
                 text: qsTr("Digital Control Reg2")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consMRFCMNT
                 text: qsTr("MRFCMNT")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consInjecttimeRH
                 text: qsTr("Injector Time RH")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consWasteGate
                 text: qsTr("WasteGate")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consMAPVolt
                 text: qsTr("MAP Voltage")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consEngineMount
                 text: qsTr("EngineMount")
+                font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consPositionCounter
                 text: qsTr("Position Counter")
+                font.pixelSize: windowbackround.width / 55
             }
             Button {
                 id: closeconsultsettings
