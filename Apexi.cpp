@@ -74,10 +74,12 @@ void Apexi::SetProtocol(const int &protocolselect)
 
 void Apexi::initSerialPort()
 {
+  /*
     if (m_serialport)
     {
         delete m_serialport;
     }
+  */
     m_serialport = new SerialPort(this);
     connect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
     connect(m_serialport, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
