@@ -172,7 +172,8 @@ void Apexi::handleError(QSerialPort::SerialPortError serialPortError)
 void Apexi::readyToRead()
 {
     m_readData = m_serialport->readAll();
-     //Test enable raw message log 
+  /*  
+  //Test enable raw message log 
     QString fileName = "RawMessage.txt";
     QFile mFile(fileName);
     if(!mFile.open(QFile::Append | QFile::Text)){
@@ -181,6 +182,7 @@ void Apexi::readyToRead()
     out << m_readData.toHex() <<endl;
     mFile.close();
     // Test End
+  */
     m_dashboard->setRecvData(QString("Receive Data : " + m_readData.toHex()));
     Apexi::apexiECU(m_readData);
 }
