@@ -59,7 +59,7 @@ Raspbian Stretch
 | Nissan Skyline R33 GTST ENR33   | (RB25DETT)             |                |   <big>__✓__  |Michael Kwaaitaal |  
 | Nissan Skyline R32 GT-R BNR32   | (RB26DETT)             |                |   <big>__✓__  |Alpheus Booth     |
 | Toyota Soarer                   | (1JZ-GTE3)             | <big>__✓__    |                |Kieron Sandhu     |
-| Nissan Silvia S14                | (SR20DET1)            | <big>__✓__    |                |Damian James Holmes|
+|                                 | (SR20DET1)            | <big>__✓__    |                |Damian James Holmes|
 
 
 
