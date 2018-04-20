@@ -52,17 +52,15 @@ Raspbian Stretch
 
 
 | Tested Vehicles Apexi PFC :      | ECU Variant:          | FC Hako:      | FC Datalogit:  |Confirmed by :    |
-| -------------------------------- |:---------------------:|:-------------:|:--------------:|:----------------:|
+| -------------------------------- |:---------------------:|:-------------:|:--------------:|:------------------:|
 | Mazda RX7 FD3S                   | (13B-REW)             | <big>__✓__    |                |Markus Ippy       |
 | Toyota MR2                       | (3S-GTE3)             | <big>__✓__    |                |Tolis Kofoglou    |
 | Toyota MR2                       | (3S-GTE )             |                |   <big>__✓__  |Juan Pena         |  
 | Nissan Skyline R33 GTST ENR33   | (RB25DETT)             |                |   <big>__✓__  |Michael Kwaaitaal |  
 | Nissan Skyline R32 GT-R BNR32   | (RB26DETT)             |                |   <big>__✓__  |Alpheus Booth     |
-  
-| Soon to be tested :              | ECU Variant:          | FC Hako:      | FC Datalogit:  |Confirmed by :    | 
-| -------------------------------- |:---------------------:|:-------------:|:--------------:|:----------------:|
-| Nissan Silvia S14                | (SR20DET1)            |               |                |                  |
-| Toyota Supra JZA70               | (1JZ-GTE)             |               |                |                  |
+| Toyota Soarer                   | (1JZ-GTE3)             | <big>__✓__    |                |Kieron Sandhu     |
+| Nissan Silvia S14                | (SR20DET1)            | <big>__✓__    |                |Damian James Holmes|
+
 
 
 #### Adaptronic Variants :
