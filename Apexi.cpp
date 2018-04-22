@@ -558,7 +558,7 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         packageADV3[5] = info->Fuelc3;
         packageADV3[6] = info->Ign3;
         packageADV3[7] = info->Dwell3;
-        packageADV3[8] = -760 + info->BoostPres3;
+        packageADV3[8] = info->BoostPres3;// FC edit Says this is boost but only displays raw number
         /*
         if (packageADV3[8] >= 0x8000)
             packageADV3[8] = (packageADV3[8] - 0x8000) * 0.01;
@@ -591,7 +591,7 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         m_dashboard->setFuelc(packageADV3[5]);
         m_dashboard->setLeadingign(packageADV3[6]);
         m_dashboard->setTrailingign(packageADV3[7]);
-        m_dashboard->setpim(packageADV3[8]);
+       // m_dashboard->setpim(packageADV3[8]);
         m_dashboard->setWatertemp(packageADV3[10]);
         m_dashboard->setIntaketemp(packageADV3[11]);
         m_dashboard->setKnock(packageADV3[12]);
