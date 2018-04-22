@@ -79,8 +79,6 @@ Absolute Pressure Sensor,		Dual 			0x3a, 0x4a
 Voltage
 FPCM F/P Voltage 				Dual 			0x52, 0x53
 */
-
-
 #include "Nissanconsult.h"
 #include "dashboard.h"
 #include "connect.h"
@@ -89,9 +87,8 @@ FPCM F/P Voltage 				Dual 			0x52, 0x53
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include "QObject"
-
-
-
+#include <QFile>
+#include <QTextStream>
 
 Nissanconsult::Nissanconsult(QObject *parent)
     : QObject(parent)
@@ -431,6 +428,16 @@ void Nissanconsult::InitECU()
 {
     ECUinitialized = 0;
     m_serialconsult->write(QByteArray::fromHex("FFFFEF"));
+    // Testing , write all received Raw data to a Text File
+        QString fileName = "NissanConsultRaw.txt";
+        QFile mFile(fileName);
+        if(!mFile.open(QFile::Append | QFile::Text)){
+        }
+        QTextStream out(&mFile);
+        out << "Send Initialisation Request " << "0xFF 0xFF 0xEF"  <<endl;
+        mFile.close();
+    // Testing End
+
 }
 /*
 void Nissanconsult::clear() const
@@ -443,6 +450,15 @@ void Nissanconsult::StopStream()
 {
     m_serialconsult->write(QByteArray::fromHex("30"));
     Stoprequested = 1;
+    // Testing , write all received Raw data to a Text File
+        QString fileName = "NissanConsultRaw.txt";
+        QFile mFile(fileName);
+        if(!mFile.open(QFile::Append | QFile::Text)){
+        }
+        QTextStream out(&mFile);
+        out << "Send StopStream Request " << "0x30"  <<endl;
+        mFile.close();
+    // Testing End
 }
 
 void Nissanconsult::RequestDTC()
@@ -464,11 +480,31 @@ void Nissanconsult::RequestLiveData()
     DTCrequested = 0;
     m_serialconsult->write(Liveread);
 
+    // Testing , write all received Raw data to a Text File
+        QString fileName = "NissanConsultRaw.txt";
+        QFile mFile(fileName);
+        if(!mFile.open(QFile::Append | QFile::Text)){
+        }
+        QTextStream out(&mFile);
+        out << "Send request for Live Stream " << Liveread.toHex()  <<endl;
+        mFile.close();
+    // Testing End
+
 }
 void Nissanconsult::readyToRead()
 {
 
     m_readDataConsult = m_serialconsult->readAll();
+
+// Testing , write all received Raw data to a Text File
+    QString fileName = "NissanConsultRaw.txt";
+    QFile mFile(fileName);
+    if(!mFile.open(QFile::Append | QFile::Text)){
+    }
+    QTextStream out(&mFile);
+    out << m_readDataConsult.toHex()  <<endl;
+    mFile.close();
+// Testing End
 
     if (ECUinitialized == 1)
     {
