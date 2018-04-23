@@ -566,7 +566,7 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         packageADV3[5] = info->Fuelc3;
         packageADV3[6] = info->Ign3;
         packageADV3[7] = info->Dwell3;
-        packageADV3[8] = info->BoostPres3;// FC edit Says this is boost but only displays raw number
+        packageADV3[8] = info->BoostPres3;  // FC edit Says this is boost but only displays raw number
         /*
         if (packageADV3[8] >= 0x8000)
             packageADV3[8] = (packageADV3[8] - 0x8000) * 0.01;
@@ -700,16 +700,21 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
     packageBasic[2] = mul[0] * info->Basic_IGT + add[6];
     packageBasic[3] = mul[0] * info->Basic_RPM + add[0];
     packageBasic[4] = mul[0] * info->Basic_KPH + add[0];
-    packageBasic[5] = mul[0] * info->Basic_Boost -760;
+    packageBasic[5] = mul[0] * info->Basic_Boost;
     packageBasic[6] = mul[0] * info->Basic_Knock + add[0];
     packageBasic[7] = mul[0] * info->Basic_Watert + add[8];
     packageBasic[8] = mul[0] * info->Basic_Airt + add[8];
     packageBasic[9] = mul[15] * info->Basic_BattV + add[0];
-    if (packageBasic[5] >= 0) // while boost pressure is positive multiply by 0.01 to show kg/cm2
+    if (packageBasic[5] >= 0) 
     {
-        Boost = packageBasic[5] *0.01;
+       if (Model == 3 || Model ==  2)
+       {
+       Boost = packageBasic[5] * 0.02;
+       }
+       else
+       Boost = (packageBasic[5] -760) * 0.01;
     }
-    else Boost = packageBasic[5]; // while boost pressure is negative show pressure in mmhg
+    else Boost = packageBasic[5] -760; // while boost pressure is negative show pressure in mmhg
     
     
     // m_dashboard->setInjDuty(packageBasic[0]);
