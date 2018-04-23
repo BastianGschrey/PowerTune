@@ -709,7 +709,7 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
     {
        if (Model == 3 || Model ==  2)
        {
-       Boost = packageBasic[5] * 0.02;
+       Boost = (packageBasic[5] -76)* 0.02;
        }
        else
        Boost = (packageBasic[5] -760) * 0.01;
