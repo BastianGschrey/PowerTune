@@ -33,6 +33,7 @@ int requestIndex = 0; //ID for requested data type Power FC
 int expectedbytes;
 int Bytes;
 int Protocol = 0;
+qreal advboost;
 
 
 double mul[80] = FC_INFO_MUL;  // required values for calculation from raw to readable values for Advanced Sensor info
@@ -548,15 +549,7 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
     if (Model == 3)
     {
         fc_adv_info_t3* info=reinterpret_cast<fc_adv_info_t3*>(rawmessagedata.data());
-        
-        QString fileName = "Advanced.txt";
-        QFile mFile(fileName);
-        if(!mFile.open(QFile::Append | QFile::Text)){
-        }
-        QTextStream out(&mFile);
-        out << rawmessagedata.toHex() <<endl;
-        mFile.close();
-
+        int checkboost = rawmessagedata[17];
         packageADV3[0] = mul[0] * info->RPM3 + add[0];
         //previousRev_rpm[buf_currentIndex] = packageADV[0];
         packageADV3[1] = info->Intakepress3;
@@ -566,13 +559,15 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         packageADV3[5] = info->Fuelc3;
         packageADV3[6] = info->Ign3;
         packageADV3[7] = info->Dwell3;
-        packageADV3[8] = info->BoostPres3;  // FC edit Says this is boost but only displays raw number
-        /*
-        if (packageADV3[8] >= 0x8000)
-            packageADV3[8] = (packageADV3[8] - 0x8000) * 0.01;
+        if (checkboost == -128)
+        {
+            advboost = rawmessagedata[16] * 0.01;
+        }
         else
-            packageADV3[8] = (1.0 / 2560 + 0.001) * packageADV3[8];
-*/
+        {
+            packageADV3[8] = info->BoostPres3 -760;
+            advboost = packageADV3[8];
+        }
         packageADV3[9] = mul[9] * info->BoostDuty3 + add[9];
         packageADV3[10] = info->Watertemp3 -80;
         packageADV3[11] = info->Intaketemp3 -80;
@@ -599,7 +594,7 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         m_dashboard->setFuelc(packageADV3[5]);
         m_dashboard->setLeadingign(packageADV3[6]);
         m_dashboard->setTrailingign(packageADV3[7]);
-       // m_dashboard->setpim(packageADV3[8]);
+        m_dashboard->setpim(advboost);
         m_dashboard->setWatertemp(packageADV3[10]);
         m_dashboard->setIntaketemp(packageADV3[11]);
         m_dashboard->setKnock(packageADV3[12]);
@@ -610,7 +605,6 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
     }
     
 }
-
 
 
 void Apexi::decodeSensor(QByteArray rawmessagedata)
