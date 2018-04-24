@@ -549,7 +549,7 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
     if (Model == 3)
     {
         fc_adv_info_t3* info=reinterpret_cast<fc_adv_info_t3*>(rawmessagedata.data());
-        int checkboost = rawmessagedata[17];
+        int checkboost = (unsigned char)rawmessagedata[17];
         packageADV3[0] = mul[0] * info->RPM3 + add[0];
         //previousRev_rpm[buf_currentIndex] = packageADV[0];
         packageADV3[1] = info->Intakepress3;
@@ -559,9 +559,10 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         packageADV3[5] = info->Fuelc3;
         packageADV3[6] = info->Ign3;
         packageADV3[7] = info->Dwell3;
-        if (checkboost == -128)
+        if (checkboost == 128)
         {
-            advboost = rawmessagedata[16] * 0.01;
+            int convert = (unsigned char)rawmessagedata[16];
+            advboost = convert * 0.01;
         }
         else
         {
@@ -687,8 +688,8 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
 {
     fc_Basic_info_t* info=reinterpret_cast<fc_Basic_info_t*>(rawmessagedata.data());
     
-    int Boost;
-    
+    qreal Boost;
+    int checkboost = (unsigned char)rawmessagedata[13];
     packageBasic[0] = mul[15] * info->Basic_Injduty + add[0];
     packageBasic[1] = mul[0] * info->Basic_IGL + add[6];
     packageBasic[2] = mul[0] * info->Basic_IGT + add[6];
@@ -699,18 +700,28 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
     packageBasic[7] = mul[0] * info->Basic_Watert + add[8];
     packageBasic[8] = mul[0] * info->Basic_Airt + add[8];
     packageBasic[9] = mul[15] * info->Basic_BattV + add[0];
-    if (packageBasic[5] >= 0) 
+    if (Model == 3 || Model ==  2)
     {
-       if (Model == 3 || Model ==  2)
-       {
-       Boost = (packageBasic[5] -76)* 0.02;
-       }
-       else
-       Boost = (packageBasic[5] -760) * 0.01;
+        if (checkboost == 128)
+        {
+            int test = (unsigned char)rawmessagedata[12];
+            Boost = test * 0.01;
+         }
+        else{
+            Boost = (packageBasic[5] -760);
+        }
     }
-    else Boost = packageBasic[5] -760; // while boost pressure is negative show pressure in mmhg
-    
-    
+
+    else{
+        if (packageBasic[5] >= 0)
+        {
+            Boost = (packageBasic[5] -760) * 0.01;
+        }
+        else{
+            Boost = packageBasic[5] -760; // while boost pressure is negative show pressure in mmhg
+        }
+      }
+
     // m_dashboard->setInjDuty(packageBasic[0]);
     m_dashboard->setLeadingign(packageBasic[1]);
     m_dashboard->setTrailingign(packageBasic[2]);
@@ -721,7 +732,7 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
     m_dashboard->setWatertemp(packageBasic[7]);
     m_dashboard->setIntaketemp(packageBasic[8]);
     m_dashboard->setBatteryV(packageBasic[9]);
-
+    qDebug() << "Basic Boost" << Boost;
     QString fileName = "Basic.txt";
     QFile mFile(fileName);
     if(!mFile.open(QFile::Append | QFile::Text)){
