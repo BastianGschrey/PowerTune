@@ -732,7 +732,7 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
     m_dashboard->setWatertemp(packageBasic[7]);
     m_dashboard->setIntaketemp(packageBasic[8]);
     m_dashboard->setBatteryV(packageBasic[9]);
-    qDebug() << "Basic Boost" << Boost;
+/*
     QString fileName = "Basic.txt";
     QFile mFile(fileName);
     if(!mFile.open(QFile::Append | QFile::Text)){
@@ -740,7 +740,7 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
     QTextStream out(&mFile);
     out << rawmessagedata.toHex() <<endl;
     mFile.close();
-    
+*/    
 }
 
 /*
