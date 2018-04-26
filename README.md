@@ -141,6 +141,37 @@ Raspbian Stretch
 * "4G63-5  "
 * "4G63-6  "
 * "4G63-7  "
+* "4G63D_US"
+* "4G63-D  "
+* "4G63-D3 "
+* "4G63-D4 "
+* "4G63-D5 "
+* "4G63-D6 "
+* "4G63-D7 "
+
+#### Honda Power FC Variants
+
+* "D15B    "
+* "B16A1   "
+* "B16A-US "
+* "B16A2   "
+* "B16A1-TH"
+* "B16B    "
+* "B16B2   "
+* "B16BT   "
+* "B16B1-TH"
+* "B16B2-TH"
+* "B18C    "
+* "B18C-US "
+* "B18C2   "
+* "B18CT   "
+* "B18C1-TH"
+* "B16A1PRO"
+* "B16A2PRO"
+* "B16B1PRO"
+* "B16B2PRO"
+* "B18C1PRO"
+* "H22A    "
 
 
 
