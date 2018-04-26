@@ -28,7 +28,15 @@ Raspbian Stretch
 #### Implemented PowerFC variants:
 
 #### Mazda :
+
+* "13B1    "
 * "13B-REW " 
+* "13B-REW2" 
+* "13B-REW3" 
+* "13BT1PRO" 
+* "13BR1PRO" 
+* "13BR2PRO" 
+* "13BR3PRO"
 
 ####  Nissan Power FC Variants
 
