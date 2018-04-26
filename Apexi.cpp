@@ -754,26 +754,26 @@ void Apexi::decodeInit(QByteArray rawmessagedata)
 {
     Modelname = QString(rawmessagedata).mid(2,8);
     //Mazda
-    if (Modelname == "13B-REW "|| Modelname == "13B     ")
+    if (Modelname == "13B1    " || Modelname == "13B-REW " || Modelname == "13B-REW2" || Modelname == "13B-REW3" || Modelname == "13BT1PRO" || Modelname == "13BR1PRO" || Modelname == "13BR2PRO" || Modelname == "13BR3PRO")
     {
         Model =1;
     }
     
     //Nissan
-    if (Modelname == "RB20DET " || Modelname == "RB26DETT"|| Modelname == "SR20DET "  || Modelname == "SR20DET1" || Modelname == "SR20DET2"  || Modelname == "SR20DET3"  || Modelname == "SR20DET4" ||   Modelname == "SR20DET5"  || Modelname == "SR205PRO"  || Modelname == "SR20T1-D"  || Modelname == "SR20T2-D"  || Modelname == "SR20T5-D"  ||  Modelname == "CA18DET " || Modelname == "RB25DET "|| Modelname == "RB251PRO")
+    if (Modelname == "NISSAN-L" || Modelname == "CA18DET " || Modelname == "SR20DE1 "|| Modelname == "SR20DE2 " || Modelname == "SR20DE3 "|| Modelname == "SR20DE4 " || Modelname == "SR20DET1"|| Modelname == "SR20DET2" || Modelname == "SR20DET3"|| Modelname == "SR20DET4" || Modelname == "SR20DET5"|| Modelname == "SR20DET6" || Modelname == "RB20DET " || Modelname == "RB25DET "|| Modelname == "RB25DET2" || Modelname == "RB26DETT" || Modelname == "VG30DETT" || Modelname == "CA181PRO" || Modelname == "SR2N1PRO" || Modelname == "SR2N2PRO" || Modelname == "SR2N3PRO" || Modelname == "SR2N4PRO" || Modelname == "SR201PRO" || Modelname == "SR202PRO" || Modelname == "SR203PRO" || Modelname == "SR204PRO" || Modelname == "SR205PRO" || Modelname == "SR206PRO" || Modelname == "RB201PRO" || Modelname == "RB251PRO" || Modelname == "RB252PRO" || Modelname == "RB261PRO" || Modelname == "RB262PRO" || Modelname == "RB26Pro " || Modelname == "RB26PRO " || Modelname == "RB26PRO1" || Modelname == "RB25PRO2" || Modelname == "CA18T1-D" || Modelname == "SR20T1-D" || Modelname == "SR20T2-D" || Modelname == "SR20T3-D" || Modelname == "SR20T4-D" || Modelname == "SR20T5-D" || Modelname == "RB26_1-D" || Modelname == "RB26_2-D" || Modelname == "VG30TT-D")
     {
         Model =2;
     }
     
     //Toyota
-    if (Modelname == "4E-FTE2 " || Modelname == "1JZ-GTE "||Modelname == "1JZ-GTE3"|| Modelname == "1ZZ-FRE " || Modelname == "2jZ-GTE1" || Modelname == "2ZZ-GE  " || Modelname == "3S-GE   " || Modelname == "3S-GTE3 " || Modelname == "3S-GTE  " || Modelname == "3E-FTE2 ")
+    if (Modelname == "TOYOTA-L"|| Modelname == "1ZZ-FE  "|| Modelname == "1ZZ-FET "|| Modelname == "2ZZ-GE  "|| Modelname == "3S-GE   "|| Modelname == "3SGET   "|| Modelname == "1JZ-GTE "|| Modelname == "1JZGT-AT"|| Modelname == "4A-G1   "|| Modelname == "4A-G2   "|| Modelname == "1JGT1PRO"|| Modelname == "TOYOTA-D"|| Modelname == "4A-GE   "|| Modelname == "4A-GE1  "|| Modelname == "4A-GE2  "|| Modelname == "4A-GE3  "|| Modelname == "4AGE1-TH"|| Modelname == "4AGE2-TH"|| Modelname == "4AGE3-TH"|| Modelname == "4E-FTE1 "|| Modelname == "4E-FTE2 "|| Modelname == "1JZGT-D "|| Modelname == "3S-GE1  "|| Modelname == "3S-GE2  "|| Modelname == "3S-GTE  "|| Modelname == "3S-GTE2 "|| Modelname == "3S-GTE3 "|| Modelname == "1JZ-GTE2"|| Modelname == "1JZ-GTE3"|| Modelname == "2JZ-GTE1"|| Modelname == "2JZ-GTE2"|| Modelname == "4AGE1PRO"|| Modelname == "4AGE2PRO"|| Modelname == "4AGE3PRO"|| Modelname == "4EFT1PRO"|| Modelname == "4EFT2PRO"|| Modelname == "3SGE1PRO"|| Modelname == "3SGT1PRO"|| Modelname == "3SGT2PRO"|| Modelname == "3SGT3PRO" || Modelname == "1JGT2PRO" || Modelname == "1JGT3PRO"|| Modelname == "2JGT1PRO" || Modelname == "2JGT2PRO")
     {
         Model =3;
     }
     
     
     //Subaru
-    if (Modelname == "EJ20K   " || Modelname == "EJ207   "|| Modelname == "EJ20G   "|| Modelname == "EJ20KPRO"   )
+    if (Modelname == "EJ20G   " || Modelname == "EJ20K   " || Modelname == "EJ207   " || Modelname == "EJ20R   " || Modelname == "EJ20GPRO")
     {
         Model =2;
     }
@@ -783,7 +783,7 @@ void Apexi::decodeInit(QByteArray rawmessagedata)
         Model =2;
     }
     //Mitsubishi
-    if (Modelname == "4G63    ")
+    if (|| Modelname == "4G63    " || Modelname == "4G63-US " || Modelname == "4G63-3  " || Modelname == "4G63-5  " || Modelname == "4G63-6  " || Modelname == "4G63-7  ")
     {
         Model =3;
     }
