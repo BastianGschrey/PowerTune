@@ -28,26 +28,111 @@ Raspbian Stretch
 #### Implemented PowerFC variants:
 
 #### Mazda :
-* 13B-REW 
+* "13B-REW " 
 
-#### Nissan :
-* RB20DET
-* RB26DETT
-* SR20DET1
-* CA18DET
-* RB25DET
+####  Nissan Power FC Variants
 
-#### Toyota :  
-* 4E-FTE2
-* 1JZ-GTE
-* 1JZ-GTE3
-* 1ZZ-FRE
-* 2jZ-GTE1
-* 2ZZ-GE
-* 3S-GE
-* 3S-GTE3
-* 3S-GTE
-* 3E-FTE2
+* "NISSAN-L"
+* "CA18DET "
+* "SR20DE1 "
+* "SR20DE2 "
+* "SR20DE3 "
+* "SR20DE4 "
+* "SR20DET1"
+* "SR20DET2"
+* "SR20DET3"
+* "SR20DET4"
+* "SR20DET5"
+* "SR20DET6"
+* "RB20DET "
+* "RB25DET "
+* "RB25DET2"
+* "RB26DETT"
+* "VG30DETT"
+* "CA181PRO"
+* "SR2N1PRO"
+* "SR2N2PRO"
+* "SR2N3PRO"
+* "SR2N4PRO"
+* "SR201PRO"
+* "SR202PRO"
+* "SR203PRO"
+* "SR204PRO"
+* "SR205PRO"
+* "SR206PRO"
+* "RB201PRO"
+* "RB251PRO"
+* "RB252PRO"
+* "RB261PRO"
+* "RB262PRO"
+* "RB26Pro "
+* "RB26PRO "
+* "RB26PRO1"
+* "RB25PRO2"
+* "CA18T1-D" 
+* "SR20T1-D" 
+* "SR20T2-D" 
+* "SR20T3-D" 
+* "SR20T4-D" 
+* "SR20T5-D" 
+* "RB26_1-D" 
+* "RB26_2-D" 
+* "VG30TT-D"
+
+#### Toyota Power FC Variants
+
+* "TOYOTA-L"
+* "1ZZ-FE  "
+* "1ZZ-FET "
+* "2ZZ-GE  "
+* "3S-GE   "
+* "3SGET   "
+* "1JZ-GTE "
+* "1JZGT-AT"
+* "4A-G1   "
+* "4A-G2   "
+* "1JGT1PRO"
+* "TOYOTA-D"
+* "4A-GE   "
+* "4A-GE1  "
+* "4A-GE2  "
+* "4A-GE3  "
+* "4AGE1-TH"
+* "4AGE2-TH"
+* "4AGE3-TH"
+* "4E-FTE1 "
+* "4E-FTE2 "
+* "1JZGT-D "
+* "3S-GE1  "
+* "3S-GE2  "
+* "3S-GTE  "
+* "3S-GTE2 "
+* "3S-GTE3 "
+* "1JZ-GTE2"
+* "1JZ-GTE3"
+* "2JZ-GTE1"
+* "2JZ-GTE2"
+* "4AGE1PRO"
+* "4AGE2PRO"
+* "4AGE3PRO"
+* "4EFT1PRO"
+* "4EFT2PRO"
+* "3SGE1PRO"
+* "3SGT1PRO"
+* "3SGT2PRO"
+* "3SGT3PRO"
+* "1JGT2PRO"
+* "1JGT3PRO"
+* "2JGT1PRO"
+* "2JGT2PRO"
+
+#### Mitsubishi  Power FC Variants
+* "4G63    "
+* "4G63-US "
+* "4G63-3  "
+* "4G63-5  "
+* "4G63-6  "
+* "4G63-7  "
 
 
 
