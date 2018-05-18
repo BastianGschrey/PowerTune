@@ -25,6 +25,7 @@ SOURCES += main.cpp \
     AdaptronicSelect.cpp \
     connect.cpp \
     calculations.cpp \
+    udpreceiver.cpp
 
 
 RESOURCES += qml.qrc
@@ -51,6 +52,7 @@ HEADERS += \
     AdaptronicSelect.h \
     connect.h \
     calculations.h \
+    udpreceiver.h
 
 
 FORMS +=

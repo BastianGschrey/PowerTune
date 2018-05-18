@@ -43,6 +43,7 @@ class calculations;
 class AppSettings;
 class GoPro;
 class GPS;
+class udpreceiver;
 class OBD;
 
 
@@ -80,6 +81,7 @@ private:
     AppSettings *m_appSettings;
     GoPro *m_gopro;
     GPS *m_gps;
+    udpreceiver *m_udpreceiver;
     AdaptronicSelect *m_adaptronicselect;
     Apexi *m_apexi;
     Nissanconsult* m_nissanconsult;

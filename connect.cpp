@@ -36,6 +36,7 @@
 #include "appsettings.h"
 #include "gopro.h"
 #include "gps.h"
+#include "udpreceiver.h"
 #include <QDebug>
 #include <QTime>
 #include <QTimer>
@@ -68,6 +69,7 @@ Connect::Connect(QObject *parent) :
     m_dashBoard(Q_NULLPTR),
     m_gopro(Q_NULLPTR),
     m_gps(Q_NULLPTR),
+    m_udpreceiver(Q_NULLPTR),
     m_adaptronicselect(Q_NULLPTR),
     m_apexi(Q_NULLPTR),
     m_nissanconsult(Q_NULLPTR),
@@ -86,6 +88,7 @@ Connect::Connect(QObject *parent) :
     m_gopro = new GoPro(this);
     m_gps = new GPS(m_dashBoard, this);
     m_adaptronicselect= new AdaptronicSelect(m_dashBoard, this);
+    m_udpreceiver= new udpreceiver(m_dashBoard, this);
     m_apexi= new Apexi(m_dashBoard, this);
     m_nissanconsult = new Nissanconsult(m_dashBoard, this);
     m_OBD = new OBD(m_dashBoard, this);
@@ -266,7 +269,11 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
 
     }
 
-
+    //UDP receiver
+    if (ecu == 4)
+    {
+        m_udpreceiver->startreceiver();
+    }
     //Adaptronic ModularCAN protocol
     if (ecuSelect == 5)
     {
@@ -337,6 +344,11 @@ void Connect::closeConnection()
     {
         m_nissanconsult->closeConnection();
 
+    }
+    //UDP receiver
+    if (ecu == 4)
+    {
+        m_udpreceiver->closeConnection();
     }
 
     //Adaptronic ModularCAN protocol
