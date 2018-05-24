@@ -24,13 +24,8 @@
 #include "AdaptronicSelect.h"
 #include "AdaptronicCAN.h"
 #include "Apexi.h"
-#include "HaltechCAN.h"
 #include "Nissanconsult.h"
 #include "obd.h"
-#include "AdaptronicCAN.h"
-#include "HaltechCAN.h"
-#include "Apexi.h"
-#include "AdaptronicSelect.h"
 #include "dashboard.h"
 #include "serialport.h"
 #include "appsettings.h"
@@ -75,7 +70,6 @@ Connect::Connect(QObject *parent) :
     m_nissanconsult(Q_NULLPTR),
     m_OBD(Q_NULLPTR),
     m_sensors(Q_NULLPTR),
-    m_haltechCANV2(Q_NULLPTR),
     m_adaptronicCAN(Q_NULLPTR),
     m_datalogger(Q_NULLPTR),
     m_calculations(Q_NULLPTR)
@@ -93,7 +87,6 @@ Connect::Connect(QObject *parent) :
     m_nissanconsult = new Nissanconsult(m_dashBoard, this);
     m_OBD = new OBD(m_dashBoard, this);
     m_sensors = new Sensors(m_dashBoard, this);
-    m_haltechCANV2 = new HaltechCAN(m_dashBoard, this);
     m_adaptronicCAN = new AdaptronicCAN(m_dashBoard, this);
     m_datalogger = new datalogger(m_dashBoard, this);
     m_calculations = new calculations(m_dashBoard, this);
@@ -282,15 +275,6 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
 
 
     }
-    //Haltech V2 CAN protocol
-    if (ecuSelect == 6)
-    {
-
-        m_haltechCANV2->openCAN();
-
-
-    }
-
 
    /* //Dicktator
     if (ecuSelect == 9)
@@ -356,13 +340,6 @@ void Connect::closeConnection()
     {
 
         m_adaptronicCAN->closeConnection();
-
-    }
-    //Haltech V2 CAN protocol
-    if (ecu == 6)
-    {
-
-        m_haltechCANV2->closeConnection();
 
     }
 }

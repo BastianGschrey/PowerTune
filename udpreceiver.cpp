@@ -43,11 +43,11 @@ void udpreceiver::processPendingDatagrams()
         datagram.resize(int(udpSocket->pendingDatagramSize()));
         udpSocket->readDatagram(datagram.data(), datagram.size());
 
-
-        int ident;
-        double Value;
         QDataStream in(&datagram, QIODevice::ReadOnly);
-        in >> ident  >> Value;
+        QString raw = datagram.data();
+        QStringList list = raw.split( "," );
+        int ident =list[0].toInt();
+        float Value =list[1].toFloat();
         switch(ident) {
 
         case 1:
@@ -710,6 +710,10 @@ void udpreceiver::processPendingDatagrams()
             break;
         case 229:
             m_dashboard->setIntakepress(Value);
+            break;
+        case 999:
+            break;
+        default:
             break;
         }
     }

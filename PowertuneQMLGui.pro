@@ -18,7 +18,6 @@ SOURCES += main.cpp \
     obd.cpp \
     sensors.cpp \
     datalogger.cpp \
-    HaltechCAN.cpp \
     AdaptronicCAN.cpp \
     Apexi.cpp \
     Nissanconsult.cpp \
@@ -45,7 +44,6 @@ HEADERS += \
     obd.h \
     sensors.h \
     datalogger.h \
-    HaltechCAN.h \
     AdaptronicCAN.h \
     Apexi.h \
     Nissanconsult.h \
