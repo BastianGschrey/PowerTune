@@ -138,7 +138,7 @@ int AFALPHALH;
 int AFALPHARH;
 int AFALPHALHSELFLEARN;
 int AFALPHARHSELFLEARN;
-int Expectedlenght;
+int Expectedlenght = 3;
 
 
 //Live Data Request commands
@@ -367,7 +367,7 @@ void Nissanconsult::LiveReqMsg(const int &val1, const int &val2, const int &val3
     AFALPHARHSELFLEARN  = Livereplystructure.indexOf((QByteArray::fromHex("1d")))+2;
 
 
-    requestlenght = Liveread.length() -1 ; // This tells us how long the initial reply will begfore the first start frame
+    requestlenght = Liveread.length() -1 ; // This tells us how long the initial reply will before the first start frame
 }
 
 
@@ -535,36 +535,34 @@ void Nissanconsult::ProcessRawMessage(const QByteArray &buffer)
 
     QByteArray StartFrame = (QByteArray::fromHex("FF"));
 
-  //  qDebug() <<("Current Message")<<m_buffer.toHex();
-  //  qDebug() <<("Lenght of message ")<<m_buffer.length();
-  //  qDebug() <<("Expected Lenght")<< Expectedlenght;
-
-
-
     if (m_buffer.contains(StartFrame))
     {
 
         int posstart = m_buffer.indexOf(StartFrame);
-        // remove the all leftovers before the start frame
         while (posstart > 1)
         {
             posstart = m_buffer.indexOf(StartFrame);
             m_buffer.remove(0,1);
         }
 
-        if  (posstart == 1)
+        if  (posstart == 0)
         {
-            Expectedlenght = m_buffer[1]+2; // +2 to include the startframe and lenght byte
+            Expectedlenght = m_buffer[1]+2;
+            qDebug() <<"expected lenght"<< Expectedlenght;
+            while (m_buffer.length() > Expectedlenght)
+            {
+                m_consultreply = m_buffer;
+                m_consultreply.remove(Expectedlenght,m_buffer.length());
+                Nissanconsult::ProcessMessage(m_consultreply);
+                qDebug() <<("Fucking buffer too long again ")<< m_buffer.length();
+                m_buffer.remove(0,Expectedlenght);
+                qDebug() <<("removing processed message")<< m_buffer.length();
+            }
         }
 
     }
 
-    if (m_buffer.length() > Expectedlenght)
-    {
-        m_consultreply = m_buffer;
-        m_consultreply.remove(Expectedlenght,m_buffer.length());
-        m_buffer.remove(0,Expectedlenght);
-    }
+
 
     if (m_buffer.length() == Expectedlenght)
     {
@@ -621,6 +619,7 @@ void Nissanconsult::ProcessRawMessage(const QByteArray &buffer)
 
 void Nissanconsult::ProcessMessage(QByteArray serialdataconsult)
 {
+    qDebug() <<("processing")<< m_consultreply.toHex();
     m_consultreply.clear();
 
         m_dashboard->setrpm(((serialdataconsult[CASPosRPMMSB]*256.0)+serialdataconsult[CASPosRPMLSB])*12.5);

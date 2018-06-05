@@ -38,5 +38,6 @@
         <file>graphics/play.png</file>
         <file>graphics/previous.png</file>
         <file>Gauges/Mediaplayer.qml</file>
+        <file>Gauges/Screentoggle.qml</file>
     </qresource>
 </RCC>

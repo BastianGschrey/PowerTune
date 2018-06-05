@@ -758,6 +758,8 @@ Rectangle {
             if (dash1.currentIndex == "8") {firstPageLoader.source = "qrc:/Gauges/Dyno.qml"};
             if (dash1.currentIndex == "9") {firstPageLoader.source = "qrc:/Gauges/Fueltechdashboard.qml"};
             if (dash1.currentIndex == "10"){firstPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
+            if (dash1.currentIndex == "11"){firstPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
+
 
 
         }
@@ -778,6 +780,8 @@ Rectangle {
             if (dash2.currentIndex == "8") {secondPageLoader.source = "qrc:/Gauges/Dyno.qml"};
             if (dash2.currentIndex == "9") {secondPageLoader.source = "qrc:/Gauges/Fueltechdashboard.qml"};
             if (dash2.currentIndex == "10"){secondPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
+            if (dash2.currentIndex == "11"){secondPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
+
 
         }
 
@@ -797,6 +801,8 @@ Rectangle {
             if (dash3.currentIndex == "8") {thirdPageLoader.source = "qrc:/Gauges/Dyno.qml"};
             if (dash3.currentIndex == "9") {thirdPageLoader.source = "qrc:/Gauges/Fueltechdashboard.qml"};
             if (dash3.currentIndex == "10"){thirdPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
+            if (dash3.currentIndex == "10"){thirdPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
+
 
         }
 
@@ -816,6 +822,7 @@ Rectangle {
             if (dash4.currentIndex == "8") {fourthPageLoader.source = "qrc:/Gauges/Dyno.qml"};
             if (dash4.currentIndex == "9") {fourthPageLoader.source = "qrc:/Gauges/Fueltechdashboard.qml"};
             if (dash4.currentIndex == "10") {fourthPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
+            if (dash4.currentIndex == "11") {fourthPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
 
         }
 
@@ -890,7 +897,7 @@ Rectangle {
                 width: windowbackround.width / 5
                 height: windowbackround.height /15
                 font.pixelSize: windowbackround.width / 55
-                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech","Mediaplayer"]
+                model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech","Mediaplayer","Screentoggle"]
                 property bool initialized: true
                 onCurrentIndexChanged:{select1.selDash1() }
                 Component.onCompleted: {select1.selDash1() }

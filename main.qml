@@ -23,14 +23,14 @@ ApplicationWindow {
 
         currentIndex: 0
         anchors.fill: parent
-
-       /* Loader {
+/*
+        Loader {
 
             id: testing
-            source: "qrc:/Gauges/Mediaplayer.qml"
+            source: "qrc:/Gauges/Screentoggle.qml"
 
-        }*/
-
+        }
+*/
         Loader {
 
             id: firstPageLoader
