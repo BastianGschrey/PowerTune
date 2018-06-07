@@ -197,7 +197,7 @@ Rectangle {
                     width: windowbackround.width / 5
                     height: windowbackround.height /15
                     font.pixelSize: windowbackround.width / 55
-                    model: [ "PowerFC", "Adaptronic Select Modbus", "OBDII" , "Nissan Consult","UDP Receiver port 45454","CAN Adaptronic Modular"]
+                    model: [ "PowerFC","UDP", "Adaptronic Select Modbus","CAN Adaptronic Modular"]
 
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
@@ -364,7 +364,7 @@ Rectangle {
                         connectButton.enabled =false;
                         ecuSelect.enabled = false;
                         disconnectButton.enabled = true;
-                        consultset.enabled = false;
+                        //consultset.enabled = false;
                     }
                 }
                 Button {
@@ -378,7 +378,7 @@ Rectangle {
                         connectButton.enabled = true;
                         disconnectButton.enabled = false;
                         ecuSelect.enabled = true;
-                        consultset.enabled = true;
+                        //consultset.enabled = true;
                         functdisconnect.disconnectfunc();
                     }
                 }
@@ -406,7 +406,7 @@ Rectangle {
                     height: windowbackround.height /15
                     font.pixelSize: windowbackround.width / 55
                     onClicked: {Calculations.resettrip()}
-                }
+                }/*
                 Button {
                     id: consultset
                     visible: { (ecuSelect.currentIndex == 3 ) ? true:false; }
@@ -415,7 +415,7 @@ Rectangle {
                     height: windowbackround.height /15
                     font.pixelSize: windowbackround.width / 55
                     onClicked: {consultrequestselect.visible = true}
-                }
+                }*/
 
                 //for official raspberry Pi image only !!!!
                 /*
@@ -730,7 +730,7 @@ Rectangle {
         id: functconnect
         function connectfunc()
         {
-            Nissanconsult.LiveReqMsg(consRPM.checkState,consRPMREF.checkState,consMAFVolt.checkState,consRHMAFVolt.checkState,consCoolantTemp.checkState,consLHO2Volt.checkState,consRHO2Volt.checkState,consSpeed.checkState,consBattvolt.checkState,consTPS.checkState,consFuelTemp.checkState,consIAT.checkState,consEGT.checkState,consDigitalBitReg.checkState,consInjectTimeLH.checkState,consIGNTiming.checkState,consAACValve.checkState,consAFALPHALH.checkState,consAFALPHARH.checkState,consAFALPHASELFLEARNLH.checkState,consAFALPHASELFLEARNRH.checkState,consDigitalControlReg1.checkState,consDigitalControlReg2.checkState,consMRFCMNT.checkState,consInjecttimeRH.checkState,consWasteGate.checkState,consMAPVolt.checkState,consEngineMount.checkState,consPositionCounter.checkState);
+            //Nissanconsult.LiveReqMsg(consRPM.checkState,consRPMREF.checkState,consMAFVolt.checkState,consRHMAFVolt.checkState,consCoolantTemp.checkState,consLHO2Volt.checkState,consRHO2Volt.checkState,consSpeed.checkState,consBattvolt.checkState,consTPS.checkState,consFuelTemp.checkState,consIAT.checkState,consEGT.checkState,consDigitalBitReg.checkState,consInjectTimeLH.checkState,consIGNTiming.checkState,consAACValve.checkState,consAFALPHALH.checkState,consAFALPHARH.checkState,consAFALPHASELFLEARNLH.checkState,consAFALPHASELFLEARNRH.checkState,consDigitalControlReg1.checkState,consDigitalControlReg2.checkState,consMRFCMNT.checkState,consInjecttimeRH.checkState,consWasteGate.checkState,consMAPVolt.checkState,consEngineMount.checkState,consPositionCounter.checkState);
             Connect.setOdometer(odometer.text);
             Connect.setWeight(weight.text);
             Connect.openConnection(serialName.currentText, ecuSelect.currentIndex ,weight.currentText);

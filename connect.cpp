@@ -24,8 +24,6 @@
 #include "AdaptronicSelect.h"
 #include "AdaptronicCAN.h"
 #include "Apexi.h"
-#include "Nissanconsult.h"
-#include "obd.h"
 #include "dashboard.h"
 #include "serialport.h"
 #include "appsettings.h"
@@ -67,8 +65,6 @@ Connect::Connect(QObject *parent) :
     m_udpreceiver(Q_NULLPTR),
     m_adaptronicselect(Q_NULLPTR),
     m_apexi(Q_NULLPTR),
-    m_nissanconsult(Q_NULLPTR),
-    m_OBD(Q_NULLPTR),
     m_sensors(Q_NULLPTR),
     m_adaptronicCAN(Q_NULLPTR),
     m_datalogger(Q_NULLPTR),
@@ -84,8 +80,6 @@ Connect::Connect(QObject *parent) :
     m_adaptronicselect= new AdaptronicSelect(m_dashBoard, this);
     m_udpreceiver= new udpreceiver(m_dashBoard, this);
     m_apexi= new Apexi(m_dashBoard, this);
-    m_nissanconsult = new Nissanconsult(m_dashBoard, this);
-    m_OBD = new OBD(m_dashBoard, this);
     m_sensors = new Sensors(m_dashBoard, this);
     m_adaptronicCAN = new AdaptronicCAN(m_dashBoard, this);
     m_datalogger = new datalogger(m_dashBoard, this);
@@ -112,7 +106,6 @@ Connect::Connect(QObject *parent) :
     engine->rootContext()->setContextProperty("AppSettings", m_appSettings);
     engine->rootContext()->setContextProperty("GoPro", m_gopro);
     engine->rootContext()->setContextProperty("GPS", m_gps);
-    engine->rootContext()->setContextProperty("Nissanconsult",m_nissanconsult);
     engine->rootContext()->setContextProperty("Sens", m_sensors);
     engine->rootContext()->setContextProperty("Logger", m_datalogger);
     engine->rootContext()->setContextProperty("Calculations", m_calculations);
@@ -242,33 +235,21 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
 
     }
 
-
+    //UDP receiver
+    if (ecu == 1)
+    {
+        qDebug() << "UDP";
+        m_udpreceiver->startreceiver();
+    }
     //Adaptronic
-    if (ecuSelect == 1)
+    if (ecuSelect == 2)
     {
        m_adaptronicselect->openConnection(portName);
 
     }
-    //OBD
-    if (ecuSelect == 2)
-    {
-       m_OBD->openConnection(portName);
-    }
-    //Nissan Consult
-    if (ecuSelect == 3)
-    {
-        //m_nissanconsult->LiveReqMsg(1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-        m_nissanconsult->openConnection(portName);
 
-    }
-
-    //UDP receiver
-    if (ecu == 4)
-    {
-        m_udpreceiver->startreceiver();
-    }
     //Adaptronic ModularCAN protocol
-    if (ecuSelect == 5)
+    if (ecuSelect == 3)
     {
 
         m_adaptronicCAN->openCAN();
@@ -310,33 +291,20 @@ void Connect::closeConnection()
         m_apexi->closeConnection();
 
     }
-
-
-    //Adaptronic Select
-    if (ecu == 1)
-    {
-         m_adaptronicselect->closeConnection();
-
-    }
-    //OBD
-    if (ecu == 2)
-    {
-       m_OBD->closeConnection();
-    }
-    //Nissan Consult
-    if (ecu == 3)
-    {
-        m_nissanconsult->closeConnection();
-
-    }
     //UDP receiver
-    if (ecu == 4)
+    if (ecu == 1)
     {
         m_udpreceiver->closeConnection();
     }
 
+    //Adaptronic Select
+    if (ecu == 2)
+    {
+         m_adaptronicselect->closeConnection();
+
+    }
     //Adaptronic ModularCAN protocol
-    if (ecu == 5)
+    if (ecu == 3)
     {
 
         m_adaptronicCAN->closeConnection();

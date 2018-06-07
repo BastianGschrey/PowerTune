@@ -35,15 +35,12 @@ class DashBoard;
 class AdaptronicCAN;
 class AdaptronicSelect;
 class Apexi;
-class Nissanconsult;
-class OBD;
 class datalogger;
 class calculations;
 class AppSettings;
 class GoPro;
 class GPS;
 class udpreceiver;
-class OBD;
 
 
 class Connect : public QObject
@@ -67,10 +64,6 @@ public:
     Q_INVOKABLE void update();
     Q_INVOKABLE void shutdown();
 
-
-
-
-
 public:
 
     QStringList portsNames() const { return m_portsNames; }
@@ -84,8 +77,6 @@ private:
     udpreceiver *m_udpreceiver;
     AdaptronicSelect *m_adaptronicselect;
     Apexi *m_apexi;
-    Nissanconsult* m_nissanconsult;
-    OBD* m_OBD;
     Sensors *m_sensors;
     AdaptronicCAN *m_adaptronicCAN;
     datalogger *m_datalogger;

@@ -15,12 +15,10 @@ SOURCES += main.cpp \
     appsettings.cpp \
     gopro.cpp \
     gps.cpp \
-    obd.cpp \
     sensors.cpp \
     datalogger.cpp \
     AdaptronicCAN.cpp \
     Apexi.cpp \
-    Nissanconsult.cpp \
     AdaptronicSelect.cpp \
     connect.cpp \
     calculations.cpp \
@@ -41,12 +39,10 @@ HEADERS += \
     appsettings.h \
     gopro.h \
     gps.h \
-    obd.h \
     sensors.h \
     datalogger.h \
     AdaptronicCAN.h \
     Apexi.h \
-    Nissanconsult.h \
     AdaptronicSelect.h \
     connect.h \
     calculations.h \
