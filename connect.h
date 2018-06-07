@@ -65,6 +65,7 @@ public:
     Q_INVOKABLE void openConnection(const QString &portName, const int &ecuSelect);
     Q_INVOKABLE void closeConnection();
     Q_INVOKABLE void update();
+    Q_INVOKABLE void shutdown();
 
 
 

@@ -352,6 +352,14 @@ void Connect::update()
     process->start("/home/pi/updatePowerTune.sh");
     process->waitForFinished(6000000); // 10 minutes time before timeout
 }
+
+void Connect::shutdown()
+{
+    m_dashBoard->setSerialStat("Shutting Down");
+    QProcess *process = new QProcess(this);
+    process->start("sudo shutdown");
+    process->waitForFinished(100); // 10 minutes time before timeout
+}
 void Connect::updatefinished(int exitCode, QProcess::ExitStatus exitStatus)
 {
     qDebug() << "code" <<exitCode;

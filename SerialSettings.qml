@@ -203,7 +203,7 @@ Rectangle {
                     onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
                 }
-                                Text {
+                Text {
                     text: "Protocol Type:"
                     font.pixelSize: windowbackround.width / 55
                     color: "white"
@@ -441,8 +441,13 @@ Rectangle {
                     onClicked: {
                         Qt.quit()
                     }
-
-
+                }
+                Button {
+                    text: "Shutdown"
+                    width: windowbackround.width / 5
+                    height: windowbackround.height /15
+                    font.pixelSize: windowbackround.width / 55
+                    onClicked: {Connect.shutdown()}
                 }
 
                 Switch {
@@ -1061,7 +1066,7 @@ Rectangle {
                 text: qsTr("Speed")
                 font.pixelSize: windowbackround.width / 55
             }
-//
+            //
             CheckBox {
                 id: consBattvolt
                 text: qsTr("Battery Voltage")
@@ -1179,7 +1184,7 @@ Rectangle {
         }
     }
 
-//
+    //
     //Sensehat Sensors
     Rectangle{
 
@@ -1247,5 +1252,3 @@ Rectangle {
         }
     }
 }
-
-
