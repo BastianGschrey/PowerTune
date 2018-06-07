@@ -357,7 +357,7 @@ void Connect::shutdown()
 {
     m_dashBoard->setSerialStat("Shutting Down");
     QProcess *process = new QProcess(this);
-    process->start("sudo shutdown");
+    process->start("sudo shutdown -h now");
     process->waitForFinished(100); // 10 minutes time before timeout
 }
 void Connect::updatefinished(int exitCode, QProcess::ExitStatus exitStatus)
