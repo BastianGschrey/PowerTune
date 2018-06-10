@@ -54,6 +54,7 @@ int logging; // 0 Logging off , 1 Logging to file
 int connectclicked =0;
 QByteArray checksumhex;
 QByteArray recvchecksumhex;
+QString selectedPort;
 
 
 Connect::Connect(QObject *parent) :
@@ -219,13 +220,19 @@ void Connect::clear() const
    // m_Connectport->clear();
 }
 
+void Connect::checkReg()
+{
+    qDebug()<<"Check Registers";
+    QProcess *process = new QProcess(this);
+    process->start("/home/pi/Consult/Consult/Regs/ConsultRegs /dev/" + selectedPort); //Check the supported Registers
+}
 
-//function to open Connect port
 void Connect::openConnection(const QString &portName, const int &ecuSelect)
 {
 
 
     ecu = ecuSelect;
+    selectedPort = portName;
 
     //Apexi
     if (ecuSelect == 0)
@@ -324,6 +331,7 @@ void Connect::closeConnection()
 
         QProcess *process = new QProcess(this);
         process->start("sudo pkill /home/pi/Consult/Consult");
+        qDebug()<<"Kill";
 
     }
 

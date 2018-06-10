@@ -406,16 +406,16 @@ Rectangle {
                     height: windowbackround.height /15
                     font.pixelSize: windowbackround.width / 55
                     onClicked: {Calculations.resettrip()}
-                }/*
+                }
                 Button {
                     id: consultset
-                    visible: { (ecuSelect.currentIndex == 3 ) ? true:false; }
+                    visible: { (ecuSelect.currentIndex == 4 ) ? true:false; }
                     text: "Consult Settings"
                     width: windowbackround.width / 5
                     height: windowbackround.height /15
                     font.pixelSize: windowbackround.width / 55
                     onClicked: {consultrequestselect.visible = true}
-                }*/
+                }
 
                 //for official raspberry Pi image only !!!!
                 /*
@@ -1171,6 +1171,19 @@ Rectangle {
                 id: consPositionCounter
                 text: qsTr("Position Counter")
                 font.pixelSize: windowbackround.width / 55
+            }
+            Button {
+                id: supportedRegs
+                text: "Check supported Regs"
+                width: windowbackround.width / 10
+                height: windowbackround.height /15
+                font.pixelSize: windowbackround.width / 55
+                onClicked: {functdisconnect.disconnectfunc();
+                    Connect.checkReg();
+                    connectButton.enabled =true;
+                    ecuSelect.enabled = true;
+                    disconnectButton.enabled = false;
+                }
             }
             Button {
                 id: closeconsultsettings

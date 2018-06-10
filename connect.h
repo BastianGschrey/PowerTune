@@ -59,6 +59,7 @@ public:
     Q_INVOKABLE void setOdometer(const qreal &Odometer);
     Q_INVOKABLE void qmlTreeviewclicked(const QModelIndex &index);
     Q_INVOKABLE void clear() const;
+    Q_INVOKABLE void checkReg();
     Q_INVOKABLE void openConnection(const QString &portName, const int &ecuSelect);
     Q_INVOKABLE void closeConnection();
     Q_INVOKABLE void update();
