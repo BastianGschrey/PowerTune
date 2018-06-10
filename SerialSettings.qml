@@ -1187,6 +1187,7 @@ Rectangle {
                     connectButton.enabled =true;
                     ecuSelect.enabled = true;
                     disconnectButton.enabled = false;
+                    supportedRegs.enabled = false;
                 }
             }
             Button {
