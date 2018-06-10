@@ -330,7 +330,7 @@ void Connect::closeConnection()
     {
 
         QProcess *process = new QProcess(this);
-        process->start("sudo pkill /home/pi/Consult/Consult");
+        process->start("sudo pkill Consult");
         qDebug()<<"Kill";
 
     }
