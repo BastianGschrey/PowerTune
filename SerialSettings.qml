@@ -1179,7 +1179,7 @@ Rectangle {
                 height: windowbackround.height /15
                 font.pixelSize: windowbackround.width / 55
                 onClicked: {functdisconnect.disconnectfunc();
-                    Connect.checkReg();
+                    Connect.checkReg(serialName.currentText);
                     connectButton.enabled =true;
                     ecuSelect.enabled = true;
                     disconnectButton.enabled = false;

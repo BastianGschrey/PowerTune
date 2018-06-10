@@ -220,11 +220,11 @@ void Connect::clear() const
    // m_Connectport->clear();
 }
 
-void Connect::checkReg()
+void Connect::checkReg(const QString &portName)
 {
-    qDebug()<<"Check Registers";
+    qDebug()<<"Check Registers" << portName;
     QProcess *process = new QProcess(this);
-    process->start("/home/pi/Consult/Regs/ConsultRegs /dev/" + selectedPort); //Check the supported Registers
+    process->start("/home/pi/Consult/Regs/ConsultRegs /dev/" + portName); //Check the supported Registers
 }
 
 void Connect::openConnection(const QString &portName, const int &ecuSelect)
