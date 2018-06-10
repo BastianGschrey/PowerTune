@@ -1177,7 +1177,7 @@ Rectangle {
             }
             Button {
                 id: supportedRegs
-                text: "Check supported Regs"
+                text: "Check"
                 width: windowbackround.width / 10
                 height: windowbackround.height /15
                 font.pixelSize: windowbackround.width / 55

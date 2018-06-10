@@ -225,7 +225,22 @@ void Connect::checkReg(const QString &portName)
     qDebug()<<"Check Registers" << portName;
     QProcess *process = new QProcess(this);
     process->start("/home/pi/Consult/Regs/ConsultRegs /dev/" + portName); //Check the supported Registers
-    m_dashBoard->setSerialStat(process->readAllStandardOutput());
+   // m_dashBoard->setSerialStat(process->readAllStandardOutput()); //This is just for testing
+
+    //Read the
+    QString path = "/home/pi/Consult/Regs/SupportedRegs.txt";// this is just for testing
+    QFile inputFile(path);
+    if (inputFile.open(QIODevice::ReadOnly))
+    {
+       QTextStream in(&inputFile);
+       while (!in.atEnd())
+       {
+          QString line = in.readLine();
+          QStringList list = line.split(QRegExp("\\,"));
+          m_dashBoard->setSerialStat(list[1]);
+       }
+       inputFile.close();
+    }
 }
 
 void Connect::openConnection(const QString &portName, const int &ecuSelect)
