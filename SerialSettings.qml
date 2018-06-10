@@ -116,7 +116,7 @@ Rectangle {
                     text: "ECU Serial Port: "
                     font.pixelSize: windowbackround.width / 55
                     color: "white"
-                    visible: { (ecuSelect.currentIndex >= "4") ? false: true; }
+                    visible: { (ecuSelect.currentIndex >= "5") ? false: true; }
                 }
                 ComboBox {
                     id: serialName
@@ -124,7 +124,7 @@ Rectangle {
                     height: windowbackround.height /15
                     font.pixelSize: windowbackround.width / 55
                     model: Connect.portsNames
-                    visible: { (ecuSelect.currentIndex >= "4") ? false: true; }
+                    visible: { (ecuSelect.currentIndex >= "5") ? false: true; }
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setBaudRate( currentIndex )
                     Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true; autoconnect.auto(); }
