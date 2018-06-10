@@ -224,7 +224,7 @@ void Connect::checkReg()
 {
     qDebug()<<"Check Registers";
     QProcess *process = new QProcess(this);
-    process->start("/home/pi/Consult/Consult/Regs/ConsultRegs /dev/" + selectedPort); //Check the supported Registers
+    process->start("/home/pi/Consult/Regs/ConsultRegs /dev/" + selectedPort); //Check the supported Registers
 }
 
 void Connect::openConnection(const QString &portName, const int &ecuSelect)
