@@ -1027,7 +1027,7 @@ Rectangle {
         color: "grey"
         Grid {
             rows: 10
-            columns: 3
+            columns: 4
 
             CheckBox {
                 id: consRPM
@@ -1196,7 +1196,11 @@ Rectangle {
                 width: windowbackround.width / 10
                 height: windowbackround.height /15
                 font.pixelSize: windowbackround.width / 55
-                onClicked: {consultrequestselect.visible = false}
+                onClicked: {
+                    consultrequestselect.visible = false;
+                    supportedRegs.enabled = true;
+
+                }
 
             }
         }
