@@ -197,7 +197,7 @@ Rectangle {
                     width: windowbackround.width / 5
                     height: windowbackround.height /15
                     font.pixelSize: windowbackround.width / 55
-                    model: [ "PowerFC","UDP", "Adaptronic Select Modbus","CAN Adaptronic Modular"]
+                    model: [ "PowerFC","UDP","Adaptronic Select Modbus","CAN Adaptronic Modular","Consult"]
 
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )

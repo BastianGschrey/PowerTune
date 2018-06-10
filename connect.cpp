@@ -256,6 +256,15 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
 
 
     }
+    if (ecuSelect == 4)
+    {
+        //NissanConsult
+        QProcess *process = new QProcess(this);
+        process->start("/home/pi/Consult/Consult /dev/" + portName);
+        m_udpreceiver->startreceiver();
+
+    }
+
 
    /* //Dicktator
     if (ecuSelect == 9)
@@ -310,6 +319,14 @@ void Connect::closeConnection()
         m_adaptronicCAN->closeConnection();
 
     }
+    if (ecu == 4)
+    {
+
+        QProcess *process = new QProcess(this);
+        process->start("sudo pkill /home/pi/Consult/Consult");
+
+    }
+
 }
 
 void Connect::update()
