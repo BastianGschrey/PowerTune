@@ -15,6 +15,7 @@ Rectangle {
     color: "grey"
 
     property  int test1: 0
+    property  int connected: 0
     property  var gpscom
     Item {
         id: powerTuneSettings
@@ -731,9 +732,10 @@ Rectangle {
         function connectfunc()
         {
             //Nissanconsult.LiveReqMsg(consRPM.checkState,consRPMREF.checkState,consMAFVolt.checkState,consRHMAFVolt.checkState,consCoolantTemp.checkState,consLHO2Volt.checkState,consRHO2Volt.checkState,consSpeed.checkState,consBattvolt.checkState,consTPS.checkState,consFuelTemp.checkState,consIAT.checkState,consEGT.checkState,consDigitalBitReg.checkState,consInjectTimeLH.checkState,consIGNTiming.checkState,consAACValve.checkState,consAFALPHALH.checkState,consAFALPHARH.checkState,consAFALPHASELFLEARNLH.checkState,consAFALPHASELFLEARNRH.checkState,consDigitalControlReg1.checkState,consDigitalControlReg2.checkState,consMRFCMNT.checkState,consInjecttimeRH.checkState,consWasteGate.checkState,consMAPVolt.checkState,consEngineMount.checkState,consPositionCounter.checkState);
+            Connect.openConnection(serialName.currentText, ecuSelect.currentIndex ,weight.currentText);
             Connect.setOdometer(odometer.text);
             Connect.setWeight(weight.text);
-            Connect.openConnection(serialName.currentText, ecuSelect.currentIndex ,weight.currentText);
+            connected = 1;
         }
     }
 
@@ -744,6 +746,7 @@ Rectangle {
         function disconnectfunc()
         {
             Connect.closeConnection(),GPS.stopGPScom();
+            connected = 0;
         }
     }
 
@@ -1178,7 +1181,8 @@ Rectangle {
                 width: windowbackround.width / 10
                 height: windowbackround.height /15
                 font.pixelSize: windowbackround.width / 55
-                onClicked: {functdisconnect.disconnectfunc();
+                onClicked: {
+                    if (connected == 1){functdisconnect.disconnectfunc();}
                     Connect.checkReg(serialName.currentText);
                     connectButton.enabled =true;
                     ecuSelect.enabled = true;
