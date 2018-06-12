@@ -414,7 +414,7 @@ void Apexi::sendRequest(int requestIndex)
         }
     }
     
-    m_timer.start(5000);
+    m_timer.start(1000); //Set timout to 1 second 
 }
 
 

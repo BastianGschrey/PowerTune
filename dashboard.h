@@ -270,6 +270,8 @@ class DashBoard : public QObject
    //Path for musicfiles
     Q_PROPERTY(QString musicpath READ musicpath WRITE setmusicpath NOTIFY musicpathChanged)
 
+    Q_PROPERTY(int supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
+
 public:
     DashBoard(QObject *parent = 0);
 
@@ -544,6 +546,8 @@ public:
 
     void setmusicpath(const QString &musicpath);
 
+    void setsupportedReg(const int &supportedReg);
+
 
     qreal Odo() const;
 
@@ -813,6 +817,8 @@ public:
 
     QString musicpath() const;
 
+    int supportedReg() const;
+
 
 
 signals:
@@ -1080,6 +1086,7 @@ signals:
     void wheelspdftleftChanged(qreal wheelspdftleft);
     void wheelspdftrightChanged(qreal wheelspdftright);
     void musicpathChanged(QString musicpath);
+    void supportedRegChanged(int supportedReg);
 
 
 private:
@@ -1357,6 +1364,7 @@ private:
     qreal m_wheelspdftright;
 
     QString m_musicpath;
+    int m_supportedReg;
 
 
 };

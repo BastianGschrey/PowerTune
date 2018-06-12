@@ -55,35 +55,6 @@ Rectangle {
             property alias rpmwarning: rpmwarn.text
             property alias knockwarning: knockwarn.text
             property alias protocol : protocol.currentIndex
-            property alias consultRPM : consRPM.checkState
-            property alias consultRPMREF : consRPMREF.checkState
-            property alias consultMAFVolt : consMAFVolt.checkState
-            property alias consultRHMAFVolt : consRHMAFVolt.checkState
-            property alias consultCoolantTemp : consCoolantTemp.checkState
-            property alias consultLHO2Volt : consLHO2Volt.checkState
-            property alias consultRHO2Volt : consRHO2Volt.checkState
-            property alias consultSpeed : consSpeed.checkState
-            property alias consultBattvolt: consBattvolt.checkState
-            property alias consultTPS: consTPS.checkState
-            property alias consultFuelTemp: consFuelTemp.checkState
-            property alias consultIAT: consIAT.checkState
-            property alias consultEGT: consEGT.checkState
-            property alias consultDigitalBitReg: consDigitalBitReg.checkState
-            property alias consultInjectTimeLH: consInjectTimeLH.checkState
-            property alias consultIGNTiming: consIGNTiming.checkState
-            property alias consultAACValve: consAACValve.checkState
-            property alias consultAFALPHALH: consAFALPHALH.checkState
-            property alias consultAFALPHARH: consAFALPHARH.checkState
-            property alias consultAFALPHASELFLEARNLH: consAFALPHASELFLEARNLH.checkState
-            property alias consultAFALPHASELFLEARNRH: consAFALPHASELFLEARNRH.checkState
-            property alias consultDigitalControlReg1: consDigitalControlReg1.checkState
-            property alias consultDigitalControlReg2: consDigitalControlReg2.checkState
-            property alias consultMRFCMNT: consMRFCMNT.checkState
-            property alias consultInjecttimeRH: consInjecttimeRH.checkState
-            property alias consultWasteGate: consWasteGate.checkState
-            property alias consultMAPVolt: consMAPVolt.checkState
-            property alias consultEngineMount: consEngineMount.checkState
-            property alias consultPositionCounter: consPositionCounter.checkState
 
         }
         SoundEffect {
@@ -99,6 +70,7 @@ Rectangle {
             onRpmChanged: { if (Dashboard.rpm > rpmwarn.text) {playwarning.start()};}
             onKnockChanged: { if (Dashboard.Knock > knockwarn.text) {playwarning.start()};}
             onBoostPresChanged: { if (Dashboard.BoostPres > boostwarn.text) {playwarning.start()};}
+            onSupportedRegChanged: {functsupportedRegs.supportedRegs() }
         }
 
 
@@ -749,7 +721,134 @@ Rectangle {
             connected = 0;
         }
     }
+    Item {   //Function for Consult to show only supported Regs
+    id: functsupportedRegs
+    function supportedRegs()
+    {
+       switch (Dashboard.supportedReg) {
+       case 1: {
+               consRPM.visible = true;
+               break;
+           }
 
+       case 3: {
+               consRPMREF.visible = true;
+               break;
+           }
+       case 5: {
+               consMAFVolt.visible = true;
+               break;
+           }
+       case 7: {
+               consRHMAFVolt.visible = true;
+               break;
+           }
+       case 8: {
+               consCoolantTemp.visible = true;
+               break;
+           }
+       case 9: {
+               consLHO2Volt.visible = true;
+               break;
+           }
+       case 10: {
+               consRHO2Volt.visible = true;
+               break;
+           }
+       case 11: {
+               consSpeed.visible = true;
+               break;
+           }
+       case 12: {
+               consBattvolt.visible = true;
+               break;
+           }
+       case 13: {
+               consTPS.visible = true;
+               break;
+           }
+       case 14: {
+               consFuelTemp.visible = true;
+               break;
+           }
+       case 15: {
+               consIAT.visible = true;
+               break;
+           }
+       case 16: {
+               // EGT .visible = true;
+               break;
+           }
+       case 17: {
+               consDigitalBitReg.visible = true;
+               break;
+           }
+       case 19: {
+               consInjectTimeLH.visible = true;
+               break;
+           }
+       case 20: {
+               consIGNTiming.visible = true;
+               break;
+           }
+       case 21: {
+               consAACValve.visible = true;
+               break;
+           }
+       case 22: {
+               consAFALPHALH.visible = true;
+               break;
+           }
+       case 23: {
+               consAFALPHARH.visible = true;
+               break;
+           }
+       case 24: {
+               consAFALPHASELFLEARNLH.visible = true;
+               break;
+           }
+       case 25: {
+               consAFALPHASELFLEARNRH.visible = true;
+               break;
+           }
+       case 26: {
+               consDigitalControlReg1.visible = true;
+               break;
+           }
+       case 27: {
+               consDigitalControlReg2.visible = true;
+               break;
+           }
+       case 28: {
+               consMRFCMNT.visible = true;
+               break;
+           }
+       case 30: {
+               consInjecttimeRH.visible = true;
+               break;
+           }
+       case 31: {
+               consWasteGate.visible = true;
+               break;
+           }
+       case 32: {
+               consMAPVolt.visible = true;
+               break;
+           }
+       case 33: {
+               consEngineMount.visible = true;
+               break;
+           }
+       case 34: {
+               consPositionCounter.visible = true;
+               break;
+           }
+       default: {
+               break;
+           }
+       }
+   }
+    }
     //Function to select Dash1
     Item {
         id: select1
@@ -1031,147 +1130,176 @@ Rectangle {
 
             CheckBox {
                 id: consRPM
+                visible: false;
                 text: qsTr("RPM")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consRPMREF
+                visible: false;
                 text: qsTr("RPMREF")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consMAFVolt
+                visible: false;
                 text: qsTr("MAF Voltage")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consRHMAFVolt
+                visible: false;
                 text: qsTr("RH MAF Voltage")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consCoolantTemp
+                visible: false;
                 text: qsTr("Coolant Temp")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consLHO2Volt
+                visible: false;
                 text: qsTr("LH O2 Voltage")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consRHO2Volt
-                text: qsTr("LH O2 Voltage")
+                visible: false;
+                text: qsTr("RH O2 Voltage")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consSpeed
+                visible: false;
                 text: qsTr("Speed")
                 font.pixelSize: windowbackround.width / 55
             }
             //
             CheckBox {
                 id: consBattvolt
+                visible: false;
                 text: qsTr("Battery Voltage")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consTPS
+                visible: false;
                 text: qsTr("TPS")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consFuelTemp
+                visible: false;
                 text: qsTr("Fuel Temp.")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consIAT
+                visible: false;
                 text: qsTr("Intake Air Temp.")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consEGT
+                visible: false;
                 text: qsTr("EGT")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consDigitalBitReg
+                visible: false;
                 text: qsTr("Digital Bit Register")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consInjectTimeLH
+                visible: false;
                 text: qsTr("Inj Time LH")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consIGNTiming
+                visible: false;
                 text: qsTr("IgnitionTiming")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consAACValve
+                visible: false;
                 text: qsTr("AACValve")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consAFALPHALH
+                visible: false;
                 text: qsTr("AF ALPHA LH")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consAFALPHARH
+                visible: false;
                 text: qsTr("AF ALPHA RH")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consAFALPHASELFLEARNLH
+                visible: false;
                 text: qsTr("AF ALPHA SELFLEARN LH")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consAFALPHASELFLEARNRH
+                visible: false;
                 text: qsTr("AF ALPHA SELFLEARN RH")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consDigitalControlReg1
+                visible: false;
                 text: qsTr("Digital Control Reg1")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consDigitalControlReg2
+                visible: false;
                 text: qsTr("Digital Control Reg2")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consMRFCMNT
+                visible: false;
                 text: qsTr("MRFCMNT")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consInjecttimeRH
+                visible: false;
                 text: qsTr("Injector Time RH")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consWasteGate
+                visible: false;
                 text: qsTr("WasteGate")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consMAPVolt
+                visible: false;
                 text: qsTr("MAP Voltage")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consEngineMount
+                visible: false;
                 text: qsTr("EngineMount")
                 font.pixelSize: windowbackround.width / 55
             }
             CheckBox {
                 id: consPositionCounter
+                visible: false;
                 text: qsTr("Position Counter")
                 font.pixelSize: windowbackround.width / 55
             }
@@ -1199,7 +1327,7 @@ Rectangle {
                 onClicked: {
                     consultrequestselect.visible = false;
                     supportedRegs.enabled = true;
-
+                    Connect.LiveReqMsg(consRPM.checkState,consRPMREF.checkState,consMAFVolt.checkState,consRHMAFVolt.checkState,consCoolantTemp.checkState,consLHO2Volt.checkState,consRHO2Volt.checkState,consSpeed.checkState,consBattvolt.checkState,consTPS.checkState,consFuelTemp.checkState,consIAT.checkState,consEGT.checkState,consDigitalBitReg.checkState,consInjectTimeLH.checkState,consIGNTiming.checkState,consAACValve.checkState,consAFALPHALH.checkState,consAFALPHARH.checkState,consAFALPHASELFLEARNLH.checkState,consAFALPHASELFLEARNRH.checkState,consDigitalControlReg1.checkState,consDigitalControlReg2.checkState,consMRFCMNT.checkState,consInjecttimeRH.checkState,consWasteGate.checkState,consMAPVolt.checkState,consEngineMount.checkState,consPositionCounter.checkState,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
                 }
 
             }

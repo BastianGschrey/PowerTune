@@ -257,6 +257,7 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_wheelspdftleft(0)
     ,  m_wheelspdftright(0)
 
+
 {
 }
 
@@ -2039,7 +2040,13 @@ void DashBoard::setmusicpath(const QString &musicpath)
     m_musicpath = musicpath;
     emit musicpathChanged(musicpath);
 }
-
+void DashBoard::setsupportedReg(const int &supportedReg)
+{
+    if (m_supportedReg == supportedReg)
+        return;
+    m_supportedReg = supportedReg;
+    emit supportedRegChanged(supportedReg);
+}
 
 
 // Odometer
@@ -2304,3 +2311,4 @@ qreal DashBoard::wheelslip() const { return m_wheelslip; }
 qreal DashBoard::wheelspdftleft() const { return m_wheelspdftleft; }
 qreal DashBoard::wheelspdftright() const { return m_wheelspdftright; }
 QString DashBoard::musicpath() const { return m_musicpath; }
+int DashBoard::supportedReg() const {return m_supportedReg; }
