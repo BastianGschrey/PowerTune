@@ -6,8 +6,6 @@ import QtSensors 5.0
 import QtQuick.Controls.Styles 1.4
 import QtMultimedia 5.8
 
-
-
 Rectangle {
     id: windowbackround
     width: parent.width
@@ -17,6 +15,7 @@ Rectangle {
     property  int test1: 0
     property  int connected: 0
     property  var gpscom
+
     Item {
         id: powerTuneSettings
         Settings {

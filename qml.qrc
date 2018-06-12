@@ -39,5 +39,6 @@
         <file>graphics/previous.png</file>
         <file>Gauges/Mediaplayer.qml</file>
         <file>Gauges/Screentoggle.qml</file>
+        <file>Gauges/ConsultTest.qml</file>
     </qresource>
 </RCC>

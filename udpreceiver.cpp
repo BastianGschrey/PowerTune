@@ -26,7 +26,7 @@ void udpreceiver::startreceiver()
     udpSocket->bind(45454, QUdpSocket::ShareAddress);
     connect(udpSocket, SIGNAL(readyRead()),
             this, SLOT(processPendingDatagrams()));
-   // qDebug()<< "UDP CONNECETED";
+    // qDebug()<< "UDP CONNECETED";
 }
 
 void udpreceiver::closeConnection()
@@ -123,7 +123,7 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setBoostwg(Value);
             break;
         case 25:
-//            m_dashboard->setbrakepedalstate(Value);
+            //            m_dashboard->setbrakepedalstate(Value);
             break;
         case 26:
             m_dashboard->setbrakepress(Value);
@@ -243,52 +243,52 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setFlag16(Value);
             break;
         case 65:
-//            m_dashboard->setFlagString1(Value);
+            //            m_dashboard->setFlagString1(Value);
             break;
         case 66:
-//            m_dashboard->setFlagString2(Value);
+            //            m_dashboard->setFlagString2(Value);
             break;
         case 67:
-//            m_dashboard->setFlagString3(Value);
+            //            m_dashboard->setFlagString3(Value);
             break;
         case 68:
-//            m_dashboard->setFlagString4(Value);
+            //            m_dashboard->setFlagString4(Value);
             break;
         case 69:
-//            m_dashboard->setFlagString5(Value);
+            //            m_dashboard->setFlagString5(Value);
             break;
         case 70:
-//            m_dashboard->setFlagString6(Value);
+            //            m_dashboard->setFlagString6(Value);
             break;
         case 71:
-//            m_dashboard->setFlagString7(Value);
+            //            m_dashboard->setFlagString7(Value);
             break;
         case 72:
- //           m_dashboard->setFlagString8(Value);
+            //           m_dashboard->setFlagString8(Value);
             break;
         case 73:
-//            m_dashboard->setFlagString9(Value);
+            //            m_dashboard->setFlagString9(Value);
             break;
         case 74:
-//            m_dashboard->setFlagString10(Value);
+            //            m_dashboard->setFlagString10(Value);
             break;
         case 75:
-//            m_dashboard->setFlagString11(Value);
+            //            m_dashboard->setFlagString11(Value);
             break;
         case 76:
-//            m_dashboard->setFlagString12(Value);
+            //            m_dashboard->setFlagString12(Value);
             break;
         case 77:
-//            m_dashboard->setFlagString13(Value);
+            //            m_dashboard->setFlagString13(Value);
             break;
         case 78:
-//            m_dashboard->setFlagString14(Value);
+            //            m_dashboard->setFlagString14(Value);
             break;
         case 79:
-//            m_dashboard->setFlagString15(Value);
+            //            m_dashboard->setFlagString15(Value);
             break;
         case 80:
-//            m_dashboard->setFlagString16(Value);
+            //            m_dashboard->setFlagString16(Value);
             break;
         case 81:
             m_dashboard->setflatshiftstate(Value);
@@ -342,22 +342,22 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setgearswitch(Value);
             break;
         case 108:
-//            m_dashboard->setgpsAltitude(Value);
+            //            m_dashboard->setgpsAltitude(Value);
             break;
         case 109:
-//            m_dashboard->setgpsLatitude(Value);
+            //            m_dashboard->setgpsLatitude(Value);
             break;
         case 110:
-//            m_dashboard->setgpsLongitude(Value);
+            //            m_dashboard->setgpsLongitude(Value);
             break;
         case 111:
-//            m_dashboard->setgpsSpeed(Value);
+            //            m_dashboard->setgpsSpeed(Value);
             break;
         case 112:
-//            m_dashboard->setgpsTime(Value);
+            //            m_dashboard->setgpsTime(Value);
             break;
         case 113:
-//            m_dashboard->setgpsVisibleSatelites(Value);
+            //            m_dashboard->setgpsVisibleSatelites(Value);
             break;
         case 114:
             m_dashboard->setgyrox(Value);
@@ -486,7 +486,7 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setMAP(Value);
             break;
         case 156:
-//            m_dashboard->setMAP2(Value);
+            //            m_dashboard->setMAP2(Value);
             break;
         case 157:
             m_dashboard->setmil(Value);
@@ -534,7 +534,7 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setpim(Value);
             break;
         case 172:
-//            m_dashboard->setPlatform(Value);
+            //            m_dashboard->setPlatform(Value);
             break;
         case 173:
             m_dashboard->setPower(Value);
@@ -549,7 +549,7 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setrallyantilagswitch(Value);
             break;
         case 177:
-//            m_dashboard->setRecvData(Value);
+            //            m_dashboard->setRecvData(Value);
             break;
         case 178:
             m_dashboard->setrightindicator(Value);
@@ -558,7 +558,7 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setrpm(Value);
             break;
         case 180:
-//            m_dashboard->setRunStat(Value);
+            //            m_dashboard->setRunStat(Value);
             break;
         case 181:
             m_dashboard->setSecinjpulse(Value);
@@ -588,31 +588,31 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setsens8(Value);
             break;
         case 190:
-//            m_dashboard->setSensorString1(Value);
+            //            m_dashboard->setSensorString1(Value);
             break;
         case 191:
-//            m_dashboard->setSensorString2(Value);
+            //            m_dashboard->setSensorString2(Value);
             break;
         case 192:
-//            m_dashboard->setSensorString3(Value);
+            //            m_dashboard->setSensorString3(Value);
             break;
         case 193:
-//            m_dashboard->setSensorString4(Value);
+            //            m_dashboard->setSensorString4(Value);
             break;
         case 194:
-//            m_dashboard->setSensorString5(Value);
+            //            m_dashboard->setSensorString5(Value);
             break;
         case 195:
-//            m_dashboard->setSensorString6(Value);
+            //            m_dashboard->setSensorString6(Value);
             break;
         case 196:
-//            m_dashboard->setSensorString7(Value);
+            //            m_dashboard->setSensorString7(Value);
             break;
         case 197:
-//            m_dashboard->setSensorString8(Value);
+            //            m_dashboard->setSensorString8(Value);
             break;
         case 198:
-//            m_dashboard->setSerialStat(Value);
+            //            m_dashboard->setSerialStat(Value);
             break;
         case 199:
             m_dashboard->setSpeed(Value);
@@ -636,7 +636,7 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->settimeddutyoutputactive(Value);
             break;
         case 206:
- //           m_dashboard->setTimeoutStat(Value);
+            //           m_dashboard->setTimeoutStat(Value);
             break;
         case 207:
             m_dashboard->setTorque(Value);
@@ -674,7 +674,7 @@ void udpreceiver::processPendingDatagrams()
         case 218:
             m_dashboard->setturborpm(Value);
             break;
-/*
+            /*
         case 219:
             m_dashboard->setunits(Value);
             break;
@@ -711,6 +711,109 @@ void udpreceiver::processPendingDatagrams()
         case 229:
             m_dashboard->setIntakepress(Value);
             break;
+
+            //not yet implemented
+        case 255:
+            //CAS REF
+            break;
+        case 259:
+            //AAC Valve
+            break;
+        case 260:
+            //
+            break;
+        case 261:
+            //
+            break;
+        case 262:
+            //
+            break;
+        case 263:
+            //
+            break;
+        case 264:
+            //
+            break;
+        case 265:
+            //
+            break;
+        case 266:
+            //
+            break;
+        case 267:
+            //
+            break;
+        case 268:
+            //
+            break;
+        case 269:
+            //
+            break;
+        case 270:
+            //
+            break;
+        case 271:
+            //
+            break;
+        case 272:
+            //
+            break;
+        case 273:
+            //
+            break;
+        case 274:
+            //
+            break;
+        case 275:
+            //
+            break;
+        case 276:
+            //
+            break;
+        case 277:
+            //
+            break;
+        case 278:
+            //
+            break;
+        case 279:
+            //
+            break;
+        case 280:
+            //
+            break;
+        case 281:
+            //
+            break;
+        case 282:
+            //
+            break;
+        case 283:
+            //
+            break;
+        case 284:
+            //
+            break;
+        case 285:
+            //
+            break;
+        case 286:
+            //
+            break;
+        case 287:
+            //
+            break;
+        case 288:
+            //
+            break;
+        case 289:
+            //
+            break;
+        case 290:
+            //
+            break;
+
+            //
         case 999:
             break;
         default:
