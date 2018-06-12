@@ -378,65 +378,89 @@ void Connect::checkReg(const QString &portName)
     case 0x28:
          m_dashBoard->setsupportedReg(31);
         i ++;
-        break;
-    case 0x2f:
+         break;
+    case 0x29://corrct
          m_dashBoard->setsupportedReg(32);
         i ++;
         break;
-    case 0x30:
+    case 0x2a://corrct
          m_dashBoard->setsupportedReg(33);
         i ++;
         break;
-    case 0x31:
+    case 0x2e://corrct
          m_dashBoard->setsupportedReg(34);
         i ++;
         break;
-    case 0x32:
+    case 0x25://corrct
          m_dashBoard->setsupportedReg(35);
         i ++;
         break;
-    case 0x33:
+    case 0x26://corrct
          m_dashBoard->setsupportedReg(36);
         i ++;
         break;
-    case 0x34:
+    case 0x27://corrct
          m_dashBoard->setsupportedReg(37);
         i ++;
         break;
-    case 0x35:
+    case 0x2f:
          m_dashBoard->setsupportedReg(38);
         i ++;
         break;
-    case 0x36:
+    case 0x30:
          m_dashBoard->setsupportedReg(39);
         i ++;
         break;
-    case 0x37:
+    case 0x31:
          m_dashBoard->setsupportedReg(40);
         i ++;
         break;
-    case 0x38:
+    case 0x32:
          m_dashBoard->setsupportedReg(41);
         i ++;
         break;
-    case 0x39:
+    case 0x33:
          m_dashBoard->setsupportedReg(42);
         i ++;
         break;
-    case 0x3a:
+    case 0x34:
          m_dashBoard->setsupportedReg(43);
         i ++;
         break;
-    case 0x4a:
+    case 0x35:
          m_dashBoard->setsupportedReg(44);
         i ++;
         break;
-    case 0x52:
+    case 0x36:
          m_dashBoard->setsupportedReg(45);
         i ++;
         break;
+    case 0x37:
+         m_dashBoard->setsupportedReg(46);
+        i ++;
+        break;
+    case 0x38:
+         m_dashBoard->setsupportedReg(47);
+        i ++;
+        break;
+    case 0x39:
+         m_dashBoard->setsupportedReg(48);
+        i ++;
+        break;
+    case 0x3a:
+         m_dashBoard->setsupportedReg(49);
+        i ++;
+        break;
+    case 0x4a:
+         m_dashBoard->setsupportedReg(50);
+        i ++;
+        break;
+    case 0x52:
+         m_dashBoard->setsupportedReg(51);
+        i ++;
+        break;
     case 0x53:
-         m_dashBoard->setsupportedReg(45);
+         m_dashBoard->setsupportedReg(52);
         i ++;
         break;
     case 0xFE:

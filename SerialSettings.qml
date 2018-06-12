@@ -776,7 +776,7 @@ Rectangle {
                break;
            }
        case 16: {
-               // EGT .visible = true;
+               consEGT.visible = true;
                break;
            }
        case 17: {
@@ -843,6 +843,70 @@ Rectangle {
                consPositionCounter.visible = true;
                break;
            }
+       case 35: {
+           consPurgeContValve.visible = true;
+           break;
+       }
+       case 36: {
+           consFuelTankTemp.visible = true;
+           break;
+       }
+       case 37: {
+           consDPCMDRVolt.visible = true;
+           break;
+       }
+       case 38: {
+           consFuelGaugeVolt.visible = true;
+           break;
+       }
+       case 39: {
+           consFRO2HeatB1.visible = true;
+           break;
+       }
+       case 40: {
+           consFRO2HeatB2.visible = true;
+           break;
+       }
+       case 41: {
+           consIGNsw.visible = true;
+           break;
+       }
+       case 42: {
+           consCALLD.visible = true;
+           break;
+       }
+       case 43: {
+           consBFuelSched.visible = true;
+           break;
+       }
+       case 44: {
+           consRRO2SensVolt.visible = true;
+           break;
+       }
+       case 45: {
+           consRRO2SensB2Volt.visible = true;
+           break;
+       }
+       case 46: {
+           consAbsTPSVolt.visible = true;
+           break;
+       }
+       case 47: {
+           consMAFgmS.visible = true;
+           break;
+       }
+       case 48: {
+           consEvapSysPressVolt.visible = true;
+           break;
+       }
+       case 50: {
+           consAbsPressSensVolt.visible = true;
+           break;
+       }
+       case 52: {
+           consFPCMFPVolt.visible = true;
+           break;
+       }
        default: {
                break;
            }
@@ -1301,6 +1365,102 @@ Rectangle {
                 id: consPositionCounter
                 visible: false;
                 text: qsTr("Position Counter")
+                font.pixelSize: windowbackround.width / 55
+            }
+            CheckBox {
+                id: consPurgeContValve
+                visible: false;
+                text: qsTr("Purg. Vol. Control Valve")
+                font.pixelSize: windowbackround.width / 55
+            }
+            CheckBox {
+                id: consFuelTankTemp
+                visible: false;
+                text: qsTr("Fuel Tank Temp")
+                font.pixelSize: windowbackround.width / 55
+            }
+            CheckBox {
+                id: consDPCMDRVolt
+                visible: false;
+                text: qsTr("FPCM DR, Voltage")
+                font.pixelSize: windowbackround.width / 55
+            }
+            CheckBox {
+                id: consFuelGaugeVolt
+                visible: false;
+                text: qsTr("Fuel Gauge, Voltage")
+                font.pixelSize: windowbackround.width / 55
+            }
+            CheckBox {
+                id: consFRO2HeatB1
+                visible: false;
+                text: qsTr("FR O2 Heater-B1")
+                font.pixelSize: windowbackround.width / 55
+            }
+            CheckBox {
+                id: consFRO2HeatB2
+                visible: false;
+                text: qsTr("FR O2 Heater-B2")
+                font.pixelSize: windowbackround.width / 55
+            }
+            CheckBox {
+                id: consIGNsw
+                visible: false;
+                text: qsTr("Ignition Switch")
+                font.pixelSize: windowbackround.width / 55
+            }
+            CheckBox {
+                id: consCALLD
+                visible: false;
+                text: qsTr("CAL/LD Value, %")
+                font.pixelSize: windowbackround.width / 55
+            }
+            CheckBox {
+                id: consBFuelSched
+                visible: false;
+                text: qsTr("B/Fuel Schedule,ms")
+                font.pixelSize: windowbackround.width / 55
+            }
+            CheckBox {
+                id: consRRO2SensVolt
+                visible: false;
+                text: qsTr("RR O2 Sensor Volt")
+                font.pixelSize: windowbackround.width / 55
+            }
+            CheckBox {
+                id: consRRO2SensB2Volt
+                visible: false;
+                text: qsTr("RR O2 Sensor B2 Volt")
+                font.pixelSize: windowbackround.width / 55
+            }
+            CheckBox {
+                id: consAbsTPSVolt
+                visible: false;
+                text: qsTr("Absolute TPS Volt")
+                font.pixelSize: windowbackround.width / 55
+            }
+            CheckBox {
+                id: consMAFgmS
+                visible: false;
+                text: qsTr("MAF gm/S")
+                font.pixelSize: windowbackround.width / 55
+            }
+            CheckBox {
+                id: consEvapSysPressVolt
+                visible: false;
+                text: qsTr("Evap System Press Volt")
+                font.pixelSize: windowbackround.width / 55
+            }
+            CheckBox {
+                id: consAbsPressSensVolt
+                visible: false;
+                text: qsTr("Abs. Press. Sens. Volt")
+                font.pixelSize: windowbackround.width / 55
+            }
+            CheckBox {
+                id: consFPCMFPVolt
+                visible: false;
+                text: qsTr("FPCM F/P Voltage")
                 font.pixelSize: windowbackround.width / 55
             }
             Button {
