@@ -48,8 +48,8 @@ void udpreceiver::processPendingDatagrams()
         QStringList list = raw.split( "," );
         int ident =list[0].toInt();
         float Value =list[1].toFloat();
-        qDebug()<<ident;
-        qDebug()<<Value;
+     //   qDebug()<<ident;
+     //   qDebug()<<Value;
 
         switch(ident) {
 
