@@ -252,9 +252,7 @@ Rectangle {
                     width: windowbackround.width / 5
                     height: windowbackround.height /15
                     font.pixelSize: windowbackround.width / 55
-                    color: "white"
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhPreferLowercase | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
-                    //enterKeyAction: EnterKeyAction.Next
                 }
                 Text
                 {
@@ -267,7 +265,6 @@ Rectangle {
                     width: windowbackround.width / 5
                     height: windowbackround.height /15
                     font.pixelSize: windowbackround.width / 55
-                    color: "white"
                     text: qsTr("0")
                     inputMethodHints: Qt.ImhDigitsOnly
                     //enterKeyAction: EnterKeyAction.Next
@@ -283,7 +280,6 @@ Rectangle {
                     width: windowbackround.width / 5
                     height: windowbackround.height /15
                     font.pixelSize: windowbackround.width / 55
-                    color: "white"
                     readOnly: true
                     text: "0"
                 }
