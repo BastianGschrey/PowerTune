@@ -169,7 +169,7 @@ Rectangle {
                     width: windowbackround.width / 5
                     height: windowbackround.height /15
                     font.pixelSize: windowbackround.width / 55
-                    model: [ "PowerFC","UDP","Adaptronic Select Modbus","CAN Adaptronic Modular","Consult"]
+                    model: [ "PowerFC","UDP","Adaptronic Select Modbus","CAN Adaptronic Modular","Consult","HaltechV1","HaltechV2"]
 
                     property bool initialized: false
                     onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
@@ -235,7 +235,6 @@ Rectangle {
                     width: windowbackround.width / 5
                     height: windowbackround.height /15
                     font.pixelSize: windowbackround.width / 55
-                    color: "white"
                     placeholderText: qsTr("GoPro Password")
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhPreferLowercase | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
                     Component.onCompleted: {transferSettings.sendSettings() }
@@ -253,6 +252,7 @@ Rectangle {
                     height: windowbackround.height /15
                     font.pixelSize: windowbackround.width / 55
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhPreferLowercase | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
+                    //enterKeyAction: EnterKeyAction.Next
                 }
                 Text
                 {

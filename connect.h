@@ -32,7 +32,6 @@
 class SerialPort;
 class Sensors;
 class DashBoard;
-class AdaptronicCAN;
 class AdaptronicSelect;
 class Apexi;
 class datalogger;
@@ -80,7 +79,6 @@ private:
     AdaptronicSelect *m_adaptronicselect;
     Apexi *m_apexi;
     Sensors *m_sensors;
-    AdaptronicCAN *m_adaptronicCAN;
     datalogger *m_datalogger;
     calculations *m_calculations;
     QStringList m_portsNames;

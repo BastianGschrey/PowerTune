@@ -48,6 +48,9 @@ void udpreceiver::processPendingDatagrams()
         QStringList list = raw.split( "," );
         int ident =list[0].toInt();
         float Value =list[1].toFloat();
+        qDebug()<<ident;
+        qDebug()<<Value;
+
         switch(ident) {
 
         case 1:
@@ -674,11 +677,10 @@ void udpreceiver::processPendingDatagrams()
         case 218:
             m_dashboard->setturborpm(Value);
             break;
-            /*
+
         case 219:
-            m_dashboard->setunits(Value);
+            //m_dashboard->setunits(Value);
             break;
-*/
         case 220:
             m_dashboard->setwastegatepress(Value);
             break;
@@ -697,14 +699,14 @@ void udpreceiver::processPendingDatagrams()
         case 225:
             m_dashboard->setwheelspdftright(Value);
             break;
-            /*
+
         case 226:
-            m_dashboard->setwheelspdrearleft(Value);
+            //m_dashboard->setwheelspdrearleft(Value);
             break;
         case 227:
-            m_dashboard->setwheelspdrearright(Value);
+            //m_dashboard->setwheelspdrearright(Value);
             break;
-*/
+
         case 228:
             m_dashboard->setBatteryV(Value);
             break;
