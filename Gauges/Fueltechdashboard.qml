@@ -16,9 +16,10 @@ Item {
     property var val3: false
     Gauge {
         id: gauge
-        height: parent.height
-        width: parent.width /1.01
+        height: 200
+        width: parent.width
         x:0
+        y:0
         minorTickmarkCount: 0
         tickmarkStepSize : 9000
         orientation : Qt.Horizontal
