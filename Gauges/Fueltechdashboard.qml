@@ -26,19 +26,22 @@ Item {
         minimumValue: 0
         maximumValue: 9000
         value: Dashboard.rpm
-        style: GaugeStyle {
-            valueBar: Rectangle {
-                width:  200
+
+         style: GaugeStyle {
+             valueBar: Rectangle {
+                 width:  200
                 color: Qt.rgba(gauge.value / gauge.maximumValue, 0, 1 - gauge.value / gauge.maximumValue, 1)
             }
+
+
         }
     }
-        Image {
+        /*Image {
             id: coverimage
             height: 200
             width: fueltechDash.width
              source: "/graphics/vertrevcanvas.png"
-        }
+        }*/
 
 
         Text {

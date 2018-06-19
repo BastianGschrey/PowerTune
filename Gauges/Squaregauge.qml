@@ -92,7 +92,9 @@ Rectangle {
             height: parent.height - 50
             width: parent.width * 0.1
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 10
+            anchors.bottomMargin: 0
+            anchors.top: parent.top
+            anchors.topMargin: 30
             anchors.left: parent.left
             anchors.leftMargin: 10
             orientation: Qt.Vertical
@@ -132,7 +134,9 @@ Rectangle {
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 10
             anchors.left: parent.left
-            anchors.leftMargin: 10
+            anchors.leftMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
             anchors.horizontalCenter: parent.horizontalCenter
             orientation: Qt.Horizontal
             minorTickmarkCount: 0
