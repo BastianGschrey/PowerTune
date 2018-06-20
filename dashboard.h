@@ -85,6 +85,15 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal Flag14 READ Flag14 WRITE setFlag14 NOTIFY flag14Changed)
     Q_PROPERTY(qreal Flag15 READ Flag15 WRITE setFlag15 NOTIFY flag15Changed)
     Q_PROPERTY(qreal Flag16 READ Flag16 WRITE setFlag16 NOTIFY flag16Changed)
+    Q_PROPERTY(qreal Flag17 READ Flag17 WRITE setFlag17 NOTIFY flag17Changed)
+    Q_PROPERTY(qreal Flag18 READ Flag18 WRITE setFlag18 NOTIFY flag18Changed)
+    Q_PROPERTY(qreal Flag19 READ Flag19 WRITE setFlag19 NOTIFY flag19Changed)
+    Q_PROPERTY(qreal Flag20 READ Flag20 WRITE setFlag20 NOTIFY flag20Changed)
+    Q_PROPERTY(qreal Flag21 READ Flag21 WRITE setFlag21 NOTIFY flag21Changed)
+    Q_PROPERTY(qreal Flag22 READ Flag22 WRITE setFlag22 NOTIFY flag22Changed)
+    Q_PROPERTY(qreal Flag23 READ Flag23 WRITE setFlag23 NOTIFY flag23Changed)
+    Q_PROPERTY(qreal Flag24 READ Flag24 WRITE setFlag24 NOTIFY flag24Changed)
+    Q_PROPERTY(qreal Flag25 READ Flag25 WRITE setFlag25 NOTIFY flag25Changed)
 
     //Flag Strings
     Q_PROPERTY(QString FlagString1 READ FlagString1 WRITE setFlagString1 NOTIFY flagString1Changed)
@@ -356,6 +365,15 @@ public:
     void setFlag14(const qreal &Flag14);
     void setFlag15(const qreal &Flag15);
     void setFlag16(const qreal &Flag16);
+    void setFlag17(const qreal &Flag17);
+    void setFlag18(const qreal &Flag18);
+    void setFlag19(const qreal &Flag19);
+    void setFlag20(const qreal &Flag20);
+    void setFlag21(const qreal &Flag21);
+    void setFlag22(const qreal &Flag22);
+    void setFlag23(const qreal &Flag23);
+    void setFlag24(const qreal &Flag24);
+    void setFlag25(const qreal &Flag25);
 
     //Flag Strings
 
@@ -631,6 +649,15 @@ public:
     qreal Flag14() const;
     qreal Flag15() const;
     qreal Flag16() const;
+    qreal Flag17() const;
+    qreal Flag18() const;
+    qreal Flag19() const;
+    qreal Flag20() const;
+    qreal Flag21() const;
+    qreal Flag22() const;
+    qreal Flag23() const;
+    qreal Flag24() const;
+    qreal Flag25() const;
 
     // Flag Strings
 
@@ -904,7 +931,15 @@ signals:
     void flag14Changed(qreal Flag14);
     void flag15Changed(qreal Flag15);
     void flag16Changed(qreal Flag16);
-
+    void flag17Changed(qreal Flag17);
+    void flag18Changed(qreal Flag18);
+    void flag19Changed(qreal Flag19);
+    void flag20Changed(qreal Flag20);
+    void flag21Changed(qreal Flag21);
+    void flag22Changed(qreal Flag22);
+    void flag23Changed(qreal Flag23);
+    void flag24Changed(qreal Flag24);
+    void flag25Changed(qreal Flag25);
     //Flag Strings
 
     void flagString1Changed(QString FlagString1);
@@ -1207,7 +1242,15 @@ private:
     qreal m_Flag14;
     qreal m_Flag15;
     qreal m_Flag16;
-
+    qreal m_Flag17;
+    qreal m_Flag18;
+    qreal m_Flag19;
+    qreal m_Flag20;
+    qreal m_Flag21;
+    qreal m_Flag22;
+    qreal m_Flag23;
+    qreal m_Flag24;
+    qreal m_Flag25;
 
     //Platform String
 

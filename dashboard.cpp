@@ -117,6 +117,15 @@ DashBoard::DashBoard(QObject *parent)
     , m_Flag14(0)
     , m_Flag15(0)
     , m_Flag16(0)
+    , m_Flag17(0)
+    , m_Flag18(0)
+    , m_Flag19(0)
+    , m_Flag20(0)
+    , m_Flag21(0)
+    , m_Flag22(0)
+    , m_Flag23(0)
+    , m_Flag24(0)
+    , m_Flag25(0)
 
 
     //Adaptronic extra
@@ -810,8 +819,69 @@ void DashBoard::setFlag16(const qreal &Flag16)
     m_Flag16 = Flag16;
     emit flag16Changed(Flag16);
 }
-
-
+void DashBoard::setFlag17(const qreal &Flag17)
+{
+    if (m_Flag17 == Flag17)
+        return;
+    m_Flag17 = Flag17;
+    emit flag17Changed(Flag17);
+}
+void DashBoard::setFlag18(const qreal &Flag18)
+{
+    if (m_Flag18 == Flag18)
+        return;
+    m_Flag18 = Flag18;
+    emit flag18Changed(Flag18);
+}
+void DashBoard::setFlag19(const qreal &Flag19)
+{
+    if (m_Flag19 == Flag19)
+        return;
+    m_Flag19 = Flag19;
+    emit flag19Changed(Flag19);
+}
+void DashBoard::setFlag20(const qreal &Flag20)
+{
+    if (m_Flag20 == Flag20)
+        return;
+    m_Flag20 = Flag20;
+    emit flag20Changed(Flag20);
+}
+void DashBoard::setFlag21(const qreal &Flag21)
+{
+    if (m_Flag21 == Flag21)
+        return;
+    m_Flag21 = Flag21;
+    emit flag21Changed(Flag21);
+}
+void DashBoard::setFlag22(const qreal &Flag22)
+{
+    if (m_Flag22 == Flag22)
+        return;
+    m_Flag22 = Flag22;
+    emit flag22Changed(Flag22);
+}
+void DashBoard::setFlag23(const qreal &Flag23)
+{
+    if (m_Flag23 == Flag23)
+        return;
+    m_Flag23 = Flag23;
+    emit flag23Changed(Flag23);
+}
+void DashBoard::setFlag24(const qreal &Flag24)
+{
+    if (m_Flag24 == Flag24)
+        return;
+    m_Flag24 = Flag24;
+    emit flag24Changed(Flag24);
+}
+void DashBoard::setFlag25(const qreal &Flag25)
+{
+    if (m_Flag25 == Flag25)
+        return;
+    m_Flag25 = Flag25;
+    emit flag25Changed(Flag25);
+}
 //Flag Strings
 
 void DashBoard::setFlagString1(const QString &FlagString1)
@@ -2130,7 +2200,15 @@ qreal DashBoard::Flag13() const { return m_Flag13; }
 qreal DashBoard::Flag14() const { return m_Flag14; }
 qreal DashBoard::Flag15() const { return m_Flag15; }
 qreal DashBoard::Flag16() const { return m_Flag16; }
-
+qreal DashBoard::Flag17() const { return m_Flag17; }
+qreal DashBoard::Flag18() const { return m_Flag18; }
+qreal DashBoard::Flag19() const { return m_Flag19; }
+qreal DashBoard::Flag20() const { return m_Flag20; }
+qreal DashBoard::Flag21() const { return m_Flag21; }
+qreal DashBoard::Flag22() const { return m_Flag22; }
+qreal DashBoard::Flag23() const { return m_Flag23; }
+qreal DashBoard::Flag24() const { return m_Flag24; }
+qreal DashBoard::Flag25() const { return m_Flag25; }
 //Flag Strings
 
 QString DashBoard::FlagString1() const { return m_FlagString1; }

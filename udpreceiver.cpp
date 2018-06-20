@@ -246,31 +246,31 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setFlag16(Value);
             break;
         case 65:
-            //            m_dashboard->setFlagString1(Value);
+            m_dashboard->setFlag17(Value);
             break;
         case 66:
-            //            m_dashboard->setFlagString2(Value);
+            m_dashboard->setFlag18(Value);
             break;
         case 67:
-            //            m_dashboard->setFlagString3(Value);
+            m_dashboard->setFlag19(Value);
             break;
         case 68:
-            //            m_dashboard->setFlagString4(Value);
+            m_dashboard->setFlag20(Value);
             break;
         case 69:
-            //            m_dashboard->setFlagString5(Value);
+            m_dashboard->setFlag21(Value);
             break;
         case 70:
-            //            m_dashboard->setFlagString6(Value);
+            m_dashboard->setFlag22(Value);
             break;
         case 71:
-            //            m_dashboard->setFlagString7(Value);
+            m_dashboard->setFlag23(Value);
             break;
         case 72:
-            //           m_dashboard->setFlagString8(Value);
+            m_dashboard->setFlag24(Value);
             break;
         case 73:
-            //            m_dashboard->setFlagString9(Value);
+            m_dashboard->setFlag25(Value);
             break;
         case 74:
             //            m_dashboard->setFlagString10(Value);
