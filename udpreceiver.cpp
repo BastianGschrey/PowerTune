@@ -247,9 +247,11 @@ void udpreceiver::processPendingDatagrams()
             break;
         case 65:
             m_dashboard->setFlag17(Value);
+            qDebug()<< "MIL ON" << Value;
             break;
         case 66:
             m_dashboard->setFlag18(Value);
+            qDebug()<< "Battery Light" << Value;
             break;
         case 67:
             m_dashboard->setFlag19(Value);
