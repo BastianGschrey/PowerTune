@@ -40,5 +40,6 @@
         <file>Gauges/Mediaplayer.qml</file>
         <file>Gauges/Screentoggle.qml</file>
         <file>Gauges/ConsultTest.qml</file>
+        <file>Gauges/HaltechFlags.qml</file>
     </qresource>
 </RCC>

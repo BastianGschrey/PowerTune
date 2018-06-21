@@ -23,14 +23,14 @@ ApplicationWindow {
 
         currentIndex: 0
         anchors.fill: parent
-/*
+
         Loader {
 
             id: testing
-            source: "qrc:/Gauges/ConsultTest.qml"
+            source: "qrc:/Gauges/HaltechFlags.qml"
 
         }
-*/
+
         Loader {
 
             id: firstPageLoader
