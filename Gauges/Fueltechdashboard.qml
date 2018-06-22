@@ -36,12 +36,12 @@ Item {
 
         }
     }
-        /*Image {
+        Image {
             id: coverimage
             height: 200
             width: fueltechDash.width
              source: "/graphics/vertrevcanvas.png"
-        }*/
+        }
 
 
         Text {
