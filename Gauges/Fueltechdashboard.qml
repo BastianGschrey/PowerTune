@@ -18,8 +18,7 @@ Item {
         id: gauge
         height: 200
         width: parent.width
-        x:0
-        y:0
+        anchors.left: parent.left
         minorTickmarkCount: 0
         tickmarkStepSize : 9000
         orientation : Qt.Horizontal
