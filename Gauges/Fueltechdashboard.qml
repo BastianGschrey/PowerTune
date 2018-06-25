@@ -30,10 +30,14 @@ Item {
              valueBar: Rectangle {
                 width:  200
                 color: Qt.rgba(gauge.value / gauge.maximumValue, 0, 1 - gauge.value / gauge.maximumValue, 1)
-                }
-             tickmarkLabel: Text {
-                color: "transparent"
              }
+             tickmarkLabel: Text {
+                visible: false
+             }
+             tickmark: Item {
+                visible: false
+             }
+
 
         }
     }
