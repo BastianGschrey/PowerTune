@@ -265,6 +265,7 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_wheelslip(0)
     ,  m_wheelspdftleft(0)
     ,  m_wheelspdftright(0)
+    ,  m_speedpercent(1)
 
 
 {
@@ -435,9 +436,9 @@ void DashBoard::setSpeed(const qreal &speed)
     if (m_speed == speed)
         return;
     if (m_units == "metric")
-    {m_speed = speed;}
+    {m_speed = qRound(speed * m_speedpercent);}
     if (m_units == "imperial")
-    {m_speed = qRound(speed * 0.621371);}
+    {m_speed = qRound((speed * 0.621371) * m_speedpercent);}
     emit speedChanged(speed);
 }
 
@@ -2117,6 +2118,13 @@ void DashBoard::setsupportedReg(const int &supportedReg)
     m_supportedReg = supportedReg;
     emit supportedRegChanged(supportedReg);
 }
+void DashBoard::setspeedpercent(const qreal &speedpercent)
+{
+    if (m_speedpercent == speedpercent)
+        return;
+    m_speedpercent = speedpercent;
+    emit speedpercentChanged(speedpercent);
+}
 
 
 // Odometer
@@ -2388,5 +2396,7 @@ qreal DashBoard::wheeldiff() const { return m_wheeldiff; }
 qreal DashBoard::wheelslip() const { return m_wheelslip; }
 qreal DashBoard::wheelspdftleft() const { return m_wheelspdftleft; }
 qreal DashBoard::wheelspdftright() const { return m_wheelspdftright; }
-QString DashBoard::musicpath() const { return m_musicpath; }
+QString DashBoard::musicpath() const {return m_musicpath; }
 int DashBoard::supportedReg() const {return m_supportedReg; }
+qreal DashBoard::speedpercent() const {return m_speedpercent; }
+

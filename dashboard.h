@@ -280,7 +280,8 @@ class DashBoard : public QObject
     Q_PROPERTY(QString musicpath READ musicpath WRITE setmusicpath NOTIFY musicpathChanged)
 
     Q_PROPERTY(int supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
-
+    Q_PROPERTY(qreal speedpercent READ speedpercent WRITE setspeedpercent NOTIFY speedpercentChanged)
+    //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
 public:
     DashBoard(QObject *parent = 0);
 
@@ -566,6 +567,8 @@ public:
 
     void setsupportedReg(const int &supportedReg);
 
+    Q_INVOKABLE void setspeedpercent(const qreal &speedpercent);
+
 
     qreal Odo() const;
 
@@ -845,6 +848,7 @@ public:
     QString musicpath() const;
 
     int supportedReg() const;
+    qreal speedpercent() const;
 
 
 
@@ -1122,7 +1126,7 @@ signals:
     void wheelspdftrightChanged(qreal wheelspdftright);
     void musicpathChanged(QString musicpath);
     void supportedRegChanged(int supportedReg);
-
+    void speedpercentChanged(qreal speedpercent);
 
 private:
     // Odometer
@@ -1408,6 +1412,7 @@ private:
 
     QString m_musicpath;
     int m_supportedReg;
+    qreal m_speedpercent;
 
 
 };
