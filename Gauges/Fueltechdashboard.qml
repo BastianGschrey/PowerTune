@@ -28,10 +28,12 @@ Item {
 
          style: GaugeStyle {
              valueBar: Rectangle {
-                 width:  200
+                width:  200
                 color: Qt.rgba(gauge.value / gauge.maximumValue, 0, 1 - gauge.value / gauge.maximumValue, 1)
-            }
-
+                }
+             tickmarkLabel: Text {
+                color: "transparent"
+             }
 
         }
     }
