@@ -135,8 +135,8 @@ Rectangle {
             anchors.bottomMargin: 10
             anchors.left: parent.left
             anchors.leftMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
+            //anchors.right: parent.right
+            //anchors.rightMargin: 0
             anchors.horizontalCenter: parent.horizontalCenter
             orientation: Qt.Horizontal
             minorTickmarkCount: 0
