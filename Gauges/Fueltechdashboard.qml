@@ -15,39 +15,55 @@ Item {
     property var val1: false
     property var val2: false
     property var val3: false
-    Gauge {
-        id: gauge
-        height: 200
-        width: parent.width
-        anchors.left: parent.left
-        minorTickmarkCount: 0
-        tickmarkStepSize : 9000
-        orientation : Qt.Horizontal
-        minimumValue: 0
-        maximumValue: 9000
-        value: Dashboard.rpm
-
-         style: GaugeStyle {
-             valueBar: Rectangle {
-                width:  200
-                color: Qt.rgba(gauge.value / gauge.maximumValue, 0, 1 - gauge.value / gauge.maximumValue, 1)
-             }
-             tickmarkLabel: Text {
-                visible: false
-             }
-             tickmark: Item {
-                visible: false
-             }
-
-
+    property  int maxRPM: Dashboard.maxRPM
+    Connections{
+        target: Dashboard
+        onMaxRPMChanged: maxRPM = Dashboard.maxRPM
         }
-    }
-        Image {
-            id: coverimage
-            height: 200
-            width: fueltechDash.width
-             source: "/graphics/vertrevcanvas.png"
-        }
+
+
+      Image
+      {
+        id:groove1
+        source:"qrc:/graphics/fueltechempty.png"
+        anchors.top:parent.top
+        anchors.left:parent.left
+        smooth: true
+
+        Item{
+              id: displayWindow1
+              height: parent.height
+              width: (800*(Dashboard.rpm)/maxRPM)
+              clip: true
+
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+
+              Image
+              {
+                id:speedarcfill
+                anchors.top:parent.top
+                anchors.left:parent.left
+                source:"qrc:/graphics/fueltechfill.png"
+                smooth: true
+                z: 1
+              }
+            }
+
+      PathInterpolator {
+        id: motionPath
+        property int value
+
+           path: Path {
+           startX: 0; startY: 189
+           PathLine { x: 800; y: 480 }
+           //PathArc { x: 176; y: 11; radiusX: 90; radiusY: 90 }
+           //PathLine { x: 800; y: 11 }
+         }
+        progress: Dashboard.rpm / maxRPM //slider.value/8000 // replace this with Dashboard.rpm
+      }
+}
+//
         ShiftLights{}
 
         Text {
