@@ -18,7 +18,7 @@ Item {
     property  int maxRPM: Dashboard.maxRPM
     Connections{
         target: Dashboard
-        onMaxRPMChanged: maxRPM = Dashboard.maxRPM
+        onMaxRPMChanged: maxRPM = Dashboard.maxRPM,console.log(Dashboard.maxRPM)
         }
 
 
@@ -57,10 +57,8 @@ Item {
            path: Path {
            startX: 0; startY: 189
            PathLine { x: 800; y: 480 }
-           //PathArc { x: 176; y: 11; radiusX: 90; radiusY: 90 }
-           //PathLine { x: 800; y: 11 }
          }
-        progress: Dashboard.rpm / maxRPM //slider.value/8000 // replace this with Dashboard.rpm
+        progress: Dashboard.rpm / maxRPM
       }
 }
 //
