@@ -7,11 +7,7 @@ Rectangle {
   visible: true
   color:"transparent"
   anchors.fill:parent
-  property  int maxRPM: Dashboard.maxRPM
-  Connections{
-      target: Dashboard
-      onMaxRPMChanged: maxRPM = Dashboard.maxRPM
-      }
+
 
 
     Image
@@ -25,7 +21,7 @@ Rectangle {
       Item{
             id: displayWindow1
             height: parent.height
-            width: (651*(Dashboard.rpm)/maxRPM)+61 //+61 is the pixel where the RPM bar starts and from there is 651 pixels wide
+            width: (651*(Dashboard.rpm)/Dashboard.maxRPM)+61 //+61 is the pixel where the RPM bar starts and from there is 651 pixels wide
 
             clip: true
 
@@ -70,7 +66,7 @@ Rectangle {
          //PathArc { x: 176; y: 11; radiusX: 90; radiusY: 90 }
          //PathLine { x: 800; y: 11 }
        }
-      progress: Dashboard.rpm / maxRPM //slider.value/8000 // replace this with Dashboard.rpm
+      progress: Dashboard.rpm / Dashboard.maxRPM //slider.value/8000 // replace this with Dashboard.rpm
     }
     }
 // remove slider

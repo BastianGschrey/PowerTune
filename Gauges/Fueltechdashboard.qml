@@ -15,11 +15,6 @@ Item {
     property var val1: false
     property var val2: false
     property var val3: false
-    property  int maxRPM: Dashboard.maxRPM
-    Connections{
-        target: Dashboard
-        onMaxRPMChanged: maxRPM = Dashboard.maxRPM,console.log(Dashboard.maxRPM)
-        }
 
 
       Image
@@ -33,7 +28,7 @@ Item {
         Item{
               id: displayWindow1
               height: parent.height
-              width: (800*(Dashboard.rpm)/maxRPM)
+              width: (800*(Dashboard.rpm)/Dashboard.maxRPM)
               clip: true
 
                 anchors.bottom: parent.bottom
@@ -58,7 +53,7 @@ Item {
            startX: 0; startY: 189
            PathLine { x: 800; y: 480 }
          }
-        progress: Dashboard.rpm / maxRPM
+        progress: Dashboard.rpm / Dashboard.maxRPM
       }
 }
 //
