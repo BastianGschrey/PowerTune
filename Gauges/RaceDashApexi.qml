@@ -19,7 +19,8 @@ Item {
         id:racedashwindow
         width: parent.width
         height:parent.height
-        color:"grey"
+        color: "black"
+
 
         RPMbar{}
         ShiftLights{}
