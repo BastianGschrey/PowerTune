@@ -1676,5 +1676,113 @@ TabView {
             }
         }
     }
+    Tab {
+        title: "RPM" //
+        Rectangle{
+            id: rpmSettings
+            anchors.fill : parent
+            color: "grey"
+
+            Item {
+                Settings {
+                    property alias maxrpm: maxRPM.text
+                    property alias shift1: stage1.text
+                    property alias shift2: stage2.text
+                    property alias shift3: stage3.text
+                    property alias shift4: stage4.text
+
+                }
+
+            }
+
+            Grid {
+
+                rows:2
+                columns: 5
+                spacing: 5
+                Text { text: "MAX RPM"
+                    font.pixelSize: rpmSettings.width / 55;color:"white"}
+                Text { text: "Shift Lights Stage 1 (g)"
+                    font.pixelSize: rpmSettings.width / 55;color:"white"}
+                Text { text: "Shift Lights Stage 2 (g)"
+                    font.pixelSize: rpmSettings.width / 55;color:"white"}
+                Text { text: "Shift Lights Stage 3 (y)"
+                    font.pixelSize: rpmSettings.width / 55;color:"white"}
+                Text { text: "Shift Lights Stage 4 (r)"
+                    font.pixelSize: rpmSettings.width / 55;color:"white"}
+                TextField {
+                    id: maxRPM
+                    width: rpmSettings.width / 5.5
+                    height: rpmSettings.height /15
+                    font.pixelSize: rpmSettings.width / 55
+                    inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+                    onEditingFinished: Dashboard.setMaxRPM
+                }
+                TextField {
+                    id: stage1
+                    width: rpmSettings.width / 5.5
+                    height: rpmSettings.height /15
+                    font.pixelSize: rpmSettings.width / 55
+                    inputMethodHints: Qt.ImhDigitsOnly
+                    onEditingFinished:Dashboard.setRPMStage1
+                }
+                TextField {
+                    id: stage2
+                    width: rpmSettings.width / 5.5
+                    height: rpmSettings.height /15
+                    font.pixelSize: rpmSettings.width / 55
+                    inputMethodHints: Qt.ImhDigitsOnly
+                    onEditingFinished:Dashboard.setRPMStage2
+                }
+                TextField {
+                    id: stage3
+                    width: rpmSettings.width / 5.5
+                    height: rpmSettings.height /15
+                    font.pixelSize: rpmSettings.width / 55
+                    inputMethodHints: Qt.ImhDigitsOnly
+                    onEditingFinished:Dashboard.setRPMStage3
+
+                }
+                TextField {
+                    id: stage4
+                    width: rpmSettings.width / 5.5
+                    height: rpmSettings.height /15
+                    font.pixelSize: rpmSettings.width / 55
+                    inputMethodHints: Qt.ImhDigitsOnly
+                    onEditingFinished: Dashboard.setRPMStage4
+                    //Component.onCompleted: tabView.currentIndex = 4 // opens the 5th tab
+                }
+
+            }
+            Rectangle{
+                anchors.fill: parent
+                color: "transparent"
+                InputPanel {
+                    id: keyboard2;
+                    anchors.fill: parent
+                    states: State {
+                        name: "visible";
+                        when: keyboard.active;
+                        PropertyChanges {
+                            target: keyboard2;
+                            y: 0 ;
+                        }
+                    }
+                    transitions: Transition {
+                        from: ""; // default initial state
+                        to: "visible";
+                        reversible: true; // toggle visibility with reversible: true;
+                        ParallelAnimation {
+                            NumberAnimation {
+                                properties: "y";
+                                duration: 250;
+                                easing.type: Easing.InOutQuad;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 

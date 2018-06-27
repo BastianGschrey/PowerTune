@@ -5,9 +5,14 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 Rectangle {
   visible: true
-  color:"white"
+  color:"transparent"
   anchors.fill:parent
-  property  int maxRPM: 9500
+  property  int maxRPM: Dashboard.MaxRPM
+  Connections{
+      target: Dashboard
+      onMaxRPMhanged: maxRPM = Dashboard.MaxRPM
+      }
+
 
     Image
     {
@@ -15,11 +20,12 @@ Rectangle {
       source:"qrc:/graphics/empty.png"
       anchors.top:parent.top
       anchors.left:parent.left
+      smooth: true
 
       Item{
             id: displayWindow1
             height: parent.height
-            width: (631*(Dashboard.rpm)/maxRPM)+86 //+81 is the pixel where the RPM bar starts and from there is 631 pixels wide
+            width: (651*(Dashboard.rpm)/maxRPM)+61 //+61 is the pixel where the RPM bar starts and from there is 651 pixels wide
 
             clip: true
 
@@ -43,6 +49,7 @@ Rectangle {
               anchors.top:parent.top
               anchors.left:parent.left
               source:"qrc:/graphics/fill.png"
+              smooth: true
               z: 1
             }
           }
@@ -58,8 +65,8 @@ Rectangle {
         PathLine { x: 245; y: 11 }
       }*/
          path: Path {
-         startX: 89; startY: 189
-         PathLine { x: 700; y: 480 }
+         startX: 61; startY: 189
+         PathLine { x: 712; y: 480 }
          //PathArc { x: 176; y: 11; radiusX: 90; radiusY: 90 }
          //PathLine { x: 800; y: 11 }
        }

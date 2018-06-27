@@ -281,6 +281,12 @@ class DashBoard : public QObject
 
     Q_PROPERTY(int supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
     Q_PROPERTY(qreal speedpercent READ speedpercent WRITE setspeedpercent NOTIFY speedpercentChanged)
+
+    Q_PROPERTY(int MaxRPM READ MaxRPM WRITE setMaxRPM NOTIFY MaxRPMChanged)
+    Q_PROPERTY(int RPMStage1 READ RPMStage1 WRITE setRPMStage1 NOTIFY RPMStage1Changed)
+    Q_PROPERTY(int RPMStage2 READ RPMStage2 WRITE setRPMStage2 NOTIFY RPMStage2Changed)
+    Q_PROPERTY(int RPMStage3 READ RPMStage3 WRITE setRPMStage3 NOTIFY RPMStage3Changed)
+    Q_PROPERTY(int RPMStage4 READ RPMStage4 WRITE setRPMStage4 NOTIFY RPMStage4Changed)
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
 public:
     DashBoard(QObject *parent = 0);
@@ -569,6 +575,13 @@ public:
 
     Q_INVOKABLE void setspeedpercent(const qreal &speedpercent);
 
+    Q_INVOKABLE void setMaxRPM(const int &MaxRPM);
+    Q_INVOKABLE void setRPMStage1(const int &RPMStage1);
+    Q_INVOKABLE void setRPMStage2(const int &RPMStage2);
+    Q_INVOKABLE void setRPMStage3(const int &RPMStage3);
+    Q_INVOKABLE void setRPMStage4(const int &RPMStage4);
+
+
 
     qreal Odo() const;
 
@@ -850,7 +863,11 @@ public:
     int supportedReg() const;
     qreal speedpercent() const;
 
-
+    int MaxRPM() const;
+    int RPMStage1() const;
+    int RPMStage2() const;
+    int RPMStage3() const;
+    int RPMStage4() const;
 
 signals:
 
@@ -1127,6 +1144,12 @@ signals:
     void musicpathChanged(QString musicpath);
     void supportedRegChanged(int supportedReg);
     void speedpercentChanged(qreal speedpercent);
+    void MaxRPMChanged (int MaxRPM);
+    void RPMStage1Changed(int RPMStage1);
+    void RPMStage2Changed(int RPMStage2);
+    void RPMStage3Changed(int RPMStage3);
+    void RPMStage4Changed(int RPMStage4);
+
 
 private:
     // Odometer
@@ -1414,6 +1437,11 @@ private:
     int m_supportedReg;
     qreal m_speedpercent;
 
+    int m_MaxRPM;
+    int m_RPMStage1;
+    int m_RPMStage2;
+    int m_RPMStage3;
+    int m_RPMStage4;
 
 };
 

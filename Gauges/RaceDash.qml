@@ -13,32 +13,8 @@ Item {
         id:racedashwindow
         width: parent.width
         height:parent.height
-        color:"grey"
-        Gauge {
-            id: gauge
-            height: parent.height
-            width: parent.width /1.025
-            y:0
-            minorTickmarkCount: 0
-            tickmarkStepSize : 9000
-            //labelStepSize: 9000
-            orientation : Qt.Horizontal
-            minimumValue: 0
-            maximumValue: 9000
+        color:"black"
 
-            value: Dashboard.rpm
-            Behavior on value {
-                NumberAnimation {
-                    duration: 5
-                }
-            }
-            style: GaugeStyle {
-                valueBar: Rectangle {
-                    width:  400
-                    color: Qt.rgba(gauge.value / gauge.maximumValue, 1.1 - gauge.value / gauge.maximumValue, 0, 1)
-                }
-            }
-        }
 
         RPMbar{}
         ShiftLights{}

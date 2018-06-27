@@ -3,12 +3,13 @@ import QtQuick 2.0
 
 
 Item {
+    id: shiftlightssetting
     width:800
     height:480
-    property  int rpmwarn1: 3000
-    property  int rpmwarn2: 5000
-    property  int rpmwarn3: 6000
-    property  int rpmwarn4: 8000
+    property  int rpmwarn1: Dashboard.RPMStage1
+    property  int rpmwarn2: Dashboard.RPMStage2
+    property  int rpmwarn3: Dashboard.RPMStage3
+    property  int rpmwarn4: Dashboard.RPMStage4
     Connections{
         target: Dashboard
         onRpmChanged: {
@@ -21,7 +22,12 @@ Item {
             if (Dashboard.rpm < rpmwarn3) {led3.source = "qrc:/graphics/ledoff.png",led6.source = "qrc:/graphics/ledoff.png"};
             if (Dashboard.rpm < rpmwarn4) {led4.source = "qrc:/graphics/ledoff.png",led5.source = "qrc:/graphics/ledoff.png"};
         }
+       onRPMStage1Changed :{rpmwarn1 = Dashboard.RPMStage1}
+       onRPMStage2Changed :{rpmwarn2 = Dashboard.RPMStage2}
+       onRPMStage3Changed :{rpmwarn3 = Dashboard.RPMStage3}
+       onRPMStage4Changed :{rpmwarn4 = Dashboard.RPMStage4}
     }
+
         Row {
             anchors.horizontalCenter: parent.horizontalCenter
 

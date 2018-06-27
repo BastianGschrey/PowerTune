@@ -266,6 +266,11 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_wheelspdftleft(0)
     ,  m_wheelspdftright(0)
     ,  m_speedpercent(1)
+    ,  m_MaxRPM(8000)
+    ,  m_RPMStage1(3000)
+    ,  m_RPMStage2(4000)
+    ,  m_RPMStage3(6000)
+    ,  m_RPMStage4(7000)
 
 
 {
@@ -2126,6 +2131,44 @@ void DashBoard::setspeedpercent(const qreal &speedpercent)
     emit speedpercentChanged(speedpercent);
 }
 
+//
+
+void DashBoard::setMaxRPM(const int &MaxRPM)
+{
+    if (m_MaxRPM == MaxRPM)
+        return;
+    m_MaxRPM = MaxRPM;
+    emit MaxRPMChanged(MaxRPM);
+}
+
+void DashBoard::setRPMStage1(const int &RPMStage1)
+{
+    if (m_RPMStage1 == RPMStage1)
+        return;
+    m_RPMStage1 = RPMStage1;
+    emit RPMStage1Changed(RPMStage1);
+}
+void DashBoard::setRPMStage2(const int &RPMStage2)
+{
+    if (m_RPMStage2 == RPMStage2)
+        return;
+    m_RPMStage2 = RPMStage2;
+    emit RPMStage2Changed(RPMStage2);
+}
+void DashBoard::setRPMStage3(const int &RPMStage3)
+{
+    if (m_RPMStage3 == RPMStage3)
+        return;
+    m_RPMStage3 = RPMStage3;
+    emit RPMStage3Changed(RPMStage3);
+}
+void DashBoard::setRPMStage4(const int &RPMStage4)
+{
+    if (m_RPMStage4 == RPMStage4)
+        return;
+    m_RPMStage4 = RPMStage4;
+    emit RPMStage4Changed(RPMStage4);
+}
 
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
@@ -2400,3 +2443,8 @@ QString DashBoard::musicpath() const {return m_musicpath; }
 int DashBoard::supportedReg() const {return m_supportedReg; }
 qreal DashBoard::speedpercent() const {return m_speedpercent; }
 
+int DashBoard::MaxRPM() const {return m_MaxRPM; }
+int DashBoard::RPMStage1() const {return m_RPMStage1; }
+int DashBoard::RPMStage2() const {return m_RPMStage2; }
+int DashBoard::RPMStage3() const {return m_RPMStage3; }
+int DashBoard::RPMStage4() const {return m_RPMStage4; }
