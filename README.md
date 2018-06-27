@@ -215,7 +215,7 @@ Raspbian Stretch
 
 | Tested Vehicles :                | ECU Variant:          | Interface:          | Confirmed:     |Confirmed by :  |
 | -------------------------------- |:---------------------:|:-------------------:|:--------------:|:--------------:|
-| Mazda RX7 FD3S                   |Adaptronic Modular     | CAN (PICAN2)        | <big>__✓__     |Bastian Gschrey |
+| Mazda RX7 FD3S                   |Haltech Elite 2000     | CAN (PICAN2)        | <big>__✓__     |Bastian Gschrey |
   
   
 
