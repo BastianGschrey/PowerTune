@@ -41,5 +41,15 @@
         <file>Gauges/Screentoggle.qml</file>
         <file>Gauges/ConsultTest.qml</file>
         <file>Gauges/HaltechFlags.qml</file>
+        <file>graphics/ledgreen.png</file>
+        <file>graphics/ledoff.png</file>
+        <file>graphics/ledred.png</file>
+        <file>graphics/ledyellow.png</file>
+        <file>graphics/RPM_BG.png</file>
+        <file>graphics/RPM_Fill.png</file>
+        <file>graphics/empty.png</file>
+        <file>graphics/fill.png</file>
+        <file>Gauges/RPMbar.qml</file>
+        <file>Gauges/ShiftLights.qml</file>
     </qresource>
 </RCC>

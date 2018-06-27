@@ -10,6 +10,24 @@ import QtMultimedia 5.8
 TabView {
     id: tabView
     anchors.fill: parent
+
+    style: TabViewStyle {
+        frameOverlap: 1
+        tab: Rectangle {
+            color: styleData.selected ? "grey" :"lightgrey"
+            border.color:  "steelblue"
+            implicitWidth: Math.max(text.width + 4, 80)
+            implicitHeight: 20
+            radius: 2
+            Text {
+                id: text
+                anchors.centerIn: parent
+                text: styleData.title
+                color: styleData.selected ? "white" : "black"
+            }
+        }
+        frame: Rectangle { color: "steelblue" }
+    }
     Tab {
         title: "Main"
         anchors.fill: parent
@@ -1181,6 +1199,7 @@ TabView {
 
 
                 Grid {
+                    id: speedcorrgrid
                     rows:3
                     columns: 4
                     spacing: warningsettings.height /150
@@ -1274,10 +1293,12 @@ TabView {
                     property alias speedplusminussetting: speedplusminus.text
 
                 }
+
             }
             Grid {
-                rows:3
+                rows:2
                 columns: 2
+                id: grid
                 spacing: calcs.height /150
                 Text { text: "Speed Correction %"
                     font.pixelSize: calcs.width / 55;color:"white"}
@@ -1300,17 +1321,19 @@ TabView {
                     inputMethodHints: Qt.ImhDigitsOnly
                     Component.onCompleted: tabView.currentIndex = 0; // opens the 1st tab
                 }
-                TextArea {
-                    width: 1500
-                    text:
-                        "Multiplies the speed " +
-                        "by the given percentage " +
-                        "Default is 100" ;
-                }
+
 
             }
 
-
+            TextArea {
+                anchors.top : grid.bottom
+                width: calcs.width / 5
+                text:
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit, " +
+                    "sed do eiusmod tempor incididunt ut labore et dolore magna " +
+                    "aliqua. Ut enim ad minim veniam, quis nostrud exercitation " +
+                    "ullamco laboris nisi ut aliquip ex ea commodo cosnsequat. ";
+            }
         Rectangle{
             anchors.fill: parent
             color: "transparent"

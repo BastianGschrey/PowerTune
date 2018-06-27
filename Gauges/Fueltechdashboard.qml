@@ -4,6 +4,7 @@ import QtQuick 2.8
 import QtQuick.Extras 1.4
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Styles 1.4
+import "../Gauges"
 import "qrc:/Gauges/createsquaregauge.js" as CreateSquareGaugeScript
 
 
@@ -43,7 +44,7 @@ Item {
             width: fueltechDash.width
              source: "/graphics/vertrevcanvas.png"
         }
-
+        ShiftLights{}
 
         Text {
             x: 0

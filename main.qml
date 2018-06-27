@@ -27,10 +27,10 @@ ApplicationWindow {
         Loader {
 
             id: testing
-            source: "qrc:/Gauges/HaltechFlags.qml"
+            source: "qrc:/Gauges/RPMbar.qml"
 
-        }*/
-
+        }
+*/
         Loader {
 
             id: firstPageLoader
