@@ -53,5 +53,6 @@
         <file>Gauges/ShiftLights.qml</file>
         <file>graphics/fueltechempty.png</file>
         <file>graphics/fueltechfill.png</file>
+        <file>Gauges/WarningDangertoManifold.qml</file>
     </qresource>
 </RCC>

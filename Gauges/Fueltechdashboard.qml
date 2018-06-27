@@ -59,6 +59,7 @@ Item {
 //
         ShiftLights{}
 
+
         Text {
             x: 0
             y: 43
@@ -93,6 +94,7 @@ Item {
         visible:false
         Component.onCompleted: Connect.readdashsetup()
     }
+
 
 
 

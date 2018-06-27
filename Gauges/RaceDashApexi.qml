@@ -552,4 +552,11 @@ Item {
 
 
     }
+    Rectangle{
+    id: warning
+    anchors.fill: racedashwindow
+    color: "transparent"
+    visible: false
+    WarningDangertoManifold{}
+    }
 }
