@@ -7,10 +7,10 @@ Rectangle {
   visible: true
   color:"transparent"
   anchors.fill:parent
-  property  int maxRPM: Dashboard.MaxRPM
+  property  int maxRPM: Dashboard.maxRPM
   Connections{
       target: Dashboard
-      onMaxRPMhanged: maxRPM = Dashboard.MaxRPM
+      onMaxRPMChanged: maxRPM = Dashboard.maxRPM
       }
 
 

@@ -51,5 +51,7 @@
         <file>graphics/fill.png</file>
         <file>Gauges/RPMbar.qml</file>
         <file>Gauges/ShiftLights.qml</file>
+        <file>graphics/fueltechempty.png</file>
+        <file>graphics/fueltechfill.png</file>
     </qresource>
 </RCC>

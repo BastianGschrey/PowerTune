@@ -1724,7 +1724,7 @@ TabView {
                     height: rpmSettings.height /15
                     font.pixelSize: rpmSettings.width / 55
                     inputMethodHints: Qt.ImhDigitsOnly
-                    onEditingFinished:Dashboard.setRPMStage1
+                    onEditingFinished:Dashboard.setrpmStage1
                 }
                 TextField {
                     id: stage2
@@ -1732,7 +1732,7 @@ TabView {
                     height: rpmSettings.height /15
                     font.pixelSize: rpmSettings.width / 55
                     inputMethodHints: Qt.ImhDigitsOnly
-                    onEditingFinished:Dashboard.setRPMStage2
+                    onEditingFinished:Dashboard.setrpmStage2
                 }
                 TextField {
                     id: stage3
@@ -1740,7 +1740,7 @@ TabView {
                     height: rpmSettings.height /15
                     font.pixelSize: rpmSettings.width / 55
                     inputMethodHints: Qt.ImhDigitsOnly
-                    onEditingFinished:Dashboard.setRPMStage3
+                    onEditingFinished:Dashboard.setrpmStage3
 
                 }
                 TextField {
@@ -1749,7 +1749,7 @@ TabView {
                     height: rpmSettings.height /15
                     font.pixelSize: rpmSettings.width / 55
                     inputMethodHints: Qt.ImhDigitsOnly
-                    onEditingFinished: Dashboard.setRPMStage4
+                    onEditingFinished: Dashboard.setrpmStage4
                     //Component.onCompleted: tabView.currentIndex = 4 // opens the 5th tab
                 }
 
