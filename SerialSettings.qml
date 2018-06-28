@@ -75,10 +75,10 @@ TabView {
                     target: Dashboard
                     onOdoChanged:{odometer.text = (Dashboard.Odo).toFixed(0) }
                     onTripChanged:{tripmeter.text = (Dashboard.Trip).toFixed(1) }
-                    onWatertempChanged: { if (Dashboard.Watertemp > watertempwarn.text) {playwarning.start()};}
-                    onRpmChanged: { if (Dashboard.rpm > rpmwarn.text) {playwarning.start()};}
-                    onKnockChanged: { if (Dashboard.Knock > knockwarn.text) {playwarning.start()};}
-                    onBoostPresChanged: { if (Dashboard.BoostPres > boostwarn.text) {playwarning.start()};}
+                    onWatertempChanged: { if (Dashboard.Watertemp > Dashboard.waterwarn) {playwarning.start()};}
+                    onRpmChanged: { if (Dashboard.rpm > Dashboard.rpmwarn) {playwarning.start()};}
+                    onKnockChanged: { if (Dashboard.Knock > Dashboard.knockwarn) {playwarning.start()};}
+                    onBoostPresChanged: { if (Dashboard.BoostPres > Dashboard.boostwarn) {playwarning.start()};}
                     onSupportedRegChanged: {functsupportedRegs.supportedRegs() }
                 }
 
@@ -1197,7 +1197,6 @@ TabView {
                 }
 
 
-
                 Grid {
                     id: speedcorrgrid
                     rows:3
@@ -1217,6 +1216,9 @@ TabView {
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
                         inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+                        onEditingFinished: Dashboard.setwaterwarn(watertempwarn.text)
+                        Component.onCompleted: Dashboard.setwaterwarn(watertempwarn.text)
+
                     }
                     TextField {
                         id: boostwarn
@@ -1224,6 +1226,8 @@ TabView {
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
                         inputMethodHints: Qt.ImhDigitsOnly
+                        onEditingFinished: Dashboard.setboostwarn(boostwarn.text)
+                        Component.onCompleted: Dashboard.setboostwarn(boostwarn.text)
                     }
                     TextField {
                         id: rpmwarn
@@ -1231,6 +1235,8 @@ TabView {
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
                         inputMethodHints: Qt.ImhDigitsOnly
+                        onEditingFinished: Dashboard.setrpmwarn(rpmwarn.text)
+                        Component.onCompleted: Dashboard.setrpmwarn(rpmwarn.text)
                     }
                     TextField {
                         id: knockwarn
@@ -1238,7 +1244,8 @@ TabView {
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
                         inputMethodHints: Qt.ImhDigitsOnly
-                        Component.onCompleted: tabView.currentIndex = 4 // opens the 5th tab
+                        onEditingFinished: Dashboard.setknockwarn(knockwarn.text)
+                        Component.onCompleted: Dashboard.setknockwarn(knockwarn.text),tabView.currentIndex = 4; // opens the 5th tab
                     }
 
                 }

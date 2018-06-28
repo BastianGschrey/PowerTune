@@ -3,6 +3,7 @@ import QtQuick.Extras 1.4
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Styles 1.4
 import "../Gauges"
+import ".."
 
 
 Item {
@@ -551,6 +552,10 @@ Item {
         }
 
 
+    }
+    Connections{
+        target: Dashboard
+        onRpmChanged:{if (Dashboard.rpm > Dashboard.rpmwarn) {warning.visible = true} else warning.visible = false }
     }
     Rectangle{
     id: warning

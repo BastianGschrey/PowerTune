@@ -271,7 +271,10 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_rpmStage2(4000)
     ,  m_rpmStage3(6000)
     ,  m_rpmStage4(7000)
-
+    ,  m_waterwarn(999)
+    ,  m_rpmwarn(9999)
+    ,  m_knockwarn(999)
+    ,  m_boostwarn(999)
 
 {
 }
@@ -2170,6 +2173,45 @@ void DashBoard::setrpmStage4(const int &rpmStage4)
     emit rpmStage4Changed(rpmStage4);
 }
 
+//
+void DashBoard::setwaterwarn(const int &waterwarn)
+{
+    if (m_waterwarn == waterwarn)
+        return;
+    m_waterwarn = waterwarn;
+    emit waterwarnChanged(waterwarn);
+}
+void DashBoard::setrpmwarn(const int &rpmwarn)
+{
+    if (m_rpmwarn == rpmwarn)
+        return;
+    m_rpmwarn = rpmwarn;
+    emit rpmwarnChanged(rpmwarn);
+}
+void DashBoard::setknockwarn(const int &knockwarn)
+{
+    if (m_knockwarn == knockwarn)
+        return;
+    m_knockwarn = knockwarn;
+    emit knockwarnChanged(knockwarn);
+}
+void DashBoard::setboostwarn(const qreal &boostwarn)
+{
+    if (m_boostwarn == boostwarn)
+        return;
+    m_boostwarn = boostwarn;
+    emit boostwarnChanged(boostwarn);
+}
+
+
+
+
+//
+
+
+
+
+
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
 
@@ -2448,3 +2490,11 @@ int DashBoard::rpmStage1() const {return m_rpmStage1; }
 int DashBoard::rpmStage2() const {return m_rpmStage2; }
 int DashBoard::rpmStage3() const {return m_rpmStage3; }
 int DashBoard::rpmStage4() const {return m_rpmStage4; }
+int DashBoard::waterwarn() const {return m_waterwarn; }
+int DashBoard::rpmwarn() const {return m_rpmwarn; }
+int DashBoard::knockwarn() const {return m_knockwarn; }
+qreal DashBoard::boostwarn() const {return m_boostwarn; }
+
+
+
+

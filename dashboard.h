@@ -287,6 +287,15 @@ class DashBoard : public QObject
     Q_PROPERTY(int rpmStage2 READ rpmStage2 WRITE setrpmStage2 NOTIFY rpmStage2Changed)
     Q_PROPERTY(int rpmStage3 READ rpmStage3 WRITE setrpmStage3 NOTIFY rpmStage3Changed)
     Q_PROPERTY(int rpmStage4 READ rpmStage4 WRITE setrpmStage4 NOTIFY rpmStage4Changed)
+
+    Q_PROPERTY(int waterwarn READ waterwarn WRITE setwaterwarn NOTIFY waterwarnChanged)
+    Q_PROPERTY(int rpmwarn READ rpmwarn WRITE setrpmwarn NOTIFY rpmwarnChanged)
+    Q_PROPERTY(int knockwarn READ knockwarn WRITE setknockwarn NOTIFY knockwarnChanged)
+    Q_PROPERTY(qreal boostwarn READ boostwarn WRITE setboostwarn NOTIFY boostwarnChanged)
+
+
+
+
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
 public:
     DashBoard(QObject *parent = 0);
@@ -580,6 +589,10 @@ public:
     Q_INVOKABLE void setrpmStage2(const int &rpmStage2);
     Q_INVOKABLE void setrpmStage3(const int &rpmStage3);
     Q_INVOKABLE void setrpmStage4(const int &rpmStage4);
+    Q_INVOKABLE void setwaterwarn(const int &waterwarn);
+    Q_INVOKABLE void setrpmwarn(const int &rpmwarn);
+    Q_INVOKABLE void setknockwarn(const int &knockwarn);
+    Q_INVOKABLE void setboostwarn(const qreal &boostwarn);
 
 
 
@@ -869,6 +882,12 @@ public:
     int rpmStage3() const;
     int rpmStage4() const;
 
+    int waterwarn() const;
+    int rpmwarn() const;
+    int knockwarn() const;
+    qreal boostwarn() const;
+
+
 signals:
 
     //Odometer
@@ -1149,7 +1168,10 @@ signals:
     void rpmStage2Changed(int rpmStage2);
     void rpmStage3Changed(int rpmStage3);
     void rpmStage4Changed(int rpmStage4);
-
+    void waterwarnChanged (int waterwarn);
+    void rpmwarnChanged (int rpmwarn);
+    void knockwarnChanged (int knockwarn);
+    void boostwarnChanged(qreal boostwarn);
 
 private:
     // Odometer
@@ -1442,6 +1464,11 @@ private:
     int m_rpmStage2;
     int m_rpmStage3;
     int m_rpmStage4;
+
+    int m_waterwarn;
+    int m_rpmwarn;
+    int m_knockwarn;
+    qreal m_boostwarn;
 
 };
 

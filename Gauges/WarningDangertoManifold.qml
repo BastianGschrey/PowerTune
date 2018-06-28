@@ -13,13 +13,13 @@ Rectangle {
         height:parent.height /1.5
         color:"red"
 
-        /*
-        Item {
+
+      /*  Item {
             Timer {
                 interval: 500; running: true; repeat: true
                 onTriggered: { console.log(warningsquare.color);
-                if (warningsquare.color == "#ff0000") {warningsquare.color = "orange"};
-                if (warningsquare.color == "#ffa500"){warningsquare.color = "red"};
+                if (warningsquare.color == "red") {warningsquare.color = "orange"};
+                if (warningsquare.color == "orange"){warningsquare.color = "red"};
                 }
 
             }
