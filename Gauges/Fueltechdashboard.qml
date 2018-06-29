@@ -95,19 +95,13 @@ Item {
         Component.onCompleted: Connect.readdashsetup()
     }
 
-/* To Basti : This is always shown behind the squaregauges , we need to do this in Java script and creae /destroy it on the fly in order to have this shown in front
-    Connections{
-        target: Dashboard
-        onSpeedChanged:{warning.visible = true }
-    }
+// To Basti : This is always shown behind the squaregauges , we need to do this in Java script and creae /destroy it on the fly in order to have this shown in front
+
     Rectangle{
-    id: warning
-    anchors.fill: fueltechDash
+    anchors.fill: parent
     color: "transparent"
-    visible: false
-    WarningDangertoManifold{}
+    WarningLoader{}
     }
-*/
 
 }
 

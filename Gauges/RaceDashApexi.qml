@@ -553,15 +553,25 @@ Item {
 
 
     }
-    Connections{
-        target: Dashboard
-        onRpmChanged:{if (Dashboard.rpm > Dashboard.rpmwarn) {warning.visible = true} else warning.visible = false }
+    Rectangle{
+    anchors.fill: parent
+    color: "transparent"
+    WarningLoader{}
     }
+    /*
+
     Rectangle{
     id: warning
     anchors.fill: racedashwindow
     color: "transparent"
     visible: false
-    WarningDangertoManifold{}
+    Warning{warningtext : warnmsg}
     }
+    Rectangle{
+    id: dangertomanifold
+    anchors.fill: racedashwindow
+    color: "transparent"
+    visible: false
+    WarningDangertoManifold{}
+    }*/
 }

@@ -1287,7 +1287,7 @@ TabView {
         }
     }
     Tab {
-        title: "Speed correction" // Tab index 4
+        title: "Speed" // Tab index 4
         Rectangle{
             id: calcs
             anchors.fill : parent
@@ -1316,6 +1316,7 @@ TabView {
                     width: calcs.width / 5
                     height: calcs.height /15
                     font.pixelSize: calcs.width / 55
+                    text:  "100"
                     inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
                     Component.onCompleted: Dashboard.setspeedpercent(speedpercent.text /100)
                     onEditingFinished: Dashboard.setspeedpercent(speedpercent.text /100)
@@ -1324,6 +1325,7 @@ TabView {
                     id: speedplusminus
                     width: calcs.width / 5
                     height: calcs.height /15
+                    text:  "0"
                     font.pixelSize: calcs.width / 55
                     inputMethodHints: Qt.ImhDigitsOnly
                     Component.onCompleted: tabView.currentIndex = 6; //
@@ -1332,7 +1334,7 @@ TabView {
 
             }
 
-            TextArea {
+            /*TextArea {
                 anchors.top : grid.bottom
                 width: calcs.width / 5
                 text:
@@ -1340,7 +1342,7 @@ TabView {
                     "sed do eiusmod tempor incididunt ut labore et dolore magna " +
                     "aliqua. Ut enim ad minim veniam, quis nostrud exercitation " +
                     "ullamco laboris nisi ut aliquip ex ea commodo cosnsequat. ";
-            }
+            }*/
         Rectangle{
             anchors.fill: parent
             color: "transparent"
@@ -1722,6 +1724,7 @@ TabView {
                     width: rpmSettings.width / 5.5
                     height: rpmSettings.height /15
                     font.pixelSize: rpmSettings.width / 55
+                    text:  "10000"
                     inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
                     onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
                     Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
@@ -1731,6 +1734,7 @@ TabView {
                     width: rpmSettings.width / 5.5
                     height: rpmSettings.height /15
                     font.pixelSize: rpmSettings.width / 55
+                    text:  "3000"
                     inputMethodHints: Qt.ImhDigitsOnly
                     onEditingFinished:Dashboard.setrpmStage1(stage1.text)
                     Component.onCompleted:Dashboard.setrpmStage1(stage1.text)
@@ -1740,6 +1744,7 @@ TabView {
                     width: rpmSettings.width / 5.5
                     height: rpmSettings.height /15
                     font.pixelSize: rpmSettings.width / 55
+                    text:  "5500"
                     inputMethodHints: Qt.ImhDigitsOnly
                     onEditingFinished:Dashboard.setrpmStage2(stage2.text)
                     Component.onCompleted:Dashboard.setrpmStage2(stage2.text)
@@ -1749,6 +1754,7 @@ TabView {
                     width: rpmSettings.width / 5.5
                     height: rpmSettings.height /15
                     font.pixelSize: rpmSettings.width / 55
+                    text:  "5500"
                     inputMethodHints: Qt.ImhDigitsOnly
                     onEditingFinished:Dashboard.setrpmStage3(stage3.text)
                     Component.onCompleted:Dashboard.setrpmStage3(stage3.text)
@@ -1759,6 +1765,7 @@ TabView {
                     width: rpmSettings.width / 5.5
                     height: rpmSettings.height /15
                     font.pixelSize: rpmSettings.width / 55
+                    text:  "7500"
                     inputMethodHints: Qt.ImhDigitsOnly
                     onEditingFinished: Dashboard.setrpmStage4(stage4.text)
                     Component.onCompleted: Dashboard.setrpmStage4(stage4.text),tabView.currentIndex = 0;
