@@ -506,29 +506,6 @@ TabView {
                             onPositionChanged: Connect.setSreenbrightness(brightness.value);
                         }
 
-                        /*
-                Text
-                {
-                    color: "red"
-                    text: Dashboard.SerialStat
-                }
-
-                Text
-                {
-                    color: "blue"
-                    text: Dashboard.RecvData
-                }
-                Text
-                {
-                    color: "purple"
-                    text: Dashboard.TimeoutStat
-                }
-                Text
-                {
-                    color: "purple"
-                    text: Dashboard.RunStat
-                }
-                */
                         Grid {
                             visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
                             rows: 10
@@ -1014,19 +991,19 @@ TabView {
                 }
 
                 Grid {
-                    rows: 3
+                    rows: 2
                     columns: 4
                     anchors.top: parent.top
                     anchors.topMargin: dashselector.height /120
                     spacing: dashselector.width / 150
                     Text { text: "Dash1"
-                        font.pixelSize: dashselector.width / 30 }
+                        font.pixelSize: dashselector.width / 55 }
                     Text { text: "Dash2"
-                        font.pixelSize: dashselector.width / 30}
+                        font.pixelSize: dashselector.width / 55}
                     Text { text: "Dash3"
-                        font.pixelSize: dashselector.width / 30}
+                        font.pixelSize: dashselector.width / 55}
                     Text { text: "Dash4"
-                        font.pixelSize: dashselector.width / 30}
+                        font.pixelSize: dashselector.width / 55}
                     ComboBox {
                         id: dash1
                         width: dashselector.width / 5
@@ -1088,8 +1065,8 @@ TabView {
                     }
                     ComboBox {
                         id: dash4
-                        width: dash4.width / 5
-                        height: dash4.height /15
+                        width: dashselector.width / 5
+                        height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
                         model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech","Mediaplayer"]
                         property bool initialized: true
