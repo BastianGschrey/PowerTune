@@ -1411,35 +1411,35 @@ TabView {
                     "aliqua. Ut enim ad minim veniam, quis nostrud exercitation " +
                     "ullamco laboris nisi ut aliquip ex ea commodo cosnsequat. ";
             }*/
-        Rectangle{
-            anchors.fill: parent
-            color: "transparent"
-            InputPanel {
-                id: keyboard2;
+            Rectangle{
                 anchors.fill: parent
-                states: State {
-                    name: "visible";
-                    when: keyboard.active;
-                    PropertyChanges {
-                        target: keyboard2;
-                        y: 0 ;
+                color: "transparent"
+                InputPanel {
+                    id: keyboard2;
+                    anchors.fill: parent
+                    states: State {
+                        name: "visible";
+                        when: keyboard.active;
+                        PropertyChanges {
+                            target: keyboard2;
+                            y: 0 ;
+                        }
                     }
-                }
-                transitions: Transition {
-                    from: ""; // default initial state
-                    to: "visible";
-                    reversible: true; // toggle visibility with reversible: true;
-                    ParallelAnimation {
-                        NumberAnimation {
-                            properties: "y";
-                            duration: 250;
-                            easing.type: Easing.InOutQuad;
+                    transitions: Transition {
+                        from: ""; // default initial state
+                        to: "visible";
+                        reversible: true; // toggle visibility with reversible: true;
+                        ParallelAnimation {
+                            NumberAnimation {
+                                properties: "y";
+                                duration: 250;
+                                easing.type: Easing.InOutQuad;
+                            }
                         }
                     }
                 }
             }
         }
- }
     }
     Tab {
         title: "Consult"// Tab index 5
@@ -1779,13 +1779,13 @@ TabView {
                 spacing: 5
                 Text { text: "MAX RPM"
                     font.pixelSize: rpmSettings.width / 55;color:"white"}
-                Text { text: "Shift Lights Stage 1 (g)"
+                Text { text: "Shift Light 1 (g)"
                     font.pixelSize: rpmSettings.width / 55;color:"white"}
-                Text { text: "Shift Lights Stage 2 (g)"
+                Text { text: "Shift Light 2 (g)"
                     font.pixelSize: rpmSettings.width / 55;color:"white"}
-                Text { text: "Shift Lights Stage 3 (y)"
+                Text { text: "Shift Light 3 (y)"
                     font.pixelSize: rpmSettings.width / 55;color:"white"}
-                Text { text: "Shift Lights Stage 4 (r)"
+                Text { text: "Shift Light 4 (r)"
                     font.pixelSize: rpmSettings.width / 55;color:"white"}
                 TextField {
                     id: maxRPM
