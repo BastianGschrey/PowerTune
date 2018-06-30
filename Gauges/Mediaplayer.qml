@@ -195,4 +195,9 @@ Rectangle {
             onClicked: if (mp3selector.visible == false){mp3selector.visible = true,list.height = parent.height /2,folderselect.text = "close folder"}else{mp3selector.visible = false,list.height = parent.height,folderselect.text = "select folder"}
         }
     }
+    Rectangle{
+    anchors.fill: parent
+    color: "transparent"
+    WarningLoader{}
+    }
 }

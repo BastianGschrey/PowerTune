@@ -125,4 +125,9 @@ Item {
 
 
     }
+    Rectangle{
+    anchors.fill: parent
+    color: "transparent"
+    WarningLoader{}
+    }
 }
