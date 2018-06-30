@@ -1275,6 +1275,7 @@ TabView {
                         width: warningsettings.width / 10
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
+                        text:  "110"
                         inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
                         onEditingFinished: Dashboard.setwaterwarn(watertempwarn.text)
                         Component.onCompleted: Dashboard.setwaterwarn(watertempwarn.text)
@@ -1286,6 +1287,7 @@ TabView {
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
                         inputMethodHints: Qt.ImhDigitsOnly
+                        text:  "0.9"
                         onEditingFinished: Dashboard.setboostwarn(boostwarn.text)
                         Component.onCompleted: Dashboard.setboostwarn(boostwarn.text)
                     }
@@ -1295,6 +1297,7 @@ TabView {
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
                         inputMethodHints: Qt.ImhDigitsOnly
+                        text:  "10000"
                         onEditingFinished: Dashboard.setrpmwarn(rpmwarn.text)
                         Component.onCompleted: Dashboard.setrpmwarn(rpmwarn.text)
                     }
@@ -1304,6 +1307,7 @@ TabView {
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
                         inputMethodHints: Qt.ImhDigitsOnly
+                        text:  "80"
                         onEditingFinished: Dashboard.setknockwarn(knockwarn.text)
                         Component.onCompleted: Dashboard.setknockwarn(knockwarn.text),tabView.currentIndex = 4; // opens the 5th tab
                     }

@@ -24,9 +24,9 @@ Rectangle {
     Connections{
         target: Dashboard
         onRpmChanged:{if (Dashboard.rpm > Dashboard.rpmwarn) {rpmwarn = true,warnmsg.text = "Danger to Manifold"} else rpmwarn= false }
-        onPimChanged:{if (Dashboard.pim > Dashboard.boostwarn) {boostwarn = true,warnmsg.text = "Boost exceeded " +Dashboard.pim} else boostwarn= false }
-        onWatertempChanged:{if (Dashboard.Watertemp > Dashboard.waterwarn) {coolanttempwarn = true,warnmsg.text = "Coolant Temp. exceeded " +Dashboard.Watertemp} else coolanttempwarn= false }
-        onKnockChanged:{if (Dashboard.Knock > Dashboard.knockwarn) {knockwarn = true,warnmsg.text = "Knock exceeded " +Dashboard.Knock} else knockwarn= false }
+        onPimChanged:{if (Dashboard.pim > Dashboard.boostwarn) {boostwarn = true,warnmsg.text = "Boost " +(Dashboard.pim).toFixed(1)} else boostwarn= false }
+        onWatertempChanged:{if (Dashboard.Watertemp > Dashboard.waterwarn) {coolanttempwarn = true,warnmsg.text = "Coolant Temp. " + (Dashboard.Watertemp).toFixed(1)} else coolanttempwarn= false }
+        onKnockChanged:{if (Dashboard.Knock > Dashboard.knockwarn) {knockwarn = true,warnmsg.text = "Knock " + (Dashboard.Knock).toFixed(0)} else knockwarn= false }
     }
 
     Connections{
