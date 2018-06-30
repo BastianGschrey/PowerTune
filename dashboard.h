@@ -303,7 +303,7 @@ public:
     // Odometer
     void setOdo(const qreal &Odo);
     //Tripmeter
-    void setTrip(const qreal &Trip);
+     Q_INVOKABLE void setTrip(const qreal &Trip);
     // Advanced Info
     void setrpm(const qreal &rpm);
     void setIntakepress(const qreal &Intakepress);

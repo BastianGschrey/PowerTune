@@ -13,13 +13,6 @@ Rectangle {
         height:parent.height /1.5
         color:"red"
 
-        ColorAnimation {
-            from: "red"
-            to: "orange"
-            duration: 200
-        }
-
-
         Text {
             id: warntxt
             text: "Warning!!!"

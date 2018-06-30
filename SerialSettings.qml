@@ -22,6 +22,7 @@ TabView {
             Text {
                 id: text
                 anchors.centerIn: parent
+                font.pixelSize: tabView.width / 55
                 text: styleData.title
                 color: styleData.selected ? "white" : "black"
             }
@@ -115,7 +116,8 @@ TabView {
                                 text: serialName.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
                                 font.weight: serialName.currentIndex === index ? Font.DemiBold : Font.Normal
                                 font.family: serialName.font.family
-                                font.pointSize: serialName.font.pointSize
+                                font.pixelSize: serialName.font.pixelSize
+                                //font.pointSize: serialName.font.pointSize
                                 highlighted: serialName.highlightedIndex === index
                                 hoverEnabled: serialName.hoverEnabled
                             }
@@ -284,6 +286,7 @@ TabView {
                             text: "Trip:"
                             font.pixelSize: windowbackround.width / 55
                             color: "white"
+
                         }
                         TextField{
                             id: tripmeter
@@ -292,6 +295,7 @@ TabView {
                             font.pixelSize: windowbackround.width / 55
                             readOnly: true
                             text: "0"
+                            Component.onCompleted: Dashboard.setTrip(tripmeter.text)
                         }
 
                         Text

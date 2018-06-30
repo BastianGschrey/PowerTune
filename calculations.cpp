@@ -58,6 +58,7 @@ void calculations::resettrip()
 {
     tripmeter = 0;
     m_dashboard->setTrip(0);
+
 }
 
 
