@@ -112,14 +112,13 @@ TabView {
                             onCurrentIndexChanged: if (initialized) AppSettings.setBaudRate( currentIndex )
                             Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true; autoconnect.auto(); }
                             delegate: ItemDelegate {
-                                width: serialName.width
-                                text: serialName.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                                font.weight: serialName.currentIndex === index ? Font.DemiBold : Font.Normal
-                                font.family: serialName.font.family
-                                font.pixelSize: serialName.font.pixelSize
-                                //font.pointSize: serialName.font.pointSize
-                                highlighted: serialName.highlightedIndex === index
-                                hoverEnabled: serialName.hoverEnabled
+                                width: parent.width
+                                text: parent.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                                font.weight: parent.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.family: parent.font.family
+                                font.pixelSize: parent.font.pixelSize
+                                highlighted: parent.highlightedIndex === index
+                                hoverEnabled: parent.hoverEnabled
                             }
                         }
                         Text {
@@ -135,6 +134,15 @@ TabView {
                             font.pixelSize: windowbackround.width / 55
                             model: Connect.portsNames
                             visible: { (gpsswitch.checked == true ) ? true:false; }
+                            delegate: ItemDelegate {
+                                width: parent.width
+                                text: parent.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                                font.weight: parent.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.family: parent.font.family
+                                font.pixelSize: parent.font.pixelSize
+                                highlighted: parent.highlightedIndex === index
+                                hoverEnabled: parent.hoverEnabled
+                            }
 
                         }
                         Text {
@@ -151,7 +159,15 @@ TabView {
                             model: [ "2400", "4800", "9600", "14400", "19200", "38400", "57600", "115200"]
                             visible: { (gpsswitch.checked == true ) ? true:false; }
                             Component.onCompleted: {autoconnectGPS.auto()}
-
+                            delegate: ItemDelegate {
+                                width: parent.width
+                                text: parent.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                                font.weight: parent.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.family: parent.font.family
+                                font.pixelSize: parent.font.pixelSize
+                                highlighted: parent.highlightedIndex === index
+                                hoverEnabled: parent.hoverEnabled
+                            }
                         }
 
                         Text {
@@ -168,7 +184,15 @@ TabView {
                             property bool initialized: false
                             Component.onCompleted: { Connect.setUnits(currentIndex);changeweighttext.changetext()}
                             onCurrentIndexChanged: { Connect.setUnits(currentIndex);changeweighttext.changetext()}
-
+                            delegate: ItemDelegate {
+                                width: parent.width
+                                text: parent.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                                font.weight: parent.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.family: parent.font.family
+                                font.pixelSize: parent.font.pixelSize
+                                highlighted: parent.highlightedIndex === index
+                                hoverEnabled: parent.hoverEnabled
+                            }
 
                         }
                         Text {
@@ -186,6 +210,15 @@ TabView {
                             property bool initialized: false
                             onCurrentIndexChanged: if (initialized) AppSettings.setECU( currentIndex )
                             Component.onCompleted: { currentIndex = AppSettings.getECU(); initialized = true }
+                            delegate: ItemDelegate {
+                                width: parent.width
+                                text: parent.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                                font.weight: parent.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.family: parent.font.family
+                                font.pixelSize: parent.font.pixelSize
+                                highlighted: parent.highlightedIndex === index
+                                hoverEnabled: parent.hoverEnabled
+                            }
                         }
                         Text {
                             text: "Protocol Type:"
@@ -204,6 +237,15 @@ TabView {
                             property bool initialized: false
                             onCurrentIndexChanged: {Apexi.SetProtocol(currentIndex)}
                             Component.onCompleted: {Apexi.SetProtocol(currentIndex)}
+                            delegate: ItemDelegate {
+                                width: parent.width
+                                text: parent.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                                font.weight: parent.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.family: parent.font.family
+                                font.pixelSize: parent.font.pixelSize
+                                highlighted: parent.highlightedIndex === index
+                                hoverEnabled: parent.hoverEnabled
+                            }
                         }
                         /*
                 Text {
@@ -235,6 +277,15 @@ TabView {
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
                             model: [ "Hero", "Hero2","Hero3"]
+                            delegate: ItemDelegate {
+                                width: parent.width
+                                text: parent.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                                font.weight: parent.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.family: parent.font.family
+                                font.pixelSize: parent.font.pixelSize
+                                highlighted: parent.highlightedIndex === index
+                                hoverEnabled: parent.hoverEnabled
+                            }
 
                         }
                         Text {
@@ -985,6 +1036,15 @@ TabView {
                         property bool initialized: true
                         onCurrentIndexChanged:{select1.selDash1() }
                         Component.onCompleted: {select1.selDash1() }
+                        delegate: ItemDelegate {
+                            width: parent.width
+                            text: parent.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                            font.weight: parent.currentIndex === index ? Font.DemiBold : Font.Normal
+                            font.family: parent.font.family
+                            font.pixelSize: parent.font.pixelSize
+                            highlighted: parent.highlightedIndex === index
+                            hoverEnabled: parent.hoverEnabled
+                        }
                     }
 
                     ComboBox {
@@ -996,6 +1056,15 @@ TabView {
                         property bool initialized: true
                         onCurrentIndexChanged:{select2.selDash2() }
                         Component.onCompleted: {select2.selDash2() }
+                        delegate: ItemDelegate {
+                            width: parent.width
+                            text: parent.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                            font.weight: parent.currentIndex === index ? Font.DemiBold : Font.Normal
+                            font.family: parent.font.family
+                            font.pixelSize: parent.font.pixelSize
+                            highlighted: parent.highlightedIndex === index
+                            hoverEnabled: parent.hoverEnabled
+                        }
                     }
 
                     ComboBox {
@@ -1007,6 +1076,15 @@ TabView {
                         property bool initialized: true
                         onCurrentIndexChanged:{select3.selDash3() }
                         Component.onCompleted: {select3.selDash3() }
+                        delegate: ItemDelegate {
+                            width: parent.width
+                            text: parent.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                            font.weight: parent.currentIndex === index ? Font.DemiBold : Font.Normal
+                            font.family: parent.font.family
+                            font.pixelSize: parent.font.pixelSize
+                            highlighted: parent.highlightedIndex === index
+                            hoverEnabled: parent.hoverEnabled
+                        }
                     }
                     ComboBox {
                         id: dash4
@@ -1017,6 +1095,15 @@ TabView {
                         property bool initialized: true
                         onCurrentIndexChanged:{select4.selDash4() }
                         Component.onCompleted: {select4.selDash4() }
+                        delegate: ItemDelegate {
+                            width: parent.width
+                            text: parent.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                            font.weight: parent.currentIndex === index ? Font.DemiBold : Font.Normal
+                            font.family: parent.font.family
+                            font.pixelSize: parent.font.pixelSize
+                            highlighted: parent.highlightedIndex === index
+                            hoverEnabled: parent.hoverEnabled
+                        }
                     }
                     //Function to select Dash1
                     Item {
