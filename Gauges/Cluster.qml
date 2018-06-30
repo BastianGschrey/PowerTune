@@ -605,4 +605,9 @@ Rectangle
     anchors.fill: view
     color: "black"
 }
+Rectangle{
+anchors.fill: parent
+color: "transparent"
+WarningLoader{}
+}
 }

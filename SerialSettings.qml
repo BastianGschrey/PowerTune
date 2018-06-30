@@ -436,14 +436,6 @@ TabView {
                     }
                 }
 */
-                        /*
-                        Button{
-                            text: "Warn Settings"
-                            width: windowbackround.width / 5
-                            height: windowbackround.height /15
-                            font.pixelSize: windowbackround.width / 55
-                            onClicked: warningsettings.visible = true
-                        }*/
                         Button {
                             text: "Quit"
                             width: windowbackround.width / 5

@@ -95,10 +95,9 @@ Item {
         Component.onCompleted: Connect.readdashsetup()
     }
 
-// To Basti : This is always shown behind the squaregauges , we need to do this in Java script and creae /destroy it on the fly in order to have this shown in front
-
     Rectangle{
     anchors.fill: parent
+    z:100 //This makes the Rectangle appear in front of the bar gauges
     color: "transparent"
     WarningLoader{}
     }
