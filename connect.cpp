@@ -751,7 +751,21 @@ void Connect::candump()
       //connect( p, SIGNAL(readyReadStandardError()), this, SLOT(ReadErr()) );
     }
 }
+void Connect::minicom()
+{
+    QProcess *p = new QProcess( this );
 
+    if (p)
+    {
+      p->setEnvironment( QProcess::systemEnvironment() );
+      p->setProcessChannelMode( QProcess::MergedChannels );
+      p->start( "minicom", QStringList() << "echo" << "hye" );
+      p->waitForStarted();
+
+      connect( p, SIGNAL(readyReadStandardOutput()), this, SLOT(processOutput()) );
+      //connect( p, SIGNAL(readyReadStandardError()), this, SLOT(ReadErr()) );
+    }
+}
 
 
 // this gets called whenever the process has something to say...

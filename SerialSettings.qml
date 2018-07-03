@@ -1901,6 +1901,11 @@ TabView {
                 text: "CanDump"
                 onClicked: Connect.candump()
             }
+            Button {
+                id: minicom
+                text: "Minicom"
+                onClicked: Connect.minicom()
+            }
             /*
             Button {
                 id: update
