@@ -1875,7 +1875,8 @@ TabView {
             color: "black"
             Connections{
                 target: Dashboard
-                onSerialStatChanged :{consoletext.append(Dashboard.SerialStat)}
+                //onSerialStatChanged :{consoletext.append(Dashboard.SerialStat)}
+                onSerialStatChanged :{consoletext = Dashboard.SerialStat}
             }
             ScrollView {
                 id: scrollconsoletext
