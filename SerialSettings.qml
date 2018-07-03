@@ -1900,11 +1900,13 @@ TabView {
                 text: "CanDump"
                 onClicked: Connect.candump()
             }
+            /*
             Button {
                 id: update
                 text: "Update"
                 onClicked: Connect.update()
                 }
+                */
             }
         }
     }
