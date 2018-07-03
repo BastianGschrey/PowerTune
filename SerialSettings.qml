@@ -1870,14 +1870,42 @@ TabView {
         title: "Developer"// Tab index 6
         //Developer Stuff
         Rectangle{
-            id: consultrequestselect
+            id: developer
             anchors.fill : parent
+            color: "black"
+            Connections{
+                target: Dashboard
+                onSerialStatChanged :{consoletext.append(Dashboard.SerialStat)}
+            }
+            ScrollView {
+                id: scrollconsoletext
+                width: 400
+                height: parent.height
+            TextArea {
+                id: consoletext
+                width: scrollconsoletext.width
+                wrapMode: TextArea.Wrap
+                color: "white"
+                    }
+            }
+            Grid {
+                anchors.top :parent.top
+                anchors.topMargin: parent.height / 20
+                anchors.right: parent.right
+                rows: 10
+                columns: 2
+                spacing: parent.width /150
             Button {
                 id: candump
                 text: "CanDump"
                 onClicked: Connect.candump()
             }
-
+            Button {
+                id: update
+                text: "Update"
+                onClicked: Connect.update()
+                }
+            }
         }
     }
 }
