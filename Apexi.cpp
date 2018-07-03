@@ -308,7 +308,7 @@ void Apexi::writeRequestPFC(QByteArray p_request)
 {
     m_writeData = p_request;
     qint64 bytesWritten = m_serialport->write(p_request);
-    m_dashboard->setSerialStat(QString("Sending Request " + p_request.toHex()));
+   // m_dashboard->setSerialStat(QString("Sending Request " + p_request.toHex()));
     
     if (bytesWritten == -1) {
         m_dashboard->setSerialStat(m_serialport->errorString());
