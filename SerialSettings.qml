@@ -1866,5 +1866,19 @@ TabView {
             }
         }
     }
+    Tab {
+        title: "Developer"// Tab index 6
+        //Developer Stuff
+        Rectangle{
+            id: consultrequestselect
+            anchors.fill : parent
+            Button {
+                id: candump
+                text: "CanDump"
+                onClicked: Connect.candump()
+            }
+
+        }
+    }
 }
 

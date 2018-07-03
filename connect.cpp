@@ -41,19 +41,12 @@
 #include <QByteArrayMatcher>
 #include <QProcess>
 
-
-
-
-
-
-
 int ecu; //0=apex, 1=adaptronic;2= OBD; 3= Dicktator ECU
 int logging; // 0 Logging off , 1 Logging to file
 int connectclicked =0;
 QByteArray checksumhex;
 QByteArray recvchecksumhex;
 QString selectedPort;
-
 
 Connect::Connect(QObject *parent) :
     QObject(parent),
@@ -729,6 +722,33 @@ void Connect::shutdown()
     process->start("sudo shutdown -h now");
     process->waitForFinished(100); // 10 minutes time before timeout
 }
+void Connect::candump()
+{
+    QProcess *p = new QProcess( this );
+
+    if (p)
+    {
+      p->setEnvironment( QProcess::systemEnvironment() );
+      p->setProcessChannelMode( QProcess::MergedChannels );
+      p->start( "candump -l can0", QStringList() << "echo" << "hye" );
+      p->waitForStarted();
+
+      connect( p, SIGNAL(readyReadStandardOutput()), this, SLOT(processOutput()) );
+      //connect( p, SIGNAL(readyReadStandardError()), this, SLOT(ReadErr()) );
+    }
+}
+
+
+
+// this gets called whenever the process has something to say...
+void Connect::processOutput()
+{
+    QProcess *p = dynamic_cast<QProcess *>( sender() );
+
+    if (p)
+      m_dashBoard->setSerialStat( p->readAllStandardOutput() );
+}
+
 void Connect::updatefinished(int exitCode, QProcess::ExitStatus exitStatus)
 {
     qDebug() << "code" <<exitCode;

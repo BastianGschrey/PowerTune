@@ -53,7 +53,7 @@ Rectangle {
 
 Image
     {
-      source:"qrc:/graphics/Racedash800x480.png"
+      source:"qrc:/graphics/Racedash.png"
       anchors.fill: parent
       smooth: true
 

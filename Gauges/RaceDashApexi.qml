@@ -22,55 +22,10 @@ Item {
         height:parent.height
         color:"black"
 
-        RPMbar{}
+        RPMBarStyle1{}
+        //RPMbar{}
         ShiftLights{}
-/*
-        Row {
-            anchors.horizontalCenter: parent.horizontalCenter
 
-            spacing: 20
-            StatusIndicator {
-                color: "green"
-                active: { (Dashboard.rpm > "3000") ? true: false; }
-            }
-            StatusIndicator {
-                color: "green"
-                active: { (Dashboard.rpm > "4000") ? true: false; }
-            }
-            StatusIndicator {
-                color: "yellow"
-                active: { (Dashboard.rpm > "5000") ? true: false; }
-            }
-            StatusIndicator {
-                color: "yellow"
-                active: { (Dashboard.rpm > "6000") ? true: false; }
-            }
-            StatusIndicator {
-                color: "red"
-                active: { (Dashboard.rpm > "7900") ? true: false; }
-            }
-            StatusIndicator {
-                color: "red"
-                active: { (Dashboard.rpm > "7900") ? true: false; }
-            }
-            StatusIndicator {
-                color: "yellow"
-                active: { (Dashboard.rpm > "6000") ? true: false; }
-            }
-            StatusIndicator {
-                color: "yellow"
-                active: { (Dashboard.rpm > "5000") ? true: false; }
-            }
-            StatusIndicator {
-                color: "green"
-                active: { (Dashboard.rpm > "4000") ? true: false; }
-            }
-            StatusIndicator {
-                color: "green"
-                active: { (Dashboard.rpm > "3000") ? true: false; }
-            }
-        }
-*/
 
         Text {
             text:"RPM"

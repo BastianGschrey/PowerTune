@@ -55,5 +55,8 @@
         <file>graphics/fueltechfill.png</file>
         <file>Gauges/Warning.qml</file>
         <file>Gauges/WarningLoader.qml</file>
+        <file>graphics/Racedash.png</file>
+        <file>Gauges/RPMBarStyle1.qml</file>
+        <file>Gauges/RPMBARStyle2.qml</file>
     </qresource>
 </RCC>
