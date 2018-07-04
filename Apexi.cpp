@@ -713,6 +713,7 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
     }
 
     else{
+        qDebug()<< "Mdl1" << packageBasic[5];
         if (packageBasic[5] >= 0)
         {
             Boost = (packageBasic[5] -760) * 0.01;
@@ -825,5 +826,6 @@ void Apexi::calculatorAux(int aux1min,int aux2max,int aux3min,int aux4max,QStrin
     auxval4 = aux4max;
     Auxname1 = Auxunit1;
     Auxname2 = Auxunit2;
+   // qDebug() << Auxunit1<<auxval1 <<auxval2 <<Auxunit2 << auxval3<<auxval4;
     
 }

@@ -363,6 +363,8 @@ public:
     explicit Apexi(QObject *parent = 0);
     explicit Apexi(DashBoard *dashboard, QObject *parent = 0);
     Q_INVOKABLE void SetProtocol(const int &protocolselect);
+    Q_INVOKABLE void Auxcalc (const QString &unitaux1,const int &an1V0,const int &an2V5,const QString &unitaux2,const int &an3V0,const int &an4V5);
+
     
     
 private:
@@ -391,7 +393,6 @@ public slots:
     void readData(QByteArray rawmessagedata);
     void decodeAdv(QByteArray rawmessagedata);
     void decodeSensor(QByteArray rawmessagedata);
-    void Auxcalc (const QString &unitaux1,const int &an1V0,const int &an2V5,const QString &unitaux2,const int &an3V0,const int &an4V5);
     void decodeAux(QByteArray rawmessagedata);
     void decodeMap(QByteArray rawmessagedata);
     void decodeBasic(QByteArray rawmessagedata);

@@ -621,6 +621,26 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
     if (ecuSelect == 6)
     {
         //HaltechV2
+        m_dashBoard->setFlagString1("Clutch");
+        m_dashBoard->setFlagString2("Brake");
+        m_dashBoard->setFlagString3("TransThrottle");
+        m_dashBoard->setFlagString4("Decel Cut");
+        m_dashBoard->setFlagString5("Gear Switch");
+        m_dashBoard->setFlagString6("Torque Red.");
+        m_dashBoard->setFlagString7("Flat Shift");
+        m_dashBoard->setFlagString8("Aux RPM Limit");
+        m_dashBoard->setFlagString9("Antilag");
+        m_dashBoard->setFlagString10("MIL");
+        m_dashBoard->setFlagString11("Batt. Light");
+        m_dashBoard->setFlagString12("Eng. Limiter");
+        m_dashBoard->setFlagString13("Ignition");
+        m_dashBoard->setFlagString14("NOS Stage 1");
+        m_dashBoard->setFlagString15("NOS Stage 2");
+        m_dashBoard->setFlagString16("NOS Stage 3");
+        //m_dashBoard->setFlagString17("NOS Stage 4");
+        //m_dashBoard->setFlagString18("NOS Stage 5");
+        //m_dashBoard->setFlagString19("NOS Stage 6");
+      
         QProcess *process = new QProcess(this);
         process->start("/home/pi/Haltech/HaltechV2");
         m_udpreceiver->startreceiver();
