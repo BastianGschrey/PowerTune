@@ -713,7 +713,7 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
     }
 
     else{
-        qDebug()<< "Mdl1" << packageBasic[5];
+       // qDebug()<< "Mdl1" << packageBasic[5];
         if (packageBasic[5] >= 0)
         {
             Boost = (packageBasic[5] -760) * 0.01;
