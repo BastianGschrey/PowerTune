@@ -9,7 +9,7 @@ Rectangle {
         width: 250
         height: 200
         color: "black"
-        border.color: "transparent"
+        border.color: "#9f9f9f"
         border.width: 2
 
         property alias title: gaugetextfield.text
@@ -32,7 +32,7 @@ Rectangle {
             height: 30
             anchors.top : parent.top
             anchors.left: parent.left
-            color: "transparent"
+            color: "#808080"
             clip: false
             visible: true
             anchors.topMargin: 2
