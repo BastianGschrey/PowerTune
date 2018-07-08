@@ -165,7 +165,7 @@ Item {
             }
             Text {
                 id: value2
-                text:(Dashboard.pim).toFixed(2)
+                text:(Dashboard.BoostPres).toFixed(2)
                 font.pixelSize: scalerect.width / 55
                 anchors.right: parent.right
                 anchors.rightMargin: scalerect.width / 26

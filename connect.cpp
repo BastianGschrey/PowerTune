@@ -143,7 +143,23 @@ void Connect::readdashsetup()
     }
 
 }
+void Connect::readdashsetupApexi()
+{
+    QString path = "UserDashApexi.txt";
+    QFile inputFile(path);
+    if (inputFile.open(QIODevice::ReadOnly))
+    {
+        QTextStream in(&inputFile);
+        while (!in.atEnd())
+        {
+            QString line = in.readLine();
+            QStringList list = line.split(QRegExp("\\,"));
+            m_dashBoard->setdashsetup1(list);
+        }
+        inputFile.close();
+    }
 
+}
 
 
 void Connect::setSreenbrightness(const int &brightness)

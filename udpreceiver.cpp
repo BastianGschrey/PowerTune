@@ -126,7 +126,7 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setBoostwg(Value);
             break;
         case 25:
-            //            m_dashboard->setbrakepedalstate(Value);
+            //m_dashboard->setbrakepedalstate(Value);
             break;
         case 26:
             m_dashboard->setbrakepress(Value);
@@ -273,25 +273,25 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setFlag25(Value);
             break;
         case 74:
-            //            m_dashboard->setFlagString10(Value);
+            // Ignition Angle Bank 1
             break;
         case 75:
-            //            m_dashboard->setFlagString11(Value);
+            //Ignition Angle Bank 2
             break;
         case 76:
-            //            m_dashboard->setFlagString12(Value);
+            //Torque Management Driveshaft RPM Target
             break;
         case 77:
-            //            m_dashboard->setFlagString13(Value);
+            //Torque Management Driveshaft RPM Target Error
             break;
         case 78:
-            //            m_dashboard->setFlagString14(Value);
+            //Torque Management Driveshaft RPM Target Error Ignition Correction
             break;
         case 79:
-            //            m_dashboard->setFlagString15(Value);
+            //Torque Management Driveshaft RPM Timed Ignition Correction
             break;
         case 80:
-            //            m_dashboard->setFlagString16(Value);
+            //Torque Management Combined Ignition Correction
             break;
         case 81:
             m_dashboard->setflatshiftstate(Value);
@@ -591,31 +591,31 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setsens8(Value);
             break;
         case 190:
-            //            m_dashboard->setSensorString1(Value);
+            //Generic Output 1 Duty Cycl
             break;
         case 191:
-            //            m_dashboard->setSensorString2(Value);
+            //Fuel Level
             break;
         case 192:
-            //            m_dashboard->setSensorString3(Value);
+            //Turbo Timer - Time Remaining
             break;
         case 193:
-            //            m_dashboard->setSensorString4(Value);
+            //Turbo Timer - Engine Time Remaining
             break;
         case 194:
-            //            m_dashboard->setSensorString5(Value);
+            //Steering Wheel Angle
             break;
         case 195:
-            //            m_dashboard->setSensorString6(Value);
+            //Driveshaft RPM
             break;
         case 196:
-            //            m_dashboard->setSensorString7(Value);
+            //NOS Pressure Sensor 2
             break;
         case 197:
-            //            m_dashboard->setSensorString8(Value);
+            //NOS Pressure Sensor 3
             break;
         case 198:
-            //            m_dashboard->setSerialStat(Value);
+            //NOS Pressure Sensor 4
             break;
         case 199:
             m_dashboard->setSpeed(Value);
@@ -722,43 +722,43 @@ void udpreceiver::processPendingDatagrams()
             //AAC Valve
             break;
         case 260:
-            //
+            //Turbo Speed Sensor 2
             break;
         case 261:
-            //
+            //Generic Sensor 1
             break;
         case 262:
-            //
+            //Generic Sensor 2
             break;
         case 263:
-            //
+            //Generic Sensor 3
             break;
         case 264:
-            //
+            //Generic Sensor 4
             break;
         case 265:
-            //
+            //Generic Sensor 5
             break;
         case 266:
-            //
+            //Generic Sensor 6
             break;
         case 267:
-            //
+            //Generic Sensor 7
             break;
         case 268:
-            //
+            //Generic Sensor 8
             break;
         case 269:
-            //
+            //Generic Sensor 9
             break;
         case 270:
-            //
+            //Generic Sensor 10
             break;
         case 271:
-            //
+            //Gearbox Oil Pressure
             break;
         case 272:
-            //
+            //Injection Stage 3 Duty Cycle
             break;
         case 273:
             //

@@ -1868,11 +1868,711 @@ TabView {
         }
     }
     Tab {
-        title: "Developer"// Tab index 6
+        title: "Apexi Dash"// Tab index 5
+        Rectangle{
+            anchors.fill :parent
+            id : apexidashsettings
+
+            property string gauge1
+            property string gauge2
+            property string gauge3
+            property string gauge4
+            property string gauge5
+            property string gauge6
+            Settings {
+                property alias vertbarin1: vertbar1.currentIndex
+                property alias horizbarin1: horizbar1.currentIndex
+                property alias datasourcesin1: datasources1.currentIndex
+                property alias decplacesin1: decplaces1.currentIndex
+                property alias maxvaltext1: maxval1.text
+                property alias unittext1 :unit1.text
+                property alias titletext1 :title1.text
+                property alias vertbarin2: vertbar2.currentIndex
+                property alias horizbarin2: horizbar2.currentIndex
+                property alias datasourcesin2: datasources2.currentIndex
+                property alias decplacesin2: decplaces2.currentIndex
+                property alias maxvaltext2: maxval2.text
+                property alias unittext2 :unit2.text
+                property alias titletext2 :title2.text
+                property alias vertbarin3: vertbar3.currentIndex
+                property alias horizbarin3: horizbar3.currentIndex
+                property alias datasourcesin3: datasources3.currentIndex
+                property alias decplacesin3: decplaces3.currentIndex
+                property alias maxvaltext3: maxval3.text
+                property alias unittext3 :unit3.text
+                property alias titletext3 :title3.text
+                property alias vertbarin4: vertbar4.currentIndex
+                property alias horizbarin4: horizbar4.currentIndex
+                property alias datasourcesin4: datasources4.currentIndex
+                property alias decplacesin4: decplaces4.currentIndex
+                property alias maxvaltext4: maxval4.text
+                property alias unittext4 :unit4.text
+                property alias titletext4 :title4.text
+                property alias vertbarin5: vertbar5.currentIndex
+                property alias horizbarin5: horizbar5.currentIndex
+                property alias datasourcesin5: datasources5.currentIndex
+                property alias decplacesin5: decplaces5.currentIndex
+                property alias maxvaltext5: maxval5.text
+                property alias unittext5 :unit5.text
+                property alias titletext5 :title5.text
+                property alias vertbarin6: vertbar6.currentIndex
+                property alias horizbarin6: horizbar6.currentIndex
+                property alias datasourcesin6: datasources6.currentIndex
+                property alias decplacesin6: decplaces6.currentIndex
+                property alias maxvaltext6: maxval6.text
+                property alias unittext6 :unit6.text
+                property alias titletext6 :title6.text
+
+
+            }
+
+            // min max horizontal vertical title unit decimal place source
+            Grid {
+                id: mygrid
+                rows:7
+                columns: 7
+                spacing: 5
+                anchors.top : parent.top
+
+                Text { text: "max Value"
+                    font.pixelSize: apexidashsettings.width / 55;color:"black"}
+                Text { text: "Horiz. Bar"
+                    font.pixelSize: apexidashsettings.width / 55;color:"black"}
+                Text { text: "Vert. Bar"
+                    font.pixelSize: apexidashsettings.width / 55;color:"black"}
+                Text { text: "Title"
+                    font.pixelSize: apexidashsettings.width / 55;color:"black"}
+                Text { text: "Unit"
+                    font.pixelSize: apexidashsettings.width / 55;color:"black"}
+                Text { text: "Dec. places"
+                    font.pixelSize: apexidashsettings.width / 55;color:"black"}
+                Text { text: "Source"
+                    font.pixelSize: apexidashsettings.width / 55;color:"black"}
+                TextField {
+                    id: maxval1
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    text: qsTr("0")
+                    inputMethodHints: Qt.ImhDigitsOnly
+                }
+                ComboBox {
+                    id: horizbar1
+                    width: apexidashsettings.width / 9
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "false","true"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: horizbar1.width
+                        text: horizbar1.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: horizbar1.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: horizbar1.font.family
+                        font.pixelSize: horizbar1.font.pixelSize
+                        highlighted: horizbar1.highlightedIndex === index
+                        hoverEnabled: horizbar1.hoverEnabled
+                    }
+                }
+                ComboBox {
+                    id: vertbar1
+                    width: apexidashsettings.width / 9
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "false","true"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: vertbar1.width
+                        text: vertbar1.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: vertbar1.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: vertbar1.font.family
+                        font.pixelSize: vertbar1.font.pixelSize
+                        highlighted: vertbar1.highlightedIndex === index
+                        hoverEnabled: vertbar1.hoverEnabled
+                    }
+                }
+                TextField {
+                    id: title1
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                }
+                TextField {
+                    id: unit1
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                }
+                ComboBox {
+                    id: decplaces1
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "0","1","2","3"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: vertbar1.width
+                        text: vertbar1.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: vertbar1.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: vertbar1.font.family
+                        font.pixelSize: vertbar1.font.pixelSize
+                        highlighted: vertbar1.highlightedIndex === index
+                        hoverEnabled: vertbar1.hoverEnabled
+                    }
+                }
+                ComboBox {
+                    id: datasources1
+                    width: apexidashsettings.width / 4
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: datasources1.width
+                        text: datasources1.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: datasources1.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: datasources1.font.family
+                        font.pixelSize: datasources1.font.pixelSize
+                        highlighted: datasources1.highlightedIndex === index
+                        hoverEnabled: datasources1.hoverEnabled
+                    }
+                }
+                TextField {
+                    id: maxval2
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    text: qsTr("0")
+                    inputMethodHints: Qt.ImhDigitsOnly
+                }
+                ComboBox {
+                    id: horizbar2
+                    width: apexidashsettings.width / 9
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "false","true"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: horizbar2.width
+                        text: horizbar2.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: horizbar2.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: horizbar2.font.family
+                        font.pixelSize: horizbar2.font.pixelSize
+                        highlighted: horizbar2.highlightedIndex === index
+                        hoverEnabled: horizbar2.hoverEnabled
+                    }
+                }
+                ComboBox {
+                    id: vertbar2
+                    width: apexidashsettings.width / 9
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "false","true"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: vertbar2.width
+                        text: vertbar2.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: vertbar2.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: vertbar2.font.family
+                        font.pixelSize: vertbar2.font.pixelSize
+                        highlighted: vertbar2.highlightedIndex === index
+                        hoverEnabled: vertbar2.hoverEnabled
+                    }
+                }
+                TextField {
+                    id: title2
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                }
+                TextField {
+                    id: unit2
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                }
+                ComboBox {
+                    id: decplaces2
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "0","1","2","3"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: vertbar2.width
+                        text: vertbar2.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: vertbar2.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: vertbar2.font.family
+                        font.pixelSize: vertbar2.font.pixelSize
+                        highlighted: vertbar2.highlightedIndex === index
+                        hoverEnabled: vertbar2.hoverEnabled
+                    }
+                }
+                ComboBox {
+                    id: datasources2
+                    width: apexidashsettings.width / 4
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: datasources2.width
+                        text: datasources2.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: datasources2.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: datasources2.font.family
+                        font.pixelSize: datasources2.font.pixelSize
+                        highlighted: datasources2.highlightedIndex === index
+                        hoverEnabled: datasources2.hoverEnabled
+                    }
+                }
+                TextField {
+                    id: maxval3
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    text: qsTr("0")
+                    inputMethodHints: Qt.ImhDigitsOnly
+                }
+                ComboBox {
+                    id: horizbar3
+                    width: apexidashsettings.width / 9
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "false","true"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: horizbar3.width
+                        text: horizbar3.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: horizbar3.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: horizbar3.font.family
+                        font.pixelSize: horizbar3.font.pixelSize
+                        highlighted: horizbar3.highlightedIndex === index
+                        hoverEnabled: horizbar3.hoverEnabled
+                    }
+                }
+                ComboBox {
+                    id: vertbar3
+                    width: apexidashsettings.width / 9
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "false","true"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: vertbar3.width
+                        text: vertbar3.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: vertbar3.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: vertbar3.font.family
+                        font.pixelSize: vertbar3.font.pixelSize
+                        highlighted: vertbar3.highlightedIndex === index
+                        hoverEnabled: vertbar3.hoverEnabled
+                    }
+                }
+                TextField {
+                    id: title3
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                }
+                TextField {
+                    id: unit3
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                }
+                ComboBox {
+                    id: decplaces3
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "0","1","2","3"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: vertbar3.width
+                        text: vertbar3.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: vertbar3.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: vertbar3.font.family
+                        font.pixelSize: vertbar3.font.pixelSize
+                        highlighted: vertbar3.highlightedIndex === index
+                        hoverEnabled: vertbar3.hoverEnabled
+                    }
+                }
+                ComboBox {
+                    id: datasources3
+                    width: apexidashsettings.width / 4
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: datasources3.width
+                        text: datasources3.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: datasources3.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: datasources3.font.family
+                        font.pixelSize: datasources3.font.pixelSize
+                        highlighted: datasources3.highlightedIndex === index
+                        hoverEnabled: datasources3.hoverEnabled
+                    }
+                }
+                TextField {
+                    id: maxval4
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    text: qsTr("0")
+                    inputMethodHints: Qt.ImhDigitsOnly
+                }
+                ComboBox {
+                    id: horizbar4
+                    width: apexidashsettings.width / 9
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "false","true"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: horizbar4.width
+                        text: horizbar4.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: horizbar4.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: horizbar4.font.family
+                        font.pixelSize: horizbar4.font.pixelSize
+                        highlighted: horizbar4.highlightedIndex === index
+                        hoverEnabled: horizbar4.hoverEnabled
+                    }
+                }
+                ComboBox {
+                    id: vertbar4
+                    width: apexidashsettings.width / 9
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "false","true"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: vertbar4.width
+                        text: vertbar4.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: vertbar4.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: vertbar4.font.family
+                        font.pixelSize: vertbar4.font.pixelSize
+                        highlighted: vertbar4.highlightedIndex === index
+                        hoverEnabled: vertbar4.hoverEnabled
+                    }
+                }
+                TextField {
+                    id: title4
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                }
+                TextField {
+                    id: unit4
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                }
+                ComboBox {
+                    id: decplaces4
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "0","1","2","3"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: vertbar4.width
+                        text: vertbar4.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: vertbar4.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: vertbar4.font.family
+                        font.pixelSize: vertbar4.font.pixelSize
+                        highlighted: vertbar4.highlightedIndex === index
+                        hoverEnabled: vertbar4.hoverEnabled
+                    }
+                }
+                ComboBox {
+                    id: datasources4
+                    width: apexidashsettings.width / 4
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: datasources4.width
+                        text: datasources4.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: datasources4.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: datasources4.font.family
+                        font.pixelSize: datasources4.font.pixelSize
+                        highlighted: datasources4.highlightedIndex === index
+                        hoverEnabled: datasources4.hoverEnabled
+                    }
+                }
+                TextField {
+                    id: maxval5
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    text: qsTr("0")
+                    inputMethodHints: Qt.ImhDigitsOnly
+                }
+                ComboBox {
+                    id: horizbar5
+                    width: apexidashsettings.width / 9
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "false","true"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: horizbar4.width
+                        text: horizbar4.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: horizbar4.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: horizbar4.font.family
+                        font.pixelSize: horizbar4.font.pixelSize
+                        highlighted: horizbar4.highlightedIndex === index
+                        hoverEnabled: horizbar4.hoverEnabled
+                    }
+                }
+                ComboBox {
+                    id: vertbar5
+                    width: apexidashsettings.width / 9
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "false","true"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: vertbar4.width
+                        text: vertbar4.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: vertbar4.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: vertbar4.font.family
+                        font.pixelSize: vertbar4.font.pixelSize
+                        highlighted: vertbar4.highlightedIndex === index
+                        hoverEnabled: vertbar4.hoverEnabled
+                    }
+                }
+                TextField {
+                    id: title5
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                }
+                TextField {
+                    id: unit5
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                }
+                ComboBox {
+                    id: decplaces5
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "0","1","2","3"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: vertbar4.width
+                        text: vertbar4.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: vertbar4.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: vertbar4.font.family
+                        font.pixelSize: vertbar4.font.pixelSize
+                        highlighted: vertbar4.highlightedIndex === index
+                        hoverEnabled: vertbar4.hoverEnabled
+                    }
+                }
+                ComboBox {
+                    id: datasources5
+                    width: apexidashsettings.width / 4
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: datasources5.width
+                        text: datasources5.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: datasources5.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: datasources5.font.family
+                        font.pixelSize: datasources5.font.pixelSize
+                        highlighted: datasources5.highlightedIndex === index
+                        hoverEnabled: datasources5.hoverEnabled
+                    }
+                }
+                TextField {
+                    id: maxval6
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    text: qsTr("0")
+                    inputMethodHints: Qt.ImhDigitsOnly
+                }
+                ComboBox {
+                    id: horizbar6
+                    width: apexidashsettings.width / 9
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "false","true"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: horizbar4.width
+                        text: horizbar4.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: horizbar4.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: horizbar4.font.family
+                        font.pixelSize: horizbar4.font.pixelSize
+                        highlighted: horizbar4.highlightedIndex === index
+                        hoverEnabled: horizbar4.hoverEnabled
+                    }
+                }
+                ComboBox {
+                    id: vertbar6
+                    width: apexidashsettings.width / 9
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "false","true"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: vertbar6.width
+                        text: vertbar6.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: vertbar6.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: vertbar6.font.family
+                        font.pixelSize: vertbar6.font.pixelSize
+                        highlighted: vertbar6.highlightedIndex === index
+                        hoverEnabled: vertbar6.hoverEnabled
+                    }
+                }
+                TextField {
+                    id: title6
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                }
+                TextField {
+                    id: unit6
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                }
+                ComboBox {
+                    id: decplaces6
+                    width: apexidashsettings.width / 12
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "0","1","2","3"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: decplaces6.width
+                        text: decplaces6.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: decplaces6.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: decplaces6.font.family
+                        font.pixelSize: decplaces6.font.pixelSize
+                        highlighted: decplaces6.highlightedIndex === index
+                        hoverEnabled: decplaces6.hoverEnabled
+                    }
+                }
+                ComboBox {
+                    id: datasources6
+                    width: apexidashsettings.width / 4
+                    height: apexidashsettings.height /15
+                    font.pixelSize: apexidashsettings.width / 55
+                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)"]
+                    property bool initialized: true
+                    delegate: ItemDelegate {
+                        width: datasources6.width
+                        text: datasources6.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: datasources6.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: datasources6.font.family
+                        font.pixelSize: datasources6.font.pixelSize
+                        highlighted: datasources6.highlightedIndex === index
+                        hoverEnabled: datasources6.hoverEnabled
+
+                    }
+
+                }
+                ListModel {
+                    id: datasources
+                    ListElement {name: "Inj Duty"}
+                    ListElement {name: "Leadingign"}
+                    ListElement {name: "Trailingign"}
+                    ListElement {name: "rpm"}
+                    ListElement {name: "Speed"}
+                    ListElement {name: "BoostPres"}
+                    ListElement {name: "Knock"}
+                    ListElement {name: "Watertemp"}
+                    ListElement {name: "Intaketemp"}
+                    ListElement {name: "BatteryV"}
+                    ListElement {name: "Intakepress"}
+                    ListElement {name: "PressureV"}
+                    ListElement {name: "ThrottleV"}
+                    ListElement {name: "InjFrPr"}
+                    ListElement {name: "Inj +/-"}
+                    ListElement {name: "Fuelc"}
+                    ListElement {name: "Moilp"}
+                    ListElement {name: "Boosttp"}
+                    ListElement {name: "Boostwg"}
+                    ListElement {name: "O2volt"}
+                    ListElement {name: "O2volt_2"}
+                    ListElement {name: "InjFrSc"}
+                    ListElement {name: "MAF1V"}
+                    ListElement {name: "MAF2V"}
+                    ListElement {name: "Dwell"}
+                    ListElement {name: "auxcalc1"}
+                    ListElement {name: "auxcalc2"}
+
+                }
+                Button {
+                    id: writefile
+                    text: "Apply"
+                    x: 350
+                    y: 400
+                    onClicked:{
+
+                        gauge1 = ("166,120,300,240,"+maxval1.text+","+decplaces1.currentText +","+unit1.text+","+title1.text+","+vertbar1.currentText +","+horizbar1.currentText +","+"false,"+"Dashboard"+","+(datasources.get(datasources1.currentIndex).name)+","+(datasources.get(datasources1.currentIndex).name))
+                        gauge2 = ("166,120,466,240,"+maxval2.text+","+decplaces2.currentText +","+unit2.text+","+title2.text+","+vertbar2.currentText +","+horizbar2.currentText +","+"false,"+"Dashboard"+","+(datasources.get(datasources2.currentIndex).name)+","+(datasources.get(datasources2.currentIndex).name))
+                        gauge3 = ("166,120,632,240,"+maxval3.text+","+decplaces3.currentText +","+unit3.text+","+title3.text+","+vertbar3.currentText +","+horizbar3.currentText +","+"false,"+"Dashboard"+","+(datasources.get(datasources3.currentIndex).name)+","+(datasources.get(datasources3.currentIndex).name))
+                        gauge4 = ("166,120,300,360,"+maxval4.text+","+decplaces4.currentText +","+unit4.text+","+title4.text+","+vertbar4.currentText +","+horizbar4.currentText +","+"false,"+"Dashboard"+","+(datasources.get(datasources4.currentIndex).name)+","+(datasources.get(datasources4.currentIndex).name))
+                        gauge5 = ("166,120,466,360,"+maxval5.text+","+decplaces5.currentText +","+unit5.text+","+title5.text+","+vertbar5.currentText +","+horizbar5.currentText +","+"false,"+"Dashboard"+","+(datasources.get(datasources5.currentIndex).name)+","+(datasources.get(datasources5.currentIndex).name))
+                        gauge6 = ("166,120,632,360,"+maxval6.text+","+decplaces6.currentText +","+unit6.text+","+title6.text+","+vertbar6.currentText +","+horizbar6.currentText +","+"false,"+"Dashboard"+","+(datasources.get(datasources6.currentIndex).name)+","+(datasources.get(datasources6.currentIndex).name))
+
+                        Apexi.writeDashfile(gauge1,gauge2,gauge3,gauge4,gauge5,gauge6)
+                    }
+                }
+            }
+            //
+
+            // Virtual Keyboard
+
+            InputPanel {
+                id: keyboard;
+                y: apexidashsettings.height; // position the top of the keyboard to the bottom of the screen/display
+
+                anchors.left: apexidashsettings.left;
+                anchors.right: apexidashsettings.right;
+
+
+                states: State {
+                    name: "visible";
+                    when: keyboard.active;
+                    PropertyChanges {
+                        target: keyboard;
+                        // position keyboard on top of the screen
+                        y: apexidashsettings.height / 1.95;
+                    }
+                }
+                transitions: Transition {
+                    from: ""; // default initial state
+                    to: "visible";
+                    reversible: true; // toggle visibility with reversible: true;
+                    ParallelAnimation {
+                        NumberAnimation {
+                            properties: "y";
+                            duration: 250;
+                            easing.type: Easing.InOutQuad;
+                        }
+                    }
+                }
+            }
+            //
+
+
+        }
+
+    }
+    Tab {
+        title: "Developer"// Tab index 7
         //Developer Stuff
         Rectangle{
             id: developer
-            anchors.fill : parent
+            anchors.top : mygrid.bottom
             color: "black"
             Connections{
                 target: Dashboard
@@ -1883,12 +2583,12 @@ TabView {
                 id: scrollconsoletext
                 width: 400
                 height: parent.height
-            TextArea {
-                id: consoletext
-                width: scrollconsoletext.width
-                wrapMode: TextArea.Wrap
-                color: "white"
-                    }
+                TextArea {
+                    id: consoletext
+                    width: scrollconsoletext.width
+                    wrapMode: TextArea.Wrap
+                    color: "white"
+                }
             }
             Grid {
                 anchors.top :parent.top
@@ -1897,17 +2597,17 @@ TabView {
                 rows: 10
                 columns: 2
                 spacing: parent.width /150
-            Button {
-                id: candump
-                text: "CanDump"
-                onClicked: Connect.candump()
-            }
-            Button {
-                id: minicom
-                text: "Minicom"
-                onClicked: Connect.minicom()
-            }
-            /*
+                Button {
+                    id: candump
+                    text: "CanDump"
+                    onClicked: Connect.candump()
+                }
+                Button {
+                    id: minicom
+                    text: "Minicom"
+                    onClicked: Connect.minicom()
+                }
+                /*
             Button {
                 id: update
                 text: "Update"

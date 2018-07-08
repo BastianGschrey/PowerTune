@@ -44,7 +44,8 @@ HEADERS += \
     AdaptronicSelect.h \
     connect.h \
     calculations.h \
-    udpreceiver.h
+    udpreceiver.h \
+    Gauges/squaregaugeracedash.h
 
 
 FORMS +=

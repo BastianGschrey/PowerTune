@@ -699,8 +699,7 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
     packageBasic[7] = mul[0] * info->Basic_Watert + add[8];
     packageBasic[8] = mul[0] * info->Basic_Airt + add[8];
     packageBasic[9] = mul[15] * info->Basic_BattV + add[0];
-    if (Model == 3 || Model ==  2)
-    {
+
         if (checkboost == 128)
         {
             int test = (unsigned char)rawmessagedata[12];
@@ -709,8 +708,8 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
         else{
             Boost = (packageBasic[5] -760);
         }
-    }
 
+/*
     else{
        // qDebug()<< "Mdl1" << packageBasic[5];
         if (packageBasic[5] >= 0)
@@ -721,13 +720,13 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
             Boost = packageBasic[5] -760; // while boost pressure is negative show pressure in mmhg
         }
       }
-
+*/
     // m_dashboard->setInjDuty(packageBasic[0]);
     m_dashboard->setLeadingign(packageBasic[1]);
     m_dashboard->setTrailingign(packageBasic[2]);
     m_dashboard->setrpm(packageBasic[3]);
     m_dashboard->setSpeed(packageBasic[4]);
-    m_dashboard->setpim(Boost);
+    m_dashboard->setBoostPres(Boost);
     m_dashboard->setKnock(packageBasic[6]);
     m_dashboard->setWatertemp(packageBasic[7]);
     m_dashboard->setIntaketemp(packageBasic[8]);
@@ -827,4 +826,25 @@ void Apexi::calculatorAux(qreal aux1min,qreal aux2max,qreal aux3min,qreal aux4ma
     Auxname2 = Auxunit2;
    // qDebug() << Auxunit1<<auxval1 <<auxval2 <<Auxunit2 << auxval3<<auxval4;
     
+}
+
+void Apexi::writeDashfile(const QString &gauge1,const QString &gauge2,const QString &gauge3,const QString &gauge4,const QString &gauge5,const QString &gauge6)
+{
+//Creates the dashboard file for the Apexi Dash
+
+    QString filename="UserDashApexi.txt";
+    QFile file( filename );
+    if ( file.open(QIODevice::ReadWrite | QIODevice::Text) )
+
+    {
+        QTextStream stream( &file );
+        stream << gauge1 << endl;
+        stream << gauge2 << endl;
+        stream << gauge3 << endl;
+        stream << gauge4 << endl;
+        stream << gauge5 << endl;
+        stream << gauge6 << endl;
+    }
+
+
 }

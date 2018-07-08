@@ -192,6 +192,7 @@ class DashBoard : public QObject
     //User Dashboard Stringlist dashsetup
 
     Q_PROPERTY(QStringList dashsetup READ dashsetup WRITE setdashsetup NOTIFY dashsetupChanged)
+    Q_PROPERTY(QStringList dashsetup1 READ dashsetup1 WRITE setdashsetup1 NOTIFY dashsetup1Changed)
 
     Q_PROPERTY(qreal accelpedpos READ accelpedpos WRITE setaccelpedpos NOTIFY accelpedposChanged)
     Q_PROPERTY(qreal airtempensor2 READ airtempensor2 WRITE setairtempensor2 NOTIFY airtempensor2Changed)
@@ -494,6 +495,7 @@ public:
     //User Dashboard Stringlist dashsetup
 
     void setdashsetup(const QStringList &dashsetup);
+    void setdashsetup1(const QStringList &dashsetup1);
 
     void setaccelpedpos(const qreal &accelpedpos);
     void setairtempensor2(const qreal &airtempensor2);
@@ -787,6 +789,7 @@ public:
     //User Dashboard Stringlist
 
     QStringList dashsetup() const;
+    QStringList dashsetup1() const;
 
     qreal accelpedpos() const;
     qreal airtempensor2() const;
@@ -1077,6 +1080,7 @@ signals:
     //User Dashboard Stringlist
 
     void dashsetupChanged(QStringList dashsetup);
+    void dashsetup1Changed(QStringList dashsetup1);
 
     void accelpedposChanged(qreal accelpedpos);
     void airtempensor2Changed(qreal airtempensor2);
@@ -1371,6 +1375,7 @@ private:
     //User Dashboard Stringlist  dashsetup
 
     QStringList m_dashsetup;
+    QStringList m_dashsetup1;
 
     qreal m_accelpedpos;
     qreal m_airtempensor2;

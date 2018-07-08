@@ -58,5 +58,7 @@
         <file>graphics/Racedash.png</file>
         <file>Gauges/RPMBarStyle1.qml</file>
         <file>Gauges/RPMBARStyle2.qml</file>
+        <file>Gauges/SquaregaugeRaceDash.qml</file>
+        <file>Gauges/createsquaregaugeracedasgh.js</file>
     </qresource>
 </RCC>
