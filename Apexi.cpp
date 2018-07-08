@@ -846,5 +846,19 @@ void Apexi::writeDashfile(const QString &gauge1,const QString &gauge2,const QStr
         stream << gauge6 << endl;
     }
 
+    QString filename2="/home/pi/UserDashboards/UserDashApexi.txt";
+    QFile file2( filename2 );
+    if ( file2.open(QIODevice::ReadWrite | QIODevice::Text) )
+
+    {
+        QTextStream stream( &file2 );
+        stream << gauge1 << endl;
+        stream << gauge2 << endl;
+        stream << gauge3 << endl;
+        stream << gauge4 << endl;
+        stream << gauge5 << endl;
+        stream << gauge6 << endl;
+    }
+
 
 }
