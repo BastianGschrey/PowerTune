@@ -2505,6 +2505,10 @@ TabView {
                     ListElement {name: "MAF1V"}
                     ListElement {name: "MAF2V"}
                     ListElement {name: "Dwell"}
+                    ListElement {name: "AN1V"}
+                    ListElement {name: "AN2V"}
+                    ListElement {name: "AN3V"}
+                    ListElement {name: "AN4V"}
                     ListElement {name: "auxcalc1"}
                     ListElement {name: "auxcalc2"}
 
