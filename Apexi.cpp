@@ -420,12 +420,12 @@ void Apexi::sendRequest(int requestIndex)
 
 
 
-void Apexi::Auxcalc (const QString &unitaux1,const int &an1V0,const int &an2V5,const QString &unitaux2,const int &an3V0,const int &an4V5)
+void Apexi::Auxcalc (const QString &unitaux1,const qreal &an1V0,const qreal &an2V5,const QString &unitaux2,const qreal &an3V0,const qreal &an4V5)
 {
-    int aux1min = an1V0;
-    int aux2max = an2V5;
-    int aux3min = an3V0;
-    int aux4max = an4V5;
+    qreal aux1min = an1V0;
+    qreal aux2max = an2V5;
+    qreal aux3min = an3V0;
+    qreal aux4max = an4V5;
     QString Auxunit1 = unitaux1;
     QString Auxunit2 = unitaux2;
     
@@ -667,10 +667,9 @@ void Apexi::decodeAux(QByteArray rawmessagedata)
     packageAux[3] = mul[32] * info->AN4 + add[32];
     
     //Analog1
-    AN1AN2calc = ((((auxval2-auxval1)/5) * (packageAux[0] - packageAux[1])) + auxval1);
-    AN3AN4calc = ((((auxval4-auxval3)/5) * (packageAux[2] - packageAux[3])) + auxval3);
+    AN1AN2calc = (((((auxval2-auxval1)*0.2) * (packageAux[0] - packageAux[1]))) + auxval1);
+    AN3AN4calc = ((((auxval4-auxval3)*0.2) * (packageAux[2] - packageAux[3])) + auxval3);
     m_dashboard->setauxcalc1(AN1AN2calc);
-    //Analog2
     m_dashboard->setauxcalc2(AN3AN4calc);
     
 }
@@ -818,7 +817,7 @@ void Apexi::decodeSensorStrings(QByteArray rawmessagedata)
     m_dashboard->setFlagString16 (QString(rawmessagedata).mid(79,3));
 }
 
-void Apexi::calculatorAux(int aux1min,int aux2max,int aux3min,int aux4max,QString Auxunit1,QString Auxunit2)
+void Apexi::calculatorAux(qreal aux1min,qreal aux2max,qreal aux3min,qreal aux4max,QString Auxunit1,QString Auxunit2)
 {
     auxval1 = aux1min;
     auxval2 = aux2max;

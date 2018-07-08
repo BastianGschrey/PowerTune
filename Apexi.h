@@ -363,7 +363,7 @@ public:
     explicit Apexi(QObject *parent = 0);
     explicit Apexi(DashBoard *dashboard, QObject *parent = 0);
     Q_INVOKABLE void SetProtocol(const int &protocolselect);
-    Q_INVOKABLE void Auxcalc (const QString &unitaux1,const int &an1V0,const int &an2V5,const QString &unitaux2,const int &an3V0,const int &an4V5);
+    Q_INVOKABLE void Auxcalc (const QString &unitaux1,const qreal &an1V0,const qreal &an2V5,const QString &unitaux2,const qreal &an3V0,const qreal &an4V5);
 
     
     
@@ -399,7 +399,7 @@ public slots:
     // void decodeVersion(QByteArray rawmessagedata);
     void decodeInit(QByteArray rawmessagedata);
     void decodeSensorStrings(QByteArray rawmessagedata);
-    void calculatorAux(int aux1min,int aux2max,int aux3min,int aux4max,QString Auxunit1,QString Auxunit2);
+    void calculatorAux(qreal aux1min,qreal aux2max,qreal aux3min,qreal aux4max,QString Auxunit1,QString Auxunit2);
     
     
 signals:
