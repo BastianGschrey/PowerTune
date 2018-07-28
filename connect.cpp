@@ -234,8 +234,8 @@ void Connect::checkReg(const QString &portName)
     QStringList list;
     qDebug()<<"Check Registers" << portName;
     QProcess *process = new QProcess(this);
-    process->start("/home/pi/Consult/Regs/ConsultRegs /dev/" + portName); //Check the supported Registers
-    // m_dashBoard->setSerialStat(process->readAllStandardOutput()); //This is just for testing
+    process->start("/home/pi/Consult/Regs/ConsultRegs /dev/"+(portName)); //Check the supported Registers
+    m_dashBoard->setSerialStat(process->readAllStandardOutput()); //This is just for testing
 
     //Read the input file
     //QString path = "regs.txt";// this is just for testing on windows
@@ -624,7 +624,8 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
     {
         //NissanConsult
         QProcess *process = new QProcess(this);
-        process->start("/home/pi/Consult/Consult /dev/" + portName);
+        process->start("/home/pi/Consult/Consult /dev/"+(portName));
+        qDebug() << "/dev/"+(portName);
         m_udpreceiver->startreceiver();
     }
     if (ecuSelect == 5)

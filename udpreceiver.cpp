@@ -45,11 +45,12 @@ void udpreceiver::processPendingDatagrams()
 
         QDataStream in(&datagram, QIODevice::ReadOnly);
         QString raw = datagram.data();
+        //qDebug()<<raw;
         QStringList list = raw.split( "," );
         int ident =list[0].toInt();
         float Value =list[1].toFloat();
-     //   qDebug()<<ident;
-     //   qDebug()<<Value;
+        //qDebug()<<ident;
+        //qDebug()<<Value;
 
         switch(ident) {
 
