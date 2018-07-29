@@ -1445,6 +1445,7 @@ TabView {
             id: consultrequestselect
             anchors.fill : parent
             color: "grey"
+            visible: false
             Grid {
                 rows: 10
                 columns: 4
@@ -2480,7 +2481,7 @@ TabView {
                 }
                 ListModel {
                     id: datasources
-                    ListElement {name: "Inj Duty"}
+                    ListElement {name: "InjDuty"}
                     ListElement {name: "Leadingign"}
                     ListElement {name: "Trailingign"}
                     ListElement {name: "rpm"}
@@ -2507,7 +2508,7 @@ TabView {
                     ListElement {name: "Dwell"}
                     ListElement {name: "AN1V"}
                     ListElement {name: "AN2V"}
-                    ListElement {name: "AN3V"}
+
                     ListElement {name: "AN4V"}
                     ListElement {name: "auxcalc1"}
                     ListElement {name: "auxcalc2"}

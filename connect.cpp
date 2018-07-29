@@ -603,7 +603,6 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
     //UDP receiver
     if (ecu == 1)
     {
-        qDebug() << "UDP";
         m_udpreceiver->startreceiver();
     }
     //Adaptronic
@@ -623,9 +622,9 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
     if (ecuSelect == 4)
     {
         //NissanConsult
-        QProcess *process = new QProcess(this);
-        process->start("/home/pi/Consult/Consult /dev/"+(portName));
-        qDebug() << "/dev/"+(portName);
+        //QProcess *process = new QProcess(this);
+        //process->start("/home/pi/Consult/Consult /dev/"+(portName));
+        //qDebug() << "/dev/"+(portName);
         m_udpreceiver->startreceiver();
     }
     if (ecuSelect == 5)
@@ -719,10 +718,10 @@ void Connect::closeConnection()
     if (ecu == 4)
     {
 
-        QProcess *process = new QProcess(this);
-        process->start("sudo pkill Consult");
-        qDebug()<<"Kill";
-
+       // QProcess *process = new QProcess(this);
+       // process->start("sudo pkill Consult");
+       // qDebug()<<"Kill";
+        m_udpreceiver->closeConnection();
     }
     if (ecu == 5)
     {
