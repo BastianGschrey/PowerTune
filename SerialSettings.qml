@@ -397,7 +397,7 @@ TabView {
                                 connectButton.enabled =false;
                                 ecuSelect.enabled = false;
                                 disconnectButton.enabled = true;
-                                //consultset.enabled = false;
+                                consultset.enabled = false;
                             }
                         }
                         Button {
@@ -411,7 +411,7 @@ TabView {
                                 connectButton.enabled = true;
                                 disconnectButton.enabled = false;
                                 ecuSelect.enabled = true;
-                                //consultset.enabled = true;
+                                consultset.enabled = true;
                                 functdisconnect.disconnectfunc();
                             }
                         }
@@ -1445,7 +1445,7 @@ TabView {
             id: consultrequestselect
             anchors.fill : parent
             color: "grey"
-            visible: false
+            //visible: false
             Grid {
                 rows: 10
                 columns: 4
@@ -1728,12 +1728,12 @@ TabView {
                     height: consultrequestselect.height /15
                     font.pixelSize: consultrequestselect.width / 55
                     onClicked: {
-                        if (connected == 1){functdisconnect.disconnectfunc();}
-                        Connect.checkReg(serialName.currentText);
-                        connectButton.enabled =true;
-                        ecuSelect.enabled = true;
-                        disconnectButton.enabled = false;
-                        supportedRegs.enabled = false;
+                        //if (connected == 1){functdisconnect.disconnectfunc();}
+                        Connect.checkReg();
+                        //connectButton.enabled =true;
+                        //ecuSelect.enabled = true;
+                        //disconnectButton.enabled = false;
+                        //supportedRegs.enabled = false;
                     }
                 }
                 Button {

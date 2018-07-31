@@ -66,6 +66,7 @@ Item {
 
   Rectangle{
   anchors.fill: parent
+  z:100 //This makes the Rectangle appear in front of the bar gauges
   color: "transparent"
   WarningLoader{}
   }

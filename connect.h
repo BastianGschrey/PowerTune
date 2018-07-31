@@ -59,7 +59,7 @@ public:
     Q_INVOKABLE void setOdometer(const qreal &Odometer);
     Q_INVOKABLE void qmlTreeviewclicked(const QModelIndex &index);
     Q_INVOKABLE void clear() const;
-    Q_INVOKABLE void checkReg(const QString &portName);
+    Q_INVOKABLE void checkReg();
     Q_INVOKABLE void LiveReqMsg(const int &val1, const int &val2, const int &val3, const int &val4, const int &val5, const int &val6, const int &val7, const int &val8, const int &val9, const int &val10, const int &val11, const int &val12, const int &val13, const int &val14, const int &val15, const int &val16, const int &val17, const int &val18, const int &val19, const int &val20, const int &val21, const int &val22, const int &val23, const int &val24, const int &val25, const int &val26, const int &val27, const int &val28, const int &val29, const int &val30, const int &val31, const int &val32, const int &val33, const int &val34, const int &val35, const int &val36, const int &val37, const int &val38, const int &val39, const int &val40, const int &val41, const int &val42, const int &val43, const int &val44, const int &val45);
     Q_INVOKABLE void openConnection(const QString &portName, const int &ecuSelect);
     Q_INVOKABLE void closeConnection();
