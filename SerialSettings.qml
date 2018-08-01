@@ -2494,22 +2494,22 @@ TabView {
                     ListElement {name: "Intakepress"}
                     ListElement {name: "PressureV"}
                     ListElement {name: "ThrottleV"}
-                    ListElement {name: "InjFrPr"}
-                    ListElement {name: "Inj +/-"}
+                    ListElement {name: "Primaryinp"}
+                    ListElement {name: "Injcorr"}
                     ListElement {name: "Fuelc"}
                     ListElement {name: "Moilp"}
                     ListElement {name: "Boosttp"}
                     ListElement {name: "Boostwg"}
                     ListElement {name: "O2volt"}
                     ListElement {name: "O2volt_2"}
-                    ListElement {name: "InjFrSc"}
+                    ListElement {name: "Secinjpulse"}
                     ListElement {name: "MAF1V"}
                     ListElement {name: "MAF2V"}
                     ListElement {name: "Dwell"}
-                    ListElement {name: "AN1V"}
-                    ListElement {name: "AN2V"}
-
-                    ListElement {name: "AN4V"}
+                    ListElement {name: "AN1V"}// make datasources
+                    ListElement {name: "AN2V"}// make datasources
+                    ListElement {name: "AN3V"}// make datasources
+                    ListElement {name: "AN4V"}// make datasources
                     ListElement {name: "auxcalc1"}
                     ListElement {name: "auxcalc2"}
 
