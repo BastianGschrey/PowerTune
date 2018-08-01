@@ -727,198 +727,7 @@ TabView {
                     connected = 0;
                 }
             }
-            Item {   //Function for Consult to show only supported Regs
-                id: functsupportedRegs
-                function supportedRegs()
-                {
-                    switch (Dashboard.supportedReg) {
-                    case 1: {
-                        consRPM.visible = true;
-                        break;
-                    }
 
-                    case 3: {
-                        consRPMREF.visible = true;
-                        break;
-                    }
-                    case 5: {
-                        consMAFVolt.visible = true;
-                        break;
-                    }
-                    case 7: {
-                        consRHMAFVolt.visible = true;
-                        break;
-                    }
-                    case 8: {
-                        consCoolantTemp.visible = true;
-                        break;
-                    }
-                    case 9: {
-                        consLHO2Volt.visible = true;
-                        break;
-                    }
-                    case 10: {
-                        consRHO2Volt.visible = true;
-                        break;
-                    }
-                    case 11: {
-                        consSpeed.visible = true;
-                        break;
-                    }
-                    case 12: {
-                        consBattvolt.visible = true;
-                        break;
-                    }
-                    case 13: {
-                        consTPS.visible = true;
-                        break;
-                    }
-                    case 14: {
-                        consFuelTemp.visible = true;
-                        break;
-                    }
-                    case 15: {
-                        consIAT.visible = true;
-                        break;
-                    }
-                    case 16: {
-                        consEGT.visible = true;
-                        break;
-                    }
-                    case 17: {
-                        consDigitalBitReg.visible = true;
-                        break;
-                    }
-                    case 19: {
-                        consInjectTimeLH.visible = true;
-                        break;
-                    }
-                    case 20: {
-                        consIGNTiming.visible = true;
-                        break;
-                    }
-                    case 21: {
-                        consAACValve.visible = true;
-                        break;
-                    }
-                    case 22: {
-                        consAFALPHALH.visible = true;
-                        break;
-                    }
-                    case 23: {
-                        consAFALPHARH.visible = true;
-                        break;
-                    }
-                    case 24: {
-                        consAFALPHASELFLEARNLH.visible = true;
-                        break;
-                    }
-                    case 25: {
-                        consAFALPHASELFLEARNRH.visible = true;
-                        break;
-                    }
-                    case 26: {
-                        consDigitalControlReg1.visible = true;
-                        break;
-                    }
-                    case 27: {
-                        consDigitalControlReg2.visible = true;
-                        break;
-                    }
-                    case 28: {
-                        consMRFCMNT.visible = true;
-                        break;
-                    }
-                    case 30: {
-                        consInjecttimeRH.visible = true;
-                        break;
-                    }
-                    case 31: {
-                        consWasteGate.visible = true;
-                        break;
-                    }
-                    case 32: {
-                        consMAPVolt.visible = true;
-                        break;
-                    }
-                    case 33: {
-                        consEngineMount.visible = true;
-                        break;
-                    }
-                    case 34: {
-                        consPositionCounter.visible = true;
-                        break;
-                    }
-                    case 35: {
-                        consPurgeContValve.visible = true;
-                        break;
-                    }
-                    case 36: {
-                        consFuelTankTemp.visible = true;
-                        break;
-                    }
-                    case 37: {
-                        consDPCMDRVolt.visible = true;
-                        break;
-                    }
-                    case 38: {
-                        consFuelGaugeVolt.visible = true;
-                        break;
-                    }
-                    case 39: {
-                        consFRO2HeatB1.visible = true;
-                        break;
-                    }
-                    case 40: {
-                        consFRO2HeatB2.visible = true;
-                        break;
-                    }
-                    case 41: {
-                        consIGNsw.visible = true;
-                        break;
-                    }
-                    case 42: {
-                        consCALLD.visible = true;
-                        break;
-                    }
-                    case 43: {
-                        consBFuelSched.visible = true;
-                        break;
-                    }
-                    case 44: {
-                        consRRO2SensVolt.visible = true;
-                        break;
-                    }
-                    case 45: {
-                        consRRO2SensB2Volt.visible = true;
-                        break;
-                    }
-                    case 46: {
-                        consAbsTPSVolt.visible = true;
-                        break;
-                    }
-                    case 47: {
-                        consMAFgmS.visible = true;
-                        break;
-                    }
-                    case 48: {
-                        consEvapSysPressVolt.visible = true;
-                        break;
-                    }
-                    case 50: {
-                        consAbsPressSensVolt.visible = true;
-                        break;
-                    }
-                    case 52: {
-                        consFPCMFPVolt.visible = true;
-                        break;
-                    }
-                    default: {
-                        break;
-                    }
-                    }
-                }
-            }
 
             Item {
                 //Function to play warning sound
@@ -1745,6 +1554,198 @@ TabView {
                     onClicked: {
                         supportedRegs.enabled = true;
                         Connect.LiveReqMsg(consRPM.checkState,consRPMREF.checkState,consMAFVolt.checkState,consRHMAFVolt.checkState,consCoolantTemp.checkState,consLHO2Volt.checkState,consRHO2Volt.checkState,consSpeed.checkState,consBattvolt.checkState,consTPS.checkState,consFuelTemp.checkState,consIAT.checkState,consEGT.checkState,consDigitalBitReg.checkState,consInjectTimeLH.checkState,consIGNTiming.checkState,consAACValve.checkState,consAFALPHALH.checkState,consAFALPHARH.checkState,consAFALPHASELFLEARNLH.checkState,consAFALPHASELFLEARNRH.checkState,consDigitalControlReg1.checkState,consDigitalControlReg2.checkState,consMRFCMNT.checkState,consInjecttimeRH.checkState,consWasteGate.checkState,consMAPVolt.checkState,consEngineMount.checkState,consPositionCounter.checkState,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+                    }
+                    Item {   //Function for Consult to show only supported Regs
+                        id: functsupportedRegs
+                        function supportedRegs()
+                        {
+                            switch (Dashboard.supportedReg) {
+                            case 1: {
+                                consRPM.visible = true;
+                                break;
+                            }
+
+                            case 3: {
+                                consRPMREF.visible = true;
+                                break;
+                            }
+                            case 5: {
+                                consMAFVolt.visible = true;
+                                break;
+                            }
+                            case 7: {
+                                consRHMAFVolt.visible = true;
+                                break;
+                            }
+                            case 8: {
+                                consCoolantTemp.visible = true;
+                                break;
+                            }
+                            case 9: {
+                                consLHO2Volt.visible = true;
+                                break;
+                            }
+                            case 10: {
+                                consRHO2Volt.visible = true;
+                                break;
+                            }
+                            case 11: {
+                                consSpeed.visible = true;
+                                break;
+                            }
+                            case 12: {
+                                consBattvolt.visible = true;
+                                break;
+                            }
+                            case 13: {
+                                consTPS.visible = true;
+                                break;
+                            }
+                            case 14: {
+                                consFuelTemp.visible = true;
+                                break;
+                            }
+                            case 15: {
+                                consIAT.visible = true;
+                                break;
+                            }
+                            case 16: {
+                                consEGT.visible = true;
+                                break;
+                            }
+                            case 17: {
+                                consDigitalBitReg.visible = true;
+                                break;
+                            }
+                            case 19: {
+                                consInjectTimeLH.visible = true;
+                                break;
+                            }
+                            case 20: {
+                                consIGNTiming.visible = true;
+                                break;
+                            }
+                            case 21: {
+                                consAACValve.visible = true;
+                                break;
+                            }
+                            case 22: {
+                                consAFALPHALH.visible = true;
+                                break;
+                            }
+                            case 23: {
+                                consAFALPHARH.visible = true;
+                                break;
+                            }
+                            case 24: {
+                                consAFALPHASELFLEARNLH.visible = true;
+                                break;
+                            }
+                            case 25: {
+                                consAFALPHASELFLEARNRH.visible = true;
+                                break;
+                            }
+                            case 26: {
+                                consDigitalControlReg1.visible = true;
+                                break;
+                            }
+                            case 27: {
+                                consDigitalControlReg2.visible = true;
+                                break;
+                            }
+                            case 28: {
+                                consMRFCMNT.visible = true;
+                                break;
+                            }
+                            case 30: {
+                                consInjecttimeRH.visible = true;
+                                break;
+                            }
+                            case 31: {
+                                consWasteGate.visible = true;
+                                break;
+                            }
+                            case 32: {
+                                consMAPVolt.visible = true;
+                                break;
+                            }
+                            case 33: {
+                                consEngineMount.visible = true;
+                                break;
+                            }
+                            case 34: {
+                                consPositionCounter.visible = true;
+                                break;
+                            }
+                            case 35: {
+                                consPurgeContValve.visible = true;
+                                break;
+                            }
+                            case 36: {
+                                consFuelTankTemp.visible = true;
+                                break;
+                            }
+                            case 37: {
+                                consDPCMDRVolt.visible = true;
+                                break;
+                            }
+                            case 38: {
+                                consFuelGaugeVolt.visible = true;
+                                break;
+                            }
+                            case 39: {
+                                consFRO2HeatB1.visible = true;
+                                break;
+                            }
+                            case 40: {
+                                consFRO2HeatB2.visible = true;
+                                break;
+                            }
+                            case 41: {
+                                consIGNsw.visible = true;
+                                break;
+                            }
+                            case 42: {
+                                consCALLD.visible = true;
+                                break;
+                            }
+                            case 43: {
+                                consBFuelSched.visible = true;
+                                break;
+                            }
+                            case 44: {
+                                consRRO2SensVolt.visible = true;
+                                break;
+                            }
+                            case 45: {
+                                consRRO2SensB2Volt.visible = true;
+                                break;
+                            }
+                            case 46: {
+                                consAbsTPSVolt.visible = true;
+                                break;
+                            }
+                            case 47: {
+                                consMAFgmS.visible = true;
+                                break;
+                            }
+                            case 48: {
+                                consEvapSysPressVolt.visible = true;
+                                break;
+                            }
+                            case 50: {
+                                consAbsPressSensVolt.visible = true;
+                                break;
+                            }
+                            case 52: {
+                                consFPCMFPVolt.visible = true;
+                                break;
+                            }
+                            default: {
+                                break;
+                            }
+                            }
+                        }
                     }
 
                 }
