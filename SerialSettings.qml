@@ -80,7 +80,6 @@ TabView {
                     onRpmChanged: { if (Dashboard.rpm > Dashboard.rpmwarn) {playwarning.start()};}
                     onKnockChanged: { if (Dashboard.Knock > Dashboard.knockwarn) {playwarning.start()};}
                     onBoostPresChanged: { if (Dashboard.BoostPres > Dashboard.boostwarn) {playwarning.start()};}
-                    onSupportedRegChanged: {functsupportedRegs.supportedRegs() }
                 }
 
 
@@ -1255,6 +1254,10 @@ TabView {
             anchors.fill : parent
             color: "grey"
             //visible: false
+            Connections{
+                target: Dashboard
+                onSupportedRegChanged: {functsupportedRegs.supportedRegs() }
+            }
             Grid {
                 rows: 10
                 columns: 4
@@ -1543,6 +1546,7 @@ TabView {
                         //ecuSelect.enabled = true;
                         //disconnectButton.enabled = false;
                         //supportedRegs.enabled = false;
+
                     }
                 }
                 Button {
