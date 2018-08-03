@@ -232,15 +232,8 @@ void Connect::checkReg()
     int i = 0;
     bool ok;
     QStringList list;
-/*
-    qDebug()<<"Check Registers" << portName;
-    QProcess *process = new QProcess(this);
-    process->start("/home/pi/Consult/Regs/ConsultRegs /dev/"+(portName)); //Check the supported Registers
-    m_dashBoard->setSerialStat(process->readAllStandardOutput()); //This is just for testing
-*/
-    //Read the input file
-    //QString path = "regs.txt";// this is just for testing on windows
-    QString path = "/home/pi/Consult/Regs/SupportedRegs.txt";// the correct path on pi
+
+    QString path = "/home/pi/Consult/SupportedRegs.txt";
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
     {
