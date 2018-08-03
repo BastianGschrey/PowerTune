@@ -1,8 +1,12 @@
 #include <dashboard.h>
 #include <QStringList>
 #include <QDebug>
+#include <QVector>
 
-
+QVector<int>averageSpeed(10);
+QVector<int>averageRPM(10);
+int avgspeed;
+int avgrpm;
 
 DashBoard::DashBoard(QObject *parent)
     : QObject(parent)
@@ -305,6 +309,13 @@ void DashBoard::setrpm(const qreal &rpm)
     if (m_rpm == rpm)
         return;
     m_rpm = rpm;
+
+    //Smoothing
+    averageRPM.removeFirst();
+    averageRPM.append(m_rpm);
+    avgrpm = 0;
+    for (int i = 0; i <= 9; i++){avgrpm+= averageRPM[i];}
+    m_rpm = avgrpm/10;
     emit rpmChanged(rpm);
 }
 
@@ -447,6 +458,17 @@ void DashBoard::setSpeed(const qreal &speed)
     {m_speed = qRound(speed * m_speedpercent);}
     if (m_units == "imperial")
     {m_speed = qRound((speed * 0.621371) * m_speedpercent);}
+
+    //Attempt to do a moving average (smoothing)
+    averageSpeed.removeFirst();
+    averageSpeed.append(m_speed);
+    //qDebug() << "Vector Speed " << averageSpeed;
+    avgspeed = 0;
+    for (int i = 0; i <= 9; i++){avgspeed+= averageSpeed[i];}
+    m_speed = avgspeed/10;
+   // qDebug() << "Average Speed " << m_speed;
+    //Smoothing end
+
     emit speedChanged(speed);
 }
 
