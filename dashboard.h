@@ -293,7 +293,8 @@ class DashBoard : public QObject
     Q_PROPERTY(int rpmwarn READ rpmwarn WRITE setrpmwarn NOTIFY rpmwarnChanged)
     Q_PROPERTY(int knockwarn READ knockwarn WRITE setknockwarn NOTIFY knockwarnChanged)
     Q_PROPERTY(qreal boostwarn READ boostwarn WRITE setboostwarn NOTIFY boostwarnChanged)
-
+    Q_PROPERTY(int smoothrpm READ smoothrpm WRITE setsmoothrpm NOTIFY smoothrpmChanged)
+    Q_PROPERTY(int smoothspeed READ smoothspeed WRITE setsmoothspeed NOTIFY smoothspeedChanged)
 
 
 
@@ -595,7 +596,8 @@ public:
     Q_INVOKABLE void setrpmwarn(const int &rpmwarn);
     Q_INVOKABLE void setknockwarn(const int &knockwarn);
     Q_INVOKABLE void setboostwarn(const qreal &boostwarn);
-
+    Q_INVOKABLE void setsmoothrpm(const int &smoothrpm);
+    Q_INVOKABLE void setsmoothspeed(const int &smoothspeed);
 
 
     qreal Odo() const;
@@ -889,7 +891,8 @@ public:
     int rpmwarn() const;
     int knockwarn() const;
     qreal boostwarn() const;
-
+    int smoothrpm() const;
+    int smoothspeed() const;
 
 signals:
 
@@ -1176,6 +1179,8 @@ signals:
     void rpmwarnChanged (int rpmwarn);
     void knockwarnChanged (int knockwarn);
     void boostwarnChanged(qreal boostwarn);
+    void smoothrpmChanged (int smoothrpm);
+    void smoothspeedChanged (int smoothspeed);
 
 private:
     // Odometer
@@ -1474,6 +1479,8 @@ private:
     int m_rpmwarn;
     int m_knockwarn;
     qreal m_boostwarn;
+    int m_smoothrpm;
+    int m_smoothspeed;
 
 };
 

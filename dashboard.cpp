@@ -3,8 +3,8 @@
 #include <QDebug>
 #include <QVector>
 
-QVector<int>averageSpeed(10);
-QVector<int>averageRPM(10);
+QVector<int>averageSpeed(0);
+QVector<int>averageRPM(0);
 int avgspeed;
 int avgrpm;
 
@@ -279,6 +279,8 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_rpmwarn(9999)
     ,  m_knockwarn(999)
     ,  m_boostwarn(999)
+    ,  m_smoothrpm(0)
+    ,  m_smoothspeed(0)
 
 {
 }
@@ -311,11 +313,14 @@ void DashBoard::setrpm(const qreal &rpm)
     m_rpm = rpm;
 
     //Smoothing
+    if (m_smoothrpm >0)
+    {
     averageRPM.removeFirst();
     averageRPM.append(m_rpm);
     avgrpm = 0;
-    for (int i = 0; i <= 9; i++){avgrpm+= averageRPM[i];}
-    m_rpm = avgrpm/10;
+    for (int i = 0; i <= m_smoothrpm-1; i++){avgrpm+= averageRPM[i];}
+    m_rpm = avgrpm/m_smoothrpm;
+    }
     emit rpmChanged(rpm);
 }
 
@@ -458,16 +463,18 @@ void DashBoard::setSpeed(const qreal &speed)
     {m_speed = qRound(speed * m_speedpercent);}
     if (m_units == "imperial")
     {m_speed = qRound((speed * 0.621371) * m_speedpercent);}
-
+qDebug() << "smoot " << m_smoothspeed;
     //Attempt to do a moving average (smoothing)
+    if (m_smoothspeed != 0)
+    {
     averageSpeed.removeFirst();
     averageSpeed.append(m_speed);
     //qDebug() << "Vector Speed " << averageSpeed;
     avgspeed = 0;
-    for (int i = 0; i <= 9; i++){avgspeed+= averageSpeed[i];}
-    m_speed = avgspeed/10;
+    for (int i = 0; i <= m_smoothspeed-1; i++){avgspeed+= averageSpeed[i];}
+    m_speed = avgspeed/m_smoothspeed;
    // qDebug() << "Average Speed " << m_speed;
-    //Smoothing end
+    }
 
     emit speedChanged(speed);
 }
@@ -2232,8 +2239,28 @@ void DashBoard::setboostwarn(const qreal &boostwarn)
     m_boostwarn = boostwarn;
     emit boostwarnChanged(boostwarn);
 }
-
-
+void DashBoard::setsmoothrpm(const int &smoothrpm)
+{
+    if (m_smoothrpm == smoothrpm)
+        return;
+    if (smoothrpm != 0)
+    {m_smoothrpm = smoothrpm+1;}
+    else {m_smoothrpm = smoothrpm;}
+    //qDebug()<<"SmoothRPM" << m_smoothrpm;
+    averageRPM.resize(m_smoothrpm);
+    emit smoothrpmChanged(smoothrpm);
+}
+void DashBoard::setsmoothspeed(const int &smoothspeed)
+{
+    if (m_smoothspeed == smoothspeed)
+        return;
+    if (smoothspeed != 0)
+    {m_smoothspeed = smoothspeed+1;}
+    else {m_smoothspeed = smoothspeed;}
+    averageSpeed.resize(m_smoothspeed);
+    //qDebug()<<"SmoothSpeed" << m_smoothrpm;
+    emit smoothspeedChanged(smoothspeed);
+}
 
 
 //
@@ -2525,7 +2552,8 @@ int DashBoard::waterwarn() const {return m_waterwarn; }
 int DashBoard::rpmwarn() const {return m_rpmwarn; }
 int DashBoard::knockwarn() const {return m_knockwarn; }
 qreal DashBoard::boostwarn() const {return m_boostwarn; }
-
+int DashBoard::smoothrpm() const {return m_smoothrpm; }
+int DashBoard::smoothspeed() const {return m_smoothspeed; }
 
 
 

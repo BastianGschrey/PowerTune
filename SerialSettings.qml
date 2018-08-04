@@ -65,6 +65,8 @@ TabView {
                     property alias odometervalue: odometer.text
                     property alias tripmetervalue: tripmeter.text
                     property alias protocol : protocol.currentIndex
+                    property alias smoothingrpm : smoothrpm.currentIndex
+                    property alias smoothingspeed : smoothspeed.currentIndex
 
                 }
                 SoundEffect {
@@ -449,6 +451,50 @@ TabView {
                             font.pixelSize: windowbackround.width / 55
                             onClicked: {Connect.shutdown()}
                         }
+
+                        Text  { text: " ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+
+                        Text  { text: "RPM Smoothing :";color: "white";font.pixelSize: windowbackround.width / 55}
+                        ComboBox {
+                            id: smoothrpm
+                            width: windowbackround.width / 5
+                            height: windowbackround.height /15
+                            font.pixelSize: windowbackround.width / 55
+                            model: ["OFF","2","3","4","5","6","7","8","9","10"]
+                            //property bool initialized: true
+                            onCurrentIndexChanged:{Dashboard.setsmoothrpm(smoothrpm.currentIndex);}
+                            Component.onCompleted: {Dashboard.setsmoothrpm(smoothrpm.currentIndex);}
+                            delegate: ItemDelegate {
+                                width: smoothrpm.width
+                                text: smoothrpm.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                                font.weight: smoothrpm.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.family: smoothrpm.font.family
+                                font.pixelSize: smoothrpm.font.pixelSize
+                                highlighted: smoothrpm.highlightedIndex === index
+                                hoverEnabled: smoothrpm.hoverEnabled
+                            }
+                        }
+
+                     Text  { text: "Speed Smoothing :";color: "white";font.pixelSize: windowbackround.width / 55}
+                     ComboBox {
+                         id: smoothspeed
+                         width: windowbackround.width / 5
+                         height: windowbackround.height /15
+                         font.pixelSize: windowbackround.width / 55
+                         model: ["OFF","2","3","4","5","6","7","8","9","10"]
+                         property bool initialized: true
+                         onCurrentIndexChanged:{Dashboard.setsmoothspeed(smoothspeed.currentIndex)}
+                         Component.onCompleted: {Dashboard.setsmoothspeed(smoothspeed.currentIndex)}
+                         delegate: ItemDelegate {
+                             width: smoothspeed.width
+                             text: smoothspeed.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                             font.weight: smoothspeed.currentIndex === index ? Font.DemiBold : Font.Normal
+                             font.family: smoothspeed.font.family
+                             font.pixelSize: smoothspeed.font.pixelSize
+                             highlighted: smoothspeed.highlightedIndex === index
+                             hoverEnabled: smoothspeed.hoverEnabled
+                         }
+                     }
 
                         Switch {
                             id: connectAtStart
