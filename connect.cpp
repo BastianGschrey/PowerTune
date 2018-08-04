@@ -233,7 +233,7 @@ void Connect::checkReg()
     bool ok;
     QStringList list;
 
-    QString path = "/home/pi/Consult/SupportedRegs.txt";
+    QString path = "/home/pi/Consult/Regs.txt";
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
     {

@@ -398,7 +398,7 @@ TabView {
                                 connectButton.enabled =false;
                                 ecuSelect.enabled = false;
                                 disconnectButton.enabled = true;
-                                consultset.enabled = false;
+                                //consultset.enabled = false;
                             }
                         }
                         Button {

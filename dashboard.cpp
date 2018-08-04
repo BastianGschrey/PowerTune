@@ -11,8 +11,6 @@ int avgrpm;
 DashBoard::DashBoard(QObject *parent)
     : QObject(parent)
 
-
-
     , m_Odo(0)
     , m_Trip(0)
     , m_rpm(0)
