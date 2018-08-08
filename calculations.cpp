@@ -77,7 +77,7 @@ void calculations::calculate()
      int N = m_dashboard->rpm() / (m_dashboard->speed() == 0.0 ? 0.01 : m_dashboard->speed()); 
      int CurrentGear = (N > (m_dashboard->gearcalc1()*1.5) ? 0.0 : (N > ((m_dashboard->gearcalc1() + m_dashboard->gearcalc2()) / 2.0) ? 1.0 : (N > ((m_dashboard->gearcalc2() + m_dashboard->gearcalc3()) / 2.0) ? 2.0 : (N > ((m_dashboard->gearcalc3() + m_dashboard->gearcalc4()) / 2.0) ? 3.0 : (N > ((m_dashboard->gearcalc4() + m_dashboard->gearcalc5()) / 2.0) ? 4.0 : (m_dashboard->gearcalc5() == 0 ? 0.0 : (N > ((m_dashboard->gearcalc5() + m_dashboard->gearcalc6()) / 2.0) ? 5.0 : (m_dashboard->gearcalc6() == 0 ? 0.0 : (N > (m_dashboard->gearcalc6() / 2.0) ? 6.0 : 0.0)))))))));
      m_dashboard->setGear(CurrentGear);
-     qDebug()<<"Gear"<< m_dashboard->Gear();
+     //qDebug()<<"Gear"<< m_dashboard->Gear();
     }
 /*
 
