@@ -70,38 +70,25 @@ void calculations::calculate()
 
     //starting the timer again with 25 ms
     m_updatetimer.start(25);
-    /*
 
-    // Calculate selected Gear from gearratio
-    //120, 70, 45, 35, 26
+   if (m_dashboard->gearcalcactivation() == 1)
+     {
+     //Gear Calculation borrowed from Raspexi big thanks to Jacob Donley
+     int N = m_dashboard->rpm() / (m_dashboard->speed() == 0.0 ? 0.01 : m_dashboard->speed()); 
+     int CurrentGear = (N > (m_dashboard->gearcalc1()*1.5) ? 0.0 : (N > ((m_dashboard->gearcalc1() + m_dashboard->gearcalc2()) / 2.0) ? 1.0 : (N > ((m_dashboard->gearcalc2() + m_dashboard->gearcalc3()) / 2.0) ? 2.0 : (N > ((m_dashboard->gearcalc3() + m_dashboard->gearcalc4()) / 2.0) ? 3.0 : (N > ((m_dashboard->gearcalc4() + m_dashboard->gearcalc5()) / 2.0) ? 4.0 : (m_dashboard->gearcalc5() == 0 ? 0.0 : (N > ((m_dashboard->gearcalc5() + m_dashboard->gearcalc6()) / 2.0) ? 5.0 : (m_dashboard->gearcalc6() == 0 ? 0.0 : (N > (m_dashboard->gearcalc6() / 2.0) ? 6.0 : 0.0)))))))));
+     m_dashboard->setGear(CurrentGear);
+     qDebug()<<"Gear"<< m_dashboard->Gear();
+    }
+/*
 
-    gearratio = m_dashboard->rpm() / m_dashboard->speed();
-    if (gearratio == gear1)
-       {
-       m_dashboard->SetGear(1);
-       }
-    if (gearratio == gear2)
-       {
-       m_dashboard->SetGear(2);
-       }
-    if (gearratio == gear3)
-       {
-       m_dashboard->SetGear(3);
-       }
-    if (gearratio == gear4)
-       {
-       m_dashboard->SetGear(4);
-       }
-    if (gearratio == gear5)
-       {
-       m_dashboard->SetGear(5);
-       }
-    if (gearratio == gear6)
-       {
-       m_dashboard->SetGear(6);
-       }
+     qDebug()<<"Gear1"<< m_dashboard->gearcalc1();
+     qDebug()<<"Gear2"<< m_dashboard->gearcalc2();
+     qDebug()<<"Gear3"<< m_dashboard->gearcalc3();
+     qDebug()<<"Gear4"<< m_dashboard->gearcalc4();
+     qDebug()<<"Gear5"<< m_dashboard->gearcalc5();
+     qDebug()<<"Gear6"<< m_dashboard->gearcalc6();
+*/
 
-  */
 
     //Odometer
     traveleddistance = ((startTime.msecsTo(QTime::currentTime())) * ((m_dashboard->speed()) / 3600000)); // Odometer

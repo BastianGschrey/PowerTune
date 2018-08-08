@@ -277,7 +277,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal wheelslip READ wheelslip WRITE setwheelslip NOTIFY wheelslipChanged)
     Q_PROPERTY(qreal wheelspdftleft READ wheelspdftleft WRITE setwheelspdftleft NOTIFY wheelspdftleftChanged)
     Q_PROPERTY(qreal wheelspdftright READ wheelspdftright WRITE setwheelspdftright NOTIFY wheelspdftrightChanged)
-   //Path for musicfiles
+    //Path for musicfiles
     Q_PROPERTY(QString musicpath READ musicpath WRITE setmusicpath NOTIFY musicpathChanged)
 
     Q_PROPERTY(int supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
@@ -296,7 +296,13 @@ class DashBoard : public QObject
     Q_PROPERTY(int smoothrpm READ smoothrpm WRITE setsmoothrpm NOTIFY smoothrpmChanged)
     Q_PROPERTY(int smoothspeed READ smoothspeed WRITE setsmoothspeed NOTIFY smoothspeedChanged)
 
-
+    Q_PROPERTY(int gearcalc1 READ gearcalc1 WRITE setgearcalc1 NOTIFY gearcalc1Changed)
+    Q_PROPERTY(int gearcalc2 READ gearcalc2 WRITE setgearcalc2 NOTIFY gearcalc2Changed)
+    Q_PROPERTY(int gearcalc3 READ gearcalc3 WRITE setgearcalc3 NOTIFY gearcalc3Changed)
+    Q_PROPERTY(int gearcalc4 READ gearcalc4 WRITE setgearcalc4 NOTIFY gearcalc4Changed)
+    Q_PROPERTY(int gearcalc5 READ gearcalc5 WRITE setgearcalc5 NOTIFY gearcalc5Changed)
+    Q_PROPERTY(int gearcalc6 READ gearcalc6 WRITE setgearcalc6 NOTIFY gearcalc6Changed)
+    Q_PROPERTY(int gearcalcactivation READ gearcalcactivation WRITE setgearcalcactivation NOTIFY gearcalcactivationChanged)
 
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
 public:
@@ -305,7 +311,7 @@ public:
     // Odometer
     void setOdo(const qreal &Odo);
     //Tripmeter
-     Q_INVOKABLE void setTrip(const qreal &Trip);
+    Q_INVOKABLE void setTrip(const qreal &Trip);
     // Advanced Info
     void setrpm(const qreal &rpm);
     void setIntakepress(const qreal &Intakepress);
@@ -599,6 +605,14 @@ public:
     Q_INVOKABLE void setsmoothrpm(const int &smoothrpm);
     Q_INVOKABLE void setsmoothspeed(const int &smoothspeed);
 
+    Q_INVOKABLE void setgearcalc1(const int &gearcalc1);
+    Q_INVOKABLE void setgearcalc2(const int &gearcalc2);
+    Q_INVOKABLE void setgearcalc3(const int &gearcalc3);
+    Q_INVOKABLE void setgearcalc4(const int &gearcalc4);
+    Q_INVOKABLE void setgearcalc5(const int &gearcalc5);
+    Q_INVOKABLE void setgearcalc6(const int &gearcalc6);
+
+   Q_INVOKABLE void setgearcalcactivation(const int &gearcalcactivation);
 
     qreal Odo() const;
 
@@ -894,6 +908,14 @@ public:
     int smoothrpm() const;
     int smoothspeed() const;
 
+    int gearcalc1() const;
+    int gearcalc2() const;
+    int gearcalc3() const;
+    int gearcalc4() const;
+    int gearcalc5() const;
+    int gearcalc6() const;
+    int gearcalcactivation() const;
+
 signals:
 
     //Odometer
@@ -1181,6 +1203,13 @@ signals:
     void boostwarnChanged(qreal boostwarn);
     void smoothrpmChanged (int smoothrpm);
     void smoothspeedChanged (int smoothspeed);
+    void gearcalc1Changed (int gearcalc1);
+    void gearcalc2Changed (int gearcalc2);
+    void gearcalc3Changed (int gearcalc3);
+    void gearcalc4Changed (int gearcalc4);
+    void gearcalc5Changed (int gearcalc5);
+    void gearcalc6Changed (int gearcalc6);
+    void gearcalcactivationChanged (int gearcalcactivation);
 
 private:
     // Odometer
@@ -1481,7 +1510,13 @@ private:
     qreal m_boostwarn;
     int m_smoothrpm;
     int m_smoothspeed;
-
+    int m_gearcalc1;
+    int m_gearcalc2;
+    int m_gearcalc3;
+    int m_gearcalc4;
+    int m_gearcalc5;
+    int m_gearcalc6;
+    int m_gearcalcactivation;
 };
 
 #endif // DASHBOARD_H

@@ -475,26 +475,26 @@ TabView {
                             }
                         }
 
-                     Text  { text: "Speed Smoothing :";color: "white";font.pixelSize: windowbackround.width / 55}
-                     ComboBox {
-                         id: smoothspeed
-                         width: windowbackround.width / 5
-                         height: windowbackround.height /15
-                         font.pixelSize: windowbackround.width / 55
-                         model: ["OFF","2","3","4","5","6","7","8","9","10"]
-                         property bool initialized: true
-                         onCurrentIndexChanged:{Dashboard.setsmoothspeed(smoothspeed.currentIndex)}
-                         Component.onCompleted: {Dashboard.setsmoothspeed(smoothspeed.currentIndex)}
-                         delegate: ItemDelegate {
-                             width: smoothspeed.width
-                             text: smoothspeed.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                             font.weight: smoothspeed.currentIndex === index ? Font.DemiBold : Font.Normal
-                             font.family: smoothspeed.font.family
-                             font.pixelSize: smoothspeed.font.pixelSize
-                             highlighted: smoothspeed.highlightedIndex === index
-                             hoverEnabled: smoothspeed.hoverEnabled
-                         }
-                     }
+                        Text  { text: "Speed Smoothing :";color: "white";font.pixelSize: windowbackround.width / 55}
+                        ComboBox {
+                            id: smoothspeed
+                            width: windowbackround.width / 5
+                            height: windowbackround.height /15
+                            font.pixelSize: windowbackround.width / 55
+                            model: ["OFF","2","3","4","5","6","7","8","9","10"]
+                            property bool initialized: true
+                            onCurrentIndexChanged:{Dashboard.setsmoothspeed(smoothspeed.currentIndex)}
+                            Component.onCompleted: {Dashboard.setsmoothspeed(smoothspeed.currentIndex)}
+                            delegate: ItemDelegate {
+                                width: smoothspeed.width
+                                text: smoothspeed.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                                font.weight: smoothspeed.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.family: smoothspeed.font.family
+                                font.pixelSize: smoothspeed.font.pixelSize
+                                highlighted: smoothspeed.highlightedIndex === index
+                                hoverEnabled: smoothspeed.hoverEnabled
+                            }
+                        }
 
                         Switch {
                             id: connectAtStart
@@ -1094,7 +1094,7 @@ TabView {
         }
     }
     Tab {
-        title: "Warnings" // Tab index 3
+        title: "Warn / Gear" // Tab index 3
         //Warning Settings by Craig Shoesmith
         Rectangle{
 
@@ -1109,6 +1109,13 @@ TabView {
                     property alias boostwarning: boostwarn.text
                     property alias rpmwarning: rpmwarn.text
                     property alias knockwarning: knockwarn.text
+                    property alias gearcalcselectswitch: gearcalcselect.checked
+                    property alias gearval1: valgear1.text
+                    property alias gearval2: valgear2.text
+                    property alias gearval3: valgear3.text
+                    property alias gearval4: valgear4.text
+                    property alias gearval5: valgear5.text
+                    property alias gearval6: valgear6.text
                 }
 
 
@@ -1165,6 +1172,109 @@ TabView {
                         text:  "80"
                         onEditingFinished: Dashboard.setknockwarn(knockwarn.text)
                         Component.onCompleted: Dashboard.setknockwarn(knockwarn.text),tabView.currentIndex = 4; // opens the 5th tab
+                    }
+
+                }
+
+            }
+            Rectangle{
+                id: gearsettings
+                width: parent.width
+                height: parent.height /2
+                y:parent.height /5
+                color: "transparent"
+                Grid {
+                    id: geargrid
+                    rows:3
+                    columns: 7
+                    spacing: warningsettings.height /150
+
+                    Text {id: switchtext
+                        text: "Gear Calc"
+                        font.pixelSize: warningsettings.width / 55;color:"white"}
+                    Text { text: "Gear1"
+                        font.pixelSize: warningsettings.width / 55;color:"white"}
+                    Text { text: "Gear2"
+                        font.pixelSize: warningsettings.width / 55;color:"white"}
+                    Text { text: "Gear3"
+                        font.pixelSize: warningsettings.width / 55;color:"white"}
+                    Text { text: "Gear4"
+                        font.pixelSize: warningsettings.width / 55;color:"white"}
+                    Text { text: "Gear5"
+                        font.pixelSize: warningsettings.width / 55;color:"white"}
+                    Text { text: "Gear6"
+                        font.pixelSize: warningsettings.width / 55;color:"white"}
+
+
+                        Switch {
+                            id: gearcalcselect
+                            width: warningsettings.width / 5
+                            height: warningsettings.height /15
+                            font.pixelSize: warningsettings.width / 55
+
+                            Component.onCompleted: if (gearcalcselect.checked == true){Dashboard.setgearcalcactivation(1),switchtext.text = "Gear Calulation ON";}else{Dashboard.setgearcalcactivation(0),switchtext.text = "Gear Calulation OFF";}
+                            onCheckedChanged: if (gearcalcselect.checked == true){Dashboard.setgearcalcactivation(1),switchtext.text = "Gear Calulation ON";}else{Dashboard.setgearcalcactivation(0),switchtext.text = "Gear Calulation OFF";}
+                        }
+
+                    TextField {
+                        id: valgear1
+                        width: warningsettings.width / 10
+                        height: warningsettings.height /15
+                        font.pixelSize: warningsettings.width / 55
+                        inputMethodHints: Qt.ImhDigitsOnly
+                        text:  "120"
+                        onEditingFinished: Dashboard.setgearcalc1(valgear1.text)
+                        Component.onCompleted: Dashboard.setgearcalc1(valgear1.text)
+                    }
+                    TextField {
+                        id: valgear2
+                        width: warningsettings.width / 10
+                        height: warningsettings.height /15
+                        font.pixelSize: warningsettings.width / 55
+                        inputMethodHints: Qt.ImhDigitsOnly
+                        text:  "74"
+                        onEditingFinished: Dashboard.setgearcalc2(valgear2.text)
+                        Component.onCompleted: Dashboard.setgearcalc2(valgear2.text)
+                    }
+                    TextField {
+                        id: valgear3
+                        width: warningsettings.width / 10
+                        height: warningsettings.height /15
+                        font.pixelSize: warningsettings.width / 55
+                        inputMethodHints: Qt.ImhDigitsOnly
+                        text:  "54"
+                        onEditingFinished: Dashboard.setgearcalc3(valgear3.text)
+                        Component.onCompleted: Dashboard.setgearcalc3(valgear3.text)
+                    }
+                    TextField {
+                        id: valgear4
+                        width: warningsettings.width / 10
+                        height: warningsettings.height /15
+                        font.pixelSize: warningsettings.width / 55
+                        inputMethodHints: Qt.ImhDigitsOnly
+                        text:  "37"
+                        onEditingFinished: Dashboard.setgearcalc4(valgear4.text)
+                        Component.onCompleted: Dashboard.setgearcalc4(valgear4.text)
+                    }
+                    TextField {
+                        id: valgear5
+                        width: warningsettings.width / 10
+                        height: warningsettings.height /15
+                        font.pixelSize: warningsettings.width / 55
+                        inputMethodHints: Qt.ImhDigitsOnly
+                        text:  "28"
+                        onEditingFinished: Dashboard.setgearcalc5(valgear5.text)
+                        Component.onCompleted: Dashboard.setgearcalc5(valgear5.text)
+                    }
+                    TextField {
+                        id: valgear6
+                        width: warningsettings.width / 10
+                        height: warningsettings.height /15
+                        font.pixelSize: warningsettings.width / 55
+                        inputMethodHints: Qt.ImhDigitsOnly
+                        text:  ""
+                        onEditingFinished: Dashboard.setgearcalc6(valgear6.text)
+                        Component.onCompleted: Dashboard.setgearcalc6(valgear6.text)
                     }
 
                 }
