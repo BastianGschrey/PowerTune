@@ -17,7 +17,7 @@ TabView {
             color: styleData.selected ? "grey" :"lightgrey"
             border.color:  "steelblue"
             implicitWidth: Math.max(text.width + 4, 80)
-            implicitHeight: 40
+            implicitHeight: 50
             radius: 2
             Text {
                 id: text
