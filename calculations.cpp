@@ -70,38 +70,13 @@ void calculations::calculate()
 
     //starting the timer again with 25 ms
     m_updatetimer.start(25);
-    /*
 
-    // Calculate selected Gear from gearratio
-    //120, 70, 45, 35, 26
-
-    gearratio = m_dashboard->rpm() / m_dashboard->speed();
-    if (gearratio == gear1)
-       {
-       m_dashboard->SetGear(1);
-       }
-    if (gearratio == gear2)
-       {
-       m_dashboard->SetGear(2);
-       }
-    if (gearratio == gear3)
-       {
-       m_dashboard->SetGear(3);
-       }
-    if (gearratio == gear4)
-       {
-       m_dashboard->SetGear(4);
-       }
-    if (gearratio == gear5)
-       {
-       m_dashboard->SetGear(5);
-       }
-    if (gearratio == gear6)
-       {
-       m_dashboard->SetGear(6);
-       }
-
-  */
+/*  
+     //Gear Calculation borrowed from Raspexi big thanks to Jacob Donley
+     int N = m_dashboard->rpm() / (m_dashboard->speed() == 0.0 ? 0.01 : m_dashboard->speed()); 
+     int CurrentGear = (N > (Gear1*1.5) ? 0.0 : (N > ((Gear1 + Gear2) / 2.0) ? 1.0 : (N > ((Gear2 + Gear3) / 2.0) ? 2.0 : (N > ((Gear3 + Gear4) / 2.0) ? 3.0 : (N > ((Gear4 + Gear5) / 2.0) ? 4.0 : (Gear5 == 0 ? 0.0 : (N > ((Gear5 + Gear6) / 2.0) ? 5.0 : (Gear6 == 0 ? 0.0 : (N > (Gear6 / 2.0) ? 6.0 : 0.0)))))))));
+     m_dashboard->SetGear(CurrentGear);
+*/
 
     //Odometer
     traveleddistance = ((startTime.msecsTo(QTime::currentTime())) * ((m_dashboard->speed()) / 3600000)); // Odometer
