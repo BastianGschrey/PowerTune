@@ -834,7 +834,7 @@ void Apexi::writeDashfile(const QString &gauge1,const QString &gauge2,const QStr
 
     QString filename="UserDashApexi.txt";
     QFile file( filename );
-    if ( file.open(QIODevice::ReadWrite | QIODevice::Text) )
+    if ( file.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text) )
 
     {
         QTextStream stream( &file );
@@ -848,7 +848,7 @@ void Apexi::writeDashfile(const QString &gauge1,const QString &gauge2,const QStr
 
     QString filename2="/home/pi/UserDashboards/UserDashApexi.txt";
     QFile file2( filename2 );
-    if ( file2.open(QIODevice::ReadWrite | QIODevice::Text) )
+    if ( file2.open(QIODevice::ReadWrite  | QIODevice::Truncate | QIODevice::Text) )
 
     {
         QTextStream stream( &file2 );
