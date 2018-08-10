@@ -2186,7 +2186,7 @@ TabView {
                     width: apexidashsettings.width / 4
                     height: apexidashsettings.height /15
                     font.pixelSize: apexidashsettings.width / 55
-                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)"]
+                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)","Gear"]
                     property bool initialized: true
                     delegate: ItemDelegate {
                         width: datasources1.width
@@ -2274,7 +2274,7 @@ TabView {
                     width: apexidashsettings.width / 4
                     height: apexidashsettings.height /15
                     font.pixelSize: apexidashsettings.width / 55
-                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)"]
+                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)","Gear"]
                     property bool initialized: true
                     delegate: ItemDelegate {
                         width: datasources2.width
@@ -2362,7 +2362,7 @@ TabView {
                     width: apexidashsettings.width / 4
                     height: apexidashsettings.height /15
                     font.pixelSize: apexidashsettings.width / 55
-                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)"]
+                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)","Gear"]
                     property bool initialized: true
                     delegate: ItemDelegate {
                         width: datasources3.width
@@ -2450,7 +2450,7 @@ TabView {
                     width: apexidashsettings.width / 4
                     height: apexidashsettings.height /15
                     font.pixelSize: apexidashsettings.width / 55
-                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)"]
+                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)","Gear"]
                     property bool initialized: true
                     delegate: ItemDelegate {
                         width: datasources4.width
@@ -2538,7 +2538,7 @@ TabView {
                     width: apexidashsettings.width / 4
                     height: apexidashsettings.height /15
                     font.pixelSize: apexidashsettings.width / 55
-                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)"]
+                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)","Gear"]
                     property bool initialized: true
                     delegate: ItemDelegate {
                         width: datasources5.width
@@ -2626,7 +2626,7 @@ TabView {
                     width: apexidashsettings.width / 4
                     height: apexidashsettings.height /15
                     font.pixelSize: apexidashsettings.width / 55
-                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)"]
+                    model: [ "Inj Duty","IGL","IGT","RPM","Speed","Boost","Knock","WtrTemp","AirTemp","BattVolt","PIM","PIM Volt","TPS Volt","InjFrPr","Inj +/-","Fuel Temp","Oil Pump","Pre Control %","Waste Gate %","O2 Sensor 1","O2 Sensor 2","InjFrSc","MAFS1","MAFS2","Dwell","AN1 Raw","AN2 Raw","AN3 Raw","An4 Raw","AUX1(AN1-AN2 Calc)","AUX2(AN3-AN4 Calc)","Gear"]
                     property bool initialized: true
                     delegate: ItemDelegate {
                         width: datasources6.width
@@ -2673,6 +2673,7 @@ TabView {
                     ListElement {name: "AN4V"}// make datasources
                     ListElement {name: "auxcalc1"}
                     ListElement {name: "auxcalc2"}
+                    ListElement {name: "Gear"}
 
                 }
                 Button {
