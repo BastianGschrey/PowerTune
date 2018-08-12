@@ -656,6 +656,12 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
         m_udpreceiver->startreceiver();
     }
 
+    if (ecuSelect == 7)
+    {
+    QProcess *process = new QProcess(this);
+    process->start("/home/pi/daemons/OBD /dev/ttyUSB0");
+    m_udpreceiver->startreceiver();
+    }
     /* //Dicktator
     if (ecuSelect == 9)
     {
