@@ -286,6 +286,7 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_gearcalc5(0)
     ,  m_gearcalc6(0)
     ,  m_gearcalcactivation(0)
+    ,  m_ecu("")
 {
 }
 
@@ -2316,6 +2317,14 @@ void DashBoard::setgearcalcactivation(const int &gearcalcactivation)
     emit gearcalcactivationChanged(gearcalcactivation);
 }
 
+void DashBoard::setecu(const QString &ecu)
+{
+    if (m_ecu == ecu)
+        return;
+    m_ecu = ecu;
+    emit ecuChanged(ecu);
+}
+
 //
 
 
@@ -2614,6 +2623,8 @@ int DashBoard::gearcalc4() const {return m_gearcalc4; }
 int DashBoard::gearcalc5() const {return m_gearcalc5; }
 int DashBoard::gearcalc6() const {return m_gearcalc6; }
 int DashBoard::gearcalcactivation() const {return m_gearcalcactivation; }
+QString DashBoard::ecu() const { return m_ecu; }
+// Sensor Strings
 
 
 

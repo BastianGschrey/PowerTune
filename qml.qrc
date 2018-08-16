@@ -60,5 +60,7 @@
         <file>Gauges/RPMBARStyle2.qml</file>
         <file>Gauges/SquaregaugeRaceDash.qml</file>
         <file>Gauges/createsquaregaugeracedasgh.js</file>
+        <file>OBDPIDS.qml</file>
+        <file>ConsultRegs.qml</file>
     </qresource>
 </RCC>

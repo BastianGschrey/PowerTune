@@ -226,14 +226,43 @@ void Connect::clear() const
 {
     // m_Connectport->clear();
 }
+// Reads the file of supported OBD PIDS and makes it available to QML for the User to select which PIDS should be polled 
+void Connect::checkOBDReg() 
+{
+    int i = 0;
+    bool ok;
+    QStringList list;
+
+    QString path = "/home/pi/daemons/SupportedPIDS.txt";
+   // QString path = "SupportedPIDS.txt";
+    QFile inputFile(path);
+    if (inputFile.open(QIODevice::ReadOnly))
+    {
+        QTextStream in(&inputFile);
+        while (!in.atEnd())
+        {
+            QString line = in.readLine();
+            list = line.split(QRegExp("\\,"));
+        }
+        inputFile.close();
+    }
+    while (i < list.length()) {
+        //qDebug()<< "Enter Loop" <<i;
+        int pidread = (list[i].toInt(&ok, 16));
+        m_dashBoard->setsupportedReg(pidread);
+        //qDebug()<< "Reading" << list[i];
+        i ++;
+    }
+
+}
 
 void Connect::checkReg()
 {
     int i = 0;
     bool ok;
     QStringList list;
-
-    QString path = "/home/pi/Consult/Regs.txt";
+    //QString path = "Regs.txt";
+    QString path = "/home/pi/daemons/Regs.txt";
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
     {
@@ -474,6 +503,44 @@ void Connect::checkReg()
 
 }
 
+void Connect::LiveReqMsgOBD(const QString &obdpids)
+{
+    //qDebug()<< "PIDS" <<obdpids;
+    QString Message;
+    QStringList list = obdpids.split( "," );
+    //qDebug()<< "Raw list" <<list;
+    QString fileName = "/home/pi/daemons/OBD.cfg";//This will be the correct path on pi
+    //QString fileName = "OBD.cfg";//for testing on windows
+    QFile mFile(fileName);
+    mFile.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text);
+    int i =0;
+    while(i < list.length())
+    {
+     if (list[i] == "2")
+     {
+      // qDebug()<< "i" <<i;
+      QString hexadecimal;
+      hexadecimal.setNum(i,16);
+      if(hexadecimal.length() %2)hexadecimal.insert(0,QLatin1String("0"));
+     // qDebug()<< "Hex" <<hexadecimal;
+      Message.append("0x"+hexadecimal);
+      Message.append(",");
+          }
+      i++;
+    }
+    Message.remove(Message.length()-1,1); //Remove the last Comma
+    //qDebug()<< "PID LST" <<Message;
+    QTextStream out(&mFile);
+    out << Message;
+    mFile.close();
+
+    //Reboot the PI for settings to take Effect
+    m_dashBoard->setSerialStat("Rebooting ");
+    QProcess *process = new QProcess(this);
+    process->start("sudo reboot");
+    process->waitForFinished(100); // 10 minutes time before timeout
+}
+
 void Connect::LiveReqMsg(const int &val1, const int &val2, const int &val3, const int &val4, const int &val5, const int &val6, const int &val7, const int &val8, const int &val9, const int &val10, const int &val11, const int &val12, const int &val13, const int &val14, const int &val15, const int &val16, const int &val17, const int &val18, const int &val19, const int &val20, const int &val21, const int &val22, const int &val23, const int &val24, const int &val25, const int &val26, const int &val27, const int &val28, const int &val29, const int &val30, const int &val31, const int &val32, const int &val33, const int &val34, const int &val35, const int &val36, const int &val37, const int &val38, const int &val39, const int &val40, const int &val41, const int &val42, const int &val43, const int &val44 , const int &val45)
 {
     QString Message;
@@ -579,6 +646,13 @@ void Connect::LiveReqMsg(const int &val1, const int &val2, const int &val3, cons
 
     QTextStream out(&mFile);
     out << Message;
+    mFile.close();
+
+    //Reboot the PI for settings to take Effect
+    m_dashBoard->setSerialStat("Rebooting ");
+    QProcess *process = new QProcess(this);
+    process->start("sudo reboot");
+    process->waitForFinished(100); // 10 minutes time before timeout
 
 }
 void Connect::openConnection(const QString &portName, const int &ecuSelect)
@@ -658,8 +732,6 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
 
     if (ecuSelect == 7)
     {
-    QProcess *process = new QProcess(this);
-    process->start("/home/pi/daemons/OBD /dev/ttyUSB0");
     m_udpreceiver->startreceiver();
     }
     /* //Dicktator
