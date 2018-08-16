@@ -233,7 +233,7 @@ void Connect::checkOBDReg()
     bool ok;
     QStringList list;
 
-    QString path = "/home/pi/daemons/SupportedPIDS.txt";
+    QString path = "/home/pi/daemons/OBDPIDS.txt";
    // QString path = "SupportedPIDS.txt";
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
