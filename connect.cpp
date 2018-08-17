@@ -905,7 +905,7 @@ void Connect::updatefinished(int exitCode, QProcess::ExitStatus exitStatus)
 void Connect::RequestLicence()
 {
 QProcess *process = new QProcess(this);
-process->start("sudo reboot");
+process->start("/home/pi/licencerequest");
 process->waitForFinished(100); // 10 minutes time before timeout
 
 QString path = "/home/pi/Licrequest.lic";
