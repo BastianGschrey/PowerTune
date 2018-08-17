@@ -901,6 +901,26 @@ void Connect::updatefinished(int exitCode, QProcess::ExitStatus exitStatus)
         m_dashBoard->setSerialStat("Update Unsuccessful");
     }
 }
+
+void Connect::RequestLicence()
+{
+QProcess *process = new QProcess(this);
+process->start("sudo reboot");
+process->waitForFinished(100); // 10 minutes time before timeout
+
+QString path = "/home/pi/Licrequest.lic";
+QFile inputFile(path);
+if (inputFile.open(QIODevice::ReadOnly))
+{
+    QTextStream in(&inputFile);
+    while (!in.atEnd())
+    {
+        QString line = in.readLine();
+        m_dashBoard->setSerialStat(line);
+    }
+    inputFile.close();
+}
+}
 /*
 void Connect::handleError(QConnectPort::ConnectPortError ConnectPortError)
 {

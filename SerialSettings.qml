@@ -2253,48 +2253,23 @@ TabView {
 
     }
     Tab {
-        title: "Developer"// Tab index 7
-                //Developer Stuff
-        /*Rectangle{
-            id: developer
-            anchors.top : mygrid.bottom
-            color: "black"
-            Connections{
-                target: Dashboard
-                //onSerialStatChanged :{consoletext.append(Dashboard.SerialStat)}
-                onSerialStatChanged :{consoletext = Dashboard.SerialStat}
-            }
-            ScrollView {
-                id: scrollconsoletext
-                width: 400
-                height: parent.height
-                TextArea {
-                    id: consoletext
-                    width: scrollconsoletext.width
-                    wrapMode: TextArea.Wrap
-                    color: "white"
-                }
-            }
-            Grid {
-                anchors.top :parent.top
-                anchors.topMargin: parent.height / 20
-                anchors.right: parent.right
-                rows: 10
-                columns: 2
-                spacing: parent.width /150
-                Button {
-                    id: candump
-                    text: "CanDump"
-                    onClicked: Connect.candump()
-                }
-                Button {
-                    id: minicom
-                    text: "Minicom"
-                    onClicked: Connect.minicom()
-                }
+        title: "Other"// Tab index 7
 
+        Rectangle{
+            id: developer
+            anchors.fill: parent
+            color: "black"
+            Button {
+                id: connectButton
+                text: "Request licence"
+
+                onClicked: {
+                Connect.RequestLicence()
+                }
             }
-        }*/
+
+
+        }
     }
 }
 
