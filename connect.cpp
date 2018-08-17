@@ -275,7 +275,7 @@ void Connect::checkReg()
         inputFile.close();
     }
     while (i < list.length()) {
-        qDebug()<< "Read supported Consult Reg <<list[i].toInt(&ok, 16);
+        qDebug()<< "Read supported Consult Reg" <<list[i].toInt(&ok, 16);
         switch (list[i].toInt(&ok, 16))
         {
 
