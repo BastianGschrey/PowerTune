@@ -233,78 +233,78 @@ property variant items:[]
             CheckBox {
                 id: obd51
                 visible: false;
-                text: qsTr("Evap. System Vap Pres")
+                text: qsTr("Abs.Baro Pressure")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd52
                 visible: false;
-                text: qsTr("Abs Baro Pres")
+                text: qsTr("Oxygen Sensor 1")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd53
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Oxygen Sensor 2")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd54
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Oxygen Sensor 3")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd55
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Oxygen Sensor 4")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd56
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Oxygen Sensor 5")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd57
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Oxygen Sensor 6")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd58
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Oxygen Sensor 7")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd59
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Oxygen Sensor 8")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd60
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Cat Temp: Bank 1,S1")
                 font.pixelSize: obdselect.width / 55
             }				CheckBox {
                 id: obd61
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Cat Temp: Bank 2,S1")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd62
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Cat Temp: Bank 1,S2")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd63
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Cat Temp: Bank 2,S2")
                 font.pixelSize: obdselect.width / 55
             }				CheckBox {
                 id: obd64
@@ -315,91 +315,91 @@ property variant items:[]
             CheckBox {
                 id: obd65
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Mon stat this drive cycle")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd66
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Control module voltage")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd67
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Absolute load value")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd68
                 visible: false;
-                text: qsTr("")
+                //text: qsTr("Fuel–Air commanded equivalence ratio")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd69
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Relative throttle pos")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd70
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Ambient air temp")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd71
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Abs throttle pos B")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd72
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Abs throttle pos C")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd73
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Accel ped pos D")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd74
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Accel ped pos E")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd75
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Accel ped pos F")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd76
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Com. throttle act")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd77
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Time run with MIL on")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd78
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Time run with MIL on")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd79
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Time since errors cleared")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
@@ -411,25 +411,25 @@ property variant items:[]
             CheckBox {
                 id: obd81
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Fuel Type")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd82
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Ethanol fuel %")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd83
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Abs Evap sys Vapor Pres")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd84
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Evap sys Vapor Pres")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
@@ -459,37 +459,37 @@ property variant items:[]
             CheckBox {
                 id: obd89
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Fuel rail abs pres")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd90
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Rel accel pedal pos")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd91
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Hybrid batt remaining life")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd92
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Engine oil temp")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd93
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Injection timing")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd94
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Fuel rate")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
@@ -507,43 +507,43 @@ property variant items:[]
             CheckBox {
                 id: obd97
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Demand engine % torque")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd98
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Act engine % torque")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd99
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Engine reference torque")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd100
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Eng percent torque data")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd101
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Mass air flow sensor")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd102
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Engine coolant temp")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
                 id: obd103
                 visible: false;
-                text: qsTr("")
+                text: qsTr("Intake air temperature")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
@@ -564,16 +564,11 @@ property variant items:[]
                 text: qsTr("")
                 font.pixelSize: obdselect.width / 55
             }
-            CheckBox {
-                id: obd
-                visible: false;
-                text: qsTr("")
-                font.pixelSize: obdselect.width / 55
-            }
+
             CheckBox {
                 id: obd107
                 visible: false;
-                text: qsTr("")
+                text: qsTr("EGT")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
