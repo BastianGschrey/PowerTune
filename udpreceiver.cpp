@@ -45,14 +45,12 @@ void udpreceiver::processPendingDatagrams()
 
         QDataStream in(&datagram, QIODevice::ReadOnly);
         QString raw = datagram.data();
+        //qDebug()<<raw;
         if (raw.isEmpty())
         {raw ="0,0";}
-
         QStringList list = raw.split( "," );
         int ident =list[0].toInt();
         float Value =list[1].toFloat();
-        //qDebug()<<ident;
-        //qDebug()<<Value;
 
         switch(ident) {
 
@@ -764,10 +762,10 @@ void udpreceiver::processPendingDatagrams()
             //Injection Stage 3 Duty Cycle
             break;
         case 273:
-            //
+            //MAP N
             break;
         case 274:
-            //
+            //MAP P
             break;
         case 275:
             //
@@ -817,8 +815,81 @@ void udpreceiver::processPendingDatagrams()
         case 290:
             //
             break;
-
-            //
+        case 800:
+            m_dashboard->setSensorString1(list[1]);
+            break;
+        case 801:
+            m_dashboard->setSensorString2(list[1]);
+            break;
+        case 802:
+            m_dashboard->setSensorString3(list[1]);
+            break;
+        case 803:
+            m_dashboard->setSensorString4(list[1]);
+            break;
+        case 804:
+            m_dashboard->setSensorString5(list[1]);
+            break;
+        case 805:
+            m_dashboard->setSensorString6(list[1]);
+            break;
+        case 806:
+            m_dashboard->setSensorString7(list[1]);
+            break;
+        case 807:
+            m_dashboard->setSensorString8(list[1]);
+            break;
+        case 808:
+            m_dashboard->setFlagString1(list[1]);
+            break;
+        case 809:
+            m_dashboard->setFlagString2(list[1]);
+            break;
+        case 810:
+            m_dashboard->setFlagString3(list[1]);
+            break;
+        case 811:
+            m_dashboard->setFlagString4(list[1]);
+            break;
+        case 812:
+            m_dashboard->setFlagString5(list[1]);
+            break;
+        case 813:
+            m_dashboard->setFlagString6(list[1]);
+            break;
+        case 814:
+            m_dashboard->setFlagString7(list[1]);
+            break;
+        case 815:
+            m_dashboard->setFlagString8(list[1]);
+            break;
+        case 816:
+            m_dashboard->setFlagString9(list[1]);
+            break;
+        case 817:
+            m_dashboard->setFlagString10(list[1]);
+            break;
+        case 818:
+            m_dashboard->setFlagString11(list[1]);
+            break;
+        case 819:
+            m_dashboard->setFlagString12(list[1]);
+            break;
+        case 820:
+            m_dashboard->setFlagString13(list[1]);
+            break;
+        case 821:
+            m_dashboard->setFlagString14(list[1]);
+            break;
+        case 822:
+            m_dashboard->setFlagString15(list[1]);
+            break;
+        case 823:
+            m_dashboard->setFlagString16(list[1]);
+            break;
+        case 824:
+            m_dashboard->setModel(list[1]);
+            break;
         case 999:
             break;
         default:
