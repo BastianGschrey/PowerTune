@@ -888,7 +888,7 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setFlagString16(list[1]);
             break;
         case 824:
-            m_dashboard->setModel(list[1]);
+            //m_dashboard->setModel(list[1]);
             break;
         case 999:
             break;
