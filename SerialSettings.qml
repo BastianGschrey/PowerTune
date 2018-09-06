@@ -2261,10 +2261,10 @@ TabView {
             color: "black"
             Button {
                 id: connectButton
-                text: "Request licence"
+                text: "OBD TEST"
 
                 onClicked: {
-                Connect.RequestLicence()
+                Connect.candump()
                 }
             }
 
