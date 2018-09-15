@@ -10,7 +10,14 @@ import QtQuick.Extras 1.4
 Rectangle {
   color:"grey"
   anchors.fill:parent
-
+  property  var unit : Dashboard.units;
+  Component.onCompleted: {units.unitadjust()
+  }
+  /*
+  Connections{
+  target: Dashboard
+  onUnitsChanged: {units.unitadjust()}
+  }*/
   Gauge {
       id: gauge
       height: parent.height
@@ -100,5 +107,14 @@ font.italic: true
     font.family: "Eurostile"
     color: "white"
 
+}
+
+Item {
+    id: units
+    function unitadjust()
+    {
+        if (unit == "imperial") {speed.text = "mph"};
+        if (unit == "metric") {speed.text = "km/h"};
+    }
 }
 }
