@@ -65,7 +65,7 @@ TabView {
                     property alias unitSelector: unitSelect.currentIndex
                     property alias odometervalue: odometer.text
                     property alias tripmetervalue: tripmeter.text
-                    property alias protocol : protocol.currentIndex
+                    //property alias protocol : protocol.currentIndex
                     property alias smoothingrpm : smoothrpm.currentIndex
                     property alias smoothingspeed : smoothspeed.currentIndex
 
@@ -221,6 +221,7 @@ TabView {
                                 hoverEnabled: ecuSelect.hoverEnabled
                             }
                         }
+                        /*
                         Text {
                             text: "Protocol Type:"
                             font.pixelSize: windowbackround.width / 55
@@ -247,7 +248,7 @@ TabView {
                                 highlighted: protocol.highlightedIndex === index
                                 hoverEnabled: protocol.hoverEnabled
                             }
-                        }
+                        }*/
                         /*
                 Text {
                     id: textloggingSelect
@@ -578,8 +579,8 @@ TabView {
                                 width: windowbackround.width / 10
                                 height: windowbackround.height /15
                                 font.pixelSize: windowbackround.width / 55
-                                validator: IntValidator {bottom: 0; top: 1000;}
-                                inputMethodHints: Qt.ImhDigitsOnly
+                                validator: IntValidator {bottom: -1000; top: 1000;}
+                                //inputMethodHints: Qt.ImhDigitsOnly
                                 placeholderText: qsTr("9")
                             }
                             TextField {
@@ -587,8 +588,8 @@ TabView {
                                 width: windowbackround.width / 10
                                 height: windowbackround.height /15
                                 font.pixelSize: windowbackround.width / 55
-                                validator: IntValidator {bottom: 0; top: 1000;}
-                                inputMethodHints: Qt.ImhDigitsOnly
+                                validator: IntValidator {bottom: -1000; top: 1000;}
+                                //inputMethodHints: Qt.ImhDigitsOnly
                                 placeholderText: qsTr("16")
                             }
 
@@ -605,8 +606,8 @@ TabView {
                                 width: windowbackround.width / 10
                                 height: windowbackround.height /15
                                 font.pixelSize: windowbackround.width / 55
-                                validator: IntValidator {bottom: 0; top: 1000;}
-                                inputMethodHints: Qt.ImhDigitsOnly
+                                validator: IntValidator {bottom: -1000; top: 1000;}
+                                //inputMethodHints: Qt.ImhDigitsOnly
                                 placeholderText: qsTr("Value @ 0V")
 
                             }
@@ -615,8 +616,8 @@ TabView {
                                 width: windowbackround.width / 10
                                 height: windowbackround.height /15
                                 font.pixelSize: windowbackround.width / 55
-                                validator: IntValidator {bottom: 0; top: 1000;}
-                                inputMethodHints: Qt.ImhDigitsOnly
+                                validator: IntValidator {bottom: -1000; top: 1000;}
+                                //inputMethodHints: Qt.ImhDigitsOnly
                                 placeholderText: qsTr("Value @ 5V")
                             }
                             TextField {
@@ -632,14 +633,14 @@ TabView {
                     TextField {
                         id: an5V0
                         windowbackround.width /12
-                        validator: IntValidator {bottom: 0; top: 1000;}
+                        validator: IntValidator {bottom: -1000; top: 1000;}
                         placeholderText: qsTr("Value @ 0V")
                         visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
                     }
                     TextField {
                         id: an6V5
                         windowbackround.width /12
-                        validator: IntValidator {bottom: 0; top: 1000;}
+                        validator: IntValidator {bottom: -1000; top: 1000;}
                         placeholderText: qsTr("Value @ 5V")
                         visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
                     }
@@ -653,14 +654,14 @@ TabView {
                     TextField {
                         id: an7V0
                         windowbackround.width /12
-                        validator: IntValidator {bottom: 0; top: 1000;}
+                        validator: IntValidator {bottom: -1000; top: 1000;}
                         placeholderText: qsTr("Value @ 0V")
                         visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
                     }
                     TextField {
                         id: an8V5
                         windowbackround.width /12
-                        validator: IntValidator {bottom: 0; top: 1000;}
+                        validator: IntValidator {bottom: -1000; top: 1000;}
                         placeholderText: qsTr("Value @ 5V")
                         visible: { (interfaceSelect.currentIndex == "1") ? true: false; }
                     }
@@ -757,7 +758,7 @@ TabView {
                     Connect.openConnection(serialName.currentText, ecuSelect.currentIndex ,weight.currentText);
                     Connect.setOdometer(odometer.text);
                     Connect.setWeight(weight.text);
-                    Apexi.calculatorAux(an1V0.text,an2V5.text,an3V0.text,an4V5.text,unitaux1.text,unitaux2.text);
+                    Dashboard.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
                     connected = 1;
                 }
             }
@@ -858,7 +859,7 @@ TabView {
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
-                        model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech","Mediaplayer","Screentoggle"]
+                        model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Dash Style 1","Dash Style 2","G-Force","Dyno","Dash Style 3","Mediaplayer"]
                         property bool initialized: true
                         onCurrentIndexChanged:{select1.selDash1() }
                         Component.onCompleted: {select1.selDash1() }
@@ -878,7 +879,7 @@ TabView {
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
-                        model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech","Mediaplayer"]
+                        model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Dash Style 1","Dash Style 2","G-Force","Dyno","Dash Style 3","Mediaplayer"]
                         property bool initialized: true
                         onCurrentIndexChanged:{select2.selDash2() }
                         Component.onCompleted: {select2.selDash2() }
@@ -898,7 +899,7 @@ TabView {
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
-                        model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech","Mediaplayer"]
+                       model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Dash Style 1","Dash Style 2","G-Force","Dyno","Dash Style 3","Mediaplayer"]
                         property bool initialized: true
                         onCurrentIndexChanged:{select3.selDash3() }
                         Component.onCompleted: {select3.selDash3() }
@@ -917,7 +918,7 @@ TabView {
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
-                        model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Race Dash","Race Dash Apexi","G-Force","Dyno","FuelTech","Mediaplayer"]
+                        model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Dash Style 1","Dash Style 2","G-Force","Dyno","Dash Style 3","Mediaplayer"]
                         property bool initialized: true
                         onCurrentIndexChanged:{select4.selDash4() }
                         Component.onCompleted: {select4.selDash4() }
@@ -1548,7 +1549,7 @@ TabView {
         }
     }
     Tab {
-        title: "Apexi Dash"// Tab index 5
+        title: "Dash Config"// Tab index 5
         Rectangle{
             anchors.fill :parent
             id : apexidashsettings
@@ -2259,16 +2260,43 @@ TabView {
             id: developer
             anchors.fill: parent
             color: "black"
-            Button {
-                id: connectButton
-                text: "OBD TEST"
-
-                onClicked: {
-                Connect.candump()
+                Connections{
+                    target: Dashboard
+                    //onSerialStatChanged :{consoletext.append(Dashboard.SerialStat)}
+                    onSerialStatChanged :{consoletext = Dashboard.SerialStat}
                 }
+                ScrollView {
+                    id: scrollconsoletext
+                    width: 400
+                    height: parent.height
+                TextArea {
+                    id: consoletext
+                    width: scrollconsoletext.width
+                    wrapMode: TextArea.Wrap
+                    color: "white"
+                        }
+                }
+                Grid {
+                    anchors.top :parent.top
+                    anchors.topMargin: parent.height / 20
+                    anchors.right: parent.right
+                    rows: 10
+                    columns: 2
+                    spacing: parent.width /150
+                Button {
+                    id: candump
+                    text: "OBD Test"
+                    onClicked: Connect.candump()
+                }
+                /*
+                Button {
+                    id: update
+                    text: "Update"
+                    onClicked: Connect.update()
+                    }
+                    */
+
             }
-
-
         }
     }
 }
