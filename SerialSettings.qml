@@ -6,7 +6,7 @@ import QtQuick.VirtualKeyboard 2.1
 import QtSensors 5.0
 import QtQuick.Controls.Styles 1.4
 import QtMultimedia 5.8
-
+//
 TabView {
     id: tabView
     anchors.fill: parent
@@ -758,8 +758,10 @@ TabView {
                     Connect.openConnection(serialName.currentText, ecuSelect.currentIndex ,weight.currentText);
                     Connect.setOdometer(odometer.text);
                     Connect.setWeight(weight.text);
-                    Dashboard.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
+                    Apexi.calculatorAux(an1V0.text,an2V5.text,an3V0.text,an4V5.text,unitaux1.text,unitaux2.text);
                     connected = 1;
+                    //Dashboard.Auxcalc(unitaux1.text,an1V0.text,an2V5.text,unitaux2.text,an3V0.text,an4V5.text);
+
                 }
             }
 
