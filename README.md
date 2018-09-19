@@ -10,6 +10,9 @@ PowerTune is a Modern Gauge Display for written in QT5.8 and supports the follow
 #### Additional ECU's supported via Daemon (these are items you can purchase from us)
 * Adaptronic Modular ECU's (Adaptronic CAN Protocol)
 * Haltech CAN V2 Protocol comapatible ECU's 
+* Microtech CAN Protocol comapatible ECU's (LT9c,LT10c,LT15c) 
+* Link G4 with CAN BUS ( via Haltech or Microtech Protocol) 
+* VIPEC with CAN BUS ( via Haltech or Microtech Protocol) 
 * Nissan Consult I
 * OBD II (Serial ELM2377 Cable only)
 
