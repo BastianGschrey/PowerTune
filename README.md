@@ -10,8 +10,11 @@ PowerTune is a Modern Gauge Display for written in QT5.8 and supports the follow
 #### Additional ECU's supported via Daemon (these are items you can purchase from us)
 * Adaptronic Modular ECU's (Adaptronic CAN Protocol)
 * Haltech CAN V2 Protocol comapatible ECU's 
+* Microtech CAN Protocol comapatible ECU's (LT9c,LT10c,LT15c) 
+* Link G4 with CAN BUS ( via Haltech or Microtech Protocol) 
+* VIPEC with CAN BUS ( via Haltech or Microtech Protocol) 
 * Nissan Consult I
-* OBD II (Serial ELM2377 Cable only)
+* OBD II (Serial ELM327 Cable only)
 
 
 Testet Platforms :
@@ -198,8 +201,6 @@ Raspbian Stretch
 | Mazda RX7 FD3S                   | (13B-REW) Modular          | CAN (PICAN2)  | <big>__✓__     |Bastian Gschrey   |
 
 
-
-   
 #### Nissan Consult :
 
 | Soon to be tested :             | ECU Variant:          | Variant:            | Confirmed:     |Confirmed by :  |
@@ -209,12 +210,19 @@ Raspbian Stretch
   
  #### Haltech V2 Protocol:
 
-
 | Tested Vehicles :                | ECU Variant:          | Interface:          | Confirmed:     |Confirmed by :  |
 | -------------------------------- |:---------------------:|:-------------------:|:--------------:|:--------------:|
 | Mazda RX7 FD3S                   |Haltech Elite 2000     | CAN (PICAN2)        | <big>__✓__     |Bastian Gschrey |
+| Mazda RX7 FD3S                   |Adaptronic  Modular    | CAN (PICAN2)        | <big>__✓__     |Bastian Gschrey |  
+ 
+ #### Microtech CAN Protocol:
+
+| Tested Vehicles :                | ECU Variant:          | Interface:          | Confirmed:     |Confirmed by :  |
+| -------------------------------- |:---------------------:|:-------------------:|:--------------:|:--------------:|
+| ?                                |LINK G4                | CAN (PICAN2)        | <big>__✓__     |Damian Holmes   |
+| Mazda RX7 FD3S                   |Microtech LT9c         | CAN (Modtronix im1  | <big>__✓__     |Jaques Hanekom  |  
   
-  
+   
 
 Implemented Features :
 
