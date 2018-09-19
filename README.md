@@ -14,7 +14,7 @@ PowerTune is a Modern Gauge Display for written in QT5.8 and supports the follow
 * Link G4 with CAN BUS ( via Haltech or Microtech Protocol) 
 * VIPEC with CAN BUS ( via Haltech or Microtech Protocol) 
 * Nissan Consult I
-* OBD II (Serial ELM2377 Cable only)
+* OBD II (Serial ELM327 Cable only)
 
 
 Testet Platforms :
