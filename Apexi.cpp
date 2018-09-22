@@ -428,7 +428,7 @@ void Apexi::Auxcalc (const QString &unitaux1,const qreal &an1V0,const qreal &an2
     qreal aux4max = an4V5;
     QString Auxunit1 = unitaux1;
     QString Auxunit2 = unitaux2;
-    
+
     Apexi::calculatorAux(aux1min,aux2max,aux3min,aux4max,Auxunit1,Auxunit2);
 }
 
@@ -662,15 +662,21 @@ void Apexi::decodeAux(QByteArray rawmessagedata)
     
     
     packageAux[0] = mul[29] * info->AN1 + add[29];
-    packageAux[1] = mul[30] * info->AN2 + add[30];
-    packageAux[2] = mul[31] * info->AN3 + add[31];
-    packageAux[3] = mul[32] * info->AN4 + add[32];
+    packageAux[1] = mul[29] * info->AN2 + add[29];
+    packageAux[2] = mul[29] * info->AN3 + add[29];
+    packageAux[3] = mul[29] * info->AN4 + add[29];
     
+    //qDebug()<< "AN1" << packageAux[0] ;
+    //qDebug()<< "AN2" << packageAux[1] ;
+    //qDebug()<< "AN3" << packageAux[2] ;
+    //qDebug()<< "AN4" << packageAux[3] ;
     //Analog1
     AN1AN2calc = (((((auxval2-auxval1)*0.2) * (packageAux[0] - packageAux[1]))) + auxval1);
     AN3AN4calc = ((((auxval4-auxval3)*0.2) * (packageAux[2] - packageAux[3])) + auxval3);
     m_dashboard->setauxcalc1(AN1AN2calc);
     m_dashboard->setauxcalc2(AN3AN4calc);
+    //qDebug()<< "AN1-AN2" << AN1AN2calc ;
+    //qDebug()<< "AN1-AN2" << AN3AN4calc ;
     
 }
 
@@ -816,7 +822,7 @@ void Apexi::decodeSensorStrings(QByteArray rawmessagedata)
     m_dashboard->setFlagString16 (QString(rawmessagedata).mid(79,3));
 }
 
-void Apexi::calculatorAux(qreal aux1min,qreal aux2max,qreal aux3min,qreal aux4max,QString Auxunit1,QString Auxunit2)
+void Apexi::calculatorAux(float aux1min,float aux2max,float aux3min,float aux4max,QString Auxunit1,QString Auxunit2)
 {
     auxval1 = aux1min;
     auxval2 = aux2max;
@@ -824,8 +830,7 @@ void Apexi::calculatorAux(qreal aux1min,qreal aux2max,qreal aux3min,qreal aux4ma
     auxval4 = aux4max;
     Auxname1 = Auxunit1;
     Auxname2 = Auxunit2;
-   // qDebug() << Auxunit1<<auxval1 <<auxval2 <<Auxunit2 << auxval3<<auxval4;
-    
+    qDebug() << Auxunit1<<auxval1 <<auxval2 <<Auxunit2 << auxval3<<auxval4;
 }
 
 void Apexi::writeDashfile(const QString &gauge1,const QString &gauge2,const QString &gauge3,const QString &gauge4,const QString &gauge5,const QString &gauge6)

@@ -401,7 +401,7 @@ public slots:
     // void decodeVersion(QByteArray rawmessagedata);
     void decodeInit(QByteArray rawmessagedata);
     void decodeSensorStrings(QByteArray rawmessagedata);
-    void calculatorAux(qreal aux1min,qreal aux2max,qreal aux3min,qreal aux4max,QString Auxunit1,QString Auxunit2);
+    void calculatorAux(float aux1min,float aux2max,float aux3min,float aux4max,QString Auxunit1,QString Auxunit2);
 
 signals:
     void sig_adaptronicReadFinished();

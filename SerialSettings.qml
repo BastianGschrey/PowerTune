@@ -579,7 +579,7 @@ TabView {
                                 width: windowbackround.width / 10
                                 height: windowbackround.height /15
                                 font.pixelSize: windowbackround.width / 55
-                                validator: IntValidator {bottom: -1000; top: 1000;}
+                                //validator: DoubleValidator {bottom: -1000.0; top: 1000.0;notation : DoubleValidator.StandardNotation ; decimals : 1}
                                 //inputMethodHints: Qt.ImhDigitsOnly
                                 placeholderText: qsTr("9")
                             }
@@ -588,7 +588,7 @@ TabView {
                                 width: windowbackround.width / 10
                                 height: windowbackround.height /15
                                 font.pixelSize: windowbackround.width / 55
-                                validator: IntValidator {bottom: -1000; top: 1000;}
+                               // validator: DoubleValidator {bottom: -1000.0; top: 1000.0;notation : DoubleValidator.StandardNotation ; decimals : 1}
                                 //inputMethodHints: Qt.ImhDigitsOnly
                                 placeholderText: qsTr("16")
                             }
@@ -606,7 +606,7 @@ TabView {
                                 width: windowbackround.width / 10
                                 height: windowbackround.height /15
                                 font.pixelSize: windowbackround.width / 55
-                                validator: IntValidator {bottom: -1000; top: 1000;}
+                                //validator: DoubleValidator {bottom: -1000.0; top: 1000.0;notation : DoubleValidator.StandardNotation ; decimals : 1}
                                 //inputMethodHints: Qt.ImhDigitsOnly
                                 placeholderText: qsTr("Value @ 0V")
 
@@ -616,7 +616,7 @@ TabView {
                                 width: windowbackround.width / 10
                                 height: windowbackround.height /15
                                 font.pixelSize: windowbackround.width / 55
-                                validator: IntValidator {bottom: -1000; top: 1000;}
+                                //validator: DoubleValidator {bottom: -1000.0; top: 1000.0;notation : DoubleValidator.StandardNotation ; decimals : 1}
                                 //inputMethodHints: Qt.ImhDigitsOnly
                                 placeholderText: qsTr("Value @ 5V")
                             }
