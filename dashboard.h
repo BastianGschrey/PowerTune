@@ -305,7 +305,7 @@ class DashBoard : public QObject
     Q_PROPERTY(int gearcalc6 READ gearcalc6 WRITE setgearcalc6 NOTIFY gearcalc6Changed)
     Q_PROPERTY(int gearcalcactivation READ gearcalcactivation WRITE setgearcalcactivation NOTIFY gearcalcactivationChanged)
 
-    Q_PROPERTY(QString ecu READ ecu WRITE setecu NOTIFY ecuChanged)
+    Q_PROPERTY(int ecu READ ecu WRITE setecu NOTIFY ecuChanged)
 
 
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
@@ -595,7 +595,7 @@ public:
     void setmusicpath(const QString &musicpath);
 
     void setsupportedReg(const int &supportedReg);
-    Q_INVOKABLE void setecu(const QString &ecu);
+    Q_INVOKABLE void setecu(const int &ecu);
 
     Q_INVOKABLE void setspeedpercent(const qreal &speedpercent);
 
@@ -924,7 +924,7 @@ public:
     int gearcalc5() const;
     int gearcalc6() const;
     int gearcalcactivation() const;
-    QString ecu() const;
+    int ecu() const;
 signals:
 
     //Odometer
@@ -1221,7 +1221,7 @@ signals:
     void gearcalc5Changed (int gearcalc5);
     void gearcalc6Changed (int gearcalc6);
     void gearcalcactivationChanged (int gearcalcactivation);
-    void ecuChanged(QString ecu);
+    void ecuChanged(int ecu);
 
 private:
     // Odometer
@@ -1532,7 +1532,7 @@ private:
     int m_gearcalc6;
     int m_gearcalcactivation;
 
-    QString m_ecu;
+    int m_ecu;
 
 };
 

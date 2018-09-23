@@ -680,7 +680,7 @@ void udpreceiver::processPendingDatagrams()
             break;
 
         case 219:
-            //m_dashboard->setunits(Value);
+            m_dashboard->setecu(Value);
             break;
         case 220:
             m_dashboard->setwastegatepress(Value);
@@ -768,7 +768,7 @@ void udpreceiver::processPendingDatagrams()
             //MAP P
             break;
         case 275:
-            m_dashboard->setInjDuty2(Value);
+            //
             break;
         case 276:
             //

@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QThread>
+#include <QDebug>
 
 // Run this as a thread and update every 50 ms
 // still need to find a way to make this configurable
@@ -54,6 +55,10 @@ void datalogger::updateLog()
             if(!mFile.open(QFile::Append | QFile::Text)){
             }
             QTextStream out(&mFile);
+
+            switch(m_dashboard->ecu())
+            {
+            case 0: ////Apexi ECU
             out << (loggerStartT.msecsTo(QTime::currentTime())) << ","
                 << m_dashboard->rpm() << ","
                 << m_dashboard->Intakepress()  << ","
@@ -149,15 +154,61 @@ void datalogger::updateLog()
                 << m_dashboard->ambipress() << ","
                 << endl;
             mFile.close();
+            break;
+            case 1: ////Link ECU Generic CAN
+                out << (loggerStartT.msecsTo(QTime::currentTime())) << ","
+                    << m_dashboard->rpm() << ","
+                    << m_dashboard->MAP()  << ","
+                    << "m_dashboard->MGP"  << ","
+                    << m_dashboard->ambipress()  << ","
+                    << m_dashboard->TPS()  << ","
+                    << "m_dashboard->Injector DC (pri)"  << ","
+                    << "m_dashboard->Injector DC (sec)"  << ","
+                    << "m_dashboard->Injector Pulse Width (Actual)"  << ","
+                    << m_dashboard->Watertemp()  << ","
+                    << m_dashboard->Intaketemp()   << ","
+                    << m_dashboard->BatteryV()  << ","
+                    << m_dashboard->MAFactivity()  << ","
+                    << "m_dashboard->Gear Position"  << ","
+                    << "m_dashboard->Injector Timing"  << ","
+                    << "m_dashboard->Ignition Timing"  << ","
+                    << "m_dashboard->Cam Inlet Position L"  << ","
+                    << "m_dashboard->Cam Inlet Position R"  << ","
+                    << "m_dashboard->Cam Exhaust Position L"  << ","
+                    << "m_dashboard->Cam Exhaust Position R"  << ","
+                    << m_dashboard->LAMBDA()  << ","
+                    << m_dashboard->lambda2()  << ","
+                    << "m_dashboard->Trig 1 Error Counter"  << ","
+                    << "m_dashboard->Fault Codes"  << ","
+                    << m_dashboard->FuelPress() << ","
+                    << m_dashboard->oiltemp() << ","
+                    << m_dashboard->oilpres() << ","
+                    << "m_dashboard->LF Wheel Speed"  << ","
+                    << "m_dashboard->LR Wheel Speed"  << ","
+                    << "m_dashboard->RF Wheel Speed"  << ","
+                    << "m_dashboard->RR Wheel Speed"  << ","
+                    << m_dashboard->Knock()  << ","
+                    << "m_dashboard->Knock Level 2"  << ","
+                    << "m_dashboard->Knock Level 3"  << ","
+                    << "m_dashboard->Knock Level 4"  << ","
+                    << "m_dashboard->Knock Level 5"  << ","
+                    << "m_dashboard->Knock Level 6"  << ","
+                    << "m_dashboard->Knock Level 7"  << ","
+                    << "m_dashboard->Knock Level 8"  << ","
+                    << endl;
+            mFile.close();
+            break;
+
+
         }
     }
 }
-
+}
 
 
 void datalogger::createHeader()
 {
-
+    qDebug()<< "ECU" << m_dashboard->ecu();
     QString filename = Log + ".csv";
     QFile file( filename );
    // qDebug() << "update Log";
@@ -168,7 +219,12 @@ void datalogger::createHeader()
                         QFile mFile(fileName);
             if(!mFile.open(QFile::Append | QFile::Text)){
                            }
-            QTextStream out(&mFile);
+
+QTextStream out(&mFile);
+            switch(m_dashboard->ecu())
+            {
+            case 0: ////Apexi
+
             out     << "Time ms" << ","
                     << "RPM" << ","
                     << "Intakepress"  << ","
@@ -264,6 +320,52 @@ void datalogger::createHeader()
                     << "Ambient Pressure" << ","
                     << endl;
             mFile.close();
+                break;
+            case 1: ////Link ECU Generic CAN
+            out     << "Time ms" << ","
+                    << "RPM" << ","
+                    << "MAP"  << ","
+                    << "MGP"  << ","
+                    << "Barometric Pressure"  << ","
+                    << "TPS"  << ","
+                    << "Injector DC (pri)"  << ","
+                    << "Injector DC (sec)"  << ","
+                    << "Injector Pulse Width (Actual)"  << ","
+                    << "ECT"  << ","
+                    << "IAT"  << ","
+                    << "ECU Volts"  << ","
+                    << "MAF"  << ","
+                    << "Gear Position"  << ","
+                    << "Injector Timing"  << ","
+                    << "Ignition Timing"  << ","
+                    << "Cam Inlet Position L"  << ","
+                    << "Cam Inlet Position R"  << ","
+                    << "Cam Exhaust Position L"  << ","
+                    << "Cam Exhaust Position R"  << ","
+                    << "Lambda 1"  << ","
+                    << "Lambda 2"  << ","
+                    << "Trig 1 Error Counter"  << ","
+                    << "Fault Codes"  << ","
+                    << "Fuel Pressure" << ","
+                    << "Oil Temp " << ","
+                    << "Oil Pressure" << ","
+                    << "LF Wheel Speed"  << ","
+                    << "LR Wheel Speed"  << ","
+                    << "RF Wheel Speed"  << ","
+                    << "RR Wheel Speed"  << ","
+                    << "Knock Level 1"  << ","
+                    << "Knock Level 2"  << ","
+                    << "Knock Level 3"  << ","
+                    << "Knock Level 4"  << ","
+                    << "Knock Level 5"  << ","
+                    << "Knock Level 6"  << ","
+                    << "Knock Level 7"  << ","
+                    << "Knock Level 8"  << ","
+                    << endl;
+            mFile.close();
+                break;
+
+        }
         }
     }
 }
