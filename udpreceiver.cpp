@@ -890,6 +890,9 @@ void udpreceiver::processPendingDatagrams()
         case 824:
             //m_dashboard->setModel(list[1]);
             break;
+        case 825:
+            //m_dashboard->setError(list[1]);
+            break;
         case 999:
             break;
         default:
