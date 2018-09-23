@@ -586,8 +586,8 @@ void Connect::daemonstartup(const int &daemon)
                 break;
 
     }
-    //QString fileName = "/home/pi/startdaemon.sh";//This will be the correct path on pi
-    QString fileName = "startdaemon.sh";//for testing on windows
+    QString fileName = "/home/pi/startdaemon.sh";//This will be the correct path on pi
+    //QString fileName = "startdaemon.sh";//for testing on windows
     QFile mFile(fileName);
     mFile.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text);
     QTextStream out(&mFile);
