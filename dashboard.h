@@ -168,7 +168,7 @@ class DashBoard : public QObject
 
     //Units ( metric /imperial select
     Q_PROPERTY(QString units READ units WRITE setunits NOTIFY unitsChanged)
-
+    Q_PROPERTY(QString pressureunits READ pressureunits WRITE setpressureunits NOTIFY pressureunitsChanged)
     //Qsensors
     Q_PROPERTY(qreal accelx READ accelx WRITE setaccelx NOTIFY accelxChanged)
     Q_PROPERTY(qreal accely READ accely WRITE setaccely NOTIFY accelyChanged)
@@ -453,6 +453,7 @@ public:
     void setgpsVisibleSatelites(const QString &gpsVisibleSatelites);
     // Units
     void setunits(const QString &units);
+    void setpressureunits(const QString &pressureunits);
 
 
 
@@ -761,6 +762,8 @@ public:
     QString gpsVisibleSatelites() const;
     //units
     QString units() const;
+    QString pressureunits() const;
+
 
 
     //Adaptronic extra
@@ -1065,6 +1068,7 @@ signals:
     // units
 
     void unitsChanged(QString units);
+    void pressureunitsChanged(QString pressureunits);
 
     //Adaptronic extra
 
@@ -1392,6 +1396,7 @@ private:
     //Units
 
     QString m_units;
+    QString m_pressureunits;
 
     //qsensors
 

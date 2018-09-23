@@ -63,6 +63,7 @@ TabView {
                     property alias password: goPropass.text
                     property alias vehicleweight: weight.text
                     property alias unitSelector: unitSelect.currentIndex
+                    property alias unitSelector2: unitSelect2.currentIndex
                     property alias odometervalue: odometer.text
                     property alias tripmetervalue: tripmeter.text
                     //property alias protocol : protocol.currentIndex
@@ -173,7 +174,7 @@ TabView {
                         }
 
                         Text {
-                            text: "Display units:"
+                            text: "Speed&Temp units:"
                             font.pixelSize: windowbackround.width / 55
                             color: "white"
                         }
@@ -186,6 +187,31 @@ TabView {
                             property bool initialized: false
                             Component.onCompleted: { Connect.setUnits(currentIndex);changeweighttext.changetext()}
                             onCurrentIndexChanged: { Connect.setUnits(currentIndex);changeweighttext.changetext()}
+                            delegate: ItemDelegate {
+                                width: unitSelect.width
+                                text: unitSelect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                                font.weight: unitSelect.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.family: unitSelect.font.family
+                                font.pixelSize: unitSelect.font.pixelSize
+                                highlighted: unitSelect.highlightedIndex === index
+                                hoverEnabled: unitSelect.hoverEnabled
+                            }
+
+                        }
+                        Text {
+                            text: "Pressure units:"
+                            font.pixelSize: windowbackround.width / 55
+                            color: "white"
+                        }
+                        ComboBox {
+                            id: unitSelect2
+                            width: windowbackround.width / 5
+                            height: windowbackround.height /15
+                            font.pixelSize: windowbackround.width / 55
+                            model: [ "kPa","PSI"]
+                            property bool initialized: false
+                            Component.onCompleted: { Connect.setPressUnits(currentIndex);}
+                            onCurrentIndexChanged: { Connect.setPressUnits(currentIndex);}
                             delegate: ItemDelegate {
                                 width: unitSelect.width
                                 text: unitSelect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData

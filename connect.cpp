@@ -191,6 +191,22 @@ void Connect::setUnits(const int &units)
     }
 
 }
+void Connect::setPressUnits(const int &units2)
+{
+    switch (units2)
+    {
+    case 0:
+        m_dashBoard->setpressureunits("metric");
+        break;
+    case 1:
+        m_dashBoard->setpressureunits("imperial");
+        break;
+
+    default:
+        break;
+    }
+
+}
 
 void Connect::setWeight(const int &weight)
 {

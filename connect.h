@@ -55,6 +55,7 @@ public:
     Q_INVOKABLE void readdashsetupApexi();
     Q_INVOKABLE void setSreenbrightness(const int &brightness);
     Q_INVOKABLE void setUnits(const int &units);
+    Q_INVOKABLE void setPressUnits(const int &units2);
     Q_INVOKABLE void setWeight(const int &weight);
     Q_INVOKABLE void setOdometer(const qreal &Odometer);
     Q_INVOKABLE void qmlTreeviewclicked(const QModelIndex &index);
