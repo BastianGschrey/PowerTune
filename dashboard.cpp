@@ -288,7 +288,7 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_gearcalc5(0)
     ,  m_gearcalc6(0)
     ,  m_gearcalcactivation(0)
-    ,  m_ecu(1)
+    ,  m_ecu(0)
 {
 }
 
