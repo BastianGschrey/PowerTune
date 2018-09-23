@@ -37,6 +37,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal Secinjpulse READ Secinjpulse WRITE setSecinjpulse NOTIFY secinjpulseChanged)
     Q_PROPERTY(qreal na2 READ na2 WRITE setna2 NOTIFY na2Changed)
     Q_PROPERTY(qreal InjDuty READ InjDuty WRITE setInjDuty NOTIFY injDutyChanged)
+    Q_PROPERTY(qreal InjDuty2 READ InjDuty2 WRITE setInjDuty2 NOTIFY injDuty2Changed)
     Q_PROPERTY(qreal pim READ pim WRITE setpim NOTIFY pimChanged)
 
     Q_PROPERTY(qreal EngLoad READ EngLoad WRITE setEngLoad NOTIFY engLoadChanged)
@@ -339,7 +340,7 @@ public:
     void setSecinjpulse(const qreal &Secinjpulse);
     void setna2(const qreal &na2);
     void setInjDuty(const qreal &InjDuty);
-
+    void setInjDuty2(const qreal &InjDuty2);
     void setEngLoad(const qreal &EngLoad);
     void setMAF1V(const qreal &MAF1V);
     void setMAF2V(const qreal &MAF2V);
@@ -648,6 +649,7 @@ public:
     qreal Secinjpulse() const;
     qreal na2() const;
     qreal InjDuty() const;
+    qreal InjDuty2() const;
     qreal EngLoad() const;
     qreal MAF1V() const;
     qreal MAF2V() const;
@@ -950,6 +952,7 @@ signals:
     void secinjpulseChanged(qreal Secinjpulse);
     void na2Changed(qreal na2);
     void injDutyChanged(qreal InjDuty);
+    void injDuty2Changed(qreal InjDuty2);
     void engLoadChanged(qreal EngLoad);
     void mAF1VChanged(qreal MAF1V);
     void mAF2VChanged(qreal MAF2V);
@@ -1249,6 +1252,7 @@ private:
     qreal m_Secinjpulse;
     qreal m_na2;
     qreal m_InjDuty;
+    qreal m_InjDuty2;
     qreal m_EngLoad;
     qreal m_MAF1V;
     qreal m_MAF2V;

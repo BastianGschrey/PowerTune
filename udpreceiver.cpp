@@ -768,7 +768,7 @@ void udpreceiver::processPendingDatagrams()
             //MAP P
             break;
         case 275:
-            //
+            m_dashboard->setInjDuty2(Value);
             break;
         case 276:
             //
@@ -892,7 +892,7 @@ void udpreceiver::processPendingDatagrams()
             break;
         case 825:
             //m_dashboard->setError(list[1]);
-            break;
+            break;            
         case 999:
             break;
         default:

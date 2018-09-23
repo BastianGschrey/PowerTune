@@ -36,6 +36,7 @@ DashBoard::DashBoard(QObject *parent)
     , m_Secinjpulse(0)
     , m_na2(0)
     , m_InjDuty(0)
+    , m_InjDuty2(0)
     , m_EngLoad(0)
     , m_MAF1V(0)
     , m_MAF2V(0)
@@ -731,7 +732,13 @@ void DashBoard::setInjDuty(const qreal &InjDuty)
     emit injDutyChanged(InjDuty);
 }
 
-
+void DashBoard::setInjDuty2(const qreal &InjDuty2)
+{
+    if (m_InjDuty2 == InjDuty2)
+        return;
+    m_InjDuty2 = InjDuty2;
+    emit injDuty2Changed(InjDuty2);
+}
 
 //Flags
 
@@ -2361,6 +2368,7 @@ qreal DashBoard::na1() const { return m_na1; }
 qreal DashBoard::Secinjpulse() const { return m_Secinjpulse; }
 qreal DashBoard::na2() const { return m_na2; }
 qreal DashBoard::InjDuty() const { return m_InjDuty; }
+qreal DashBoard::InjDuty2() const { return m_InjDuty2; }
 qreal DashBoard::EngLoad() const { return m_EngLoad; }
 qreal DashBoard::MAF1V() const { return m_MAF1V; }
 qreal DashBoard::MAF2V() const { return m_MAF2V; }
