@@ -2282,10 +2282,10 @@ TabView {
 
     }
     Tab {
-        title: "Other"// Tab index 7
+        title: "Startup"// Tab index 7
 
         Rectangle{
-            id: developer
+            id: daemons
             anchors.fill: parent
             color: "black"
                 Connections{
@@ -2312,9 +2312,25 @@ TabView {
                     columns: 2
                     spacing: parent.width /150
                 Button {
-                    id: candump
-                    text: "OBD Test"
-                    onClicked: Connect.candump()
+                    id: apply
+                    text: "apply"
+                    onClicked: Connect.daemonstartup(daemonselect.currentIndex)
+                }
+                ComboBox {
+                    id: daemonselect
+                    width: daemons.width / 5
+                    height: daemons.height /15
+                    font.pixelSize: daemons.width / 55
+                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","Apexi","OBD2"]
+                    delegate: ItemDelegate {
+                        width: daemonselect.width
+                        text: daemonselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: daemonselect.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: daemonselect.font.family
+                        font.pixelSize: daemonselect.font.pixelSize
+                        highlighted: daemonselect.highlightedIndex === index
+                        hoverEnabled: daemonselect.hoverEnabled
+                    }
                 }
                 /*
                 Button {
