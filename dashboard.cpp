@@ -335,9 +335,9 @@ void DashBoard::setIntakepress(const qreal &Intakepress)
 {
     if (m_Intakepress == Intakepress)
         return;
-    if (m_units == "metric")
+    if (m_pressureunits == "metric")
     {m_Intakepress = Intakepress;}
-    if (m_units == "imperial")
+    if (m_pressureunits == "imperial")
     {m_Intakepress = qRound(Intakepress * 0.145038);}
     emit intakepressChanged(Intakepress);    
     return;
@@ -599,8 +599,6 @@ void DashBoard::setBoostPres(const qreal &BoostPres)
             m_BoostPres = (temp/10);
             }
     }
-
-    m_BoostPres = BoostPres;
     emit boostPresChanged(BoostPres);
 
 
@@ -1264,7 +1262,6 @@ void DashBoard::setMAP(const qreal &MAP)
     { m_MAP = MAP;}
     if (m_pressureunits == "imperial")
     {m_MAP = qRound(MAP * 0.145038);}
-    m_MAP = MAP;
     emit mAPChanged(MAP);
 }
 
@@ -1419,7 +1416,6 @@ void DashBoard::setFuelPress(const qreal &FuelPress)
     { m_FuelPress = FuelPress;}
     if (m_pressureunits == "imperial")
     {m_FuelPress = qRound(FuelPress * 0.145038);}
-    m_FuelPress = FuelPress;
     emit fuelPressChanged(FuelPress);
 }
 
@@ -1492,7 +1488,6 @@ void DashBoard::setambipress(const qreal &ambipress)
     { m_ambipress = ambipress;}
     if (m_pressureunits == "imperial")
     {m_ambipress = qRound(ambipress * 0.145038);}
-    m_ambipress = ambipress;
     emit ambipressChanged(ambipress);
 }
 
@@ -1629,7 +1624,6 @@ void DashBoard::setbrakepress(const qreal &brakepress)
     { m_brakepress = brakepress;}
     if (m_pressureunits == "imperial")
     {m_brakepress = qRound(brakepress * 0.145038);}
-    m_brakepress = brakepress;
     emit brakepressChanged(brakepress);
 }
 void DashBoard::setclutchswitchstate(const qreal &clutchswitchstate)
@@ -1647,7 +1641,6 @@ void DashBoard::setcoolantpress(const qreal &coolantpress)
     { m_coolantpress = coolantpress;}
     if (m_pressureunits == "imperial")
     {m_coolantpress = qRound(coolantpress * 0.145038);}
-    m_coolantpress = coolantpress;
     emit coolantpressChanged(coolantpress);
 }
 void DashBoard::setdecelcut(const qreal &decelcut)
@@ -2036,7 +2029,10 @@ void DashBoard::setnospress(const qreal &nospress)
 {
     if (m_nospress == nospress)
         return;
-    m_nospress = nospress;
+    if (m_pressureunits == "metric")
+    { m_nospress = nospress;}
+    if (m_pressureunits == "imperial")
+    {m_nospress = qRound(nospress * 0.145038);}
     emit nospressChanged(nospress);
 }
 void DashBoard::setnosswitch(const qreal &nosswitch)
@@ -2050,11 +2046,10 @@ void DashBoard::setoilpres(const qreal &oilpres)
 {
     if (m_oilpres == oilpres)
         return;
-    if (m_units == "metric")
+    if (m_pressureunits == "metric")
     { m_oilpres = oilpres;}
-    if (m_units == "imperial")
+    if (m_pressureunits == "imperial")
     {m_oilpres = qRound(oilpres * 0.145038);}
-    m_oilpres = oilpres;
     emit oilpresChanged(oilpres);
 }
 void DashBoard::setoiltemp(const qreal &oiltemp)
@@ -2169,7 +2164,6 @@ void DashBoard::setwastegatepress(const qreal &wastegatepress)
     { m_wastegatepress = wastegatepress;}
     if (m_units == "imperial")
     {m_wastegatepress = qRound(wastegatepress * 0.145038);}
-    m_wastegatepress = wastegatepress;
     emit wastegatepressChanged(wastegatepress);
 }
 void DashBoard::setwheeldiff(const qreal &wheeldiff)
