@@ -269,6 +269,8 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_wheelslip(0)
     ,  m_wheelspdftleft(0)
     ,  m_wheelspdftright(0)
+    ,  m_wheelspdrearleft(0)
+    ,  m_wheelspdrearright(0)
     ,  m_speedpercent(1)
     ,  m_maxRPM(8000)
     ,  m_rpmStage1(3000)
@@ -2207,6 +2209,26 @@ void DashBoard::setwheelspdftright(const qreal &wheelspdftright)
     emit wheelspdftrightChanged(wheelspdftright);
 }
 
+void DashBoard::setwheelspdrearleft(const qreal &wheelspdrearleft)
+{
+    if (m_wheelspdrearleft == wheelspdrearleft)
+        return;
+    if (m_units == "metric")
+    {m_wheelspdrearleft = wheelspdrearleft;}
+    if (m_units == "imperial")
+    {m_wheelspdrearleft = qRound(wheelspdrearleft * 1.8 + 32);}
+    emit wheelspdrearleftChanged(wheelspdrearleft);
+}
+void DashBoard::setwheelspdrearright(const qreal &wheelspdrearright)
+{
+    if (m_wheelspdrearright == wheelspdrearright)
+        return;
+    if (m_units == "metric")
+    {m_wheelspdrearright = wheelspdrearright;}
+    if (m_units == "imperial")
+    {m_wheelspdrearright = qRound(wheelspdrearright * 1.8 + 32);}
+    emit wheelspdrearrightChanged(wheelspdrearright);
+}
 void DashBoard::setmusicpath(const QString &musicpath)
 {
     if (m_musicpath == musicpath)
@@ -2657,6 +2679,8 @@ qreal DashBoard::wheeldiff() const { return m_wheeldiff; }
 qreal DashBoard::wheelslip() const { return m_wheelslip; }
 qreal DashBoard::wheelspdftleft() const { return m_wheelspdftleft; }
 qreal DashBoard::wheelspdftright() const { return m_wheelspdftright; }
+qreal DashBoard::wheelspdrearleft() const { return m_wheelspdrearleft; }
+qreal DashBoard::wheelspdrearright() const { return m_wheelspdrearright; }
 QString DashBoard::musicpath() const {return m_musicpath; }
 int DashBoard::supportedReg() const {return m_supportedReg; }
 qreal DashBoard::speedpercent() const {return m_speedpercent; }

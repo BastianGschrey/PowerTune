@@ -702,10 +702,10 @@ void udpreceiver::processPendingDatagrams()
             break;
 
         case 226:
-            //m_dashboard->setwheelspdrearleft(Value);
+            m_dashboard->setwheelspdrearleft(Value);
             break;
         case 227:
-            //m_dashboard->setwheelspdrearright(Value);
+            m_dashboard->setwheelspdrearright(Value);
             break;
 
         case 228:
@@ -768,7 +768,7 @@ void udpreceiver::processPendingDatagrams()
             //MAP P
             break;
         case 275:
-            //
+            m_dashboard->setInjDuty2(Value);
             break;
         case 276:
             //

@@ -278,6 +278,8 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal wheelslip READ wheelslip WRITE setwheelslip NOTIFY wheelslipChanged)
     Q_PROPERTY(qreal wheelspdftleft READ wheelspdftleft WRITE setwheelspdftleft NOTIFY wheelspdftleftChanged)
     Q_PROPERTY(qreal wheelspdftright READ wheelspdftright WRITE setwheelspdftright NOTIFY wheelspdftrightChanged)
+    Q_PROPERTY(qreal wheelspdrearleft READ wheelspdrearleft WRITE setwheelspdrearleft NOTIFY wheelspdrearleftChanged)
+    Q_PROPERTY(qreal wheelspdrearright READ wheelspdrearright WRITE setwheelspdrearright NOTIFY wheelspdrearrightChanged)
     //Path for musicfiles
     Q_PROPERTY(QString musicpath READ musicpath WRITE setmusicpath NOTIFY musicpathChanged)
 
@@ -591,7 +593,8 @@ public:
     void setwheelslip(const qreal &wheelslip);
     void setwheelspdftleft(const qreal &wheelspdftleft);
     void setwheelspdftright(const qreal &wheelspdftright);
-
+    void setwheelspdrearleft(const qreal &wheelspdrearleft);
+    void setwheelspdrearright(const qreal &wheelspdrearright);
     void setmusicpath(const QString &musicpath);
 
     void setsupportedReg(const int &supportedReg);
@@ -898,7 +901,8 @@ public:
     qreal wheelslip() const;
     qreal wheelspdftleft() const;
     qreal wheelspdftright() const;
-
+    qreal wheelspdrearleft() const;
+    qreal wheelspdrearright() const;
     QString musicpath() const;
 
     int supportedReg() const;
@@ -1200,6 +1204,8 @@ signals:
     void wheelslipChanged(qreal wheelslip);
     void wheelspdftleftChanged(qreal wheelspdftleft);
     void wheelspdftrightChanged(qreal wheelspdftright);
+    void wheelspdrearleftChanged(qreal wheelspdrearleft);
+    void wheelspdrearrightChanged(qreal wheelspdrearright);
     void musicpathChanged(QString musicpath);
     void supportedRegChanged(int supportedReg);
     void speedpercentChanged(qreal speedpercent);
@@ -1507,6 +1513,8 @@ private:
     qreal m_wheelslip;
     qreal m_wheelspdftleft;
     qreal m_wheelspdftright;
+    qreal m_wheelspdrearleft;
+    qreal m_wheelspdrearright;
 
     QString m_musicpath;
     int m_supportedReg;
