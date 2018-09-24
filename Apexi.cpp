@@ -696,8 +696,8 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
     qreal Boost;
     int checkboost = (unsigned char)rawmessagedata[13];
     packageBasic[0] = mul[15] * info->Basic_Injduty + add[0];
-    packageBasic[1] = mul[0] * info->Basic_IGL + add[6];
-    packageBasic[2] = mul[0] * info->Basic_IGT + add[6];
+    packageBasic[1] = info->Basic_IGL;
+    packageBasic[2] = info->Basic_IGT;
     packageBasic[3] = mul[0] * info->Basic_RPM + add[0];
     packageBasic[4] = mul[0] * info->Basic_KPH + add[0];
     packageBasic[5] = mul[0] * info->Basic_Boost;
