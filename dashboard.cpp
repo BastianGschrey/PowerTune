@@ -37,6 +37,7 @@ DashBoard::DashBoard(QObject *parent)
     , m_na2(0)
     , m_InjDuty(0)
     , m_InjDuty2(0)
+    , m_InjAngle(0)
     , m_EngLoad(0)
     , m_MAF1V(0)
     , m_MAF2V(0)
@@ -291,6 +292,8 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_gearcalc6(0)
     ,  m_gearcalcactivation(0)
     ,  m_ecu(0)
+    ,  m_Error("")
+
 {
 }
 
@@ -759,6 +762,13 @@ void DashBoard::setInjDuty2(const qreal &InjDuty2)
     emit injDuty2Changed(InjDuty2);
 }
 
+void DashBoard::setInjAngle(const qreal &InjAngle)
+{
+    if (m_InjAngle == InjAngle)
+        return;
+    m_InjAngle = InjAngle;
+    emit InjAngleChanged(InjAngle);
+}
 //Flags
 
 void DashBoard::setFlag1(const qreal &Flag1)
@@ -2400,7 +2410,13 @@ void DashBoard::setecu(const int &ecu)
     emit ecuChanged(ecu);
 }
 
-//
+void DashBoard::setError(const QString &Error)
+{
+    if (m_ecu == Error)
+        return;
+    m_Error = Error;
+    emit ErrorChanged(Error);
+}
 
 
 
@@ -2437,6 +2453,7 @@ qreal DashBoard::Secinjpulse() const { return m_Secinjpulse; }
 qreal DashBoard::na2() const { return m_na2; }
 qreal DashBoard::InjDuty() const { return m_InjDuty; }
 qreal DashBoard::InjDuty2() const { return m_InjDuty2; }
+qreal DashBoard::InjAngle() const { return m_InjAngle; }
 qreal DashBoard::EngLoad() const { return m_EngLoad; }
 qreal DashBoard::MAF1V() const { return m_MAF1V; }
 qreal DashBoard::MAF2V() const { return m_MAF2V; }
@@ -2704,6 +2721,9 @@ int DashBoard::gearcalc5() const {return m_gearcalc5; }
 int DashBoard::gearcalc6() const {return m_gearcalc6; }
 int DashBoard::gearcalcactivation() const {return m_gearcalcactivation; }
 int DashBoard::ecu() const { return m_ecu; }
+QString DashBoard::Error() const { return m_Error; }
+
+
 // Sensor Strings
 
 

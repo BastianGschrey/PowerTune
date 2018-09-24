@@ -771,7 +771,7 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setInjDuty2(Value);
             break;
         case 276:
-            //
+            m_dashboard->setInjAngle(Value);
             break;
         case 277:
             //
@@ -891,7 +891,7 @@ void udpreceiver::processPendingDatagrams()
             //m_dashboard->setModel(list[1]);
             break;
         case 825:
-            //m_dashboard->setError(list[1]);
+            m_dashboard->setError(list[1]);
             break;            
         case 999:
             break;

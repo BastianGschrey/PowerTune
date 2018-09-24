@@ -38,6 +38,8 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal na2 READ na2 WRITE setna2 NOTIFY na2Changed)
     Q_PROPERTY(qreal InjDuty READ InjDuty WRITE setInjDuty NOTIFY injDutyChanged)
     Q_PROPERTY(qreal InjDuty2 READ InjDuty2 WRITE setInjDuty2 NOTIFY injDuty2Changed)
+    Q_PROPERTY(qreal InjAngle READ InjAngle WRITE setInjAngle NOTIFY InjAngleChanged)
+
     Q_PROPERTY(qreal pim READ pim WRITE setpim NOTIFY pimChanged)
 
     Q_PROPERTY(qreal EngLoad READ EngLoad WRITE setEngLoad NOTIFY engLoadChanged)
@@ -308,6 +310,7 @@ class DashBoard : public QObject
     Q_PROPERTY(int gearcalcactivation READ gearcalcactivation WRITE setgearcalcactivation NOTIFY gearcalcactivationChanged)
 
     Q_PROPERTY(int ecu READ ecu WRITE setecu NOTIFY ecuChanged)
+    Q_PROPERTY(QString Error READ Error WRITE setError NOTIFY ErrorChanged)
 
 
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
@@ -343,6 +346,8 @@ public:
     void setna2(const qreal &na2);
     void setInjDuty(const qreal &InjDuty);
     void setInjDuty2(const qreal &InjDuty2);
+    void setInjAngle(const qreal &InjAngle);
+
     void setEngLoad(const qreal &EngLoad);
     void setMAF1V(const qreal &MAF1V);
     void setMAF2V(const qreal &MAF2V);
@@ -599,6 +604,7 @@ public:
 
     void setsupportedReg(const int &supportedReg);
     Q_INVOKABLE void setecu(const int &ecu);
+    void setError(const QString &Error);
 
     Q_INVOKABLE void setspeedpercent(const qreal &speedpercent);
 
@@ -654,6 +660,7 @@ public:
     qreal na2() const;
     qreal InjDuty() const;
     qreal InjDuty2() const;
+    qreal InjAngle() const;
     qreal EngLoad() const;
     qreal MAF1V() const;
     qreal MAF2V() const;
@@ -929,6 +936,7 @@ public:
     int gearcalc6() const;
     int gearcalcactivation() const;
     int ecu() const;
+    QString Error() const;
 signals:
 
     //Odometer
@@ -960,6 +968,7 @@ signals:
     void na2Changed(qreal na2);
     void injDutyChanged(qreal InjDuty);
     void injDuty2Changed(qreal InjDuty2);
+    void InjAngleChanged(qreal InjAngle);
     void engLoadChanged(qreal EngLoad);
     void mAF1VChanged(qreal MAF1V);
     void mAF2VChanged(qreal MAF2V);
@@ -1228,6 +1237,7 @@ signals:
     void gearcalc6Changed (int gearcalc6);
     void gearcalcactivationChanged (int gearcalcactivation);
     void ecuChanged(int ecu);
+    void ErrorChanged(QString Error);
 
 private:
     // Odometer
@@ -1263,6 +1273,7 @@ private:
     qreal m_na2;
     qreal m_InjDuty;
     qreal m_InjDuty2;
+    qreal m_InjAngle;
     qreal m_EngLoad;
     qreal m_MAF1V;
     qreal m_MAF2V;
@@ -1541,6 +1552,7 @@ private:
     int m_gearcalcactivation;
 
     int m_ecu;
+    QString m_Error;
 
 };
 
