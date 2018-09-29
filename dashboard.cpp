@@ -600,7 +600,7 @@ void DashBoard::setBoostPres(const qreal &BoostPres)
         if (BoostPres > 0)
         {
         qreal temp;
-        temp = qRound(BoostPres * 142.233)
+        temp = qRound(BoostPres * 142.233);
         m_BoostPres = (temp/10);
         }
     }

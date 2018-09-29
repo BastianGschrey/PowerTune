@@ -1,4 +1,11 @@
 #!/bin/sh
+echo "Killing all  Daemons"
+sudo pkill OBD
+sudo pkill Haltechd
+sudo pkill Consult
+sudo pkill Apexid 
+sudo pkill Microtechd 
+sudo pkill Linkd
 echo "Updating Daemons"
 cp -r /home/pi/src/daemons/. /home/pi/daemons/
 cd /home/pi/daemons
