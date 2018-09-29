@@ -598,9 +598,9 @@ void DashBoard::setBoostPres(const qreal &BoostPres)
         if (m_BoostPres <= 0)
         {m_BoostPres = qRound(BoostPres * 0.039370079197446);}
         else
-            {
-            m_BoostPres = (BoostPres * 142.233);
-            }
+        {
+        m_BoostPres = (BoostPres * 14.2233);
+        }
     }
     emit boostPresChanged(BoostPres);
 
