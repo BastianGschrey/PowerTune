@@ -595,10 +595,10 @@ void DashBoard::setBoostPres(const qreal &BoostPres)
     {m_BoostPres = BoostPres;}
     if (m_pressureunits == "imperial")
     {
-        qDebug()<<"Boost" << m_BoostPres;
-        if (m_BoostPres <= 0)
+        qDebug()<<"Boost" << BoostPres;
+        if (BoostPres <= 0)
         {m_BoostPres = qRound(BoostPres * 0.039370079197446);}
-        if (m_BoostPres > 0)
+        if (BoostPres > 0)
         {
         m_BoostPres = (BoostPres * 14.2233);
         }
