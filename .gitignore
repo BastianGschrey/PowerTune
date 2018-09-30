@@ -7,3 +7,5 @@ Documents/
 *.dbbf9ac
 
 udpreceiver\.cpp\.autosave
+
+daemons/DataLog\.csv
