@@ -479,7 +479,7 @@ TabView {
                             onClicked: {Connect.shutdown()}
                         }
 
-                        Text  { text: " ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.3 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Text  { text: "RPM Smoothing :";color: "white";font.pixelSize: windowbackround.width / 55}
                         ComboBox {

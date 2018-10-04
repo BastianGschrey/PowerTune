@@ -522,7 +522,7 @@ void Connect::checkReg()
 
 void Connect::LiveReqMsgOBD(const QString &obdpids)
 {
-    //qDebug()<< "PIDS" <<obdpids;
+    qDebug()<< "PIDS" <<obdpids;
     QString Message;
     QStringList list = obdpids.split( "," );
     //qDebug()<< "Raw list" <<list;
