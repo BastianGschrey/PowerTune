@@ -1,6 +1,6 @@
-﻿166,120,300,240,150,1,V,Battery,true,false,false,Dashboard,BatteryV,BatteryV
-166,120,466,240,300,0,°C,Coolant T.,false,true,false,Dashboard,Watertemp,Watertemp
-166,120,632,240,300,0,°C,Air T.,false,false,false,Dashboard,Intaketemp,Intaketemp
-166,120,300,360,150,0,,Knock,false,false,false,Dashboard,Knock,Knock
-166,120,466,360,25,1,,AFR,true,false,false,Dashboard,auxcalc1,auxcalc1
-166,120,632,360,2,1,,Boost,false,false,false,Dashboard,BoostPres,BoostPres
+﻿266,120,0,240,120,0,°,ECT.,false,true,false,Dashboard,Watertemp,Watertemp
+266,120,267,240,120,0,°,IAT,false,true,false,Dashboard,Intaketemp,Intaketemp
+266,120,534,240,160,0,°,AMBIT,false,true,false,Dashboard,ambitemp,ambitemp
+266,120,0,360,100,0,%,Throttle,false,true,false,Dashboard,TPS,TPS
+266,120,267,360,5,0,,Boost,false,false,false,Dashboard,BoostPres,BoostPres
+266,120,534,360,5,0,,Fuel Pressure,false,true,false,Dashboard,FuelPress,FuelPress

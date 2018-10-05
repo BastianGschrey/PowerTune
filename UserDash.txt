@@ -1,7 +1,6 @@
-200,150,10,180,300,0,kPa,MAP,true,false,false,Dashboard,MAP,MAP
-165,150,220,180,300,2,λ,Lambda,false,false,true,Dashboard,LAMBDA,LAMBDATarget
-200,120,10,340,150,0,°C,MAT,false,true,false,Dashboard,Intaketemp,Intaketemp
-340,120,220,340,300,0,°C,ECT,false,true,false,Dashboard,Watertemp,Watertemp
-165,150,395,180,100,0,%,WG DC%,false,true,false,Dashboard,boostcontrol,boostcontrol
-215,150,570,180,500,0,kPa,FuelP,true,false,false,Dashboard,FuelPress,FuelPress
-215,120,570,340,10,0,,Gear,false,false,false,Dashboard,Gear,Gear
+﻿266,120,0,240,120,0,°,ECT.,false,true,false,Dashboard,Watertemp,Watertemp
+266,120,267,240,120,0,°,IAT,false,true,false,Dashboard,Intaketemp,Intaketemp
+266,120,534,240,160,0,°,AMBIT,false,true,false,Dashboard,ambitemp,ambitemp
+266,120,0,360,100,0,%,Throttle,false,true,false,Dashboard,TPS,TPS
+266,120,267,360,5,0,,Boost,false,false,false,Dashboard,BoostPres,BoostPres
+266,120,534,360,5,0,,Fuel Pressure,false,true,false,Dashboard,FuelPress,FuelPress

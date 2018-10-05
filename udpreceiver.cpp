@@ -774,7 +774,7 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setInjAngle(Value);
             break;
         case 277:
-            //
+            //Catalyst Temp Bank1 S1
             break;
         case 278:
             //
