@@ -1,4 +1,6 @@
 #!/bin/sh
+echo "Fetching latest Daemons"
+git pull
 echo "Killing all  Daemons"
 sudo pkill OBD
 sudo pkill Haltechd

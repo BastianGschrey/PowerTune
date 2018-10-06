@@ -777,7 +777,7 @@ void udpreceiver::processPendingDatagrams()
             //Catalyst Temp Bank1 S1
             break;
         case 278:
-            //
+            //Manifold Gauge Pressure kPa
             break;
         case 279:
             //
