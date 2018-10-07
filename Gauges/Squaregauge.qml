@@ -26,8 +26,8 @@ Rectangle {
 
         property double mainvalue
         property int maxvalue
-        property int warnvaluehigh: 20000
-        property int warnvaluelow : -20000
+        property double warnvaluehigh: 20000
+        property double warnvaluelow : -20000
 
         Rectangle {
             id: titlebar
@@ -175,10 +175,9 @@ Rectangle {
             id: warningindication
             function warn()
             {
-               if (mainvaluetextfield.text > warnvaluehigh)anim.running = true,anim2.running = true;
+               if (mainvaluetextfield.text > warnvaluehigh || mainvaluetextfield.text < warnvaluelow )anim.running = true,anim2.running = true;
                else anim.running = false,anim2.running = false,titlebar.color = "#808080" ,initialID.color = "black";
-               if (mainvaluetextfield.text < warnvaluelow)anim.running = true,anim2.running = true;
-                else anim.running = false,anim2.running = false,titlebar.color = "#808080" ,initialID.color = "black";
+
             }
         }
         Gauge {

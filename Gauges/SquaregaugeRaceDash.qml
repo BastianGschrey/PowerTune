@@ -209,9 +209,7 @@ Rectangle {
             id: warningindication
             function warn()
             {
-               if (mainvaluetextfield.text > warnvaluehigh)anim.running = true,anim2.running = true;
-               else anim.running = false,anim2.running = false,titlebar.color = "#808080" ,initialID.color = "black";
-               if (mainvaluetextfield.text < warnvaluelow)anim.running = true,anim2.running = true;
+                if (mainvaluetextfield.text > warnvaluehigh || mainvaluetextfield.text < warnvaluelow )anim.running = true,anim2.running = true;
                 else anim.running = false,anim2.running = false,titlebar.color = "#808080" ,initialID.color = "black";
             }
         }
