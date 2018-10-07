@@ -12,6 +12,11 @@ Rectangle {
         width: parent.width /1.5
         height:parent.height /1.5
         color:"red"
+        SequentialAnimation on color {
+            loops: Animation.Infinite
+            ColorAnimation { from: "red"; to: "orange"; duration: 300 }
+            ColorAnimation { from: "orange"; to: "red"; duration: 300 }
+        }
 
         Text {
             id: warntxt
