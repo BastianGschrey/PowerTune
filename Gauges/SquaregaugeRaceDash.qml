@@ -46,15 +46,15 @@ Rectangle {
                 PropertyAnimation {
                     target: titlebar
                     property: "color"
-                    from: "red"
-                    to: "#9f9f9f"
+                    from: "darkred"
+                    to: "red"
                     duration: 500
                 }
                 PropertyAnimation {
                     target: titlebar
                     property: "color"
-                    from: "#9f9f9f"
-                    to: "red"
+                    from: "red"
+                    to: "darkred"
                     duration: 500
                 }
                 }
@@ -66,13 +66,13 @@ Rectangle {
                     target: initialID
                     property: "color"
                     from: "darkred"
-                    to: "#9f9f9f"
+                    to: "red"
                     duration: 500
                 }
                 PropertyAnimation {
                     target: initialID
                     property: "color"
-                    from: "#9f9f9f"
+                    from: "red"
                     to: "darkred"
                     duration: 500
                 }
