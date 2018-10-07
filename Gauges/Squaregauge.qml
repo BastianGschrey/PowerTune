@@ -12,6 +12,8 @@ Rectangle {
         border.color: "#9f9f9f"
         border.width: 2
 
+
+
         property alias title: gaugetextfield.text
         property alias mainunit: mainvalueunittextfield.text
         property alias vertgaugevisible: vertgauge.visible
@@ -24,6 +26,8 @@ Rectangle {
 
         property double mainvalue
         property int maxvalue
+        property int warnvaluehigh: 20000
+        property int warnvaluelow : -20000
 
         Rectangle {
             id: titlebar
@@ -38,6 +42,46 @@ Rectangle {
             anchors.topMargin: 2
             anchors.leftMargin: 2
 
+            }
+
+        SequentialAnimation {
+            id: anim
+            loops: Animation.Infinite
+            running: false
+            PropertyAnimation {
+                target: titlebar
+                property: "color"
+                from: "red"
+                to: "#9f9f9f"
+                duration: 500
+            }
+            PropertyAnimation {
+                target: titlebar
+                property: "color"
+                from: "#9f9f9f"
+                to: "red"
+                duration: 500
+            }
+            }
+        SequentialAnimation {
+            id: anim2
+            loops: Animation.Infinite
+            running: false
+            PropertyAnimation {
+                target: initialID
+                property: "color"
+                from: "darkred"
+                to: "#9f9f9f"
+                duration: 500
+            }
+            PropertyAnimation {
+                target: initialID
+                property: "color"
+                from: "#9f9f9f"
+                to: "darkred"
+                duration: 500
+            }
+            }
             Text {
                 id: gaugetextfield
                 anchors.top: parent.top
@@ -48,7 +92,6 @@ Rectangle {
                 color: "white"
 
             }
-        }
 
         Text {
             id: mainvaluetextfield
@@ -60,6 +103,7 @@ Rectangle {
             font.pixelSize: 50
             font.family: "Eurostile"
             color: "white"
+            onTextChanged: warningindication.warn()
         }
 
         Text {
@@ -126,7 +170,17 @@ Rectangle {
             }
 
         }
-
+        Item {
+            //to change the warning
+            id: warningindication
+            function warn()
+            {
+               if (mainvaluetextfield.text > warnvaluehigh)anim.running = true,anim2.running = true;
+               else anim.running = false,anim2.running = false,titlebar.color = "#808080" ,initialID.color = "black";
+               if (mainvaluetextfield.text < warnvaluelow)anim.running = true,anim2.running = true;
+                else anim.running = false,anim2.running = false,titlebar.color = "#808080" ,initialID.color = "black";
+            }
+        }
         Gauge {
             id: horizgauge
             height: parent.height * 0.2
@@ -168,4 +222,5 @@ Rectangle {
             }
 
         }
+
 }
