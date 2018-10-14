@@ -10,17 +10,12 @@
         <file>Gauges/BarGauge.qml</file>
         <file>Gauges/GPS.qml</file>
         <file>Gauges/RaceDash.qml</file>
-        <file>GPSTracks/Zwartkops.qml</file>
         <file>graphics/Racedash800x480.png</file>
         <file>graphics/MainDash.png</file>
         <file>Gauges/GaugeNeedle_minus90to180.qml</file>
         <file>Gauges/GaugeNeedle_minus180to90.qml</file>
         <file>Gauges/Charts.qml</file>
         <file>Gauges/RaceDashApexi.qml</file>
-        <file>GPSTracks/test.qml</file>
-        <file>GPSTracks/UtahMotorsportCampusEAST.qml</file>
-        <file>GPSTracks/UtahMotorsportCampusWest.qml</file>
-        <file>GPSTracks/UtahMotorsportCampusBig.qml</file>
         <file>Gauges/ForceMeter.qml</file>
         <file>Gauges/SensorTest.qml</file>
         <file>Gauges/verticalbargauge.qml</file>
@@ -62,5 +57,14 @@
         <file>Gauges/createsquaregaugeracedasgh.js</file>
         <file>OBDPIDS.qml</file>
         <file>ConsultRegs.qml</file>
+        <file>GPSTracks/Laptimer.qml</file>
+        <file>GPSTracks/osm_100-l-3-16-37885-37633.png</file>
+        <file>GPSTracks/osm_100-l-3-16-37885-37634.png</file>
+        <file>GPSTracks/osm_100-l-3-16-60017-39541.png</file>
+        <file>GPSTracks/osm_100-l-3-16-60017-39542.png</file>
+        <file>GPSTracks/osm_100-l-3-16-60018-39541.png</file>
+        <file>GPSTracks/osm_100-l-3-16-60018-39542.png</file>
+        <file>GPSTracks/osm_100-l-3-15-32305-20037.png</file>
+        <file>GPSTracks/osm_100-l-3-15-32305-20038.png</file>
     </qresource>
 </RCC>

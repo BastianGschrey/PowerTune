@@ -31,7 +31,7 @@ public:
 
 
 public slots:
-    void startGPScom(const QString &portName);
+    void startGPScom(const QString &portName,const int &baud);
     void stopGPScom();
 
 private slots:

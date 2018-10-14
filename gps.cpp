@@ -360,18 +360,18 @@ bail:
 }
 
 
-void GPS::startGPScom(const QString &portName)
+void GPS::startGPScom(const QString &portName,const int &baud)
 {
 
     com = new QSerialPort(this);
     serialBuffer = "";
-    qDebug() <<"StartGPS"<< portName ;
+    qDebug() <<"StartGPS"<< portName << baud ;
 
 
 
     com->setPortName(portName);
     com->open(QSerialPort::ReadOnly);
-    com->setBaudRate(QSerialPort::Baud4800);
+    com->setBaudRate(baud);
     com->setDataBits(QSerialPort::Data8);
     com->setFlowControl(QSerialPort::NoFlowControl);
     com->setParity(QSerialPort::NoParity);

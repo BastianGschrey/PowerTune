@@ -128,7 +128,7 @@ TabView {
                             text: "GPS Port: "
                             font.pixelSize: windowbackround.width / 55
                             color: "white"
-                            visible: { (gpsswitch.checked == true ) ? true:false; }
+                            //visible: { (gpsswitch.checked == true ) ? true:false; }
                         }
                         ComboBox {
                             id: serialNameGPS
@@ -136,7 +136,7 @@ TabView {
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
                             model: Connect.portsNames
-                            visible: { (gpsswitch.checked == true ) ? true:false; }
+                           // visible: { (gpsswitch.checked == true ) ? true:false; }
                             delegate: ItemDelegate {
                                 width: serialNameGPS.width
                                 text: serialNameGPS.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -152,7 +152,7 @@ TabView {
                             text: "GPS Baud: "
                             font.pixelSize: windowbackround.width / 55
                             color: "white"
-                            visible: { (gpsswitch.checked == true ) ? true:false; }
+                            //visible: { (gpsswitch.checked == true ) ? true:false; }
                         }
                         ComboBox {
                             id: serialGPSBaud
@@ -160,7 +160,7 @@ TabView {
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
                             model: [ "2400", "4800", "9600", "14400", "19200", "38400", "57600", "115200"]
-                            visible: { (gpsswitch.checked == true ) ? true:false; }
+                            //visible: { (gpsswitch.checked == true ) ? true:false; }
                             Component.onCompleted: {autoconnectGPS.auto()}
                             delegate: ItemDelegate {
                                 width: serialGPSBaud.width
@@ -720,7 +720,7 @@ TabView {
                 function auto()
                 {
 
-                    if (gpsswitch.checked == true)GPS.startGPScom(serialNameGPS.currentText);
+                    if (gpsswitch.checked == true)GPS.startGPScom(serialNameGPS.currentText,serialGPSBaud.currentText);
                     if (gpsswitch.checked == false)GPS.stopGPScom();
                 }
             }
@@ -968,7 +968,7 @@ TabView {
                             if (dash1.currentIndex == "0") {firstPageLoader.source = "qrc:/Gauges/Cluster.qml"};
                             if (dash1.currentIndex == "1") {firstPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
                             if (dash1.currentIndex == "2") {firstPageLoader.source = "qrc:/Gauges/Charts.qml"};
-                            if (dash1.currentIndex == "3") {firstPageLoader.source = "qrc:/Gauges/GPS.qml"};
+                            if (dash1.currentIndex == "3") {firstPageLoader.source = "qrc:/GPSTracks/Laptimer.qml"};
                             if (dash1.currentIndex == "4") {firstPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
                             if (dash1.currentIndex == "5") {firstPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
                             if (dash1.currentIndex == "6") {firstPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
@@ -990,7 +990,7 @@ TabView {
                             if (dash2.currentIndex == "0") {secondPageLoader.source = "qrc:/Gauges/Cluster.qml"};
                             if (dash2.currentIndex == "1") {secondPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
                             if (dash2.currentIndex == "2") {secondPageLoader.source = "qrc:/Gauges/Charts.qml"};
-                            if (dash2.currentIndex == "3") {secondPageLoader.source = "qrc:/Gauges/GPS.qml"};
+                            if (dash2.currentIndex == "3") {secondPageLoader.source = "qrc:/GPSTracks/Laptimer.qml"};
                             if (dash2.currentIndex == "4") {secondPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
                             if (dash2.currentIndex == "5") {secondPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
                             if (dash2.currentIndex == "6") {secondPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
@@ -1011,7 +1011,7 @@ TabView {
                             if (dash3.currentIndex == "0") {thirdPageLoader.source = "qrc:/Gauges/Cluster.qml"};
                             if (dash3.currentIndex == "1") {thirdPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
                             if (dash3.currentIndex == "2") {thirdPageLoader.source = "qrc:/Gauges/Charts.qml"};
-                            if (dash3.currentIndex == "3") {thirdPageLoader.source = "qrc:/Gauges/GPS.qml"};
+                            if (dash3.currentIndex == "3") {thirdPageLoader.source = "qrc:/GPSTracks/Laptimer.qml"};
                             if (dash3.currentIndex == "4") {thirdPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
                             if (dash3.currentIndex == "5") {thirdPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
                             if (dash3.currentIndex == "6") {thirdPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
@@ -1032,7 +1032,7 @@ TabView {
                             if (dash4.currentIndex == "0") {fourthPageLoader.source = "qrc:/Gauges/Cluster.qml"};
                             if (dash4.currentIndex == "1") {fourthPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
                             if (dash4.currentIndex == "2") {fourthPageLoader.source = "qrc:/Gauges/Charts.qml"};
-                            if (dash4.currentIndex == "3") {fourthPageLoader.source = "qrc:/Gauges/GPS.qml"};
+                            if (dash4.currentIndex == "3") {fourthPageLoader.source = "qrc:/GPSTracks/Laptimer.qml"};
                             if (dash4.currentIndex == "4") {fourthPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
                             if (dash4.currentIndex == "5") {fourthPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
                             if (dash4.currentIndex == "6") {fourthPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
