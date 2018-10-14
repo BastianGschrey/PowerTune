@@ -71,7 +71,7 @@ Item {
             anchors.left: map.right
             font.pixelSize: 20
             //model: [ "Current Position","Australia","Germany","New Zealand","South Africa","United Kingdom","USA"]
-            model: ["Australia","New Zealand","South Africa"]
+            model: ["Current Position","Australia","New Zealand","South Africa"]
             delegate: ItemDelegate {
                 width: countryselect.width
                 text: countryselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
