@@ -25,7 +25,7 @@ Item {
                 value: ':/GPSTracks/'
             }
             //Disable to Fetch Map Data from the Server
-                       /*PluginParameter {
+                     /*  PluginParameter {
                           name: "osm.mapping.providersrepository.disabled"
                           value: true
                        }*/
@@ -168,11 +168,11 @@ Item {
             id: changecountry
             function change(){
             if (countryselect.textAt(countryselect.currentIndex) == "Current Position"){trackselect.model = ["Tilt 0", "Tilt 45"],map.center= QtPositioning.coordinate(Dashboard.gpsLatitude,Dashboard.gpsLongitude)};
-            if (countryselect.textAt(countryselect.currentIndex) == "Australia"){trackselect.model = ["Wakefield Park"]};
+            if (countryselect.textAt(countryselect.currentIndex) == "Australia"){trackselect.model = ["Carrnell Raceway","Wakefield Park"]};
             if (countryselect.textAt(countryselect.currentIndex) == "Germany"){trackselect.model = ["Hockenheim","Nürburgring"]};
             if (countryselect.textAt(countryselect.currentIndex) == "New Zealand"){trackselect.model = ["Pukekohe Park"]};
            // if (countryselect.textAt(countryselect.currentIndex) == "South Africa"){trackselect.model = ["Dezzi","Redstar","Welkom","Zwartkops"]};
-            if (countryselect.textAt(countryselect.currentIndex) == "South Africa"){trackselect.model = ["Zwartkops"]};
+            if (countryselect.textAt(countryselect.currentIndex) == "South Africa"){trackselect.model = ["Redstar","Zwartkops"]};
             //if (countryselect.textAt(countryselect.currentIndex) == "United Kingdom"){trackselect.model = ["Silverstone"]};
             //if (countryselect.textAt(countryselect.currentIndex) == "USA"){trackselect.model = ["Utah Motorsport Park"]};
              console.log(countryselect.textAt(countryselect.currentIndex))
@@ -187,13 +187,13 @@ Item {
             if (trackselect.textAt(trackselect.currentIndex) == "Tilt 0"){map.tilt = 0};
             if (trackselect.textAt(trackselect.currentIndex) == "Tilt 45"){map.tilt = 45};
             if (trackselect.textAt(trackselect.currentIndex) == "Bruce McLaren Motorsport Park"){map.center= QtPositioning.coordinate(-38.666331,176.1430453,17),map.zoomLevel = 15.6,map.bearing  = 43,map.tilt = 0};
-            if (trackselect.textAt(trackselect.currentIndex) == "Redstar"){map.center= QtPositioning.coordinate(-26.074278, 28.752637),map.zoomLevel = 16,map.bearing  = 0,map.tilt = 0};
+            if (trackselect.textAt(trackselect.currentIndex) == "Redstar"){map.center= QtPositioning.coordinate(-26.074283, 28.751711),map.zoomLevel = 16,map.bearing  = 0,map.tilt = 0};
             if (trackselect.textAt(trackselect.currentIndex) == "Utah Motorsport Park"){map.center= QtPositioning.coordinate(40.579618,-112.3805621,398),map.zoomLevel = 15.1 ,map.bearing  = 90,map.tilt = 0};
             if (trackselect.textAt(trackselect.currentIndex) == "Wakefield Park"){map.center= QtPositioning.coordinate(-34.840764,149.686800),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 0};
             if (trackselect.textAt(trackselect.currentIndex) == "Nürburgring"){map.center= QtPositioning.coordinate(50.333009,6.9415444,172),map.zoomLevel = 16,map.bearing  = 0,map.tilt = 0};
             if (trackselect.textAt(trackselect.currentIndex) == "Zwartkops"){map.center= QtPositioning.coordinate(-25.809960, 28.111175),map.zoomLevel = 16.6,map.bearing  = 0,map.tilt = 0};
-            if (trackselect.textAt(trackselect.currentIndex) == "Pukekohe Park"){map.center= QtPositioning.coordinate(-37.215300, 174.919707),map.zoomLevel = 15,map.tilt = 0}
-
+            if (trackselect.textAt(trackselect.currentIndex) == "Pukekohe Park"){map.center= QtPositioning.coordinate(-37.215300, 174.919707),map.zoomLevel = 15,map.tilt = 0,map.bearing  = 0}
+            if (trackselect.textAt(trackselect.currentIndex) == "Carrnell Raceway"){map.center= QtPositioning.coordinate(-28.685079, 151.938694),map.zoomLevel = 17,map.tilt = 0,map.bearing  = 22}
 
         }
         }
