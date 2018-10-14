@@ -186,12 +186,12 @@ Item {
                 console.log(trackselect.textAt(trackselect.currentIndex))
             if (trackselect.textAt(trackselect.currentIndex) == "Tilt 0"){map.tilt = 0};
             if (trackselect.textAt(trackselect.currentIndex) == "Tilt 45"){map.tilt = 45};
-            if (trackselect.textAt(trackselect.currentIndex) == "Bruce McLaren Motorsport Park"){map.center= QtPositioning.coordinate(-38.666331,176.1430453,17),map.zoomLevel = 15.6,map.bearing = 43,map.tilt = 0};
-            if (trackselect.textAt(trackselect.currentIndex) == "Redstar"){map.center= QtPositioning.coordinate(-26.074278, 28.752637),map.zoomLevel = 16,map.baering = 0,map.tilt = 0};
-            if (trackselect.textAt(trackselect.currentIndex) == "Utah Motorsport Park"){map.center= QtPositioning.coordinate(40.579618,-112.3805621,398),map.zoomLevel = 15.1 ,map.bearing = 90,map.tilt = 0};
-            if (trackselect.textAt(trackselect.currentIndex) == "Wakefield Park"){map.center= QtPositioning.coordinate(-34.840764,149.686800),map.zoomLevel = 16,map.tilt = 0,map.baering = 0};
-            if (trackselect.textAt(trackselect.currentIndex) == "Nürburgring"){map.center= QtPositioning.coordinate(50.333009,6.9415444,172),map.zoomLevel = 16,map.baering = 0,map.tilt = 0};
-            if (trackselect.textAt(trackselect.currentIndex) == "Zwartkops"){map.center= QtPositioning.coordinate(-25.809960, 28.111175),map.zoomLevel = 16.6,map.baering = 0,map.tilt = 0};
+            if (trackselect.textAt(trackselect.currentIndex) == "Bruce McLaren Motorsport Park"){map.center= QtPositioning.coordinate(-38.666331,176.1430453,17),map.zoomLevel = 15.6,map.bearing  = 43,map.tilt = 0};
+            if (trackselect.textAt(trackselect.currentIndex) == "Redstar"){map.center= QtPositioning.coordinate(-26.074278, 28.752637),map.zoomLevel = 16,map.bearing  = 0,map.tilt = 0};
+            if (trackselect.textAt(trackselect.currentIndex) == "Utah Motorsport Park"){map.center= QtPositioning.coordinate(40.579618,-112.3805621,398),map.zoomLevel = 15.1 ,map.bearing  = 90,map.tilt = 0};
+            if (trackselect.textAt(trackselect.currentIndex) == "Wakefield Park"){map.center= QtPositioning.coordinate(-34.840764,149.686800),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 0};
+            if (trackselect.textAt(trackselect.currentIndex) == "Nürburgring"){map.center= QtPositioning.coordinate(50.333009,6.9415444,172),map.zoomLevel = 16,map.bearing  = 0,map.tilt = 0};
+            if (trackselect.textAt(trackselect.currentIndex) == "Zwartkops"){map.center= QtPositioning.coordinate(-25.809960, 28.111175),map.zoomLevel = 16.6,map.bearing  = 0,map.tilt = 0};
             if (trackselect.textAt(trackselect.currentIndex) == "Pukekohe Park"){map.center= QtPositioning.coordinate(-37.215300, 174.919707),map.zoomLevel = 15,map.tilt = 0}
 
 
