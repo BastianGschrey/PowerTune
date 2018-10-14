@@ -349,8 +349,9 @@ void udpreceiver::processPendingDatagrams()
             //            m_dashboard->setgpsAltitude(Value);
             break;
         case 109:
-            m_dashboard->setgpsLatitude(QString::number(-25.809960));
-            m_dashboard->setgpsLongitude(QString::number(28.111175));
+            //-25.809581, 28.112241
+           // m_dashboard->setgpsLatitude(QString::number(-25.809581));
+           // m_dashboard->setgpsLongitude(QString::number(28.112241));
             break;
         case 110:
             //            m_dashboard->setgpsLongitude(Value);
