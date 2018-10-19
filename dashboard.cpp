@@ -1569,6 +1569,15 @@ void DashBoard::setdashsetup1(const QStringList &dashsetup1)
     emit dashsetup1Changed(dashsetup1);
 }
 
+void DashBoard::setdashfiles(const QStringList &dashfiles)
+{
+    if (m_dashfiles == dashfiles)
+        return;
+    m_dashfiles = dashfiles;
+    emit dashfilesChanged(dashfiles);
+}
+
+
 void DashBoard::setaccelpedpos(const qreal &accelpedpos)
 {
     if (m_accelpedpos == accelpedpos)
@@ -2613,6 +2622,8 @@ bool DashBoard::screen() const { return m_screen; }
 //User Dashboard Stringlist
 QStringList DashBoard::dashsetup() const { return m_dashsetup; }
 QStringList DashBoard::dashsetup1() const { return m_dashsetup1; }
+
+QStringList DashBoard::dashfiles() const { return m_dashfiles; }
 
 qreal DashBoard::accelpedpos() const { return m_accelpedpos; }
 qreal DashBoard::airtempensor2() const { return m_airtempensor2; }

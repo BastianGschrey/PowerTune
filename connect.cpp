@@ -47,6 +47,9 @@ int connectclicked =0;
 QByteArray checksumhex;
 QByteArray recvchecksumhex;
 QString selectedPort;
+QString dashfilename1;
+QString dashfilename2;
+QString dashfilename3;
 
 Connect::Connect(QObject *parent) :
     QObject(parent),
@@ -111,6 +114,14 @@ Connect::~Connect()
 
 
 }
+
+void Connect::setfilenames(const QString &file1,const QString &file2,const QString &file3)
+{
+        dashfilename1 = file1;
+        dashfilename2 = file2;
+        dashfilename3 = file3;
+        qDebug()<<"FILENAMES" << dashfilename1<< dashfilename2<< dashfilename3;
+}
 void Connect::checkifraspberrypi()
 {
     QString path = "/sys/class/backlight/rpi_backlight/brightness";
@@ -125,10 +136,20 @@ void Connect::checkifraspberrypi()
         m_dashBoard->setscreen(false);
     }
 }
+void Connect::readavailabledashfiles()
+{
+    //QDir directory("C:/Repositories/Customer/build-PowertuneQMLGui-Desktop_Qt_5_10_0_MinGW_32bit-Release");
+    QDir directory("/home/pi/UserDashboards");
+    QStringList dashfiles = directory.entryList(QStringList() << "*.txt",QDir::Files);
+    m_dashBoard->setdashfiles(dashfiles);
+    //qDebug() <<"files" << dashfiles ;
+}
 
 void Connect::readdashsetup()
 {
-    QString path = "UserDash.txt";// this is just for testing
+   // qDebug() <<"fueltech" << dashfilename3 ;
+   // QString path = "C:/Repositories/Customer/build-PowertuneQMLGui-Desktop_Qt_5_10_0_MinGW_32bit-Release/"+dashfilename3;
+    QString path = "/home/pi/UserDashboards/"+dashfilename3;
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
     {
@@ -145,7 +166,9 @@ void Connect::readdashsetup()
 }
 void Connect::readdashsetupApexi()
 {
-    QString path = "UserDashApexi.txt";
+   // qDebug() <<"Apexi" << dashfilename2 ;
+    //QString path = "C:/Repositories/Customer/build-PowertuneQMLGui-Desktop_Qt_5_10_0_MinGW_32bit-Release/"+dashfilename2;
+    QString path = "/home/pi/UserDashboards/"+dashfilename2;
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
     {

@@ -197,6 +197,9 @@ class DashBoard : public QObject
     Q_PROPERTY(QStringList dashsetup READ dashsetup WRITE setdashsetup NOTIFY dashsetupChanged)
     Q_PROPERTY(QStringList dashsetup1 READ dashsetup1 WRITE setdashsetup1 NOTIFY dashsetup1Changed)
 
+
+    Q_PROPERTY(QStringList dashfiles READ dashfiles WRITE setdashfiles NOTIFY dashfilesChanged)
+
     Q_PROPERTY(qreal accelpedpos READ accelpedpos WRITE setaccelpedpos NOTIFY accelpedposChanged)
     Q_PROPERTY(qreal airtempensor2 READ airtempensor2 WRITE setairtempensor2 NOTIFY airtempensor2Changed)
     Q_PROPERTY(qreal antilaglauchswitch READ antilaglauchswitch WRITE setantilaglauchswitch NOTIFY antilaglauchswitchChanged)
@@ -516,6 +519,9 @@ public:
     void setdashsetup(const QStringList &dashsetup);
     void setdashsetup1(const QStringList &dashsetup1);
 
+    void setdashfiles(const QStringList &dashfiles);
+
+
     void setaccelpedpos(const qreal &accelpedpos);
     void setairtempensor2(const qreal &airtempensor2);
     void setantilaglauchswitch(const qreal &antilaglauchswitch);
@@ -826,6 +832,8 @@ public:
     QStringList dashsetup() const;
     QStringList dashsetup1() const;
 
+    QStringList dashfiles() const;
+
     qreal accelpedpos() const;
     qreal airtempensor2() const;
     qreal antilaglauchswitch() const;
@@ -1130,6 +1138,9 @@ signals:
 
     void dashsetupChanged(QStringList dashsetup);
     void dashsetup1Changed(QStringList dashsetup1);
+    void dashfilesChanged(QStringList dashfiles);
+
+
 
     void accelpedposChanged(qreal accelpedpos);
     void airtempensor2Changed(qreal airtempensor2);
@@ -1441,6 +1452,8 @@ private:
 
     QStringList m_dashsetup;
     QStringList m_dashsetup1;
+
+    QStringList m_dashfiles;
 
     qreal m_accelpedpos;
     qreal m_airtempensor2;

@@ -20,19 +20,19 @@ Item {
             id: mapPlugin
             name: "osm"
             //Offline directory for Map Tiles
-            PluginParameter {
+          /*  PluginParameter {
                 name: 'osm.mapping.offline.directory'
                 value: ':/GPSTracks/'
-            }
+            }*/
             //Disable to Fetch Map Data from the Server
                      /*  PluginParameter {
                           name: "osm.mapping.providersrepository.disabled"
                           value: true
-                       }*/
+                       }
                        PluginParameter {
                           name: "osm.mapping.providersrepository.address"
                           value: 'qrc:/GPSTracks/'
-                       }
+                       }*/
         }
 
         Map {
@@ -41,9 +41,9 @@ Item {
             width : 400
             plugin: mapPlugin
             zoomLevel: 16
-            activeMapType: map.supportedMapTypes[1]
+            activeMapType: map.supportedMapTypes[8]
             copyrightsVisible : false
-            gesture.enabled: false
+            gesture.enabled: true
             tilt: 0
             color: "black"
 
@@ -71,7 +71,7 @@ Item {
             anchors.left: map.right
             font.pixelSize: 20
             //model: [ "Current Position","Australia","Germany","New Zealand","South Africa","United Kingdom","USA"]
-            model: ["Current Position","Australia","New Zealand","South Africa"]
+            model: ["Current Position","Australia","Germany","New Zealand","South Africa"]
             delegate: ItemDelegate {
                 width: countryselect.width
                 text: countryselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -162,7 +162,6 @@ Item {
 
                 }
 
-
         Item
         {
             id: changecountry
@@ -171,8 +170,7 @@ Item {
             if (countryselect.textAt(countryselect.currentIndex) == "Australia"){trackselect.model = ["Carrnell Raceway","Wakefield Park"]};
             if (countryselect.textAt(countryselect.currentIndex) == "Germany"){trackselect.model = ["Hockenheim","Nürburgring"]};
             if (countryselect.textAt(countryselect.currentIndex) == "New Zealand"){trackselect.model = ["Pukekohe Park"]};
-           // if (countryselect.textAt(countryselect.currentIndex) == "South Africa"){trackselect.model = ["Dezzi","Redstar","Welkom","Zwartkops"]};
-            if (countryselect.textAt(countryselect.currentIndex) == "South Africa"){trackselect.model = ["Redstar","Zwartkops"]};
+            if (countryselect.textAt(countryselect.currentIndex) == "South Africa"){trackselect.model = ["Dezzi","Midvaal","Phakisa","Redstar","Zwartkops"]};
             //if (countryselect.textAt(countryselect.currentIndex) == "United Kingdom"){trackselect.model = ["Silverstone"]};
             //if (countryselect.textAt(countryselect.currentIndex) == "USA"){trackselect.model = ["Utah Motorsport Park"]};
              console.log(countryselect.textAt(countryselect.currentIndex))
@@ -190,13 +188,17 @@ Item {
             if (trackselect.textAt(trackselect.currentIndex) == "Redstar"){map.center= QtPositioning.coordinate(-26.074283, 28.751711),map.zoomLevel = 16,map.bearing  = 0,map.tilt = 0};
             if (trackselect.textAt(trackselect.currentIndex) == "Utah Motorsport Park"){map.center= QtPositioning.coordinate(40.579618,-112.3805621,398),map.zoomLevel = 15.1 ,map.bearing  = 90,map.tilt = 0};
             if (trackselect.textAt(trackselect.currentIndex) == "Wakefield Park"){map.center= QtPositioning.coordinate(-34.840764,149.686800),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 0};
-            if (trackselect.textAt(trackselect.currentIndex) == "Nürburgring"){map.center= QtPositioning.coordinate(50.333009,6.9415444,172),map.zoomLevel = 16,map.bearing  = 0,map.tilt = 0};
+            if (trackselect.textAt(trackselect.currentIndex) == "Nürburgring"){map.center= QtPositioning.coordinate(50.358917, 6.965215),map.zoomLevel = 16,map.bearing  = 0,map.tilt = 0};
             if (trackselect.textAt(trackselect.currentIndex) == "Zwartkops"){map.center= QtPositioning.coordinate(-25.809960, 28.111175),map.zoomLevel = 16.6,map.bearing  = 0,map.tilt = 0};
-            if (trackselect.textAt(trackselect.currentIndex) == "Pukekohe Park"){map.center= QtPositioning.coordinate(-37.215300, 174.919707),map.zoomLevel = 15,map.tilt = 0,map.bearing  = 0}
+            if (trackselect.textAt(trackselect.currentIndex) == "Pukekohe Park"){map.center= QtPositioning.coordinate(-37.215300, 174.919707),map.zoomLevel = 15.6,map.tilt = 0,map.bearing  = 0}
             if (trackselect.textAt(trackselect.currentIndex) == "Carrnell Raceway"){map.center= QtPositioning.coordinate(-28.685079, 151.938694),map.zoomLevel = 17,map.tilt = 0,map.bearing  = 22}
+            if (trackselect.textAt(trackselect.currentIndex) == "Phakisa"){map.center= QtPositioning.coordinate(-27.904231, 26.713996),map.zoomLevel = 15.6,map.tilt = 0,map.bearing  = 22}
+            if (trackselect.textAt(trackselect.currentIndex) == "Midvaal"){map.center= QtPositioning.coordinate(-26.612376, 28.059484),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 22}
+            if (trackselect.textAt(trackselect.currentIndex) == "Dezzi"){map.center= QtPositioning.coordinate(-30.770474, 30.426004),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 22}
 
         }
         }
+
         Item
         {
             //Needed to permanently update the Map Center if Current Position view is selected

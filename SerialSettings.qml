@@ -70,6 +70,7 @@ TabView {
                     property alias smoothingrpm : smoothrpm.currentIndex
                     property alias smoothingspeed : smoothspeed.currentIndex
 
+
                 }
                 SoundEffect {
                     id: warnsound
@@ -152,6 +153,7 @@ TabView {
                             text: "GPS Baud: "
                             font.pixelSize: windowbackround.width / 55
                             color: "white"
+
                             //visible: { (gpsswitch.checked == true ) ? true:false; }
                         }
                         ComboBox {
@@ -860,18 +862,22 @@ TabView {
             Item {
                 id: dashSettings
                 Settings {
-
+                    property alias file1select : dash1file.currentIndex
+                    property alias file2select : dash2file.currentIndex
+                    property alias file3select : dash3file.currentIndex
                     property alias dashselect1 : dash1.currentIndex
                     property alias dashselect2 : dash2.currentIndex
                     property alias dashselect3 : dash3.currentIndex
                     property alias dashselect4 : dash4.currentIndex
 
+
                 }
 
                 Grid {
+                    id: firstgrid
                     rows: 2
                     columns: 4
-                    anchors.top: parent.top
+                    anchors.top: firstgrid.bottom
                     anchors.topMargin: dashselector.height /120
                     spacing: dashselector.width / 150
                     Text { text: "Dash1"
@@ -887,10 +893,10 @@ TabView {
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
-                        model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Dash Style 1","Dash Style 2","G-Force","Dyno","Dash Style 3","Mediaplayer"]
+                        model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer"]
                         property bool initialized: true
-                        onCurrentIndexChanged:{select1.selDash1() }
-                        Component.onCompleted: {select1.selDash1() }
+                        onCurrentIndexChanged:{Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select1.selDash1() }
+                        Component.onCompleted: {Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select1.selDash1() }
                         delegate: ItemDelegate {
                             width: dash1.width
                             text: dash1.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -907,10 +913,10 @@ TabView {
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
-                        model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Dash Style 1","Dash Style 2","G-Force","Dyno","Dash Style 3","Mediaplayer"]
+                        model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer"]
                         property bool initialized: true
-                        onCurrentIndexChanged:{select2.selDash2() }
-                        Component.onCompleted: {select2.selDash2() }
+                        onCurrentIndexChanged:{Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select2.selDash2() }
+                        Component.onCompleted: {Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select2.selDash2() }
                         delegate: ItemDelegate {
                             width: dash2.width
                             text: dash2.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -927,10 +933,10 @@ TabView {
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
-                       model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Dash Style 1","Dash Style 2","G-Force","Dyno","Dash Style 3","Mediaplayer"]
+                       model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer"]
                         property bool initialized: true
-                        onCurrentIndexChanged:{select3.selDash3() }
-                        Component.onCompleted: {select3.selDash3() }
+                        onCurrentIndexChanged:{Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select3.selDash3() }
+                        Component.onCompleted: {Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select3.selDash3() }
                         delegate: ItemDelegate {
                             width: dash3.width
                             text: dash3.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -946,10 +952,10 @@ TabView {
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
-                        model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","Dash Style 1","Dash Style 2","G-Force","Dyno","Dash Style 3","Mediaplayer"]
+                        model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer"]
                         property bool initialized: true
-                        onCurrentIndexChanged:{select4.selDash4() }
-                        Component.onCompleted: {select4.selDash4() }
+                        onCurrentIndexChanged:{Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select4.selDash4() }
+                        Component.onCompleted: {Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select4.selDash4() }
                         delegate: ItemDelegate {
                             width: dash4.width
                             text: dash4.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -960,6 +966,83 @@ TabView {
                             hoverEnabled: dash4.hoverEnabled
                         }
                     }
+                }
+                    Grid{
+                    id: dashgrid2
+                    rows: 4
+                    columns: 3
+                    anchors.top: firstgrid.bottom
+                    anchors.topMargin: dashselector.height /120
+                    spacing: dashselector.width / 150
+                    Text { text: "UserDash1 Source"
+                        font.pixelSize: dashselector.width / 55 }
+                    Text { text: "UserDash2 Source"
+                        font.pixelSize: dashselector.width / 55}
+                    Text { text: "UserDash2 Source"
+                        font.pixelSize: dashselector.width / 55}
+                    ComboBox {
+                        id: dash1file
+                        width: dashselector.width / 5
+                        height: dashselector.height /15
+                        font.pixelSize: dashselector.width / 55
+                        model: Dashboard.dashfiles
+                        property bool initialized: true
+                      //  onCurrentIndexChanged:{select4.selDash4() }
+                      //  Component.onCompleted: {select4.selDash4() }
+                        delegate: ItemDelegate {
+                            width: dash1file.width
+                            text: dash1file.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                            font.weight: dash1file.currentIndex === index ? Font.DemiBold : Font.Normal
+                            font.family: dash1file.font.family
+                            font.pixelSize: dash1file.font.pixelSize
+                            highlighted: dash1file.highlightedIndex === index
+                            hoverEnabled: dash1file.hoverEnabled
+                        }
+                        onCurrentIndexChanged: Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex))
+                    }
+                    ComboBox {
+                        id: dash2file
+                        width: dashselector.width / 5
+                        height: dashselector.height /15
+                        font.pixelSize: dashselector.width / 55
+                        model: Dashboard.dashfiles
+                        property bool initialized: true
+                      //  onCurrentIndexChanged:{select4.selDash4() }
+                      //  Component.onCompleted: {select4.selDash4() }
+                        delegate: ItemDelegate {
+                            width: dash2file.width
+                            text: dash2file.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                            font.weight: dash2file.currentIndex === index ? Font.DemiBold : Font.Normal
+                            font.family: dash2file.font.family
+                            font.pixelSize: dash2file.font.pixelSize
+                            highlighted: dash2file.highlightedIndex === index
+                            hoverEnabled: dash2file.hoverEnabled
+                        }
+                        onCurrentIndexChanged: Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex))
+                    }
+                    ComboBox {
+                        id: dash3file
+                        width: dashselector.width / 5
+                        height: dashselector.height /15
+                        font.pixelSize: dashselector.width / 55
+                        model: Dashboard.dashfiles
+                        property bool initialized: true
+                      //  onCurrentIndexChanged:{select4.selDash4() }
+                      //  Component.onCompleted: {select4.selDash4() }
+                        delegate: ItemDelegate {
+                            width: dash3file.width
+                            text: dash3file.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                            font.weight: dash3file.currentIndex === index ? Font.DemiBold : Font.Normal
+                            font.family: dash3file.font.family
+                            font.pixelSize: dash3file.font.pixelSize
+                            highlighted: dash3file.highlightedIndex === index
+                            hoverEnabled: dash3file.hoverEnabled
+                        }
+                        Component.onCompleted: Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex))
+                        onCurrentIndexChanged: Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex))
+                    }
+
+}
                     //Function to select Dash1
                     Item {
                         id: select1
@@ -970,11 +1053,11 @@ TabView {
                             if (dash1.currentIndex == "2") {firstPageLoader.source = "qrc:/Gauges/Charts.qml"};
                             if (dash1.currentIndex == "3") {firstPageLoader.source = "qrc:/GPSTracks/Laptimer.qml"};
                             if (dash1.currentIndex == "4") {firstPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
-                            if (dash1.currentIndex == "5") {firstPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
-                            if (dash1.currentIndex == "6") {firstPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
-                            if (dash1.currentIndex == "7") {firstPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
-                            if (dash1.currentIndex == "8") {firstPageLoader.source = "qrc:/Gauges/Dyno.qml"};
-                            if (dash1.currentIndex == "9") {firstPageLoader.source = "qrc:/Gauges/Fueltechdashboard.qml"};
+                            if (dash1.currentIndex == "5") {firstPageLoader.source = "qrc:/Gauges/Userdash1.qml"};
+                            if (dash1.currentIndex == "6") {firstPageLoader.source = "qrc:/Gauges/Userdash2.qml"};
+                            if (dash1.currentIndex == "7") {firstPageLoader.source = "qrc:/Gauges/Userdash3.qml"};
+                            if (dash1.currentIndex == "8") {firstPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
+                            if (dash1.currentIndex == "9") {firstPageLoader.source = "qrc:/Gauges/Dyno.qml"};
                             if (dash1.currentIndex == "10"){firstPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                             if (dash1.currentIndex == "11"){firstPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
 
@@ -992,11 +1075,11 @@ TabView {
                             if (dash2.currentIndex == "2") {secondPageLoader.source = "qrc:/Gauges/Charts.qml"};
                             if (dash2.currentIndex == "3") {secondPageLoader.source = "qrc:/GPSTracks/Laptimer.qml"};
                             if (dash2.currentIndex == "4") {secondPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
-                            if (dash2.currentIndex == "5") {secondPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
-                            if (dash2.currentIndex == "6") {secondPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
-                            if (dash2.currentIndex == "7") {secondPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
-                            if (dash2.currentIndex == "8") {secondPageLoader.source = "qrc:/Gauges/Dyno.qml"};
-                            if (dash2.currentIndex == "9") {secondPageLoader.source = "qrc:/Gauges/Fueltechdashboard.qml"};
+                            if (dash2.currentIndex == "5") {secondPageLoader.source = "qrc:/Gauges/Userdash1.qml"};
+                            if (dash2.currentIndex == "6") {secondPageLoader.source = "qrc:/Gauges/Userdash2.qml"};
+                            if (dash2.currentIndex == "7") {secondPageLoader.source = "qrc:/Gauges/Userdash3.qml"};
+                            if (dash2.currentIndex == "8") {secondPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
+                            if (dash2.currentIndex == "9") {secondPageLoader.source = "qrc:/Gauges/Dyno.qml"};
                             if (dash2.currentIndex == "10"){secondPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                             if (dash2.currentIndex == "11"){secondPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
 
@@ -1013,11 +1096,11 @@ TabView {
                             if (dash3.currentIndex == "2") {thirdPageLoader.source = "qrc:/Gauges/Charts.qml"};
                             if (dash3.currentIndex == "3") {thirdPageLoader.source = "qrc:/GPSTracks/Laptimer.qml"};
                             if (dash3.currentIndex == "4") {thirdPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
-                            if (dash3.currentIndex == "5") {thirdPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
-                            if (dash3.currentIndex == "6") {thirdPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
-                            if (dash3.currentIndex == "7") {thirdPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
-                            if (dash3.currentIndex == "8") {thirdPageLoader.source = "qrc:/Gauges/Dyno.qml"};
-                            if (dash3.currentIndex == "9") {thirdPageLoader.source = "qrc:/Gauges/Fueltechdashboard.qml"};
+                            if (dash3.currentIndex == "5") {thirdPageLoader.source = "qrc:/Gauges/Userdash1.qml"};
+                            if (dash3.currentIndex == "6") {thirdPageLoader.source = "qrc:/Gauges/Userdash2.qml"};
+                            if (dash3.currentIndex == "7") {thirdPageLoader.source = "qrc:/Gauges/Userdash3.qml"};
+                            if (dash3.currentIndex == "8") {thirdPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
+                            if (dash3.currentIndex == "9") {thirdPageLoader.source = "qrc:/Gauges/Dyno.qml"};
                             if (dash3.currentIndex == "10"){thirdPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                             if (dash3.currentIndex == "10"){thirdPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
 
@@ -1034,11 +1117,11 @@ TabView {
                             if (dash4.currentIndex == "2") {fourthPageLoader.source = "qrc:/Gauges/Charts.qml"};
                             if (dash4.currentIndex == "3") {fourthPageLoader.source = "qrc:/GPSTracks/Laptimer.qml"};
                             if (dash4.currentIndex == "4") {fourthPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
-                            if (dash4.currentIndex == "5") {fourthPageLoader.source = "qrc:/Gauges/RaceDash.qml"};
-                            if (dash4.currentIndex == "6") {fourthPageLoader.source = "qrc:/Gauges/RaceDashApexi.qml"};
-                            if (dash4.currentIndex == "7") {fourthPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
-                            if (dash4.currentIndex == "8") {fourthPageLoader.source = "qrc:/Gauges/Dyno.qml"};
-                            if (dash4.currentIndex == "9") {fourthPageLoader.source = "qrc:/Gauges/Fueltechdashboard.qml"};
+                            if (dash4.currentIndex == "5") {fourthPageLoader.source = "qrc:/Gauges/Userdash1.qml"};
+                            if (dash4.currentIndex == "6") {fourthPageLoader.source = "qrc:/Gauges/Userdash2.qml"};
+                            if (dash4.currentIndex == "7") {fourthPageLoader.source = "qrc:/Gauges/Userdash3.qml"};
+                            if (dash4.currentIndex == "8") {fourthPageLoader.source = "qrc:/Gauges/ForceMeter.qml"};
+                            if (dash4.currentIndex == "9") {fourthPageLoader.source = "qrc:/Gauges/Dyno.qml"};
                             if (dash4.currentIndex == "10") {fourthPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                             if (dash4.currentIndex == "11") {fourthPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
 
@@ -1048,7 +1131,7 @@ TabView {
                 }
             }
         }
-    }
+
     Tab {
         title: "Sensehat" // Tab index 2
         //Sensehat Sensors

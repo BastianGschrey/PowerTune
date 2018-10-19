@@ -4,10 +4,10 @@ import QtQuick.Controls 2.1
 import QtQuick.Controls.Styles 1.4
 import "../Gauges"
 import ".."
-import "qrc:/Gauges/createsquaregaugeracedasgh.js" as CreateSquareGaugeScript1
+import "qrc:/Gauges/createsquaregaugeUserDash.js" as CreateSquareGaugeScript1
 
 Item {
-    id: raceDash
+    id: userDash
     anchors.fill: parent
 
     property var val1: false

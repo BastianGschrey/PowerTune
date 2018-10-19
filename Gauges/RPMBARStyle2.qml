@@ -63,48 +63,4 @@ Rectangle {
       progress: Dashboard.rpm / Dashboard.maxRPM
     }
     }
-// remove slider
-/*
-    Slider {
-          id: slider
-          anchors.bottom: parent.bottom
-          width: parent.width-10
-          height: 100
-
-          style: SliderStyle {
-            handle:
-              Rectangle {
-                    anchors.centerIn: parent
-                    color: control.pressed ? "white" : "lightgray"
-                    border.color: "gray"
-                    implicitWidth: 10
-                    implicitHeight: 40
-                  }
-
-            groove: Rectangle {
-              width: slider.width
-              height: 10
-              color:"black"
-
-              LinearGradient {
-                anchors.verticalCenter: parent.verticalCenter
-                start: Qt.point(0, 0)
-                end: Qt.point(parent.width, 0)
-                width: styleData.handlePosition
-                height: 10
-
-                gradient: Gradient {
-                  GradientStop {position: 0.0; color: "#008BFF" }
-                  GradientStop {position: 0.5; color: "#3FFFD0" }
-                  GradientStop { position: 1.0; color: "#3FFF41" }
-                }
-              }
-            }
-
-          }
-
-          maximumValue: 8000
-
-        }*/
-//Remove till here
 }

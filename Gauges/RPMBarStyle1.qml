@@ -13,11 +13,7 @@ Rectangle {
   property  var unit : Dashboard.units;
   Component.onCompleted: {units.unitadjust()
   }
-  /*
-  Connections{
-  target: Dashboard
-  onUnitsChanged: {units.unitadjust()}
-  }*/
+
   Gauge {
       id: gauge
       height: parent.height

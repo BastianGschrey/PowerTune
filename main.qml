@@ -23,14 +23,8 @@ ApplicationWindow {
 
         currentIndex: 0
         anchors.fill: parent
-/*
-        Loader {
+        Component.onCompleted: Connect.readavailabledashfiles()
 
-            id: testing
-            source: "qrc:/Gauges/RPMbar.qml"
-
-        }
-*/
         Loader {
 
             id: firstPageLoader
