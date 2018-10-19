@@ -6,7 +6,7 @@ import QtQuick.VirtualKeyboard 2.1
 import QtSensors 5.0
 import QtQuick.Controls.Styles 1.4
 import QtMultimedia 5.8
-//
+
 TabView {
     id: tabView
     anchors.fill: parent
