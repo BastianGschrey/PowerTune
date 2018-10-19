@@ -1127,13 +1127,13 @@ TabView {
                     id: buttonsquare
                     anchors.top: userdashsettings.bottom
                     color: "grey"
-                    Button{
+                    /*Button{
                         height: 50
                         width: 100
                         text: "Apply changes"
                         anchors.centerIn: buttonsquare
                         onClicked: {select1.selDash1(),select2.selDash2(),select3.selDash3(),select4.selDash4()}
-                    }
+                    }*/
                 }
                 //Function to select Dash1
                 Item {
