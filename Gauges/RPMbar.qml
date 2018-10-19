@@ -13,7 +13,7 @@ Rectangle {
   Text {
       text:"RPM"
       font.pixelSize: 20
-      y: 150
+      y: 160
       x: 180
       font.bold: true
       font.family: "Eurostile"
@@ -23,7 +23,7 @@ Rectangle {
   Text {
       text: (Dashboard.rpm)
       font.pixelSize: 100
-      y: 120
+      y: 130
       x: 240
   font.italic: true
       font.bold: true
@@ -35,7 +35,7 @@ Rectangle {
       id :speed
       text: "km/h"
       font.pixelSize: 20
-      y: 150
+      y: 160
       x: 510
       font.bold: true
       font.family: "Eurostile"
@@ -45,7 +45,7 @@ Rectangle {
   Text {
       text: (Dashboard.speed)
       font.pixelSize: 100
-      y: 120
+      y: 130
       x: 570
   font.italic: true
       font.bold: true
