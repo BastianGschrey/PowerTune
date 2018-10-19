@@ -32,9 +32,9 @@ function finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,set
             // Error Handling
             console.log("Error creating object");
         }
+
     } else if (component.status == Component.Error) {
         // Error Handling
         console.log("Error loading component:", component.errorString());
     }
 }
-

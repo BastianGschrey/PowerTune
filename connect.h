@@ -53,8 +53,10 @@ public:
     Q_INVOKABLE void setfilenames(const QString &file1,const QString &file2,const QString &file3);
     Q_INVOKABLE void checkifraspberrypi();
     Q_INVOKABLE void readavailabledashfiles();
-    Q_INVOKABLE void readdashsetup();
-    Q_INVOKABLE void readdashsetupApexi();
+    Q_INVOKABLE void setrpm(const int &dash1,const int &dash2,const int &dash3);
+    Q_INVOKABLE void readdashsetup3();
+    Q_INVOKABLE void readdashsetup2();
+    Q_INVOKABLE void readdashsetup1();
     Q_INVOKABLE void setSreenbrightness(const int &brightness);
     Q_INVOKABLE void setUnits(const int &units);
     Q_INVOKABLE void setPressUnits(const int &units2);

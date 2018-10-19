@@ -7,7 +7,62 @@ Rectangle {
   visible: true
   color:"transparent"
   anchors.fill:parent
+  property  var unit : Dashboard.units;
+  Component.onCompleted: {units.unitadjust()}
 
+    Text {
+      text:"RPM"
+      font.pixelSize: 20
+      y: 150
+      x: 180
+      font.bold: true
+      font.family: "Eurostile"
+      color: "grey"
+
+  }
+  Text {
+      text: (Dashboard.rpm)
+      font.pixelSize: 100
+      y: 110
+      x: 220
+  font.italic: true
+      font.bold: true
+      font.family: "Eurostile"
+      color: "white"
+
+  }
+  Text {
+      id :speed
+      text: "km/h"
+      font.pixelSize: 20
+      y: 150
+      x: 510
+      font.bold: true
+      font.family: "Eurostile"
+      color: "grey"
+
+  }
+  Text {
+      text: (Dashboard.speed)
+      font.pixelSize: 100
+      y: 110
+      x: 570
+  font.italic: true
+      font.bold: true
+      font.family: "Eurostile"
+      color: "white"
+
+  }
+
+
+  Item {
+      id: units
+      function unitadjust()
+      {
+          if (unit == "imperial") {speed.text = "mph"};
+          if (unit == "metric") {speed.text = "km/h"};
+      }
+  }
 
 
     Image
@@ -63,4 +118,5 @@ Rectangle {
       progress: Dashboard.rpm / Dashboard.maxRPM
     }
     }
+            ShiftLights{}
 }

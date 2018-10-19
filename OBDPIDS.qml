@@ -1050,7 +1050,7 @@ Button {
             function supportedRegs()
             {
                 var Test = "obd"+Dashboard.supportedReg+".visible"
-                console.log(Test)
+                //console.log(Test)
                 switch (Dashboard.supportedReg) {
 
                 case 4: {

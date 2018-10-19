@@ -1553,14 +1553,21 @@ void DashBoard::setscreen(const bool &screen)
     emit screenChanged(screen);
 }
 
-void DashBoard::setdashsetup(const QStringList &dashsetup)
+void DashBoard::setdashsetup3(const QStringList &dashsetup3)
 {
-    if (m_dashsetup == dashsetup)
+    if (m_dashsetup3 == dashsetup3)
         return;
-    m_dashsetup = dashsetup;
-    emit dashsetupChanged(dashsetup);
+    m_dashsetup3 = dashsetup3;
+    emit dashsetup3Changed(dashsetup3);
 }
 
+void DashBoard::setdashsetup2(const QStringList &dashsetup2)
+{
+    if (m_dashsetup2 == dashsetup2)
+        return;
+    m_dashsetup2 = dashsetup2;
+    emit dashsetup2Changed(dashsetup2);
+}
 void DashBoard::setdashsetup1(const QStringList &dashsetup1)
 {
     if (m_dashsetup1 == dashsetup1)
@@ -2418,6 +2425,27 @@ void DashBoard::setecu(const int &ecu)
     m_ecu = ecu;
     emit ecuChanged(ecu);
 }
+void DashBoard::setrpmstyle1(const int &rpmstyle1)
+{
+    if (m_rpmstyle1 == rpmstyle1)
+        return;
+    m_rpmstyle1 = rpmstyle1;
+    emit rpmstyle1Changed(rpmstyle1);
+}
+void DashBoard::setrpmstyle2(const int &rpmstyle2)
+{
+    if (m_rpmstyle2 == rpmstyle2)
+        return;
+    m_rpmstyle2 = rpmstyle2;
+    emit rpmstyle2Changed(rpmstyle2);
+}
+void DashBoard::setrpmstyle3(const int &rpmstyle3)
+{
+    if (m_rpmstyle3 == rpmstyle3)
+        return;
+    m_rpmstyle3 = rpmstyle3;
+    emit rpmstyle3Changed(rpmstyle3);
+}
 
 void DashBoard::setError(const QString &Error)
 {
@@ -2620,7 +2648,8 @@ qreal DashBoard::Weight() const { return m_Weight; }
 bool DashBoard::screen() const { return m_screen; }
 
 //User Dashboard Stringlist
-QStringList DashBoard::dashsetup() const { return m_dashsetup; }
+QStringList DashBoard::dashsetup3() const { return m_dashsetup3; }
+QStringList DashBoard::dashsetup2() const { return m_dashsetup2; }
 QStringList DashBoard::dashsetup1() const { return m_dashsetup1; }
 
 QStringList DashBoard::dashfiles() const { return m_dashfiles; }
@@ -2732,6 +2761,10 @@ int DashBoard::gearcalc5() const {return m_gearcalc5; }
 int DashBoard::gearcalc6() const {return m_gearcalc6; }
 int DashBoard::gearcalcactivation() const {return m_gearcalcactivation; }
 int DashBoard::ecu() const { return m_ecu; }
+int DashBoard::rpmstyle1() const { return m_rpmstyle1; }
+int DashBoard::rpmstyle2() const { return m_rpmstyle2; }
+int DashBoard::rpmstyle3() const { return m_rpmstyle3; }
+
 QString DashBoard::Error() const { return m_Error; }
 
 

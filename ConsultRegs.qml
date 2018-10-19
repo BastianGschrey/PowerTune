@@ -311,7 +311,7 @@ Item {
                 id: functsupportedRegs
                 function supportedRegs()
                 {
-                    console.log("QML"+Dashboard.supportedReg)
+                    //console.log("QML"+Dashboard.supportedReg)
                     switch (Dashboard.supportedReg) {
                     case 1: {
                         consRPM.visible = true;

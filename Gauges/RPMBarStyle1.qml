@@ -11,8 +11,8 @@ Rectangle {
   color:"grey"
   anchors.fill:parent
   property  var unit : Dashboard.units;
-  Component.onCompleted: {units.unitadjust()
-  }
+  Component.onCompleted: {units.unitadjust();}
+
 
   Gauge {
       id: gauge
@@ -104,6 +104,7 @@ font.italic: true
     color: "white"
 
 }
+        ShiftLights{}
 
 Item {
     id: units

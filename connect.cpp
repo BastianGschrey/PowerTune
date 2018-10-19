@@ -120,7 +120,15 @@ void Connect::setfilenames(const QString &file1,const QString &file2,const QStri
         dashfilename1 = file1;
         dashfilename2 = file2;
         dashfilename3 = file3;
-        qDebug()<<"FILENAMES" << dashfilename1<< dashfilename2<< dashfilename3;
+        //qDebug()<<"FILENAMES" << dashfilename1<< dashfilename2<< dashfilename3;
+}
+
+void Connect::setrpm(const int &dash1,const int &dash2,const int &dash3)
+{
+         //qDebug()<<"rpm source" << dash1<< dash2<< dash3;
+        m_dashBoard->setrpmstyle1(dash1);
+        m_dashBoard->setrpmstyle2(dash2);
+        m_dashBoard->setrpmstyle3(dash3);
 }
 void Connect::checkifraspberrypi()
 {
@@ -138,17 +146,16 @@ void Connect::checkifraspberrypi()
 }
 void Connect::readavailabledashfiles()
 {
-    //QDir directory("C:/Repositories/Customer/build-PowertuneQMLGui-Desktop_Qt_5_10_0_MinGW_32bit-Release");
+   // QDir directory(""); //for Windows
     QDir directory("/home/pi/UserDashboards");
     QStringList dashfiles = directory.entryList(QStringList() << "*.txt",QDir::Files);
     m_dashBoard->setdashfiles(dashfiles);
     //qDebug() <<"files" << dashfiles ;
 }
 
-void Connect::readdashsetup()
+void Connect::readdashsetup3()
 {
-   // qDebug() <<"fueltech" << dashfilename3 ;
-   // QString path = "C:/Repositories/Customer/build-PowertuneQMLGui-Desktop_Qt_5_10_0_MinGW_32bit-Release/"+dashfilename3;
+   // QString path = dashfilename3;//for Windows
     QString path = "/home/pi/UserDashboards/"+dashfilename3;
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
@@ -158,17 +165,36 @@ void Connect::readdashsetup()
         {
             QString line = in.readLine();
             QStringList list = line.split(QRegExp("\\,"));
-            m_dashBoard->setdashsetup(list);
+            m_dashBoard->setdashsetup3(list);
         }
         inputFile.close();
     }
 
 }
-void Connect::readdashsetupApexi()
+void Connect::readdashsetup2()
 {
-   // qDebug() <<"Apexi" << dashfilename2 ;
-    //QString path = "C:/Repositories/Customer/build-PowertuneQMLGui-Desktop_Qt_5_10_0_MinGW_32bit-Release/"+dashfilename2;
+
+    //QString path = dashfilename2;//for Windows
     QString path = "/home/pi/UserDashboards/"+dashfilename2;
+    QFile inputFile(path);
+    if (inputFile.open(QIODevice::ReadOnly))
+    {
+        QTextStream in(&inputFile);
+        while (!in.atEnd())
+        {
+            QString line = in.readLine();
+            QStringList list = line.split(QRegExp("\\,"));
+            m_dashBoard->setdashsetup2(list);
+        }
+        inputFile.close();
+    }
+
+}
+void Connect::readdashsetup1()
+{
+
+    //QString path = dashfilename1;//for Windows
+    QString path = "/home/pi/UserDashboards/"+dashfilename1;
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
     {
@@ -183,7 +209,6 @@ void Connect::readdashsetupApexi()
     }
 
 }
-
 
 void Connect::setSreenbrightness(const int &brightness)
 {

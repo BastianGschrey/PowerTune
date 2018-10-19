@@ -194,7 +194,8 @@ class DashBoard : public QObject
 
     //User Dashboard Stringlist dashsetup
 
-    Q_PROPERTY(QStringList dashsetup READ dashsetup WRITE setdashsetup NOTIFY dashsetupChanged)
+    Q_PROPERTY(QStringList dashsetup3 READ dashsetup3 WRITE setdashsetup3 NOTIFY dashsetup3Changed)
+    Q_PROPERTY(QStringList dashsetup2 READ dashsetup2 WRITE setdashsetup3 NOTIFY dashsetup2Changed)
     Q_PROPERTY(QStringList dashsetup1 READ dashsetup1 WRITE setdashsetup1 NOTIFY dashsetup1Changed)
 
 
@@ -313,6 +314,11 @@ class DashBoard : public QObject
     Q_PROPERTY(int gearcalcactivation READ gearcalcactivation WRITE setgearcalcactivation NOTIFY gearcalcactivationChanged)
 
     Q_PROPERTY(int ecu READ ecu WRITE setecu NOTIFY ecuChanged)
+
+    Q_PROPERTY(int rpmstyle1 READ rpmstyle1 WRITE setrpmstyle1 NOTIFY rpmstyle1Changed)
+    Q_PROPERTY(int rpmstyle2 READ rpmstyle2 WRITE setrpmstyle2 NOTIFY rpmstyle2Changed)
+    Q_PROPERTY(int rpmstyle3 READ rpmstyle3 WRITE setrpmstyle3 NOTIFY rpmstyle3Changed)
+
     Q_PROPERTY(QString Error READ Error WRITE setError NOTIFY ErrorChanged)
 
 
@@ -516,7 +522,8 @@ public:
 
     //User Dashboard Stringlist dashsetup
 
-    void setdashsetup(const QStringList &dashsetup);
+    void setdashsetup3(const QStringList &dashsetup3);
+    void setdashsetup2(const QStringList &dashsetup2);
     void setdashsetup1(const QStringList &dashsetup1);
 
     void setdashfiles(const QStringList &dashfiles);
@@ -610,6 +617,10 @@ public:
 
     void setsupportedReg(const int &supportedReg);
     Q_INVOKABLE void setecu(const int &ecu);
+
+    void setrpmstyle1(const int &rpmstyle1);
+    void setrpmstyle2(const int &rpmstyle2);
+    void setrpmstyle3(const int &rpmstyle3);
     void setError(const QString &Error);
 
     Q_INVOKABLE void setspeedpercent(const qreal &speedpercent);
@@ -829,7 +840,8 @@ public:
 
     //User Dashboard Stringlist
 
-    QStringList dashsetup() const;
+    QStringList dashsetup3() const;
+    QStringList dashsetup2() const;
     QStringList dashsetup1() const;
 
     QStringList dashfiles() const;
@@ -944,6 +956,9 @@ public:
     int gearcalc6() const;
     int gearcalcactivation() const;
     int ecu() const;
+    int rpmstyle1() const;
+    int rpmstyle2() const;
+    int rpmstyle3() const;
     QString Error() const;
 signals:
 
@@ -1136,7 +1151,8 @@ signals:
 
     //User Dashboard Stringlist
 
-    void dashsetupChanged(QStringList dashsetup);
+    void dashsetup3Changed(QStringList dashsetup3);
+    void dashsetup2Changed(QStringList dashsetup2);
     void dashsetup1Changed(QStringList dashsetup1);
     void dashfilesChanged(QStringList dashfiles);
 
@@ -1248,6 +1264,9 @@ signals:
     void gearcalc6Changed (int gearcalc6);
     void gearcalcactivationChanged (int gearcalcactivation);
     void ecuChanged(int ecu);
+    void rpmstyle1Changed(int rpmstyle1);
+    void rpmstyle2Changed(int rpmstyle2);
+    void rpmstyle3Changed(int rpmstyle3);
     void ErrorChanged(QString Error);
 
 private:
@@ -1450,7 +1469,8 @@ private:
     bool m_screen;
     //User Dashboard Stringlist  dashsetup
 
-    QStringList m_dashsetup;
+    QStringList m_dashsetup3;
+    QStringList m_dashsetup2;
     QStringList m_dashsetup1;
 
     QStringList m_dashfiles;
@@ -1565,6 +1585,9 @@ private:
     int m_gearcalcactivation;
 
     int m_ecu;
+    int m_rpmstyle1;
+    int m_rpmstyle2;
+    int m_rpmstyle3;
     QString m_Error;
 
 };

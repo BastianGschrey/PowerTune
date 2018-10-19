@@ -20,19 +20,15 @@ Item {
             id: mapPlugin
             name: "osm"
             //Offline directory for Map Tiles
-          /*  PluginParameter {
+           PluginParameter {
                 name: 'osm.mapping.offline.directory'
                 value: ':/GPSTracks/'
-            }*/
-            //Disable to Fetch Map Data from the Server
-                     /*  PluginParameter {
-                          name: "osm.mapping.providersrepository.disabled"
-                          value: true
-                       }
+            }
+
                        PluginParameter {
                           name: "osm.mapping.providersrepository.address"
                           value: 'qrc:/GPSTracks/'
-                       }*/
+                       }
         }
 
         Map {
@@ -41,9 +37,9 @@ Item {
             width : 400
             plugin: mapPlugin
             zoomLevel: 16
-            activeMapType: map.supportedMapTypes[8]
+            activeMapType: map.supportedMapTypes[1]
             copyrightsVisible : false
-            gesture.enabled: true
+            gesture.enabled: false
             tilt: 0
             color: "black"
 
