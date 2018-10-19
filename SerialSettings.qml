@@ -877,7 +877,6 @@ TabView {
                     id: firstgrid
                     rows: 2
                     columns: 4
-                    anchors.top: firstgrid.bottom
                     anchors.topMargin: dashselector.height /120
                     spacing: dashselector.width / 150
                     Text { text: "Dash1"
