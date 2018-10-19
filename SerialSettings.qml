@@ -877,10 +877,10 @@ TabView {
 
                 }
                 Rectangle{
-                id: firstgrid
-                width: 800
-                height: 100
-                color:"grey"
+                    id: firstgrid
+                    width: 800
+                    height: 100
+                    color:"grey"
 
                 }
                 Grid {
@@ -977,7 +977,7 @@ TabView {
                 }
                 Rectangle{
                     width:800
-                    height:300
+                    height:200
                     id: userdashsettings
                     anchors.top: firstgrid.bottom
                     color: "grey"
@@ -985,7 +985,7 @@ TabView {
                     Text {
                         anchors.top : userdashsettings.top
                         anchors.horizontalCenter: userdashsettings.horizontalCenter
-                        text: "Configurable User Dashboard settings"
+                        text: "Configurable User Dashboard Settings :"
                         font.pixelSize: dashselector.width / 25 }
                     Grid{
                         id: dashgrid2
@@ -1119,6 +1119,20 @@ TabView {
                                 hoverEnabled: rpm3.hoverEnabled
                             }
                         }
+                    }
+                }
+                Rectangle{
+                    width:800
+                    height:100
+                    id: buttonsquare
+                    anchors.top: userdashsettings.bottom
+                    color: "grey"
+                    Button{
+                        height: 50
+                        width: 100
+                        text: "Apply changes"
+                        anchors.centerIn: buttonsquare
+                        onClicked: {select1.selDash1(),select2.selDash2(),select3.selDash3(),select4.selDash4()}
                     }
                 }
                 //Function to select Dash1
