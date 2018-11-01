@@ -480,8 +480,14 @@ TabView {
                             font.pixelSize: windowbackround.width / 55
                             onClicked: {Connect.shutdown()}
                         }
+                        Button {
+                            text: "Reboot"
+                            width: windowbackround.width / 5
+                            height: windowbackround.height /15
+                            font.pixelSize: windowbackround.width / 55
+                            onClicked: {Connect.shutdown()}
+                        }
 
-                        Text  { text: "V 1.42 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Text  { text: "RPM Smoothing :";color: "white";font.pixelSize: windowbackround.width / 55}
                         ComboBox {
@@ -558,6 +564,7 @@ TabView {
                             text: qsTr("GPS")
                             onCheckedChanged: {autoconnectGPS.auto()}
                         }
+                        Text  { text: "V 1.43 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness

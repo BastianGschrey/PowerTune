@@ -957,6 +957,13 @@ void Connect::shutdown()
     process->start("sudo shutdown -h now");
     process->waitForFinished(100); // 10 minutes time before timeout
 }
+void Connect::reboot()
+{
+    m_dashBoard->setSerialStat("Rebooting");
+    QProcess *process = new QProcess(this);
+    process->start("sudo reboot");
+    process->waitForFinished(100); // 10 minutes time before timeout
+}
 void Connect::candump()
 {
     QProcess *p = new QProcess( this );
