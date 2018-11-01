@@ -485,7 +485,7 @@ TabView {
                             width: windowbackround.width / 5
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
-                            onClicked: {Connect.shutdown()}
+                            onClicked: {Connect.reboot()}
                         }
 
 
