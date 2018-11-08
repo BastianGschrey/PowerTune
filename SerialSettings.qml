@@ -2463,7 +2463,7 @@ TabView {
         Rectangle{
             id: daemons
             anchors.fill: parent
-            color: "black"
+            color: "grey"
             Connections{
                 target: Dashboard
                 //onSerialStatChanged :{consoletext.append(Dashboard.SerialStat)}
@@ -2495,11 +2495,17 @@ TabView {
                 rows: 10
                 columns: 2
                 spacing: parent.width /150
+                Text { text: "Apply Settings :"
+                    font.pixelSize: daemons.width / 55 }
                 Button {
                     id: apply
+                    width: daemons.width / 5
+                    height: daemons.height /15
                     text: "apply"
                     onClicked: Connect.daemonstartup(daemonselect.currentIndex)
                 }
+                Text { text: "Start up Daemon :"
+                    font.pixelSize: daemons.width / 55 }
                 ComboBox {
                     id: daemonselect
                     width: daemons.width / 5
@@ -2516,6 +2522,8 @@ TabView {
                         hoverEnabled: daemonselect.hoverEnabled
                     }
                 }
+                Text { text: "Arduino Port"
+                    font.pixelSize: daemons.width / 55 }
                 ComboBox {
                     id: comboArduino
                     width: daemons.width / 5
@@ -2534,17 +2542,22 @@ TabView {
                         hoverEnabled: comboArduino.hoverEnabled
                     }
                 }
+                Text { text: "Connect Arduino"
+                    font.pixelSize: daemons.width / 55 }
                 Button {
                     id: arduino
-                    text: "Arduino"
-                    onClicked: Arduino.openConnection(comboArduino.currentText)
+                    width: daemons.width / 5
+                    height: daemons.height /15
+                    text: "Connect"
+                    onClicked: Arduino.openConnection(comboArduino.currentText),arduino.enabled = false;
                     }
+                Text { text: "Autoconnect"
+                    font.pixelSize: daemons.width / 55 }
                 Switch {
                     id: arduinoautoconnect
                     width: daemons.width / 5
                     height: daemons.height/15
                     font.pixelSize: daemons.width / 55
-                    text: qsTr("Autoconnect")
                     Component.onCompleted: autoconnectarduino.autoarduino()
                 }
                 Item {
