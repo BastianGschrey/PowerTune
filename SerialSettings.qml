@@ -1716,7 +1716,7 @@ TabView {
                     text:  "7500"
                     inputMethodHints: Qt.ImhDigitsOnly
                     onEditingFinished: Dashboard.setrpmStage4(stage4.text)
-                    Component.onCompleted: Dashboard.setrpmStage4(stage4.text),tabView.currentIndex = 0;
+                    Component.onCompleted: Dashboard.setrpmStage4(stage4.text),tabView.currentIndex = 8;
                 }
 
             }
@@ -2456,7 +2456,7 @@ TabView {
 
     }
     Tab {
-        title: "Startup"// Tab index 7
+        title: "Startup"// Tab index 8
 
 
 
@@ -2549,7 +2549,7 @@ TabView {
                     width: daemons.width / 5
                     height: daemons.height /15
                     text: "Connect"
-                    onClicked: Arduino.openConnection(comboArduino.currentText),arduino.enabled = false;
+                    onClicked: Arduino.openConnection(comboArduino.currentText),arduino.enabled = false,Dashboard.setExternalSpeed(1);
                     }
                 Text { text: "Autoconnect"
                     font.pixelSize: daemons.width / 55 }
@@ -2558,14 +2558,14 @@ TabView {
                     width: daemons.width / 5
                     height: daemons.height/15
                     font.pixelSize: daemons.width / 55
-                    Component.onCompleted: autoconnectarduino.autoarduino()
+                    Component.onCompleted: autoconnectarduino.autoarduino(),tabView.currentIndex = 0;
                 }
                 Item {
                     //Function to automatically connect
                     id: autoconnectarduino
                     function autoarduino()
                     {
-                        if (arduinoautoconnect.checked == true) Arduino.openConnection(comboArduino.currentText),arduino.enabled = false;
+                        if (arduinoautoconnect.checked == true) Arduino.openConnection(comboArduino.currentText),arduino.enabled = false,Dashboard.setExternalSpeed(1);
                     }
                 }
 

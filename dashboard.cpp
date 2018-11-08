@@ -293,6 +293,7 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_gearcalcactivation(0)
     ,  m_ecu(0)
     ,  m_Error("")
+    ,  m_ExternalSpeed(0)
 
 {
 }
@@ -2455,7 +2456,13 @@ void DashBoard::setError(const QString &Error)
     emit ErrorChanged(Error);
 }
 
-
+void DashBoard::setExternalSpeed(const int &ExternalSpeed)
+{
+    if (m_ExternalSpeed == ExternalSpeed)
+        return;
+    m_ExternalSpeed = ExternalSpeed;
+    emit ExternalSpeedChanged(ExternalSpeed);
+}
 
 
 
@@ -2766,7 +2773,7 @@ int DashBoard::rpmstyle2() const { return m_rpmstyle2; }
 int DashBoard::rpmstyle3() const { return m_rpmstyle3; }
 
 QString DashBoard::Error() const { return m_Error; }
-
+int DashBoard::ExternalSpeed() const {return m_ExternalSpeed; }
 
 // Sensor Strings
 

@@ -621,7 +621,12 @@ void udpreceiver::processPendingDatagrams()
             //NOS Pressure Sensor 4
             break;
         case 199:
+            if (m_dashboard->ExternalSpeed() == 0 )
+            {
             m_dashboard->setSpeed(Value);
+            }
+            else
+            {break;}
             break;
         case 200:
             m_dashboard->setSVSS(Value);

@@ -321,6 +321,8 @@ class DashBoard : public QObject
 
     Q_PROPERTY(QString Error READ Error WRITE setError NOTIFY ErrorChanged)
 
+    Q_PROPERTY(int ExternalSpeed READ ExternalSpeed WRITE setExternalSpeed NOTIFY ExternalSpeedChanged)
+
 
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
 public:
@@ -622,7 +624,7 @@ public:
     void setrpmstyle2(const int &rpmstyle2);
     void setrpmstyle3(const int &rpmstyle3);
     void setError(const QString &Error);
-
+    Q_INVOKABLE void setExternalSpeed(const int &ExternalSpeed);
     Q_INVOKABLE void setspeedpercent(const qreal &speedpercent);
 
     Q_INVOKABLE void setmaxRPM(const int &maxRPM);
@@ -645,6 +647,8 @@ public:
     Q_INVOKABLE void setgearcalc6(const int &gearcalc6);
 
    Q_INVOKABLE void setgearcalcactivation(const int &gearcalcactivation);
+
+
 
     qreal Odo() const;
 
@@ -960,6 +964,8 @@ public:
     int rpmstyle2() const;
     int rpmstyle3() const;
     QString Error() const;
+    int ExternalSpeed() const;
+
 signals:
 
     //Odometer
@@ -1268,6 +1274,8 @@ signals:
     void rpmstyle2Changed(int rpmstyle2);
     void rpmstyle3Changed(int rpmstyle3);
     void ErrorChanged(QString Error);
+    void ExternalSpeedChanged(int ExternalSpeed);
+
 
 private:
     // Odometer
@@ -1589,7 +1597,7 @@ private:
     int m_rpmstyle2;
     int m_rpmstyle3;
     QString m_Error;
-
+    int m_ExternalSpeed;
 };
 
 #endif // DASHBOARD_H
