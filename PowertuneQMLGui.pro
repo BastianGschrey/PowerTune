@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     AdaptronicSelect.cpp \
     connect.cpp \
     calculations.cpp \
-    udpreceiver.cpp
+    udpreceiver.cpp \
+    arduino.cpp
 
 
 RESOURCES += qml.qrc
@@ -45,7 +46,8 @@ HEADERS += \
     connect.h \
     calculations.h \
     udpreceiver.h \
-    Gauges/squaregaugeracedash.h
+    Gauges/squaregaugeracedash.h \
+    arduino.h
 
 
 FORMS +=

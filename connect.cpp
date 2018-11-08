@@ -28,6 +28,7 @@
 #include "gopro.h"
 #include "gps.h"
 #include "udpreceiver.h"
+#include "arduino.h"
 #include <QDebug>
 #include <QTime>
 #include <QTimer>
@@ -62,7 +63,8 @@ Connect::Connect(QObject *parent) :
     m_apexi(Q_NULLPTR),
     m_sensors(Q_NULLPTR),
     m_datalogger(Q_NULLPTR),
-    m_calculations(Q_NULLPTR)
+    m_calculations(Q_NULLPTR),
+    m_arduino(Q_NULLPTR)
 
 {
 
@@ -77,6 +79,7 @@ Connect::Connect(QObject *parent) :
     m_sensors = new Sensors(m_dashBoard, this);
     m_datalogger = new datalogger(m_dashBoard, this);
     m_calculations = new calculations(m_dashBoard, this);
+    m_arduino = new Arduino(m_dashBoard, this);
     QString mPath = "/";
     // DIRECTORIES
     dirModel = new QFileSystemModel(this);
@@ -105,6 +108,8 @@ Connect::Connect(QObject *parent) :
     engine->rootContext()->setContextProperty("Dirmodel", dirModel);
     engine->rootContext()->setContextProperty("Filemodel", fileModel);
     engine->rootContext()->setContextProperty("Apexi", m_apexi);
+    engine->rootContext()->setContextProperty("Arduino", m_arduino);
+
 }
 
 

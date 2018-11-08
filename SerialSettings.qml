@@ -2458,6 +2458,8 @@ TabView {
     Tab {
         title: "Startup"// Tab index 7
 
+
+
         Rectangle{
             id: daemons
             anchors.fill: parent
@@ -2466,6 +2468,14 @@ TabView {
                 target: Dashboard
                 //onSerialStatChanged :{consoletext.append(Dashboard.SerialStat)}
                 onSerialStatChanged :{consoletext = Dashboard.SerialStat}
+            }
+            Item {
+                id: startupsettings
+                Settings {
+                    property alias comboArduinoPort : comboArduino.currentText
+                    property alias comboArduinoindex: comboArduino.currentIndex
+                    property alias autoconnectarduinoautoconnect : arduinoautoconnect.checked
+                }
             }
             ScrollView {
                 id: scrollconsoletext
@@ -2506,16 +2516,49 @@ TabView {
                         hoverEnabled: daemonselect.hoverEnabled
                     }
                 }
-                /*
-                Button {
-                    id: update
-                    text: "Update"
-                    onClicked: Connect.update()
+                ComboBox {
+                    id: comboArduino
+                    width: daemons.width / 5
+                    height: daemons.height /15
+                    font.pixelSize: daemons.width / 55
+                    model: Connect.portsNames
+                    //visible: { (ecuSelect.currentIndex >= "5") ? false: true; }
+                    property bool initialized: false
+                    delegate: ItemDelegate {
+                        width: comboArduino.width
+                        text: comboArduino.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: comboArduino.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: comboArduino.font.family
+                        font.pixelSize: comboArduino.font.pixelSize
+                        highlighted: comboArduino.highlightedIndex === index
+                        hoverEnabled: comboArduino.hoverEnabled
                     }
-                    */
+                }
+                Button {
+                    id: arduino
+                    text: "Arduino"
+                    onClicked: Arduino.openConnection(comboArduino.currentText)
+                    }
+                Switch {
+                    id: arduinoautoconnect
+                    width: daemons.width / 5
+                    height: daemons.height/15
+                    font.pixelSize: daemons.width / 55
+                    text: qsTr("Autoconnect")
+                    Component.onCompleted: autoconnectarduino.autoarduino()
+                }
+                Item {
+                    //Function to automatically connect
+                    id: autoconnectarduino
+                    function autoarduino()
+                    {
+                        if (arduinoautoconnect.checked == true) Arduino.openConnection(comboArduino.currentText),arduino.enabled = false;
+                    }
+                }
 
             }
         }
+
     }
 }
 

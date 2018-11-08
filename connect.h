@@ -40,6 +40,7 @@ class AppSettings;
 class GoPro;
 class GPS;
 class udpreceiver;
+class Arduino;
 
 
 class Connect : public QObject
@@ -100,6 +101,7 @@ private:
     QProcess process;
     QFileSystemModel *dirModel;
     QFileSystemModel *fileModel;
+    Arduino *m_arduino;
 
 
 
