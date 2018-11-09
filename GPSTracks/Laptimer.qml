@@ -13,6 +13,14 @@ Item {
     onGpsLongitudeChanged : {pos.poschanged()}
     }
 
+       PositionSource {
+         id: gpsPos
+         updateInterval: 500
+         active: true
+         nmeaSource: "socket://localhost:2947"
+
+         onPositionChanged: {console.log(position)}
+       }
 
     Rectangle{
         anchors.fill: parent
@@ -51,6 +59,7 @@ Item {
                 anchorPoint.y: 10
                 width: 15
                 coordinate: QtPositioning.coordinate(Dashboard.gpsLatitude,Dashboard.gpsLongitude)
+                //coordinate: QtPositioning.coordinate(Dashboard.gpsLatitude,Dashboard.gpsLongitude)
                 sourceItem: Rectangle {
                     id: image
                     width:20
