@@ -43,7 +43,7 @@
 class SerialNmea : public QObject, public QGeoPositionInfoSourceFactory
 {
     Q_OBJECT
-  //  Q_PLUGIN_METADATA(IID "org.qt-project.qt.position.sourcefactory/5.0"
+    //  Q_PLUGIN_METADATA(IID "org.qt-project.qt.position.sourcefactory/5.0"
    //                   FILE "plugin.json")
     Q_INTERFACES(QGeoPositionInfoSourceFactory)
 public:

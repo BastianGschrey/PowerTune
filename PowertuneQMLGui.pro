@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     connect.cpp \
     calculations.cpp \
     udpreceiver.cpp \
-    arduino.cpp
+    arduino.cpp \
+    serialnmea.cpp
 
 
 RESOURCES += qml.qrc
@@ -47,7 +48,8 @@ HEADERS += \
     calculations.h \
     udpreceiver.h \
     Gauges/squaregaugeracedash.h \
-    arduino.h
+    arduino.h \
+    serialnmea.h
 
 
 FORMS +=

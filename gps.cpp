@@ -366,17 +366,13 @@ void GPS::startGPScom(const QString &portName,const int &baud)
     com = new QSerialPort(this);
     serialBuffer = "";
     qDebug() <<"StartGPS"<< portName << baud ;
-
-
-
-    com->setPortName(portName);
+    com->setPortName("/dev/ttyAMA0");
     com->open(QSerialPort::ReadOnly);
     com->setBaudRate(baud);
     com->setDataBits(QSerialPort::Data8);
     com->setFlowControl(QSerialPort::NoFlowControl);
     com->setParity(QSerialPort::NoParity);
     com->setStopBits(QSerialPort::OneStop);
-   // QObject::connect(com, SIGNAL(readyRead()), this, SLOT(readSerial()));
     connect(this->com,SIGNAL(readyRead()),this, SLOT(readSerial()));
 
 

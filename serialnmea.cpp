@@ -86,9 +86,10 @@ NmeaSource::NmeaSource(QObject *parent)
         }
         m_port->setPortName(portName);
     } else {
-        m_port->setPortName(QString::fromUtf8(requestedPort));
+        //m_port->setPortName(QString::fromUtf8(requestedPort));
+       m_port->setPortName("/dev/ttyAMA0");
     }
-    m_port->setBaudRate(4800);
+    m_port->setBaudRate(9600);
     qDebug() << "Opening serial port" << m_port->portName();
     if (!m_port->open(QIODevice::ReadOnly)) {
         qWarning("serialnmea: Failed to open %s", qPrintable(m_port->portName()));
@@ -96,7 +97,7 @@ NmeaSource::NmeaSource(QObject *parent)
         return;
     }
     setDevice(m_port.data());
-    qDebug() << "Opened successfully";
+    qDebug() << "Opened Port nmeasource";
 }
 QGeoPositionInfoSource *SerialNmea::positionInfoSource(QObject *parent)
 {
