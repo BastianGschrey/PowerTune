@@ -13,6 +13,11 @@ Item {
     onGpsLongitudeChanged : {pos.poschanged()}
     }
 
+    PositionSource {
+        id: serialPortGPS
+        name:"SerialPortNmea"
+        preferredPositioningMethods: PositionSource.SatellitePositioningMethods
+    }
 
 
     Rectangle{
