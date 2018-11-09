@@ -6,17 +6,18 @@ import QtQuick.Controls 2.1
 Item {
     id: mapItem
     anchors.fill: parent
-
+/*
     Connections{
     target: Dashboard
     onGpsLatitudeChanged : {pos.poschanged()}
     onGpsLongitudeChanged : {pos.poschanged()}
-    }
+    }*/
 
     PositionSource {
         id: serialPortGPS
         name:"SerialPortNmea"
         preferredPositioningMethods: PositionSource.SatellitePositioningMethods
+        onPositionChanged: console.log(position.verticalSpeed)
     }
 
 
