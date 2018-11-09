@@ -13,15 +13,7 @@ Item {
     onGpsLongitudeChanged : {pos.poschanged()}
     }
 
-       PositionSource {
-         id: gpsPos
-         updateInterval: 500
-         active: true
-         //nmeaSource: "socket://localhost:2947"
-         nmeaSource: "socket://127.0.0.1:2947"
 
-         onPositionChanged: {console.log(position)}
-       }
 
     Rectangle{
         anchors.fill: parent
