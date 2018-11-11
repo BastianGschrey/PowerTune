@@ -17,7 +17,7 @@ Item {
         id: serialPortGPS
         name:"SerialPortNmea"
         preferredPositioningMethods: PositionSource.SatellitePositioningMethods
-        onPositionChanged: console.log(position.verticalSpeed)
+        onPositionChanged: console.log(position)
     }
 
 

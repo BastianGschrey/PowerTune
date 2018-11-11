@@ -5,14 +5,14 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Extras 1.4
 
 Rectangle {
+
         id: initialID
         width: 250
         height: 200
-        color: "black"
+        //color: "black"
         border.color: "#9f9f9f"
         border.width: 2
-
-
+        Component.onCompleted: colorsettings.set()
 
         property alias title: gaugetextfield.text
         property alias mainunit: mainvalueunittextfield.text
@@ -23,6 +23,11 @@ Rectangle {
         property alias maintextvalue: mainvaluetextfield.text
         property alias mainvalue: mainvaluetextfield.text
         property alias maxvalue: vertgauge.maximumValue
+        property alias titlecolor: titlebar.color
+        property string resettitlecolor
+        property string resetbackroundcolor
+        property string framecolor
+        property string textcolor
 
         property double mainvalue
         property int maxvalue
@@ -36,7 +41,7 @@ Rectangle {
             height: 30
             anchors.top : parent.top
             anchors.left: parent.left
-            color: "#808080"
+            color: titlecolor
             clip: false
             visible: true
             anchors.topMargin: 2
@@ -89,7 +94,7 @@ Rectangle {
                 font.pixelSize: 23
                 font.bold: true
                 font.family: "Eurostile"
-                color: "white"
+                color: textcolor
 
             }
 
@@ -102,7 +107,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: 50
             font.family: "Eurostile"
-            color: "white"
+            color: textcolor
             onTextChanged: warningindication.warn()
         }
 
@@ -115,7 +120,7 @@ Rectangle {
             font.pixelSize: 28
             font.family: "Eurostile"
             font.bold: true
-            color: "white"
+            color: textcolor
         }
 
 
@@ -128,7 +133,7 @@ Rectangle {
             height: parent.height * 0.2
             font.pixelSize: 28
             font.family: "Eurostile"
-            color: "white"
+            color: textcolor
         }
 
         Gauge {
@@ -176,8 +181,17 @@ Rectangle {
             function warn()
             {
                if (mainvaluetextfield.text > warnvaluehigh || mainvaluetextfield.text < warnvaluelow )anim.running = true,anim2.running = true;
-               else anim.running = false,anim2.running = false,titlebar.color = "#808080" ,initialID.color = "black";
+               else anim.running = false,anim2.running = false,titlebar.color = resettitlecolor ,initialID.color = resetbackroundcolor;
 
+            }
+        }
+        Item {
+            //Set the colors of backround and Boarder
+            id: colorsettings
+            function set()
+            {
+            initialID.color = resetbackroundcolor;
+            initialID.border.color = framecolor;
             }
         }
         Gauge {
