@@ -27,8 +27,9 @@ Rectangle {
         property string resettitlecolor
         property string resetbackroundcolor
         property string framecolor
+        property string titletextcolor
         property string textcolor
-
+        property string barcolor
         property double mainvalue
         property int maxvalue
         property double warnvaluehigh: 20000
@@ -94,7 +95,7 @@ Rectangle {
                 font.pixelSize: 23
                 font.bold: true
                 font.family: "Eurostile"
-                color: textcolor
+                color: titletextcolor
 
             }
 
@@ -170,7 +171,7 @@ Rectangle {
                 }
                 valueBar: Rectangle {
                     implicitWidth: 25
-                    color: "#9f9f9f"
+                    color: barcolor
                 }
             }
 
@@ -230,7 +231,7 @@ Rectangle {
                 }
                 valueBar: Rectangle {
                     implicitWidth: 25
-                    color: "#9f9f9f"
+                    color: barcolor
                 }
             }
 
