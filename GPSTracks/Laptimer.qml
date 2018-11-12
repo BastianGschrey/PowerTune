@@ -16,9 +16,12 @@ Item {
     PositionSource {
         id: serialPortGPS
         name:"SerialPortNmea"
+        nmeaSource:"/dev/ttyAMA0"
         preferredPositioningMethods: PositionSource.SatellitePositioningMethods
         onPositionChanged: console.log(position)
+        Component.onCompleted: console.log("SerialNMEA")
     }
+
 
 
     Rectangle{
