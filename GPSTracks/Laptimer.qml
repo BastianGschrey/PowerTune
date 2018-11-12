@@ -15,15 +15,13 @@ Item {
 
     PositionSource {
         id: serialPortGPS
-        updateInterval: 1000
-        active: true
         name:"SerialPortNmea"
         preferredPositioningMethods: PositionSource.SatellitePositioningMethods
         onPositionChanged: {
             var coord = serialPortGPS.position.coordinate;
             console.log("Coordinate:", coord.longitude, coord.latitude);
         }
-        Component.onCompleted: console.log(serialPortGPS.sourceError )
+        Component.onCompleted: console.log("Source error code " + serialPortGPS.sourceError)
     }
 
 
