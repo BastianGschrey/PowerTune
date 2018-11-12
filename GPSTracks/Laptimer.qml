@@ -18,12 +18,12 @@ Item {
         updateInterval: 1000
         active: true
         name:"SerialPortNmea"
-        nmeaSource:"/dev/ttyAMA0"
         preferredPositioningMethods: PositionSource.SatellitePositioningMethods
         onPositionChanged: {
             var coord = serialPortGPS.position.coordinate;
             console.log("Coordinate:", coord.longitude, coord.latitude);
         }
+        Component.onCompleted: console.log(serialPortGPS.supportedPositioningMethods)
     }
 
 
