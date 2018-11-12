@@ -564,7 +564,7 @@ TabView {
                             text: qsTr("GPS")
                             onCheckedChanged: {autoconnectGPS.auto()}
                         }
-                        Text  { text: "V 1.43 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.44 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
