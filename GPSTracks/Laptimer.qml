@@ -23,7 +23,7 @@ Item {
             var coord = serialPortGPS.position.coordinate;
             console.log("Coordinate:", coord.longitude, coord.latitude);
         }
-        Component.onCompleted: console.log(serialPortGPS.supportedPositioningMethods)
+        Component.onCompleted: console.log(serialPortGPS.sourceError )
     }
 
 
