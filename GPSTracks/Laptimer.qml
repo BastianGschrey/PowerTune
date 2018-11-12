@@ -18,7 +18,7 @@ Item {
         name:"SerialPortNmea"
         nmeaSource:"/dev/ttyAMA0"
         preferredPositioningMethods: PositionSource.SatellitePositioningMethods
-        onPositionChanged: console.log(position)
+        onPositionChanged: console.log(position.speed)
         Component.onCompleted: console.log("SerialNMEA")
     }
 
