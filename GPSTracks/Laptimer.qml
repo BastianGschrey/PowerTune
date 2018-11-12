@@ -15,6 +15,8 @@ Item {
 
     PositionSource {
         id: serialPortGPS
+        updateInterval: 1000
+        active: true
         name:"SerialPortNmea"
         nmeaSource:"/dev/ttyAMA0"
         preferredPositioningMethods: PositionSource.SatellitePositioningMethods
