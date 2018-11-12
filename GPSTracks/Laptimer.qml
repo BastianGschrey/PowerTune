@@ -18,8 +18,10 @@ Item {
         name:"SerialPortNmea"
         nmeaSource:"/dev/ttyAMA0"
         preferredPositioningMethods: PositionSource.SatellitePositioningMethods
-        onPositionChanged: console.log(position.speed)
-        Component.onCompleted: console.log("SerialNMEA")
+        onPositionChanged: {
+            var coord = serialPortGPS.position.coordinate;
+            console.log("Coordinate:", coord.longitude, coord.latitude);
+        }
     }
 
 
