@@ -26,6 +26,7 @@ void GPS::readSerial()
 
     if(buffer_split.length() < 5){
         serialData = com->readAll();
+        qDebug<< serialData;
         serialBuffer = serialBuffer + QString::fromStdString(serialData.toStdString());
         serialData.clear();
     }else{
