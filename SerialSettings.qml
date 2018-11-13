@@ -2565,7 +2565,7 @@ TabView {
                     id: autoconnectarduino
                     function autoarduino()
                     {
-                        if (arduinoautoconnect.checked == true) Arduino.openConnection(comboArduino.currentText),arduino.enabled = false,Dashboard.setExternalSpeed(1);
+                        if (arduinoautoconnect.checked == true) Arduino.openConnection("/dev/ttyACM0"),arduino.enabled = false,Dashboard.setExternalSpeed(1);
                     }
                 }
 
