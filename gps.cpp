@@ -20,6 +20,7 @@ GPS::GPS(DashBoard *dashboard, QObject *parent)
 
 void GPS::readSerial()
 {
+    qDebug()<< "receiving serialData from GPS";
     QRegExp sep("(\n|\r)");
     QStringList buffer_split = serialBuffer.split(sep,QString::SkipEmptyParts); //  split the serialBuffer string, parsing with ',' as the separator
 
@@ -367,7 +368,7 @@ void GPS::startGPScom(const QString &portName,const int &baud)
     com = new QSerialPort(this);
     serialBuffer = "";
     qDebug() <<"StartGPS"<< portName << baud ;
-    com->setPortName(portName);
+    com->setPortName("/dev/ttyAMA0");
     com->open(QSerialPort::ReadOnly);
     com->setBaudRate(baud);
     com->setDataBits(QSerialPort::Data8);
