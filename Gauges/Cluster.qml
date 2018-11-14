@@ -86,7 +86,7 @@ Item {
             anchors.left: scalerect.left
             anchors.leftMargin: scalerect.width / 2.75
             anchors.bottom: scalerect.bottom
-            anchors.bottomMargin: scalerect.height / 3.2
+            anchors.bottomMargin: scalerect.height / 5
             color: "transparent"
 
 
@@ -160,12 +160,12 @@ Item {
         Rectangle {
             color: "transparent"
             id: speedo
-            height: scalerect.height /1.791
+            height: scalerect.height /1.6
             width: height
             anchors.left: scalerect.left
-            anchors.leftMargin: scalerect.width / 24.24
+            anchors.leftMargin: scalerect.width / 18.18 //44
             anchors.top: scalerect.top
-            anchors.topMargin: scalerect.height / 10.43
+            anchors.topMargin: scalerect.height / 9.23 //52
 
 
             // Paint Tickmarks and Labels on the Speedo
@@ -209,12 +209,12 @@ Item {
         Rectangle {
             color: "transparent"
             id: revcounter
-            height: scalerect.height /1.791
+            height: scalerect.height /1.6
             width: height
             anchors.top: scalerect.top
-            anchors.topMargin: scalerect.height / 10.43
+            anchors.topMargin: scalerect.height / 9.23
             anchors.right: scalerect.right
-            anchors.rightMargin: scalerect.width / 25
+            anchors.rightMargin: scalerect.height / 13 //44
 
             // Paint Tickmarks and Labels on the Rev counter
             CircularGauge {
