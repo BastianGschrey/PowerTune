@@ -29,20 +29,7 @@ Item {
         running: true
     }
 
-    OpacityAnimator {
-        target: leftgaugeticks;
-        from: 0;
-        to: 1;
-        duration: 6000
-        running: true
-    }
-    OpacityAnimator {
-        target: rightgaugeticks;
-        from: 0;
-        to: 1;
-        duration: 6000
-        running: true
-    }
+
     OpacityAnimator {
         target: speedometer;
         from: 0;
@@ -67,34 +54,7 @@ Item {
         running: true
     }
 
-    OpacityAnimator {
-        target: value1;
-        from: 0;
-        to: 1;
-        duration: 6000
-        running: true
-    }
-    OpacityAnimator {
-        target: value2;
-        from: 0;
-        to: 1;
-        duration: 6000
-        running: true
-    }
-    OpacityAnimator {
-        target: value1label;
-        from: 0;
-        to: 1;
-        duration: 6000
-        running: true
-    }
-    OpacityAnimator {
-        target: value2label;
-        from: 0;
-        to: 1;
-        duration: 6000
-        running: true
-    }
+
 
     //Backround image for the Gauges
     Image {
@@ -102,7 +62,7 @@ Item {
         width: parent.width
         height: parent.height
         fillMode: Image.PreserveAspectFit
-        source: "/graphics/MainDash.png"
+        source: "/graphics/MainDashnew.png"
 
     }
 
@@ -117,66 +77,7 @@ Item {
         color: "transparent"
 
         //Test
-        Rectangle {
-            color: "transparent"
-            id: test
-            height: scalerect.height /6
-            width: scalerect.width /4.3
-            anchors.left: scalerect.left
-            anchors.leftMargin: scalerect.width /2.6
-            anchors.bottom: scalerect.bottom
-            anchors.bottomMargin: scalerect.height / 3.5 //127
 
-            Text {
-                id: value1label
-                text:"AFR"
-                font.pixelSize: scalerect.width / 55
-                anchors.left: parent.left
-                anchors.leftMargin: scalerect.width / 26
-                anchors.bottom: parent.bottom
-                font.bold: true
-                font.family: "Eurostile"
-                color: "white"
-
-            }
-            Text {
-                id: value1
-                text: (Dashboard.auxcalc1).toFixed(1)
-                font.pixelSize: scalerect.width / 55
-                anchors.right: parent.right
-                anchors.rightMargin: scalerect.width / 26
-                anchors.bottom: parent.bottom
-                font.bold: true
-                font.family: "Eurostile"
-                color: "white"
-
-            }
-            Text {
-                id: value2label
-                text:"Boost"
-                font.pixelSize: scalerect.width / 55
-                anchors.bottom: value1label.top
-                anchors.left: parent.left
-                anchors.leftMargin: scalerect.width / 26
-                font.bold: true
-                font.family: "Eurostile"
-                color: "white"
-
-            }
-            Text {
-                id: value2
-                text:(Dashboard.BoostPres).toFixed(2)
-                font.pixelSize: scalerect.width / 55
-                anchors.right: parent.right
-                anchors.rightMargin: scalerect.width / 26
-                anchors.bottom: value1.top
-                font.bold: true
-                font.family: "Eurostile"
-                color: "white"
-
-            }
-
-        }
         Rectangle{
             id: odotrip
             //height: scalerect.height /6
@@ -185,14 +86,14 @@ Item {
             anchors.left: scalerect.left
             anchors.leftMargin: scalerect.width / 2.75
             anchors.bottom: scalerect.bottom
-            anchors.bottomMargin: scalerect.height / 5
+            anchors.bottomMargin: scalerect.height / 3.2
             color: "transparent"
 
 
             Text {
                 id: tripname
                 text:"Trip "
-                font.pixelSize: scalerect.width / 60
+                font.pixelSize: scalerect.width / 50
                 anchors.right: trip.left
                 anchors.bottom: odotrip.bottom
                 font.family: "Eurostile"
@@ -202,7 +103,7 @@ Item {
             Text {
                 id: trip
                 text:(Dashboard.Trip).toFixed(1)
-                font.pixelSize: scalerect.width / 55
+                font.pixelSize: scalerect.width / 45
                 anchors.right: tripunits.left
                 anchors.bottom: odotrip.bottom
                 font.bold: true
@@ -213,7 +114,7 @@ Item {
             Text {
                 id: tripunits
                 text:" km"
-                font.pixelSize: scalerect.width / 60
+                font.pixelSize: scalerect.width / 50
                 anchors.right: parent.right
                 anchors.bottom: odotrip.bottom
                 //font.bold: true
@@ -224,7 +125,7 @@ Item {
             Text {
                 id: odoname
                 text:"Total "
-                font.pixelSize: scalerect.width / 60
+                font.pixelSize: scalerect.width / 50
                 anchors.left: parent.left
                 anchors.bottom: odotrip.bottom
                 font.family: "Eurostile"
@@ -234,7 +135,7 @@ Item {
             Text {
                 id: odo
                 text: (Dashboard.Odo).toFixed(0)
-                font.pixelSize: scalerect.width / 55
+                font.pixelSize: scalerect.width / 45
                 anchors.left: odoname.right
                 anchors.bottom: odotrip.bottom
                 font.bold: true
@@ -253,125 +154,18 @@ Item {
 
             }
         }
-        //Small gauge on the left
-        Rectangle {
-            color: "transparent"
-            id: leftgauge
-            height: scalerect.height /5.3
-            width: height
-            anchors.left: scalerect.left
-            anchors.leftMargin: scalerect.width /26.66
-            anchors.bottom: scalerect.bottom
-            anchors.bottomMargin: scalerect.height / 3.79 //127
 
-            // Paint Tickmarks and Labels on the left gauge
-            CircularGauge {
-                id: leftgaugeticks
-                height: parent.height
-                width: height
-                value: Dashboard.Watertemp
-                anchors.verticalCenter: parent.verticalCenter
-                minimumValue: 30
-                maximumValue: 110
-                style: DashboardGaugeStyle {
-                    id: leftgaugetickstyle
-                    labelStepSize: 30
-                    tickmarkStepSize: 20
-                    labelInset: toPixels(0.21)
-                    minimumValueAngle: -160
-                    maximumValueAngle: -50
-                    needleLength: toPixels(1)
-                    needleBaseWidth: toPixels(0.1)
-                    needleTipWidth: toPixels(0.04)
-                    tickmark: Rectangle {
-                        implicitWidth: toPixels(0.03)
-                        antialiasing: true
-                        implicitHeight: toPixels(0.08)
-                        color: styleData.index === 4  ? Qt.rgba(0.5, 0, 0, 1) : "#c8c8c8"
-                    }
-                    minorTickmark: null
-                    tickmarkLabel: Text {
-                        font.pixelSize: Math.max(6, toPixels(0.18))
-                        text: styleData.value
-                        color: styleData.index === 4 ? Qt.rgba(0.5, 0, 0, 1) : "#c8c8c8"
-                        antialiasing: true
-                    }
-                }
-            }
-        }
-        // small gauge on the right
-
-        Rectangle {
-            color: "transparent"
-            id: rightgauge
-            height: scalerect.height /5.3
-            width: height
-            anchors.right: scalerect.right
-            anchors.rightMargin: scalerect.width /39
-            anchors.bottom: scalerect.bottom
-            anchors.bottomMargin: scalerect.height / 3.85
-
-            // Paint Tickmarks and Labels on the right gauge
-            CircularGauge {
-                id: rightgaugeticks
-                height: parent.height
-                width: height
-                value: Dashboard.Intaketemp
-                anchors.verticalCenter: parent.verticalCenter
-                minimumValue: 20
-                maximumValue: 80
-                //
-                style: DashboardGaugeStyle {
-                    labelStepSize: 30
-                    tickmarkStepSize: 20
-                    labelInset: toPixels(0.3)
-                    minimumValueAngle: 160
-                    maximumValueAngle: 45
-                    needleLength: toPixels(1)
-                    needleBaseWidth: toPixels(0.1)
-                    needleTipWidth: toPixels(0.04)
-                    tickmark: Rectangle {
-                        implicitWidth: toPixels(0.03)
-                        antialiasing: true
-                        implicitHeight: toPixels(0.08)
-                        color: styleData.index === 2 || styleData.index === 3 ? Qt.rgba(0.5, 0, 0, 1) : "#c8c8c8"
-                    }
-                    minorTickmark: null
-                    tickmarkLabel: Text {
-                        font.pixelSize: Math.max(6, toPixels(0.18))
-                        text: styleData.value
-                        color: styleData.index === 2 ||styleData.index === 3  ? Qt.rgba(0.5, 0, 0, 1) : "#c8c8c8"
-                        antialiasing: true
-                    }
-
-
-
-                }
-            }
-
-            //test
-
-        }
-
-        Rectangle {
-            width: parent.width /6
-            height: parent.height /2
-            color: "transparent"
-            anchors.horizontalCenter: parent.horizontalCenter
-            y :parent.height /4
-
-        }
 
         //Rectangle in which the Speedometer Resides
         Rectangle {
             color: "transparent"
             id: speedo
-            height: scalerect.height /2.08
+            height: scalerect.height /1.791
             width: height
             anchors.left: scalerect.left
-            anchors.leftMargin:  scalerect.width / 7.47
+            anchors.leftMargin: scalerect.width / 24.24
             anchors.top: scalerect.top
-            anchors.topMargin: scalerect.height / 3.69
+            anchors.topMargin: scalerect.height / 10.43
 
 
             // Paint Tickmarks and Labels on the Speedo
@@ -415,12 +209,12 @@ Item {
         Rectangle {
             color: "transparent"
             id: revcounter
-            height: scalerect.height /2.08 //230
+            height: scalerect.height /1.791
             width: height
             anchors.top: scalerect.top
-            anchors.topMargin: scalerect.height / 3.69
+            anchors.topMargin: scalerect.height / 10.43
             anchors.right: scalerect.right
-            anchors.rightMargin:  scalerect.width / 8.1
+            anchors.rightMargin: scalerect.width / 25
 
             // Paint Tickmarks and Labels on the Rev counter
             CircularGauge {
@@ -576,10 +370,8 @@ Item {
                     ListElement {text:"MAF Activity" }
                     ListElement {text:"O2 Volt2" }
                 }
-
             }
         }
-    }
     //Setting the scale of the speedo and temp gauges according to metric or imperial
     Item {
         id: units
@@ -609,5 +401,6 @@ Rectangle{
 anchors.fill: parent
 color: "transparent"
 WarningLoader{}
+}
 }
 }
