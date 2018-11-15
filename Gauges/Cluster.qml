@@ -86,7 +86,7 @@ Item {
             anchors.left: scalerect.left
             anchors.leftMargin: scalerect.width / 2.75
             anchors.bottom: scalerect.bottom
-            anchors.bottomMargin: scalerect.height / 5
+            anchors.bottomMargin: scalerect.height / 3.6
             color: "transparent"
 
 
@@ -179,7 +179,7 @@ Item {
                 maximumValue: 320
 
                 style: DashboardGaugeStyle {
-                    labelStepSize: 20
+                    labelStepSize: 30
                     labelInset: toPixels(0.21)
                     needleLength: 0
                     needleTipWidth: 0
@@ -202,6 +202,24 @@ Item {
                 anchors.centerIn: parent
                 value: Dashboard.speed / 2.597402597402597
 
+
+            }
+            Image {
+                id: speedoinner
+                width: parent.width /1.70
+                height: width
+                fillMode: Image.PreserveAspectFit
+                anchors.centerIn: parent
+                source: "qrc:/graphics/Tacho_Mitte.png"
+
+            }
+            Text {
+                id: speedinnertext
+                text: Dashboard.speed
+                font.pixelSize: scalerect.width / 20
+                anchors.centerIn: parent
+                font.family: "Eurostile"
+                color: "white"
 
             }
         }
@@ -234,6 +252,7 @@ Item {
                     needleTipWidth: 0
                     needleBaseWidth: 0
                 }
+
             }
 
 
@@ -245,7 +264,26 @@ Item {
                 value: Dashboard.rpm *0.0077
 
             }
+            Image {
+                id: revinner
+                width: parent.width /1.70
+                height: width
+                fillMode: Image.PreserveAspectFit
+                anchors.centerIn: parent
+                source: "qrc:/graphics/Tacho_Mitte.png"
+
+            }
+            Text {
+                id: revinnertesxt
+                text: Dashboard.rpm
+                font.pixelSize: scalerect.width / 20
+                anchors.centerIn: parent
+                font.family: "Eurostile"
+                color: "white"
+
+            }
         }
+
     }
 
 
@@ -377,8 +415,9 @@ Item {
         id: units
         function unitadjust()
         {
-            if (unit == "imperial") {speedoopacity.target = speedoNeedlemph,speedometer.maximumValue = 200,speedoNeedlemph.visible = true, speedoNeedlekph.visible = false,revneedele.visible = true; leftgaugeticks.minimumValue =40,leftgaugeticks.maximumValue =220, rightgaugeticks.minimumValue = 40,rightgaugeticks.maximumValue = 190,tripunits.text = " mi",odounit.text = " mi" };
-            if (unit == "metric") {speedoopacity.target = speedoNeedlekph,speedometer.maximumValue = 320,speedoNeedlemph.visible = false, speedoNeedlekph.visible = true,leftgaugeticks.minimumValue =30,leftgaugeticks.maximumValue =110, rightgaugeticks.minimumValue =20,rightgaugeticks.maximumValue = 80,tripunits.text = " km" ,odounit.text = " km"};
+            if (unit == "imperial") {speedoopacity.target = speedoNeedlemph,speedometer.maximumValue = 200,speedoNeedlemph.visible = true, speedoNeedlekph.visible = false,revneedele.visible = true;tripunits.text = " mi",odounit.text = " mi" };
+            if (unit == "metric") {speedoopacity.target = speedoNeedlekph,speedometer.maximumValue = 320,speedoNeedlemph.visible = false, speedoNeedlekph.visible = true,tripunits.text = " km" ,odounit.text = " km"};
+
         }
 
 
@@ -391,12 +430,7 @@ Item {
         }
 
     }
-Rectangle
-{
-    id: intro
-    anchors.fill: view
-    color: "black"
-}
+
 Rectangle{
 anchors.fill: parent
 color: "transparent"
