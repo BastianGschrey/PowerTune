@@ -125,5 +125,7 @@
         <file>Gauges/createsquaregaugeUserDash.js</file>
         <file>Gauges/RPMbarStyle3.qml</file>
         <file>graphics/MainDashnew.png</file>
+        <file>Gauges/createMaindash.js</file>
+        <file>Gauges/SquareGaugeMain.qml</file>
     </qresource>
 </RCC>

@@ -159,6 +159,24 @@ void Connect::readavailabledashfiles()
     //qDebug() <<"files" << dashfiles ;
 }
 
+void Connect::readMaindashsetup()
+{
+    //QString path = "MainDash.txt";//for Windows
+    QString path = "/home/pi/UserDashboards/MainDash.txt";
+    QFile inputFile(path);
+    if (inputFile.open(QIODevice::ReadOnly))
+    {
+        QTextStream in(&inputFile);
+        while (!in.atEnd())
+        {
+            QString line = in.readLine();
+            QStringList list = line.split(QRegExp("\\,"));
+            m_dashBoard->setmaindashsetup(list);
+        }
+        inputFile.close();
+    }
+
+}
 void Connect::readdashsetup3()
 {
     //QString path = dashfilename3;//for Windows
@@ -199,8 +217,8 @@ void Connect::readdashsetup2()
 void Connect::readdashsetup1()
 {
 
-    QString path = dashfilename1;//for Windows
-    //QString path = "/home/pi/UserDashboards/"+dashfilename1;
+    //QString path = dashfilename1;//for Windows
+    QString path = "/home/pi/UserDashboards/"+dashfilename1;
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
     {

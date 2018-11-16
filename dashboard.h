@@ -194,6 +194,7 @@ class DashBoard : public QObject
 
     //User Dashboard Stringlist dashsetup
 
+    Q_PROPERTY(QStringList maindashsetup READ maindashsetup WRITE setmaindashsetup NOTIFY maindashsetupChanged)
     Q_PROPERTY(QStringList dashsetup3 READ dashsetup3 WRITE setdashsetup3 NOTIFY dashsetup3Changed)
     Q_PROPERTY(QStringList dashsetup2 READ dashsetup2 WRITE setdashsetup3 NOTIFY dashsetup2Changed)
     Q_PROPERTY(QStringList dashsetup1 READ dashsetup1 WRITE setdashsetup1 NOTIFY dashsetup1Changed)
@@ -524,6 +525,7 @@ public:
 
     //User Dashboard Stringlist dashsetup
 
+    void setmaindashsetup(const QStringList &maindashsetup);
     void setdashsetup3(const QStringList &dashsetup3);
     void setdashsetup2(const QStringList &dashsetup2);
     void setdashsetup1(const QStringList &dashsetup1);
@@ -843,7 +845,7 @@ public:
     bool screen() const;
 
     //User Dashboard Stringlist
-
+    QStringList maindashsetup() const;
     QStringList dashsetup3() const;
     QStringList dashsetup2() const;
     QStringList dashsetup1() const;
@@ -1157,6 +1159,7 @@ signals:
 
     //User Dashboard Stringlist
 
+    void maindashsetupChanged(QStringList maindashsetup);
     void dashsetup3Changed(QStringList dashsetup3);
     void dashsetup2Changed(QStringList dashsetup2);
     void dashsetup1Changed(QStringList dashsetup1);
@@ -1476,7 +1479,7 @@ private:
     //Official Pi screen present screen
     bool m_screen;
     //User Dashboard Stringlist  dashsetup
-
+    QStringList m_maindashsetup;
     QStringList m_dashsetup3;
     QStringList m_dashsetup2;
     QStringList m_dashsetup1;

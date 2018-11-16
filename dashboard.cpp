@@ -1554,6 +1554,14 @@ void DashBoard::setscreen(const bool &screen)
     emit screenChanged(screen);
 }
 
+void DashBoard::setmaindashsetup(const QStringList &maindashsetup)
+{
+    if (m_maindashsetup == maindashsetup)
+        return;
+    m_maindashsetup = maindashsetup;
+    emit maindashsetupChanged(maindashsetup);
+}
+
 void DashBoard::setdashsetup3(const QStringList &dashsetup3)
 {
     if (m_dashsetup3 == dashsetup3)
@@ -2655,6 +2663,7 @@ qreal DashBoard::Weight() const { return m_Weight; }
 bool DashBoard::screen() const { return m_screen; }
 
 //User Dashboard Stringlist
+QStringList DashBoard::maindashsetup() const { return m_maindashsetup; }
 QStringList DashBoard::dashsetup3() const { return m_dashsetup3; }
 QStringList DashBoard::dashsetup2() const { return m_dashsetup2; }
 QStringList DashBoard::dashsetup1() const { return m_dashsetup1; }

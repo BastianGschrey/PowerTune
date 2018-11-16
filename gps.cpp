@@ -368,9 +368,9 @@ void GPS::startGPScom(const QString &portName,const int &baud)
     com = new QSerialPort(this);
     serialBuffer = "";
    // qDebug() <<"StartGPS"<< portName << baud ;
-    com->setPortName("ttyAMA0");
+    com->setPortName(portName);
     com->open(QSerialPort::ReadOnly);
-    com->setBaudRate(9600);
+    com->setBaudRate(baud);
     com->setDataBits(QSerialPort::Data8);
     com->setFlowControl(QSerialPort::NoFlowControl);
     com->setParity(QSerialPort::NoParity);
@@ -403,12 +403,11 @@ void GPS::startGPScom(const QString &portName,const int &baud)
 
 void GPS::stopGPScom()
 {
-    /*
+
     if (connected == 1)
     {
      connected =0;
      com->close();
     }
-    */
 }
 
