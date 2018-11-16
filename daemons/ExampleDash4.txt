@@ -1,0 +1,5 @@
+﻿166,150,300,180,300,0,kg/cm²,Boost,true,false,false,Dashboard,pim,pim
+166,150,500,180,300,0,kg/cm²,Boost,true,false,false,Dashboard,pim,pim
+166,150,300,340,150,0,°C,MAT,false,true,false,Dashboard,Intaketemp,Intaketemp
+166,150,500,340,300,0,°C,ECT,false,true,false,Dashboard,Watertemp,Watertemp
+
