@@ -1,6 +1,0 @@
-﻿266,120,0,240,120,0,°,ECT.,false,true,false,Dashboard,Watertemp,Watertemp,20000,-2000
-266,120,267,240,120,0,°,IAT,false,true,false,Dashboard,Intaketemp,Intaketemp,20000,-2000
-266,120,534,240,160,0,°,AMBIT,false,true,false,Dashboard,ambitemp,ambitemp,20000,-2000
-266,120,0,360,100,0,%,Throttle,false,true,false,Dashboard,TPS,TPS,20000,-2000
-266,120,267,360,5,0,,Boost,false,false,false,Dashboard,BoostPres,BoostPres,20000,-2000
-266,120,534,360,5,0,,Fuel Pressure,false,true,false,Dashboard,FuelPress,FuelPress,20000,-2000

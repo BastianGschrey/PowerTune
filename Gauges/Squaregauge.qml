@@ -24,6 +24,8 @@ Rectangle {
         property alias mainvalue: mainvaluetextfield.text
         property alias maxvalue: vertgauge.maximumValue
         property alias titlecolor: titlebar.color
+        property alias titlefontsize :gaugetextfield.font.pixelSize
+        property alias mainfontsize :mainvaluetextfield.font.pixelSize
         property string resettitlecolor
         property string resetbackroundcolor
         property string framecolor

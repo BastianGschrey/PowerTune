@@ -211,11 +211,19 @@ Item {
                 maximumValue: 320
 
                 style: DashboardGaugeStyle {
-                    labelStepSize: 30
-                    labelInset: toPixels(0.21)
+                    labelStepSize: 20
+                    labelInset: toPixels(0.25)
                     needleLength: 0
                     needleTipWidth: 0
                     needleBaseWidth: 0
+                    tickmarkLabel:  Text {
+                        font.pixelSize: styleData.value >= speedometer.value+15 || styleData.value <= speedometer.value-15  ? speedo.height /22 : (speedometer.value-styleData.value)+speedo.height /11
+
+                        text: styleData.value
+                        font.bold : styleData.value >= speedometer.value+10 || styleData.value <= speedometer.value-10  ? false : true
+                        color: styleData.value >= speedometer.value+10 || styleData.value <= speedometer.value-10  ? "grey" : "white"
+                        antialiasing: true
+                    }
                 }
             }
             // Speedo Needle animation
@@ -283,6 +291,13 @@ Item {
                     needleLength: 0
                     needleTipWidth: 0
                     needleBaseWidth: 0
+                    tickmarkLabel:  Text {
+                        font.pixelSize: styleData.value >= Dashboard.rpm/1000+0.5 || styleData.value <= Dashboard.rpm/1000-0.5  ? revcounterticks.height /22 : (revcounterticks.value-Dashboard.rpm/1000)+speedo.height /11
+                        text: styleData.value
+                        font.bold : styleData.value >= Dashboard.rpm/1000+0.5 || styleData.value <= Dashboard.rpm/1000-0.5  ? false : true
+                        color: styleData.value <= Dashboard.rpm/1000 ? "white" : "grey"
+                        antialiasing: true
+                    }
                 }
 
             }
