@@ -60,7 +60,6 @@ void GPS::openConnection(const QString &portName,const QString &Baud)
         break;
     case 9600:
         m_serialport->setBaudRate(QSerialPort::Baud9600);
-        qDebug()<<"Baudrate 9600 SET ";
         break;
     case 19200:
         m_serialport->setBaudRate(QSerialPort::Baud19200);
@@ -149,9 +148,9 @@ void GPS::processLine(const QString & line){
     QString decLon = convertToDecimal(longitude, lonDirection);
     QString formatted = time + ',' + decLat + ',' + decLon;
 
-    m_dashboard->setgpsLatitude(decLat);
-    m_dashboard->setgpsLongitude(decLon);
-    m_dashboard->setgpsSpeed(speedkmh);
+    m_dashboard->setgpsLatitude(decLat.toDouble());
+    m_dashboard->setgpsLongitude(decLon.toDouble());
+    m_dashboard->setgpsSpeed(speedkmh.toDouble());
     m_dashboard->setgpsTime(time);
 
 }
@@ -176,8 +175,8 @@ void GPS::processGPGGA(const QString & line){
     }
     QString satelitesinview = fields[7];
     QString altitude = fields[9];
-    m_dashboard->setgpsVisibleSatelites(satelitesinview);
-    m_dashboard->setgpsAltitude(altitude + "M");
+    m_dashboard->setgpsVisibleSatelites(satelitesinview.toInt());
+    m_dashboard->setgpsAltitude(altitude.toDouble());
 
 
 }

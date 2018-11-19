@@ -63,7 +63,6 @@ Item {
                 anchorPoint.y: 10
                 width: 15
                 coordinate: QtPositioning.coordinate(Dashboard.gpsLatitude,Dashboard.gpsLongitude)
-                //coordinate: QtPositioning.coordinate(Dashboard.gpsLatitude,Dashboard.gpsLongitude)
                 sourceItem: Rectangle {
                     id: image
                     width:20
