@@ -112,7 +112,7 @@ Item {
 
         }
         Grid {
-                    rows: 6
+                    rows: 7
                     columns: 2
                     spacing: 5
                     anchors.left: map.right
@@ -168,6 +168,15 @@ Item {
                         font.pixelSize: 20
                         font.bold: true
                         font.family: "Eurostile"}
+                    Text { text: "GPS FIX type: "
+                        font.pixelSize: 20
+                        font.bold: true
+                        font.family: "Eurostile"}
+                    Text { text: Dashboard.gpsFIXtype
+                        font.pixelSize: 20
+                        font.bold: true
+                        font.family: "Eurostile"}
+
 
                 }
 

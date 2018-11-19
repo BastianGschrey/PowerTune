@@ -160,6 +160,8 @@ DashBoard::DashBoard(QObject *parent)
     , m_gpsLongitude ("0")
     , m_gpsSpeed ("0")
     , m_gpsVisibleSatelites ("0")
+    , m_gpsFIXtype ("No FIX")
+
 
     //units
     , m_units("unit")
@@ -1248,6 +1250,14 @@ void DashBoard::setgpsVisibleSatelites(const QString &gpsVisibleSatelites)
         return;
     m_gpsVisibleSatelites = gpsVisibleSatelites;
     emit gpsVisibleSatelitesChanged(gpsVisibleSatelites);
+}
+
+void DashBoard::setgpsFIXtype(const QString &gpsFIXtype)
+{
+    if (m_gpsFIXtype == gpsFIXtype)
+        return;
+    m_gpsFIXtype = gpsFIXtype;
+    emit gpsFIXtypeChanged(gpsFIXtype);
 }
 
 // Units
@@ -2611,6 +2621,8 @@ QString DashBoard::gpsLatitude() const { return m_gpsLatitude; }
 QString DashBoard::gpsLongitude () const { return m_gpsLongitude; }
 QString DashBoard::gpsSpeed() const { return m_gpsSpeed; }
 QString DashBoard::gpsVisibleSatelites () const { return m_gpsVisibleSatelites; }
+QString DashBoard::gpsFIXtype () const { return m_gpsFIXtype; }
+
 
 //units
 QString DashBoard::units() const { return m_units; }

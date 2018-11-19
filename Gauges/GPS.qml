@@ -24,7 +24,7 @@ Rectangle {
         }
 }
         Grid {
-            rows: 6
+            rows: 8
             columns: 2
             spacing: 5
             anchors.left: mapwindow.right
@@ -76,6 +76,14 @@ Rectangle {
                 font.bold: true
                 font.family: "Eurostile"}
             Text { text: Dashboard.gpsVisibleSatelites
+                font.pixelSize: gpswindow.width /20
+                font.bold: true
+                font.family: "Eurostile"}
+            Text { text: "GPS FIX: "
+                font.pixelSize: gpswindow.width /20
+                font.bold: true
+                font.family: "Eurostile"}
+            Text { text: Dashboard.gpsFIXtype
                 font.pixelSize: gpswindow.width /20
                 font.bold: true
                 font.family: "Eurostile"}

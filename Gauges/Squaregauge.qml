@@ -110,7 +110,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: 50
             font.family: "Eurostile"
-            color: textcolor
+            color: "white"
             onTextChanged: warningindication.warn()
         }
 

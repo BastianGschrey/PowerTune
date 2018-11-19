@@ -167,6 +167,7 @@ class DashBoard : public QObject
     Q_PROPERTY(QString gpsLongitude READ gpsLongitude WRITE setgpsLongitude NOTIFY gpsLongitudeChanged)
     Q_PROPERTY(QString gpsSpeed READ gpsSpeed WRITE setgpsSpeed NOTIFY gpsSpeedChanged)
     Q_PROPERTY(QString gpsVisibleSatelites READ gpsVisibleSatelites WRITE setgpsVisibleSatelites NOTIFY gpsVisibleSatelitesChanged)
+    Q_PROPERTY(QString gpsFIXtype READ gpsFIXtype  WRITE setgpsFIXtype  NOTIFY gpsFIXtypeChanged)
 
     //Units ( metric /imperial select
     Q_PROPERTY(QString units READ units WRITE setunits NOTIFY unitsChanged)
@@ -470,6 +471,8 @@ public:
     void setgpsLongitude(const QString &gpsLongitude);
     void setgpsSpeed(const QString &gpsSpeed);
     void setgpsVisibleSatelites(const QString &gpsVisibleSatelites);
+    void setgpsFIXtype(const QString &gpsFIXtype);
+
     // Units
     void setunits(const QString &units);
     void setpressureunits(const QString &pressureunits);
@@ -793,6 +796,9 @@ public:
     QString gpsLongitude() const;
     QString gpsSpeed() const;
     QString gpsVisibleSatelites() const;
+    QString gpsFIXtype() const;
+
+
     //units
     QString units() const;
     QString pressureunits() const;
@@ -1108,6 +1114,8 @@ signals:
     void gpsLongitudeChanged(QString gpsLongitude);
     void gpsSpeedChanged(QString gpsSpeed);
     void gpsVisibleSatelitesChanged(QString gpsVisibleSatelites);
+    void gpsFIXtypeChanged(QString gpsFIXtype);
+
 
     // units
 
@@ -1450,6 +1458,8 @@ private:
     QString m_gpsLongitude;
     QString m_gpsSpeed;
     QString m_gpsVisibleSatelites;
+    QString m_gpsFIXtype;
+
 
     //Units
 

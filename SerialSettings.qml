@@ -163,7 +163,7 @@ TabView {
                             font.pixelSize: windowbackround.width / 55
                             model: [ "2400", "4800", "9600", "14400", "19200", "38400", "57600", "115200"]
                             //visible: { (gpsswitch.checked == true ) ? true:false; }
-                            Component.onCompleted: {autoconnectGPS.auto()}
+                           // Component.onCompleted: {autoconnectGPS.auto()}
                             delegate: ItemDelegate {
                                 width: serialGPSBaud.width
                                 text: serialGPSBaud.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -729,8 +729,9 @@ TabView {
                 function auto()
                 {
 
-                    if (gpsswitch.checked == true)GPS.startGPScom(serialNameGPS.currentText,serialGPSBaud.currentText);
-                    if (gpsswitch.checked == false)GPS.stopGPScom();
+                   // if (gpsswitch.checked == true)GPS.startGPScom(serialNameGPS.currentText,serialGPSBaud.currentText);
+                    if (gpsswitch.checked === true)GPS.openConnection(serialNameGPS.currentText,serialGPSBaud.currentText);
+                    //if (gpsswitch.checked === false)GPS.closeConnection(),console.log("GPS CLOSED BY QML");
                 }
             }
             Item {

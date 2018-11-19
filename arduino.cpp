@@ -35,6 +35,7 @@ void Arduino::clear()
 //function to open serial port
 void Arduino::openConnection(const QString &portName)
 {
+    qDebug()<<"open Arduino  "+portName;
 
     initSerialPort();
     m_serialport->setPortName(portName);
@@ -80,6 +81,7 @@ void Arduino::handleError(QSerialPort::SerialPortError serialPortError)
 void Arduino::readyToRead()
 {
     m_readData = m_serialport->readLine();
+    qDebug()<< "Arduino"+m_readData;
     Arduino::assemblemessage(m_readData);
 }
 
