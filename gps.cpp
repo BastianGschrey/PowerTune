@@ -76,7 +76,6 @@ void GPS::openConnection(const QString &portName,const QString &Baud)
     default:
         m_serialport->setBaudRate(QSerialPort::Baud9600);
         break;
-        break;
     }
 
     m_serialport->setParity(QSerialPort::NoParity);
@@ -85,25 +84,15 @@ void GPS::openConnection(const QString &portName,const QString &Baud)
     m_serialport->setFlowControl(QSerialPort::NoFlowControl);;
 
 
-    if(m_serialport->open(QIODevice::ReadWrite) == false)
-    {
-        qDebug()<<"serial closed straight after opening ";
-        GPS::closeConnection();
-    }
-
 }
 void GPS::closeConnection()
 {
     qDebug()<<"close connection GPS";
-    /*if(m_serialport->open(QIODevice::ReadWrite) == true){
-    qDebug()<<"serialport was open";
     disconnect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
     disconnect(m_serialport, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
                this, &GPS::handleError);
-        m_serialport->close();}
-    else{
-    qDebug()<<"serialport was closed";
-    }*/
+        m_serialport->close();
+
 }
 
 
