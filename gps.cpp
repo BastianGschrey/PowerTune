@@ -137,20 +137,17 @@ void GPS::processLine(const QString & line){
     time.insert(5,":");
     QString latitude = fields[3];
     QString latDirection = fields[4];
-
     QString longitude = fields[5];
     QString lonDirection = fields[6];
     QString groundspeedknots = fields[7];
     double speed = groundspeedknots.toDouble() * 1.852;
-    QString speedkmh = QString::number(speed);
-
     QString decLat = convertToDecimal(latitude, latDirection);
     QString decLon = convertToDecimal(longitude, lonDirection);
-    QString formatted = time + ',' + decLat + ',' + decLon;
+
 
     m_dashboard->setgpsLatitude(decLat.toDouble());
     m_dashboard->setgpsLongitude(decLon.toDouble());
-    m_dashboard->setgpsSpeed(speedkmh.toDouble());
+    m_dashboard->setgpsSpeed(speed);
     m_dashboard->setgpsTime(time);
 
 }

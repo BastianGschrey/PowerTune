@@ -1,0 +1,7 @@
+266,120,0,240,120,0,deg,Water Temp,false,true,false,Dashboard,Watertemp,Watertemp,108,40,lightsteelblue,black,lightsteelblue,white,white,blue,25,40
+266,120,267,240,120,0,deg,Oil Temp,false,true,false,Dashboard,oiltemp,oiltemp,115,60,lightsteelblue,black,lightsteelblue,white,white,blue,25,40
+266,120,534,240,700,0,kpa,Oil Pressure,false,false,false,Dashboard,oilpres,oilpres,700,80,lightsteelblue,black,lightsteelblue,white,white,blue,25,40
+199,120,0,360,70,0,deg,Intake Temp,false,false,false,Dashboard,Intaketemp,Intaketemp,50,0,lightsteelblue,black,lightsteelblue,white,white,blue,25,40
+199,120,200,360,0,2,V,Battery Volts,false,false,false,Dashboard,BatteryV,BatteryV,14.88,12.50,lightsteelblue,black,lightsteelblue,white,white,blue,25,40
+219,120,400,360,0,0,kpa,Fuel Pressure,false,false,false,Dashboard,FuelPress,FuelPress,600,250,lightsteelblue,black,lightsteelblue,white,white,blue,25,40
+179,120,620,360,0,0,%,Injector Duty,false,true,false,Dashboard,InjDuty,InjDuty,85,-1,lightsteelblue,black,lightsteelblue,white,white,blue,25,40

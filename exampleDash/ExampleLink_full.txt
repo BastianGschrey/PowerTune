@@ -1,0 +1,14 @@
+266,120,0,0,8500,0,rpm,MAP,false,true,false,Dashboard,rpm,rpm,8600,-1,blue,black,blue,white,white,blue,25,40
+266,120,267,0,1.3,2,?,Lambda,false,true,false,Dashboard,LAMBDA,LAMBDA,2,0.6,blue,black,blue,white,white,blue,25,40
+266,120,534,0,300,2,kpa,MAP,false,true,false,Dashboard,MAP,MAP,320,1,blue,black,blue,white,white,blue,25,40
+266,120,0,120,120,0,deg,Water Temp,false,true,false,Dashboard,Watertemp,Watertemp,108,40,blue,black,blue,white,white,blue,25,40
+266,120,267,120,120,0,deg,Oil Temp,false,true,false,Dashboard,oiltemp,oiltemp,115,60,blue,black,blue,white,white,blue,25,40
+266,120,534,120,700,0,kpa,Oil Pressure,false,true,false,Dashboard,oilpres,oilpres,700,80,blue,black,blue,white,white,blue,25,40
+199,120,0,240,70,0,deg,Intake Temp,false,true,false,Dashboard,Intaketemp,Intaketemp,50,0,blue,black,blue,white,white,blue,25,40
+199,120,200,240,15,2,V,Battery Volts,false,true,false,Dashboard,BatteryV,BatteryV,14.88,11.80,blue,black,blue,white,white,blue,25,40
+219,120,400,240,700,0,kpa,Fuel Pressure,false,true,false,Dashboard,FuelPress,FuelPress,600,240,blue,black,blue,white,white,blue,25,40
+179,120,620,240,100,0,%,Injector Duty,false,true,false,Dashboard,InjDuty,InjDuty,85,-1,blue,black,blue,white,white,blue,25,40
+219,120,0,360,0,0,kpa,Barometric,false,false,false,Dashboard,ambipress,ambipress,150,0,blue,black,blue,white,white,blue,25,40
+199,120,220,360,0,0,deg,Ignition Angle,false,false,false,Dashboard,Ign,Ign,-30,50,blue,black,blue,white,white,blue,25,40
+199,120,420,360,0,0,ms,Injector MS,false,false,false,Dashboard,injms,injms,250,-1,blue,black,blue,white,white,blue,25,40
+179,120,620,360,100,0,%,TPS,false,true,false,Dashboard,TPS,TPS,101,-1,blue,black,blue,white,white,blue,25,40

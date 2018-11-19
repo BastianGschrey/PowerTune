@@ -1,0 +1,14 @@
+266,120,0,0,8500,0,rpm,MAP,false,true,false,Dashboard,rpm,rpm,8600,-1,yellow,black,yellow,black,white,gold,25,35
+266,120,267,0,22,2,A/F,AFR,false,true,false,Dashboard,AFR,AFR,0,15,yellow,black,yellow,black,white,gold,25,35
+266,120,534,0,11000,0,kg/m²,MAP,false,true,false,Dashboard,Intakepress,Intakepress,320,1,yellow,black,yellow,black,white,gold,25,35
+266,120,0,120,120,0,deg,Water Temp,false,true,false,Dashboard,Watertemp,Watertemp,108,40,yellow,black,yellow,black,white,gold,25,35
+266,120,267,120,120,0,,Knock,false,true,false,Dashboard,Knock,Knock,0,60,yellow,black,yellow,black,white,gold,25,35
+266,120,534,120,5,2,V,O2 Voltage,false,true,false,Dashboard,O2volt,O2volt,700,80,yellow,black,yellow,black,white,gold,25,35
+199,120,0,240,70,0,deg,Intake Temp,false,true,false,Dashboard,Intaketemp,Intaketemp,50,0,yellow,black,yellow,black,white,gold,25,35
+199,120,200,240,15,2,V,Battery Volts,false,true,false,Dashboard,BatteryV,BatteryV,14.88,11.80,yellow,black,yellow,black,white,gold,25,35
+219,120,400,240,20,0,,Boost,false,true,false,Dashboard,BoostPres,BoostPres,-1000,1,yellow,black,yellow,black,white,gold,25,35
+179,120,620,240,100,0,%,Injector Duty,false,true,false,Dashboard,InjDuty,InjDuty,0,90,yellow,black,yellow,black,white,gold,25,35
+219,120,0,360,100,0,%,BoostDuty,false,true,false,Dashboard,BoostDuty,BoostDuty,0,120,yellow,black,yellow,black,white,gold,25,35
+199,120,220,360,0,0,deg,Ignition Angle,false,false,false,Dashboard,Ign,Ign,-30,50,yellow,black,yellow,black,white,gold,25,35
+199,120,420,360,0,0,ms,Injector MS,false,false,false,Dashboard,injms,injms,250,-1,yellow,black,yellow,black,white,gold,25,35
+179,120,620,360,5,2,V,TPS,false,true,false,Dashboard,ThrottleV,ThrottleV,101,-1,yellow,black,yellow,black,white,gold,25,35
