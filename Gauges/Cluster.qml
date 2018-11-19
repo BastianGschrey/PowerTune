@@ -74,7 +74,7 @@ Item {
         running: true
     }
     OpacityAnimator {
-        target: revcounter;
+        target: revcounterticks;
         from: 0;
         to: 1;
         duration: 6000
@@ -116,13 +116,12 @@ Item {
 
         Rectangle{
             id: odotrip
-            //height: scalerect.height /6
             height: scalerect.height /15
-            width: scalerect.width /3.5
+            width: scalerect.width /2.33
             anchors.left: scalerect.left
-            anchors.leftMargin: scalerect.width / 2.75
+            anchors.leftMargin: scalerect.width / 3.5
             anchors.bottom: scalerect.bottom
-            anchors.bottomMargin: scalerect.height / 3.6
+            anchors.bottomMargin: scalerect.height / 4
             color: "transparent"
 
 
@@ -250,7 +249,7 @@ Item {
             }
             Image {
                 id: speedoinner
-                width: parent.width /1.70
+                width: parent.width /1.68
                 height: width
                 fillMode: Image.PreserveAspectFit
                 anchors.centerIn: parent
@@ -317,12 +316,11 @@ Item {
             }
             Image {
                 id: revinner
-                width: parent.width /1.70
+                width: parent.width /1.68
                 height: width
                 fillMode: Image.PreserveAspectFit
                 anchors.centerIn: parent
                 source: "qrc:/graphics/Tacho_Mitte.png"
-
             }
             Text {
                 id: revinnertesxt
