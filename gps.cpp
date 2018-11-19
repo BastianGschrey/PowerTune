@@ -46,11 +46,39 @@ void GPS::clear()
 //function to open serial port
 void GPS::openConnection(const QString &portName,const QString &Baud)
 {
+    int baudrate = Baud.toInt();
     m_timer.stop();
     qDebug()<<"open GPS Port: "+portName+"  Baud: "+Baud;
     initSerialPort();
     m_serialport->setPortName(portName);
-    m_serialport->setBaudRate(QSerialPort::Baud9600);
+    switch (baudrate) {
+    case 2400:
+        m_serialport->setBaudRate(QSerialPort::Baud2400);
+        break;
+    case 4800:
+        m_serialport->setBaudRate(QSerialPort::Baud4800);
+        break;
+    case 9600:
+        m_serialport->setBaudRate(QSerialPort::Baud9600);
+        break;
+    case 19200:
+        m_serialport->setBaudRate(QSerialPort::Baud19200);
+        break;
+    case 38400:
+        m_serialport->setBaudRate(QSerialPort::Baud38400);
+        break;
+    case 57600:
+        m_serialport->setBaudRate(QSerialPort::Baud57600);
+        break;
+    case 115200:
+        m_serialport->setBaudRate(QSerialPort::Baud115200);
+        break;
+    default:
+        m_serialport->setBaudRate(QSerialPort::Baud9600);
+        break;
+        break;
+    }
+
     m_serialport->setParity(QSerialPort::NoParity);
     m_serialport->setDataBits(QSerialPort::Data8);
     m_serialport->setStopBits(QSerialPort::OneStop);
@@ -60,8 +88,7 @@ void GPS::openConnection(const QString &portName,const QString &Baud)
     if(m_serialport->open(QIODevice::ReadWrite) == false)
     {
         qDebug()<<"serial closed straight after opening ";
-      //  GPS::closeConnection();
-      // openConnection(portName,Baud);
+        GPS::closeConnection();
     }
 
 }

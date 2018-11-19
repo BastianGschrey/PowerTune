@@ -163,7 +163,7 @@ TabView {
                             font.pixelSize: windowbackround.width / 55
                             model: [ "2400", "4800", "9600", "14400", "19200", "38400", "57600", "115200"]
                             //visible: { (gpsswitch.checked == true ) ? true:false; }
-                           // Component.onCompleted: {autoconnectGPS.auto()}
+                            Component.onCompleted: {autoconnectGPS.auto()}
                             delegate: ItemDelegate {
                                 width: serialGPSBaud.width
                                 text: serialGPSBaud.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -445,7 +445,31 @@ TabView {
                                 functdisconnect.disconnectfunc();
                             }
                         }
-
+                        Button {
+                            id: connectButtonGPS
+                            text: "GPS Connect"
+                            width: windowbackround.width / 5
+                            height: windowbackround.height /15
+                            font.pixelSize: windowbackround.width / 55
+                            onClicked: {
+                                GPS.openConnection(serialNameGPS.currentText,serialGPSBaud.currentText)
+                                connectButtonGPS.enabled=false
+                                disconnectButtonGPS.enabled=true
+                            }
+                        }
+                        Button {
+                            id: disconnectButtonGPS
+                            text: "GPS Disconnect"
+                            width: windowbackround.width / 5
+                            height: windowbackround.height /15
+                            font.pixelSize: windowbackround.width / 55
+                            enabled: false
+                            onClicked: {
+                                GPS.closeConnection()
+                                connectButtonGPS.enabled = true;
+                                disconnectButtonGPS.enabled = false;
+                            }
+                        }
 
                         Button {
                             id: resettrip
@@ -561,10 +585,10 @@ TabView {
                             width: windowbackround.width / 5
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
-                            text: qsTr("GPS")
-                            onCheckedChanged: {autoconnectGPS.auto()}
+                            text: qsTr("Autoconnect GPS")
+                            //onCheckedChanged: {autoconnectGPS.auto()}
                         }
-                        Text  { text: "V 1.44 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.45 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -730,7 +754,7 @@ TabView {
                 {
 
                    // if (gpsswitch.checked == true)GPS.startGPScom(serialNameGPS.currentText,serialGPSBaud.currentText);
-                    if (gpsswitch.checked === true)GPS.openConnection(serialNameGPS.currentText,serialGPSBaud.currentText);
+                    if (gpsswitch.checked === true)GPS.openConnection(serialNameGPS.currentText,serialGPSBaud.currentText),connectButtonGPS.enabled=false,disconnectButtonGPS.enabled=true;
                     //if (gpsswitch.checked === false)GPS.closeConnection(),console.log("GPS CLOSED BY QML");
                 }
             }
@@ -807,7 +831,7 @@ TabView {
                 id: functdisconnect
                 function disconnectfunc()
                 {
-                    Connect.closeConnection(),GPS.stopGPScom();
+                    Connect.closeConnection()
                     connected = 0;
                 }
             }

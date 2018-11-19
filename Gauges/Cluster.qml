@@ -26,7 +26,11 @@ Item {
     property string val11 : "transparent"
     property int val12
     property int val13
-
+    Rectangle{
+    anchors.fill: view
+    color: "transparent"
+    WarningLoader{}
+    }
     Connections{
         target: Dashboard
         onMaindashsetupChanged: {
@@ -494,10 +498,6 @@ Item {
 
 
     }
-Rectangle{
-anchors.fill: view
-color: "transparent"
-WarningLoader{}
-}
+
 }
 }
