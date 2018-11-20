@@ -588,6 +588,7 @@ TabView {
                             text: qsTr("Autoconnect GPS")
                             //onCheckedChanged: {autoconnectGPS.auto()}
                         }
+
                         Text  { text: "V 1.45 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
@@ -2584,6 +2585,15 @@ TabView {
                     height: daemons.height/15
                     font.pixelSize: daemons.width / 55
                     Component.onCompleted: autoconnectarduino.autoarduino(),tabView.currentIndex = 0;
+                }
+                Text { text: "GPS as Mainspeedsource"
+                    font.pixelSize: daemons.width / 55 }
+                Switch {
+                    id: speedsourcegps
+                    width: daemons.width / 5
+                    height: daemons.height/15
+                    font.pixelSize: daemons.width / 55
+                    onCheckedChanged: {Dashboard.setExternalSpeed(2)}
                 }
                 Item {
                     //Function to automatically connect

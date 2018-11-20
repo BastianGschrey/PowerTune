@@ -480,8 +480,6 @@ void DashBoard::setSpeed(const qreal &speed)
     {m_speed = qRound(speed * m_speedpercent);}
     if (m_units == "imperial")
     {m_speed = qRound((speed * 0.621371) * m_speedpercent);}
-    //qDebug() << "smooth " << m_smoothspeed;
-    //Attempt to do a moving average (smoothing)
     if (m_smoothspeed != 0)
     {
         averageSpeed.removeFirst();
@@ -492,8 +490,9 @@ void DashBoard::setSpeed(const qreal &speed)
         m_speed = avgspeed/m_smoothspeed;
         // qDebug() << "Average Speed " << m_speed;
     }
-
+if (m_ExternalSpeed == 0){
     emit speedChanged(speed);
+}
 }
 
 void DashBoard::setIscvduty(const qreal &Iscvduty)
@@ -1241,7 +1240,16 @@ void DashBoard::setgpsSpeed(const double &gpsSpeed)
     if (m_gpsSpeed == gpsSpeed)
         return;
     m_gpsSpeed = gpsSpeed;
+
+    if (m_units == "metric")
+    {m_speed = qRound(gpsSpeed * m_speedpercent);}
+    if (m_units == "imperial")
+    {m_speed = qRound((gpsSpeed * 0.621371) * m_speedpercent);}
+
     emit gpsSpeedChanged(gpsSpeed);
+    if (m_ExternalSpeed == 2){
+    emit speedChanged(gpsSpeed);
+    }
 }
 
 void DashBoard::setgpsVisibleSatelites(const int &gpsVisibleSatelites)
