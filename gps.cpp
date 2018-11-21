@@ -190,9 +190,10 @@ QString GPS::convertToDecimal(const QString & coord, const QString & dir){
     double dec = minutes.toDouble() * 60 / 3600;
     double degrees = coord.mid(0, decIndex -2).toDouble();
     double decCoord = dec + degrees;
+    double decCoord = degrees + dec;
     if(dir == "W" || dir == "S")
         decCoord *= -1.0;
-    return QString::number(decCoord);
+    return QString::number(decCoord,'f',6);
 }
 
 
