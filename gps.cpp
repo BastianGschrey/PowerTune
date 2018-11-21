@@ -141,7 +141,7 @@ void GPS::processLine(const QString & line){
     QString lonDirection = fields[6];
     QString groundspeedknots = fields[7];
     double speed = groundspeedknots.toDouble() * 1.852;
-    if (speed < 2)
+    if (speed < 5)
     {
         speed = 0; // this is to ensure we show 0 if we standing as GPS sometimes sends a value greater 0 when standing still
     }

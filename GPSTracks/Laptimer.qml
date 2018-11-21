@@ -12,19 +12,6 @@ Item {
     onGpsLatitudeChanged : {pos.poschanged()}
     onGpsLongitudeChanged : {pos.poschanged()}
     }
-/*
-    PositionSource {
-        id: serialPortGPS
-        name:"SerialPortNmea"
-        preferredPositioningMethods: PositionSource.SatellitePositioningMethods
-        onPositionChanged: {
-            var coord = serialPortGPS.position.coordinate;
-            console.log("Coordinate:", coord.longitude, coord.latitude);
-        }
-        Component.onCompleted: console.log("Source error code " + serialPortGPS.sourceError)
-    }
-
-*/
 
     Rectangle{
         anchors.fill: parent
@@ -41,6 +28,7 @@ Item {
                           name: "osm.mapping.providersrepository.address"
                           value: 'qrc:/GPSTracks/'
                        }
+
         }
 
         Map {
