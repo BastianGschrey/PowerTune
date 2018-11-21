@@ -21,7 +21,7 @@ Item {
             //Offline directory for Map Tiles
            PluginParameter {
                 name: 'osm.mapping.offline.directory'
-                value: ':/GPSTracks/
+                value: ':/GPSTracks/'
                 //value:'/home/pi/maptiles/'
             }
 
