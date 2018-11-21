@@ -21,13 +21,14 @@ Item {
             //Offline directory for Map Tiles
            PluginParameter {
                 name: 'osm.mapping.offline.directory'
-                value: ':/GPSTracks/'
+                value: ':/GPSTracks/
+                //value:'/home/pi/maptiles/'
             }
 
                        PluginParameter {
                           name: "osm.mapping.providersrepository.address"
                           value: 'qrc:/GPSTracks/'
-                          //value: '/home/pi/maptiles'
+                         // value: '/home/pi/maptiles/'
                        }
 
         }
