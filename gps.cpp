@@ -141,13 +141,17 @@ void GPS::processLine(const QString & line){
     QString lonDirection = fields[6];
     QString groundspeedknots = fields[7];
     double speed = groundspeedknots.toDouble() * 1.852;
+    if (speed < 2)
+    {
+        speed = 0; // this is to ensure we show 0 if we standing as GPS sometimes sends a value greater 0 when standing still
+    }
     QString decLat = convertToDecimal(latitude, latDirection);
     QString decLon = convertToDecimal(longitude, lonDirection);
 
 
     m_dashboard->setgpsLatitude(decLat.toDouble());
     m_dashboard->setgpsLongitude(decLon.toDouble());
-    m_dashboard->setgpsSpeed(speed);
+    m_dashboard->setgpsSpeed(qRound(speed));// round speed to the nearest integer
     m_dashboard->setgpsTime(time);
 
 }
