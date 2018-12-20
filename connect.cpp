@@ -776,7 +776,7 @@ void Connect::LiveReqMsg(const int &val1, const int &val2, const int &val3, cons
     //qDebug()<< "write" <<Message;
 
 
-    QString fileName = "/home/pi/Consult/Consult.cfg";//This will be the correct path on pi
+    QString fileName = "/home/pi/daemons/Consult.cfg";//This will be the correct path on pi
     //QString fileName = "Consult.cfg";//for testing on windows
     QFile mFile(fileName);
     mFile.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text);
