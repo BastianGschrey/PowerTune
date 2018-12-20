@@ -160,7 +160,8 @@ DashBoard::DashBoard(QObject *parent)
     , m_gpsLongitude (0)
     , m_gpsSpeed (0)
     , m_gpsVisibleSatelites (0)
-    , m_gpsFIXtype ("No FIX")
+    , m_gpsFIXtype ("no connection")
+    , m_gpsbaering (0)
 
 
     //units
@@ -1247,7 +1248,7 @@ void DashBoard::setgpsSpeed(const double &gpsSpeed)
     {m_speed = qRound((gpsSpeed * 0.621371) * m_speedpercent);}
 
     emit gpsSpeedChanged(gpsSpeed);
-    if (m_ExternalSpeed == 2){
+    if (m_ExternalSpeed == 5){
     emit speedChanged(gpsSpeed);
     }
 }
@@ -1267,6 +1268,14 @@ void DashBoard::setgpsFIXtype(const QString &gpsFIXtype)
     m_gpsFIXtype = gpsFIXtype;
     emit gpsFIXtypeChanged(gpsFIXtype);
 }
+void DashBoard::setgpsbaering(const qreal &gpsbaering)
+{
+    if (m_gpsbaering == gpsbaering)
+        return;
+    m_gpsbaering = gpsbaering;
+    emit gpsbaeringChanged(gpsbaering);
+}
+
 
 // Units
 void DashBoard::setunits (const QString &units)
@@ -2250,6 +2259,9 @@ void DashBoard::setwheelspdftleft(const qreal &wheelspdftleft)
     if (m_units == "imperial")
     {m_wheelspdftleft = qRound(wheelspdftleft * 1.8 + 32);}
     emit wheelspdftleftChanged(wheelspdftleft);
+    if (m_ExternalSpeed == 1){
+        emit speedChanged(wheelspdftleft);
+    }
 }
 void DashBoard::setwheelspdftright(const qreal &wheelspdftright)
 {
@@ -2260,6 +2272,9 @@ void DashBoard::setwheelspdftright(const qreal &wheelspdftright)
     if (m_units == "imperial")
     {m_wheelspdftright = qRound(wheelspdftright * 1.8 + 32);}
     emit wheelspdftrightChanged(wheelspdftright);
+    if (m_ExternalSpeed == 2){
+        emit speedChanged(wheelspdftright);
+    }
 }
 
 void DashBoard::setwheelspdrearleft(const qreal &wheelspdrearleft)
@@ -2271,6 +2286,9 @@ void DashBoard::setwheelspdrearleft(const qreal &wheelspdrearleft)
     if (m_units == "imperial")
     {m_wheelspdrearleft = qRound(wheelspdrearleft * 1.8 + 32);}
     emit wheelspdrearleftChanged(wheelspdrearleft);
+    if (m_ExternalSpeed == 3){
+        emit speedChanged(wheelspdrearleft);
+    }
 }
 void DashBoard::setwheelspdrearright(const qreal &wheelspdrearright)
 {
@@ -2281,6 +2299,9 @@ void DashBoard::setwheelspdrearright(const qreal &wheelspdrearright)
     if (m_units == "imperial")
     {m_wheelspdrearright = qRound(wheelspdrearright * 1.8 + 32);}
     emit wheelspdrearrightChanged(wheelspdrearright);
+    if (m_ExternalSpeed == 4){
+        emit speedChanged(wheelspdrearright);
+    }
 }
 void DashBoard::setmusicpath(const QString &musicpath)
 {
@@ -2630,6 +2651,8 @@ double DashBoard::gpsLongitude () const { return m_gpsLongitude; }
 double DashBoard::gpsSpeed() const { return m_gpsSpeed; }
 int DashBoard::gpsVisibleSatelites () const { return m_gpsVisibleSatelites; }
 QString DashBoard::gpsFIXtype () const { return m_gpsFIXtype; }
+qreal DashBoard::gpsbaering() const { return m_gpsbaering; }
+
 
 
 //units

@@ -168,6 +168,7 @@ class DashBoard : public QObject
     Q_PROPERTY(double gpsSpeed READ gpsSpeed WRITE setgpsSpeed NOTIFY gpsSpeedChanged)
     Q_PROPERTY(int gpsVisibleSatelites READ gpsVisibleSatelites WRITE setgpsVisibleSatelites NOTIFY gpsVisibleSatelitesChanged)
     Q_PROPERTY(QString gpsFIXtype READ gpsFIXtype  WRITE setgpsFIXtype  NOTIFY gpsFIXtypeChanged)
+    Q_PROPERTY(qreal gpsbaering READ gpsbaering WRITE setgpsbaering NOTIFY gpsbaeringChanged)
 
     //Units ( metric /imperial select
     Q_PROPERTY(QString units READ units WRITE setunits NOTIFY unitsChanged)
@@ -472,6 +473,7 @@ public:
     void setgpsSpeed(const double &gpsSpeed);
     void setgpsVisibleSatelites(const int &gpsVisibleSatelites);
     void setgpsFIXtype(const QString &gpsFIXtype);
+    void setgpsbaering(const qreal &gpsbaering);
 
     // Units
     void setunits(const QString &units);
@@ -797,7 +799,7 @@ public:
     double gpsSpeed() const;
     int gpsVisibleSatelites() const;
     QString gpsFIXtype() const;
-
+    qreal gpsbaering() const;
 
     //units
     QString units() const;
@@ -1115,7 +1117,7 @@ signals:
     void gpsSpeedChanged(double gpsSpeed);
     void gpsVisibleSatelitesChanged(int gpsVisibleSatelites);
     void gpsFIXtypeChanged(QString gpsFIXtype);
-
+    void gpsbaeringChanged(qreal gpsbaering);
 
     // units
 
@@ -1459,7 +1461,7 @@ private:
     double m_gpsSpeed;
     int m_gpsVisibleSatelites;
     QString m_gpsFIXtype;
-
+    qreal m_gpsbaering;
 
     //Units
 
