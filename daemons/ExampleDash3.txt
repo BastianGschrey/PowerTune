@@ -1,7 +1,0 @@
-﻿200,150,10,180,120,0,°C,ECT,false,true,false,Dashboard,Watertemp,Watertemp,107,0
-165,150,220,180,120,0,°C,MAT,false,true,false,Dashboard,Intaketemp,Intaketemp,60,0
-200,120,10,340,200,0,kPa,MAP,false,true,false,Dashboard,MAP,MAP,200,0
-340,120,220,340,2,0,,Boost mmhg / kg/cm²,false,true,false,Dashboard,BoostPres,BoostPres,2,-900
-165,150,395,180,5,0,,Gear,false,false,false,Dashboard,Gear,Gear
-215,150,570,180,5,0,kPa,FuelP,false,true,false,Dashboard,FuelPress,FuelPress,200,-200
-215,120,570,340,5,0,kPa,OilP,false,true,false,Dashboard,oilpres,oilpres,200,-200

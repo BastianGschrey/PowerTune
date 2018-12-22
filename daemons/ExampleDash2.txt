@@ -1,9 +1,0 @@
-﻿160,120,0,240,110,0,°C,Coolant T.,false,true,false,Dashboard,Watertemp,Watertemp
-160,120,160,240,80,0,°C,Air Temp,false,true,false,Dashboard,Intaketemp,Intaketemp
-160,120,320,240,40,0,°,Ign. Adv.,false,true,false,Dashboard,Ign,Ign
-160,120,480,240,100,0,%,Throttle,false,true,false,Dashboard,TPS,TPS
-160,120,640,240,5,0,,Gear,false,true,false,Dashboard,Gear,Gear
-200,120,0,360,5,1,Bar,Oil Pressure,false,true,false,Dashboard,oilpres,oilpres
-200,120,200,360,5,1,Bar,Fuel Pressure,false,true,false,Dashboard,FuelPress,FuelPress
-200,120,400,360,2,1,,Boost,false,false,false,Dashboard,BoostPres,BoostPres
-200,120,600,360,16,1,V,Battery,false,true,false,Dashboard,BatteryV,BatteryV
