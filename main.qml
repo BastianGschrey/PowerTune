@@ -28,7 +28,7 @@ ApplicationWindow {
         Loader {
 
             id: firstPageLoader
-            source: ""
+            source: "qrc:/Intro.qml"
 
         }
 

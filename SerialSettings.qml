@@ -2498,11 +2498,13 @@ TabView {
             Item {
                 id: startupsettings
                 Settings {
-                    property alias comboArduinoPort : comboArduino.currentText
-                    property alias comboArduinoindex: comboArduino.currentIndex
-                    property alias autoconnectarduinoautoconnect : arduinoautoconnect.checked
+                    //property alias comboArduinoPort : comboArduino.currentText
+                    //property alias comboArduinoindex: comboArduino.currentIndex
+                    //property alias autoconnectarduinoautoconnect : arduinoautoconnect.checked
+                    property alias mainspeedsource : mainspeedsource.currentIndex
+
                 }
-            }
+            }/*
             ScrollView {
                 id: scrollconsoletext
                 width: 400
@@ -2513,7 +2515,7 @@ TabView {
                     wrapMode: TextArea.Wrap
                     color: "white"
                 }
-            }
+            }*/
             Grid {
                 anchors.top :parent.top
                 anchors.topMargin: parent.height / 20
@@ -2548,6 +2550,7 @@ TabView {
                         hoverEnabled: daemonselect.hoverEnabled
                     }
                 }
+                /*
                 Text { text: "Arduino Port"
                     font.pixelSize: daemons.width / 55 }
                 ComboBox {
@@ -2602,11 +2605,33 @@ TabView {
                     {
                         if (arduinoautoconnect.checked == true) Arduino.openConnection("/dev/ttyACM0"),arduino.enabled = false,Dashboard.setExternalSpeed(1);
                     }
+}
+*/
+
+                Text { text: "Main Speed Source"
+                    font.pixelSize: daemons.width / 55 }
+                ComboBox {
+                    id: mainspeedsource
+                    width: daemons.width / 5
+                    height: daemons.height /15
+                    font.pixelSize: daemons.width / 55
+                    model: ["ECU Speed","LF Wheelspeed","RF Wheelspeed","LR Wheelspeed","RR Wheelspeed","GPS"]
+                    onCurrentIndexChanged: Dashboard.setExternalSpeed(mainspeedsource.currentIndex)//,console.log(mainspeedsource.currentIndex)
+                    property bool initialized: false
+                    delegate: ItemDelegate {
+                        width: mainspeedsource.width
+                        text: mainspeedsource.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: mainspeedsource.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: mainspeedsource.font.family
+                        font.pixelSize: mainspeedsource.font.pixelSize
+                        highlighted: mainspeedsource.highlightedIndex === index
+                        hoverEnabled: mainspeedsource.hoverEnabled
+                    }
+                }
                 }
 
             }
         }
 
     }
-}
 
