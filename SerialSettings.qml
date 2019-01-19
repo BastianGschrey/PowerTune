@@ -2493,7 +2493,7 @@ TabView {
             Connections{
                 target: Dashboard
                 //onSerialStatChanged :{consoletext.append(Dashboard.SerialStat)}
-                onSerialStatChanged :{consoletext = Dashboard.SerialStat}
+                //onSerialStatChanged :{consoletext = Dashboard.SerialStat}
             }
             Item {
                 id: startupsettings
