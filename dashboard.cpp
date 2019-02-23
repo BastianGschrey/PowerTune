@@ -166,6 +166,7 @@ DashBoard::DashBoard(QObject *parent)
 
     //units
     , m_units("unit")
+    , m_speedunits("unit")
     , m_pressureunits("unit")
 
     //Sensors
@@ -477,9 +478,9 @@ void DashBoard::setSpeed(const qreal &speed)
 {
     if (m_speed == speed)
         return;
-    if (m_units == "metric")
+    if (m_speedunits == "metric")
     {m_speed = qRound(speed * m_speedpercent);}
-    if (m_units == "imperial")
+    if (m_speedunits == "imperial")
     {m_speed = qRound((speed * 0.621371) * m_speedpercent);}
     if (m_smoothspeed != 0)
     {
@@ -1242,9 +1243,9 @@ void DashBoard::setgpsSpeed(const double &gpsSpeed)
         return;
     m_gpsSpeed = gpsSpeed;
 
-    if (m_units == "metric")
+    if (m_speedunits == "metric")
     {m_speed = qRound(gpsSpeed * m_speedpercent);}
-    if (m_units == "imperial")
+    if (m_speedunits == "imperial")
     {m_speed = qRound((gpsSpeed * 0.621371) * m_speedpercent);}
 
     emit gpsSpeedChanged(gpsSpeed);
@@ -1284,6 +1285,13 @@ void DashBoard::setunits (const QString &units)
         return;
     m_units = units;
     emit unitsChanged(units);
+}
+void DashBoard::setspeedunits (const QString &speedunits)
+{
+    if (m_speedunits == speedunits)
+        return;
+    m_speedunits = speedunits;
+    emit speedunitsChanged(speedunits);
 }
 
 void DashBoard::setpressureunits (const QString &pressureunits)
@@ -1341,9 +1349,9 @@ void DashBoard::setMVSS(const qreal &MVSS)
 {
     if (m_MVSS == MVSS)
         return;
-    if (m_units == "metric")
+    if (m_speedunits == "metric")
     { m_MVSS= MVSS;}
-    if (m_units == "imperial")
+    if (m_speedunits == "imperial")
     {m_MVSS = qRound(MVSS * 0.621371);}
 
     emit mVSSChanged(MVSS);
@@ -1353,9 +1361,9 @@ void DashBoard::setSVSS(const qreal &SVSS)
 {
     if (m_SVSS == SVSS)
         return;
-    if (m_units == "metric")
+    if (m_speedunits == "metric")
     { m_SVSS= SVSS;}
-    if (m_units == "imperial")
+    if (m_speedunits == "imperial")
     {m_SVSS = qRound(SVSS * 0.621371);}
     emit sVSSChanged(SVSS);
 }
@@ -2234,9 +2242,9 @@ void DashBoard::setwheeldiff(const qreal &wheeldiff)
 {
     if (m_wheeldiff == wheeldiff)
         return;
-    if (m_units == "metric")
+    if (m_speedunits == "metric")
     {m_wheeldiff = wheeldiff;}
-    if (m_units == "imperial")
+    if (m_speedunits == "imperial")
     {m_wheeldiff = qRound(wheeldiff * 1.8 + 32);}
     emit wheeldiffChanged(wheeldiff);
 }
@@ -2244,9 +2252,9 @@ void DashBoard::setwheelslip(const qreal &wheelslip)
 {
     if (m_wheelslip == wheelslip)
         return;
-    if (m_units == "metric")
+    if (m_speedunits == "metric")
     {m_wheelslip = wheelslip;}
-    if (m_units == "imperial")
+    if (m_speedunits == "imperial")
     {m_wheelslip = qRound(wheelslip * 1.8 + 32);}
     emit wheelslipChanged(wheelslip);
 }
@@ -2254,9 +2262,9 @@ void DashBoard::setwheelspdftleft(const qreal &wheelspdftleft)
 {
     if (m_wheelspdftleft == wheelspdftleft)
         return;
-    if (m_units == "metric")
+    if (m_speedunits == "metric")
     {m_wheelspdftleft = wheelspdftleft;}
-    if (m_units == "imperial")
+    if (m_speedunits == "imperial")
     {m_wheelspdftleft = qRound(wheelspdftleft * 1.8 + 32);}
     emit wheelspdftleftChanged(wheelspdftleft);
     if (m_ExternalSpeed == 1){
@@ -2267,9 +2275,9 @@ void DashBoard::setwheelspdftright(const qreal &wheelspdftright)
 {
     if (m_wheelspdftright == wheelspdftright)
         return;
-    if (m_units == "metric")
+    if (m_speedunits == "metric")
     {m_wheelspdftright = wheelspdftright;}
-    if (m_units == "imperial")
+    if (m_speedunits == "imperial")
     {m_wheelspdftright = qRound(wheelspdftright * 1.8 + 32);}
     emit wheelspdftrightChanged(wheelspdftright);
     if (m_ExternalSpeed == 2){
@@ -2281,9 +2289,9 @@ void DashBoard::setwheelspdrearleft(const qreal &wheelspdrearleft)
 {
     if (m_wheelspdrearleft == wheelspdrearleft)
         return;
-    if (m_units == "metric")
+    if (m_speedunits == "metric")
     {m_wheelspdrearleft = wheelspdrearleft;}
-    if (m_units == "imperial")
+    if (m_speedunits == "imperial")
     {m_wheelspdrearleft = qRound(wheelspdrearleft * 1.8 + 32);}
     emit wheelspdrearleftChanged(wheelspdrearleft);
     if (m_ExternalSpeed == 3){
@@ -2294,9 +2302,9 @@ void DashBoard::setwheelspdrearright(const qreal &wheelspdrearright)
 {
     if (m_wheelspdrearright == wheelspdrearright)
         return;
-    if (m_units == "metric")
+    if (m_speedunits == "metric")
     {m_wheelspdrearright = wheelspdrearright;}
-    if (m_units == "imperial")
+    if (m_speedunits == "imperial")
     {m_wheelspdrearright = qRound(wheelspdrearright * 1.8 + 32);}
     emit wheelspdrearrightChanged(wheelspdrearright);
     if (m_ExternalSpeed == 4){
@@ -2657,6 +2665,7 @@ qreal DashBoard::gpsbaering() const { return m_gpsbaering; }
 
 //units
 QString DashBoard::units() const { return m_units; }
+QString DashBoard::speedunits() const { return m_speedunits; }
 QString DashBoard::pressureunits() const { return m_pressureunits; }
 
 

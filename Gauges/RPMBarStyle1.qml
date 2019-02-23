@@ -10,7 +10,7 @@ import QtQuick.Extras 1.4
 Rectangle {
   color:"grey"
   anchors.fill:parent
-  property  var unit : Dashboard.units;
+  property  var unit : Dashboard.speedunits;
   Component.onCompleted: {units.unitadjust();}
 
 

@@ -50,8 +50,8 @@ TabView {
                     property alias serialPortName: serialName.currentText
                     property alias gpsPortName: serialNameGPS.currentText
                     property alias gpsPortNameindex: serialNameGPS.currentIndex
-                    property alias gpsBaud: serialGPSBaud.currentText
-                    property alias gpsBaudindex: serialGPSBaud.currentIndex
+                    //property alias gpsBaud: serialGPSBaud.currentText
+                    //property alias gpsBaudindex: serialGPSBaud.currentIndex
                     property alias ecuType: ecuSelect.currentText
                     property alias auxunit1: unitaux1.text
                     property alias aux1: an1V0.text
@@ -62,6 +62,7 @@ TabView {
                     property alias goProVariant: goProSelect.currentIndex
                     property alias password: goPropass.text
                     property alias vehicleweight: weight.text
+                    property alias unitSelector1: unitSelect1.currentIndex
                     property alias unitSelector: unitSelect.currentIndex
                     property alias unitSelector2: unitSelect2.currentIndex
                     property alias odometervalue: odometer.text
@@ -149,6 +150,7 @@ TabView {
                             }
 
                         }
+                        /*
                         Text {
                             text: "GPS Baud: "
                             font.pixelSize: windowbackround.width / 55
@@ -173,10 +175,34 @@ TabView {
                                 highlighted: serialGPSBaud.highlightedIndex === index
                                 hoverEnabled: serialGPSBaud.hoverEnabled
                             }
-                        }
-
+                        }*/
                         Text {
-                            text: "Speed&Temp units:"
+                            text: "Speed units:"
+                            font.pixelSize: windowbackround.width / 55
+                            color: "white"
+                        }
+                        ComboBox {
+                            id: unitSelect1
+                            width: windowbackround.width / 5
+                            height: windowbackround.height /15
+                            font.pixelSize: windowbackround.width / 55
+                            model: [ "Metric","Imperial"]
+                            property bool initialized: false
+                            Component.onCompleted: { Connect.setSpeedUnits(currentIndex);changeweighttext.changetext()}
+                            onCurrentIndexChanged: { Connect.setSpeedUnits(currentIndex);changeweighttext.changetext()}
+                            delegate: ItemDelegate {
+                                width: unitSelect1.width
+                                text: unitSelect1.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                                font.weight: unitSelect1.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.family: unitSelect1.font.family
+                                font.pixelSize: unitSelect1.font.pixelSize
+                                highlighted: unitSelect1.highlightedIndex === index
+                                hoverEnabled: unitSelect1.hoverEnabled
+                            }
+
+                        }
+                        Text {
+                            text: "Temp units:"
                             font.pixelSize: windowbackround.width / 55
                             color: "white"
                         }
@@ -452,7 +478,7 @@ TabView {
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
                             onClicked: {
-                                GPS.openConnection(serialNameGPS.currentText,serialGPSBaud.currentText)
+                                GPS.openConnection(serialNameGPS.currentText,"9600")
                                 connectButtonGPS.enabled=false
                                 disconnectButtonGPS.enabled=true
                             }
@@ -589,7 +615,7 @@ TabView {
                             //onCheckedChanged: {autoconnectGPS.auto()}
                         }
 
-                        Text  { text: "V 1.45 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.46 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -755,7 +781,7 @@ TabView {
                 {
 
                    // if (gpsswitch.checked == true)GPS.startGPScom(serialNameGPS.currentText,serialGPSBaud.currentText);
-                    if (gpsswitch.checked === true)GPS.openConnection(serialNameGPS.currentText,serialGPSBaud.currentText),connectButtonGPS.enabled=false,disconnectButtonGPS.enabled=true;
+                    if (gpsswitch.checked === true)GPS.openConnection(serialNameGPS.currentText,"9600"),connectButtonGPS.enabled=false,disconnectButtonGPS.enabled=true;
                     //if (gpsswitch.checked === false)GPS.closeConnection(),console.log("GPS CLOSED BY QML");
                 }
             }

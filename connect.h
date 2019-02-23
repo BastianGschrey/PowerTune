@@ -60,6 +60,7 @@ public:
     Q_INVOKABLE void readdashsetup2();
     Q_INVOKABLE void readdashsetup1();
     Q_INVOKABLE void setSreenbrightness(const int &brightness);
+    Q_INVOKABLE void setSpeedUnits(const int &units1);
     Q_INVOKABLE void setUnits(const int &units);
     Q_INVOKABLE void setPressUnits(const int &units2);
     Q_INVOKABLE void setWeight(const int &weight);

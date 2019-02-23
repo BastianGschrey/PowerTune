@@ -153,7 +153,7 @@ void Connect::checkifraspberrypi()
 void Connect::readavailabledashfiles()
 {
     //QDir directory(""); //for Windows
-    QDir directory("/home/pi/UserDashboards");
+   QDir directory("/home/pi/UserDashboards");
     QStringList dashfiles = directory.entryList(QStringList() << "*.txt",QDir::Files);
     m_dashBoard->setdashfiles(dashfiles);
     //qDebug() <<"files" << dashfiles ;
@@ -161,7 +161,7 @@ void Connect::readavailabledashfiles()
 
 void Connect::readMaindashsetup()
 {
-    //QString path = "MainDash.txt";//for Windows
+   // QString path = "MainDash.txt";//for Windows
     QString path = "/home/pi/UserDashboards/MainDash.txt";
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
@@ -246,7 +246,22 @@ void Connect::setSreenbrightness(const int &brightness)
     //qDebug() << brightness;
     f.close();
 }
+void Connect::setSpeedUnits(const int &units1)
+{
+    switch (units1)
+    {
+    case 0:
+        m_dashBoard->setspeedunits("metric");
+        break;
+    case 1:
+        m_dashBoard->setspeedunits("imperial");
+        break;
 
+    default:
+        break;
+    }
+
+}
 void Connect::setUnits(const int &units)
 {
     switch (units)

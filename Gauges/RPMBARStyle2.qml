@@ -7,7 +7,7 @@ Rectangle {
   visible: true
   color:"transparent"
   anchors.fill:parent
-  property  var unit : Dashboard.units;
+  property  var unit : Dashboard.speedunits;
   Component.onCompleted: {units.unitadjust()}
 
     Text {

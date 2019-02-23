@@ -60,7 +60,7 @@ Item {
 
     //adjusts the Gauges to metric or imperial
 
-    property  var unit : Dashboard.units;
+    property  var unit : Dashboard.speedunits;
 
     //fade in effect for the Gauges (Welcome animation)
 
