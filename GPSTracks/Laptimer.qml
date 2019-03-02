@@ -42,7 +42,7 @@ Item {
             width : 400
             plugin: mapPlugin
             zoomLevel: 16
-            activeMapType: map.supportedMapTypes[1]
+            activeMapType: map.supportedMapTypes[3]
             copyrightsVisible : false
             gesture.enabled: false
             tilt: 0
