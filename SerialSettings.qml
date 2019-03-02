@@ -2529,6 +2529,7 @@ TabView {
                     //property alias comboArduinoindex: comboArduino.currentIndex
                     //property alias autoconnectarduinoautoconnect : arduinoautoconnect.checked
                     property alias mainspeedsource : mainspeedsource.currentIndex
+                    property alias daemonselect : daemonselect.currentIndex
 
                 }
             }/*
