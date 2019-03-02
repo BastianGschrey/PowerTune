@@ -24,16 +24,16 @@ Item {
             //Offline directory for Map Tiles
            PluginParameter {
                 name: 'osm.mapping.offline.directory'
-                //value: ':/GPSTracks/'
-                value: "/home/pi/maptiles/"
+                value: ':/GPSTracks/'
+                //value: "/home/pi/maptiles/"
            }
-
+/*
                        PluginParameter {
                           name: "osm.mapping.providersrepository.address"
-                          //value: 'qrc:/GPSTracks/'
-                         value: "/home/pi/maptiles/"
+                          value: 'qrc:/GPSTracks/'
+                         //value: "/home/pi/maptiles/"
                        }
-
+*/
         }
 
         Map {
@@ -42,7 +42,7 @@ Item {
             width : 400
             plugin: mapPlugin
             zoomLevel: 16
-            activeMapType: map.supportedMapTypes[3]
+            activeMapType: map.supportedMapTypes[1]
             copyrightsVisible : false
             gesture.enabled: false
             tilt: 0
