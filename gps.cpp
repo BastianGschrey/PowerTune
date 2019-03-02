@@ -164,6 +164,10 @@ void GPS::setGPSBAUD115()
     m_dashboard->setgpsFIXtype("GPS set 115k");
     m_serialport->write(QByteArray::fromHex("b5620600140001000000d008000000c201000700070000000000c496"));
     m_serialport->waitForBytesWritten(4000);
+    m_serialport->write(QByteArray::fromHex("b5620600140001000000d008000000c201000700070000000000c496"));
+    m_serialport->waitForBytesWritten(4000);
+    m_serialport->write(QByteArray::fromHex("b5620600140001000000d008000000c201000700070000000000c496"));
+    m_serialport->waitForBytesWritten(4000);
     closeConnection1();
 }
 void GPS::setGPS10HZ()
@@ -214,7 +218,7 @@ void GPS::readyToRead()
  //   m_timer.stop();
    if(this->m_serialport->canReadLine()){
        QByteArray line = m_serialport->readLine();
-       qDebug() <<"receiving "+ line  << endl;
+    //   qDebug() <<"receiving "+ line  << endl;
    //QString line = QString(m_serialport->readLine());
        if(line.startsWith("$GPRMC"))
            processGPRMC(line);
