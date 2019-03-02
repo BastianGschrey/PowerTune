@@ -51,7 +51,7 @@ void GPS::initSerialPort()
     connect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
     connect(m_serialport, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
             this, &GPS::handleError);
-    connect(&m_timout, &QTimer::timeout, this, &GPS::handleTimeout);
+    //connect(&m_timer, &QTimer::timeout, this, &GPS::handleTimeout);
 
 }
 
@@ -212,11 +212,9 @@ void GPS::readyToRead()
 {
  //   m_timer.stop();
    if(this->m_serialport->canReadLine()){
-       m_timout.start(3000); //Set timout to 3seconds
        QByteArray line = m_serialport->readLine();
    //QString line = QString(m_serialport->readLine());
        if(line.startsWith("$GPRMC"))
-           m_timout.stop();
            processGPRMC(line);
        if(line.startsWith("$GPGGA"))
            processGPGGA(line);
@@ -254,7 +252,7 @@ void GPS::handleTimeout()
     closeConnection();
     initialized = 0;
     rateset = 0;
-    openConnection("ttyAMA0","9600");
+    openConnection("ttyAMA0","115200");
 }
 
 void GPS::processGPRMC(const QString & line){
