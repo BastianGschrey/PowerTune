@@ -2,6 +2,7 @@
 #define GPS_H
 #include "serialport.h"
 #include <QElapsedTimer>
+#include <QTimer>
 
 class DashBoard;
 class Serialport;
@@ -21,6 +22,7 @@ private:
     QByteArray  m_readData;
     QByteArray  m_buffer;
     QElapsedTimer m_timer;
+    QTimer      m_timout;
     QString convertToDecimal(const QString & coord, const QString & dir);
     void processGPRMC(const QString &line);
     void checklinecrossed();
