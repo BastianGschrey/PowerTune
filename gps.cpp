@@ -210,9 +210,11 @@ void GPS::handleError(QSerialPort::SerialPortError serialPortError)
 
 void GPS::readyToRead()
 {
+
  //   m_timer.stop();
    if(this->m_serialport->canReadLine()){
        QByteArray line = m_serialport->readLine();
+       qDebug() <<"receiving "+ line  << endl;
    //QString line = QString(m_serialport->readLine());
        if(line.startsWith("$GPRMC"))
            processGPRMC(line);
