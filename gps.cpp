@@ -181,7 +181,6 @@ void GPS::closeConnection()
     disconnect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
     disconnect(m_serialport, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
                this, &GPS::handleError);
-    disconnect(&m_timout, &QTimer::timeout, this, &GPS::handleTimeout);
         m_serialport->close();
     m_dashboard->setgpsFIXtype("close serial");
 }
@@ -191,7 +190,6 @@ void GPS::closeConnection1()
     disconnect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
     disconnect(m_serialport, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
                this, &GPS::handleError);
-    disconnect(&m_timout, &QTimer::timeout, this, &GPS::handleTimeout);
         m_serialport->close();
         initialized =1;
         m_dashboard->setgpsFIXtype("close serial");
@@ -233,7 +231,7 @@ void GPS::readyToRead()
        {
           m_dashboard->setgpsFIXtype("10Hz ACK");
           rateset = 1;
-          //closeConnection1();
+          closeConnection1();
 
        }
        if (line.contains(NACK10HZ))
@@ -254,7 +252,6 @@ void GPS::handleTimeout()
 {
     m_dashboard->setgpsFIXtype("timeout./");
     closeConnection();
-    qDebug()<<"serial closed straight after opening ";
     initialized = 0;
     rateset = 0;
     openConnection("ttyAMA0","9600");
