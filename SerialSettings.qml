@@ -612,6 +612,7 @@ TabView {
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
                             text: qsTr("Autoconnect GPS")
+                            Component.onCompleted: {autoconnectGPS.auto()}
                             //onCheckedChanged: {autoconnectGPS.auto()}
                         }
 
