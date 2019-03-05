@@ -11,17 +11,7 @@ int rateset = 0 ;
 int baudrate;
 QByteArray ACK10HZ = QByteArray::fromHex("b562050102");
 QByteArray NACK10HZ = QByteArray::fromHex("b562050002");
-/* 
-//Need to test these :
-//Different output MASK (UBX + NMEA @ 115200 )
-//B5 62 06 00 14 00 01 00 00 00 D0 08 00 00 00 C2 01 00 07 00 03 00 00 00 00 00 C0 7E
-//0xB5 0x62 0x05 0x00 0x02 = Not Acknowledged // (Byte Class ID) (Byte Msg ID)
-QByteArray ACK10HZ = QByteArray::fromHex("b5620501020608"); 
-QByteArray NACK10HZ = QByteArray::fromHex("b5620500020608");
-QByteArray ACK115BAUD = QByteArray::fromHex("b5620501020600"); 
-QByteArray NACK115BAUD  = QByteArray::fromHex("b5620500020600");
 
-*/
 int Laps = 0;
 double startlineX1 ; //Longitude
 double startlineX2 ; //Longitude
@@ -137,12 +127,12 @@ void GPS::openConnection(const QString &portName,const QString &Baud)
     }
     if (initialized == 0)
     {
+        removeNMEAmsg();
         setGPSBAUD115();
     }
     if (initialized == 1)
     {
         setGPS10HZ();
-        removeNMEAmsg();
     }
 
     // Timeout timer
@@ -170,15 +160,13 @@ void GPS::removeNMEAmsg()
 void GPS::setGPSBAUD115()
 {
     //Set Ublox GPS to use baudrate of 115200
-    //qDebug()<<"Sending command to initialize at 115K";
+    qDebug()<<"Sending command to initialize at 115K";
     m_dashboard->setgpsFIXtype("GPS set 115k");
     m_serialport->write(QByteArray::fromHex("b5620600140001000000d008000000c201000700070000000000c496"));
     m_serialport->waitForBytesWritten(4000);
-    m_serialport->write(QByteArray::fromHex("b5620600140001000000d008000000c201000700070000000000c496"));
-    m_serialport->waitForBytesWritten(4000);
-    m_serialport->write(QByteArray::fromHex("b5620600140001000000d008000000c201000700070000000000c496"));
-    m_serialport->waitForBytesWritten(4000);
+
     closeConnection1();
+
 }
 void GPS::setGPS10HZ()
 {
@@ -200,6 +188,7 @@ void GPS::closeConnection()
 }
 void GPS::closeConnection1()
 {
+
     m_dashboard->setgpsFIXtype("close connection");
     disconnect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
     disconnect(m_serialport, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
@@ -228,6 +217,7 @@ void GPS::readyToRead()
  //   m_timer.stop();
    if(this->m_serialport->canReadLine()){
        QByteArray line = m_serialport->readLine();
+       qDebug()<<"Receiving: " << line  << endl;
     //   qDebug() <<"receiving "+ line  << endl;
    //QString line = QString(m_serialport->readLine());
        if(line.startsWith("$GPRMC"))
@@ -245,7 +235,7 @@ void GPS::readyToRead()
        {
           m_dashboard->setgpsFIXtype("10Hz ACK");
           rateset = 1;
-          closeConnection1();
+         // closeConnection1();
 
        }
        if (line.contains(NACK10HZ))
