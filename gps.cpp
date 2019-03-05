@@ -160,7 +160,7 @@ void GPS::removeNMEAmsg()
 void GPS::setGPSBAUD115()
 {
     //Set Ublox GPS to use baudrate of 115200
-    qDebug()<<"Sending command to initialize at 115K";
+    //qDebug()<<"Sending command to initialize at 115K";
     m_dashboard->setgpsFIXtype("GPS set 115k");
     m_serialport->write(QByteArray::fromHex("b5620600140001000000d008000000c201000700070000000000c496"));
     m_serialport->waitForBytesWritten(4000);
@@ -217,7 +217,6 @@ void GPS::readyToRead()
  //   m_timer.stop();
    if(this->m_serialport->canReadLine()){
        QByteArray line = m_serialport->readLine();
-       qDebug()<<"Receiving: " << line  << endl;
     //   qDebug() <<"receiving "+ line  << endl;
    //QString line = QString(m_serialport->readLine());
        if(line.startsWith("$GPRMC"))
@@ -350,7 +349,7 @@ QString GPS::convertToDecimal(const QString & coord, const QString & dir){
 
 void GPS::defineFinishLine(const double & Y1,const double & X1,const double & Y2,const double & X2)
 {
-    qDebug()<<"Finish Line Settings";
+  //  qDebug()<<"Finish Line Settings";
     linedirection = 0;
     startlineX1 = X1; //Longitude
     startlineX2 = X2; //Longitude
@@ -366,7 +365,7 @@ void GPS::checknewLap()
 //qDebug()<<"current intercept" << currentintercept;
     if ((previousintercept <= 0 && currentintercept >= 0) || (previousintercept >= 0 && currentintercept <= 0) || (currentintercept == 0))
     {
-qDebug()<<"hello";
+
         if (m_dashboard->gpsLongitude() <= startlineX2 && m_dashboard->gpsLongitude() >= startlineX1 )
         {
             qDebug()<<"Checknew Lap";
