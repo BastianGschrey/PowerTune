@@ -11,7 +11,17 @@ int rateset = 0 ;
 int baudrate;
 QByteArray ACK10HZ = QByteArray::fromHex("b562050102");
 QByteArray NACK10HZ = QByteArray::fromHex("b562050002");
+/* 
+//Need to test these :
+//Different output MASK (UBX + NMEA @ 115200 )
+//B5 62 06 00 14 00 01 00 00 00 D0 08 00 00 00 C2 01 00 07 00 03 00 00 00 00 00 C0 7E
+//0xB5 0x62 0x05 0x00 0x02 = Not Acknowledged // (Byte Class ID) (Byte Msg ID)
+QByteArray ACK10HZ = QByteArray::fromHex("b5620501020608"); 
+QByteArray NACK10HZ = QByteArray::fromHex("b5620500020608");
+QByteArray ACK115BAUD = QByteArray::fromHex("b5620501020600"); 
+QByteArray NACK115BAUD  = QByteArray::fromHex("b5620500020600");
 
+*/
 int Laps = 0;
 double startlineX1 ; //Longitude
 double startlineX2 ; //Longitude
