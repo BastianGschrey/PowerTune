@@ -30,8 +30,8 @@ Item {
 
                        PluginParameter {
                           name: "osm.mapping.providersrepository.address"
-                          value: 'qrc:/GPSTracks/'
-                         //value: "/home/pi/maptiles/"
+                          //value: 'qrc:/GPSTracks/'
+                          value: "/home/pi/maptiles/"
                        }
 
         }
