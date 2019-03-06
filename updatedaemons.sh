@@ -16,7 +16,7 @@ cd /home/pi/daemons
 chmod +x OBD
 chmod +x Haltechd
 chmod +x Consult
-chmod +x Apexid 
+#chmod +x Apexid 
 chmod +x Microtechd 
 chmod +x Linkd
 #chmod +x BRZ86d
