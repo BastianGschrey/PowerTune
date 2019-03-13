@@ -30,6 +30,7 @@ GPS::GPS(QObject *parent)
     : QObject(parent)
     , m_dashboard(Q_NULLPTR)
 {
+
 }
 
 GPS::GPS(DashBoard *dashboard, QObject *parent)
@@ -40,9 +41,9 @@ GPS::GPS(DashBoard *dashboard, QObject *parent)
 /*
 void GPS::delaytimer()
 {
-    qDebug()<<"Delay";
+    //qDebug()<<"Delay";
     connect(&m_timer, &QTimer::timeout, this, &GPS::openConnection);
-    qDebug()<<"start timer";
+    //qDebug()<<"start timer";
     m_timer.start(6000);
 }
 */
@@ -52,7 +53,8 @@ void GPS::initSerialPort()
     connect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
     connect(m_serialport, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
             this, &GPS::handleError);
-    //connect(&m_timer, &QTimer::timeout, this, &GPS::handleTimeout);
+    connect(&m_timeouttimer, &QTimer::timeout, this, &GPS::handleTimeout);
+
 
 }
 
@@ -69,20 +71,15 @@ void GPS::openConnection(const QString &portName,const QString &Baud)
 
 
     initSerialPort();
-
+    //qDebug()<<"Starting timer";
+    m_timeouttimer.start(5000);
     // now open the connection with the user settings again
     m_dashboard->setgpsFIXtype("open Serial " + portName);
     baudrate = Baud.toInt();
-    //qDebug()<<"open GPS Port: "+portName;
+    ////qDebug()<<"open GPS Port: "+portName;
     m_serialport->setPortName(portName);
-/*
-    if (initialized == 1)
-    {
-      //qDebug()<<"Already initialized";
-      baudrate = 115200;
-    }
-*/
-    m_dashboard->setgpsFIXtype("Try Baudrate " );
+
+    m_dashboard->setgpsFIXtype("open with " + Baud );
     switch (baudrate)
     {
     case 2400:
@@ -93,26 +90,26 @@ void GPS::openConnection(const QString &portName,const QString &Baud)
         break;
     case 9600:
         m_serialport->setBaudRate(QSerialPort::Baud9600);
-        qDebug()<<"opening at 9600 Baud";
+        //qDebug()<<"opening at 9600 Baud";
         break;
     case 19200:
         m_serialport->setBaudRate(QSerialPort::Baud19200);
         break;
     case 38400:
         m_serialport->setBaudRate(QSerialPort::Baud38400);
-        qDebug()<<"opening at 38400 Baud";
+        //qDebug()<<"opening at 38400 Baud";
         break;
     case 57600:
         m_serialport->setBaudRate(QSerialPort::Baud57600);
-        qDebug()<<"opening at 57K Baud";
+        //qDebug()<<"opening at 57K Baud";
         break;
     case 115200:
         m_serialport->setBaudRate(QSerialPort::Baud115200);
-        qDebug()<<"opening at 115K Baud";
+        //qDebug()<<"opening at 115K Baud";
         break;
     default:
         m_serialport->setBaudRate(QSerialPort::Baud9600);
-        qDebug()<<"opening at default Baud";
+        //qDebug()<<"opening at default Baud";
         break;
     }
 
@@ -124,19 +121,19 @@ void GPS::openConnection(const QString &portName,const QString &Baud)
 
     if(m_serialport->open(QIODevice::ReadWrite) == false)
     {
-        qDebug()<<"serial closed straight after opening ";
+        //qDebug()<<"serial closed straight after opening ";
         GPS::closeConnection();
     }
 
+/*
     if (rateset == 0)
     {
         setGPS10HZ();
 
     }
+*/
 
 
-    // Timeout timer
-    //m_timer.start(1000);
 
     //defineFinishLine();
 
@@ -145,7 +142,7 @@ void GPS::openConnection(const QString &portName,const QString &Baud)
 void GPS::removeNMEAmsg()
 {
     //disables all the NMEA mesages that we don't need ( we only need RMC and  GGA)
-    qDebug()<<"Sending NMEA disable";
+    //qDebug()<<"Sending NMEA disable";
     m_dashboard->setgpsFIXtype("Disable messages");
     m_serialport->write(QByteArray::fromHex("B56206010800F0050000000000000446")); //VTG OFF
     m_serialport->waitForBytesWritten(4000);
@@ -161,17 +158,16 @@ void GPS::removeNMEAmsg()
 void GPS::setGPSBAUD115()
 {
     //Set Ublox GPS to use baudrate of 115200
-    qDebug()<<"Sending command to initialize at 115K";
+    //qDebug()<<"Sending command to initialize at 115K";
     m_dashboard->setgpsFIXtype("GPS set 115k");
     m_serialport->write(QByteArray::fromHex("b5620600140001000000d008000000c201000700070000000000c496"));
     m_serialport->waitForBytesWritten(4000);
     closeConnection1();
-
 }
 void GPS::setGPS10HZ()
 {
     //Set Ublox GPS Update Rate to 10Hz
-    qDebug()<<"Request  10HZ";
+    //qDebug()<<"Request  10HZ";
     m_dashboard->setgpsFIXtype("GPS set 10HZ");
     m_serialport->write(QByteArray::fromHex("b562060806006400010001007a12"));
     m_serialport->waitForBytesWritten(4000);
@@ -179,10 +175,11 @@ void GPS::setGPS10HZ()
 }
 void GPS::closeConnection()
 {
-    //qDebug()<<"close connection GPS";
+    ////qDebug()<<"close connection GPS";
     disconnect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
     disconnect(m_serialport, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
                this, &GPS::handleError);
+    disconnect(&m_timeouttimer, &QTimer::timeout, this, &GPS::handleTimeout);
         m_serialport->close();
     m_dashboard->setgpsFIXtype("close serial");
 }
@@ -193,6 +190,7 @@ void GPS::closeConnection1()
     disconnect(this->m_serialport,SIGNAL(readyRead()),this,SLOT(readyToRead()));
     disconnect(m_serialport, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
                this, &GPS::handleError);
+    disconnect(&m_timeouttimer, &QTimer::timeout, this, &GPS::handleTimeout);
         m_serialport->close();
         initialized =1;
         m_dashboard->setgpsFIXtype("close serial");
@@ -205,7 +203,7 @@ void GPS::handleError(QSerialPort::SerialPortError serialPortError)
 {
     if (serialPortError == QSerialPort::ReadError) {
        m_dashboard->setgpsFIXtype(m_serialport->errorString());
-        qDebug()<<" GPS Error ";
+        //qDebug()<<" GPS Error ";
     }
 }
 
@@ -218,47 +216,42 @@ void GPS::readyToRead()
    if(this->m_serialport->canReadLine()){
        QByteArray line = m_serialport->readLine();
    //qDebug() <<"receiving "+ line  << endl;
-   //QString line = QString(m_serialport->readLine());
-       if(line.startsWith("$GPRMC"))
-           processGPRMC(line);
-       if(line.startsWith("$GPGGA"))
-           processGPGGA(line);
        if(line.startsWith("$GNRMC"))
            processGPRMC(line);
+       //qDebug() <<"stop timer ready to read";
+           m_timeouttimer.stop();
+           //qDebug() <<"start timer ready to read";
+         // m_timeouttimer.start(5000);
        if(line.startsWith("$GNGGA"))
-           processGPGGA(line);
-
-       if ( rateset == 0)
        {
+           processGPGGA(line);
+       if (rateset == 0)
+       {
+           setGPS10HZ();
+           rateset = 1;
+       }
+       }
        if (line.contains(ACK10HZ))
        {
-          qDebug()<<"10HZ ACK";
+          //qDebug()<<"10HZ ACK";
           m_dashboard->setgpsFIXtype("10Hz ACK");
           rateset = 1;
           removeNMEAmsg();
           setGPSBAUD115();
        }
-       else
-       {
-          //qDebug()<<"10HZ NACK";
-          //m_dashboard->setgpsFIXtype("10Hz NOCK");
-          //setGPS10HZ();
 
-       }
-       }
 
    }
-  //  m_timer.start(1000);
+
 
 
 }
 
 void GPS::handleTimeout()
 {
+    //qDebug()<<"timeout";
     m_dashboard->setgpsFIXtype("timeout./");
     closeConnection();
-    initialized = 0;
-    rateset = 0;
     openConnection("ttyAMA0","115200");
 }
 
@@ -296,7 +289,7 @@ void GPS::processGPRMC(const QString & line){
 }
 
 void GPS::processGPGGA(const QString & line){
-    //qDebug() <<"GPGGA "+ line  << endl;
+    ////qDebug() <<"GPGGA "+ line  << endl;
     QStringList fields = line.split(',');
     int fixquality = fields[6].toInt();
 
@@ -351,7 +344,7 @@ QString GPS::convertToDecimal(const QString & coord, const QString & dir){
 
 void GPS::defineFinishLine(const double & Y1,const double & X1,const double & Y2,const double & X2)
 {
-  //  qDebug()<<"Finish Line Settings";
+  //  //qDebug()<<"Finish Line Settings";
     linedirection = 0;
     startlineX1 = X1; //Longitude
     startlineX2 = X2; //Longitude
@@ -364,25 +357,25 @@ void GPS::defineFinishLine(const double & Y1,const double & X1,const double & Y2
 void GPS::checknewLap()
 {
     currentintercept = m_dashboard->gpsLatitude() -( (m * m_dashboard->gpsLongitude()) + b);
-//qDebug()<<"current intercept" << currentintercept;
+////qDebug()<<"current intercept" << currentintercept;
     if ((previousintercept <= 0 && currentintercept >= 0) || (previousintercept >= 0 && currentintercept <= 0) || (currentintercept == 0))
     {
 
         if (m_dashboard->gpsLongitude() <= startlineX2 && m_dashboard->gpsLongitude() >= startlineX1 )
         {
-            qDebug()<<"Checknew Lap";
+            //qDebug()<<"Checknew Lap";
             if (m_timer.isValid() == true)
             {Laps++;
-            qDebug() << "Line Crossed " << " Lap " << Laps;
+            //qDebug() << "Line Crossed " << " Lap " << Laps;
             QTime y(0, 0);
             y = y.addMSecs(m_timer.elapsed());
             QString Laptime = y.toString("mm:ss.zzz");
-            qDebug() << "Laptime" << Laptime;
+            //qDebug() << "Laptime" << Laptime;
             m_timer.restart();
             }
             else{
             m_timer.start();
-            qDebug() << "Starting Lap Timer ";
+            //qDebug() << "Starting Lap Timer ";
             }
         }
     }
