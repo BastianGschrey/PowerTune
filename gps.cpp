@@ -10,8 +10,7 @@ int initialized = 0;
 int rateset = 0 ;
 int raterequ = 0;
 int baudrate;
-QByteArray ACK10HZ = QByteArray::fromHex("050102");
-                    // \xB5""b\x05\x01\x02\x00\x06\x00\x0E"
+QByteArray ACK10HZ = QByteArray::fromHex("0501020006");
 QByteArray NACK10HZ = QByteArray::fromHex("050002");
 
 int Laps = 0;
@@ -76,12 +75,13 @@ void GPS::openConnection(const QString &portName,const QString &Baud)
     baudrate = Baud.toInt();
     //qDebug()<<"open GPS Port: "+portName;
     m_serialport->setPortName(portName);
+/*
     if (initialized == 1)
     {
       //qDebug()<<"Already initialized";
       baudrate = 115200;
     }
-
+*/
     m_dashboard->setgpsFIXtype("Try Baudrate " );
     switch (baudrate)
     {
@@ -127,15 +127,13 @@ void GPS::openConnection(const QString &portName,const QString &Baud)
         qDebug()<<"serial closed straight after opening ";
         GPS::closeConnection();
     }
-    if (initialized == 0)
-    {
-        removeNMEAmsg();
-        setGPSBAUD115();
-    }
-    if (initialized == 1)
+
+    if (rateset == 0)
     {
         setGPS10HZ();
+
     }
+
 
     // Timeout timer
     //m_timer.start(1000);
@@ -234,17 +232,17 @@ void GPS::readyToRead()
        {
        if (line.contains(ACK10HZ))
        {
-          //qDebug()<<"10HZ ACK";
+          qDebug()<<"10HZ ACK";
           m_dashboard->setgpsFIXtype("10Hz ACK");
           rateset = 1;
-         // closeConnection1();
-
+          removeNMEAmsg();
+          setGPSBAUD115();
        }
        else
        {
           //qDebug()<<"10HZ NACK";
           //m_dashboard->setgpsFIXtype("10Hz NOCK");
-          setGPS10HZ();
+          //setGPS10HZ();
 
        }
        }
