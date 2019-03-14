@@ -166,7 +166,7 @@ void GPS::readyToRead()
         if(line.startsWith("$GPRMC"))
             processGPRMC(line);
         m_timeouttimer.stop();
-        if(line.startsWith("$GPGGA"))
+        if(line.startsWith("$GNGGA"))
         {
             m_dashboard->setgpsFIXtype("Switch to GPS");
             setGPSOnly();
