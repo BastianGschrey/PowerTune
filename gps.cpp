@@ -180,8 +180,9 @@ void GPS::handleTimeout()
 {
     //Timeout will occur if the GPS was already initialized and still opened at 9600 Baud
     m_dashboard->setgpsFIXtype("Timeout");
-    closeConnection();
-    openConnection("ttyAMA0","115200");
+   setGPSBAUD115();
+    // closeConnection();
+   // openConnection("ttyAMA0","115200");
 }
 
 void GPS::processGPRMC(const QString & line){
