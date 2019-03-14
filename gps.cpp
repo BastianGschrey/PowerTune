@@ -86,9 +86,7 @@ void GPS::openConnection(const QString &portName,const QString &Baud)
     {
         GPS::closeConnection();
     }
-    // Switch on GPS only
-    m_serialport->write(QByteArray::fromHex("B562063E0C000000100100081000010001017CF2")); //GPS Only
-    m_serialport->waitForBytesWritten(4000);
+
 
 }
 
@@ -121,6 +119,13 @@ void GPS::setGPS10HZ()
     //Set Ublox GPS Update Rate to 10Hz
     m_dashboard->setgpsFIXtype("GPS set 10HZ");
     m_serialport->write(QByteArray::fromHex("b562060806006400010001007a12"));
+    m_serialport->waitForBytesWritten(4000);
+
+}
+void GPS::setGPSOnly()
+{
+    // Switch on GPS only
+    m_serialport->write(QByteArray::fromHex("B562063E0C000000100100081000010001017CF2")); //GPS Only
     m_serialport->waitForBytesWritten(4000);
 
 }
@@ -163,6 +168,9 @@ void GPS::readyToRead()
         m_timeouttimer.stop();
         if(line.startsWith("$GPGGA"))
         {
+            m_dashboard->setgpsFIXtype("Switch to GPS");
+            setGPSOnly();
+
             processGPGGA(line);
             if (rateset == 0)
             {
