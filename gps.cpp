@@ -86,6 +86,9 @@ void GPS::openConnection(const QString &portName,const QString &Baud)
     {
         GPS::closeConnection();
     }
+    // Switch on GPS only
+    m_serialport->write(QByteArray::fromHex("B562063E0C000000100100081000010001017CF2")); //GPS Only
+    m_serialport->waitForBytesWritten(4000);
 
 }
 
@@ -103,6 +106,7 @@ void GPS::removeNMEAmsg()
     m_serialport->waitForBytesWritten(4000);
     m_serialport->write(QByteArray::fromHex("B56206010800F008000000000000075B")); //ZDA_Off
     m_serialport->waitForBytesWritten(4000);
+
 }
 void GPS::setGPSBAUD115()
 {
@@ -154,14 +158,15 @@ void GPS::readyToRead()
 {    
     if(this->m_serialport->canReadLine()){
         QByteArray line = m_serialport->readLine();
-        if(line.startsWith("$GNRMC"))
+        if(line.startsWith("$GPRMC"))
             processGPRMC(line);
         m_timeouttimer.stop();
-        if(line.startsWith("$GNGGA"))
+        if(line.startsWith("$GPGGA"))
         {
             processGPGGA(line);
             if (rateset == 0)
             {
+                //Use only GPS
                 setGPS10HZ();
                 rateset = 1;
             }
@@ -180,7 +185,7 @@ void GPS::handleTimeout()
 {
     //Timeout will occur if the GPS was already initialized and still opened at 9600 Baud
     m_dashboard->setgpsFIXtype("Timeout");
-   setGPSBAUD115();
+    setGPSBAUD115();
     // closeConnection();
    // openConnection("ttyAMA0","115200");
 }
@@ -202,10 +207,10 @@ void GPS::processGPRMC(const QString & line){
         m_dashboard->setgpsbaering(bearing.toDouble());
     }
     double speed = groundspeedknots.toDouble() * 1.852;
-    if (speed < 2)
+ /*   if (speed < 2)
     {
         speed = 0; // this is to ensure we show 0 if we standing as GPS sometimes sends a value greater 0 when standing still
-    }
+    }*/
     QString decLat = convertToDecimal(latitude, latDirection);
     QString decLon = convertToDecimal(longitude, lonDirection);
 
