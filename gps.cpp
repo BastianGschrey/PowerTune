@@ -125,7 +125,7 @@ void GPS::setGPS10HZ()
 void GPS::setGPSOnly()
 {
     // Switch on GPS only
-    m_serialport->write(QByteArray::fromHex("B562063E0C000000100100081000010001017CF2")); //GPS Only
+    m_serialport->write(QByteArray::fromHex("B562063E2C0000201005000810000100010101010300000001010308100000000101050003000000010106080E00000001010CD1")); //GPS Only
     m_serialport->waitForBytesWritten(4000);
 
 }
