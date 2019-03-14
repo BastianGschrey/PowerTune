@@ -170,7 +170,9 @@ void GPS::readyToRead()
         {
             m_dashboard->setgpsFIXtype("Switch to GPS");
             setGPSOnly();
-
+        }
+            if(line.startsWith("$GPGGA"))
+            {
             processGPGGA(line);
             if (rateset == 0)
             {
