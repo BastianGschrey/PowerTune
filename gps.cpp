@@ -93,6 +93,7 @@ void GPS::openConnection(const QString &portName,const QString &Baud)
 void GPS::removeNMEAmsg()
 {
     //disables all the NMEA mesages that we don't need ( we only need RMC and  GGA)
+    setGPSOnly();
     m_dashboard->setgpsFIXtype("Disable messages");
     m_serialport->write(QByteArray::fromHex("B56206010800F0050000000000000446")); //VTG OFF
     m_serialport->waitForBytesWritten(4000);
@@ -156,7 +157,7 @@ void GPS::handleError(QSerialPort::SerialPortError serialPortError)
     if (serialPortError == QSerialPort::ReadError)
     {
         m_dashboard->setgpsFIXtype(m_serialport->errorString());
-          }
+    }
 }
 
 void GPS::readyToRead()
@@ -167,19 +168,16 @@ void GPS::readyToRead()
             processGPRMC(line);
         m_timeouttimer.stop();
         if(line.startsWith("$GNGGA"))
-        {
-            m_dashboard->setgpsFIXtype("Switch to GPS");
-            setGPSOnly();
-        }
-            if(line.startsWith("$GPGGA"))
-            {
-            processGPGGA(line);
             if (rateset == 0)
             {
                 //Use only GPS
                 setGPS10HZ();
                 rateset = 1;
             }
+        if(line.startsWith("$GPGGA"))
+        {
+            processGPGGA(line);
+
         }
         if (line.contains(ACK10HZ))
         {
@@ -197,7 +195,7 @@ void GPS::handleTimeout()
     m_dashboard->setgpsFIXtype("Timeout");
     setGPSBAUD115();
     // closeConnection();
-   // openConnection("ttyAMA0","115200");
+    // openConnection("ttyAMA0","115200");
 }
 
 void GPS::processGPRMC(const QString & line){
@@ -217,7 +215,7 @@ void GPS::processGPRMC(const QString & line){
         m_dashboard->setgpsbaering(bearing.toDouble());
     }
     double speed = groundspeedknots.toDouble() * 1.852;
- /*   if (speed < 2)
+    /*   if (speed < 2)
     {
         speed = 0; // this is to ensure we show 0 if we standing as GPS sometimes sends a value greater 0 when standing still
     }*/
