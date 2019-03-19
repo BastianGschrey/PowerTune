@@ -111,7 +111,7 @@ void GPS::setGPSBAUD115()
 {
     //Set Ublox GPS to use baudrate of 115200
     m_dashboard->setgpsFIXtype("GPS set 115k");
-    m_serialport->write(QByteArray::fromHex("b5620600140001000000d008000000c201000700070000000000c496"));
+    m_serialport->write(QByteArray::fromHex("B5620600140001000000D008000000C201000700020000000000BF78"));
     m_serialport->waitForBytesWritten(4000);
     closeConnection1();
 }
