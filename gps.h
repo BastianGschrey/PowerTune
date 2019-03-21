@@ -28,6 +28,7 @@ private:
     void checklinecrossed();
     void linecrossed();
     void processGPGGA(const QString &line);
+    void processGPVTG(const QString & line);
     void checknewLap();
 
 
@@ -35,6 +36,7 @@ private:
 public slots:
     //void delaytimer();
     void openConnection(const QString &portName,const QString &Baud);
+    void ProcessMessage(QByteArray messageline);
     void removeNMEAmsg();
     void setGPSBAUD115();
     void setGPS10HZ();

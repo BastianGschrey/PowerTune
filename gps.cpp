@@ -12,7 +12,7 @@ int raterequ = 0;
 int baudrate;
 QByteArray ACK10HZ = QByteArray::fromHex("0501020006");
 QByteArray NACK10HZ = QByteArray::fromHex("050002");
-
+QByteArray line;
 int Laps = 0;
 double startlineX1 ; //Longitude
 double startlineX2 ; //Longitude
@@ -162,31 +162,77 @@ void GPS::handleError(QSerialPort::SerialPortError serialPortError)
 
 void GPS::readyToRead()
 {    
+
+    QByteArray rawData = m_serialport->readAll();          // read data from serial port
+    //qDebug()<< "chunk " << rawData;
+    line.append(rawData);
+    if (line.contains("\r\n"))
+    {
+        int end = line.lastIndexOf("\r\n") + 2;
+        QByteArray message = line;
+        //qDebug()<< "line raw" << line;
+        message.remove(end, line.length());
+        //qDebug()<< "Processed Message" << message;
+        line.remove(0,end);
+        //qDebug()<< "line new" << line;
+        ProcessMessage(message);
+    }
+
+
+/*
+    for (int i=0; i < rawData.size(); i++)
+    {
+       //line << rawData[i];
+       line.append(rawData);
+       if (line.size() >= 2 && line[line.size()-2] == '\r' && line[line.size()-1] == '\n')
+       {
+          qDebug()<< "line " << line;
+          //emit(line);
+          line.clear();
+       }
+    }
+*/
+    /*
     if(this->m_serialport->canReadLine()){
         QByteArray line = m_serialport->readLine();
         if(line.startsWith("$GPRMC"))
             processGPRMC(line);
         m_timeouttimer.stop();
-        if(line.startsWith("$GNGGA"))
-            if (rateset == 0)
-            {
-                //Use only GPS
-                setGPS10HZ();
-                rateset = 1;
-            }
-        if(line.startsWith("$GPGGA"))
-        {
-            processGPGGA(line);
 
-        }
-        if (line.contains(ACK10HZ))
-        {
-            m_dashboard->setgpsFIXtype("10Hz ACK");
-            rateset = 1;
-            removeNMEAmsg();
-            setGPSBAUD115();
-        }
+
+        */
     }
+void GPS::ProcessMessage(QByteArray messageline)
+{
+    m_timeouttimer.stop();
+    if(messageline.contains("$GNGGA"))
+        if (rateset == 0)
+        {
+            //Use only GPS
+            setGPS10HZ();
+            rateset = 1;
+        }
+    if(messageline.startsWith("$GPGGA"))
+    {
+        processGPGGA(messageline);
+
+    }
+    /*
+    if(messageline.startsWith("$GPVTG"))
+    {
+        processGPVTG(messageline);
+
+    }
+    */
+    if (messageline.contains(ACK10HZ))
+    {
+        m_dashboard->setgpsFIXtype("10Hz ACK");
+        rateset = 1;
+        removeNMEAmsg();
+        setGPSBAUD115();
+    }
+
+
 }
 
 void GPS::handleTimeout()
@@ -214,6 +260,7 @@ void GPS::processGPRMC(const QString & line){
         //We update bearing only if we have a valid baering
         m_dashboard->setgpsbaering(bearing.toDouble());
     }
+
     double speed = groundspeedknots.toDouble() * 1.852;
     /*   if (speed < 2)
     {
@@ -236,7 +283,7 @@ void GPS::processGPGGA(const QString & line)
 
     switch (fixquality) {
     case 0:
-        m_dashboard->setgpsFIXtype("No fix !");
+        m_dashboard->setgpsFIXtype("No fix yet");
         break;
     case 1:
         m_dashboard->setgpsFIXtype("GPS only");
@@ -265,6 +312,13 @@ void GPS::processGPGGA(const QString & line)
     checknewLap();
 }
 
+void GPS::processGPVTG(const QString & line)
+{
+    QStringList fields = line.split(',');
+    QString speed = fields[7];
+    m_dashboard->setgpsSpeed(speed.toInt());
+
+}
 QString GPS::convertToDecimal(const QString & coord, const QString & dir)
 {
     int decIndex = coord.indexOf('.');
