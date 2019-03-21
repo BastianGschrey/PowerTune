@@ -217,7 +217,11 @@ void GPS::ProcessMessage(QByteArray messageline)
         processGPGGA(messageline);
 
     }
-    /*
+    if(line.startsWith("$GPRMC"))
+    {
+        processGPRMC(messageline);
+    }
+        /*
     if(messageline.startsWith("$GPVTG"))
     {
         processGPVTG(messageline);
@@ -316,7 +320,7 @@ void GPS::processGPVTG(const QString & line)
 {
     QStringList fields = line.split(',');
     QString speed = fields[7];
-    m_dashboard->setgpsSpeed(speed.toInt());
+   // m_dashboard->setgpsSpeed(speed.toInt());
 
 }
 QString GPS::convertToDecimal(const QString & coord, const QString & dir)
