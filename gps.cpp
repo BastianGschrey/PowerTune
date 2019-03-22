@@ -168,7 +168,7 @@ void GPS::readyToRead()
     line.append(rawData);
     if (line.contains("\r\n"))
     {
-        int end = line.lastIndexOf("\r\n") + 2;
+        int end = line.indexOf("\r\n") + 2;
         QByteArray message = line;
         //qDebug()<< "line raw" << line;
         message.remove(end, line.length());
@@ -219,6 +219,7 @@ void GPS::ProcessMessage(QByteArray messageline)
     }
     if(line.startsWith("$GPRMC"))
     {
+        //qDebug()<< "GPRMC";
         processGPRMC(messageline);
     }
         /*
@@ -249,6 +250,7 @@ void GPS::handleTimeout()
 }
 
 void GPS::processGPRMC(const QString & line){
+    //qDebug()<< "GPRMC Processing";
     QStringList fields = line.split(',');
     QString time = fields[1];
     time.insert(2,":");
