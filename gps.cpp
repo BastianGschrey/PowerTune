@@ -168,7 +168,8 @@ void GPS::readyToRead()
     line.append(rawData);
     if (line.contains("\r\n"))
     {
-        int end = line.indexOf("\r\n") + 2;
+        //int end = line.indexOf("\r\n") + 2;
+        int end = line.lastIndexOf("\r\n") + 2;
         QByteArray message = line;
         //qDebug()<< "line raw" << line;
         message.remove(end, line.length());
@@ -231,6 +232,7 @@ void GPS::ProcessMessage(QByteArray messageline)
     */
     if (messageline.contains(ACK10HZ))
     {
+        qDebug() << "ACK 10Hz" <<messageline.toHex();
         m_dashboard->setgpsFIXtype("10Hz ACK");
         rateset = 1;
         removeNMEAmsg();
