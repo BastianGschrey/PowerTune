@@ -10,7 +10,7 @@ int initialized = 0;
 int rateset = 0 ;
 int raterequ = 0;
 int baudrate;
-QByteArray ACK10HZ = QByteArray::fromHex("0501020006");
+QByteArray ACK10HZ = QByteArray::fromHex("b562050102000608");
 QByteArray NACK10HZ = QByteArray::fromHex("050002");
 QByteArray line;
 int Laps = 0;
