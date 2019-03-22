@@ -217,7 +217,7 @@ void GPS::ProcessMessage(QByteArray messageline)
         processGPGGA(messageline);
 
     }
-    if(line.startsWith("$GPRMC"))
+    if(messageline.startsWith("$GPRMC"))
     {
         //qDebug()<< "GPRMC";
         processGPRMC(messageline);
