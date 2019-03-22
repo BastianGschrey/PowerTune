@@ -613,10 +613,10 @@ TabView {
                             font.pixelSize: windowbackround.width / 55
                             text: qsTr("Autoconnect GPS")
                             Component.onCompleted: {autoconnectGPS.auto()}
-                            //onCheckedChanged: {autoconnectGPS.auto()}
+                            onCheckedChanged: {autoconnectGPS.auto()}
                         }
 
-                        Text  { text: "V 1.6 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.7 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
