@@ -616,7 +616,7 @@ TabView {
                             //onCheckedChanged: {autoconnectGPS.auto()}
                         }
 
-                        Text  { text: "V 1.7 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.71 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
