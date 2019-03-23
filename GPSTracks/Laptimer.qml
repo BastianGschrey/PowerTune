@@ -185,6 +185,7 @@ Item {
                         font.pixelSize: 20
                         font.bold: true
                         font.family: "Eurostile"}
+ /*
                     Text { text: "Fastest Lap Time: "
                         font.pixelSize: 20
                         font.bold: true
@@ -201,6 +202,7 @@ Item {
                         font.pixelSize: 20
                         font.bold: true
                         font.family: "Eurostile"}
+*/
                     Text { text: "GPS FIX type: "
                         font.pixelSize: 20
                         font.bold: true
