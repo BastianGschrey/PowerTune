@@ -27,14 +27,38 @@ Item {
                 //value: ':/GPSTracks/'
                 value: "/home/pi/maptiles/"
            }
-
+/*
                        PluginParameter {
                           name: "osm.mapping.providersrepository.address"
                           //value: 'qrc:/GPSTracks/'
                           value: "/home/pi/maptiles/"
-                       }
+                       }*/
 
         }
+
+        Connections{
+            target: Dashboard
+            onCurrentLapChanged :{
+                if (Dashboard.currentLap > 0){timer.running = true,count = 0};
+                if (Dashboard.currentLap == 0){timer.running = false,count = 0};
+            }
+        }
+        Timer {
+          id: timer
+          interval: 100
+          running: false
+          repeat: true
+          onTriggered: count += 1
+
+
+        }
+
+        function time(count) {
+            return new Date(ms).toISOString().slice(11, -1);
+            console.log( time(12345 * 1000) );  // "03:25:45.000"
+        }
+
+       // console.log( time(12345 * 1000) );  // "03:25:45.000"
 
         Map {
             id: map
@@ -104,47 +128,31 @@ Item {
             onCurrentIndexChanged: changetrack.change()
 
         }
+        Button {
+            id: resettime
+            width: 170
+            height: 30
+            anchors.left: map.right
+            anchors.top: countryselect.bottom
+            font.pixelSize: 20
+        }
+        Button {
+            id: stop
+            width: 230
+            height: 30
+            anchors.left: countryselect.right
+            anchors.top: trackselect.bottom
+            font.pixelSize: 20
+
+
+        }
         Grid {
                     rows: 8
                     columns: 2
                     spacing: 5
                     anchors.left: map.right
-                    anchors.top: countryselect.bottom
-/*
+                    anchors.top: resettime.bottom
 
-                     Timer {
-                       id: timer
-                       interval: 1
-                       running: false
-                       repeat: true
-                       onTriggered: count += 1
-                     }
-                     Text {
-                       id: text
-                       font.pixelSize: 100
-                       text: (count / 100).toFixed(3)
-                     }
-
-                     Button {
-                       text: timer.running ? "Stop" : "Start"
-                       onClicked: timer.running = !timer.running
-                     }
-                     Button {
-                       text: "Reset"
-                       onClicked: count = 0
-                     }
-                     //
-*/
-                    Text { text: "Current Time: "
-                        font.pixelSize: 20
-                        font.bold: true
-                        font.family: "Eurostile"
-                    }
-                    Text { text: Dashboard.gpsTime
-                        font.pixelSize: 20
-                        font.bold: true
-                        font.family: "Eurostile"
-                    }
                     Text { text: "GPS Speed: "
                         font.pixelSize: 20
                         font.bold: true
@@ -153,39 +161,39 @@ Item {
                         font.pixelSize: 20
                         font.bold: true
                         font.family: "Eurostile"}
-                    Text { text: "Altitude: "
+                    Text { text: "Current Lap Time: "
                         font.pixelSize: 20
                         font.bold: true
                         font.family: "Eurostile"}
-                    Text { text: Dashboard.gpsAltitude
+                    Text { text: (count / 10).toFixed(1) //Qt.formatDateTime(Date(count), Qt.ISODate)
                         font.pixelSize: 20
                         font.bold: true
                         font.family: "Eurostile"}
-                    Text { text: "Latitude: "
+                    Text { text: "Current LAP No:"
                         font.pixelSize: 20
                         font.bold: true
                         font.family: "Eurostile"}
-                    Text { text: Dashboard.gpsLatitude
+                    Text { text: Dashboard.currentLap
                         font.pixelSize: 20
                         font.bold: true
                         font.family: "Eurostile"}
-                    Text { text: "Longitude: "
+                    Text { text: "Last Lap Time: "
                         font.pixelSize: 20
                         font.bold: true
                         font.family: "Eurostile"}
-                    Text { text: Dashboard.gpsLongitude
+                    Text { text: Dashboard.laptime
                         font.pixelSize: 20
                         font.bold: true
                         font.family: "Eurostile"}
-                    Text { text: "Visible Satelites: "
+                    Text { text: "Fastest Lap Time: "
                         font.pixelSize: 20
                         font.bold: true
                         font.family: "Eurostile"}
-                    Text { text: Dashboard.gpsVisibleSatelites
+                    Text { text: Dashboard.bestlaptime
                         font.pixelSize: 20
                         font.bold: true
                         font.family: "Eurostile"}
-                    Text { text: "GPS Bearing: "
+                    Text { text: "Fastest Lap No: "
                         font.pixelSize: 20
                         font.bold: true
                         font.family: "Eurostile"}

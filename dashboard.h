@@ -327,6 +327,13 @@ class DashBoard : public QObject
 
     Q_PROPERTY(int ExternalSpeed READ ExternalSpeed WRITE setExternalSpeed NOTIFY ExternalSpeedChanged)
 
+    //laptimer
+
+    Q_PROPERTY(QString laptime READ laptime WRITE setlaptime NOTIFY laptimeChanged)
+    Q_PROPERTY(QString Lastlaptime READ Lastlaptime WRITE setLastlaptime NOTIFY LastlaptimeChanged)
+    Q_PROPERTY(QString bestlaptime READ bestlaptime WRITE setbestlaptime NOTIFY bestlaptimeChanged)
+    Q_PROPERTY(int currentLap READ currentLap WRITE setcurrentLap NOTIFY currentLapChanged)
+
 
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
 public:
@@ -657,6 +664,12 @@ public:
 
    Q_INVOKABLE void setgearcalcactivation(const int &gearcalcactivation);
 
+    //laptimer
+    void setcurrentLap(const int &currentLap);
+    void setlaptime(const QString &laptime);
+    void setLastlaptime(const QString &Lastlaptime);
+    void setbestlaptime(const QString &bestlaptime);
+
 
 
     qreal Odo() const;
@@ -979,6 +992,13 @@ public:
     QString Error() const;
     int ExternalSpeed() const;
 
+    //laptimer
+
+    int currentLap() const;
+    QString laptime() const;
+    QString Lastlaptime() const;
+    QString bestlaptime() const;
+
 signals:
 
     //Odometer
@@ -1293,6 +1313,12 @@ signals:
     void ErrorChanged(QString Error);
     void ExternalSpeedChanged(int ExternalSpeed);
 
+    //laptimer
+
+    void currentLapChanged(int currentLap);
+    void laptimeChanged(QString laptime);
+    void LastlaptimeChanged(QString Lastlaptime);
+    void bestlaptimeChanged(QString bestlaptime);
 
 private:
     // Odometer
@@ -1618,6 +1644,14 @@ private:
     int m_rpmstyle3;
     QString m_Error;
     int m_ExternalSpeed;
+
+    //laptimer
+
+    int m_currentLap;
+    QString m_laptime;
+    QString m_Lastlaptime;
+    QString m_bestlaptime;
+
 };
 
 #endif // DASHBOARD_H

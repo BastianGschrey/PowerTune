@@ -961,7 +961,7 @@ TabView {
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
-                        model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer"]
+                        model: ["Main Dash", "Adaptronic","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer"]
                         property bool initialized: true
                         onCurrentIndexChanged:{Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select1.selDash1() }
                         Component.onCompleted: {Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select1.selDash1() }
@@ -981,7 +981,7 @@ TabView {
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
-                        model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer"]
+                         model: ["Main Dash", "Adaptronic","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer"]
                         property bool initialized: true
                         onCurrentIndexChanged:{Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select2.selDash2() }
                         Component.onCompleted: {Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select2.selDash2() }
@@ -1001,7 +1001,7 @@ TabView {
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
-                        model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer"]
+                        model: ["Main Dash", "Adaptronic","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer"]
                         property bool initialized: true
                         onCurrentIndexChanged:{Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select3.selDash3() }
                         Component.onCompleted: {Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select3.selDash3() }
@@ -1020,7 +1020,7 @@ TabView {
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
-                        model: ["Main Dash", "Adaptronic","Charts", "GPS", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer"]
+                         model: ["Main Dash", "Adaptronic","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer"]
                         property bool initialized: true
                         onCurrentIndexChanged:{Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select4.selDash4() }
                         Component.onCompleted: {Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select4.selDash4() }
@@ -1202,7 +1202,7 @@ TabView {
                     {
                         if (dash1.currentIndex == "0") {firstPageLoader.source = "qrc:/Gauges/Cluster.qml"};
                         if (dash1.currentIndex == "1") {firstPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
-                        if (dash1.currentIndex == "2") {firstPageLoader.source = "qrc:/Gauges/Charts.qml"};
+                        if (dash1.currentIndex == "2") {firstPageLoader.source = "qrc:/Gauges/GPS.qml"};
                         if (dash1.currentIndex == "3") {firstPageLoader.source = "qrc:/GPSTracks/Laptimer.qml"};
                         if (dash1.currentIndex == "4") {firstPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
                         if (dash1.currentIndex == "5") {firstPageLoader.source = "qrc:/Gauges/Userdash1.qml"};
@@ -1224,7 +1224,7 @@ TabView {
                     {
                         if (dash2.currentIndex == "0") {secondPageLoader.source = "qrc:/Gauges/Cluster.qml"};
                         if (dash2.currentIndex == "1") {secondPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
-                        if (dash2.currentIndex == "2") {secondPageLoader.source = "qrc:/Gauges/Charts.qml"};
+                        if (dash2.currentIndex == "2") {secondPageLoader.source = "qrc:/Gauges/GPS.qml"};
                         if (dash2.currentIndex == "3") {secondPageLoader.source = "qrc:/GPSTracks/Laptimer.qml"};
                         if (dash2.currentIndex == "4") {secondPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
                         if (dash2.currentIndex == "5") {secondPageLoader.source = "qrc:/Gauges/Userdash1.qml"};
@@ -1245,7 +1245,7 @@ TabView {
                     {
                         if (dash3.currentIndex == "0") {thirdPageLoader.source = "qrc:/Gauges/Cluster.qml"};
                         if (dash3.currentIndex == "1") {thirdPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
-                        if (dash3.currentIndex == "2") {thirdPageLoader.source = "qrc:/Gauges/Charts.qml"};
+                        if (dash3.currentIndex == "2") {thirdPageLoader.source = "qrc:/Gauges/GPS.qml"};
                         if (dash3.currentIndex == "3") {thirdPageLoader.source = "qrc:/GPSTracks/Laptimer.qml"};
                         if (dash3.currentIndex == "4") {thirdPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
                         if (dash3.currentIndex == "5") {thirdPageLoader.source = "qrc:/Gauges/Userdash1.qml"};
@@ -1266,7 +1266,7 @@ TabView {
                     {
                         if (dash4.currentIndex == "0") {fourthPageLoader.source = "qrc:/Gauges/Cluster.qml"};
                         if (dash4.currentIndex == "1") {fourthPageLoader.source = "qrc:/Gauges/DashAdaptronic.qml"};
-                        if (dash4.currentIndex == "2") {fourthPageLoader.source = "qrc:/Gauges/Charts.qml"};
+                        if (dash4.currentIndex == "2") {fourthPageLoader.source = "qrc:/Gauges/GPS.qml"};
                         if (dash4.currentIndex == "3") {fourthPageLoader.source = "qrc:/GPSTracks/Laptimer.qml"};
                         if (dash4.currentIndex == "4") {fourthPageLoader.source = "qrc:/Gauges/PFCSensors.qml"};
                         if (dash4.currentIndex == "5") {fourthPageLoader.source = "qrc:/Gauges/Userdash1.qml"};

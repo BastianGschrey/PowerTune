@@ -150,6 +150,7 @@ void GPS::closeConnection1()
     initialized =1;
     m_dashboard->setgpsFIXtype("close serial");
     openConnection("ttyAMA0","115200");
+
 }
 
 void GPS::handleError(QSerialPort::SerialPortError serialPortError)
@@ -367,10 +368,14 @@ void GPS::checknewLap()
                 QTime y(0, 0);
                 y = y.addMSecs(m_timer.elapsed());
                 QString Laptime = y.toString("mm:ss.zzz");
+                m_dashboard->setlaptime(Laptime);
+                m_dashboard->setcurrentLap(Laps);
                 m_timer.restart();
             }
             else{
                 m_timer.start();
+                Laps++;
+                m_dashboard->setcurrentLap(Laps);
             }
         }
     }

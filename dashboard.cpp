@@ -299,6 +299,13 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_Error("")
     ,  m_ExternalSpeed(0)
 
+    //laptimer
+
+    ,  m_currentLap(0)
+    ,  m_laptime("00:00:000")
+    ,  m_Lastlaptime("00:00:000")
+    ,  m_bestlaptime("00:00:000")
+
 {
 }
 
@@ -2519,6 +2526,35 @@ void DashBoard::setExternalSpeed(const int &ExternalSpeed)
     emit ExternalSpeedChanged(ExternalSpeed);
 }
 
+void DashBoard::setcurrentLap(const int &currentLap)
+{
+    if (m_currentLap == currentLap)
+        return;
+    m_currentLap = currentLap;
+    emit currentLapChanged(currentLap);
+}
+
+void DashBoard::setlaptime(const QString &laptime)
+{
+    if (m_laptime == laptime)
+        return;
+    m_laptime = laptime;
+    emit laptimeChanged(laptime);
+}
+void DashBoard::setLastlaptime(const QString &Lastlaptime)
+{
+    if (m_Lastlaptime == Lastlaptime)
+        return;
+    m_Lastlaptime = Lastlaptime;
+    emit LastlaptimeChanged(Lastlaptime);
+}
+void DashBoard::setbestlaptime(const QString &bestlaptime)
+{
+    if (m_bestlaptime == bestlaptime)
+        return;
+    m_bestlaptime = bestlaptime;
+    emit bestlaptimeChanged(bestlaptime);
+}
 
 
 // Odometer
@@ -2835,6 +2871,16 @@ int DashBoard::rpmstyle3() const { return m_rpmstyle3; }
 
 QString DashBoard::Error() const { return m_Error; }
 int DashBoard::ExternalSpeed() const {return m_ExternalSpeed; }
+
+//laptimer
+
+int DashBoard::currentLap() const {return m_currentLap; }
+QString DashBoard::laptime() const {return m_laptime; }
+QString DashBoard::Lastlaptime() const {return m_Lastlaptime; }
+QString DashBoard::bestlaptime() const {return m_bestlaptime; }
+
+
+
 
 // Sensor Strings
 
