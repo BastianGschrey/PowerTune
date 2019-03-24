@@ -27,12 +27,12 @@ Item {
                 //value: ':/GPSTracks/'
                 value: "/home/pi/maptiles/"
            }
-/*
+
                        PluginParameter {
                           name: "osm.mapping.providersrepository.address"
                           //value: 'qrc:/GPSTracks/'
                           value: "/home/pi/maptiles/"
-                       }*/
+                       }
 
         }
 
