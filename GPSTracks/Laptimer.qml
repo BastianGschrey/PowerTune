@@ -177,7 +177,7 @@ Item {
             anchors.left: map.right
             anchors.top: resettime.bottom
 
-            Text { text: "Current: "
+            Text { text: "Current Laptime: "
                 font.pixelSize: 15
                 font.bold: true
                 font.family: "Eurostile"}
@@ -187,8 +187,8 @@ Item {
                 font.pixelSize: 20
                 font.bold: true
                 font.family: "Eurostile"}
-            Text { text: "Current:"
-                font.pixelSize: 20
+            Text { text: "Current lap:"
+                font.pixelSize: 15
                 font.bold: true
                 font.family: "Eurostile"}
             Text { text: Dashboard.currentLap
@@ -196,7 +196,7 @@ Item {
                 font.bold: true
                 font.family: "Eurostile"}
             Text { text: "Last Lap Time: "
-                font.pixelSize: 20
+                font.pixelSize: 15
                 font.bold: true
                 font.family: "Eurostile"}
             Text { text: Dashboard.laptime
@@ -205,7 +205,7 @@ Item {
                 font.family: "Eurostile"}
 
             Text { text: "GPS FIX type: "
-                font.pixelSize: 20
+                font.pixelSize: 15
                 font.bold: true
                 font.family: "Eurostile"}
             Text { text: Dashboard.gpsFIXtype
