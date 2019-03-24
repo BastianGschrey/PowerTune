@@ -22,17 +22,21 @@ Item {
             id: mapPlugin
             name: "osm"
             //Offline directory for Map Tiles
-           PluginParameter {
+            PluginParameter {
                 name: 'osm.mapping.offline.directory'
                 //value: ':/GPSTracks/'
                 value: "/home/pi/maptiles/"
-           }
+            }
+            PluginParameter {
+                name: 'osm.mapping.providersrepository.disabled'
+                value: true
+            }
 
-                       PluginParameter {
-                          name: "osm.mapping.providersrepository.address"
-                          //value: 'qrc:/GPSTracks/'
-                          value: "/home/pi/maptiles/"
-                       }
+            PluginParameter {
+                name: "osm.mapping.providersrepository.address"
+                //value: 'qrc:/GPSTracks/'
+                value: "/home/pi/maptiles/"
+            }
 
         }
 
