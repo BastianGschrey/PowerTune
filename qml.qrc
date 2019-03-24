@@ -129,5 +129,6 @@
         <file>Gauges/SquareGaugeMain.qml</file>
         <file>graphics/Logo.png</file>
         <file>Intro.qml</file>
+        <file>GPSTracks/Laptimecontainer.qml</file>
     </qresource>
 </RCC>

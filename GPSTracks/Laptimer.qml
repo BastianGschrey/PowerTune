@@ -1,19 +1,50 @@
-import QtQuick 2.8
+import QtQuick 2.9
 import QtLocation 5.9
 import QtPositioning 5.9
-import QtQuick.Controls 2.1
+import QtQuick.Controls 2.2
+//import QtQuick.Controls 1.4
 
 
 Item {
     id: mapItem
     anchors.fill: parent
 
-    property int count: 0
+//Timer is inacurate for real timing therefore we use some Javascript to measure time and update the frontend with the measured time via Timer
+    property double startTime: 0
+    property int msecondsElapsed: 0
+
+    function restartCounter()  {
+
+        mapItem.startTime = 0;
+
+    }
+
+    function timeChanged()  {
+        if(mapItem.startTime==0)
+        {
+            mapItem.startTime = new Date().getTime(); //returns the number of milliseconds since the epoch (1970-01-01T00:00:00Z);
+        }
+        var currentTime = new Date().getTime();
+        mapItem.msecondsElapsed = (currentTime-startTime)/100;
+    }
+
+    Timer  {
+        id: elapsedTimer
+        interval: 100;
+        running: false;
+        repeat: true;
+        onTriggered: {
+
+            mapItem.timeChanged()
+            time.text = new Date(mapItem.msecondsElapsed*100).toLocaleTimeString(Qt.locale(),"mm" + ":" + "ss" + "." + "zzz")
+
+        }
+    }
 
     Connections{
-    target: Dashboard
-    onGpsLatitudeChanged : {pos.poschanged()}
-    onGpsLongitudeChanged : {pos.poschanged()}
+        target: Dashboard
+        onGpsLatitudeChanged : {pos.poschanged()}
+        onGpsLongitudeChanged : {pos.poschanged()}
     }
 
     Rectangle{
@@ -40,29 +71,17 @@ Item {
 
         }
 
+
+
+
+
         Connections{
             target: Dashboard
             onCurrentLapChanged :{
-                if (Dashboard.currentLap > 0){timer.running = true,count = 0};
-                if (Dashboard.currentLap == 0){timer.running = false,count = 0};
+                if (Dashboard.currentLap > 0){elapsedTimer.running = true,mapItem.startTime = 0};
+                if (Dashboard.currentLap == 0){elapsedTimer.running = false,mapItem.startTime = 0};
             }
         }
-        Timer {
-          id: timer
-          interval: 100
-          running: false
-          repeat: true
-          onTriggered: count += 1
-
-
-        }
-
-        function time(count) {
-            return new Date(ms).toISOString().slice(11, -1);
-            console.log( time(12345 * 1000) );  // "03:25:45.000"
-        }
-
-       // console.log( time(12345 * 1000) );  // "03:25:45.000"
 
         Map {
             id: map
@@ -151,45 +170,63 @@ Item {
 
         }
         Grid {
-                    rows: 8
-                    columns: 2
-                    spacing: 5
-                    anchors.left: map.right
-                    anchors.top: resettime.bottom
+            id:grid1
+            rows: 4
+            columns: 2
+            spacing: 5
+            anchors.left: map.right
+            anchors.top: resettime.bottom
 
-                    Text { text: "GPS Speed: "
-                        font.pixelSize: 20
-                        font.bold: true
-                        font.family: "Eurostile"}
-                    Text { text: Dashboard.gpsSpeed
-                        font.pixelSize: 20
-                        font.bold: true
-                        font.family: "Eurostile"}
-                    Text { text: "Current Lap Time: "
-                        font.pixelSize: 20
-                        font.bold: true
-                        font.family: "Eurostile"}
-                    Text { text: (count / 10).toFixed(1) //Qt.formatDateTime(Date(count), Qt.ISODate)
-                        font.pixelSize: 20
-                        font.bold: true
-                        font.family: "Eurostile"}
-                    Text { text: "Current LAP No:"
-                        font.pixelSize: 20
-                        font.bold: true
-                        font.family: "Eurostile"}
-                    Text { text: Dashboard.currentLap
-                        font.pixelSize: 20
-                        font.bold: true
-                        font.family: "Eurostile"}
-                    Text { text: "Last Lap Time: "
-                        font.pixelSize: 20
-                        font.bold: true
-                        font.family: "Eurostile"}
-                    Text { text: Dashboard.laptime
-                        font.pixelSize: 20
-                        font.bold: true
-                        font.family: "Eurostile"}
- /*
+            Text { text: "Current: "
+                font.pixelSize: 15
+                font.bold: true
+                font.family: "Eurostile"}
+            Text {
+                id: time
+                text: "00:00.000"
+                font.pixelSize: 20
+                font.bold: true
+                font.family: "Eurostile"}
+            Text { text: "Current:"
+                font.pixelSize: 20
+                font.bold: true
+                font.family: "Eurostile"}
+            Text { text: Dashboard.currentLap
+                font.pixelSize: 20
+                font.bold: true
+                font.family: "Eurostile"}
+            Text { text: "Last Lap Time: "
+                font.pixelSize: 20
+                font.bold: true
+                font.family: "Eurostile"}
+            Text { text: Dashboard.laptime
+                font.pixelSize: 20
+                font.bold: true
+                font.family: "Eurostile"}
+
+            Text { text: "GPS FIX type: "
+                font.pixelSize: 20
+                font.bold: true
+                font.family: "Eurostile"}
+            Text { text: Dashboard.gpsFIXtype
+                font.pixelSize: 20
+                font.bold: true
+                font.family: "Eurostile"}
+        }
+
+Rectangle{
+    anchors.top: grid1.bottom
+    anchors.left: map.right
+    width: 400
+    height: 200
+    color: "green"
+        Laptimecontainer{
+            width: 400
+            height: 200
+        }
+}
+
+            /*
                     Text { text: "Fastest Lap Time: "
                         font.pixelSize: 20
                         font.bold: true
@@ -207,53 +244,45 @@ Item {
                         font.bold: true
                         font.family: "Eurostile"}
 */
-                    Text { text: "GPS FIX type: "
-                        font.pixelSize: 20
-                        font.bold: true
-                        font.family: "Eurostile"}
-                    Text { text: Dashboard.gpsFIXtype
-                        font.pixelSize: 20
-                        font.bold: true
-                        font.family: "Eurostile"}
-                }
+
 
         Item
         {
             id: changecountry
             function change(){
 
-            if (countryselect.textAt(countryselect.currentIndex) == "Current Position"){trackselect.model = ["Tilt 0", "Tilt 45"],map.center= QtPositioning.coordinate(-25.804219,28.300091)};
+                if (countryselect.textAt(countryselect.currentIndex) == "Current Position"){trackselect.model = ["Tilt 0", "Tilt 45"],map.center= QtPositioning.coordinate(-25.804219,28.300091)};
                 //if (countryselect.textAt(countryselect.currentIndex) == "Current Position"){trackselect.model = ["Tilt 0", "Tilt 45"],map.center= QtPositioning.coordinate(Dashboard.gpsLatitude,Dashboard.gpsLongitude)};
-            if (countryselect.textAt(countryselect.currentIndex) == "Australia"){trackselect.model = ["Carrnell Raceway","Wakefield Park"]};
-            if (countryselect.textAt(countryselect.currentIndex) == "Germany"){trackselect.model = ["Hockenheim","Nürburgring"]};
-            if (countryselect.textAt(countryselect.currentIndex) == "New Zealand"){trackselect.model = ["Pukekohe Park"]};
-            if (countryselect.textAt(countryselect.currentIndex) == "South Africa"){trackselect.model = ["Dezzi","Midvaal","Phakisa","Redstar","Zwartkops"]};
-            //if (countryselect.textAt(countryselect.currentIndex) == "United Kingdom"){trackselect.model = ["Silverstone"]};
-            //if (countryselect.textAt(countryselect.currentIndex) == "USA"){trackselect.model = ["Utah Motorsport Park"]};
-             console.log(countryselect.textAt(countryselect.currentIndex))
-            changetrack.change()
-        }
+                if (countryselect.textAt(countryselect.currentIndex) == "Australia"){trackselect.model = ["Carrnell Raceway","Wakefield Park"]};
+                if (countryselect.textAt(countryselect.currentIndex) == "Germany"){trackselect.model = ["Hockenheim","Nürburgring"]};
+                if (countryselect.textAt(countryselect.currentIndex) == "New Zealand"){trackselect.model = ["Pukekohe Park"]};
+                if (countryselect.textAt(countryselect.currentIndex) == "South Africa"){trackselect.model = ["Dezzi","Midvaal","Phakisa","Redstar","Zwartkops"]};
+                //if (countryselect.textAt(countryselect.currentIndex) == "United Kingdom"){trackselect.model = ["Silverstone"]};
+                //if (countryselect.textAt(countryselect.currentIndex) == "USA"){trackselect.model = ["Utah Motorsport Park"]};
+                console.log(countryselect.textAt(countryselect.currentIndex))
+                changetrack.change()
+            }
         }
         Item
         {
             id: changetrack
             function change(){
                 console.log(trackselect.textAt(trackselect.currentIndex))
-                        if (trackselect.textAt(trackselect.currentIndex) == "Tilt 0"){map.tilt = 0};
-                        if (trackselect.textAt(trackselect.currentIndex) == "Tilt 45"){map.tilt = 45};
-                        if (trackselect.textAt(trackselect.currentIndex) == "Bruce McLaren Motorsport Park"){map.center= QtPositioning.coordinate(-38.666331,176.1430453,17),map.zoomLevel = 15.6,map.bearing  = 43,map.tilt = 0};
-                        if (trackselect.textAt(trackselect.currentIndex) == "Redstar"){map.center= QtPositioning.coordinate(-26.074283, 28.751711),map.zoomLevel = 16,map.bearing  = 0,map.tilt = 0,GPS.defineFinishLine(-26.075097, 28.755060,-26.075111,28.755229)};
-                        if (trackselect.textAt(trackselect.currentIndex) == "Utah Motorsport Park"){map.center= QtPositioning.coordinate(40.579618,-112.3805621,398),map.zoomLevel = 15.1 ,map.bearing  = 90,map.tilt = 0};
-                        if (trackselect.textAt(trackselect.currentIndex) == "Wakefield Park"){map.center= QtPositioning.coordinate(-34.840764,149.686800),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 0,GPS.defineFinishLine(-34.840111,149.685229,-34.840172,149.685433)};
-                        if (trackselect.textAt(trackselect.currentIndex) == "Nürburgring"){map.center= QtPositioning.coordinate(50.358917, 6.965215),map.zoomLevel = 16,map.bearing  = 0,map.tilt = 0};
-                        if (trackselect.textAt(trackselect.currentIndex) == "Zwartkops"){map.center= QtPositioning.coordinate(-25.809960, 28.111175),map.zoomLevel = 16.6,map.bearing  = 0,map.tilt = 0,GPS.defineFinishLine(-25.809477,28.112105,-25.809404,28.112276)};
-                        if (trackselect.textAt(trackselect.currentIndex) == "Pukekohe Park"){map.center= QtPositioning.coordinate(-37.215300, 174.919707),map.zoomLevel = 15.6,map.tilt = 0,map.bearing  = 0,GPS.defineFinishLine(-37.215564,174.915710,-37.215510, 174.915914)}
-                        if (trackselect.textAt(trackselect.currentIndex) == "Carrnell Raceway"){map.center= QtPositioning.coordinate(-28.685079, 151.938694),map.zoomLevel = 17,map.tilt = 0,map.bearing  = 22}
-                        if (trackselect.textAt(trackselect.currentIndex) == "Phakisa"){map.center= QtPositioning.coordinate(-27.904231, 26.713996),map.zoomLevel = 15.6,map.tilt = 0,map.bearing  = 22}
-                        if (trackselect.textAt(trackselect.currentIndex) == "Midvaal"){map.center= QtPositioning.coordinate(-26.612376, 28.059484),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 22,GPS.defineFinishLine(-26.613392, 28.058586,-26.613509,28.058717)}
-            if (trackselect.textAt(trackselect.currentIndex) == "Dezzi"){map.center= QtPositioning.coordinate(-30.770474, 30.426004),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 22}
+                if (trackselect.textAt(trackselect.currentIndex) == "Tilt 0"){map.tilt = 0};
+                if (trackselect.textAt(trackselect.currentIndex) == "Tilt 45"){map.tilt = 45};
+                if (trackselect.textAt(trackselect.currentIndex) == "Bruce McLaren Motorsport Park"){map.center= QtPositioning.coordinate(-38.666331,176.1430453,17),map.zoomLevel = 15.6,map.bearing  = 43,map.tilt = 0};
+                if (trackselect.textAt(trackselect.currentIndex) == "Redstar"){map.center= QtPositioning.coordinate(-26.074283, 28.751711),map.zoomLevel = 16,map.bearing  = 0,map.tilt = 0,GPS.defineFinishLine(-26.075097, 28.755060,-26.075111,28.755229)};
+                if (trackselect.textAt(trackselect.currentIndex) == "Utah Motorsport Park"){map.center= QtPositioning.coordinate(40.579618,-112.3805621,398),map.zoomLevel = 15.1 ,map.bearing  = 90,map.tilt = 0};
+                if (trackselect.textAt(trackselect.currentIndex) == "Wakefield Park"){map.center= QtPositioning.coordinate(-34.840764,149.686800),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 0,GPS.defineFinishLine(-34.840111,149.685229,-34.840172,149.685433)};
+                if (trackselect.textAt(trackselect.currentIndex) == "Nürburgring"){map.center= QtPositioning.coordinate(50.358917, 6.965215),map.zoomLevel = 16,map.bearing  = 0,map.tilt = 0};
+                if (trackselect.textAt(trackselect.currentIndex) == "Zwartkops"){map.center= QtPositioning.coordinate(-25.809960, 28.111175),map.zoomLevel = 16.6,map.bearing  = 0,map.tilt = 0,GPS.defineFinishLine(-25.809477,28.112105,-25.809404,28.112276)};
+                if (trackselect.textAt(trackselect.currentIndex) == "Pukekohe Park"){map.center= QtPositioning.coordinate(-37.215300, 174.919707),map.zoomLevel = 15.6,map.tilt = 0,map.bearing  = 0,GPS.defineFinishLine(-37.215564,174.915710,-37.215510, 174.915914)}
+                if (trackselect.textAt(trackselect.currentIndex) == "Carrnell Raceway"){map.center= QtPositioning.coordinate(-28.685079, 151.938694),map.zoomLevel = 17,map.tilt = 0,map.bearing  = 22}
+                if (trackselect.textAt(trackselect.currentIndex) == "Phakisa"){map.center= QtPositioning.coordinate(-27.904231, 26.713996),map.zoomLevel = 15.6,map.tilt = 0,map.bearing  = 22}
+                if (trackselect.textAt(trackselect.currentIndex) == "Midvaal"){map.center= QtPositioning.coordinate(-26.612376, 28.059484),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 22,GPS.defineFinishLine(-26.613392, 28.058586,-26.613509,28.058717)}
+                if (trackselect.textAt(trackselect.currentIndex) == "Dezzi"){map.center= QtPositioning.coordinate(-30.770474, 30.426004),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 22}
 
-        }
+            }
         }
 
         Item
@@ -261,8 +290,8 @@ Item {
             //Needed to permanently update the Map Center if Current Position view is selected
             id: pos
             function poschanged(){
-            if (countryselect.textAt(countryselect.currentIndex) == "Current Position"){map.center= QtPositioning.coordinate(Dashboard.gpsLatitude,Dashboard.gpsLongitude)};
-         }
+                if (countryselect.textAt(countryselect.currentIndex) == "Current Position"){map.center= QtPositioning.coordinate(Dashboard.gpsLatitude,Dashboard.gpsLongitude)};
+            }
         }
     }
 }
