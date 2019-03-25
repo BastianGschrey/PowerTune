@@ -10,6 +10,7 @@ int initialized = 0;
 int rateset = 0 ;
 int raterequ = 0;
 int baudrate;
+QTime fastestlap(0, 0);
 QByteArray ACK10HZ = QByteArray::fromHex("b562050102000608");
 QByteArray NACK10HZ = QByteArray::fromHex("050002");
 QByteArray line;
@@ -364,13 +365,24 @@ void GPS::checknewLap()
         if (m_dashboard->gpsLongitude() <= startlineX2 && m_dashboard->gpsLongitude() >= startlineX1 )
         {
             if (m_timer.isValid() == true)
-            {Laps++;
+            {
                 QTime y(0, 0);
-                y = y.addMSecs(m_timer.elapsed());
-                QString Laptime = y.toString("mm:ss.zzz");
-                m_dashboard->setlaptime(Laptime);
-                m_dashboard->setcurrentLap(Laps);
-                m_timer.restart();
+                                y = y.addMSecs(m_timer.elapsed());
+                                if (Laps == 1)
+                                {
+                                    fastestlap = y;
+                                    m_dashboard->setbestlaptime(fastestlap.toString("mm:ss.zzz"));
+                                }
+                                if (y < fastestlap)
+                                {
+                                   // qDebug() << "y is smaller";
+                                fastestlap = y;
+                                m_dashboard->setbestlaptime(y.toString("mm:ss.zzz"));
+                                }
+                                Laps++;
+                                m_dashboard->setlaptime(y.toString("mm:ss.zzz"));
+                                m_dashboard->setcurrentLap(Laps);
+                                m_timer.restart();
             }
             else{
                 m_timer.start();

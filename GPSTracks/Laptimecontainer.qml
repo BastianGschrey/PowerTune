@@ -3,57 +3,63 @@ import QtQuick.Controls 1.4
 
 Rectangle {
     width: 400
-    height: 350
+    height: 400
     color: "black"
+
     Connections{
         target: Dashboard
         onCurrentLapChanged :{
             if (Dashboard.currentLap > 1)
             {
                 laptimeModel.append({"lap":Dashboard.currentLap-1, "time":Dashboard.laptime})
-                //tableview.selection.select(Dashboard.currentLap-2)
+                laptimelistview.incrementCurrentIndex()
             }
-            if (Dashboard.currentLap == 0){laptimeModel.clear()};
+            if (Dashboard.currentLap == 0){
+                laptimeModel.clear()
+                laptimelistview.currentIndex = 0
+            }
         }
     }
     ListModel {
         id: laptimeModel
     }
-    ScrollView {
-        id:scrollcontainer
-        width: 400
-        height: 350
 
+    Component {
+        id: contactDelegate
 
-        TableView {
-            id:tableview
-            width: 380
-            height: 400
-
-            TableViewColumn {
-                role: "lap"
-                title: "Lap"
-                width: scrollcontainer.width /3
-                delegate: imageDelegate
-            }
-
-            TableViewColumn {
-                role: "time"
-                title: "Time"
-                width: scrollcontainer.width /1.65
-                delegate: imageDelegate
-            }
-            itemDelegate: Item {
+        Item {
+            id:leftcolum
+            width: 400; height: 40
+            Row {
+            Column {
                 Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: "black"
-                    elide: styleData.elideMode
-                    text: styleData.value
-                    font.pixelSize: 20
-                    font.bold: true
-                }
+                        text: "LAP " + lap
+                        width: 110
+                        color: "white"
+                        font.pixelSize:  15
+                        font.bold: true}
             }
-            model: laptimeModel
+            Column {
+                Text { text: time
+                       anchors.right: parent.right
+                       width: 195
+                       color: "white"
+                       font.pixelSize:  30
+                       font.bold: true}
+            }
+        }
         }
     }
+
+    ListView {
+        id: laptimelistview
+        width: 400
+        height: 200
+        anchors.bottom: parent.bottom
+        model: laptimeModel
+        delegate: contactDelegate
+        highlight: Rectangle { color: "#505050"; radius: 5}
+        focus: true
+    }
+
 }

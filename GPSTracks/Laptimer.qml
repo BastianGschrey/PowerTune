@@ -2,13 +2,13 @@ import QtQuick 2.9
 import QtLocation 5.9
 import QtPositioning 5.9
 import QtQuick.Controls 2.2
-//import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 
 
-Item {
+Rectangle {
     id: mapItem
     anchors.fill: parent
-
+    color: "black"
 //Timer is inacurate for real timing therefore we use some Javascript to measure time and update the frontend with the measured time via Timer
     property double startTime: 0
     property int msecondsElapsed: 0
@@ -49,6 +49,7 @@ Item {
 
     Rectangle{
         anchors.fill: parent
+        color: "black"
         Plugin {
             id: mapPlugin
             name: "osm"
@@ -153,7 +154,8 @@ Item {
         }
         Button {
             id: resettime
-            width: 170
+            text: "Reset Best Lap"
+            width: 180
             height: 30
             anchors.left: map.right
             anchors.top: countryselect.bottom
@@ -161,55 +163,64 @@ Item {
         }
         Button {
             id: stop
-            width: 230
+            text: "Reset Laptimer"
+            width: 180
             height: 30
-            anchors.left: countryselect.right
+            anchors.right: parent.right
             anchors.top: trackselect.bottom
             font.pixelSize: 20
-
-
         }
         Grid {
             id:grid1
-            rows: 4
+            rows: 3
             columns: 2
             spacing: 5
             anchors.left: map.right
             anchors.top: resettime.bottom
 
-            Text { text: "Current Laptime: "
+
+            Text { text: "Current : "
                 font.pixelSize: 15
                 font.bold: true
+                color : "orangered"
                 font.family: "Eurostile"}
             Text {
                 id: time
                 text: "00:00.000"
-                font.pixelSize: 20
+                font.pixelSize: 30
                 font.bold: true
+                color : "orangered"
                 font.family: "Eurostile"}
-            Text { text: "Current lap:"
+            /*
+            Text { text: "Last Lap:"
                 font.pixelSize: 15
                 font.bold: true
-                font.family: "Eurostile"}
-            Text { text: Dashboard.currentLap
-                font.pixelSize: 20
-                font.bold: true
-                font.family: "Eurostile"}
-            Text { text: "Last Lap Time: "
-                font.pixelSize: 15
-                font.bold: true
+                color : "white"
                 font.family: "Eurostile"}
             Text { text: Dashboard.laptime
-                font.pixelSize: 20
+                font.pixelSize: 30
                 font.bold: true
+                color : "white"
                 font.family: "Eurostile"}
+            */
+            Text { text: "Best Lap: "
+                font.pixelSize: 15
+                font.bold: true
+                color: "#00ff00"
+                font.family: "Eurostile"}
+            Text { text: Dashboard.bestlaptime
+                font.pixelSize: 30
+                font.bold: true
+                color: "#00ff00"
+                font.family: "Eurostile"}
+
 
             Text { text: "GPS FIX type: "
                 font.pixelSize: 15
                 font.bold: true
                 font.family: "Eurostile"}
             Text { text: Dashboard.gpsFIXtype
-                font.pixelSize: 20
+                font.pixelSize: 30
                 font.bold: true
                 font.family: "Eurostile"}
         }
@@ -219,31 +230,13 @@ Rectangle{
     anchors.left: map.right
     width: 400
     height: 200
-    color: "green"
+    color: "black"
         Laptimecontainer{
             width: 400
             height: 200
         }
 }
 
-            /*
-                    Text { text: "Fastest Lap Time: "
-                        font.pixelSize: 20
-                        font.bold: true
-                        font.family: "Eurostile"}
-                    Text { text: Dashboard.bestlaptime
-                        font.pixelSize: 20
-                        font.bold: true
-                        font.family: "Eurostile"}
-                    Text { text: "Fastest Lap No: "
-                        font.pixelSize: 20
-                        font.bold: true
-                        font.family: "Eurostile"}
-                    Text { text: Dashboard.gpsbaering
-                        font.pixelSize: 20
-                        font.bold: true
-                        font.family: "Eurostile"}
-*/
 
 
         Item

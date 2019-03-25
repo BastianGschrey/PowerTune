@@ -302,9 +302,9 @@ DashBoard::DashBoard(QObject *parent)
     //laptimer
 
     ,  m_currentLap(0)
-    ,  m_laptime("00:00:000")
-    ,  m_Lastlaptime("00:00:000")
-    ,  m_bestlaptime("00:00:000")
+    ,  m_laptime("00:00.000")
+    ,  m_Lastlaptime("00:00.000")
+    ,  m_bestlaptime("00:00.000")
 
 {
 }
