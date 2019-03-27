@@ -45,6 +45,17 @@ Rectangle {
         target: Dashboard
         onGpsLatitudeChanged : {pos.poschanged()}
         onGpsLongitudeChanged : {pos.poschanged()}
+        onCurrentLapChanged :{
+            if (Dashboard.currentLap > 1)
+            {
+                laptimeModel.append({"lap":Dashboard.currentLap-1, "time":Dashboard.laptime})
+                laptimelistview.incrementCurrentIndex()
+            }
+            if (Dashboard.currentLap == 0){
+                laptimeModel.clear()
+                laptimelistview.currentIndex = 0
+            }
+        }
     }
 
     Rectangle{
@@ -154,20 +165,24 @@ Rectangle {
         }
         Button {
             id: resettime
-            text: "Reset Best Lap"
-            width: 180
+            visible: false
+            text: "Reset best lap"
+            width: 170
             height: 30
             anchors.left: map.right
-            anchors.top: countryselect.bottom
+            anchors.margins: 20
+            anchors.bottom: parent.bottom
             font.pixelSize: 20
         }
         Button {
             id: stop
+            visible: false
             text: "Reset Laptimer"
-            width: 180
+            width: 170
             height: 30
             anchors.right: parent.right
-            anchors.top: trackselect.bottom
+             anchors.bottom: parent.bottom
+             anchors.margins: 20
             font.pixelSize: 20
         }
         Grid {
@@ -176,7 +191,7 @@ Rectangle {
             columns: 2
             spacing: 5
             anchors.left: map.right
-            anchors.top: resettime.bottom
+            anchors.top: countryselect.bottom
 
 
             Text { text: "Current : "
@@ -225,16 +240,71 @@ Rectangle {
                 font.family: "Eurostile"}
         }
 
+        Rectangle{
+            //hides the overflow from the the ListView
+            anchors.bottom: laptimes.top
+            anchors.right: parent.right
+            width: 400
+            height: 40
+            color: "black"
+            z:100
+        }
+
 Rectangle{
+    id :laptimes
     anchors.top: grid1.bottom
     anchors.left: map.right
     width: 400
     height: 200
     color: "black"
-        Laptimecontainer{
-            width: 400
-            height: 200
+
+    ListModel {
+        id: laptimeModel
+    }
+
+    Component {
+        id: contactDelegate
+
+        Item {
+            id:leftcolum
+            width: 400; height: 40
+            Row {
+            Column {
+                Text {
+                        text: "LAP " + lap
+                        width: 110
+                        color: "white"
+                        font.pixelSize:  15
+                        font.bold: true}
+            }
+            Column {
+                Text { text: time
+                       anchors.right: parent.right
+                       width: 195
+                       color: "white"
+                       font.pixelSize:  30
+                       font.bold: true}
+            }
         }
+        }
+    }
+
+    ListView {
+        id: laptimelistview
+        width: 400
+        height: 200
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        model: laptimeModel
+        delegate: contactDelegate
+        highlight: Rectangle { color: "#505050"; radius: 5}
+        focus: false
+        addDisplaced: Transition {
+            NumberAnimation { properties: "x,y"; duration: 1000 }
+        }
+    }
+
+
 }
 
 
