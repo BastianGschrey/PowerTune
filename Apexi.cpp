@@ -92,6 +92,7 @@ void Apexi::initSerialPort()
 
 //function for flushing all serial buffers
 void Apexi::clear()
+  
 {
     m_serialport->clear();
 }
@@ -147,7 +148,7 @@ void Apexi::handleTimeout()
         m_dashboard->setSerialStat(QString("Connected to Serialport"));
     }
     
-    requestIndex = 0;
+    requestIndex = 2;
     m_readData.clear();
     
     Apexi::sendRequest(requestIndex);
@@ -414,7 +415,7 @@ void Apexi::sendRequest(int requestIndex)
         }
     }
     
-    m_timer.start(1000); //Set timout to 1 second 
+    m_timer.start(700); //Set timout to 700 mseconds 
 }
 
 
