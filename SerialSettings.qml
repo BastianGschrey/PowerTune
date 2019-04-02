@@ -483,9 +483,9 @@ TabView {
                             onClicked: {
                                 autoconnectGPS.auto()
                                // console.log("clicked GPS")
-                               // GPS.openConnection(serialNameGPS.currentText,"9600")
-                               // connectButtonGPS.enabled=false
-                               // disconnectButtonGPS.enabled=true
+                                GPS.openConnection(serialNameGPS.currentText,"9600")
+                                connectButtonGPS.enabled=false
+                                disconnectButtonGPS.enabled=true
                             }
                         }
                         Button {
@@ -780,7 +780,7 @@ TabView {
                 function auto()
                 {
                     // if (connectAtStart.checked == true) Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex);
-                    if (connectButton.enabled == false) functconnect.connectfunc(),connectButton.enabled =false,ecuSelect.enabled = false,disconnectButton.enabled = true;//Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),
+                    if (connectButton.enabled == false) functconnect.connectfunc(),ecuSelect.enabled = false,disconnectButton.enabled = true;//Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),
                 }
             }
             Item {
