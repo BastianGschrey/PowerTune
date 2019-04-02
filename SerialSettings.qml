@@ -540,7 +540,10 @@ TabView {
                             width: windowbackround.width / 5
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
-                            onClicked: {Connect.reboot()}
+                            onClicked: {
+                                GPS.closeConnection()
+                                Connect.reboot()
+                            }
                         }
 
 
@@ -624,7 +627,7 @@ TabView {
                             //onCheckedChanged: {autoconnectGPS.auto()}
                         }
 */
-                        Text  { text: "V 1.73 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.74 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness

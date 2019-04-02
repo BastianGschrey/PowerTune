@@ -152,8 +152,8 @@ void Connect::checkifraspberrypi()
 }
 void Connect::readavailabledashfiles()
 {
-    //QDir directory(""); //for Windows
-   QDir directory("/home/pi/UserDashboards");
+    QDir directory(""); //for Windows
+   //QDir directory("/home/pi/UserDashboards");
     QStringList dashfiles = directory.entryList(QStringList() << "*.txt",QDir::Files);
     m_dashBoard->setdashfiles(dashfiles);
     //qDebug() <<"files" << dashfiles ;
@@ -161,8 +161,8 @@ void Connect::readavailabledashfiles()
 
 void Connect::readMaindashsetup()
 {
-   // QString path = "MainDash.txt";//for Windows
-    QString path = "/home/pi/UserDashboards/MainDash.txt";
+    QString path = "MainDash.txt";//for Windows
+    //QString path = "/home/pi/UserDashboards/MainDash.txt";
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
     {
@@ -217,8 +217,8 @@ void Connect::readdashsetup2()
 void Connect::readdashsetup1()
 {
 
-    //QString path = dashfilename1;//for Windows
-    QString path = "/home/pi/UserDashboards/"+dashfilename1;
+    QString path = dashfilename1;//for Windows
+    //QString path = "/home/pi/UserDashboards/"+dashfilename1;
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
     {
