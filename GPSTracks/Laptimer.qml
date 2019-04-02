@@ -163,28 +163,24 @@ Rectangle {
             onCurrentIndexChanged: changetrack.change()
 
         }
-        Button {
-            id: resettime
-            visible: false
 
-            text: "Reset best lap"
-            width: 170
-            height: 30
-            anchors.left: map.right
-            anchors.margins: 20
-            anchors.bottom: parent.bottom
-            font.pixelSize: 20
-        }
         Button {
             id: stop
-            visible: false
-            text: "Reset Laptimer"
+            //visible: false
+            text: "Reset"
             width: 170
             height: 30
             anchors.right: parent.right
              anchors.bottom: parent.bottom
              anchors.margins: 20
             font.pixelSize: 20
+            onClicked: {
+                        laptimeModel.clear()
+                        elapsedTimer.running = false
+                        time.text= "00:00.000"
+                        mapItem.startTime = 0
+                        GPS.resetLaptimer()
+                        }
         }
         Grid {
             id:grid1

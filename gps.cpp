@@ -10,6 +10,7 @@ int initialized = 0;
 int rateset = 0 ;
 int raterequ = 0;
 int baudrate;
+QString GPSPort;
 QTime fastestlap(0, 0);
 QByteArray ACK10HZ = QByteArray::fromHex("b562050102000608");
 QByteArray NACK10HZ = QByteArray::fromHex("050002");
@@ -57,6 +58,8 @@ void GPS::clear()
 //function to open serial port
 void GPS::openConnection(const QString &portName,const QString &Baud)
 {   
+    GPSPort = portName;
+    qDebug()<< "GPS Port Name : " + GPSPort;
     initSerialPort();
     m_timeouttimer.start(5000);
     m_dashboard->setgpsFIXtype("open Serial " + portName);
@@ -150,7 +153,7 @@ void GPS::closeConnection1()
     m_serialport->close();
     initialized =1;
     m_dashboard->setgpsFIXtype("close serial");
-    openConnection("ttyAMA0","115200");
+    openConnection(GPSPort,"115200");
 
 }
 
@@ -356,6 +359,13 @@ void GPS::defineFinishLine(const double & Y1,const double & X1,const double & Y2
     b = startlineY1 - (m*startlineX1);
 }
 
+
+void GPS::resetLaptimer()
+{
+    Laps = 0;
+    m_timer.invalidate();
+    m_dashboard->setbestlaptime("00:00.000");
+}
 void GPS::checknewLap()
 {
     currentintercept = m_dashboard->gpsLatitude() -( (m * m_dashboard->gpsLongitude()) + b);
