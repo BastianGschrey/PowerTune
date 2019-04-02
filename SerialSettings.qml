@@ -45,8 +45,10 @@ TabView {
                 id: powerTuneSettings
                 Settings {
                     property alias brightnessselect: brightness.value
-                    property alias connectAtStartUp: connectAtStart.checked
-                    property alias gpsswitch: gpsswitch.checked
+                   // property alias connectAtStartUp: connectAtStart.checked
+                    property alias connectECUAtStartup: connectButton.enabled
+                    property alias connectGPSAtStartup: connectButtonGPS.enabled
+                    //property alias gpsswitch: gpsswitch.checked
                     property alias serialPortName: serialName.currentText
                     property alias gpsPortName: serialNameGPS.currentText
                     property alias gpsPortNameindex: serialNameGPS.currentIndex
@@ -477,10 +479,13 @@ TabView {
                             width: windowbackround.width / 5
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
+                            Component.onCompleted: autoconnectGPS.auto()
                             onClicked: {
-                                GPS.openConnection(serialNameGPS.currentText,"9600")
-                                connectButtonGPS.enabled=false
-                                disconnectButtonGPS.enabled=true
+                                autoconnectGPS.auto()
+                               // console.log("clicked GPS")
+                               // GPS.openConnection(serialNameGPS.currentText,"9600")
+                               // connectButtonGPS.enabled=false
+                               // disconnectButtonGPS.enabled=true
                             }
                         }
                         Button {
@@ -580,14 +585,16 @@ TabView {
                                 hoverEnabled: smoothspeed.hoverEnabled
                             }
                         }
-
+                        /*
                         Switch {
                             id: connectAtStart
                             width: windowbackround.width / 5
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
                             text: qsTr("Autoconnect")
+
                         }
+                        */
                         Switch {
                             id: loggerswitch
                             width: windowbackround.width / 5
@@ -606,6 +613,7 @@ TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
+/*
                         Switch {
                             id: gpsswitch
                             width: windowbackround.width / 5
@@ -615,8 +623,8 @@ TabView {
                             Component.onCompleted: {autoconnectGPS.auto()}
                             //onCheckedChanged: {autoconnectGPS.auto()}
                         }
-
-                        Text  { text: "V 1.72 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+*/
+                        Text  { text: "V 1.73 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -772,7 +780,7 @@ TabView {
                 function auto()
                 {
                     // if (connectAtStart.checked == true) Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, interfaceSelect.currentIndex, loggerSelect.currentIndex);
-                    if (connectAtStart.checked == true) functconnect.connectfunc(),connectButton.enabled =false,ecuSelect.enabled = false,disconnectButton.enabled = true;//Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),
+                    if (connectButton.enabled == false) functconnect.connectfunc(),connectButton.enabled =false,ecuSelect.enabled = false,disconnectButton.enabled = true;//Connect.openConnection(serialName.currentText, ecuSelect.currentIndex, loggerSelect.currentIndex,logger.datalogger()),
                 }
             }
             Item {
@@ -782,7 +790,7 @@ TabView {
                 {
 
                    // if (gpsswitch.checked == true)GPS.startGPScom(serialNameGPS.currentText,serialGPSBaud.currentText);
-                    if (gpsswitch.checked === true)GPS.openConnection(serialNameGPS.currentText,"9600"),connectButtonGPS.enabled=false,disconnectButtonGPS.enabled=true;
+                    if (connectButtonGPS.enabled == false)GPS.openConnection(serialNameGPS.currentText,"9600"),disconnectButtonGPS.enabled=true;
                     //if (gpsswitch.checked === false)GPS.closeConnection(),console.log("GPS CLOSED BY QML");
                 }
             }
@@ -1769,7 +1777,7 @@ TabView {
                     text:  "7500"
                     inputMethodHints: Qt.ImhDigitsOnly
                     onEditingFinished: Dashboard.setrpmStage4(stage4.text)
-                    Component.onCompleted: Dashboard.setrpmStage4(stage4.text),tabView.currentIndex = 8;
+                    Component.onCompleted: Dashboard.setrpmStage4(stage4.text),tabView.currentIndex++;
                 }
 
             }
@@ -1803,6 +1811,7 @@ TabView {
             }
         }
     }
+/* // There is a binding loop somewhere in the Dashconfig
     Tab {
         title: "Dash Config"// Tab index 5
         Rectangle{
@@ -1946,13 +1955,13 @@ TabView {
                     model: [ "0","1","2","3"]
                     property bool initialized: true
                     delegate: ItemDelegate {
-                        width: vertbar1.width
-                        text: vertbar1.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                        font.weight: vertbar1.currentIndex === index ? Font.DemiBold : Font.Normal
-                        font.family: vertbar1.font.family
-                        font.pixelSize: vertbar1.font.pixelSize
-                        highlighted: vertbar1.highlightedIndex === index
-                        hoverEnabled: vertbar1.hoverEnabled
+                        width: decplaces1.width
+                        text: decplaces1.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: decplaces1.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: decplaces1.font.family
+                        font.pixelSize: decplaces1.font.pixelSize
+                        highlighted: decplaces1.highlightedIndex === index
+                        hoverEnabled: decplaces1.hoverEnabled
                     }
                 }
                 ComboBox {
@@ -2034,13 +2043,13 @@ TabView {
                     model: [ "0","1","2","3"]
                     property bool initialized: true
                     delegate: ItemDelegate {
-                        width: vertbar2.width
-                        text: vertbar2.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                        font.weight: vertbar2.currentIndex === index ? Font.DemiBold : Font.Normal
-                        font.family: vertbar2.font.family
-                        font.pixelSize: vertbar2.font.pixelSize
-                        highlighted: vertbar2.highlightedIndex === index
-                        hoverEnabled: vertbar2.hoverEnabled
+                        width: decplaces2.width
+                        text: decplaces2.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: decplaces2.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: decplaces2.font.family
+                        font.pixelSize: decplaces2.font.pixelSize
+                        highlighted: decplaces2.highlightedIndex === index
+                        hoverEnabled: decplaces2.hoverEnabled
                     }
                 }
                 ComboBox {
@@ -2508,6 +2517,7 @@ TabView {
         }
 
     }
+*/
     Tab {
         title: "Startup"// Tab index 8
 
@@ -2577,6 +2587,7 @@ TabView {
                         highlighted: daemonselect.highlightedIndex === index
                         hoverEnabled: daemonselect.hoverEnabled
                     }
+                     Component.onCompleted: tabView.currentIndex = 0;
                 }
                 /*
                 Text { text: "Arduino Port"

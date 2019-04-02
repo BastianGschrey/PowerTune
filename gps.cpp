@@ -58,7 +58,7 @@ void GPS::clear()
 void GPS::openConnection(const QString &portName,const QString &Baud)
 {   
     initSerialPort();
-    m_timeouttimer.start(5000);
+ //   m_timeouttimer.start(5000);
     m_dashboard->setgpsFIXtype("open Serial " + portName);
     baudrate = Baud.toInt();
     m_serialport->setPortName(portName);

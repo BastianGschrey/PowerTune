@@ -166,6 +166,7 @@ Rectangle {
         Button {
             id: resettime
             visible: false
+
             text: "Reset best lap"
             width: 170
             height: 30
