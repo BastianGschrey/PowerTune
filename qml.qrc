@@ -53,72 +53,6 @@
         <file>OBDPIDS.qml</file>
         <file>ConsultRegs.qml</file>
         <file>GPSTracks/Laptimer.qml</file>
-        <file>GPSTracks/osm_100-l-3-16-37885-37633.png</file>
-        <file>GPSTracks/osm_100-l-3-16-37885-37634.png</file>
-        <file>GPSTracks/osm_100-l-3-16-60017-39541.png</file>
-        <file>GPSTracks/osm_100-l-3-16-60017-39542.png</file>
-        <file>GPSTracks/osm_100-l-3-16-60018-39541.png</file>
-        <file>GPSTracks/osm_100-l-3-16-60018-39542.png</file>
-        <file>GPSTracks/osm_100-l-3-15-32305-20037.png</file>
-        <file>GPSTracks/osm_100-l-3-15-32305-20038.png</file>
-        <file>GPSTracks/osm_100-l-3-16-38001-37687.png</file>
-        <file>GPSTracks/osm_100-l-3-16-38002-37687.png</file>
-        <file>GPSTracks/osm_100-l-3-16-38002-37688.png</file>
-        <file>GPSTracks/osm_100-l-3-17-120854-76445.jpg</file>
-        <file>GPSTracks/osm_100-l-3-17-120855-76444.jpg</file>
-        <file>GPSTracks/osm_100-l-3-17-120855-76445.jpg</file>
-        <file>GPSTracks/osm_100-l-3-17-120855-76446.jpg</file>
-        <file>GPSTracks/osm_100-l-3-12-2126-1382.png</file>
-        <file>GPSTracks/osm_100-l-3-12-2126-1383.png</file>
-        <file>GPSTracks/osm_100-l-3-12-2127-1382.png</file>
-        <file>GPSTracks/osm_100-l-3-16-37875-37796.jpg</file>
-        <file>GPSTracks/osm_100-l-3-16-37875-37797.jpg</file>
-        <file>GPSTracks/osm_100-l-3-16-37876-37796.jpg</file>
-        <file>GPSTracks/osm_100-l-3-16-37876-37797.jpg</file>
-        <file>GPSTracks/osm_100-l-3-16-60016-39542.png</file>
-        <file>GPSTracks/osm_100-l-4-15-18814-19030.jpg</file>
-        <file>GPSTracks/osm_100-l-4-15-18814-19031.jpg</file>
-        <file>GPSTracks/osm_100-l-4-15-18815-19029.jpg</file>
-        <file>GPSTracks/osm_100-l-4-15-18815-19030.jpg</file>
-        <file>GPSTracks/osm_100-l-4-15-18815-19031.jpg</file>
-        <file>GPSTracks/osm_100-l-4-15-18816-19029.jpg</file>
-        <file>GPSTracks/osm_100-l-4-15-18816-19030.jpg</file>
-        <file>GPSTracks/osm_100-l-4-15-18816-19031.jpg</file>
-        <file>GPSTracks/osm_100-l-4-15-32304-20037.jpg</file>
-        <file>GPSTracks/osm_100-l-4-15-32304-20038.jpg</file>
-        <file>GPSTracks/osm_100-l-4-15-32304-20039.jpg</file>
-        <file>GPSTracks/osm_100-l-4-15-32305-20037.jpg</file>
-        <file>GPSTracks/osm_100-l-4-15-32305-20038.jpg</file>
-        <file>GPSTracks/osm_100-l-4-15-32305-20039.jpg</file>
-        <file>GPSTracks/osm_100-l-4-15-32306-20037.jpg</file>
-        <file>GPSTracks/osm_100-l-4-15-32306-20038.jpg</file>
-        <file>GPSTracks/osm_100-l-4-15-32306-20039.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-37874-37797.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-37875-37795.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-37875-37796.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-37875-37797.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-37876-37795.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-37876-37796.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-37876-37797.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-37876-37798.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-37877-37796.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-37884-37633.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-37884-37634.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-37885-37633.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-37885-37634.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-60016-39541.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-60016-39542.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-60017-39541.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-60017-39542.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-60018-39541.jpg</file>
-        <file>GPSTracks/osm_100-l-4-16-60018-39542.jpg</file>
-        <file>GPSTracks/osm_100-l-4-17-120854-76444.jpg</file>
-        <file>GPSTracks/osm_100-l-4-17-120854-76445.jpg</file>
-        <file>GPSTracks/osm_100-l-4-17-120854-76446.jpg</file>
-        <file>GPSTracks/osm_100-l-4-17-120855-76444.jpg</file>
-        <file>GPSTracks/osm_100-l-4-17-120855-76445.jpg</file>
-        <file>GPSTracks/osm_100-l-4-17-120855-76446.jpg</file>
-        <file>GPSTracks/osm_100-l-4-17-120856-76445.jpg</file>
         <file>Gauges/Userdash1.qml</file>
         <file>Gauges/Userdash2.qml</file>
         <file>Gauges/Userdash3.qml</file>
@@ -129,6 +63,5 @@
         <file>Gauges/SquareGaugeMain.qml</file>
         <file>graphics/Logo.png</file>
         <file>Intro.qml</file>
-        <file>GPSTracks/Laptimecontainer.qml</file>
     </qresource>
 </RCC>
