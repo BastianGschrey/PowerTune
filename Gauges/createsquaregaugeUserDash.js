@@ -18,8 +18,10 @@ function createSquareGauge(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,
 function finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec,Setwarnvaluehigh,Setwarnvaluelow,Setframeclolor,Setbackroundcolor,Settitlecolor,Settitletextcolor,Settextcolor,Setbarcolor,SetTitlefontsize,SetMainfontsize) {
     if (component.status === Component.Ready) {
         gauge = component.createObject(userDash, {"id": setID, "title":setID, "width": setWidth, "height": setHeight,
-                                           "mainvalue": Qt.binding(function(){return SetValueObject[SetValuePropertyMain].toFixed(setDecPlace)}),
-                                           "secvalue": Qt.binding(function(){return SetValueObject[SetValuePropertySec].toFixed(setDecPlace)}),
+                                           "mainvalue": Qt.binding(function(){return Dashboard[SetValuePropertyMain].toFixed(setDecPlace)}),
+                                           "secvalue": Qt.binding(function(){return Dashboard[SetValuePropertySec].toFixed(setDecPlace)}),
+                                           "mainvaluename":SetValuePropertyMain,
+                                           "secvaluename":SetValuePropertySec,
                                            "maxvalue": setMaxValue,
                                            "warnvaluehigh": Setwarnvaluehigh,
                                            "warnvaluelow":Setwarnvaluelow,
