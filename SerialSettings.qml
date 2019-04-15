@@ -974,8 +974,8 @@ TabView {
                         font.pixelSize: dashselector.width / 55
                         model: ["Main Dash", "Adaptronic","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer"]
                         property bool initialized: true
-                        onCurrentIndexChanged:{Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select1.selDash1() }
-                        Component.onCompleted: {Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select1.selDash1() }
+                        onCurrentIndexChanged:{select1.selDash1() }
+                        Component.onCompleted: {select1.selDash1() }
                         delegate: ItemDelegate {
                             width: dash1.width
                             text: dash1.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -994,8 +994,8 @@ TabView {
                         font.pixelSize: dashselector.width / 55
                          model: ["Main Dash", "Adaptronic","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer"]
                         property bool initialized: true
-                        onCurrentIndexChanged:{Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select2.selDash2() }
-                        Component.onCompleted: {Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select2.selDash2() }
+                        onCurrentIndexChanged:{select2.selDash2() }
+                        Component.onCompleted: {select2.selDash2() }
                         delegate: ItemDelegate {
                             width: dash2.width
                             text: dash2.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -1014,8 +1014,8 @@ TabView {
                         font.pixelSize: dashselector.width / 55
                         model: ["Main Dash", "Adaptronic","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer"]
                         property bool initialized: true
-                        onCurrentIndexChanged:{Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select3.selDash3() }
-                        Component.onCompleted: {Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select3.selDash3() }
+                        onCurrentIndexChanged:{select3.selDash3() }
+                        Component.onCompleted: {select3.selDash3() }
                         delegate: ItemDelegate {
                             width: dash3.width
                             text: dash3.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -1033,8 +1033,8 @@ TabView {
                         font.pixelSize: dashselector.width / 55
                          model: ["Main Dash", "Adaptronic","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer"]
                         property bool initialized: true
-                        onCurrentIndexChanged:{Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select4.selDash4() }
-                        Component.onCompleted: {Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex)),select4.selDash4() }
+                        onCurrentIndexChanged:{select4.selDash4() }
+                        Component.onCompleted: {select4.selDash4() }
                         delegate: ItemDelegate {
                             width: dash4.width
                             text: dash4.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -1088,7 +1088,7 @@ TabView {
                                 highlighted: dash1file.highlightedIndex === index
                                 hoverEnabled: dash1file.hoverEnabled
                             }
-                            onCurrentIndexChanged: Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex))
+                            //onCurrentIndexChanged: Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex))
                         }
                         ComboBox {
                             id: dash2file
@@ -1107,7 +1107,7 @@ TabView {
                                 highlighted: dash2file.highlightedIndex === index
                                 hoverEnabled: dash2file.hoverEnabled
                             }
-                            onCurrentIndexChanged: Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex))
+                            //onCurrentIndexChanged: Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex))
                         }
                         ComboBox {
                             id: dash3file
@@ -1126,8 +1126,8 @@ TabView {
                                 highlighted: dash3file.highlightedIndex === index
                                 hoverEnabled: dash3file.hoverEnabled
                             }
-                            Component.onCompleted: Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex))
-                            onCurrentIndexChanged: Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex))
+                            //Component.onCompleted: Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex))
+                            //onCurrentIndexChanged: Connect.setfilenames(dash1file.textAt(dash1file.currentIndex),dash2file.textAt(dash2file.currentIndex),dash3file.textAt(dash3file.currentIndex))
                         }
                         Text { text: "UserDash1 RPM BAR"
                             font.pixelSize: dashselector.width / 55 }

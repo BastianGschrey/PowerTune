@@ -12,7 +12,9 @@ Rectangle {
     property string information: "Square gauge"
     border.color: "#9f9f9f"
     border.width: 2
-    Component.onCompleted: set()
+    Component.onCompleted: {set();
+
+    }
 
     property string mainvaluename
     property string secvaluename
@@ -22,8 +24,7 @@ Rectangle {
     property alias horigaugevisible: horizgauge.visible
     property alias secvaluevisible: secondaryvaluetextfield.visible
     property alias secvalue: secondaryvaluetextfield.text
-    property alias maintextvalue: mainvaluetextfield.text
-    property alias mainvalue: mainvaluetextfield.text
+    property alias mainvalue : placeholder.text
     property alias maxvalue: vertgauge.maximumValue
     property alias titlecolor: titlebar.color
     property alias titlefontsize :gaugetextfield.font.pixelSize
@@ -34,18 +35,23 @@ Rectangle {
     property string titletextcolor
     property string textcolor
     property string barcolor
-    property double mainvalue
     property int maxvalue
+    property int decimalpoints
     property double warnvaluehigh: 20000
     property double warnvaluelow : -20000
 
     Drag.active: true
 
     Connections{
-    target: Dashboard
-    onDraggableChanged:togglemousearea()
+        target: Dashboard
+        onDraggableChanged:togglemousearea()
     }
-
+    Text {
+        id : placeholder
+        onTextChanged: { toggledecimal();}
+        Component.onCompleted: {toggledecimal();}
+        visible: false
+    }
     MouseArea {
         id: touchArea
         anchors.fill: parent
@@ -53,7 +59,7 @@ Rectangle {
         enabled: false
         //drag.active:
         onDoubleClicked: {
-        popupmenu.popup(touchArea.mouseX, touchArea.mouseY);
+            popupmenu.popup(touchArea.mouseX, touchArea.mouseY);
         }
         /*
         Timer {
@@ -73,7 +79,7 @@ Rectangle {
         id: titlebar
         width: parent.width - 4
         //height: (parent.height) * 0.2
-        height: 30
+        height: parent.height / 4
         anchors.top : parent.top
         anchors.left: parent.left
         color: titlecolor
@@ -124,8 +130,8 @@ Rectangle {
     }
     Text {
         id: gaugetextfield
-        anchors.top: parent.top
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: titlebar.verticalCenter
+        anchors.horizontalCenter: titlebar.horizontalCenter
         font.pixelSize: 23
         font.bold: true
         font.family: "Eurostile"
@@ -140,7 +146,9 @@ Rectangle {
         font.pixelSize: 50
         font.family: "Eurostile"
         color: "white"
-        onTextChanged: warningindication.warn()
+        onTextChanged: {
+            warningindication.warn();
+        }
     }
 
     Text {
@@ -169,12 +177,12 @@ Rectangle {
 
     Gauge {
         id: vertgauge
-        height: parent.height - 50
+        height: parent.height - titlebar.height
         width: parent.width * 0.1
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
-        anchors.top: parent.top
-        anchors.topMargin: 30
+        //anchors.top: parent.top
+        //anchors.topMargin: 30
         anchors.left: parent.left
         anchors.leftMargin: 10
         orientation: Qt.Vertical
@@ -201,7 +209,7 @@ Rectangle {
             }
             valueBar: Rectangle {
                 id: vertbar
-                implicitWidth: 25
+                implicitWidth: vertgauge.width
                 color: barcolor
             }
         }
@@ -211,8 +219,10 @@ Rectangle {
         id: warningindication
         function warn()
         {
+
             if (mainvaluetextfield.text > warnvaluehigh || mainvaluetextfield.text < warnvaluelow )anim.running = true,anim2.running = true;
             else anim.running = false,anim2.running = false,titlebar.color = resettitlecolor ,gauge.color = resetbackroundcolor;
+
         }
     }
 
@@ -231,12 +241,38 @@ Rectangle {
     {
         if (Dashboard.draggable === 1)
         {
-         touchArea.enabled = true;
-        //    console.log ("Enable square touch");
+            touchArea.enabled = true;
+            //    console.log ("Enable square touch");
         }
         else
             touchArea.enabled = false;
         //    console.log ("Disable square touch");
+    }
+    //
+    function toggledecimal()
+    {
+        if (decimalpoints < 4)
+        {
+            mainvaluetextfield.text = parseFloat(placeholder.text).toFixed(decimalpoints);
+        }
+        else
+            mainvaluetextfield.text = placeholder.text;
+    }
+    function hidemenues()
+    {
+        txtMaxValue.visible = false;
+        btnMaxValue.visible = false;
+        txtMinValue.visible = false;
+        btnMinValue.visible = false;
+        txtwidth.visible = false;
+        txtheight.visible = false;
+        btnSize.visible =false;
+        cbx_titlefontsize.visible =false;
+        btntitlefontsize.visible =false;
+        cbx_gaugefontsize.visible =false;
+        btngaugefontsize.visible =false;
+        cbx_decimalplaces.visible  = false;
+        btndecimalplaces.visible = false;
     }
     Gauge {
         id: horizgauge
@@ -271,7 +307,7 @@ Rectangle {
                 }
             }
             valueBar: Rectangle {
-                implicitWidth: 25
+                implicitWidth: horizgauge.height
                 color: barcolor
             }
         }
@@ -284,15 +320,33 @@ Rectangle {
         Menu {
             id: popupmenu
             MenuItem {
-                text: "Change size"
+                text: "Change gauge size"
                 font.pixelSize: 15
                 onClicked: sizemenu.popup(touchArea.mouseX, touchArea.mouseY)
+            }
+            MenuItem {
+                text: "Title font size"
+                font.pixelSize: 15
+                onClicked:    {
+                    cbx_titlefontsize.visible =true;
+                    btntitlefontsize.visible =true;
+                }
 
+            }
+            MenuItem {
+                text: "Gauge font size"
+                font.pixelSize: 15
+                onClicked:
+                {
+                    btngaugefontsize.visible =true;
+                    cbx_gaugefontsize.visible =true;
+                }
             }
             MenuItem {
                 text: "Change sec value"
                 font.pixelSize: 15
                 onClicked: {
+                    hidemenues();
                     cbxSecondary.visible = true;
                     btnSecSrc.visible = true;
                 }
@@ -301,20 +355,31 @@ Rectangle {
                 text: "Change title"
                 font.pixelSize: 15
                 onClicked: {
+                    hidemenues();
                     titlenameValue.visible = true;
                     btntitleValue.visible = true;
+                }
+            }
+            MenuItem {
+                text: "Set decimal"
+                font.pixelSize: 15
+                onClicked: {
+                    hidemenues();
+                    cbx_decimalplaces.visible = true;
+                    btndecimalplaces.visible = true;
                 }
             }
             MenuItem {
                 text: "Set bar gauge max"
                 font.pixelSize: 15
                 onClicked: {
+                    hidemenues();
                     bargaugeMax.visible = true;
                     btnmaxValue.visible = true;
                 }
             }
             MenuItem {
-                text: "toggle sec value"
+                text: "Toggle sec value"
                 font.pixelSize: 15
                 onClicked: {
                     if(secondaryvaluetextfield.visible === true){
@@ -326,7 +391,7 @@ Rectangle {
                 }
             }
             MenuItem {
-                text: "toggle vertical bar gauge"
+                text: "Toggle vertical bar gauge"
                 font.pixelSize: 15
                 onClicked: {
                     if(vertgauge.visible === true){
@@ -341,7 +406,7 @@ Rectangle {
             }
 
             MenuItem {
-                text: "toggle horizontal bar gauge"
+                text: "Toggle horizontal bar gauge"
                 font.pixelSize: 15
                 onClicked: {
                     if(horizgauge.visible === true){
@@ -358,6 +423,7 @@ Rectangle {
                 text: "Set min warning"
                 font.pixelSize: 15
                 onClicked: {
+                    hidemenues();
                     txtMinValue.visible = true;
                     btnMinValue.visible = true;
                 }
@@ -367,6 +433,7 @@ Rectangle {
                 text: "Set max warning"
                 font.pixelSize: 15
                 onClicked: {
+                    hidemenues();
                     txtMaxValue.visible = true;
                     btnMaxValue.visible = true;
                 }
@@ -389,31 +456,45 @@ Rectangle {
                 text: "small"
                 onClicked: {
 
-                    gauge.width = 160;
-                    gauge.height = 120;
+                    gauge.width = 199;
+                    gauge.height = 119;
                 }
             }
             MenuItem {
                 text: "medium"
                 onClicked: {
 
-                    gauge.width = 300;
-                    gauge.height = 200;
+                    gauge.width = 266;
+                    gauge.height = 119;
                 }
             }
             MenuItem {
                 text: "large"
                 onClicked: {
 
-                    gauge.width = 400;
-                    gauge.height = 266;
+                    gauge.width = 533;
+                    gauge.height = 119;
+                }
+            }
+            MenuItem {
+                text: "custom"
+                onClicked: {
+                    txtwidth.visible = true;
+                    txtheight.visible = true;
+                    btnSize.visible =true;
                 }
             }
         }
 
-        ///////////////////
+
         Menu {
             id: symbolMenu
+            MenuItem {
+                text: "None"
+                onClicked: {
+                    mainvalueunittextfield.text = ""
+                }
+            }
             MenuItem {
                 text: "°"
                 onClicked: {
@@ -512,7 +593,6 @@ Rectangle {
         }
 
     }
-
     Item {
         id: minValueSelect
         anchors.fill: parent
@@ -521,13 +601,9 @@ Rectangle {
             id: txtMinValue
             width: 94
             height: 40
-            //inputMask: "00000"
             visible: false
             text: warnvaluelow;
-            inputMethodHints: Qt.ImhDigitsOnly
         }
-
-
         Button {
             id: btnMinValue
             x: 119
@@ -538,13 +614,121 @@ Rectangle {
             anchors.rightMargin: 0
             visible: false
             onClicked: {
-                txtMinValue.visible = false;
-                btnMinValue.visible = false;
-                warnvaluelow = txtMinValue.text;
+                hidemenues();
             }
         }
 
     }
+    Item {
+        id: gaugeSizeselect
+        anchors.fill: parent
+
+        TextField {
+            id: txtwidth
+            width: 94
+            height: 40
+            visible: false
+            text: gauge.width;
+        }
+        TextField {
+            id: txtheight
+            anchors.top : txtwidth.bottom
+            width: 94
+            height: 40
+            visible: false
+            text: gauge.height;
+        }
+        Button {
+            id: btnSize
+            x: 119
+            text: qsTr("OK")
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            visible: false
+            onClicked: {
+                hidemenues();
+                gauge.width = txtwidth.text;
+                gauge.height = txtheight.text;
+            }
+        }
+    }
+    Item {
+        id: decimalplacesSelect
+        anchors.fill: parent
+
+        ComboBox {
+            id: cbx_decimalplaces
+            visible: false
+            model: ["0","1","2","3","N/A"]
+        }
+        Button {
+            id: btndecimalplaces
+            x: 119
+            text: qsTr("OK")
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            visible: false
+            onClicked: {
+                hidemenues();
+                decimalpoints = cbx_decimalplaces.currentIndex;
+                toggledecimal();
+            }
+        }
+    }
+    Item {
+        id: titlefontsizeSelect
+        anchors.fill: parent
+
+        ComboBox {
+            id: cbx_titlefontsize
+            visible: false
+            model: [10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,250,260]
+        }
+        Button {
+            id: btntitlefontsize
+            x: 119
+            text: qsTr("OK")
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            visible: false
+            onClicked: {
+                hidemenues();
+                gaugetextfield.font.pixelSize = cbx_titlefontsize.textAt(cbx_titlefontsize.currentIndex);
+            }
+        }
+    }
+    Item {
+        id: gaugefontsizeSelect
+        anchors.fill: parent
+
+        ComboBox {
+            id: cbx_gaugefontsize
+            visible: false
+            model: [10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,250,260]
+        }
+        Button {
+            id: btngaugefontsize
+            x: 119
+            text: qsTr("OK")
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            visible: false
+            onClicked: {
+                hidemenues();
+                mainvaluetextfield.font.pixelSize = cbx_gaugefontsize.textAt(cbx_gaugefontsize.currentIndex);
+            }
+        }
+    }
+
+
 
     Item {
         id: maxValueSelect
@@ -557,7 +741,7 @@ Rectangle {
             //inputMask: "00000"
             visible: false
             text: warnvaluehigh
-            inputMethodHints: Qt.ImhDigitsOnly
+            //inputMethodHints: Qt.ImhDigitsOnly
         }
 
         Button {
@@ -570,8 +754,7 @@ Rectangle {
             anchors.rightMargin: 0
             visible: false
             onClicked: {
-                txtMaxValue.visible = false;
-                btnMaxValue.visible = false;
+                hidemenues();
                 warnvaluehigh = txtMaxValue.text;
             }
         }
@@ -587,7 +770,7 @@ Rectangle {
             height: 40
             visible: false
             text: title
-            //inputMethodHints: Qt.ImhDigitsOnly
+            ////inputMethodHints: Qt.ImhDigitsOnly
         }
 
 
@@ -601,6 +784,7 @@ Rectangle {
             anchors.rightMargin: 0
             visible: false
             onClicked: {
+                hidemenues();
                 title = titlenameValue.text;
                 titlenameValue.visible = false;
                 btntitleValue.visible = false;
@@ -608,32 +792,33 @@ Rectangle {
         }
     }
     Item {
-         id: bargaugeMaxVal
-         anchors.fill: parent
+        id: bargaugeMaxVal
+        anchors.fill: parent
 
-         TextField {
-             id: bargaugeMax
-             width: 94
-             height: 40
-             visible: false
-             text: maxvalue
-             inputMethodHints: Qt.ImhDigitsOnly
-         }
+        TextField {
+            id: bargaugeMax
+            width: 94
+            height: 40
+            visible: false
+            text: maxvalue
+            //inputMethodHints: Qt.ImhDigitsOnly
+        }
 
-         Button {
-             id: btnmaxValue
-             x: 119
-             text: qsTr("OK")
-             anchors.top: parent.top
-             anchors.topMargin: 0
-             anchors.right: parent.right
-             anchors.rightMargin: 0
-             visible: false
-             onClicked: {
-                 maxvalue = bargaugeMax.text;
-                 bargaugeMax.visible = false;
-                 btnmaxValue.visible = false;
-             }
-         }
-     }
+        Button {
+            id: btnmaxValue
+            x: 119
+            text: qsTr("OK")
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            visible: false
+            onClicked: {
+                hidemenues();
+                maxvalue = bargaugeMax.text;
+                bargaugeMax.visible = false;
+                btnmaxValue.visible = false;
+            }
+        }
+    }
 }

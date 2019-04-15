@@ -121,14 +121,18 @@ Connect::~Connect()
 
 }
 
-void Connect::setfilenames(const QString &file1)
+void Connect::setfilename1(const QString &file1)
 {
         dashfilename1 = file1;
-       // dashfilename2 = file2;
-       // dashfilename3 = file3;
-        //qDebug()<<"FILENAMES" << dashfilename1<< dashfilename2<< dashfilename3;
 }
-
+void Connect::setfilename2(const QString &file2)
+{
+       dashfilename2 = file2;
+}
+void Connect::setfilename3(const QString &file3)
+{
+       dashfilename3 = file3;
+}
 void Connect::setrpm(const int &dash1,const int &dash2,const int &dash3)
 {
          //qDebug()<<"rpm source" << dash1<< dash2<< dash3;

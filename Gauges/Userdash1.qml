@@ -62,7 +62,7 @@ Item {
     }
 */
     Settings {
-        property alias datastore: mainwindow.datastore
+        property alias datastore1: mainwindow.datastore
         property alias rpmbackround1: rpmstyleselector.currentIndex
     }
 
@@ -170,39 +170,52 @@ Item {
         }
     }
     // Virtual Keyboard
-    InputPanel {
-        id: keyboard;
-        y:0
-        z:200
-        // y: parent.height; // position the top of the keyboard to the bottom of the screen/display
-        width: parent.width
-        height: parent.height /2
+    Rectangle{
+        id: keyboardcontainer
+        color: "darkgrey"
         visible: false
+        width :500
+        height:180
+        z:220
+        MouseArea {
+            id: touchAkeyboardcontainer
+            anchors.fill:parent
+            drag.target: keyboardcontainer
+        }
+        InputPanel {
+            id: keyboard
+            anchors.fill: parent
+            visible: false
+            KeyboardStyle{
+                fullScreenInputCursor: Rectangle{
+                    width: 1
+                    color: "blue"
+                    visible: parent.blinkStatus
+                }
+                keyboardBackground: Rectangle{
+                    anchors.fill: parent
+                    color: "green"
+                }
 
-        KeyboardStyle{
-            fullScreenInputCursor: Rectangle{
-                width: 1
-                color: "blue"
-                visible: parent.blinkStatus
             }
-            keyboardBackground: Rectangle{
-                anchors.fill: parent
-                color: "green"
+
+            states: State {
+                name: "visible";
+                when: keyboard.active;
+                PropertyChanges {
+                    target: keyboard;
+                    visible: true
+                }
+                PropertyChanges {
+                    target: keyboardcontainer;
+                    visible: true;
+                    x:0
+                    y:0
+                }
             }
 
         }
-
-        states: State {
-            name: "visible";
-            when: keyboard.active;
-            PropertyChanges {
-                target: keyboard;
-                visible: true
-            }
-        }
-
     }
-
     /// RPM STYLE SELECTOR and Backround picture loader
     Rectangle{
         id: rpmbackroundselector
@@ -227,21 +240,21 @@ Item {
                 font.pixelSize: 25
                 font.bold: true
             }
-        ComboBox {
-            id: rpmstyleselector
-            width: 200
-            height: 40
-            model: ["None", "Style1","Style2", "Style3", "Style4"]
-            onCurrentIndexChanged: rpmgauge.selector();
-        }
-        Button {
-            id: btncloserpm
-            text: qsTr("CLOSE:")
-            font.pixelSize: 15
-            width: 200
-            height: 40
-            onClicked:{rpmbackroundselector.visible =false;}
-        }
+            ComboBox {
+                id: rpmstyleselector
+                width: 200
+                height: 40
+                model: ["None", "Style1","Style2", "Style3", "Style4"]
+                onCurrentIndexChanged: rpmgauge.selector();
+            }
+            Button {
+                id: btncloserpm
+                text: qsTr("CLOSE:")
+                font.pixelSize: 15
+                width: 200
+                height: 40
+                onClicked:{rpmbackroundselector.visible =false;}
+            }
         }
     }
     /// The Gauge Creation Menu
@@ -301,18 +314,6 @@ Item {
             }
 
             Button {
-                id: btncancel
-                width: 95
-                text: "CANCEL"
-                font.pixelSize: 15
-                onClicked:  {
-                    squaregaugemenu.visible = false;
-                    selectcolor.visible =false;
-                    Dashboard.setdraggable(0);
-                }
-            }
-
-            Button {
                 id: btnsave
                 width: 95
                 text: qsTr("SAVE")
@@ -330,7 +331,7 @@ Item {
                         if(userDash.children[i].information === "Square gauge"){
                             //console.log(userDash.children[i].information +" " + userDash.children[i].valuepropertymain +  " Item no." + i)
                             //Apend all values of each gauge to the List Model
-                            gaugelist.append({"type": userDash.children[i].title,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"maxvalue":userDash.children[i].maxvalue,"decplace":userDash.children[i].decimalplaces,"unit":userDash.children[i].mainunit,"id":userDash.children[i].title,"vertgaugevis":userDash.children[i].vertgaugevisible,"horigaugevis":userDash.children[i].horigaugevisible,"secvaluevis":userDash.children[i].secvaluevisible,"valuepropertymain":userDash.children[i].mainvaluename,"valuepropertysec":userDash.children[i].secvaluename,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow,"framecolor":userDash.children[i].framecolor,"backroundcolor":userDash.children[i].resetbackroundcolor,"titlecolor":userDash.children[i].resettitlecolor,"titletextcolor":userDash.children[i].titletextcolor,"textcolor":userDash.children[i].textcolor,"barcolor":userDash.children[i].barcolor,"titlefontsize":userDash.children[i].titlefontsize,"mainfontsize":userDash.children[i].mainfontsize})
+                            gaugelist.append({"type": userDash.children[i].title,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"maxvalue":userDash.children[i].maxvalue,"decplace":userDash.children[i].decimalpoints,"unit":userDash.children[i].mainunit,"id":userDash.children[i].title,"vertgaugevis":userDash.children[i].vertgaugevisible,"horigaugevis":userDash.children[i].horigaugevisible,"secvaluevis":userDash.children[i].secvaluevisible,"valuepropertymain":userDash.children[i].mainvaluename,"valuepropertysec":userDash.children[i].secvaluename,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow,"framecolor":userDash.children[i].framecolor,"backroundcolor":userDash.children[i].resetbackroundcolor,"titlecolor":userDash.children[i].resettitlecolor,"titletextcolor":userDash.children[i].titletextcolor,"textcolor":userDash.children[i].textcolor,"barcolor":userDash.children[i].barcolor,"titlefontsize":userDash.children[i].titlefontsize,"mainfontsize":userDash.children[i].mainfontsize})
                             //console.log(gaugelist.get(i).width)
 
                         }
@@ -382,6 +383,8 @@ Item {
                 font.pixelSize: 15
 
                 onClicked: {
+
+                    btncancelload.visible = true;
                     loadfromfile.visible = false;
                     loadfileselect.visible = true;
                     btnadd.visible = false;
@@ -395,7 +398,7 @@ Item {
                     loadfromfile.visible = false;
                     load.visible = true;
                     selectcolor.visible =false;
-                    Dashboard.setdraggable(0);
+                    btnbackround.visible =false;
                 }
             }
             Button{
@@ -417,9 +420,30 @@ Item {
                 font.pixelSize: 15
                 visible: false
                 onClicked: {
-                    Connect.setfilenames(loadfileselect.textAt(loadfileselect.currentIndex));
+                    loadfileselect.visible = false;
+                    Connect.setfilename1(loadfileselect.textAt(loadfileselect.currentIndex));
                     console.log(loadfileselect.textAt(loadfileselect.currentIndex));
                     squaregaugemenu.visible = false;
+                    load.visible = false;
+                    selectcolor.visible =false;
+                    Dashboard.setdraggable(0);
+                    Connect.readdashsetup1();
+                }
+            }
+            Button{
+                id: btncancelload
+                width: 95
+                text: "CANCEL"
+                font.pixelSize: 15
+                visible: false
+                onClicked: {
+                    loadfileselect.visible = false;
+                    btncancelload.visible = false;
+                    squaregaugemenu.visible = false;
+                    Connect.setfilename1(loadfileselect.textAt(loadfileselect.currentIndex));
+                    console.log(loadfileselect.textAt(loadfileselect.currentIndex));
+                    squaregaugemenu
+                    load.visible = false;
                     selectcolor.visible =false;
                     Dashboard.setdraggable(0);
                     Connect.readdashsetup1();
@@ -434,7 +458,18 @@ Item {
                     rpmbackroundselector.visible =true;
                     squaregaugemenu.visible = false;
                     btnbackround.visible =false;
-                    //open backround bar and picture selector
+                    Dashboard.setdraggable(0);
+                }
+            }
+            Button {
+                id: btncancel
+                width: 95
+                text: "CLOSE"
+                font.pixelSize: 15
+                onClicked:  {
+                    squaregaugemenu.visible = false;
+                    selectcolor.visible =false;
+                    Dashboard.setdraggable(0);
                 }
             }
         }
@@ -756,7 +791,7 @@ Item {
 
                     ItemDelegate {
                     width: titlecolor.width
-                    font.pixelSize: 50
+                    font.pixelSize: 15
                     Rectangle {
 
                         width: titlecolor.width
@@ -766,6 +801,7 @@ Item {
                         Text {
                             text: itemColor
                             anchors.centerIn: parent
+                            font.pixelSize: 15
                         }
                     }
                 }
@@ -801,6 +837,7 @@ Item {
                         Text {
                             text: itemColor
                             anchors.centerIn: parent
+                            font.pixelSize: 15
                         }
                     }
                 }
@@ -822,6 +859,7 @@ Item {
         }
     }
 }
+
 
 
 
