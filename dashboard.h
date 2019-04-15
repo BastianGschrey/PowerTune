@@ -334,7 +334,7 @@ class DashBoard : public QObject
     Q_PROPERTY(QString bestlaptime READ bestlaptime WRITE setbestlaptime NOTIFY bestlaptimeChanged)
     Q_PROPERTY(int currentLap READ currentLap WRITE setcurrentLap NOTIFY currentLapChanged)
 
-
+    Q_PROPERTY(int draggable READ draggable WRITE setdraggable NOTIFY draggableChanged)
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
 public:
     DashBoard(QObject *parent = 0);
@@ -670,7 +670,7 @@ public:
     void setLastlaptime(const QString &Lastlaptime);
     void setbestlaptime(const QString &bestlaptime);
 
-
+    Q_INVOKABLE void setdraggable(const int &draggable);
 
     qreal Odo() const;
 
@@ -999,6 +999,7 @@ public:
     QString Lastlaptime() const;
     QString bestlaptime() const;
 
+    int draggable() const;
 signals:
 
     //Odometer
@@ -1319,7 +1320,7 @@ signals:
     void laptimeChanged(QString laptime);
     void LastlaptimeChanged(QString Lastlaptime);
     void bestlaptimeChanged(QString bestlaptime);
-
+    void draggableChanged(int draggable);
 private:
     // Odometer
 
@@ -1651,6 +1652,9 @@ private:
     QString m_laptime;
     QString m_Lastlaptime;
     QString m_bestlaptime;
+
+    int m_draggable;
+
 
 };
 

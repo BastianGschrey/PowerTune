@@ -51,7 +51,7 @@ class Connect : public QObject
 public:
     ~Connect();
     explicit Connect(QObject *parent = 0);
-    Q_INVOKABLE void setfilenames(const QString &file1,const QString &file2,const QString &file3);
+    Q_INVOKABLE void setfilenames(const QString &file1);
     Q_INVOKABLE void checkifraspberrypi();
     Q_INVOKABLE void readavailabledashfiles();
     Q_INVOKABLE void setrpm(const int &dash1,const int &dash2,const int &dash3);

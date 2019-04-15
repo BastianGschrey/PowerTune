@@ -159,11 +159,21 @@ Item {
     MouseArea {
         id: touchArea
         anchors.fill: parent
-
-
+        onDoubleClicked:             {
+            cbx_sources.visible = true;
+            btnadd.visible = true;
+            btncancel.visible = true;
+            btnsave.visible = true;
+            btnclear.visible = true;
+            selectcolor.visible = true;
+            loadfromfile.visible = true;
+            Dashboard.setdraggable(1);
+            //pimenu.popup(touchArea.mouseX,touchArea.mouseY)
+        }
+/*
         Timer {
             id: pressAndHoldTimer
-            interval: 1000
+            interval: 2000
             onTriggered:
             {
                 cbx_sources.visible = true;
@@ -172,12 +182,13 @@ Item {
                 btnsave.visible = true;
                 btnclear.visible = true;
                 selectcolor.visible = true;
-                //loadfromfile.visible = true;
+                loadfromfile.visible = true;
                 //pimenu.popup(touchArea.mouseX,touchArea.mouseY)
             }
         }
-        onPressed: pressAndHoldTimer.start()
-        onReleased: pressAndHoldTimer.stop()
+        */
+        //onPressed: pressAndHoldTimer.start()
+        //onReleased: pressAndHoldTimer.stop()
     }
     // Virtual Keyboard
     InputPanel {
@@ -255,6 +266,7 @@ Item {
             btnclear.visible = false;
             selectcolor.visible = false;
             loadfromfile.visible = false;
+            Dashboard.setdraggable(0);
         }
     }
 
@@ -274,7 +286,7 @@ Item {
             btnclear.visible = false
             selectcolor.visible = false
             loadfromfile.visible = false;
-
+Dashboard.setdraggable(0);
         }
     }
 
@@ -294,6 +306,7 @@ Item {
             btnclear.visible = false;
             selectcolor.visible = false;
             loadfromfile.visible = false;
+            Dashboard.setdraggable(0);
             // Clearing the gaugelist
             gaugelist.clear()
             for (var i=0; i<userDash.children.length; ++i)
@@ -336,7 +349,9 @@ Item {
             cbx_sources.visible = false
             btnsave.visible = false
             btnclear.visible = false
+            loadfromfile.visible =false;
             selectcolor.visible = false;
+            Dashboard.setdraggable(0);
             for (var i=0; i<userDash.children.length; ++i)
             {
                 userDash.children[i].destroy()
@@ -354,7 +369,39 @@ Item {
         visible: false
 
         onClicked: {
+            loadfromfile.visible = false;
             loadfileselect.visible = true;
+            btnadd.visible = false;
+            btncancel.visible = false;
+            cbx_sources.visible = false;
+            btnsave.visible = false;
+            btnclear.visible = false;
+            selectcolor.visible = false;
+            load.visible = true;
+Dashboard.setdraggable(0);
+        }
+    }
+    Button{
+        id: load
+        x: 720
+        y: 170
+        width: 80
+        text: "Load"
+        font.pixelSize: 15
+        visible: false
+
+        onClicked: {
+            Connect.setfilenames(loadfileselect.textAt(loadfileselect.currentIndex));
+            console.log(loadfileselect.textAt(loadfileselect.currentIndex));
+            load.visible = false;
+            loadfileselect.visible = false;
+            btnadd.visible = false
+            btncancel.visible = false
+            cbx_sources.visible = false
+            btnsave.visible = false
+            btnclear.visible = false
+            selectcolor.visible = false;
+            Dashboard.setdraggable(0);
             Connect.readdashsetup1();
         }
     }

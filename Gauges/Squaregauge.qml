@@ -41,17 +41,25 @@ Rectangle {
 
     Drag.active: true
 
-
+    Connections{
+    target: Dashboard
+    onDraggableChanged:togglemousearea()
+    }
+    Connections{
+    target: touchArea
+    touchArea.drag.active : {console.log("dragging")}
+    }
     MouseArea {
         id: touchArea
         anchors.fill: parent
-
         drag.target: parent
+        enabled: false
 
         Timer {
             id: pressAndHoldTimer
             interval: 1000
             onTriggered: popupmenu.popup(touchArea.mouseX, touchArea.mouseY);
+
 
         }
         onPressed: pressAndHoldTimer.start()
@@ -218,7 +226,17 @@ Rectangle {
         mainvalueunittextfield.color =  textcolor;
         //vertgauge.valueBar.color = "green"
     }
-
+    function togglemousearea()
+    {
+        if (Dashboard.draggable === 1)
+        {
+         touchArea.enabled = true;
+        //    console.log ("Enable square touch");
+        }
+        else
+            touchArea.enabled = false;
+        //    console.log ("Disable square touch");
+    }
     Gauge {
         id: horizgauge
         height: parent.height * 0.2

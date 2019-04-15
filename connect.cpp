@@ -121,11 +121,11 @@ Connect::~Connect()
 
 }
 
-void Connect::setfilenames(const QString &file1,const QString &file2,const QString &file3)
+void Connect::setfilenames(const QString &file1)
 {
         dashfilename1 = file1;
-        dashfilename2 = file2;
-        dashfilename3 = file3;
+       // dashfilename2 = file2;
+       // dashfilename3 = file3;
         //qDebug()<<"FILENAMES" << dashfilename1<< dashfilename2<< dashfilename3;
 }
 
@@ -217,7 +217,7 @@ void Connect::readdashsetup2()
 void Connect::readdashsetup1()
 {
 
-   // QString path = dashfilename1;//for Windows
+    //QString path = dashfilename1;//for Windows
     QString path = "/home/pi/UserDashboards/"+dashfilename1;
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
