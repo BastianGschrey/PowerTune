@@ -30,7 +30,7 @@ Item {
     property int val12
     property int val13
 
-
+    Drag.active: true
 
     ListModel {
         id: gaugelist
@@ -63,17 +63,13 @@ Item {
 */
     Settings {
         property alias datastore: mainwindow.datastore
+        property alias rpmbackround1: rpmstyleselector.currentIndex
     }
 
 
 
     Connections{
         target: Dashboard
-
-        onRpmstyle1Changed:
-        {
-            rpmgauge.selctor();
-        }
 
         onDashsetup1Changed:
         {
@@ -112,9 +108,9 @@ Item {
     }
     Item{
         id: rpmgauge
-        function selctor()
+        function selector()
         {
-            switch (Dashboard.rpmstyle1) {
+            switch (rpmstyleselector.currentIndex) {
 
             case 0:
             {
@@ -152,43 +148,26 @@ Item {
     }
     // From Here we do all the Magic stuff for the dynamic creation of the Gauges
 
-
-
-
-
     MouseArea {
         id: touchArea
         anchors.fill: parent
-        onDoubleClicked:             {
+        onDoubleClicked:
+        {
+
+            btnbackround.visible = true;
+            savetofile.visible = true;
+            squaregaugemenu.visible =true;
+            btnopencolorselect.visible = true;
             cbx_sources.visible = true;
             btnadd.visible = true;
             btncancel.visible = true;
             btnsave.visible = true;
             btnclear.visible = true;
-            selectcolor.visible = true;
             loadfromfile.visible = true;
+            squaregaugemenu.visible = true;
             Dashboard.setdraggable(1);
             //pimenu.popup(touchArea.mouseX,touchArea.mouseY)
         }
-/*
-        Timer {
-            id: pressAndHoldTimer
-            interval: 2000
-            onTriggered:
-            {
-                cbx_sources.visible = true;
-                btnadd.visible = true;
-                btncancel.visible = true;
-                btnsave.visible = true;
-                btnclear.visible = true;
-                selectcolor.visible = true;
-                loadfromfile.visible = true;
-                //pimenu.popup(touchArea.mouseX,touchArea.mouseY)
-            }
-        }
-        */
-        //onPressed: pressAndHoldTimer.start()
-        //onReleased: pressAndHoldTimer.stop()
     }
     // Virtual Keyboard
     InputPanel {
@@ -223,188 +202,244 @@ Item {
         }
 
     }
-    ComboBox {
-        id: cbx_sources
-        x: 600
-        y: 0
-        textRole: "titlename"
-        width: 200
-        height: 40
-        model: powertunedatasource
-        visible: false
-    }
-    ComboBox {
-        id: loadfileselect
-        x: 600
-        y: 0
-        model: Dashboard.dashfiles
-        width: 200
-        height: 40
 
+    /// RPM STYLE SELECTOR and Backround picture loader
+    Rectangle{
+        id: rpmbackroundselector
+        width: 200
+        height: 200
+        color : "darkgrey"
+        x :590
+        y: 0
+        z:200
         visible: false
-    }
+        MouseArea {
+            id: touchArearpmbackroundselector
+            anchors.fill:parent
+            drag.target: rpmbackroundselector
+        }
+        Grid{
+            rows:4
+            columns: 1
 
-    Button {
-        id: btnadd
-        x: 600
-        y: 46
-        width: 80
-        height: 40
-        text: qsTr("ADD")
-        font.pixelSize: 15
-        //highlighted: false
-        checkable: false
-        //autoExclusive: false
-        checked: false
-        visible: false
-        onClicked: {
-            CreateSquareGaugeScript.createSquareGauge(266,119,0,240,248,0,powertunedatasource.get(cbx_sources.currentIndex).defaultsymbol,powertunedatasource.get(cbx_sources.currentIndex).titlename,false,true,false,"Dashboard",powertunedatasource.get(cbx_sources.currentIndex).sourcename,powertunedatasource.get(cbx_sources.currentIndex).sourcename,10000,-20000,"lightsteelblue","black","lightsteelblue","white","white","blue",25,40);
-            cbx_sources.visible = false;
-            btnadd.visible = false;
-            btncancel.visible = false;
-            btnsave.visible = false;
-            btnclear.visible = false;
-            selectcolor.visible = false;
-            loadfromfile.visible = false;
-            Dashboard.setdraggable(0);
+            Text {
+                text: qsTr("RPM Style:")
+                font.pixelSize: 25
+                font.bold: true
+            }
+        ComboBox {
+            id: rpmstyleselector
+            width: 200
+            height: 40
+            model: ["None", "Style1","Style2", "Style3", "Style4"]
+            onCurrentIndexChanged: rpmgauge.selector();
+        }
+        Button {
+            id: btncloserpm
+            text: qsTr("CLOSE:")
+            font.pixelSize: 15
+            width: 200
+            height: 40
+            onClicked:{rpmbackroundselector.visible =false;}
+        }
         }
     }
-
-    Button {
-        id: btncancel
-        x: 720
-        y: 46
-        width: 80
-        text: "CANCEL"
-        font.pixelSize: 15
+    /// The Gauge Creation Menu
+    Rectangle{
+        id: squaregaugemenu
+        width: 200
+        height: 300
+        color : "darkgrey"
+        x :590
+        y: 0
+        z:200
         visible: false
-        onClicked:  {
-            btnadd.visible = false
-            btncancel.visible = false
-            cbx_sources.visible = false
-            btnsave.visible = false
-            btnclear.visible = false
-            selectcolor.visible = false
-            loadfromfile.visible = false;
-Dashboard.setdraggable(0);
+        MouseArea {
+            id: touchAreasquaregaugemenu
+            anchors.fill:parent
+            drag.target: squaregaugemenu
         }
-    }
+        ComboBox {
+            id: cbx_sources
+            x:0
+            y:0
+            textRole: "titlename"
+            width: 200
+            height: 40
+            model: powertunedatasource
+        }
+        ComboBox {
+            id: loadfileselect
+            x:0
+            y:0
+            model: Dashboard.dashfiles
+            width: 200
+            height: 40
+            visible: false
+        }
 
-    Button {
-        id: btnsave
-        x: 600
-        y: 99
-        width: 80
-        text: qsTr("SAVE")
-        font.pixelSize: 15
-        visible: false
-        onClicked: {
-            cbx_sources.visible = false;
-            btnadd.visible = false;
-            btncancel.visible = false;
-            btnsave.visible = false;
-            btnclear.visible = false;
-            selectcolor.visible = false;
-            loadfromfile.visible = false;
-            Dashboard.setdraggable(0);
-            // Clearing the gaugelist
-            gaugelist.clear()
-            for (var i=0; i<userDash.children.length; ++i)
-            {
+        Grid{
+            rows:6
+            columns: 2
+            //anchors.top : cbx_sources.bottom
+            spacing:10
+            x:0
+            y:45
 
-                //Check which type of gauges we have and send info to console
-                if(userDash.children[i].information === "Square gauge"){
-                    //console.log(userDash.children[i].information +" " + userDash.children[i].valuepropertymain +  " Item no." + i)
-                    //Apend all values of each gauge to the List Model
-                    gaugelist.append({"type": userDash.children[i].title,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"maxvalue":userDash.children[i].maxvalue,"decplace":userDash.children[i].decimalplaces,"unit":userDash.children[i].mainunit,"id":userDash.children[i].title,"vertgaugevis":userDash.children[i].vertgaugevisible,"horigaugevis":userDash.children[i].horigaugevisible,"secvaluevis":userDash.children[i].secvaluevisible,"valuepropertymain":userDash.children[i].mainvaluename,"valuepropertysec":userDash.children[i].secvaluename,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow,"framecolor":userDash.children[i].framecolor,"backroundcolor":userDash.children[i].resetbackroundcolor,"titlecolor":userDash.children[i].resettitlecolor,"titletextcolor":userDash.children[i].titletextcolor,"textcolor":userDash.children[i].textcolor,"barcolor":userDash.children[i].barcolor,"titlefontsize":userDash.children[i].titlefontsize,"mainfontsize":userDash.children[i].mainfontsize})
-                    //console.log(gaugelist.get(i).width)
-
-                }
-                if(userDash.children[i].information === "Bar gauge"){
-                    //console.log(userDash.children[i].information +" " + userDash.children[i].title +  " Item no." + i)
-                }
-                if(userDash.children[i].information === "Round gauge"){
-                    //console.log(userDash.children[i].information +" " + userDash.children[i].title +  " Item no." + i)
+            Button {
+                id: btnadd
+                width: 95
+                height: 40
+                text: qsTr("ADD")
+                font.pixelSize: 15
+                onClicked: {
+                    CreateSquareGaugeScript.createSquareGauge(266,119,0,240,248,0,powertunedatasource.get(cbx_sources.currentIndex).defaultsymbol,powertunedatasource.get(cbx_sources.currentIndex).titlename,false,true,false,"Dashboard",powertunedatasource.get(cbx_sources.currentIndex).sourcename,powertunedatasource.get(cbx_sources.currentIndex).sourcename,10000,-20000,"lightsteelblue","black","lightsteelblue","white","white","blue",25,40);
+                    squaregaugemenu.visible = false;
+                    selectcolor.visible =false;
+                    Dashboard.setdraggable(0);
                 }
             }
 
-            var datamodel = []
-            for (var j = 0; j < gaugelist.count; ++j) datamodel.push(gaugelist.get(j))
-            datastore = JSON.stringify(datamodel)
+            Button {
+                id: btncancel
+                width: 95
+                text: "CANCEL"
+                font.pixelSize: 15
+                onClicked:  {
+                    squaregaugemenu.visible = false;
+                    selectcolor.visible =false;
+                    Dashboard.setdraggable(0);
+                }
+            }
 
-        }
-    }
+            Button {
+                id: btnsave
+                width: 95
+                text: qsTr("SAVE")
+                font.pixelSize: 15
+                onClicked: {
+                    squaregaugemenu.visible = false;
+                    selectcolor.visible =false;
+                    Dashboard.setdraggable(0);
+                    // Clearing the gaugelist
+                    gaugelist.clear()
+                    for (var i=0; i<userDash.children.length; ++i)
+                    {
 
-    Button {
-        id: btnclear
-        x: 720
-        y: 99
-        width: 80
-        text: "Clear"
-        font.pixelSize: 15
-        visible: false
-        onClicked:  {
-            btnadd.visible = false
-            btncancel.visible = false
-            cbx_sources.visible = false
-            btnsave.visible = false
-            btnclear.visible = false
-            loadfromfile.visible =false;
-            selectcolor.visible = false;
-            Dashboard.setdraggable(0);
-            for (var i=0; i<userDash.children.length; ++i)
-            {
-                userDash.children[i].destroy()
+                        //Check which type of gauges we have and send info to console
+                        if(userDash.children[i].information === "Square gauge"){
+                            //console.log(userDash.children[i].information +" " + userDash.children[i].valuepropertymain +  " Item no." + i)
+                            //Apend all values of each gauge to the List Model
+                            gaugelist.append({"type": userDash.children[i].title,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"maxvalue":userDash.children[i].maxvalue,"decplace":userDash.children[i].decimalplaces,"unit":userDash.children[i].mainunit,"id":userDash.children[i].title,"vertgaugevis":userDash.children[i].vertgaugevisible,"horigaugevis":userDash.children[i].horigaugevisible,"secvaluevis":userDash.children[i].secvaluevisible,"valuepropertymain":userDash.children[i].mainvaluename,"valuepropertysec":userDash.children[i].secvaluename,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow,"framecolor":userDash.children[i].framecolor,"backroundcolor":userDash.children[i].resetbackroundcolor,"titlecolor":userDash.children[i].resettitlecolor,"titletextcolor":userDash.children[i].titletextcolor,"textcolor":userDash.children[i].textcolor,"barcolor":userDash.children[i].barcolor,"titlefontsize":userDash.children[i].titlefontsize,"mainfontsize":userDash.children[i].mainfontsize})
+                            //console.log(gaugelist.get(i).width)
+
+                        }
+                        if(userDash.children[i].information === "Bar gauge"){
+                            //console.log(userDash.children[i].information +" " + userDash.children[i].title +  " Item no." + i)
+                        }
+                        if(userDash.children[i].information === "Round gauge"){
+                            //console.log(userDash.children[i].information +" " + userDash.children[i].title +  " Item no." + i)
+                        }
+                    }
+
+                    var datamodel = []
+                    for (var j = 0; j < gaugelist.count; ++j) datamodel.push(gaugelist.get(j))
+                    datastore = JSON.stringify(datamodel)
+
+                }
+            }
+            Button {
+                id: btnopencolorselect
+                width:95
+                text: qsTr("COLORS")
+                font.pixelSize: 15
+                onClicked: {
+                    selectcolor.visible =true;
+                    squaregaugemenu.visible = false;
+                    Dashboard.setdraggable(0);
+                }
+            }
+            Button {
+                id: btnclear
+                width: 95
+                text: "CLEAR"
+                font.pixelSize: 15
+                onClicked:  {
+                    selectcolor.visible =false;
+                    squaregaugemenu.visible = false;
+                    Dashboard.setdraggable(0);
+                    for (var i=0; i<userDash.children.length; ++i)
+                    {
+                        userDash.children[i].destroy()
+                    }
+                }
+            }
+
+            Button{
+                id: loadfromfile
+                width: 95
+                text: "IMPORT"
+                font.pixelSize: 15
+
+                onClicked: {
+                    loadfromfile.visible = false;
+                    loadfileselect.visible = true;
+                    btnadd.visible = false;
+                    btncancel.visible = false;
+                    cbx_sources.visible = false;
+                    btnsave.visible = false;
+                    btnclear.visible = false;
+                    selectcolor.visible = false;
+                    savetofile.visible = false;
+                    btnopencolorselect.visible = false;
+                    loadfromfile.visible = false;
+                    load.visible = true;
+                    selectcolor.visible =false;
+                    Dashboard.setdraggable(0);
+                }
+            }
+            Button{
+                id: savetofile
+                width: 95
+                text: "EXPORT"
+                font.pixelSize: 15
+
+                onClicked: {
+                    squaregaugemenu.visible = false;
+                    Dashboard.setdraggable(0);
+                    selectcolor.visible =false;
+                }
+            }
+            Button{
+                id: load
+                width: 95
+                text: "LOAD"
+                font.pixelSize: 15
+                visible: false
+                onClicked: {
+                    Connect.setfilenames(loadfileselect.textAt(loadfileselect.currentIndex));
+                    console.log(loadfileselect.textAt(loadfileselect.currentIndex));
+                    squaregaugemenu.visible = false;
+                    selectcolor.visible =false;
+                    Dashboard.setdraggable(0);
+                    Connect.readdashsetup1();
+                }
+            }
+            Button{
+                id: btnbackround
+                width: 95
+                text: "RPM"
+                font.pixelSize: 15
+                onClicked: {
+                    rpmbackroundselector.visible =true;
+                    squaregaugemenu.visible = false;
+                    btnbackround.visible =false;
+                    //open backround bar and picture selector
+                }
             }
         }
     }
-
-    Button{
-        id: loadfromfile
-        x: 720
-        y: 170
-        width: 80
-        text: "Import"
-        font.pixelSize: 15
-        visible: false
-
-        onClicked: {
-            loadfromfile.visible = false;
-            loadfileselect.visible = true;
-            btnadd.visible = false;
-            btncancel.visible = false;
-            cbx_sources.visible = false;
-            btnsave.visible = false;
-            btnclear.visible = false;
-            selectcolor.visible = false;
-            load.visible = true;
-Dashboard.setdraggable(0);
-        }
-    }
-    Button{
-        id: load
-        x: 720
-        y: 170
-        width: 80
-        text: "Load"
-        font.pixelSize: 15
-        visible: false
-
-        onClicked: {
-            Connect.setfilenames(loadfileselect.textAt(loadfileselect.currentIndex));
-            console.log(loadfileselect.textAt(loadfileselect.currentIndex));
-            load.visible = false;
-            loadfileselect.visible = false;
-            btnadd.visible = false
-            btncancel.visible = false
-            cbx_sources.visible = false
-            btnsave.visible = false
-            btnclear.visible = false
-            selectcolor.visible = false;
-            Dashboard.setdraggable(0);
-            Connect.readdashsetup1();
-        }
-    }
+    // End
     /*
     PieMenu{
         id: pimenu
@@ -515,16 +550,22 @@ Dashboard.setdraggable(0);
         }
     }
 
+    //Color Selection panel
     Rectangle{
         id: selectcolor
         x:0
         y:0
-        height :150
+        height :200
         width: 500
         color: "darkgrey"
         visible: false
-        Drag.active: true
-        //Drag.target: parent
+
+        MouseArea {
+            id: touchAreacolorselect
+            anchors.fill:parent
+            drag.target: selectcolor
+        }
+        /*
         Item {
             id: colorsettingsSaved
             Settings {
@@ -536,9 +577,9 @@ Dashboard.setdraggable(0);
                 property alias indexmaintextcolor: valuetext.currentIndex
             }
         }
-
+        */
         Grid{
-            rows:4
+            rows:5
             columns: 3
             anchors.centerIn: parent
             spacing:5
@@ -673,7 +714,6 @@ Dashboard.setdraggable(0);
                 width: 150;
                 model: ColorList{}
                 visible: true
-
                 onCurrentIndexChanged: changebargaugecolor()
 
                 delegate:
@@ -771,6 +811,13 @@ Dashboard.setdraggable(0);
                     color:  valuetext.currentText
                 }
 
+            }
+            Button {
+                id: btnclosecolorselect
+                width:150
+                text: qsTr("CLOSE")
+                font.pixelSize: 15
+                onClicked: {selectcolor.visible = false;}
             }
         }
     }

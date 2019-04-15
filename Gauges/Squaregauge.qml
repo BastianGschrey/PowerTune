@@ -45,16 +45,17 @@ Rectangle {
     target: Dashboard
     onDraggableChanged:togglemousearea()
     }
-    Connections{
-    target: touchArea
-    touchArea.drag.active : {console.log("dragging")}
-    }
+
     MouseArea {
         id: touchArea
         anchors.fill: parent
         drag.target: parent
         enabled: false
-
+        //drag.active:
+        onDoubleClicked: {
+        popupmenu.popup(touchArea.mouseX, touchArea.mouseY);
+        }
+        /*
         Timer {
             id: pressAndHoldTimer
             interval: 1000
@@ -63,7 +64,7 @@ Rectangle {
 
         }
         onPressed: pressAndHoldTimer.start()
-        onReleased: pressAndHoldTimer.stop();
+        onReleased: pressAndHoldTimer.stop();*/
     }
 
 
