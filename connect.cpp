@@ -124,7 +124,7 @@ void Connect::saveDashtoFile(const QString &filename,const QString &dashstring)
 {
   //      qDebug()<<"Filename" << filename + "txt";
         QStringList fields = dashstring.split(QRegExp("[\r\n]"));
-        QFile file( filename + ".txt" );
+        QFile file( "/home/pi/UserDashboards/"+filename + ".txt" );
         file.remove(); //remove file if it exists to avoid appending of existing file
         if ( file.open(QIODevice::ReadWrite) )
         {
