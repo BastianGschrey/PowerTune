@@ -373,7 +373,7 @@ Item {
                 font.pixelSize: 15
 
                 onClicked: {
-
+                    Connect.readavailabledashfiles();
                     btncancelload.visible = true;
                     loadfromfile.visible = false;
                     loadfileselect.visible = true;
