@@ -39,7 +39,7 @@ Item {
     ComboBox{
         id: dashvalue
         width: 200
-        model: Dashboard.dashsetup1
+        model: Dashboard.dashsetup2
         visible:false
     }
 
@@ -52,15 +52,8 @@ Item {
             for (var i = 0; i < datamodel.length; ++i) gaugelist.append(datamodel[i])
         }
         createDash()
-        console.log("")
     }
-    /*
-    onClosing: {
-      var datamodel = []
-      for (var i = 0; i < gaugelist.count; ++i) datamodel.push(gaugelist.get(i))
-      datastore = JSON.stringify(datamodel)
-    }
-*/
+
     Settings {
         property alias datastore2: mainwindow.datastore
         property alias rpmbackround2: rpmstyleselector.currentIndex
@@ -100,12 +93,7 @@ Item {
         anchors.fill:parent
         source: ""
     }
-    ComboBox{
-        id: dashvalue1
-        width: 200
-        model: Dashboard.dashsetup2
-        visible:false
-    }
+
     Item{
         id: rpmgauge
         function selector()
@@ -420,14 +408,15 @@ Item {
                 font.pixelSize: 15
                 visible: false
                 onClicked: {
+
                     loadfileselect.visible = false;
-                    Connect.setfilename1(loadfileselect.textAt(loadfileselect.currentIndex));
-                    console.log(loadfileselect.textAt(loadfileselect.currentIndex));
+                    Connect.setfilename2(loadfileselect.textAt(loadfileselect.currentIndex));
                     squaregaugemenu.visible = false;
                     load.visible = false;
                     selectcolor.visible =false;
+                    btncancelload.visible = false;
                     Dashboard.setdraggable(0);
-                    Connect.readdashsetup1();
+                    Connect.readdashsetup2();
                 }
             }
             Button{
@@ -440,13 +429,9 @@ Item {
                     loadfileselect.visible = false;
                     btncancelload.visible = false;
                     squaregaugemenu.visible = false;
-                    Connect.setfilename1(loadfileselect.textAt(loadfileselect.currentIndex));
-                    console.log(loadfileselect.textAt(loadfileselect.currentIndex));
-                    squaregaugemenu
                     load.visible = false;
                     selectcolor.visible =false;
                     Dashboard.setdraggable(0);
-                    Connect.readdashsetup1();
                 }
             }
             Button{

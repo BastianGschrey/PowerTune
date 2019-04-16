@@ -54,13 +54,7 @@ Item {
         createDash()
         console.log("")
     }
-    /*
-    onClosing: {
-      var datamodel = []
-      for (var i = 0; i < gaugelist.count; ++i) datamodel.push(gaugelist.get(i))
-      datastore = JSON.stringify(datamodel)
-    }
-*/
+
     Settings {
         property alias datastore1: mainwindow.datastore
         property alias rpmbackround1: rpmstyleselector.currentIndex
@@ -100,12 +94,7 @@ Item {
         anchors.fill:parent
         source: ""
     }
-    ComboBox{
-        id: dashvalue1
-        width: 200
-        model: Dashboard.dashsetup1
-        visible:false
-    }
+
     Item{
         id: rpmgauge
         function selector()
@@ -422,7 +411,7 @@ Item {
                 onClicked: {
                     loadfileselect.visible = false;
                     Connect.setfilename1(loadfileselect.textAt(loadfileselect.currentIndex));
-                    console.log(loadfileselect.textAt(loadfileselect.currentIndex));
+                    btncancelload.visible = false;
                     squaregaugemenu.visible = false;
                     load.visible = false;
                     selectcolor.visible =false;
@@ -440,13 +429,9 @@ Item {
                     loadfileselect.visible = false;
                     btncancelload.visible = false;
                     squaregaugemenu.visible = false;
-                    Connect.setfilename1(loadfileselect.textAt(loadfileselect.currentIndex));
-                    console.log(loadfileselect.textAt(loadfileselect.currentIndex));
-                    squaregaugemenu
                     load.visible = false;
                     selectcolor.visible =false;
                     Dashboard.setdraggable(0);
-                    Connect.readdashsetup1();
                 }
             }
             Button{

@@ -39,7 +39,7 @@ Item {
     ComboBox{
         id: dashvalue
         width: 200
-        model: Dashboard.dashsetup1
+        model: Dashboard.dashsetup3
         visible:false
     }
 
@@ -62,7 +62,8 @@ Item {
     }
 */
     Settings {
-        property alias datastore: mainwindow.datastore
+        property alias datastore3: mainwindow.datastore
+        property alias rpmbackround3: rpmstyleselector.currentIndex
     }
 
 
@@ -70,12 +71,7 @@ Item {
     Connections{
         target: Dashboard
 
-        onRpmstyle1Changed:
-        {
-            rpmgauge.selctor();
-        }
-
-        onDashsetup1Changed:
+        onDashsetup3Changed:
         {
             if (dashvalue.textAt(8) === "true") {val1 = true};
             if (dashvalue.textAt(8) === "false") {val1 = false};
@@ -93,7 +89,6 @@ Item {
             if (dashvalue.textAt(21) !== "") {val11 = dashvalue.textAt(21);}else {val11 = "grey";}
             if (dashvalue.textAt(22) !== "") {val12 = dashvalue.textAt(22);}else {val12 = 28;}
             if (dashvalue.textAt(23) !== "") {val13 = dashvalue.textAt(23);}else {val13 = 50;}
-            console.log(dashvalue.textAt(16))
             CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13),val4,val5,val6,val7,val8,val9,val10,val11,val12,val13);
         }
 
@@ -104,17 +99,12 @@ Item {
         anchors.fill:parent
         source: ""
     }
-    ComboBox{
-        id: dashvalue1
-        width: 200
-        model: Dashboard.dashsetup1
-        visible:false
-    }
+
     Item{
         id: rpmgauge
-        function selctor()
+        function selector()
         {
-            switch (Dashboard.rpmstyle1) {
+            switch (rpmstyleselector.currentIndex) {
 
             case 0:
             {
@@ -157,6 +147,8 @@ Item {
         anchors.fill: parent
         onDoubleClicked:
         {
+
+            btnbackround.visible = true;
             savetofile.visible = true;
             squaregaugemenu.visible =true;
             btnopencolorselect.visible = true;
@@ -172,40 +164,93 @@ Item {
         }
     }
     // Virtual Keyboard
-    InputPanel {
-        id: keyboard;
-        y:0
-        z:200
-        // y: parent.height; // position the top of the keyboard to the bottom of the screen/display
-        width: parent.width
-        height: parent.height /2
+    Rectangle{
+        id: keyboardcontainer
+        color: "darkgrey"
         visible: false
+        width :500
+        height:180
+        z:220
+        MouseArea {
+            id: touchAkeyboardcontainer
+            anchors.fill:parent
+            drag.target: keyboardcontainer
+        }
+        InputPanel {
+            id: keyboard
+            anchors.fill: parent
+            visible: false
+            KeyboardStyle{
+                fullScreenInputCursor: Rectangle{
+                    width: 1
+                    color: "blue"
+                    visible: parent.blinkStatus
+                }
+                keyboardBackground: Rectangle{
+                    anchors.fill: parent
+                    color: "green"
+                }
 
-        KeyboardStyle{
-            fullScreenInputCursor: Rectangle{
-                width: 1
-                color: "blue"
-                visible: parent.blinkStatus
             }
-            keyboardBackground: Rectangle{
-                anchors.fill: parent
-                color: "green"
+
+            states: State {
+                name: "visible";
+                when: keyboard.active;
+                PropertyChanges {
+                    target: keyboard;
+                    visible: true
+                }
+                PropertyChanges {
+                    target: keyboardcontainer;
+                    visible: true;
+                    x:0
+                    y:0
+                }
             }
 
         }
-
-        states: State {
-            name: "visible";
-            when: keyboard.active;
-            PropertyChanges {
-                target: keyboard;
-                visible: true
-            }
-        }
-
     }
+    /// RPM STYLE SELECTOR and Backround picture loader
+    Rectangle{
+        id: rpmbackroundselector
+        width: 200
+        height: 200
+        color : "darkgrey"
+        x :590
+        y: 0
+        z:200
+        visible: false
+        MouseArea {
+            id: touchArearpmbackroundselector
+            anchors.fill:parent
+            drag.target: rpmbackroundselector
+        }
+        Grid{
+            rows:4
+            columns: 1
 
-
+            Text {
+                text: qsTr("RPM Style:")
+                font.pixelSize: 25
+                font.bold: true
+            }
+            ComboBox {
+                id: rpmstyleselector
+                width: 200
+                height: 40
+                model: ["None", "Style1","Style2", "Style3", "Style4"]
+                onCurrentIndexChanged: rpmgauge.selector();
+            }
+            Button {
+                id: btncloserpm
+                text: qsTr("CLOSE:")
+                font.pixelSize: 15
+                width: 200
+                height: 40
+                onClicked:{rpmbackroundselector.visible =false;}
+            }
+        }
+    }
     /// The Gauge Creation Menu
     Rectangle{
         id: squaregaugemenu
@@ -241,7 +286,7 @@ Item {
         }
 
         Grid{
-            rows:5
+            rows:6
             columns: 2
             //anchors.top : cbx_sources.bottom
             spacing:10
@@ -256,18 +301,6 @@ Item {
                 font.pixelSize: 15
                 onClicked: {
                     CreateSquareGaugeScript.createSquareGauge(266,119,0,240,248,0,powertunedatasource.get(cbx_sources.currentIndex).defaultsymbol,powertunedatasource.get(cbx_sources.currentIndex).titlename,false,true,false,"Dashboard",powertunedatasource.get(cbx_sources.currentIndex).sourcename,powertunedatasource.get(cbx_sources.currentIndex).sourcename,10000,-20000,"lightsteelblue","black","lightsteelblue","white","white","blue",25,40);
-                    squaregaugemenu.visible = false;
-                    selectcolor.visible =false;
-                    Dashboard.setdraggable(0);
-                }
-            }
-
-            Button {
-                id: btncancel
-                width: 95
-                text: "CANCEL"
-                font.pixelSize: 15
-                onClicked:  {
                     squaregaugemenu.visible = false;
                     selectcolor.visible =false;
                     Dashboard.setdraggable(0);
@@ -292,7 +325,7 @@ Item {
                         if(userDash.children[i].information === "Square gauge"){
                             //console.log(userDash.children[i].information +" " + userDash.children[i].valuepropertymain +  " Item no." + i)
                             //Apend all values of each gauge to the List Model
-                            gaugelist.append({"type": userDash.children[i].title,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"maxvalue":userDash.children[i].maxvalue,"decplace":userDash.children[i].decimalplaces,"unit":userDash.children[i].mainunit,"id":userDash.children[i].title,"vertgaugevis":userDash.children[i].vertgaugevisible,"horigaugevis":userDash.children[i].horigaugevisible,"secvaluevis":userDash.children[i].secvaluevisible,"valuepropertymain":userDash.children[i].mainvaluename,"valuepropertysec":userDash.children[i].secvaluename,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow,"framecolor":userDash.children[i].framecolor,"backroundcolor":userDash.children[i].resetbackroundcolor,"titlecolor":userDash.children[i].resettitlecolor,"titletextcolor":userDash.children[i].titletextcolor,"textcolor":userDash.children[i].textcolor,"barcolor":userDash.children[i].barcolor,"titlefontsize":userDash.children[i].titlefontsize,"mainfontsize":userDash.children[i].mainfontsize})
+                            gaugelist.append({"type": userDash.children[i].title,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"maxvalue":userDash.children[i].maxvalue,"decplace":userDash.children[i].decimalpoints,"unit":userDash.children[i].mainunit,"id":userDash.children[i].title,"vertgaugevis":userDash.children[i].vertgaugevisible,"horigaugevis":userDash.children[i].horigaugevisible,"secvaluevis":userDash.children[i].secvaluevisible,"valuepropertymain":userDash.children[i].mainvaluename,"valuepropertysec":userDash.children[i].secvaluename,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow,"framecolor":userDash.children[i].framecolor,"backroundcolor":userDash.children[i].resetbackroundcolor,"titlecolor":userDash.children[i].resettitlecolor,"titletextcolor":userDash.children[i].titletextcolor,"textcolor":userDash.children[i].textcolor,"barcolor":userDash.children[i].barcolor,"titlefontsize":userDash.children[i].titlefontsize,"mainfontsize":userDash.children[i].mainfontsize})
                             //console.log(gaugelist.get(i).width)
 
                         }
@@ -324,7 +357,7 @@ Item {
             Button {
                 id: btnclear
                 width: 95
-                text: "Clear"
+                text: "CLEAR"
                 font.pixelSize: 15
                 onClicked:  {
                     selectcolor.visible =false;
@@ -344,6 +377,8 @@ Item {
                 font.pixelSize: 15
 
                 onClicked: {
+
+                    btncancelload.visible = true;
                     loadfromfile.visible = false;
                     loadfileselect.visible = true;
                     btnadd.visible = false;
@@ -354,9 +389,10 @@ Item {
                     selectcolor.visible = false;
                     savetofile.visible = false;
                     btnopencolorselect.visible = false;
+                    loadfromfile.visible = false;
                     load.visible = true;
                     selectcolor.visible =false;
-                    Dashboard.setdraggable(0);
+                    btnbackround.visible =false;
                 }
             }
             Button{
@@ -378,12 +414,53 @@ Item {
                 font.pixelSize: 15
                 visible: false
                 onClicked: {
-                    Connect.setfilenames(loadfileselect.textAt(loadfileselect.currentIndex));
-                    console.log(loadfileselect.textAt(loadfileselect.currentIndex));
+                    Connect.setfilename3(loadfileselect.textAt(loadfileselect.currentIndex));
+                    loadfileselect.visible = false;
+                    btncancelload.visible = false;
+                    squaregaugemenu.visible = false;
+                    load.visible = false;
+                    selectcolor.visible =false;
+                    Dashboard.setdraggable(0);
+                    Connect.readdashsetup3();
+                }
+            }
+            Button{
+                id: btncancelload
+                width: 95
+                text: "CANCEL"
+                font.pixelSize: 15
+                visible: false
+                onClicked: {
+                    loadfileselect.visible = false;
+                    btncancelload.visible = false;
+                    squaregaugemenu.visible = false;
+                    squaregaugemenu
+                    load.visible = false;
+                    selectcolor.visible =false;
+                    Dashboard.setdraggable(0);
+                }
+            }
+            Button{
+                id: btnbackround
+                width: 95
+                text: "RPM"
+                font.pixelSize: 15
+                onClicked: {
+                    rpmbackroundselector.visible =true;
+                    squaregaugemenu.visible = false;
+                    btnbackround.visible =false;
+                    Dashboard.setdraggable(0);
+                }
+            }
+            Button {
+                id: btncancel
+                width: 95
+                text: "CLOSE"
+                font.pixelSize: 15
+                onClicked:  {
                     squaregaugemenu.visible = false;
                     selectcolor.visible =false;
                     Dashboard.setdraggable(0);
-                    Connect.readdashsetup1();
                 }
             }
         }
@@ -705,7 +782,7 @@ Item {
 
                     ItemDelegate {
                     width: titlecolor.width
-                    font.pixelSize: 50
+                    font.pixelSize: 15
                     Rectangle {
 
                         width: titlecolor.width
@@ -715,6 +792,7 @@ Item {
                         Text {
                             text: itemColor
                             anchors.centerIn: parent
+                            font.pixelSize: 15
                         }
                     }
                 }
@@ -750,6 +828,7 @@ Item {
                         Text {
                             text: itemColor
                             anchors.centerIn: parent
+                            font.pixelSize: 15
                         }
                     }
                 }
@@ -766,8 +845,12 @@ Item {
                 width:150
                 text: qsTr("CLOSE")
                 font.pixelSize: 15
-                onClicked: {selectcolor.visible =false;}
+                onClicked: {selectcolor.visible = false;}
             }
         }
     }
 }
+
+
+
+
