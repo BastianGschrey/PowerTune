@@ -129,7 +129,7 @@ void Connect::saveDashtoFile(const QString &filename,const QString &dashstring)
         if ( file.open(QIODevice::ReadWrite) )
         {
             QTextStream stream( &file );
-            stream << dashstring;
+            stream << dashstring << endl;
         }
         file.close();
 }
