@@ -25,6 +25,7 @@ ApplicationWindow {
         anchors.fill: parent
         Component.onCompleted: Connect.readavailabledashfiles()
 
+
         Loader {
 
             id: firstPageLoader

@@ -305,10 +305,12 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_laptime("00:00.000")
     ,  m_Lastlaptime("00:00.000")
     ,  m_bestlaptime("00:00.000")
+    ,  m_draggable(0)
+
 
 {
-}
 
+}
 
 
 // Odometer
@@ -2556,6 +2558,14 @@ void DashBoard::setbestlaptime(const QString &bestlaptime)
     emit bestlaptimeChanged(bestlaptime);
 }
 
+void DashBoard::setdraggable(const int &draggable)
+{
+    if (m_draggable == draggable)
+        return;
+    m_draggable = draggable;
+    emit draggableChanged(draggable);
+}
+
 
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
@@ -2878,7 +2888,7 @@ int DashBoard::currentLap() const {return m_currentLap; }
 QString DashBoard::laptime() const {return m_laptime; }
 QString DashBoard::Lastlaptime() const {return m_Lastlaptime; }
 QString DashBoard::bestlaptime() const {return m_bestlaptime; }
-
+int DashBoard::draggable() const { return m_draggable; }
 
 
 
