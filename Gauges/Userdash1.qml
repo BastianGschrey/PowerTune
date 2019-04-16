@@ -16,6 +16,7 @@ Item {
     id: mainwindow
     anchors.fill: parent
     property string datastore: ""
+    property string saveDashtofilestring : ""
     property bool val1: false
     property bool val2: false
     property bool val3: false
@@ -36,6 +37,7 @@ Item {
         id: gaugelist
     }
 
+
     ComboBox{
         id: dashvalue
         width: 200
@@ -52,7 +54,6 @@ Item {
             for (var i = 0; i < datamodel.length; ++i) gaugelist.append(datamodel[i])
         }
         createDash()
-        console.log("")
     }
 
     Settings {
@@ -67,6 +68,7 @@ Item {
 
         onDashsetup1Changed:
         {
+            console.log("test " +dashvalue.textAt(14))
             if (dashvalue.textAt(8) === "true") {val1 = true};
             if (dashvalue.textAt(8) === "false") {val1 = false};
             if (dashvalue.textAt(9) === "true") {val2 = true};
@@ -83,7 +85,7 @@ Item {
             if (dashvalue.textAt(21) !== "") {val11 = dashvalue.textAt(21);}else {val11 = "grey";}
             if (dashvalue.textAt(22) !== "") {val12 = dashvalue.textAt(22);}else {val12 = 28;}
             if (dashvalue.textAt(23) !== "") {val13 = dashvalue.textAt(23);}else {val13 = 50;}
-            console.log(dashvalue.textAt(16))
+
             CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13),val4,val5,val6,val7,val8,val9,val10,val11,val12,val13);
         }
 
@@ -320,7 +322,7 @@ Item {
                         if(userDash.children[i].information === "Square gauge"){
                             //console.log(userDash.children[i].information +" " + userDash.children[i].valuepropertymain +  " Item no." + i)
                             //Apend all values of each gauge to the List Model
-                            gaugelist.append({"type": userDash.children[i].title,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"maxvalue":userDash.children[i].maxvalue,"decplace":userDash.children[i].decimalpoints,"unit":userDash.children[i].mainunit,"id":userDash.children[i].title,"vertgaugevis":userDash.children[i].vertgaugevisible,"horigaugevis":userDash.children[i].horigaugevisible,"secvaluevis":userDash.children[i].secvaluevisible,"valuepropertymain":userDash.children[i].mainvaluename,"valuepropertysec":userDash.children[i].secvaluename,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow,"framecolor":userDash.children[i].framecolor,"backroundcolor":userDash.children[i].resetbackroundcolor,"titlecolor":userDash.children[i].resettitlecolor,"titletextcolor":userDash.children[i].titletextcolor,"textcolor":userDash.children[i].textcolor,"barcolor":userDash.children[i].barcolor,"titlefontsize":userDash.children[i].titlefontsize,"mainfontsize":userDash.children[i].mainfontsize})
+                            gaugelist.append({"type": userDash.children[i].title,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"maxvalue":userDash.children[i].maxvalue,"decplace":userDash.children[i].decimalpoints,"unit":userDash.children[i].mainunit,"id":userDash.children[i].title,"vertgaugevis":userDash.children[i].vertgaugevisible,"horigaugevis":userDash.children[i].horigaugevisible,"secvaluevis":userDash.children[i].secvaluevisible,"valuepropertymain":userDash.children[i].mainvaluename,"valuepropertysec":userDash.children[i].secvaluename,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow,"framecolor":userDash.children[i].framecolor,"backroundcolor":userDash.children[i].resetbackroundcolor,"titlecolor":userDash.children[i].resettitlecolor,"titletextcolor":userDash.children[i].titletextcolor,"textcolor":userDash.children[i].textcolor,"barcolor":userDash.children[i].barcolor,"titlefontsize":userDash.children[i].titlefontsize,"mainfontsize":userDash.children[i].mainfontsize,"info":userDash.children[i].information})
                             //console.log(gaugelist.get(i).width)
 
                         }
@@ -400,6 +402,8 @@ Item {
                     squaregaugemenu.visible = false;
                     Dashboard.setdraggable(0);
                     selectcolor.visible =false;
+                    saveDashtofile();
+                    Connect.saveDashtoFile("Dash1Export",saveDashtofilestring);
                 }
             }
             Button{
@@ -493,6 +497,13 @@ Item {
     }
 
     ///////////////////Functions
+    function saveDashtofile()
+    {
+         saveDashtofilestring = ""
+         for (var i=0; i<gaugelist.rowCount(); ++i)
+         saveDashtofilestring += (userDash.children[i].width+","+userDash.children[i].height+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].maxvalue+","+userDash.children[i].decimalpoints+","+userDash.children[i].mainunit+","+userDash.children[i].title+","+userDash.children[i].vertgaugevisible+","+userDash.children[i].horigaugevisible+","+userDash.children[i].secvaluevisible+","+"Dashboard"+","+userDash.children[i].mainvaluename+","+userDash.children[i].secvaluename+","+userDash.children[i].warnvaluehigh+","+userDash.children[i].warnvaluelow+","+userDash.children[i].framecolor+","+userDash.children[i].resetbackroundcolor+","+userDash.children[i].resettitlecolor+","+userDash.children[i].titletextcolor+","+userDash.children[i].textcolor+","+userDash.children[i].barcolor+","+userDash.children[i].titlefontsize+","+userDash.children[i].mainfontsize+","+userDash.children[i].information+"\r\n");
+
+    }
     function createDash()
     {
         console.log("create Dashboard")
@@ -517,9 +528,7 @@ Item {
         {
             if(userDash.children[i].information === "Square gauge")
             {
-                console.log("From" + userDash.children[i].resettitlecolor)
                 userDash.children[i].resettitlecolor = colorselect.textAt(colorselecttitlebar.currentIndex)
-                console.log("To" + userDash.children[i].resettitlecolor)
                 userDash.children[i].set()
             }
         }
