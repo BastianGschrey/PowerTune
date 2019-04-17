@@ -43,10 +43,6 @@ Item {
         model: Dashboard.dashsetup1
         visible:false
         font.pixelSize: 15
-        delegate: ItemDelegate {
-            width: dashvalue.width
-            font.pixelSize: dashvalue.font.pixelSize
-        }
     }
 
     DatasourcesList{id: powertunedatasource}
@@ -255,10 +251,6 @@ Item {
                 font.pixelSize: 15
                 model: ["None", "Style1","Style2", "Style3", "Style4"]
                 onCurrentIndexChanged: rpmgauge.selector();
-                delegate: ItemDelegate {
-                    width: rpmstyleselector.width
-                    font.pixelSize: rpmstyleselector.font.pixelSize
-                }
             }
             Text {
                 text: qsTr("Extra:")
@@ -272,10 +264,6 @@ Item {
                 font.pixelSize: 15
                 model: ["None", "PFC Sensors"]
                 onCurrentIndexChanged: setextra();
-                delegate: ItemDelegate {
-                    width: extraSelector.width
-                    font.pixelSize: extraSelector.font.pixelSize
-                }
             }
             Button {
                 id: btncloserpm
@@ -309,10 +297,6 @@ Item {
             width: 200
             height: 40
             model: powertunedatasource
-            delegate: ItemDelegate {
-                width: cbx_sources.width
-                font.pixelSize: cbx_sources.font.pixelSize
-            }
         }
         ComboBox {
             id: loadfileselect
@@ -321,10 +305,6 @@ Item {
             width: 200
             height: 40
             visible: false
-            delegate: ItemDelegate {
-                width: loadfileselect.width
-                font.pixelSize: loadfileselect.font.pixelSize
-            }
         }
 
         Grid{
