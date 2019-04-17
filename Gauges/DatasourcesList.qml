@@ -492,25 +492,36 @@ ListModel {
         defaultsymbol: ""
         titlename:"Gear sw."
     }
+
     ListElement {
-        //            sourcename:"gpsAltitude"
+        sourcename:"gpsAltitude"
+        defaultsymbol: "m"
+        titlename:"GPS Altitude"
     }
     ListElement {
-        //-25.809581, 28.112241
-        // sourcename:"gpsLatitude(QString::number(-25.809581));
-        // sourcename:"gpsLongitude(QString::number(28.112241));
+        sourcename:"gpsLatitude"
+        defaultsymbol: ""
+        titlename:"GPS Latitude"
     }
     ListElement {
-        //            sourcename:"gpsLongitude"
+        sourcename:"gpsLongitude"
+        defaultsymbol: ""
+        titlename:"GPS Longitude"
     }
     ListElement {
-        //            sourcename:"gpsSpeed"
+        sourcename:"gpsSpeed"
+        defaultsymbol: "kph"
+        titlename:"GPS Speed"
     }
     ListElement {
-        //            sourcename:"gpsTime"
+        sourcename:"gpsTime"
+        defaultsymbol: ""
+        titlename:"GPS Time"
     }
     ListElement {
-        //            sourcename:"gpsVisibleSatelites"
+        sourcename:"gpsVisibleSatelites"
+        defaultsymbol: ""
+        titlename:"GPS Visible Satelites"
     }
     ListElement {
         sourcename:"gyrox"
@@ -575,13 +586,14 @@ ListModel {
     ListElement {
         sourcename:"incamangle1"
         defaultsymbol: ""
-        titlename:"Inlet Cam 1"
+        titlename:"Inlet Cam 1 angle"
     }
     ListElement {
         sourcename:"incamangle2"
         defaultsymbol: ""
-        titlename:"Inlet Cam 2"
+        titlename:"Inlet Cam 2 angle"
     }
+    /*
     ListElement {
         sourcename:"Inj"
     }
@@ -597,6 +609,7 @@ ListModel {
     ListElement {
         sourcename:"Inj4"
     }
+    */
     ListElement {
         sourcename:"InjDuty"
         defaultsymbol: "%"
@@ -622,6 +635,7 @@ ListModel {
         defaultsymbol: ""
         titlename:"Knock"
     }
+    /*
     ListElement {
         sourcename:"knocklevlogged1"
     }
@@ -634,6 +648,7 @@ ListModel {
     ListElement {
         sourcename:"knockretardbank2"
     }
+    */
     ListElement {
         sourcename:"LAMBDA"
         defaultsymbol: "λ"
@@ -705,7 +720,7 @@ ListModel {
         titlename:"MAP"
     }
     ListElement {
-        //            sourcename:"MAP2"
+        sourcename:"MAP2"
         defaultsymbol: "kPa"
         titlename:"MAP2"
     }
