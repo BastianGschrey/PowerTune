@@ -64,6 +64,15 @@ Item {
         model: Dashboard.maindashsetup
         visible:false
         font.pixelSize: 15
+        delegate: ItemDelegate {
+            width: dashvalue.width
+            text: dashvalue.textRole ? (Array.isArray(dashvalue.model) ? modelData[dashvalue.textRole] : model[dashvalue.textRole]) : modelData
+            font.weight: dashvalue.currentIndex === index ? Font.DemiBold : Font.Normal
+            font.family: dashvalue.font.family
+            font.pixelSize: dashvalue.font.pixelSize
+            highlighted: dashvalue.highlightedIndex === index
+            hoverEnabled: dashvalue.hoverEnabled
+        }
     }
     DatasourcesList{id: powertunedatasource}
 
@@ -491,6 +500,15 @@ Item {
             height: 40
             model: powertunedatasource
             font.pixelSize: 15
+            delegate: ItemDelegate {
+                width: cbx_sources.width
+                text: cbx_sources.textRole ? (Array.isArray(cbx_sources.model) ? modelData[cbx_sources.textRole] : model[cbx_sources.textRole]) : modelData
+                font.weight: cbx_sources.currentIndex === index ? Font.DemiBold : Font.Normal
+                font.family: cbx_sources.font.family
+                font.pixelSize: cbx_sources.font.pixelSize
+                highlighted: cbx_sources.highlightedIndex === index
+                hoverEnabled: cbx_sources.hoverEnabled
+            }
         }
         ComboBox {
             id: loadfileselect
@@ -501,6 +519,15 @@ Item {
             height: 40
             visible: false
             font.pixelSize: 15
+            delegate: ItemDelegate {
+                width: loadfileselect.width
+                text: loadfileselect.textRole ? (Array.isArray(loadfileselect.model) ? modelData[loadfileselect.textRole] : model[loadfileselect.textRole]) : modelData
+                font.weight: loadfileselect.currentIndex === index ? Font.DemiBold : Font.Normal
+                font.family: loadfileselect.font.family
+                font.pixelSize: loadfileselect.font.pixelSize
+                highlighted: loadfileselect.highlightedIndex === index
+                hoverEnabled: loadfileselect.hoverEnabled
+            }
         }
 
         Grid{
