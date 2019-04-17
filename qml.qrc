@@ -49,7 +49,6 @@
         <file>graphics/Racedash.png</file>
         <file>Gauges/RPMBarStyle1.qml</file>
         <file>Gauges/RPMBARStyle2.qml</file>
-        <file>Gauges/SquaregaugeRaceDash.qml</file>
         <file>OBDPIDS.qml</file>
         <file>ConsultRegs.qml</file>
         <file>GPSTracks/Laptimer.qml</file>
@@ -60,7 +59,6 @@
         <file>Gauges/RPMbarStyle3.qml</file>
         <file>graphics/MainDashnew.png</file>
         <file>Gauges/createMaindash.js</file>
-        <file>Gauges/SquareGaugeMain.qml</file>
         <file>graphics/Logo.png</file>
         <file>Intro.qml</file>
         <file>Gauges/DatasourcesList.qml</file>

@@ -41,6 +41,7 @@ Rectangle {
     property double warnvaluelow : -20000
 
     Drag.active: true
+    DatasourcesList{id: powertunedatasource}
 
     Connections{
         target: Dashboard
@@ -568,13 +569,13 @@ Rectangle {
         id: secSourceSelector
         anchors.fill: parent
 
+
         ComboBox {
             id: cbxSecondary
             visible: false
-            textRole: "name"
-            //model: dataSourceModel
+            textRole: "titlename"
+            model: powertunedatasource
         }
-
         Button {
             id: btnSecSrc
             x: 150
@@ -587,7 +588,8 @@ Rectangle {
             onClicked: {
                 cbxSecondary.visible = false;
                 btnSecSrc.visible = false;
-                secvalue = cbxSecondary.currentIndex;
+                secvalue = Qt.binding(function(){return Dashboard[powertunedatasource.get(cbxSecondary.currentIndex).sourcename]});
+                //secvalue = cbxSecondary.currentIndex;
                 secondaryvaluetextfield.visible = true;
             }
         }
