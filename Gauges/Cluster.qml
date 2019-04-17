@@ -63,6 +63,7 @@ Item {
         width: 200
         model: Dashboard.maindashsetup
         visible:false
+        font.pixelSize: 15
     }
     DatasourcesList{id: powertunedatasource}
 
@@ -489,6 +490,7 @@ Item {
             width: 200
             height: 40
             model: powertunedatasource
+            font.pixelSize: 15
         }
         ComboBox {
             id: loadfileselect
@@ -498,6 +500,7 @@ Item {
             width: 200
             height: 40
             visible: false
+            font.pixelSize: 15
         }
 
         Grid{
@@ -837,6 +840,7 @@ Item {
                 width: 150;
                 model: ColorList{}
                 visible: true
+                font.pixelSize: 15
                 onCurrentIndexChanged: changeframeclolor()
                 delegate:
 
@@ -872,6 +876,7 @@ Item {
                 width: 150;
                 model: ColorList{}
                 visible: true
+                font.pixelSize: 15
                 onCurrentIndexChanged: changetitlebarclolor()
 
                 delegate:
@@ -906,6 +911,7 @@ Item {
                 width: 150;
                 model: ColorList{}
                 visible: true
+                font.pixelSize: 15
                 onCurrentIndexChanged: changebackroundcolor()
 
                 delegate:
@@ -950,6 +956,7 @@ Item {
                 width: 150;
                 model: ColorList{}
                 visible: true
+                font.pixelSize: 15
                 onCurrentIndexChanged: changebargaugecolor()
 
                 delegate:
@@ -986,6 +993,7 @@ Item {
                 width: 150;
                 model: ColorList{}
                 visible: true
+                font.pixelSize: 15
                 onCurrentIndexChanged: changetitlecolor()
 
                 delegate:
@@ -1022,6 +1030,7 @@ Item {
                 width: 150;
                 model: ColorList{}
                 visible: true
+                font.pixelSize: 15
                 onCurrentIndexChanged: changevaluetextcolor()
 
                 delegate:
