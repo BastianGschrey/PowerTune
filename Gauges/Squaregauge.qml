@@ -62,16 +62,6 @@ Rectangle {
         onDoubleClicked: {
             popupmenu.popup(touchArea.mouseX, touchArea.mouseY);
         }
-        /*
-        Timer {
-            id: pressAndHoldTimer
-            interval: 1000
-            onTriggered: popupmenu.popup(touchArea.mouseX, touchArea.mouseY);
-
-
-        }
-        onPressed: pressAndHoldTimer.start()
-        onReleased: pressAndHoldTimer.stop();*/
     }
 
 
@@ -182,8 +172,6 @@ Rectangle {
         width: parent.width * 0.1
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
-        //anchors.top: parent.top
-        //anchors.topMargin: 30
         anchors.left: parent.left
         anchors.leftMargin: 10
         orientation: Qt.Vertical
@@ -589,7 +577,6 @@ Rectangle {
                 cbxSecondary.visible = false;
                 btnSecSrc.visible = false;
                 secvalue = Qt.binding(function(){return Dashboard[powertunedatasource.get(cbxSecondary.currentIndex).sourcename]});
-                //secvalue = cbxSecondary.currentIndex;
                 secondaryvaluetextfield.visible = true;
             }
         }
@@ -772,7 +759,6 @@ Rectangle {
             height: 40
             visible: false
             text: title
-            ////inputMethodHints: Qt.ImhDigitsOnly
         }
 
 
@@ -803,7 +789,6 @@ Rectangle {
             height: 40
             visible: false
             text: maxvalue
-            //inputMethodHints: Qt.ImhDigitsOnly
         }
 
         Button {

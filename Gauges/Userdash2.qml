@@ -42,6 +42,7 @@ Item {
         width: 200
         model: Dashboard.dashsetup2
         visible:false
+        font.pixelSize: 15
     }
 
     DatasourcesList{id: powertunedatasource}
@@ -242,6 +243,7 @@ Item {
                 id: rpmstyleselector
                 width: 200
                 height: 40
+                font.pixelSize: 15
                 model: ["None", "Style1","Style2", "Style3", "Style4"]
                 onCurrentIndexChanged: rpmgauge.selector();
             }
@@ -254,6 +256,7 @@ Item {
                 id: extraSelector
                 width: 200
                 height: 40
+                font.pixelSize: 15
                 model: ["None", "PFC Sensors"]
                 onCurrentIndexChanged: setextra();
             }
@@ -286,6 +289,7 @@ Item {
             id: cbx_sources
             x:0
             y:0
+            font.pixelSize: 15
             textRole: "titlename"
             width: 200
             height: 40
@@ -295,6 +299,7 @@ Item {
             id: loadfileselect
             x:0
             y:0
+            font.pixelSize: 15
             model: Dashboard.dashfiles
             width: 200
             height: 40
@@ -313,6 +318,7 @@ Item {
                 id: btnadd
                 width: 95
                 height: 40
+
                 text: qsTr("ADD")
                 font.pixelSize: 15
                 onClicked: {
@@ -664,6 +670,7 @@ Item {
                 id: colorselect
                 width: 150;
                 model: ColorList{}
+                font.pixelSize: 15
                 visible: true
                 onCurrentIndexChanged: changeframeclolor()
                 delegate:
@@ -700,6 +707,7 @@ Item {
                 width: 150;
                 model: ColorList{}
                 visible: true
+                font.pixelSize: 15
                 onCurrentIndexChanged: changetitlebarclolor()
 
                 delegate:
@@ -734,6 +742,7 @@ Item {
                 width: 150;
                 model: ColorList{}
                 visible: true
+                font.pixelSize: 15
                 onCurrentIndexChanged: changebackroundcolor()
 
                 delegate:
@@ -778,6 +787,7 @@ Item {
                 width: 150;
                 model: ColorList{}
                 visible: true
+                font.pixelSize: 15
                 onCurrentIndexChanged: changebargaugecolor()
 
                 delegate:
@@ -814,6 +824,7 @@ Item {
                 width: 150;
                 model: ColorList{}
                 visible: true
+                font.pixelSize: 15
                 onCurrentIndexChanged: changetitlecolor()
 
                 delegate:
@@ -850,6 +861,7 @@ Item {
                 width: 150;
                 model: ColorList{}
                 visible: true
+                font.pixelSize: 15
                 onCurrentIndexChanged: changevaluetextcolor()
 
                 delegate:
