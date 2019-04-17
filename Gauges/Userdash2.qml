@@ -43,6 +43,15 @@ Item {
         model: Dashboard.dashsetup2
         visible:false
         font.pixelSize: 15
+        delegate: ItemDelegate {
+            width: dashvalue.width
+            text: dashvalue.textRole ? (Array.isArray(dashvalue.model) ? modelData[dashvalue.textRole] : model[dashvalue.textRole]) : modelData
+            font.weight: dashvalue.currentIndex === index ? Font.DemiBold : Font.Normal
+            font.family: dashvalue.font.family
+            font.pixelSize: dashvalue.font.pixelSize
+            highlighted: dashvalue.highlightedIndex === index
+            hoverEnabled: dashvalue.hoverEnabled
+        }
     }
 
     DatasourcesList{id: powertunedatasource}
@@ -246,6 +255,15 @@ Item {
                 font.pixelSize: 15
                 model: ["None", "Style1","Style2", "Style3", "Style4"]
                 onCurrentIndexChanged: rpmgauge.selector();
+                delegate: ItemDelegate {
+                    width: rpmstyleselector.width
+                    text: rpmstyleselector.textRole ? (Array.isArray(rpmstyleselector.model) ? modelData[rpmstyleselector.textRole] : model[rpmstyleselector.textRole]) : modelData
+                    font.weight: rpmstyleselector.currentIndex === index ? Font.DemiBold : Font.Normal
+                    font.family: rpmstyleselector.font.family
+                    font.pixelSize: rpmstyleselector.font.pixelSize
+                    highlighted: rpmstyleselector.highlightedIndex === index
+                    hoverEnabled: rpmstyleselector.hoverEnabled
+                }
             }
             Text {
                 text: qsTr("Extra:")
@@ -259,6 +277,15 @@ Item {
                 font.pixelSize: 15
                 model: ["None", "PFC Sensors"]
                 onCurrentIndexChanged: setextra();
+                delegate: ItemDelegate {
+                    width: extraSelector.width
+                    text: extraSelector.textRole ? (Array.isArray(extraSelector.model) ? modelData[extraSelector.textRole] : model[extraSelector.textRole]) : modelData
+                    font.weight: extraSelector.currentIndex === index ? Font.DemiBold : Font.Normal
+                    font.family: extraSelector.font.family
+                    font.pixelSize: extraSelector.font.pixelSize
+                    highlighted: extraSelector.highlightedIndex === index
+                    hoverEnabled: extraSelector.hoverEnabled
+                }
             }
             Button {
                 id: btncloserpm
@@ -294,6 +321,15 @@ Item {
             width: 200
             height: 40
             model: powertunedatasource
+            delegate: ItemDelegate {
+                width: cbx_sources.width
+                text: cbx_sources.textRole ? (Array.isArray(cbx_sources.model) ? modelData[cbx_sources.textRole] : model[cbx_sources.textRole]) : modelData
+                font.weight: cbx_sources.currentIndex === index ? Font.DemiBold : Font.Normal
+                font.family: cbx_sources.font.family
+                font.pixelSize: cbx_sources.font.pixelSize
+                highlighted: cbx_sources.highlightedIndex === index
+                hoverEnabled: cbx_sources.hoverEnabled
+            }
         }
         ComboBox {
             id: loadfileselect
@@ -304,6 +340,15 @@ Item {
             width: 200
             height: 40
             visible: false
+            delegate: ItemDelegate {
+                width: loadfileselect.width
+                text: loadfileselect.textRole ? (Array.isArray(loadfileselect.model) ? modelData[loadfileselect.textRole] : model[loadfileselect.textRole]) : modelData
+                font.weight: loadfileselect.currentIndex === index ? Font.DemiBold : Font.Normal
+                font.family: loadfileselect.font.family
+                font.pixelSize: loadfileselect.font.pixelSize
+                highlighted: loadfileselect.highlightedIndex === index
+                hoverEnabled: loadfileselect.hoverEnabled
+            }
         }
 
         Grid{
