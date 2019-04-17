@@ -136,7 +136,7 @@ Item {
     }
     Rectangle{
         anchors.fill: parent
-        z:100 //This makes the Rectangle appear in front of the bar gauges
+        z:300 //This makes the Rectangle appear in front of the bar gauges
         color: "transparent"
         WarningLoader{}
     }
@@ -226,7 +226,7 @@ Item {
             drag.target: rpmbackroundselector
         }
         Grid{
-            rows:4
+            rows:8
             columns: 1
 
             Text {
@@ -240,6 +240,18 @@ Item {
                 height: 40
                 model: ["None", "Style1","Style2", "Style3", "Style4"]
                 onCurrentIndexChanged: rpmgauge.selector();
+            }
+            Text {
+                text: qsTr("Extra:")
+                font.pixelSize: 25
+                font.bold: true
+            }
+            ComboBox {
+                id: extraSelector
+                width: 200
+                height: 40
+                model: ["None", "PFC Sensors"]
+                //onCurrentIndexChanged: rpmgauge.selector();
             }
             Button {
                 id: btncloserpm
