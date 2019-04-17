@@ -7,8 +7,7 @@ import QtQuick.Controls 2.1
 
 Rectangle {
     id: sensorwindow
-    width: parent.width
-    height:parent.height
+    anchors.fill: parent
     color:"transparent"
     property int sizeoftext : sensorwindow.width /32
 

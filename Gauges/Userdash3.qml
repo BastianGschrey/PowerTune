@@ -65,6 +65,7 @@ Item {
     Settings {
         property alias datastore3: mainwindow.datastore
         property alias rpmbackround3: rpmstyleselector.currentIndex
+        property alias extraLoader3: extraSelector.currentIndex
     }
 
 
@@ -142,6 +143,13 @@ Item {
         z:300 //This makes the Rectangle appear in front of the bar gauges
         color: "transparent"
         WarningLoader{}
+    }
+    Loader{
+        id: extraLoader
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        height: parent.height /2.2
+        width: parent.width /2.7
     }
     // From Here we do all the Magic stuff for the dynamic creation of the Gauges
 
@@ -229,7 +237,7 @@ Item {
             drag.target: rpmbackroundselector
         }
         Grid{
-            rows:4
+            rows:8
             columns: 1
 
             Text {
@@ -243,6 +251,18 @@ Item {
                 height: 40
                 model: ["None", "Style1","Style2", "Style3", "Style4"]
                 onCurrentIndexChanged: rpmgauge.selector();
+            }
+            Text {
+                text: qsTr("Extra:")
+                font.pixelSize: 25
+                font.bold: true
+            }
+            ComboBox {
+                id: extraSelector
+                width: 200
+                height: 40
+                model: ["None", "PFC Sensors"]
+                onCurrentIndexChanged: setextra();
             }
             Button {
                 id: btncloserpm
@@ -504,6 +524,19 @@ Item {
     }
 
     ///////////////////Functions
+    function setextra()
+    {
+        switch (extraSelector.currentIndex){
+        case 0:{
+            extraLoader.source = "";
+            break;
+        }
+        case 1:{
+            extraLoader.setSource("qrc:/Gauges/PFCSensors.qml",{ sizeoftext : mainwindow.width /54});
+            break;
+        }
+        }
+    }
     function saveDashtofile()
     {
          saveDashtofilestring = ""

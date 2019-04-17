@@ -37,7 +37,6 @@ Item {
         id: gaugelist
     }
 
-
     ComboBox{
         id: dashvalue
         width: 200
@@ -59,6 +58,7 @@ Item {
     Settings {
         property alias datastore1: mainwindow.datastore
         property alias rpmbackround1: rpmstyleselector.currentIndex
+        property alias extraLoader1: extraSelector.currentIndex
     }
 
 
@@ -88,9 +88,9 @@ Item {
             if (dashvalue.textAt(23) !== "") {val13 = dashvalue.textAt(23);}else {val13 = 50;}
 
             if (dashvalue.textAt(0) !== "") {
-            CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13),val4,val5,val6,val7,val8,val9,val10,val11,val12,val13);
+                CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13),val4,val5,val6,val7,val8,val9,val10,val11,val12,val13);
             }
-            }
+        }
 
     }
 
@@ -140,6 +140,15 @@ Item {
         color: "transparent"
         WarningLoader{}
     }
+    Loader{
+        id: extraLoader
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        height: parent.height /2.2
+        width: parent.width /2.7
+    }
+
+
     // From Here we do all the Magic stuff for the dynamic creation of the Gauges
 
     MouseArea {
@@ -251,7 +260,7 @@ Item {
                 width: 200
                 height: 40
                 model: ["None", "PFC Sensors"]
-                //onCurrentIndexChanged: rpmgauge.selector();
+                onCurrentIndexChanged: setextra();
             }
             Button {
                 id: btncloserpm
@@ -512,11 +521,25 @@ Item {
     }
 
     ///////////////////Functions
+    function setextra()
+    {
+        switch (extraSelector.currentIndex){
+        case 0:{
+            extraLoader.source = "";
+            break;
+        }
+        case 1:{
+            extraLoader.setSource("qrc:/Gauges/PFCSensors.qml",{ sizeoftext : mainwindow.width /54});
+            break;
+        }
+        }
+    }
+
     function saveDashtofile()
     {
-         saveDashtofilestring = ""
-         for (var i=0; i<userDash.children.length; ++i)
-         saveDashtofilestring += (userDash.children[i].width+","+userDash.children[i].height+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].maxvalue+","+userDash.children[i].decimalpoints+","+userDash.children[i].mainunit+","+userDash.children[i].title+","+userDash.children[i].vertgaugevisible+","+userDash.children[i].horigaugevisible+","+userDash.children[i].secvaluevisible+","+"Dashboard"+","+userDash.children[i].mainvaluename+","+userDash.children[i].secvaluename+","+userDash.children[i].warnvaluehigh+","+userDash.children[i].warnvaluelow+","+userDash.children[i].framecolor+","+userDash.children[i].resetbackroundcolor+","+userDash.children[i].resettitlecolor+","+userDash.children[i].titletextcolor+","+userDash.children[i].textcolor+","+userDash.children[i].barcolor+","+userDash.children[i].titlefontsize+","+userDash.children[i].mainfontsize+","+userDash.children[i].information+"\r\n");
+        saveDashtofilestring = ""
+        for (var i=0; i<userDash.children.length; ++i)
+            saveDashtofilestring += (userDash.children[i].width+","+userDash.children[i].height+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].maxvalue+","+userDash.children[i].decimalpoints+","+userDash.children[i].mainunit+","+userDash.children[i].title+","+userDash.children[i].vertgaugevisible+","+userDash.children[i].horigaugevisible+","+userDash.children[i].secvaluevisible+","+"Dashboard"+","+userDash.children[i].mainvaluename+","+userDash.children[i].secvaluename+","+userDash.children[i].warnvaluehigh+","+userDash.children[i].warnvaluelow+","+userDash.children[i].framecolor+","+userDash.children[i].resetbackroundcolor+","+userDash.children[i].resettitlecolor+","+userDash.children[i].titletextcolor+","+userDash.children[i].textcolor+","+userDash.children[i].barcolor+","+userDash.children[i].titlefontsize+","+userDash.children[i].mainfontsize+","+userDash.children[i].information+"\r\n");
 
     }
     function createDash()
