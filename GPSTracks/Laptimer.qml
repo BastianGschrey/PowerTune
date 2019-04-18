@@ -341,7 +341,7 @@ Rectangle{
                 if (trackselect.textAt(trackselect.currentIndex) == "Phakisa"){map.center= QtPositioning.coordinate(-27.904231, 26.713996),map.zoomLevel = 15.6,map.tilt = 0,map.bearing  = 22}
                 if (trackselect.textAt(trackselect.currentIndex) == "Midvaal"){map.center= QtPositioning.coordinate(-26.612376, 28.059484),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 22,GPS.defineFinishLine(-26.613392, 28.058586,-26.613509,28.058717)}
                 if (trackselect.textAt(trackselect.currentIndex) == "Dezzi"){map.center= QtPositioning.coordinate(-30.770474, 30.426004),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 22}
-                if (trackselect.textAt(trackselect.currentIndex) == "Buttonwillow"){map.center= QtPositioning.coordinate(35.491242, -119.545396),map.zoomLevel = 15.4,map.tilt = 0,map.bearing  = 0,GPS.defineFinishLine(35.488858, -119.544520,35.488690, -119.544515)}
+                if (trackselect.textAt(trackselect.currentIndex) == "Buttonwillow"){map.center= QtPositioning.coordinate(35.491242, -119.545396),map.zoomLevel = 15.4,map.tilt = 0,map.bearing  = 0,GPS.defineFinishLine(35.488681, -119.544514,35.488858,-119.544521)}
             }
         }
 

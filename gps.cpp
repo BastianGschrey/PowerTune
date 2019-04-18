@@ -357,9 +357,8 @@ void GPS::defineFinishLine(const double & Y1,const double & X1,const double & Y2
     startlineY2 = Y2; //Latitude
     m = (startlineY1-startlineY2) / (startlineX1-startlineX2);
     b = startlineY1 - (m*startlineX1);
+    qDebug()<<"Finishline"<< Y1<<X1<<Y2<<X2;
 }
-
-
 void GPS::resetLaptimer()
 {
     Laps = 0;
@@ -373,6 +372,34 @@ void GPS::checknewLap()
     {
 
         if (m_dashboard->gpsLongitude() <= startlineX2 && m_dashboard->gpsLongitude() >= startlineX1 )
+        {
+            if (m_timer.isValid() == true)
+            {
+                QTime y(0, 0);
+                                y = y.addMSecs(m_timer.elapsed());
+                                if (Laps == 1)
+                                {
+                                    fastestlap = y;
+                                    m_dashboard->setbestlaptime(fastestlap.toString("mm:ss.zzz"));
+                                }
+                                if (y < fastestlap)
+                                {
+                                   // qDebug() << "y is smaller";
+                                fastestlap = y;
+                                m_dashboard->setbestlaptime(y.toString("mm:ss.zzz"));
+                                }
+                                Laps++;
+                                m_dashboard->setlaptime(y.toString("mm:ss.zzz"));
+                                m_dashboard->setcurrentLap(Laps);
+                                m_timer.restart();
+            }
+            else{
+                m_timer.start();
+                Laps++;
+                m_dashboard->setcurrentLap(Laps);
+            }
+        }
+        if (m_dashboard->gpsLatitude() <= startlineY2 && m_dashboard->gpsLatitude() >= startlineY1 )
         {
             if (m_timer.isValid() == true)
             {
