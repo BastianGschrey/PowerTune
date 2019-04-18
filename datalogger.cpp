@@ -152,6 +152,8 @@ void datalogger::updateLog()
                 << m_dashboard->compass()  << ","
                 << m_dashboard->ambitemp()  << ","
                 << m_dashboard->ambipress() << ","
+                << m_dashboard->currentLap() << ","
+                << m_dashboard->laptime()  << ","
                 << endl;
             mFile.close();
             break;
@@ -195,6 +197,8 @@ void datalogger::updateLog()
                     << "Knock Level 6"  << ","
                     << "Knock Level 7"  << ","
                     << "Knock Level 8"  << ","
+                    << m_dashboard->currentLap() << ","
+                    << m_dashboard->laptime()  << ","
                     << endl;
             mFile.close();
             break;
@@ -318,6 +322,8 @@ QTextStream out(&mFile);
                     << "Azimuth"  << ","
                     << "Ambient Temperature"  << ","
                     << "Ambient Pressure" << ","
+                    << "Current LAP"    << ","
+                    << "LAP TIME"       << ","
                     << endl;
             mFile.close();
                 break;
@@ -361,6 +367,8 @@ QTextStream out(&mFile);
                     << "Knock Level 6"  << ","
                     << "Knock Level 7"  << ","
                     << "Knock Level 8"  << ","
+                    << "Current LAP"    << ","
+                    << "LAP TIME"       << ","
                     << endl;
             mFile.close();
                 break;

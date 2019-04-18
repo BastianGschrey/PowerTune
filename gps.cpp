@@ -348,16 +348,16 @@ QString GPS::convertToDecimal(const QString & coord, const QString & dir)
 
 //Laptimer
 
-void GPS::defineFinishLine(const double & Y1,const double & X1,const double & Y2,const double & X2)
+void GPS::defineFinishLine(const double & Y1,const double & X1,const double & Y2,const double & X2,const int & linedir)
 {
-    linedirection = 0;
+    linedirection = linedir;
     startlineX1 = X1; //Longitude
     startlineX2 = X2; //Longitude
     startlineY1 = Y1; //Latitude
     startlineY2 = Y2; //Latitude
     m = (startlineY1-startlineY2) / (startlineX1-startlineX2);
     b = startlineY1 - (m*startlineX1);
-    qDebug()<<"Finishline"<< Y1<<X1<<Y2<<X2;
+    qDebug()<<"Linedir"<< Y1<<X1<<Y2<<X2;
 }
 void GPS::resetLaptimer()
 {
@@ -370,9 +370,14 @@ void GPS::checknewLap()
     currentintercept = m_dashboard->gpsLatitude() -( (m * m_dashboard->gpsLongitude()) + b);
     if ((previousintercept <= 0 && currentintercept >= 0) || (previousintercept >= 0 && currentintercept <= 0) || (currentintercept == 0))
     {
+        switch (linedirection)
+        {
+        case 1:
 
+        //Finish Line East to West
         if (m_dashboard->gpsLongitude() <= startlineX2 && m_dashboard->gpsLongitude() >= startlineX1 )
         {
+            qDebug() << "1";
             if (m_timer.isValid() == true)
             {
                 QTime y(0, 0);
@@ -399,8 +404,13 @@ void GPS::checknewLap()
                 m_dashboard->setcurrentLap(Laps);
             }
         }
+            break;
+        case 2:
+
+        //Finish Line North to South
         if (m_dashboard->gpsLatitude() <= startlineY2 && m_dashboard->gpsLatitude() >= startlineY1 )
         {
+            //qDebug() << "2";
             if (m_timer.isValid() == true)
             {
                 QTime y(0, 0);
@@ -427,6 +437,11 @@ void GPS::checknewLap()
                 m_dashboard->setcurrentLap(Laps);
             }
         }
+        break;
+
+    default:
+        break;
+    }
     }
     previousintercept = currentintercept;
 }
