@@ -132,7 +132,7 @@ Rectangle {
             anchors.left: map.right
             font.pixelSize: 20
             //model: [ "Current Position","Australia","Germany","New Zealand","South Africa","United Kingdom","USA"]
-            model: ["Current Position","Australia","Germany","New Zealand","South Africa"]
+            model: ["Current Position","Australia","Germany","New Zealand","South Africa","USA"]
             delegate: ItemDelegate {
                 width: countryselect.width
                 text: countryselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -311,14 +311,14 @@ Rectangle{
             id: changecountry
             function change(){
 
-                if (countryselect.textAt(countryselect.currentIndex) == "Current Position"){trackselect.model = ["Tilt 0", "Tilt 45"],map.center= QtPositioning.coordinate(-25.804219,28.300091)};
+                if (countryselect.textAt(countryselect.currentIndex) === "Current Position"){trackselect.model = ["Tilt 0", "Tilt 45"],map.center= QtPositioning.coordinate(-25.804219,28.300091)};
                 //if (countryselect.textAt(countryselect.currentIndex) == "Current Position"){trackselect.model = ["Tilt 0", "Tilt 45"],map.center= QtPositioning.coordinate(Dashboard.gpsLatitude,Dashboard.gpsLongitude)};
-                if (countryselect.textAt(countryselect.currentIndex) == "Australia"){trackselect.model = ["Carrnell Raceway","Wakefield Park"]};
-                if (countryselect.textAt(countryselect.currentIndex) == "Germany"){trackselect.model = ["Hockenheim","Nürburgring"]};
-                if (countryselect.textAt(countryselect.currentIndex) == "New Zealand"){trackselect.model = ["Pukekohe Park"]};
-                if (countryselect.textAt(countryselect.currentIndex) == "South Africa"){trackselect.model = ["Dezzi","Midvaal","Phakisa","Redstar","Zwartkops"]};
+                if (countryselect.textAt(countryselect.currentIndex) === "Australia"){trackselect.model = ["Carrnell Raceway","Wakefield Park"]};
+                if (countryselect.textAt(countryselect.currentIndex) === "Germany"){trackselect.model = ["Hockenheim","Nürburgring"]};
+                if (countryselect.textAt(countryselect.currentIndex) === "New Zealand"){trackselect.model = ["Pukekohe Park"]};
+                if (countryselect.textAt(countryselect.currentIndex) === "South Africa"){trackselect.model = ["Dezzi","Midvaal","Phakisa","Redstar","Zwartkops"]};
                 //if (countryselect.textAt(countryselect.currentIndex) == "United Kingdom"){trackselect.model = ["Silverstone"]};
-                //if (countryselect.textAt(countryselect.currentIndex) == "USA"){trackselect.model = ["Utah Motorsport Park"]};
+                if (countryselect.textAt(countryselect.currentIndex) === "USA"){trackselect.model = ["Buttonwillow"]};
                 console.log(countryselect.textAt(countryselect.currentIndex))
                 changetrack.change()
             }
@@ -341,7 +341,7 @@ Rectangle{
                 if (trackselect.textAt(trackselect.currentIndex) == "Phakisa"){map.center= QtPositioning.coordinate(-27.904231, 26.713996),map.zoomLevel = 15.6,map.tilt = 0,map.bearing  = 22}
                 if (trackselect.textAt(trackselect.currentIndex) == "Midvaal"){map.center= QtPositioning.coordinate(-26.612376, 28.059484),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 22,GPS.defineFinishLine(-26.613392, 28.058586,-26.613509,28.058717)}
                 if (trackselect.textAt(trackselect.currentIndex) == "Dezzi"){map.center= QtPositioning.coordinate(-30.770474, 30.426004),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 22}
-
+                if (trackselect.textAt(trackselect.currentIndex) == "Buttonwillow"){map.center= QtPositioning.coordinate(35.491242, -119.545396),map.zoomLevel = 15.4,map.tilt = 0,map.bearing  = 0,GPS.defineFinishLine(35.488858, -119.544520,35.488690, -119.544515)}
             }
         }
 
