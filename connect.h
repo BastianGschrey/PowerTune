@@ -57,6 +57,7 @@ public:
     Q_INVOKABLE void setfilename3(const QString &file3);
     Q_INVOKABLE void checkifraspberrypi();
     Q_INVOKABLE void readavailabledashfiles();
+    Q_INVOKABLE void readavailablebackrounds();
     Q_INVOKABLE void setrpm(const int &dash1,const int &dash2,const int &dash3);
     Q_INVOKABLE void readMaindashsetup();
     Q_INVOKABLE void readdashsetup3();

@@ -7,17 +7,22 @@ import QtQuick.Controls 2.1
 import QtQuick.Extras 1.4
 
 
-Rectangle {
-  color:"grey"
+Item {
   anchors.fill:parent
   property  var unit : Dashboard.speedunits;
   Component.onCompleted: {units.unitadjust();}
 
+Rectangle{
+id: gaugebackround
+height: parent.height /2.2
+width: parent.width
+color: "darkgrey"
 
+}
   Gauge {
       id: gauge
       height: parent.height
-      width: parent.width /1.025
+      width: parent.width /1.024
       y:0
       minorTickmarkCount: 0
       tickmarkStepSize : Dashboard.maxRPM
@@ -48,7 +53,7 @@ Rectangle {
               }
           }
           valueBar: Rectangle {
-              width:  400
+              width:  210
               color: Qt.rgba(gauge.value / gauge.maximumValue, 1.1 - gauge.value / gauge.maximumValue, 0, 1)
           }
       }

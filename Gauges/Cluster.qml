@@ -445,19 +445,6 @@ Item {
             id: keyboard
             anchors.fill: parent
             visible: false
-            KeyboardStyle{
-                fullScreenInputCursor: Rectangle{
-                    width: 1
-                    color: "blue"
-                    visible: parent.blinkStatus
-                }
-                keyboardBackground: Rectangle{
-                    anchors.fill: parent
-                    color: "green"
-                }
-
-            }
-
             states: State {
                 name: "visible";
                 when: keyboard.active;

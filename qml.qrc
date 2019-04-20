@@ -5,7 +5,6 @@
         <file>graphics/Tacho_Mitte.png</file>
         <file>Gauges/DashboardGaugeStyle.qml</file>
         <file>Gauges/TachometerStyle.qml</file>
-        <file>Gauges/DashAdaptronic.qml</file>
         <file>Gauges/PFCSensors.qml</file>
         <file>Gauges/BarGauge.qml</file>
         <file>Gauges/GPS.qml</file>
@@ -63,5 +62,6 @@
         <file>Gauges/DatasourcesList.qml</file>
         <file>Gauges/ColorList.qml</file>
         <file>Gauges/ColorpickerCombobox.qml</file>
+        <file>Gauges/RoundGauge.qml</file>
     </qresource>
 </RCC>

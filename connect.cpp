@@ -122,35 +122,35 @@ Connect::~Connect()
 }
 void Connect::saveDashtoFile(const QString &filename,const QString &dashstring)
 {
-  //      qDebug()<<"Filename" << filename + "txt";
-        QStringList fields = dashstring.split(QRegExp("[\r\n]"));
-        QFile file( "/home/pi/UserDashboards/"+filename + ".txt" );
-        file.remove(); //remove file if it exists to avoid appending of existing file
-        if ( file.open(QIODevice::ReadWrite) )
-        {
-            QTextStream stream( &file );
-            stream << dashstring << endl;
-        }
-        file.close();
+    //      qDebug()<<"Filename" << filename + "txt";
+    QStringList fields = dashstring.split(QRegExp("[\r\n]"));
+    QFile file( "/home/pi/UserDashboards/"+filename + ".txt" );
+    file.remove(); //remove file if it exists to avoid appending of existing file
+    if ( file.open(QIODevice::ReadWrite) )
+    {
+        QTextStream stream( &file );
+        stream << dashstring << endl;
+    }
+    file.close();
 }
 void Connect::setfilename1(const QString &file1)
 {
-        dashfilename1 = file1;
+    dashfilename1 = file1;
 }
 void Connect::setfilename2(const QString &file2)
 {
-       dashfilename2 = file2;
+    dashfilename2 = file2;
 }
 void Connect::setfilename3(const QString &file3)
 {
-       dashfilename3 = file3;
+    dashfilename3 = file3;
 }
 void Connect::setrpm(const int &dash1,const int &dash2,const int &dash3)
 {
-         //qDebug()<<"rpm source" << dash1<< dash2<< dash3;
-        m_dashBoard->setrpmstyle1(dash1);
-        m_dashBoard->setrpmstyle2(dash2);
-        m_dashBoard->setrpmstyle3(dash3);
+    //qDebug()<<"rpm source" << dash1<< dash2<< dash3;
+    m_dashBoard->setrpmstyle1(dash1);
+    m_dashBoard->setrpmstyle2(dash2);
+    m_dashBoard->setrpmstyle3(dash3);
 }
 void Connect::checkifraspberrypi()
 {
@@ -173,6 +173,15 @@ void Connect::readavailabledashfiles()
     QStringList dashfiles = directory.entryList(QStringList() << "*.txt",QDir::Files);
     m_dashBoard->setdashfiles(dashfiles);
     //qDebug() <<"files" << dashfiles ;
+}
+
+void Connect::readavailablebackrounds()
+{
+    //QDir directory(""); //for Windows
+    QDir directory("/home/pi/Logo");
+    QStringList dashfiles = directory.entryList(QStringList() << "*.png",QDir::Files);
+    dashfiles.prepend("None");
+    m_dashBoard->setbackroundpictures(dashfiles);
 }
 
 void Connect::readMaindashsetup()
@@ -354,7 +363,7 @@ void Connect::checkOBDReg()
     QStringList list;
 
     QString path = "/home/pi/daemons/OBDPIDS.txt";
-   // QString path = "SupportedPIDS.txt";
+    // QString path = "SupportedPIDS.txt";
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
     {
@@ -636,17 +645,17 @@ void Connect::LiveReqMsgOBD(const QString &obdpids)
     int i =0;
     while(i < list.length())
     {
-     if (list[i] == "2")
-     {
-      // qDebug()<< "i" <<i;
-      QString hexadecimal;
-      hexadecimal.setNum(i,16);
-      if(hexadecimal.length() %2)hexadecimal.insert(0,QLatin1String("0"));
-     // qDebug()<< "Hex" <<hexadecimal;
-      Message.append("0x"+hexadecimal);
-      Message.append(",");
-          }
-      i++;
+        if (list[i] == "2")
+        {
+            // qDebug()<< "i" <<i;
+            QString hexadecimal;
+            hexadecimal.setNum(i,16);
+            if(hexadecimal.length() %2)hexadecimal.insert(0,QLatin1String("0"));
+            // qDebug()<< "Hex" <<hexadecimal;
+            Message.append("0x"+hexadecimal);
+            Message.append(",");
+        }
+        i++;
     }
     Message.remove(Message.length()-1,1); //Remove the last Comma
     //qDebug()<< "PID LST" <<Message;
@@ -666,27 +675,27 @@ void Connect::daemonstartup(const int &daemon)
     QString daemonstart;
     switch (daemon)
     {
-            case 0:
-                daemonstart = "";
-                break;
-            case 1:
-                daemonstart = "./Haltechd";
-                break;
-            case 2:
-                daemonstart = "./Linkd";
-                break;
-            case 3:
-                daemonstart = "./Microtechd";
-                break;
-            case 4:
-                daemonstart = "./Consult /dev/ttyUSB0";
-                break;
-            case 5:
-                daemonstart = "./Apexid /dev/ttyUSB0";
-                break;
-            case 6:
-                daemonstart = "./OBD /dev/ttyUSB0";
-                break;
+    case 0:
+        daemonstart = "";
+        break;
+    case 1:
+        daemonstart = "./Haltechd";
+        break;
+    case 2:
+        daemonstart = "./Linkd";
+        break;
+    case 3:
+        daemonstart = "./Microtechd";
+        break;
+    case 4:
+        daemonstart = "./Consult /dev/ttyUSB0";
+        break;
+    case 5:
+        daemonstart = "./Apexid /dev/ttyUSB0";
+        break;
+    case 6:
+        daemonstart = "./OBD /dev/ttyUSB0";
+        break;
 
     }
     QString fileName = "/home/pi/startdaemon.sh";//This will be the correct path on pi
@@ -892,7 +901,7 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
         //m_dashBoard->setFlagString17("NOS Stage 4");
         //m_dashBoard->setFlagString18("NOS Stage 5");
         //m_dashBoard->setFlagString19("NOS Stage 6");
-      
+
         QProcess *process = new QProcess(this);
         process->start("/home/pi/Haltech/HaltechV2");
         m_udpreceiver->startreceiver();
@@ -900,7 +909,7 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
 
     if (ecuSelect == 7)
     {
-    m_udpreceiver->startreceiver();
+        m_udpreceiver->startreceiver();
     }
     /* //Dicktator
     if (ecuSelect == 9)
@@ -952,15 +961,15 @@ void Connect::closeConnection()
     if (ecu == 3)
     {
 
-         m_udpreceiver->closeConnection();
+        m_udpreceiver->closeConnection();
 
     }
     if (ecu == 4)
     {
 
-       // QProcess *process = new QProcess(this);
-       // process->start("sudo pkill Consult");
-       // qDebug()<<"Kill";
+        // QProcess *process = new QProcess(this);
+        // process->start("sudo pkill Consult");
+        // qDebug()<<"Kill";
         m_udpreceiver->closeConnection();
     }
     if (ecu == 5)
@@ -995,13 +1004,13 @@ void Connect::update()
 
     if (p)
     {
-      p->setEnvironment( QProcess::systemEnvironment() );
-      p->setProcessChannelMode( QProcess::MergedChannels );
-      p->start("/home/pi/updatePowerTune.sh", QStringList() << "echo" << "hye" );
-      p->waitForStarted();
+        p->setEnvironment( QProcess::systemEnvironment() );
+        p->setProcessChannelMode( QProcess::MergedChannels );
+        p->start("/home/pi/updatePowerTune.sh", QStringList() << "echo" << "hye" );
+        p->waitForStarted();
 
-      connect( p, SIGNAL(readyReadStandardOutput()), this, SLOT(processOutput()) );
-      //connect( p, SIGNAL(readyReadStandardError()), this, SLOT(ReadErr()) );
+        connect( p, SIGNAL(readyReadStandardOutput()), this, SLOT(processOutput()) );
+        //connect( p, SIGNAL(readyReadStandardError()), this, SLOT(ReadErr()) );
     }
 }
 
@@ -1025,13 +1034,13 @@ void Connect::candump()
 
     if (p)
     {
-      p->setEnvironment( QProcess::systemEnvironment() );
-      p->setProcessChannelMode( QProcess::MergedChannels );
-      p->start( "/home/pi/daemons/OBD /dev/ttyUSB0", QStringList() << "echo" << "hye" );
-      p->waitForStarted();
+        p->setEnvironment( QProcess::systemEnvironment() );
+        p->setProcessChannelMode( QProcess::MergedChannels );
+        p->start( "/home/pi/daemons/OBD /dev/ttyUSB0", QStringList() << "echo" << "hye" );
+        p->waitForStarted();
 
-      connect( p, SIGNAL(readyReadStandardOutput()), this, SLOT(processOutput()) );
-      //connect( p, SIGNAL(readyReadStandardError()), this, SLOT(ReadErr()) );
+        connect( p, SIGNAL(readyReadStandardOutput()), this, SLOT(processOutput()) );
+        //connect( p, SIGNAL(readyReadStandardError()), this, SLOT(ReadErr()) );
     }
 }
 void Connect::minicom()
@@ -1040,13 +1049,13 @@ void Connect::minicom()
 
     if (p)
     {
-      p->setEnvironment( QProcess::systemEnvironment() );
-      p->setProcessChannelMode( QProcess::MergedChannels );
-      p->start( "minicom", QStringList() << "echo" << "hye" );
-      p->waitForStarted();
+        p->setEnvironment( QProcess::systemEnvironment() );
+        p->setProcessChannelMode( QProcess::MergedChannels );
+        p->start( "minicom", QStringList() << "echo" << "hye" );
+        p->waitForStarted();
 
-      connect( p, SIGNAL(readyReadStandardOutput()), this, SLOT(processOutput()) );
-      //connect( p, SIGNAL(readyReadStandardError()), this, SLOT(ReadErr()) );
+        connect( p, SIGNAL(readyReadStandardOutput()), this, SLOT(processOutput()) );
+        //connect( p, SIGNAL(readyReadStandardError()), this, SLOT(ReadErr()) );
     }
 }
 
@@ -1057,7 +1066,7 @@ void Connect::processOutput()
     QProcess *p = dynamic_cast<QProcess *>( sender() );
 
     if (p)
-      m_dashBoard->setSerialStat( p->readAllStandardOutput() );
+        m_dashBoard->setSerialStat( p->readAllStandardOutput() );
 }
 
 void Connect::updatefinished(int exitCode, QProcess::ExitStatus exitStatus)
@@ -1079,95 +1088,20 @@ void Connect::updatefinished(int exitCode, QProcess::ExitStatus exitStatus)
 
 void Connect::RequestLicence()
 {
-QProcess *process = new QProcess(this);
-process->start("/home/pi/licencerequest");
-process->waitForFinished(100); // 10 minutes time before timeout
+    QProcess *process = new QProcess(this);
+    process->start("/home/pi/licencerequest");
+    process->waitForFinished(100); // 10 minutes time before timeout
 
-QString path = "/home/pi/Licrequest.lic";
-QFile inputFile(path);
-if (inputFile.open(QIODevice::ReadOnly))
-{
-    QTextStream in(&inputFile);
-    while (!in.atEnd())
+    QString path = "/home/pi/Licrequest.lic";
+    QFile inputFile(path);
+    if (inputFile.open(QIODevice::ReadOnly))
     {
-        QString line = in.readLine();
-        m_dashBoard->setSerialStat(line);
-    }
-    inputFile.close();
-}
-}
-/*
-void Connect::handleError(QConnectPort::ConnectPortError ConnectPortError)
-{
-    if (ConnectPortError == QConnectPort::ReadError) {
-        QString fileName = "Errors.txt";
-        QFile mFile(fileName);
-        if(!mFile.open(QFile::Append | QFile::Text)){
-        }
-        QTextStream out(&mFile);
-        out << "Connect Error " << (m_Connectport->errorString()) <<endl;
-        mFile.close();
-        m_dashBoard->setConnectStat(m_Connectport->errorString());
-
-    }
-}
-
-*/
-/*
-void Connect::readyToRead()
-{
-
-    if(ecu == 1)
-    {
-
-
-    }
-
-    if(ecu == 9) //Dicktator ECU
-    {
-        m_readData = m_Connectport->readAll();
-        Connect::dicktatorECU(m_readData);
-        m_readData.clear();
-    }
-
-}
-
-void Connect::dicktatorECU(const QByteArray &buffer)
-{
-    //Appending the message until the patterns Start and End Are found , then removing all bytes before and after the message
-    m_buffer.append(buffer);
-    QByteArray startpattern("START");
-    QByteArrayMatcher startmatcher(startpattern);
-    QByteArray endpattern("END");
-    QByteArrayMatcher endmatcher(endpattern);
-    int pos = 0;
-    while((pos = startmatcher.indexIn(m_buffer, pos)) != -1)
-    {
-
-        if (pos !=0)
+        QTextStream in(&inputFile);
+        while (!in.atEnd())
         {
-            m_buffer.remove(0, pos);
+            QString line = in.readLine();
+            m_dashBoard->setSerialStat(line);
         }
-        if (pos == 0 ) break;
+        inputFile.close();
     }
-    int pos2 = 0;
-    while((pos2 = endmatcher.indexIn(m_buffer, pos2)) != -1)
-    {
-
-
-    if (pos2 > 30)
-        {
-            m_buffer.remove(0,pos2-30);
-        }
-
-        if (pos2 == 30 )
-        {
-            m_dicktatorMsg = m_buffer;
-            m_buffer.clear();
-            m_decoder->decodeDicktator(m_dicktatorMsg);
-            break;
-        }
-    }
-
 }
-*/

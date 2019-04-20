@@ -1637,6 +1637,13 @@ void DashBoard::setdashfiles(const QStringList &dashfiles)
     emit dashfilesChanged(dashfiles);
 }
 
+void DashBoard::setbackroundpictures(const QStringList &backroundpictures)
+{
+    if (m_backroundpictures == backroundpictures)
+        return;
+    m_backroundpictures = backroundpictures;
+    emit backroundpicturesChanged(backroundpictures);
+}
 
 void DashBoard::setaccelpedpos(const qreal &accelpedpos)
 {
@@ -2767,6 +2774,7 @@ QStringList DashBoard::dashsetup2() const { return m_dashsetup2; }
 QStringList DashBoard::dashsetup1() const { return m_dashsetup1; }
 
 QStringList DashBoard::dashfiles() const { return m_dashfiles; }
+QStringList DashBoard::backroundpictures() const { return m_backroundpictures; }
 
 qreal DashBoard::accelpedpos() const { return m_accelpedpos; }
 qreal DashBoard::airtempensor2() const { return m_airtempensor2; }

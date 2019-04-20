@@ -204,6 +204,7 @@ class DashBoard : public QObject
 
 
     Q_PROPERTY(QStringList dashfiles READ dashfiles WRITE setdashfiles NOTIFY dashfilesChanged)
+Q_PROPERTY(QStringList backroundpictures READ backroundpictures WRITE setbackroundpictures NOTIFY backroundpicturesChanged)
 
     Q_PROPERTY(qreal accelpedpos READ accelpedpos WRITE setaccelpedpos NOTIFY accelpedposChanged)
     Q_PROPERTY(qreal airtempensor2 READ airtempensor2 WRITE setairtempensor2 NOTIFY airtempensor2Changed)
@@ -545,6 +546,8 @@ public:
     void setdashsetup1(const QStringList &dashsetup1);
 
     void setdashfiles(const QStringList &dashfiles);
+    void setbackroundpictures(const QStringList &backroundpictures);
+
 
 
     void setaccelpedpos(const qreal &accelpedpos);
@@ -875,6 +878,8 @@ public:
     QStringList dashsetup1() const;
 
     QStringList dashfiles() const;
+    QStringList backroundpictures() const;
+
 
     qreal accelpedpos() const;
     qreal airtempensor2() const;
@@ -1199,8 +1204,7 @@ signals:
     void dashsetup2Changed(QStringList dashsetup2);
     void dashsetup1Changed(QStringList dashsetup1);
     void dashfilesChanged(QStringList dashfiles);
-
-
+    void backroundpicturesChanged(QStringList backroundpictures);
 
     void accelpedposChanged(qreal accelpedpos);
     void airtempensor2Changed(qreal airtempensor2);
@@ -1529,6 +1533,7 @@ private:
     QStringList m_dashsetup1;
 
     QStringList m_dashfiles;
+    QStringList m_backroundpictures;
 
     qreal m_accelpedpos;
     qreal m_airtempensor2;

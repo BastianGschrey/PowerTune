@@ -5,14 +5,12 @@ import com.powertune 1.0
 
 ApplicationWindow {
 
-
     visible: true
     width: 800
     height: 480
     minimumWidth: 800
     minimumHeight: 480
-    title: qsTr("PowerTune ") + Dashboard.Platform + "  V 1.0"
-    // visibility: "FullScreen"
+    title: qsTr("PowerTune ") + Dashboard.Platform + "  V 1.83"
     color: "black"
     Item {
         id: name
@@ -25,23 +23,19 @@ ApplicationWindow {
         anchors.fill: parent
         Component.onCompleted: Connect.readavailabledashfiles()
 
-
         Loader {
 
             id: firstPageLoader
             source: "qrc:/Intro.qml"
-
         }
 
         Loader {
             id: secondPageLoader
             source: ""
-
         }
         Loader {
             id: thirdPageLoader
             source: ""
-
          }
         
         Loader {
@@ -55,14 +49,10 @@ ApplicationWindow {
         }
     }
 
-
-
     PageIndicator {
         id: indicator
-
         count: view.count
         currentIndex: view.currentIndex
-
         anchors.bottom: view.bottom
         anchors.horizontalCenter: parent.horizontalCenter
     }

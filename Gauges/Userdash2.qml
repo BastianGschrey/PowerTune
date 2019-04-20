@@ -11,12 +11,15 @@ import QtQuick.VirtualKeyboard 2.1
 import QtQuick.VirtualKeyboard.Styles 2.2
 import "../Gauges"
 import "qrc:/Gauges/createsquaregaugeUserDash.js" as CreateSquareGaugeScript
+import "qrc:/Gauges/createverticalbargauge.js" as CreateBargaugeScript
 
 Item {
     id: mainwindow
     anchors.fill: parent
     property string datastore: ""
     property string saveDashtofilestring : ""
+    property string gaugeType : ""
+    property string backroundpicturesource1 : ""
     property bool val1: false
     property bool val2: false
     property bool val3: false
@@ -30,13 +33,24 @@ Item {
     property string val11 : "transparent"
     property int val12
     property int val13
+    property string val14 : "Square Gauge"
+    property int parser
 
     Drag.active: true
 
     ListModel {
         id: gaugelist
     }
-
+    Rectangle{
+        id: mainbackroundcolor
+        anchors.fill: parent
+    }
+    Image {
+        id:backroundpicture1
+        anchors.fill: parent
+        fillMode: Image.PreserveAspectFit
+        z: 0
+    }
     ComboBox{
         id: dashvalue
         width: 200
@@ -69,6 +83,9 @@ Item {
         property alias datastore2: mainwindow.datastore
         property alias rpmbackround2: rpmstyleselector.currentIndex
         property alias extraLoader2: extraSelector.currentIndex
+        property alias savebackroundpicture2: backroundpicture1.source
+        property alias savemainbackroundcolor2: mainbackroundcolor.color
+        //property alias savebackround: backroundpicture1.source
     }
 
 
@@ -94,8 +111,24 @@ Item {
             if (dashvalue.textAt(21) !== "") {val11 = dashvalue.textAt(21);}else {val11 = "grey";}
             if (dashvalue.textAt(22) !== "") {val12 = dashvalue.textAt(22);}else {val12 = 28;}
             if (dashvalue.textAt(23) !== "") {val13 = dashvalue.textAt(23);}else {val13 = 50;}
-            if (dashvalue.textAt(0) !== "") {
-            CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13),val4,val5,val6,val7,val8,val9,val10,val11,val12,val13);
+            if (dashvalue.textAt(24) !== "") {val14 = dashvalue.textAt(24);}else {val14 = "Square Gauge";}
+
+                if (dashvalue.textAt(0) !== "") {
+                    if (val14 === "Square Gauge")
+                {
+                    CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),val1,val2,val3,Dashboard,dashvalue.textAt(12),dashvalue.textAt(13),val4,val5,val6,val7,val8,val9,val10,val11,val12,val13);
+                }
+
+                if (dashvalue.textAt(11) === "Bar Gauge")
+                {
+                    console.log("Bar Gauge")
+                    CreateBargaugeScript.createVerticalGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),dashvalue.textAt(8),dashvalue.textAt(9),dashvalue.textAt(10));
+                }
+                if (dashvalue.textAt(11) === "Round Gauge")
+                {
+                    console.log("Round Gauge")
+                    CreateBargaugeScript.createVerticalGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),dashvalue.textAt(8),dashvalue.textAt(9),dashvalue.textAt(10));
+                }
             }
         }
 
@@ -106,6 +139,8 @@ Item {
         anchors.fill:parent
         source: ""
     }
+
+
 
     Item{
         id: rpmgauge
@@ -147,6 +182,7 @@ Item {
         color: "transparent"
         WarningLoader{}
     }
+
     Loader{
         id: extraLoader
         anchors.left: parent.left
@@ -154,7 +190,10 @@ Item {
         height: parent.height /2.2
         width: parent.width /2.7
     }
+
+
     // From Here we do all the Magic stuff for the dynamic creation of the Gauges
+
 
     MouseArea {
         id: touchArea
@@ -167,14 +206,13 @@ Item {
             squaregaugemenu.visible =true;
             btnopencolorselect.visible = true;
             cbx_sources.visible = true;
-            btnadd.visible = true;
+            btnaddSquare.visible = true;
             btncancel.visible = true;
             btnsave.visible = true;
             btnclear.visible = true;
             loadfromfile.visible = true;
             squaregaugemenu.visible = true;
             Dashboard.setdraggable(1);
-            //pimenu.popup(touchArea.mouseX,touchArea.mouseY)
         }
     }
     // Virtual Keyboard
@@ -194,18 +232,6 @@ Item {
             id: keyboard
             anchors.fill: parent
             visible: false
-            KeyboardStyle{
-                fullScreenInputCursor: Rectangle{
-                    width: 1
-                    color: "blue"
-                    visible: parent.blinkStatus
-                }
-                keyboardBackground: Rectangle{
-                    anchors.fill: parent
-                    color: "green"
-                }
-
-            }
 
             states: State {
                 name: "visible";
@@ -221,14 +247,13 @@ Item {
                     y:0
                 }
             }
-
         }
     }
     /// RPM STYLE SELECTOR and Backround picture loader
     Rectangle{
         id: rpmbackroundselector
         width: 200
-        height: 200
+        height: 300
         color : "darkgrey"
         x :590
         y: 0
@@ -240,12 +265,13 @@ Item {
             drag.target: rpmbackroundselector
         }
         Grid{
-            rows:8
+            rows:10
             columns: 1
+            rowSpacing :5
 
             Text {
                 text: qsTr("RPM Style:")
-                font.pixelSize: 25
+                font.pixelSize: 20
                 font.bold: true
             }
             ComboBox {
@@ -266,8 +292,68 @@ Item {
                 }
             }
             Text {
+                text: qsTr("Backround picture:")
+                font.pixelSize: 20
+                font.bold: true
+            }
+            ComboBox {
+                id: backroundSelector
+                width: 200
+                height: 40
+                font.pixelSize: 15
+                model: Dashboard.backroundpictures
+                currentIndex: 0
+                onCurrentIndexChanged: {
+                                        backroundpicturesource1 = "file:///home/pi/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
+                                        backroundpicture1.source = backroundpicturesource1;
+                                       }
+                delegate: ItemDelegate {
+                    width: backroundSelector.width
+                    text: backroundSelector.textRole ? (Array.isArray(backroundSelector.model) ? modelData[backroundSelector.textRole] : model[backroundSelector.textRole]) : modelData
+                    font.weight: backroundSelector.currentIndex === index ? Font.DemiBold : Font.Normal
+                    font.family: backroundSelector.font.family
+                    font.pixelSize: backroundSelector.font.pixelSize
+                    highlighted: backroundSelector.highlightedIndex === index
+                    hoverEnabled: backroundSelector.hoverEnabled
+                }
+            }
+            Text {
+                text: qsTr("Backround color:")
+                font.pixelSize: 20
+                font.bold: true
+            }
+            ComboBox {
+                id: mainbackroundcolorselect
+                width: 200;
+                height:40
+                model: ColorList{}
+                visible: true
+                font.pixelSize: 15
+                onCurrentIndexChanged: mainbackroundcolor.color = mainbackroundcolorselect.textAt(mainbackroundcolorselect.currentIndex)
+                delegate:
+
+                    ItemDelegate {
+                    id:itemDelegate
+                    width: mainbackroundcolorselect.width
+                    font.pixelSize: 15
+                    Rectangle {
+
+                        width: mainbackroundcolorselect.width
+                        height: 50
+                        color:  itemColor
+
+                        Text {
+
+                            text: itemColor
+                            anchors.centerIn: parent
+                            font.pixelSize: 15
+                        }
+                    }
+                }
+            }
+            Text {
                 text: qsTr("Extra:")
-                font.pixelSize: 25
+                font.pixelSize: 20
                 font.bold: true
             }
             ComboBox {
@@ -314,8 +400,6 @@ Item {
         }
         ComboBox {
             id: cbx_sources
-            x:0
-            y:0
             font.pixelSize: 15
             textRole: "titlename"
             width: 200
@@ -333,8 +417,6 @@ Item {
         }
         ComboBox {
             id: loadfileselect
-            x:0
-            y:0
             font.pixelSize: 15
             model: Dashboard.dashfiles
             width: 200
@@ -360,12 +442,11 @@ Item {
             y:45
 
             Button {
-                id: btnadd
+                id: btnaddSquare
                 width: 95
                 height: 40
-
-                text: qsTr("ADD")
-                font.pixelSize: 15
+                text: qsTr("Add Square")
+                font.pixelSize: 12
                 onClicked: {
                     CreateSquareGaugeScript.createSquareGauge(266,119,0,240,248,0,powertunedatasource.get(cbx_sources.currentIndex).defaultsymbol,powertunedatasource.get(cbx_sources.currentIndex).titlename,false,true,false,"Dashboard",powertunedatasource.get(cbx_sources.currentIndex).sourcename,powertunedatasource.get(cbx_sources.currentIndex).sourcename,10000,-20000,"lightsteelblue","black","lightsteelblue","white","white","blue",25,40);
                     squaregaugemenu.visible = false;
@@ -375,10 +456,23 @@ Item {
             }
 
             Button {
+                id: btnaddBar
+                width: 95
+                height: 40
+                text: qsTr("Add Bar")
+                font.pixelSize: 12
+                onClicked: {
+                    CreateBargaugeScript.createVerticalGauge(320,80,10,0,0,8000,0,powertunedatasource.get(cbx_sources.currentIndex).titlename,powertunedatasource.get(cbx_sources.currentIndex).sourcename,1000,0);
+                    squaregaugemenu.visible = false;
+                    selectcolor.visible =false;
+                    Dashboard.setdraggable(0);
+                }
+            }
+            Button {
                 id: btnsave
                 width: 95
                 text: qsTr("SAVE")
-                font.pixelSize: 15
+                font.pixelSize: 12
                 onClicked: {
                     squaregaugemenu.visible = false;
                     selectcolor.visible =false;
@@ -390,14 +484,16 @@ Item {
 
                         //Check which type of gauges we have and send info to console
                         if(userDash.children[i].information === "Square gauge"){
-                            //console.log(userDash.children[i].information +" " + userDash.children[i].valuepropertymain +  " Item no." + i)
+                            console.log("Save Square");
                             //Apend all values of each gauge to the List Model
-                            gaugelist.append({"type": userDash.children[i].title,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"maxvalue":userDash.children[i].maxvalue,"decplace":userDash.children[i].decimalpoints,"unit":userDash.children[i].mainunit,"id":userDash.children[i].title,"vertgaugevis":userDash.children[i].vertgaugevisible,"horigaugevis":userDash.children[i].horigaugevisible,"secvaluevis":userDash.children[i].secvaluevisible,"valuepropertymain":userDash.children[i].mainvaluename,"valuepropertysec":userDash.children[i].secvaluename,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow,"framecolor":userDash.children[i].framecolor,"backroundcolor":userDash.children[i].resetbackroundcolor,"titlecolor":userDash.children[i].resettitlecolor,"titletextcolor":userDash.children[i].titletextcolor,"textcolor":userDash.children[i].textcolor,"barcolor":userDash.children[i].barcolor,"titlefontsize":userDash.children[i].titlefontsize,"mainfontsize":userDash.children[i].mainfontsize})
+                            gaugelist.append({"type": userDash.children[i].title,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"maxvalue":userDash.children[i].maxvalue,"decplace":userDash.children[i].decimalpoints,"unit":userDash.children[i].mainunit,"id":userDash.children[i].title,"vertgaugevis":userDash.children[i].vertgaugevisible,"horigaugevis":userDash.children[i].horigaugevisible,"secvaluevis":userDash.children[i].secvaluevisible,"valuepropertymain":userDash.children[i].mainvaluename,"valuepropertysec":userDash.children[i].secvaluename,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow,"framecolor":userDash.children[i].framecolor,"backroundcolor":userDash.children[i].resetbackroundcolor,"titlecolor":userDash.children[i].resettitlecolor,"titletextcolor":userDash.children[i].titletextcolor,"textcolor":userDash.children[i].textcolor,"barcolor":userDash.children[i].barcolor,"titlefontsize":userDash.children[i].titlefontsize,"mainfontsize":userDash.children[i].mainfontsize,"info":userDash.children[i].information})
                             //console.log(gaugelist.get(i).width)
 
                         }
                         if(userDash.children[i].information === "Bar gauge"){
-                            //console.log(userDash.children[i].information +" " + userDash.children[i].title +  " Item no." + i)
+                            console.log("Save Bar");
+                            gaugelist.append({"type": userDash.children[i].title,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"maxvalue":userDash.children[i].maxvalue,"decplace":userDash.children[i].decimalpoints,"unit":userDash.children[i].gaugename,"id":userDash.children[i].title,"valuepropertymain":userDash.children[i].mainvaluename,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow,"info":userDash.children[i].information,"minval":userDash.children[i].minvalue})
+
                         }
                         if(userDash.children[i].information === "Round gauge"){
                             //console.log(userDash.children[i].information +" " + userDash.children[i].title +  " Item no." + i)
@@ -413,8 +509,8 @@ Item {
             Button {
                 id: btnopencolorselect
                 width:95
-                text: qsTr("COLORS")
-                font.pixelSize: 15
+                text: qsTr("Colors")
+                font.pixelSize: 12
                 onClicked: {
                     selectcolor.visible =true;
                     squaregaugemenu.visible = false;
@@ -424,8 +520,8 @@ Item {
             Button {
                 id: btnclear
                 width: 95
-                text: "CLEAR"
-                font.pixelSize: 15
+                text: "Clear"
+                font.pixelSize: 12
                 onClicked:  {
                     selectcolor.visible =false;
                     squaregaugemenu.visible = false;
@@ -440,15 +536,16 @@ Item {
             Button{
                 id: loadfromfile
                 width: 95
-                text: "IMPORT"
-                font.pixelSize: 15
+                text: "Import"
+                font.pixelSize: 12
 
                 onClicked: {
                     Connect.readavailabledashfiles();
+                    btnaddBar.visible = false;
                     btncancelload.visible = true;
                     loadfromfile.visible = false;
                     loadfileselect.visible = true;
-                    btnadd.visible = false;
+                    btnaddSquare.visible = false;
                     btncancel.visible = false;
                     cbx_sources.visible = false;
                     btnsave.visible = false;
@@ -465,8 +562,8 @@ Item {
             Button{
                 id: savetofile
                 width: 95
-                text: "EXPORT"
-                font.pixelSize: 15
+                text: "Export"
+                font.pixelSize: 12
 
                 onClicked: {
                     squaregaugemenu.visible = false;
@@ -479,17 +576,16 @@ Item {
             Button{
                 id: load
                 width: 95
-                text: "LOAD"
-                font.pixelSize: 15
+                text: "Load"
+                font.pixelSize: 12
                 visible: false
                 onClicked: {
-
                     loadfileselect.visible = false;
                     Connect.setfilename2(loadfileselect.textAt(loadfileselect.currentIndex));
+                    btncancelload.visible = false;
                     squaregaugemenu.visible = false;
                     load.visible = false;
                     selectcolor.visible =false;
-                    btncancelload.visible = false;
                     Dashboard.setdraggable(0);
                     Connect.readdashsetup2();
                 }
@@ -497,8 +593,8 @@ Item {
             Button{
                 id: btncancelload
                 width: 95
-                text: "CANCEL"
-                font.pixelSize: 15
+                text: "Cancel"
+                font.pixelSize: 12
                 visible: false
                 onClicked: {
                     loadfileselect.visible = false;
@@ -507,25 +603,27 @@ Item {
                     load.visible = false;
                     selectcolor.visible =false;
                     Dashboard.setdraggable(0);
+
                 }
             }
             Button{
                 id: btnbackround
                 width: 95
-                text: "RPM"
-                font.pixelSize: 15
+                text: "Background"
+                font.pixelSize: 12
                 onClicked: {
                     rpmbackroundselector.visible =true;
                     squaregaugemenu.visible = false;
                     btnbackround.visible =false;
                     Dashboard.setdraggable(0);
+                    Connect.readavailablebackrounds();
                 }
             }
             Button {
                 id: btncancel
                 width: 95
-                text: "CLOSE"
-                font.pixelSize: 15
+                text: "Close"
+                font.pixelSize: 12
                 onClicked:  {
                     squaregaugemenu.visible = false;
                     selectcolor.visible =false;
@@ -534,39 +632,11 @@ Item {
             }
         }
     }
-    // End
-    /*
-    PieMenu{
-        id: pimenu
-        z:120
-        Quick1.MenuItem{
-            text: "Add square gauge"
-            onTriggered: function() { print("Action 3"); }
-        }
-        Quick1.MenuItem{
-            text: "Add bar gauge"
-        }
-        Quick1.MenuItem{
-            text: "Add analoge gauge"
-        }
-        Quick1.MenuItem{
-            text: "Change color square gauge"
-        }
-        Quick1.MenuItem{
-            text: "Export to file"
-        }
-        Quick1.MenuItem{
-            text: "Import from file"
-        }
-    }
-*/
     //We put all Gauges here
     Item{
         id: userDash
         anchors.fill: parent
-
     }
-
     ///////////////////Functions
     function setextra()
     {
@@ -581,19 +651,34 @@ Item {
         }
         }
     }
+
     function saveDashtofile()
     {
-         saveDashtofilestring = ""
-         for (var i=0; i<userDash.children.length; ++i)
-             saveDashtofilestring += (userDash.children[i].width+","+userDash.children[i].height+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].maxvalue+","+userDash.children[i].decimalpoints+","+userDash.children[i].mainunit+","+userDash.children[i].title+","+userDash.children[i].vertgaugevisible+","+userDash.children[i].horigaugevisible+","+userDash.children[i].secvaluevisible+","+"Dashboard"+","+userDash.children[i].mainvaluename+","+userDash.children[i].secvaluename+","+userDash.children[i].warnvaluehigh+","+userDash.children[i].warnvaluelow+","+userDash.children[i].framecolor+","+userDash.children[i].resetbackroundcolor+","+userDash.children[i].resettitlecolor+","+userDash.children[i].titletextcolor+","+userDash.children[i].textcolor+","+userDash.children[i].barcolor+","+userDash.children[i].titlefontsize+","+userDash.children[i].mainfontsize+","+userDash.children[i].information+"\r\n");
+        saveDashtofilestring = ""
+        for (var i=0; i<userDash.children.length; ++i)
+            saveDashtofilestring += (userDash.children[i].width+","+userDash.children[i].height+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].maxvalue+","+userDash.children[i].decimalpoints+","+userDash.children[i].mainunit+","+userDash.children[i].title+","+userDash.children[i].vertgaugevisible+","+userDash.children[i].horigaugevisible+","+userDash.children[i].secvaluevisible+","+"Dashboard"+","+userDash.children[i].mainvaluename+","+userDash.children[i].secvaluename+","+userDash.children[i].warnvaluehigh+","+userDash.children[i].warnvaluelow+","+userDash.children[i].framecolor+","+userDash.children[i].resetbackroundcolor+","+userDash.children[i].resettitlecolor+","+userDash.children[i].titletextcolor+","+userDash.children[i].textcolor+","+userDash.children[i].barcolor+","+userDash.children[i].titlefontsize+","+userDash.children[i].mainfontsize+","+userDash.children[i].information+"\r\n");
 
     }
     function createDash()
     {
         console.log("create Dashboard")
-        for (var i=0; i<gaugelist.rowCount(); ++i)
-            CreateSquareGaugeScript.createSquareGauge(gaugelist.get(i).width,gaugelist.get(i).height,gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).maxvalue,gaugelist.get(i).decplace,gaugelist.get(i).unit,gaugelist.get(i).id,gaugelist.get(i).vertgaugevis,gaugelist.get(i).horigaugevis,gaugelist.get(i).secvaluevis,"Dashboard",gaugelist.get(i).valuepropertymain,gaugelist.get(i).valuepropertysec,gaugelist.get(i).warnvaluehigh,gaugelist.get(i).warnvaluelow,gaugelist.get(i).framecolor,gaugelist.get(i).backroundcolor,gaugelist.get(i).titlecolor,gaugelist.get(i).titletextcolor,gaugelist.get(i).textcolor,gaugelist.get(i).barcolor,gaugelist.get(i).titlefontsize,gaugelist.get(i).mainfontsize);
 
+        for (var i=0; i<gaugelist.rowCount(); ++i)
+        {
+           // gaugeType = gaugelist.get(i).info;
+
+            //Create Square Gauge
+
+            if (gaugelist.get(i).info === "Square gauge")
+            {
+                CreateSquareGaugeScript.createSquareGauge(gaugelist.get(i).width,gaugelist.get(i).height,gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).maxvalue,gaugelist.get(i).decplace,gaugelist.get(i).unit,gaugelist.get(i).id,gaugelist.get(i).vertgaugevis,gaugelist.get(i).horigaugevis,gaugelist.get(i).secvaluevis,"Dashboard",gaugelist.get(i).valuepropertymain,gaugelist.get(i).valuepropertysec,gaugelist.get(i).warnvaluehigh,gaugelist.get(i).warnvaluelow,gaugelist.get(i).framecolor,gaugelist.get(i).backroundcolor,gaugelist.get(i).titlecolor,gaugelist.get(i).titletextcolor,gaugelist.get(i).textcolor,gaugelist.get(i).barcolor,gaugelist.get(i).titlefontsize,gaugelist.get(i).mainfontsize);
+            }
+            //Create Bar Gauge
+            if (gaugelist.get(i).info=== "Bar gauge")
+            {
+                CreateBargaugeScript.createVerticalGauge(gaugelist.get(i).width,gaugelist.get(i).height,gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).minval,gaugelist.get(i).maxvalue,gaugelist.get(i).decplace,gaugelist.get(i).unit,gaugelist.get(i).valuepropertymain,gaugelist.get(i).warnvaluehigh,gaugelist.get(i).warnvaluelow);
+            }
+        }
     }
     function changeframeclolor()
     {
@@ -612,9 +697,7 @@ Item {
         {
             if(userDash.children[i].information === "Square gauge")
             {
-                console.log("From" + userDash.children[i].resettitlecolor)
                 userDash.children[i].resettitlecolor = colorselect.textAt(colorselecttitlebar.currentIndex)
-                console.log("To" + userDash.children[i].resettitlecolor)
                 userDash.children[i].set()
             }
         }
@@ -680,19 +763,7 @@ Item {
             anchors.fill:parent
             drag.target: selectcolor
         }
-        /*
-        Item {
-            id: colorsettingsSaved
-            Settings {
-                property alias indexframecolor: colorselect.currentIndex
-                property alias indextitlebarcolor: colorselecttitlebar.currentIndex
-                property alias indexbackroundcolor: backroundcolor.currentIndex
-                property alias indexbargaugecolor: bargaugecolor.currentIndex
-                property alias indextitletextcolor: titlecolor.currentIndex
-                property alias indexmaintextcolor: valuetext.currentIndex
-            }
-        }
-        */
+
         Grid{
             rows:5
             columns: 3
@@ -715,8 +786,8 @@ Item {
                 id: colorselect
                 width: 150;
                 model: ColorList{}
-                font.pixelSize: 15
                 visible: true
+                font.pixelSize: 15
                 onCurrentIndexChanged: changeframeclolor()
                 delegate:
 
@@ -786,8 +857,8 @@ Item {
                 id: backroundcolor
                 width: 150;
                 model: ColorList{}
-                visible: true
                 font.pixelSize: 15
+                visible: true
                 onCurrentIndexChanged: changebackroundcolor()
 
                 delegate:
@@ -831,8 +902,8 @@ Item {
                 id: bargaugecolor
                 width: 150;
                 model: ColorList{}
-                visible: true
                 font.pixelSize: 15
+                visible: true
                 onCurrentIndexChanged: changebargaugecolor()
 
                 delegate:
@@ -933,7 +1004,6 @@ Item {
                     height: valuetext.height
                     color:  valuetext.currentText
                 }
-
             }
             Button {
                 id: btnclosecolorselect
@@ -945,7 +1015,3 @@ Item {
         }
     }
 }
-
-
-
-

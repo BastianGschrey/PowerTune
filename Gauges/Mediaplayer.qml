@@ -6,8 +6,8 @@ import QtQuick.Extras 1.4
 import QtMultimedia 5.8
 
 Rectangle {
-    width: parent.width
-    height: parent.height
+    width: 800
+    height: 480
     property bool playing: false
     Connections{
         target: Dashboard
@@ -28,16 +28,12 @@ Rectangle {
         model: Dirmodel
         onActivated: Connect.qmlTreeviewclicked(mp3selector.currentIndex),folderModel.folder = Dashboard.musicpath;
     }
-
-
     ListView {
         id: list
         width: parent.width/2
         height: parent.height
         anchors.bottom: parent.bottom
         model: folderModel
-        //anchors.right: parent.right
-
         onCurrentIndexChanged: {
             // This will handle changing playlist with all possible selection methods
             playMusic.source = folderModel.get(currentIndex, "fileURL")

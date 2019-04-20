@@ -25,7 +25,7 @@ Rectangle {
     property alias secvaluevisible: secondaryvaluetextfield.visible
     property alias secvalue: secondaryvaluetextfield.text
     property alias mainvalue : placeholder.text
-    property alias maxvalue: vertgauge.maximumValue
+    property double maxvalue: vertgauge.maximumValue
     property alias titlecolor: titlebar.color
     property alias titlefontsize :gaugetextfield.font.pixelSize
     property alias mainfontsize :mainvaluetextfield.font.pixelSize
@@ -35,7 +35,6 @@ Rectangle {
     property string titletextcolor
     property string textcolor
     property string barcolor
-    property int maxvalue
     property int decimalpoints
     property double warnvaluehigh: 20000
     property double warnvaluelow : -20000
@@ -606,7 +605,6 @@ Rectangle {
                 hidemenues();
             }
         }
-
     }
     Item {
         id: gaugeSizeselect
@@ -747,7 +745,6 @@ Rectangle {
                 warnvaluehigh = txtMaxValue.text;
             }
         }
-
     }
     Item {
         id: titleRename
