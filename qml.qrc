@@ -15,7 +15,6 @@
         <file>Gauges/Charts.qml</file>
         <file>Gauges/ForceMeter.qml</file>
         <file>Gauges/SensorTest.qml</file>
-        <file>Gauges/verticalbargauge.qml</file>
         <file>Gauges/createverticalbargauge.js</file>
         <file>Gauges/Dyno.qml</file>
         <file>Gauges/Camera.qml</file>
@@ -63,5 +62,6 @@
         <file>Gauges/ColorList.qml</file>
         <file>Gauges/ColorpickerCombobox.qml</file>
         <file>Gauges/RoundGauge.qml</file>
+        <file>Gauges/Verticalbargauge.qml</file>
     </qresource>
 </RCC>

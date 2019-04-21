@@ -321,5 +321,3 @@ Rectangle {
         btngaugenamechange.visible = false;
     }
 }
-
-
