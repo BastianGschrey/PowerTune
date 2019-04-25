@@ -76,7 +76,7 @@ Rectangle {
       Item{
             id: displayWindow1
             height: parent.height
-            width: (735*(Dashboard.rpm)/Dashboard.maxRPM)+47 //+61 is the pixel where the RPM bar starts and from there is 651 pixels wide
+            width: (678*(Dashboard.rpm)/Dashboard.maxRPM)+70 //+70 is the pixel where the RPM bar starts and from there is 678 pixels wide
 
             clip: true
 

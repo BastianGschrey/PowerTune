@@ -24,7 +24,7 @@ Rectangle {
       text: (Dashboard.rpm)
       font.pixelSize: 100
       y: 130
-      x: 240
+      x: 217
   font.italic: true
       font.bold: true
       font.family: "Eurostile"
