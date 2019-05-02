@@ -2,6 +2,7 @@ import QtQuick 2.5
 import QtQuick.Controls 2.1
 
 Item {
+    id: picture
     height: pictureheight
     width : pictureheight
     property string information: "gauge image"
@@ -99,6 +100,12 @@ Item {
                     highlighted: pictureSelector.highlightedIndex === index
                     hoverEnabled: pictureSelector.hoverEnabled
                 }
+            }
+            RoundButton{
+                width: parent.width
+                text: "Delete picture"
+                font.pixelSize: 15
+                onClicked: picture.destroy();
             }
             RoundButton{
                 width: parent.width
