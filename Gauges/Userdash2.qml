@@ -61,7 +61,7 @@ Item {
     ComboBox{
         id: dashvalue
         width: 200
-        model: Dashboard.dashsetup1
+        model: Dashboard.dashsetup2
         visible:false
         font.pixelSize: 15
         delegate: ItemDelegate {
