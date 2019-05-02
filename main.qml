@@ -10,7 +10,7 @@ ApplicationWindow {
     height: 480
     minimumWidth: 800
     minimumHeight: 480
-    title: qsTr("PowerTune ") + Dashboard.Platform + "  V 1.83"
+    title: qsTr("PowerTune ") + Dashboard.Platform + "  V 1.85"
     color: "black"
     Item {
         id: name
@@ -21,10 +21,9 @@ ApplicationWindow {
 
         currentIndex: 0
         anchors.fill: parent
-        Component.onCompleted: Connect.readavailabledashfiles()
+        //Component.onCompleted: Connect.readavailabledashfiles()
 
         Loader {
-
             id: firstPageLoader
             source: "qrc:/Intro.qml"
         }

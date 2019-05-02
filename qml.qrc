@@ -63,5 +63,13 @@
         <file>Gauges/ColorpickerCombobox.qml</file>
         <file>Gauges/RoundGauge.qml</file>
         <file>Gauges/Verticalbargauge.qml</file>
+        <file>Gauges/createRoundGauge.js</file>
+        <file>graphics/needle.svg</file>
+        <file>graphics/RoungGaugeRing.png</file>
+        <file>Gauges/MyTextLabel.qml</file>
+        <file>Gauges/createText.js</file>
+        <file>Gauges/createPicture.js</file>
+        <file>Gauges/Picture.qml</file>
+        <file>graphics/slectImage.png</file>
     </qresource>
 </RCC>

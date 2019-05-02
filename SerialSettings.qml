@@ -566,7 +566,7 @@ TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.84 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.85 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -815,9 +815,9 @@ TabView {
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
                         model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
-                        property bool initialized: true
+                        currentIndex: 1
                         onCurrentIndexChanged:{select1.selDash1() }
-                        Component.onCompleted: {select1.selDash1() }
+                        //Component.onCompleted: {select1.selDash1() }
                         delegate: ItemDelegate {
                             width: dash1.width
                             text: dash1.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -835,9 +835,8 @@ TabView {
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
                         model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
-                        property bool initialized: true
+                        currentIndex: 1
                         onCurrentIndexChanged:{select2.selDash2() }
-                        Component.onCompleted: {select2.selDash2() }
                         delegate: ItemDelegate {
                             width: dash2.width
                             text: dash2.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -855,9 +854,8 @@ TabView {
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
                         model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
-                        property bool initialized: true
                         onCurrentIndexChanged:{select3.selDash3() }
-                        Component.onCompleted: {select3.selDash3() }
+                        currentIndex: 1
                         delegate: ItemDelegate {
                             width: dash3.width
                             text: dash3.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -874,9 +872,8 @@ TabView {
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
                         model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
-                        property bool initialized: true
+                        currentIndex: 1
                         onCurrentIndexChanged:{select4.selDash4() }
-                        Component.onCompleted: {select4.selDash4() }
                         delegate: ItemDelegate {
                             width: dash4.width
                             text: dash4.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -912,6 +909,7 @@ TabView {
                     id: select2
                     function selDash2()
                     {
+
                         if (dash2.currentIndex == "0") {secondPageLoader.source = "qrc:/Gauges/Cluster.qml"};
                         if (dash2.currentIndex == "1") {secondPageLoader.source = "qrc:/Gauges/GPS.qml"};
                         if (dash2.currentIndex == "2") {secondPageLoader.source = "qrc:/GPSTracks/Laptimer.qml"};
@@ -923,7 +921,8 @@ TabView {
                         if (dash2.currentIndex == "8") {secondPageLoader.source = "qrc:/Gauges/Dyno.qml"};
                         if (dash2.currentIndex == "9"){secondPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                         if (dash2.currentIndex == "10"){secondPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
-                    }
+
+}
                 }
                 Item {
                     id: select3

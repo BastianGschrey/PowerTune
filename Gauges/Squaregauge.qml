@@ -41,7 +41,34 @@ Rectangle {
 
     Drag.active: true
     DatasourcesList{id: powertunedatasource}
-
+/*
+    //Intro
+    SequentialAnimation {
+        id: intro
+        running: true
+        onRunningChanged:{
+        if (intro.running == false )gauge.value  = Qt.binding(function(){return Dashboard[mainvaluename]});
+        }
+        NumberAnimation {
+            id :animation
+            target: mainvaluetextfield
+            property: "text"
+            easing.type: Easing.InOutSine
+            from: minvalue
+            to: maxvalue
+            duration: 500
+        }
+        NumberAnimation {
+            id :animation1
+            target: mainvaluetextfield
+            property: "text"
+            easing.type: Easing.InOutSine
+            from: maxvalue
+            to: minvalue
+            duration: 500
+        }
+    }
+    */
     Connections{
         target: Dashboard
         onDraggableChanged:togglemousearea()

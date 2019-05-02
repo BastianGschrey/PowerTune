@@ -8,390 +8,691 @@ ListModel {
         defaultsymbol: "%"
         sourcename:"accelpedpos"
         supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"AccelTimer"
         defaultsymbol: "s"
         titlename:"Accel. Timmer"
         supportedECU: ""
+        decimalpoints : "4"
+        maxvalue : "1000"
+        stepsize : "1000"
+        divisor : "1"
     }
     ListElement {
         sourcename:"accelx"
         defaultsymbol: "G"
         titlename:"X accel."
         supportedECU: ""
+        decimalpoints : "1"
+        maxvalue : "4"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"accely"
         defaultsymbol: "G"
         titlename:"Y accel."
         supportedECU: ""
+        decimalpoints : "1"
+        maxvalue : "4"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"accelz"
         defaultsymbol: "G"
         titlename:"Z accel."
         supportedECU: ""
+        decimalpoints : "1"
+        maxvalue : "4"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"AFR"
         defaultsymbol: "A/F"
         titlename:"AFR"
         supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "20"
+        stepsize : "5"
+        divisor : "1"
     }
     ListElement {
         sourcename:"airtempensor2"
         defaultsymbol: "°C"
         titlename:"Air T.2"
         supportedECU: ""
+        decimalpoints : "1"
+        maxvalue : "120"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"ambipress"
         defaultsymbol: "kPa"
         titlename:"Ambi Pres."
         supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "140"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"ambitemp"
         defaultsymbol: "°C"
         titlename:"Ambi Temp."
         supportedECU: ""
+        decimalpoints : "1"
+        maxvalue : "120"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"antilaglauchswitch"
         defaultsymbol: ""
         titlename:"Antilag sw."
         supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"antilaglaunchon"
         defaultsymbol: ""
         titlename:"Antilag launch"
         supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"auxcalc1"
         defaultsymbol: ""
         titlename:"AUX Calc1"
+        decimalpoints : "2"
+        maxvalue : "100"
+        stepsize : "10"
+        divisor : "1"
     }
     ListElement {
         sourcename:"auxcalc2"
         defaultsymbol: ""
         titlename:"AUX Calc2"
+        decimalpoints : "2"
+        maxvalue : "100"
+        stepsize : "10"
+        divisor : "1"
     }
     ListElement {
         sourcename:"auxcalc3"
         defaultsymbol: ""
         titlename:"AUX Calc3"
+        decimalpoints : "2"
+        maxvalue : "100"
+        stepsize : "10"
+        divisor : "1"
     }
     ListElement {
         sourcename:"auxcalc4"
         defaultsymbol: ""
         titlename:"AUX Calc4"
+        decimalpoints : "2"
+        maxvalue : "100"
+        stepsize : "10"
+        divisor : "1"
     }
     ListElement {
         sourcename:"auxrevlimitswitch"
         defaultsymbol: ""
         titlename:"AUX Rev Limit Sw"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"AUXT"
         defaultsymbol: "°C"
         titlename:"AUX Temp"
+        decimalpoints : "0"
+        maxvalue : "120"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"avfueleconomy"
         defaultsymbol: ""
         titlename:"Av. Fuel Economy"
+        decimalpoints : "1"
+        maxvalue : "30"
+        stepsize : "5"
+        divisor : "1"
     }
     ListElement {
         sourcename:"battlight"
         defaultsymbol: ""
         titlename:"Battery Light"
         supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"boostcontrol"
         defaultsymbol: "%"
         titlename:"Boost Ctrl."
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"BoostDuty"
         defaultsymbol: "%"
         titlename:"Boos Duty"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"BoostPres"
-        defaultsymbol: "kPa"
+        defaultsymbol: "kgcm2"
         titlename:"Boost"
+        decimalpoints : "2"
+        maxvalue : "2"
+        stepsize : "0.5"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Boosttp"
         defaultsymbol: "%"
         titlename:"Boost Tp"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Boostwg"
         defaultsymbol: ""
         titlename:"Boost Wg"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "10"
+        divisor : "1"
     }
     ListElement {
         sourcename:"brakepedalstate"
         defaultsymbol: ""
         titlename:"Brake Pedal"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
 
     }
     ListElement {
         sourcename:"brakepress"
         defaultsymbol: "kPa"
         titlename:"Brake Pres."
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "100"
+        divisor : "1"
     }
     ListElement {
         sourcename:"clutchswitchstate"
         defaultsymbol: ""
         titlename:"Clutch Sw"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"compass"
         defaultsymbol: ""
         titlename:"Compass"
+        decimalpoints : "4"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"coolantpress"
         defaultsymbol: "kPa"
         titlename:"Coolant P."
         supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "100"
+        divisor : "1"
     }
     ListElement {
         sourcename:"decelcut"
         defaultsymbol: ""
         titlename:"Decel Cut"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"diffoiltemp"
         defaultsymbol: "°C"
         titlename:"Diff Oil T."
+        decimalpoints : "0"
+        maxvalue : "180"
+        stepsize : "30"
+        divisor : "1"
     }
     ListElement {
         sourcename:"distancetoempty"
         defaultsymbol: "km"
         titlename:"Dist. To Empty"
+        decimalpoints : "0"
+        maxvalue : "600"
+        stepsize : "100"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Dwell"
         defaultsymbol: ""
         titlename:"Dwell"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"egt1"
         defaultsymbol: "°C"
         titlename:"EGT 1"
+        decimalpoints : "0"
+        maxvalue : "1300"
+        stepsize : "200"
+        divisor : "1"
     }
     ListElement {
         sourcename:"egt2"
         defaultsymbol: "°C"
         titlename:"EGT 2"
+        decimalpoints : "0"
+        maxvalue : "1300"
+        stepsize : "200"
+        divisor : "1"
     }
     ListElement {
         sourcename:"egt3"
         defaultsymbol: "°C"
         titlename:"EGT 3"
+        decimalpoints : "0"
+        maxvalue : "1300"
+        stepsize : "200"
+        divisor : "1"
     }
     ListElement {
         sourcename:"egt4"
         defaultsymbol: "°C"
         titlename:"EGT 4"
+        decimalpoints : "0"
+        maxvalue : "1300"
+        stepsize : "200"
+        divisor : "1"
     }
     ListElement {
         sourcename:"egt5"
         defaultsymbol: "°C"
         titlename:"EGT 5"
+        decimalpoints : "0"
+        maxvalue : "1300"
+        stepsize : "200"
+        divisor : "1"
     }
     ListElement {
         sourcename:"egt6"
         defaultsymbol: "°C"
         titlename:"EGT 6"
+        decimalpoints : "0"
+        maxvalue : "1300"
+        stepsize : "200"
+        divisor : "1"
     }
     ListElement {
         sourcename:"egt7"
         defaultsymbol: "°C"
         titlename:"EGT 7"
+        decimalpoints : "0"
+        maxvalue : "1300"
+        stepsize : "200"
+        divisor : "1"
     }
     ListElement {
         sourcename:"egt8"
         defaultsymbol: "°C"
         titlename:"EGT 8"
+        decimalpoints : "0"
+        maxvalue : "1300"
+        stepsize : "200"
+        divisor : "1"
     }
     ListElement {
         sourcename:"egt9"
         defaultsymbol: "°C"
         titlename:"EGT 9"
+        decimalpoints : "0"
+        maxvalue : "1300"
+        stepsize : "200"
+        divisor : "1"
     }
     ListElement {
         sourcename:"egt10"
         defaultsymbol: "°C"
         titlename:"EGT 10"
+        decimalpoints : "0"
+        maxvalue : "1300"
+        stepsize : "200"
+        divisor : "1"
     }
     ListElement {
         sourcename:"egt11"
         defaultsymbol: "°C"
         titlename:"EGT 11"
+        decimalpoints : "0"
+        maxvalue : "1300"
+        stepsize : "200"
+        divisor : "1"
     }
     ListElement {
         sourcename:"egt12"
         defaultsymbol: "°C"
         titlename:"EGT 12"
+        decimalpoints : "0"
+        maxvalue : "1300"
+        stepsize : "200"
+        divisor : "1"
     }
     ListElement {
         sourcename:"EngLoad"
         defaultsymbol: "%"
         titlename:"Eng. Load"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"excamangle1"
         defaultsymbol: "°"
         titlename:"Exhaust Cam 1"
+        decimalpoints : "0"
+        maxvalue : "270"
+        stepsize : "30"
+        divisor : "1"
     }
     ListElement {
         sourcename:"excamangle2"
         defaultsymbol: "°"
-        titlename:"Exhaust Cam 1"
+        titlename:"Exhaust Cam 2"
+        decimalpoints : "0"
+        maxvalue : "270"
+        stepsize : "30"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag1"
         defaultsymbol: ""
         titlename:"Flag1"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag2"
         defaultsymbol: ""
         titlename:"Flag2"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag3"
         defaultsymbol: ""
         titlename:"Flag3"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag4"
         defaultsymbol: ""
         titlename:"Flag4"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag5"
         defaultsymbol: ""
         titlename:"Flag5"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag6"
         defaultsymbol: ""
         titlename:"Flag6"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag7"
         defaultsymbol: ""
         titlename:"Flag7"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag8"
         defaultsymbol: ""
         titlename:"Flag8"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag9"
         defaultsymbol: ""
         titlename:"Flag9"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag10"
         defaultsymbol: ""
         titlename:"Flag10"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag11"
         defaultsymbol: ""
         titlename:"Flag11"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag12"
         defaultsymbol: ""
         titlename:"Flag12"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag13"
         defaultsymbol: ""
         titlename:"Flag13"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag14"
         defaultsymbol: ""
         titlename:"Flag14"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag15"
         defaultsymbol: ""
         titlename:"Flag15"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag16"
         defaultsymbol: ""
         titlename:"Flag16"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag17"
         defaultsymbol: ""
         titlename:"Flag17"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag18"
         defaultsymbol: ""
         titlename:"Flag18"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag19"
         defaultsymbol: ""
         titlename:"Flag19"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag20"
         defaultsymbol: ""
         titlename:"Flag20"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag21"
         defaultsymbol: ""
         titlename:"Flag21"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag22"
         defaultsymbol: ""
         titlename:"Flag22"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag23"
         defaultsymbol: ""
         titlename:"Flag23"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag24"
         defaultsymbol: ""
         titlename:"Flag24"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Flag25"
         defaultsymbol: ""
         titlename:"Flag25"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         // Ignition Angle Bank 1
         defaultsymbol: "°"
         titlename:"IGN Angle B1"
+        decimalpoints : "0"
+        maxvalue : "50"
+        stepsize : "10"
+        divisor : "1"
     }
     ListElement {
         //Ignition Angle Bank 2
         defaultsymbol: "°"
         titlename:"IGN Angle B2"
+        decimalpoints : "0"
+        maxvalue : "50"
+        stepsize : "10"
+        divisor : "1"
     }
+    /*
     ListElement {
         //Torque Management Driveshaft RPM Target
     }
@@ -407,191 +708,341 @@ ListModel {
     ListElement {
         //Torque Management Combined Ignition Correction
     }
+    */
     ListElement {
         sourcename:"flatshiftstate"
         defaultsymbol: ""
         titlename:"Flat Shift"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Fuelc"
         defaultsymbol: "%"
         titlename:"Fuel Correction"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"fuelclevel"
         defaultsymbol: ""
         titlename:"Fuel level"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"fuelcomposition"
         defaultsymbol: "%"
         titlename:"Ethanol"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
+
     }
     ListElement {
         sourcename:"fuelconsrate"
         defaultsymbol: ""
         titlename:"Fuel Cons."
+        decimalpoints : "0"
+        maxvalue : "200"
+        stepsize : "10"
+        divisor : "1"
     }
     ListElement {
         sourcename:"fuelcutperc"
         defaultsymbol: "%"
         titlename:"Fuel Cut"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"fuelflow"
         defaultsymbol: "°"
         titlename:"Fuel flow"
+        decimalpoints : "1"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"fuelflowdiff"
         defaultsymbol: ""
         titlename:"Fuel flow dif."
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"fuelflowret"
         defaultsymbol: ""
         titlename:"Fuel flow ret."
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"FuelPress"
         defaultsymbol: "kPa"
         titlename:"Fuel Pres."
+        decimalpoints : "0"
+        maxvalue : "400"
+        stepsize : "100"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Fueltemp"
         defaultsymbol: "°C"
         titlename:"Fuel T."
+        decimalpoints : "0"
+        maxvalue : "120"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"fueltrimlongtbank1"
-        defaultsymbol: ""
+        defaultsymbol: "%"
         titlename:"Fuel trim long B1"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"fueltrimlongtbank2"
         defaultsymbol: ""
         titlename:"Fuel trim long B2"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"fueltrimshorttbank1"
         defaultsymbol: ""
         titlename:"Fuel trim short B1"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"fueltrimshorttbank2"
         defaultsymbol: ""
         titlename:"Fuel trim short B2"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Gear"
         defaultsymbol: ""
         titlename:"Gear"
+        decimalpoints : "0"
+        maxvalue : "5"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"gearswitch"
         defaultsymbol: ""
         titlename:"Gear sw."
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
 
     ListElement {
         sourcename:"gpsAltitude"
         defaultsymbol: "m"
         titlename:"GPS Altitude"
+        decimalpoints : "0"
+        maxvalue : "2000"
+        stepsize : "1000"
+        divisor : "1"
     }
     ListElement {
         sourcename:"gpsLatitude"
         defaultsymbol: ""
         titlename:"GPS Latitude"
+        decimalpoints : "4"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"gpsLongitude"
         defaultsymbol: ""
         titlename:"GPS Longitude"
+        decimalpoints : "4"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"gpsSpeed"
         defaultsymbol: "kph"
         titlename:"GPS Speed"
+        decimalpoints : "0"
+        maxvalue : "320"
+        stepsize : "40"
+        divisor : "1"
     }
     ListElement {
         sourcename:"gpsTime"
         defaultsymbol: ""
         titlename:"GPS Time"
+        decimalpoints : "4"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"gpsVisibleSatelites"
         defaultsymbol: ""
         titlename:"GPS Visible Satelites"
+        decimalpoints : "4"
+        maxvalue : "20"
+        stepsize : "5"
+        divisor : "1"
     }
     ListElement {
         sourcename:"gyrox"
         defaultsymbol: ""
         titlename:"Gyro X"
+        decimalpoints : "0"
+        maxvalue : "360"
+        stepsize : "90"
+        divisor : "1"
     }
     ListElement {
         sourcename:"gyroy"
         defaultsymbol: ""
         titlename:"Giro Y"
+        decimalpoints : "0"
+        maxvalue : "360"
+        stepsize : "90"
+        divisor : "1"
     }
     ListElement {
         sourcename:"gyroz"
         defaultsymbol: ""
         titlename:"Gyro Z"
+        decimalpoints : "4"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"handbrake"
         defaultsymbol: ""
         titlename:"Handbrake"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"highbeam"
         defaultsymbol: ""
         titlename:"Highbeam"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"homeccounter"
         defaultsymbol: ""
         titlename:"Homecounter"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"IdleValue"
         defaultsymbol: ""
         titlename:"Idle Val."
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Ign"
         defaultsymbol: ""
         titlename:"Ignition"
+        decimalpoints : "0"
+        maxvalue : "50"
+        stepsize : "10"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Ign1"
         defaultsymbol: ""
         titlename:"Ignition 1"
+        decimalpoints : "0"
+        maxvalue : "50"
+        stepsize : "10"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Ign2"
         defaultsymbol: ""
         titlename:"Ignition 2"
+        decimalpoints : "0"
+        maxvalue : "50"
+        stepsize : "10"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Ign3"
         defaultsymbol: ""
         titlename:"Ignition 3"
+        decimalpoints : "0"
+        maxvalue : "50"
+        stepsize : "10"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Ign4"
         defaultsymbol: ""
         titlename:"Ignition 4"
+        decimalpoints : "0"
+        maxvalue : "50"
+        stepsize : "10"
+        divisor : "1"
     }
     ListElement {
         sourcename:"incamangle1"
         defaultsymbol: ""
         titlename:"Inlet Cam 1 angle"
+        decimalpoints : "0"
+        maxvalue : "270"
+        stepsize : "30"
+        divisor : "1"
     }
     ListElement {
         sourcename:"incamangle2"
         defaultsymbol: ""
         titlename:"Inlet Cam 2 angle"
+        decimalpoints : "0"
+        maxvalue : "270"
+        stepsize : "30"
+        divisor : "1"
     }
     /*
     ListElement {
@@ -614,26 +1065,46 @@ ListModel {
         sourcename:"InjDuty"
         defaultsymbol: "%"
         titlename:"Inj. Duty"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"injms"
         defaultsymbol: "ms"
         titlename:"Inj timing."
+        decimalpoints : "3"
+        maxvalue : "6"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Intaketemp"
         defaultsymbol: ""
         titlename:"IAT"
+        decimalpoints : "0"
+        maxvalue : "120"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Iscvduty"
         defaultsymbol: "%"
         titlename:"ISCV duty"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Knock"
         defaultsymbol: ""
         titlename:"Knock"
+        decimalpoints : "0"
+        maxvalue : "400"
+        stepsize : "100"
+        divisor : "1"
     }
     /*
     ListElement {
@@ -653,325 +1124,581 @@ ListModel {
         sourcename:"LAMBDA"
         defaultsymbol: "λ"
         titlename:"Lambda 1"
+        decimalpoints : "3"
+        maxvalue : "2"
+        stepsize : "0.5"
+        divisor : "1"
     }
     ListElement {
         sourcename:"lambda2"
         defaultsymbol: "λ"
         titlename:"Lambda 2"
+        decimalpoints : "3"
+        maxvalue : "2"
+        stepsize : "0.5"
+        divisor : "1"
     }
     ListElement {
         sourcename:"lambda3"
         defaultsymbol: "λ"
         titlename:"Lambda 3"
+        decimalpoints : "3"
+        maxvalue : "2"
+        stepsize : "0.5"
+        divisor : "1"
     }
     ListElement {
         sourcename:"lambda4"
         defaultsymbol: "λ"
         titlename:"Lambda 4"
+        decimalpoints : "3"
+        maxvalue : "2"
+        stepsize : "0.5"
+        divisor : "1"
     }
     ListElement {
         sourcename:"LAMBDATarget"
         defaultsymbol: "λ"
         titlename:"Lambda Target"
+        decimalpoints : "3"
+        maxvalue : "2"
+        stepsize : "0.5"
+        divisor : "1"
     }
     ListElement {
         sourcename:"launchcontolfuelenrich"
         defaultsymbol: "%"
         titlename:"Launch control fuel enrich"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"launchctrolignretard"
         defaultsymbol: "%"
         titlename:"Launch control ign ret."
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Leadingign"
         defaultsymbol: ""
         titlename:"Leading ign"
+        decimalpoints : "0"
+        maxvalue : "50"
+        stepsize : "10"
+        divisor : "1"
     }
     ListElement {
         sourcename:"leftindicator"
         defaultsymbol: ""
         titlename:"left indicator"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"limpmode"
         defaultsymbol: ""
         titlename:"Limp mode"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"MAF1V"
         defaultsymbol: "V"
         titlename:"MAF 1 Volt"
+        decimalpoints : "2"
+        maxvalue : "5"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"MAF2V"
         defaultsymbol: "V"
         titlename:"MAF 2 Volt"
+        decimalpoints : "2"
+        maxvalue : "5"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"MAFactivity"
         defaultsymbol: "%"
         titlename:"MAF activity"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"MAP"
         defaultsymbol: "kPa"
         titlename:"MAP"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "100"
+        divisor : "1"
     }
     ListElement {
         sourcename:"MAP2"
         defaultsymbol: "kPa"
         titlename:"MAP2"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "100"
+        divisor : "1"
     }
     ListElement {
         sourcename:"mil"
         defaultsymbol: ""
         titlename:"M.I.L"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"missccount"
         defaultsymbol: ""
         titlename:"Miss count"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "100"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Moilp"
         defaultsymbol: "V"
         titlename:"Metering Oil Pump"
+        decimalpoints : "2"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
-        sourcename:"MVSS"
+        sourcename:"speed"
         defaultsymbol: "kph"
-        titlename:"Main Speed"
+        titlename:"Speed"
+        decimalpoints : "0"
+        maxvalue : "320"
+        stepsize : "40"
+        divisor : "1"
     }
     ListElement {
         sourcename:"nosactive"
         defaultsymbol: ""
         titlename:"NOS"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"nospress"
         defaultsymbol: "kPa"
         titlename:"NOS Pres."
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "100"
+        divisor : "1"
     }
     ListElement {
         sourcename:"nosswitch"
         defaultsymbol: ""
         titlename:"NOS sw."
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"O2volt"
         defaultsymbol: "V"
         titlename:"O2 Volt 1"
+        decimalpoints : "2"
+        maxvalue : "6"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"O2volt_2"
         defaultsymbol: "V"
         titlename:"O2 Volt 2"
+        decimalpoints : "2"
+        maxvalue : "6"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Odo"
         defaultsymbol: "km"
         titlename:"Odometer"
+        decimalpoints : "2"
+        maxvalue : "1000"
+        stepsize : "100"
+        divisor : "1"
     }
     ListElement {
         sourcename:"oilpres"
         defaultsymbol: "kPa"
         titlename:"Oil Pres"
+        decimalpoints : "1"
+        maxvalue : "400"
+        stepsize : "100"
+        divisor : "1"
     }
     ListElement {
         sourcename:"oiltemp"
         defaultsymbol: "°C"
         titlename:"Oil Temp."
         supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "120"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"pim"
         defaultsymbol: "kPa"
         titlename:"PIM"
+        decimalpoints : "0"
+        maxvalue : "400"
+        stepsize : "100"
+        divisor : "1"
     }
 
     ListElement {
         sourcename:"Power"
         defaultsymbol: "KW"
         titlename:"Power"
+        decimalpoints : "0"
+        maxvalue : "600"
+        stepsize : "100"
+        divisor : "1"
     }
     ListElement {
         sourcename:"PressureV"
         defaultsymbol: "V"
         titlename:"MAP Volt."
+        decimalpoints : "2"
+        maxvalue : "5"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Primaryinp"
         defaultsymbol: ""
         titlename:"Pri. Inj pulse width"
+        decimalpoints : "0"
+        maxvalue : "120"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"rallyantilagswitch"
         defaultsymbol: ""
         titlename:"Rally antilag sw."
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"rightindicator"
         defaultsymbol: ""
         titlename:"Right Indicator"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"rpm"
         defaultsymbol: "rpm"
         titlename:"RPM"
+        decimalpoints : "0"
+        maxvalue : "10000"
+        stepsize : "1000"
+        divisor : "1000"
     }
     ListElement {
         sourcename:"Secinjpulse"
         defaultsymbol: "ms"
         titlename:"Secondary Inj. Pulse width"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"SVSS"
         defaultsymbol: "kph"
         titlename:"Slave speed"
+        decimalpoints : "0"
+        maxvalue : "320"
+        stepsize : "40"
+        divisor : "1"
     }
     ListElement {
         sourcename:"targetbstlelkpa"
         defaultsymbol: "kPa"
         titlename:"Target Boost"
+        decimalpoints : "0"
+        maxvalue : "400"
+        stepsize : "100"
+        divisor : "1"
     }
     ListElement {
         sourcename:"ThrottleV"
         defaultsymbol: "V"
         titlename:"TPS V"
+        decimalpoints : "2"
+        maxvalue : "5"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"timeddutyout1"
         defaultsymbol: ""
         titlename:"Timed duty 1"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"timeddutyout2"
         defaultsymbol: "V"
         titlename:"Timed duty 2"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"timeddutyoutputactive"
         defaultsymbol: ""
         titlename:"Timed duty output active"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Torque"
         defaultsymbol: "nm"
-        titlename:"Maf 1 Volt"
+        titlename:"Torque"
+        decimalpoints : "0"
+        maxvalue : "600"
+        stepsize : "100"
+        divisor : "1"
     }
     ListElement {
         sourcename:"torqueredcutactive"
         defaultsymbol: ""
         titlename:"Torque red. cut active"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"torqueredlevelactive"
         defaultsymbol: ""
         titlename:"Torque red. level active"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"TPS"
         defaultsymbol: "%"
         titlename:"Throttle Position"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Trailingign"
         defaultsymbol: ""
         titlename:"Trailing Ign."
+        decimalpoints : "0"
+        maxvalue : "50"
+        stepsize : "10"
+        divisor : "1"
     }
     ListElement {
         sourcename:"transientthroactive"
         defaultsymbol: ""
         titlename:"Transient throttle active"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"transoiltemp"
         defaultsymbol: ""
         titlename:"Transmission Oil T."
+        decimalpoints : "0"
+        maxvalue : "150"
+        stepsize : "25"
+        divisor : "1"
     }
     ListElement {
         sourcename:"triggerccounter"
         defaultsymbol: ""
         titlename:"Trigger Counter"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"triggersrsinceasthome"
         defaultsymbol: ""
         titlename:"Triggers since last home"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"TRIM"
         defaultsymbol: ""
         titlename:"Trim"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Trip"
         defaultsymbol: "km"
         titlename:"Trip meter"
+        decimalpoints : "1"
+        maxvalue : "1000"
+        stepsize : "100"
+        divisor : "1"
     }
     ListElement {
         sourcename:"turborpm"
         defaultsymbol: "rpm"
         titlename:"Turbo rpm"
+        decimalpoints : "0"
+        maxvalue : "100000"
+        stepsize : "10000"
+        divisor : "1"
     }
     ListElement {
         sourcename:"wastegatepress"
         defaultsymbol: "kPa"
         titlename:"Waste gate Pres."
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "100"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Watertemp"
         defaultsymbol: "°C"
         titlename:"ECT"
         supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "120"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"wheeldiff"
         defaultsymbol: ""
         titlename:"Wheel speed difference"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"wheelslip"
         defaultsymbol: "%"
         titlename:"Wheel slip"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
     }
     ListElement {
         sourcename:"wheelspdftleft"
         defaultsymbol: "kph"
         titlename:"Wheel speed left front"
+        decimalpoints : "0"
+        maxvalue : "320"
+        stepsize : "90"
+        divisor : "1"
     }
     ListElement {
         sourcename:"wheelspdftright"
         defaultsymbol: "kph"
         titlename:"Wheel speed right front"
+        decimalpoints : "0"
+        maxvalue : "320"
+        stepsize : "90"
+        divisor : "1"
     }
     ListElement {
         sourcename:"wheelspdrearleft"
         defaultsymbol: "kph"
         titlename:"Wheel speed left rear"
+        decimalpoints : "0"
+        maxvalue : "320"
+        stepsize : "90"
+        divisor : "1"
     }
     ListElement {
         sourcename:"wheelspdrearright"
         defaultsymbol: "kph"
         titlename:"Wheel speed right rear"
+        decimalpoints : "0"
+        maxvalue : "320"
+        stepsize : "90"
+        divisor : "1"
     }
     ListElement {
         sourcename:"BatteryV"
         defaultsymbol: "V"
         titlename:"Battery Voltage"
+        decimalpoints : "1"
+        maxvalue : "20"
+        stepsize : "5"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Intakepress"
         defaultsymbol: "kPa"
         titlename:"Boost (abs.)"
         supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "400"
+        stepsize : "100"
+        divisor : "1"
     }
     ListElement {
         sourcename:"Error"
         defaultsymbol: ""
         titlename:"Error"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
     }
 }
 

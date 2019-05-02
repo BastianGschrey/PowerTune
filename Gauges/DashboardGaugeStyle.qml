@@ -128,7 +128,6 @@ CircularGaugeStyle {
     needle: Canvas {
         implicitWidth: needleBaseWidth
         implicitHeight: needleLength
-
         property real xCenter: width / 2
         property real yCenter: height / 2
 
@@ -144,7 +143,7 @@ CircularGaugeStyle {
             ctx.lineTo(xCenter, yCenter - needleLength);
             ctx.lineTo(xCenter, 0);
             ctx.closePath();
-            ctx.fillStyle = Qt.rgba(0.66, 0, 0, 0.66);
+            ctx.fillStyle = "blue";
             ctx.fill();
 
             ctx.beginPath();
@@ -153,7 +152,7 @@ CircularGaugeStyle {
             ctx.lineTo(xCenter + needleTipWidth / 2, 0);
             ctx.lineTo(xCenter, 0);
             ctx.closePath();
-            ctx.fillStyle = Qt.lighter(Qt.rgba(0.66, 0, 0, 0.66));
+            ctx.fillStyle = "blue";
             ctx.fill();
         }
     }

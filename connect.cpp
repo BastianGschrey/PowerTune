@@ -124,7 +124,8 @@ void Connect::saveDashtoFile(const QString &filename,const QString &dashstring)
 {
     //      qDebug()<<"Filename" << filename + "txt";
     QStringList fields = dashstring.split(QRegExp("[\r\n]"));
-    QFile file( "/home/pi/UserDashboards/"+filename + ".txt" );
+   // QFile file( "/home/pi/UserDashboards/"+filename + ".txt" );
+    QFile file(filename + ".txt" );
     file.remove(); //remove file if it exists to avoid appending of existing file
     if ( file.open(QIODevice::ReadWrite) )
     {
@@ -168,7 +169,7 @@ void Connect::checkifraspberrypi()
 }
 void Connect::readavailabledashfiles()
 {
-    //QDir directory(""); //for Windows
+   // QDir directory(""); //for Windows
     QDir directory("/home/pi/UserDashboards");
     QStringList dashfiles = directory.entryList(QStringList() << "*.txt",QDir::Files);
     m_dashBoard->setdashfiles(dashfiles);
@@ -213,7 +214,15 @@ void Connect::readdashsetup3()
         while (!in.atEnd())
         {
             QString line = in.readLine();
-            QStringList list = line.split(QRegExp("\\,"));
+            QStringList list;
+            if (line.contains("gauge")){
+            list = line.split(QRegExp("\\,"));
+            }
+            else
+            {
+             line.prepend("Square gauge,");
+             list = line.split(QRegExp("\\,"));
+            }
             m_dashBoard->setdashsetup3(list);
         }
         inputFile.close();
@@ -232,7 +241,15 @@ void Connect::readdashsetup2()
         while (!in.atEnd())
         {
             QString line = in.readLine();
-            QStringList list = line.split(QRegExp("\\,"));
+            QStringList list;
+            if (line.contains("gauge")){
+            list = line.split(QRegExp("\\,"));
+            }
+            else
+            {
+             line.prepend("Square gauge,");
+             list = line.split(QRegExp("\\,"));
+            }
             m_dashBoard->setdashsetup2(list);
         }
         inputFile.close();
@@ -245,13 +262,22 @@ void Connect::readdashsetup1()
     //QString path = dashfilename1;//for Windows
     QString path = "/home/pi/UserDashboards/"+dashfilename1;
     QFile inputFile(path);
+    //QStringList list;
     if (inputFile.open(QIODevice::ReadOnly))
     {
         QTextStream in(&inputFile);
         while (!in.atEnd())
         {
             QString line = in.readLine();
-            QStringList list = line.split(QRegExp("\\,"));
+            QStringList list;
+            if (line.contains("gauge")){
+            list = line.split(QRegExp("\\,"));
+            }
+            else
+            {
+             line.prepend("Square gauge,");
+             list = line.split(QRegExp("\\,"));
+            }
             m_dashBoard->setdashsetup1(list);
         }
         inputFile.close();
