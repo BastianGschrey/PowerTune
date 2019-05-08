@@ -1515,6 +1515,7 @@ Quick1.TabView {
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
                     onClicked: {
+                                consoleText.clear();
                                 Wifiscanner.initializeWifiscanner();
                                 Wifiscanner.findActiveWirelesses();
                                 //btnScanNetwork.enabled =false;
@@ -1616,7 +1617,7 @@ Quick1.TabView {
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
                     Component.onCompleted: {
-                        consoleText.clear();
+
                         Wifiscanner.findActiveWirelesses();
                         Wifiscanner.initializeWifiscanner();
                     }
