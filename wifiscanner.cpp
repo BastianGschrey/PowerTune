@@ -78,17 +78,47 @@ void WifiScanner::finalize(int exitCode, QProcess::ExitStatus exitStatus)
     QStringList fields = outputline.split(QRegExp("[\n]"));
     //Parse List and delete all items without SSID in them
     qDebug() << "elements :" << fields.count();
-            foreach (const QString &str, fields) {
-                if (str.contains("SSID"))
-                {
-                    QString raw;
-                    raw = str;
-                    raw.replace(" ", "");
-                    raw.remove(QChar('"'), Qt::CaseInsensitive);
-                    //raw.remove(QChar('\'), Qt::CaseInsensitive);
-                    raw.remove(0,6);
-                    result += raw;
-                }
-            }
+    foreach (const QString &str, fields) {
+        if (str.contains("SSID"))
+        {
+            QString raw;
+            raw = str;
+            raw.replace(" ", "");
+            raw.remove(QChar('"'), Qt::CaseInsensitive);
+            //raw.remove(QChar('\'), Qt::CaseInsensitive);
+            raw.remove(0,6);
+            result += raw;
+        }
+    }
     m_dashboard->setwifi(result);
 }
+
+
+
+void WifiScanner::setwifi(const QString &country,const QString &ssid1,const QString &psk1,const QString &ssid2,const QString &psk2)
+{
+    QFile file("/etc/wpa_supplicant/wpa_supplicant.conf");
+    //QFile file("testme.txt" );
+    file.remove(); //remove file if it exists to avoid appending of existing file
+    if ( file.open(QIODevice::ReadWrite) )
+    {
+            QTextStream out(&file);
+
+            out     << "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" << "\r\n"
+                    << "update_config=1" << "\r\n"
+                    << "country="+country << "\r\n"
+                    << "#Primary WIFI" << "\r\n"
+                    << "network={" << "\r\n"
+                    << "ssid=" << "\"" << ssid1 << "\"" << "\r\n"
+                    << "psk=" << "\"" << psk1  << "\"" << "\r\n"
+                    << "}" << "\r\n"
+                    << "#Secondary WIFI" << "\r\n"
+                    << "network={" << "\r\n"
+                    << "ssid="<< "\"" << ssid2 << "\"" << "\r\n"
+                    << "psk=" << "\"" << psk2 << "\"" << "\r\n"
+                    << "}" << "\r\n"
+                    << endl;
+            file.close();
+        }
+    }
+

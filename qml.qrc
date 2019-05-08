@@ -71,5 +71,6 @@
         <file>Gauges/createPicture.js</file>
         <file>Gauges/Picture.qml</file>
         <file>graphics/slectImage.png</file>
+        <file>WifiCountryList.qml</file>
     </qresource>
 </RCC>

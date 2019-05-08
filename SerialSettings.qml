@@ -6,6 +6,7 @@ import QtQuick.VirtualKeyboard 2.1
 import QtSensors 5.0
 import QtQuick.Controls.Styles 1.4
 import QtMultimedia 5.8
+import "qrc:/Gauges/"
 
 Quick1.TabView {
     id: tabView
@@ -566,7 +567,7 @@ Quick1.TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.86F ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.87 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -1466,7 +1467,11 @@ Quick1.TabView {
                  scrollBar.increase();
                 }
             }
+            WifiCountryList{id: wificountrynames}
 
+            Settings {
+                property alias wificountryindex: wificountrycbx.currentIndex
+                      }
 
             Flickable {
                 id: flickable
@@ -1504,7 +1509,7 @@ Quick1.TabView {
                     font.pixelSize: extrarect.width / 55 }
                 Button {
                     id: btnScanNetwork
-                    visible: false
+                   // visible: false
                     text: "Scan WIFI"
                     width: extrarect.width / 5
                     height: extrarect.height /15
@@ -1514,12 +1519,23 @@ Quick1.TabView {
                                 //btnScanNetwork.enabled =false;
                         }
                 }
-                Text { text: "Wifi Networks :"
-                    visible: false
+                Text { text: "Wifi Country :"
+                    font.pixelSize: extrarect.width / 55 }
+                ComboBox {
+                    id: wificountrycbx
+                    //visible: false
+                    width: extrarect.width / 5
+                    height: extrarect.height /15
+                    font.pixelSize: extrarect.width / 55
+                    model: wificountrynames
+                    textRole: "name"
+                    property bool initialized: true
+                }
+                Text { text: "Wifi 1 :"
                     font.pixelSize: extrarect.width / 55 }
                 ComboBox {
                     id: wifilistbox
-                    visible: false
+                    //visible: false
                     width: extrarect.width / 5
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
@@ -1536,6 +1552,45 @@ Quick1.TabView {
                         hoverEnabled: wifilistbox.hoverEnabled
                     }
                 }
+                Text {
+
+                    text: "Password 1:"
+                    font.pixelSize: extrarect.width / 55 }
+                TextField {
+                    id: pw1
+                    placeholderText: qsTr("Passphrase")
+                    width: extrarect.width / 5
+                    font.pixelSize: extrarect.width / 55 }
+                Text { text: "Wifi 2 :"
+                    //visible: false
+                    font.pixelSize: extrarect.width / 55 }
+                ComboBox {
+                    id: wifilistbox2
+                    //visible: false
+                    width: extrarect.width / 5
+                    height: extrarect.height /15
+                    font.pixelSize: extrarect.width / 55
+                    model: Dashboard.wifi
+                    onCountChanged: btnScanNetwork.enabled =true;
+                    property bool initialized: false
+                    delegate: ItemDelegate {
+                        width: wifilistbox2.width
+                        text: wifilistbox2.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: wifilistbox2.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: wifilistbox2.font.family
+                        font.pixelSize: wifilistbox2.font.pixelSize
+                        highlighted: wifilistbox2.highlightedIndex === index
+                        hoverEnabled: wifilistbox2.hoverEnabled
+                    }
+                }
+                Text {
+                    text: "Password :"
+                    font.pixelSize: extrarect.width / 55 }
+                TextField {
+                    id: pw2
+                    placeholderText: qsTr("Passphrase")
+                    width: extrarect.width / 5
+                    font.pixelSize: extrarect.width / 55 }
                 Text { text: " "
                     font.pixelSize: extrarect.width / 55 }
                 Button {
@@ -1548,6 +1603,20 @@ Quick1.TabView {
                                 Connect.update();
                                 updateBtn.enabled =false;
                         }
+                }
+                Text { text: " "
+                    font.pixelSize: extrarect.width / 55 }
+                Button {
+                    id: applyWifiSettings
+                    text: "Apply WIFI Settings"
+                    width: extrarect.width / 5
+                    height: extrarect.height /15
+                    font.pixelSize: extrarect.width / 55
+                    onClicked: {
+                        Wifiscanner.setwifi(wificountrynames.get(wificountrycbx.currentIndex).countryname,wifilistbox.textAt(wifilistbox.currentIndex),pw1.text,wifilistbox2.textAt(wifilistbox2.currentIndex),pw2.text )
+                        GPS.closeConnection()
+                        Connect.reboot()
+                    }
                 }
             }
         }
