@@ -1496,7 +1496,7 @@ Quick1.TabView {
                 ScrollBar.vertical: ScrollBar { id:scrollBar
                 policy: ScrollBar.AlwaysOn}
             }
-
+/*
             Grid {
                 id:extragrid
                 anchors.top :parent.top
@@ -1553,7 +1553,7 @@ Quick1.TabView {
                                 updateBtn.enabled =false;
                         }
                 }
-            }
+            }*/
         }
     }
 ///////////////////////////////////////////////////////////////////////////////////////////
