@@ -28,14 +28,6 @@ WifiScanner::WifiScanner(DashBoard *dashboard, QObject *parent)
 void WifiScanner::initializeWifiscanner()
 {
 
-    /*
-    findTimer = new QTimer();
-    findTimer->setInterval(3000);
-    connect(findTimer,&QTimer::timeout,this,&WifiScanner::findActiveWirelesses);
-    findTimer->start();
-    foundCount = 0;
-    findActiveWirelesses();*/
-   // QProcess *process = new QProcess(this);
     process = new QProcess(this);  // create on the heap, so it doesn't go out of scope
     connect (process, SIGNAL(readyReadStandardOutput()), this, SLOT(readData()));  // connect process signals with your code
     connect(process, SIGNAL(finished(int , QProcess::ExitStatus )), this, SLOT(finalize(int , QProcess::ExitStatus)));

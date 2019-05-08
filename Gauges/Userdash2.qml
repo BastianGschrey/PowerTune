@@ -784,7 +784,8 @@ Item {
             switch (gaugelist.get(i).info) {
 
             case "Bar gauge": {
-                CreateBargaugeScript.createVerticalGauge(gaugelist.get(i).width,gaugelist.get(i).height,gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).minvalue,gaugelist.get(i).maxvalue,gaugelist.get(i).decplace,gaugelist.get(i).unit,gaugelist.get(i).id,gaugelist.get(i).warnvaluehigh,gaugelist.get(i).warnvaluelow);
+                //                                                     setWidth,              setHeight,              setX,               setY,             setMinValue,                setMaxValue,            setDecPlace,             setUnit,                   SetValueProperty,              SetWarnvaluehigh,              Setwarnvaluelow
+                CreateBargaugeScript.createVerticalGauge(gaugelist.get(i).width,gaugelist.get(i).height,gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).minvalue,gaugelist.get(i).maxvalue,gaugelist.get(i).decplace,gaugelist.get(i).unit,gaugelist.get(i).valuepropertymain,gaugelist.get(i).warnvaluehigh,gaugelist.get(i).warnvaluelow);
                 break;
             }
             case "Square gauge": {
