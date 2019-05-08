@@ -231,6 +231,7 @@ void Connect::readdashsetup3()
              line.prepend("Square gauge,");
              list = line.split(QRegExp("\\,"));
             }
+            list.removeAll(QString(""));
             m_dashBoard->setdashsetup3(list);
         }
         inputFile.close();
@@ -259,6 +260,7 @@ void Connect::readdashsetup2()
              line.prepend("Square gauge,");
              list = line.split(QRegExp("\\,"));
             }
+            list.removeAll(QString(""));
             m_dashBoard->setdashsetup2(list);
         }
         inputFile.close();
@@ -287,6 +289,7 @@ void Connect::readdashsetup1()
              line.prepend("Square gauge,");
              list = line.split(QRegExp("\\,"));
             }
+            list.removeAll(QString(""));
             m_dashBoard->setdashsetup1(list);
         }
         inputFile.close();
