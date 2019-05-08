@@ -638,10 +638,13 @@ Rectangle{
                     onReleased: {timer.running = false;}
                     onClicked: {maxvalue--}
                 }
-                TextField{text: maxvalue
-
+                TextField{
+                    id: maxText
+                    text: maxvalue
                     width: popupmenu.width /3.2
                     horizontalAlignment: Text.AlignHCenter
+                    onTextChanged: maxvalue = maxText.text
+                    font.pixelSize: 15
                 }
                 RoundButton{ text: "+"
                     width: popupmenu.width /3.2
