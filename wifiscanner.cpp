@@ -41,6 +41,7 @@ void WifiScanner::initializeWifiscanner()
     connect(process, SIGNAL(finished(int , QProcess::ExitStatus )), this, SLOT(finalize(int , QProcess::ExitStatus)));
     //process->start("sudo /sbin/iwlist wlan0 scan");  // start the process
     result.clear();
+    outputline.clear();
     process->start("sudo /sbin/iw wlan0 scan | egrep 'SSID'");
     process->waitForFinished();
 
@@ -74,6 +75,7 @@ void WifiScanner::readData()
 {
     QString line = process->readAllStandardOutput();        // read data from serial port
     outputline.append(line);
+    qDebug() << "Line :"<< line;
 }
 
 void WifiScanner::finalize(int exitCode, QProcess::ExitStatus exitStatus)
