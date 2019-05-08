@@ -9,6 +9,7 @@
 #include <QByteArray>
 
 QString outputline;
+QStringList result;
 
 WifiScanner::WifiScanner(QObject *parent)
     : QObject(parent)
@@ -38,7 +39,9 @@ void WifiScanner::initializeWifiscanner()
     process = new QProcess(this);  // create on the heap, so it doesn't go out of scope
     connect (process, SIGNAL(readyReadStandardOutput()), this, SLOT(readData()));  // connect process signals with your code
     connect(process, SIGNAL(finished(int , QProcess::ExitStatus )), this, SLOT(finalize(int , QProcess::ExitStatus)));
-    process->start("sudo iwlist wlan0 scan");  // start the process
+    //process->start("sudo iwlist wlan0 scan");  // start the process
+    result.clear();
+    process->start("sudo iw wlan0 scan | egrep 'SSID'");
     process->waitForFinished();
 
 }
@@ -80,9 +83,6 @@ void WifiScanner::finalize(int exitCode, QProcess::ExitStatus exitStatus)
     QStringList fields = outputline.split(QRegExp("[\n]"));
     //Parse List and delete all items without SSID in them
     qDebug() << "elements :" << fields.count();
-
-            QStringList result;
-            result.clear();
             foreach (const QString &str, fields) {
                 if (str.contains("SSID"))
                 {

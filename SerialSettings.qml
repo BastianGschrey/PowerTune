@@ -1461,7 +1461,7 @@ Quick1.TabView {
 /////////////////////////////////////////////////////////////////////////////////////////////
     Quick1.Tab {
         title: "Extra"// Tab index 9
-
+        Component.onCompleted: Wifiscanner.findActiveWirelesses();
         Rectangle{
             id: extrarect
             anchors.fill: parent
@@ -1506,7 +1506,7 @@ Quick1.TabView {
                 columns: 2
                 spacing: parent.width /150
 
-/*
+
                 Text { text: " "
                     font.pixelSize: extrarect.width / 55 }
                 Button {
@@ -1539,7 +1539,7 @@ Quick1.TabView {
                         highlighted: mainspeedsource.highlightedIndex === index
                         hoverEnabled: mainspeedsource.hoverEnabled
                     }
-                }*/
+                }
                 Text { text: " "
                     font.pixelSize: extrarect.width / 55 }
                 Button {
