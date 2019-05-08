@@ -29,6 +29,7 @@
 #include "gps.h"
 #include "udpreceiver.h"
 #include "arduino.h"
+#include "wifiscanner.h"
 #include <QDebug>
 #include <QTime>
 #include <QTimer>
@@ -65,7 +66,8 @@ Connect::Connect(QObject *parent) :
     m_sensors(Q_NULLPTR),
     m_datalogger(Q_NULLPTR),
     m_calculations(Q_NULLPTR),
-    m_arduino(Q_NULLPTR)
+    m_arduino(Q_NULLPTR),
+    m_wifiscanner(Q_NULLPTR)
 
 {
 
@@ -81,6 +83,8 @@ Connect::Connect(QObject *parent) :
     m_datalogger = new datalogger(m_dashBoard, this);
     m_calculations = new calculations(m_dashBoard, this);
     m_arduino = new Arduino(m_dashBoard, this);
+    m_wifiscanner = new WifiScanner(m_dashBoard, this);
+   // m_wifiscanner = new WifScanner(this);
     QString mPath = "/";
     // DIRECTORIES
     dirModel = new QFileSystemModel(this);
@@ -110,6 +114,8 @@ Connect::Connect(QObject *parent) :
     engine->rootContext()->setContextProperty("Filemodel", fileModel);
     engine->rootContext()->setContextProperty("Apexi", m_apexi);
     engine->rootContext()->setContextProperty("Arduino", m_arduino);
+    engine->rootContext()->setContextProperty("Wifiscanner", m_wifiscanner);
+
 
 }
 
@@ -124,8 +130,8 @@ void Connect::saveDashtoFile(const QString &filename,const QString &dashstring)
 {
     //      qDebug()<<"Filename" << filename + "txt";
     QStringList fields = dashstring.split(QRegExp("[\r\n]"));
-   // QFile file( "/home/pi/UserDashboards/"+filename + ".txt" );
-    QFile file(filename + ".txt" );
+    QFile file( "/home/pi/UserDashboards/"+filename + ".txt" );
+   // QFile file(filename + ".txt" );
     file.remove(); //remove file if it exists to avoid appending of existing file
     if ( file.open(QIODevice::ReadWrite) )
     {
@@ -1092,10 +1098,13 @@ void Connect::minicom()
 // this gets called whenever the process has something to say...
 void Connect::processOutput()
 {
+   // qDebug() << "processing";
     QProcess *p = dynamic_cast<QProcess *>( sender() );
 
-    if (p)
-        m_dashBoard->setSerialStat( p->readAllStandardOutput() );
+  //  if (p)
+        QString output = p->readAllStandardOutput();
+ //       qDebug() << "redirecting" << output;
+        m_dashBoard->setSerialStat(output);
 }
 
 void Connect::updatefinished(int exitCode, QProcess::ExitStatus exitStatus)

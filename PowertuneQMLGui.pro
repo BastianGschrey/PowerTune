@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     connect.cpp \
     calculations.cpp \
     udpreceiver.cpp \
-    arduino.cpp
+    arduino.cpp \
+    wifiscanner.cpp
 
 
 RESOURCES += qml.qrc
@@ -46,8 +47,8 @@ HEADERS += \
     connect.h \
     calculations.h \
     udpreceiver.h \
-    Gauges/squaregaugeracedash.h \
-    arduino.h
+    arduino.h \
+    wifiscanner.h
 
 
 FORMS +=

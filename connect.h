@@ -41,6 +41,7 @@ class GoPro;
 class GPS;
 class udpreceiver;
 class Arduino;
+class WifiScanner;
 
 
 class Connect : public QObject
@@ -108,6 +109,7 @@ private:
     QFileSystemModel *dirModel;
     QFileSystemModel *fileModel;
     Arduino *m_arduino;
+    WifiScanner *m_wifiscanner;
 
 
 

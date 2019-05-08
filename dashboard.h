@@ -204,7 +204,7 @@ class DashBoard : public QObject
 
 
     Q_PROPERTY(QStringList dashfiles READ dashfiles WRITE setdashfiles NOTIFY dashfilesChanged)
-Q_PROPERTY(QStringList backroundpictures READ backroundpictures WRITE setbackroundpictures NOTIFY backroundpicturesChanged)
+    Q_PROPERTY(QStringList backroundpictures READ backroundpictures WRITE setbackroundpictures NOTIFY backroundpicturesChanged)
 
     Q_PROPERTY(qreal accelpedpos READ accelpedpos WRITE setaccelpedpos NOTIFY accelpedposChanged)
     Q_PROPERTY(qreal airtempensor2 READ airtempensor2 WRITE setairtempensor2 NOTIFY airtempensor2Changed)
@@ -336,8 +336,9 @@ Q_PROPERTY(QStringList backroundpictures READ backroundpictures WRITE setbackrou
     Q_PROPERTY(int currentLap READ currentLap WRITE setcurrentLap NOTIFY currentLapChanged)
 
     Q_PROPERTY(int draggable READ draggable WRITE setdraggable NOTIFY draggableChanged)
+    Q_PROPERTY(QStringList wifi READ wifi WRITE setwifi NOTIFY wifiChanged)
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
-public:
+    public:
     DashBoard(QObject *parent = 0);
 
     // Odometer
@@ -674,7 +675,7 @@ public:
     void setbestlaptime(const QString &bestlaptime);
 
     Q_INVOKABLE void setdraggable(const int &draggable);
-
+    void setwifi(const QStringList&wifi);
     qreal Odo() const;
 
     //Tripmeter
@@ -1005,6 +1006,7 @@ public:
     QString bestlaptime() const;
 
     int draggable() const;
+    QStringList wifi() const;
 signals:
 
     //Odometer
@@ -1325,6 +1327,7 @@ signals:
     void LastlaptimeChanged(QString Lastlaptime);
     void bestlaptimeChanged(QString bestlaptime);
     void draggableChanged(int draggable);
+    void wifiChanged(QStringList wifi);
 private:
     // Odometer
 
@@ -1659,6 +1662,7 @@ private:
     QString m_bestlaptime;
 
     int m_draggable;
+    QStringList m_wifi;
 
 
 };

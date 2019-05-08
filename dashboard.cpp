@@ -306,6 +306,8 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_Lastlaptime("00:00.000")
     ,  m_bestlaptime("00:00.000")
     ,  m_draggable(0)
+    ,  m_wifi()
+    ,  m_SerialStat("Test")
 
 
 {
@@ -2572,7 +2574,13 @@ void DashBoard::setdraggable(const int &draggable)
     m_draggable = draggable;
     emit draggableChanged(draggable);
 }
-
+void DashBoard::setwifi(const QStringList &wifi)
+{
+    if (m_wifi== wifi)
+        return;
+    m_wifi = wifi;
+    emit wifiChanged(wifi);
+}
 
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
@@ -2897,6 +2905,8 @@ QString DashBoard::laptime() const {return m_laptime; }
 QString DashBoard::Lastlaptime() const {return m_Lastlaptime; }
 QString DashBoard::bestlaptime() const {return m_bestlaptime; }
 int DashBoard::draggable() const { return m_draggable; }
+
+QStringList DashBoard::wifi() const {return m_wifi; }
 
 
 

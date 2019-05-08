@@ -1,5 +1,5 @@
 import QtQuick 2.8
-import QtQuick.Controls 1.4
+import QtQuick.Controls 1.4 as Quick1
 import QtQuick.Controls 2.1
 import Qt.labs.settings 1.0
 import QtQuick.VirtualKeyboard 2.1
@@ -7,7 +7,7 @@ import QtSensors 5.0
 import QtQuick.Controls.Styles 1.4
 import QtMultimedia 5.8
 
-TabView {
+Quick1.TabView {
     id: tabView
     anchors.fill: parent
 
@@ -64,7 +64,7 @@ TabView {
         }
         frame: Rectangle { color: "steelblue" }
     }
-    Tab {
+    Quick1.Tab {
         title: "Main"
         anchors.fill: parent
         Rectangle {
@@ -566,7 +566,7 @@ TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.85 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.86 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -769,7 +769,7 @@ TabView {
             }
         }
     }
-    Tab {
+    Quick1.Tab {
         id :dash
         title: "Dash Select"
         Rectangle{
@@ -963,7 +963,7 @@ TabView {
         }
     }
 
-    Tab {
+    Quick1.Tab {
         title: "Sensehat" // Tab index 2
         //Sensehat Sensors
         Rectangle{
@@ -1038,7 +1038,7 @@ TabView {
 
         }
     }
-    Tab {
+    Quick1.Tab {
         title: "Warn / Gear" // Tab index 3
         //Warning Settings by Craig Shoesmith
         Rectangle{
@@ -1226,7 +1226,7 @@ TabView {
             }
         }
     }
-    Tab {
+    Quick1.Tab {
         title: "Speed" // Tab index 4
         Rectangle{
             id: calcs
@@ -1253,13 +1253,14 @@ TabView {
                     font.pixelSize: calcs.width / 55
                     text:  "100"
                     inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
-                    Component.onCompleted: Dashboard.setspeedpercent(speedpercent.text /100)
+                    Component.onCompleted: {Dashboard.setspeedpercent(speedpercent.text /100);
+                                            tabView.currentIndex = 6;}
                     onEditingFinished: Dashboard.setspeedpercent(speedpercent.text /100)
                 }
             }
         }
     }
-    Tab {
+    Quick1.Tab {
         id:regtab
         title: ""// Tab index 5
         visible: false
@@ -1285,7 +1286,7 @@ TabView {
 
 
     }
-    Tab {
+    Quick1.Tab {
         title: "RPM" //
         Rectangle{
             id: rpmSettings
@@ -1374,7 +1375,7 @@ TabView {
         }
     }
 
-    Tab {
+    Quick1.Tab {
         title: "Startup"// Tab index 8
 
         Rectangle{
@@ -1383,7 +1384,12 @@ TabView {
             color: "grey"
             Connections{
                 target: Dashboard
+                onSerialStatChanged : {consoleText.append(Dashboard.SerialStat);
+                 scrollBar.increase();
+                }
             }
+
+
             Item {
                 id: startupsettings
                 Settings {
@@ -1392,7 +1398,9 @@ TabView {
 
                 }
             }
+
             Grid {
+                id:startupgrid
                 anchors.top :parent.top
                 anchors.topMargin: parent.height / 20
                 anchors.right: parent.right
@@ -1425,9 +1433,9 @@ TabView {
                         highlighted: daemonselect.highlightedIndex === index
                         hoverEnabled: daemonselect.hoverEnabled
                     }
-                    Component.onCompleted: tabView.currentIndex = 0;
+                    //Component.onCompleted: tabView.currentIndex = 0;
                 }
-                Text { text: "Main Speed Source"
+                Text { text: "Main Speed Source :"
                     font.pixelSize: daemons.width / 55 }
                 ComboBox {
                     id: mainspeedsource
@@ -1450,4 +1458,103 @@ TabView {
             }
         }
     }
+/////////////////////////////////////////////////////////////////////////////////////////////
+    Quick1.Tab {
+        title: "Extra"// Tab index 9
+
+        Rectangle{
+            id: extrarect
+            anchors.fill: parent
+            color: "grey"
+            Connections{
+                target: Dashboard
+                onSerialStatChanged : {
+                    consoleText.append(Dashboard.SerialStat);
+                 scrollBar.increase();
+                }
+            }
+
+
+            Flickable {
+                id: flickable
+                width: 450
+                height: 400
+
+                TextArea.flickable: TextArea {
+                    id : consoleText
+                    wrapMode: TextArea.Wrap
+                    readOnly: true
+                    color: "green"
+                    font.pixelSize: 15
+                    background: Rectangle {
+                        height:flickable.height
+                        width: flickable.width
+                        color: "black"
+                    }
+                }
+
+                ScrollBar.vertical: ScrollBar { id:scrollBar
+                policy: ScrollBar.AlwaysOn}
+            }
+
+            Grid {
+                id:extragrid
+                anchors.top :parent.top
+                anchors.topMargin: parent.height / 20
+                anchors.right: parent.right
+                rows: 10
+                columns: 2
+                spacing: parent.width /150
+
+
+                Text { text: " "
+                    font.pixelSize: extrarect.width / 55 }
+                Button {
+                    id: btnScanNetwork
+                    text: "Scan WIFI"
+                    width: extrarect.width / 5
+                    height: extrarect.height /15
+                    font.pixelSize: extrarect.width / 55
+                    onClicked: {
+                                Wifiscanner.findActiveWirelesses();
+                                btnScanNetwork.enabled =false;
+                        }
+                }
+                Text { text: "Wifi Networks :"
+                    font.pixelSize: extrarect.width / 55 }
+                ComboBox {
+                    id: wifilistbox
+                    width: extrarect.width / 5
+                    height: extrarect.height /15
+                    font.pixelSize: extrarect.width / 55
+                    model: Dashboard.wifi
+                    onCountChanged: btnScanNetwork.enabled =true;
+                    property bool initialized: false
+                    delegate: ItemDelegate {
+                        width: mainspeedsource.width
+                        text: mainspeedsource.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: mainspeedsource.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: mainspeedsource.font.family
+                        font.pixelSize: mainspeedsource.font.pixelSize
+                        highlighted: mainspeedsource.highlightedIndex === index
+                        hoverEnabled: mainspeedsource.hoverEnabled
+                    }
+                }
+                Text { text: " "
+                    font.pixelSize: extrarect.width / 55 }
+                Button {
+                    id: updateBtn
+                    text: "Update"
+                    width: extrarect.width / 5
+                    height: extrarect.height /15
+                    font.pixelSize: extrarect.width / 55
+                    onClicked: {
+                                Connect.update();
+                                updateBtn.enabled =false;
+                        }
+                }
+            }
+        }
+    }
+///////////////////////////////////////////////////////////////////////////////////////////
 }
