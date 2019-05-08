@@ -128,10 +128,10 @@ Connect::~Connect()
 }
 void Connect::saveDashtoFile(const QString &filename,const QString &dashstring)
 {
-    //      qDebug()<<"Filename" << filename + "txt";
+   //      qDebug()<<"Filename" << filename + "txt";
     QStringList fields = dashstring.split(QRegExp("[\r\n]"));
     QFile file( "/home/pi/UserDashboards/"+filename + ".txt" );
-   // QFile file(filename + ".txt" );
+    //QFile file(filename + ".txt" );
     file.remove(); //remove file if it exists to avoid appending of existing file
     if ( file.open(QIODevice::ReadWrite) )
     {
@@ -175,7 +175,7 @@ void Connect::checkifraspberrypi()
 }
 void Connect::readavailabledashfiles()
 {
-   // QDir directory(""); //for Windows
+    //QDir directory(""); //for Windows
     QDir directory("/home/pi/UserDashboards");
     QStringList dashfiles = directory.entryList(QStringList() << "*.txt",QDir::Files);
     m_dashBoard->setdashfiles(dashfiles);

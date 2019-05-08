@@ -102,8 +102,9 @@ Item {
 
         onDashsetup1Changed:
         {
-            if (dashvalue.textAt(0) !== "\r") {
+            if (dashvalue.textAt(1) !== "") {
 
+                console.log("new item " +dashvalue.textAt(0) );
                 if (dashvalue.textAt(0) === "Bar gauge")
                 {
                     //  console.log("Create Bar Gauge")

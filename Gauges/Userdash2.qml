@@ -102,7 +102,7 @@ Item {
 
         onDashsetup2Changed:
         {
-            if (dashvalue.textAt(0) !== " ") {
+            if (dashvalue.textAt(1) !== "") {
                 //console.log("Dashseptup changed");
                 //console.log(dashvalue.textAt(0) );
                 if (dashvalue.textAt(0) === "Bar gauge")
