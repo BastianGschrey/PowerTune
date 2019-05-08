@@ -1453,7 +1453,7 @@ Quick1.TabView {
     }
 /////////////////////////////////////////////////////////////////////////////////////////////
     Quick1.Tab {
-        title: "Extra"// Tab index 9
+        title: "Network"// Tab index 9
 
         Rectangle{
             id: extrarect
@@ -1612,7 +1612,7 @@ Quick1.TabView {
 
                 Button {
                     id: applyWifiSettings
-                    text: "Apply WIFI Settings"
+                    text: "Apply Settings"
                     width: extrarect.width / 5
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
