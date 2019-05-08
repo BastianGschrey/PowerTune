@@ -102,7 +102,7 @@ Item {
 
         onDashsetup1Changed:
         {
-            if (dashvalue.textAt(0) !== " ") {
+            if (dashvalue.textAt(0) !== "\r\n") {
 
                 if (dashvalue.textAt(0) === "Bar gauge")
                 {
