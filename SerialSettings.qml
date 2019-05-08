@@ -1561,6 +1561,7 @@ Quick1.TabView {
                     placeholderText: qsTr("Passphrase")
                     width: extrarect.width / 5
                     font.pixelSize: extrarect.width / 55 }
+                /*
                 Text { text: "Wifi 2 :"
                     //visible: false
                     font.pixelSize: extrarect.width / 55 }
@@ -1590,7 +1591,7 @@ Quick1.TabView {
                     id: pw2
                     placeholderText: qsTr("Passphrase")
                     width: extrarect.width / 5
-                    font.pixelSize: extrarect.width / 55 }
+                    font.pixelSize: extrarect.width / 55 }*/
                 Text { text: " "
                     font.pixelSize: extrarect.width / 55 }
                 Button {
@@ -1614,8 +1615,8 @@ Quick1.TabView {
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
                     onClicked: {
-                        Wifiscanner.setwifi(wificountrynames.get(wificountrycbx.currentIndex).countryname,wifilistbox.textAt(wifilistbox.currentIndex),pw1.text,wifilistbox2.textAt(wifilistbox2.currentIndex),pw2.text );
-
+                        //Wifiscanner.setwifi(wificountrynames.get(wificountrycbx.currentIndex).countryname,wifilistbox.textAt(wifilistbox.currentIndex),pw1.text,wifilistbox2.textAt(wifilistbox2.currentIndex),pw2.text );
+                        Wifiscanner.setwifi(wificountrynames.get(wificountrycbx.currentIndex).countryname,wifilistbox.textAt(wifilistbox.currentIndex),pw1.text,"placeholder","placeholder" );
                         Connect.reboot();
                     }
                 }

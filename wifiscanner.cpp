@@ -112,11 +112,11 @@ void WifiScanner::setwifi(const QString &country,const QString &ssid1,const QStr
                     << "ssid=" << "\"" << ssid1 << "\"" << "\r\n"
                     << "psk=" << "\"" << psk1  << "\"" << "\r\n"
                     << "}" << "\r\n"
-                    << "#Secondary WIFI" << "\r\n"
-                    << "network={" << "\r\n"
-                    << "ssid="<< "\"" << ssid2 << "\"" << "\r\n"
-                    << "psk=" << "\"" << psk2 << "\"" << "\r\n"
-                    << "}" << "\r\n"
+                   // << "#Secondary WIFI" << "\r\n"
+                   // << "network={" << "\r\n"
+                   // << "ssid="<< "\"" << ssid2 << "\"" << "\r\n"
+                   // << "psk=" << "\"" << psk2 << "\"" << "\r\n"
+                   // << "}" << "\r\n"
                     << endl;
             file.close();
         }
