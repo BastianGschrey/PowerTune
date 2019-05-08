@@ -1382,20 +1382,12 @@ Quick1.TabView {
             id: daemons
             anchors.fill: parent
             color: "grey"
-            Connections{
-                target: Dashboard
-                onSerialStatChanged : {consoleText.append(Dashboard.SerialStat);
-                 scrollBar.increase();
-                }
-            }
-
 
             Item {
                 id: startupsettings
                 Settings {
                     property alias mainspeedsource : mainspeedsource.currentIndex
                     property alias daemonselect : daemonselect.currentIndex
-
                 }
             }
 
@@ -1470,6 +1462,7 @@ Quick1.TabView {
                 target: Dashboard
                 onSerialStatChanged : {
                     consoleText.append(Dashboard.SerialStat);
+                    console.log(Dashboard.SerialStat);
                  scrollBar.increase();
                 }
             }
@@ -1517,7 +1510,7 @@ Quick1.TabView {
                     font.pixelSize: extrarect.width / 55
                     onClicked: {
                                 Wifiscanner.findActiveWirelesses();
-                                btnScanNetwork.enabled =false;
+                                //btnScanNetwork.enabled =false;
                         }
                 }
                 Text { text: "Wifi Networks :"
