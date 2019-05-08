@@ -108,7 +108,7 @@ Item {
                 if (dashvalue.textAt(0) === "Bar gauge")
                 {
                     //  console.log("Create Bar Gauge")
-                    CreateBargaugeScript.createVerticalGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),dashvalue.textAt(8),dashvalue.textAt(9),dashvalue.textAt(10));
+                    CreateBargaugeScript.createVerticalGauge(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),dashvalue.textAt(8),dashvalue.textAt(9),dashvalue.textAt(10),dashvalue.textAt(11));
                 }
                 if (dashvalue.textAt(0) === "Round gauge")
                 {
@@ -690,6 +690,10 @@ Item {
         saveDashtofilestring = ""
         for (var i=0; i<userDash.children.length; ++i)
         {
+            if (userDash.children[i].information === "Bar gauge")
+            {
+                saveDashtofilestring += (userDash.children[i].information+","+userDash.children[i].width+","+userDash.children[i].height+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].minvalue+","+userDash.children[i].maxvalue+","+userDash.children[i].decimalpoints+","+userDash.children[i].gaugename+","+userDash.children[i].mainvaluename+","+userDash.children[i].warnvaluehigh+","+userDash.children[i].warnvaluelow+"\r\n");
+            }
             if (userDash.children[i].information === "Square gauge")
             {
                 saveDashtofilestring += (userDash.children[i].information+","+userDash.children[i].width+","+userDash.children[i].height+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].maxvalue+","+userDash.children[i].decimalpoints+","+userDash.children[i].mainunit+","+userDash.children[i].title+","+userDash.children[i].vertgaugevisible+","+userDash.children[i].horigaugevisible+","+userDash.children[i].secvaluevisible+","+"Dashboard"+","+userDash.children[i].mainvaluename+","+userDash.children[i].secvaluename+","+userDash.children[i].warnvaluehigh+","+userDash.children[i].warnvaluelow+","+userDash.children[i].framecolor+","+userDash.children[i].resetbackroundcolor+","+userDash.children[i].resettitlecolor+","+userDash.children[i].titletextcolor+","+userDash.children[i].textcolor+","+userDash.children[i].barcolor+","+userDash.children[i].titlefontsize+","+userDash.children[i].mainfontsize+"\r\n");

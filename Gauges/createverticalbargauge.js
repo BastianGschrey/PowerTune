@@ -20,13 +20,10 @@ function finishCreation(setWidth,setHeight,setX,setY,setMinValue,setMaxValue,set
                                            "minvalue": setMinValue,
                                            "gaugename": setUnit,
                                            "mainvaluename" : SetValueProperty,
-                                           //"mainvalue": Qt.binding(function(){return Dashboard[SetValueProperty]}),
                                            "gaugevalue": Qt.binding(function(){return Dashboard[SetValueProperty]}),
                                            "x": setX, "y": setY});
-        //console.log(Qt.binding(function(){return SetValueObject[SetValueProperty].toFixed(setDecPlace) +  " " + setUnit}));
         if (gauge === null) {
             // Error Handling
-            //console.log("Error creating object");
         }
     } else if (component.status === Component.Error) {
         // Error Handling

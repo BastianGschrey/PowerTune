@@ -103,8 +103,7 @@ Item {
         onDashsetup1Changed:
         {
             if (dashvalue.textAt(0) !== "") {
-                //console.log("Dashseptup changed");
-                //console.log(dashvalue.textAt(0) );
+
                 if (dashvalue.textAt(0) === "Bar gauge")
                 {
                     //  console.log("Create Bar Gauge")
@@ -692,8 +691,7 @@ Item {
         {
             if (userDash.children[i].information === "Bar gauge")
             {
-                //et                                                                                Width,                     setHeight,                      setX,s                       etY,                     setMinValue,                      setMaxValue,                          setDecPlace,s                            etUnit,        SetValueProperty,             SetWarnvaluehigh,              Setwarnvaluelow)
-                saveDashtofilestring += (userDash.children[i].information+","+userDash.children[i].width+","+userDash.children[i].height+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].minvalue+","+userDash.children[i].maxvalue+","+userDash.children[i].decimalpoints+","+userDash.children[i].mainunit+","+userDash.children[i].mainvaluename+","+userDash.children[i].warnvaluehigh+","+userDash.children[i].warnvaluelow+"\r\n");
+                saveDashtofilestring += (userDash.children[i].information+","+userDash.children[i].width+","+userDash.children[i].height+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].minvalue+","+userDash.children[i].maxvalue+","+userDash.children[i].decimalpoints+","+userDash.children[i].gaugename+","+userDash.children[i].mainvaluename+","+userDash.children[i].warnvaluehigh+","+userDash.children[i].warnvaluelow+"\r\n");
             }
             if (userDash.children[i].information === "Square gauge")
             {
