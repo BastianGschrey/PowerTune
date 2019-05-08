@@ -48,6 +48,7 @@ Rectangle {
         minimumValue: minvalue
         maximumValue: maxvalue
         tickmarkStepSize : maximumValue / 4
+        font.pixelSize: 15
 
         //value: Dashboard.MAP
         Behavior on value {
