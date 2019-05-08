@@ -1028,20 +1028,14 @@ void Connect::closeConnection()
 
 void Connect::update()
 {
-    /*
-    m_dashBoard->setSerialStat("Update started");
-    QProcess *process = new QProcess(this);
-    connect(process , SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(updatefinished(int, QProcess::ExitStatus)));
-    process->start("/home/pi/updatePowerTune.sh");
-    process->waitForFinished(6000000); // 10 minutes time before timeout
-    */
+
     QProcess *p = new QProcess( this );
 
     if (p)
     {
         p->setEnvironment( QProcess::systemEnvironment() );
         p->setProcessChannelMode( QProcess::MergedChannels );
-        p->start("/home/pi/updatePowerTune.sh", QStringList() << "echo" << "hye" );
+        p->start("/home/pi/src/updatePowerTune.sh", QStringList() << "echo" << "hye" );
         p->waitForStarted();
 
         connect( p, SIGNAL(readyReadStandardOutput()), this, SLOT(processOutput()) );

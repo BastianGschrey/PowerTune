@@ -1496,7 +1496,7 @@ Quick1.TabView {
                 ScrollBar.vertical: ScrollBar { id:scrollBar
                 policy: ScrollBar.AlwaysOn}
             }
-/*
+
             Grid {
                 id:extragrid
                 anchors.top :parent.top
@@ -1506,7 +1506,7 @@ Quick1.TabView {
                 columns: 2
                 spacing: parent.width /150
 
-
+/*
                 Text { text: " "
                     font.pixelSize: extrarect.width / 55 }
                 Button {
@@ -1539,7 +1539,7 @@ Quick1.TabView {
                         highlighted: mainspeedsource.highlightedIndex === index
                         hoverEnabled: mainspeedsource.hoverEnabled
                     }
-                }
+                }*/
                 Text { text: " "
                     font.pixelSize: extrarect.width / 55 }
                 Button {
@@ -1553,7 +1553,7 @@ Quick1.TabView {
                                 updateBtn.enabled =false;
                         }
                 }
-            }*/
+            }
         }
     }
 ///////////////////////////////////////////////////////////////////////////////////////////
