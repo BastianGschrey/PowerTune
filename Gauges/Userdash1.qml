@@ -108,7 +108,7 @@ Item {
                 if (dashvalue.textAt(0) === "Bar gauge")
                 {
                     //  console.log("Create Bar Gauge")
-                    CreateBargaugeScript.createVerticalGauge(dashvalue.textAt(0),dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),dashvalue.textAt(8),dashvalue.textAt(9),dashvalue.textAt(10));
+                    CreateBargaugeScript.createVerticalGauge(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),dashvalue.textAt(8),dashvalue.textAt(9),dashvalue.textAt(10));
                 }
                 if (dashvalue.textAt(0) === "Round gauge")
                 {
