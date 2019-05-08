@@ -36,7 +36,7 @@ if nc -zw5 www.github.com 443; then
 # Compile PowerTune
 		cd /home/pi/build
 		echo "Compiling PowerTune ... go grab a Coffee"
-		qmake /home/pi/src
+                /opt/QT5/bin/qmake /home/pi/src
 		make -j4
 # Check if the PowerTune executable exists in the build folder
 		if [ -f /home/pi/build/PowertuneQMLGui ];then
@@ -44,6 +44,7 @@ if nc -zw5 www.github.com 443; then
 		sudo reboot
 		else
 		echo "Something went wrong"
+		sudo rm -r /home/pi/build
 		fi
 else
 echo "Update not possible , Github not reachable check your connection "
