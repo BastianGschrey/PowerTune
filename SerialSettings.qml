@@ -1524,13 +1524,13 @@ Quick1.TabView {
                     onCountChanged: btnScanNetwork.enabled =true;
                     property bool initialized: false
                     delegate: ItemDelegate {
-                        width: mainspeedsource.width
-                        text: mainspeedsource.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                        font.weight: mainspeedsource.currentIndex === index ? Font.DemiBold : Font.Normal
-                        font.family: mainspeedsource.font.family
-                        font.pixelSize: mainspeedsource.font.pixelSize
-                        highlighted: mainspeedsource.highlightedIndex === index
-                        hoverEnabled: mainspeedsource.hoverEnabled
+                        width: wifilistbox.width
+                        text: wifilistbox.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: wifilistbox.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.family: wifilistbox.font.family
+                        font.pixelSize: wifilistbox.font.pixelSize
+                        highlighted: wifilistbox.highlightedIndex === index
+                        hoverEnabled: wifilistbox.hoverEnabled
                     }
                 }
                 Text { text: " "
