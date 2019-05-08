@@ -20,7 +20,7 @@ WifiScanner::WifiScanner(QObject *parent)
 
 WifiScanner::WifiScanner(DashBoard *dashboard, QObject *parent)
     : QObject(parent)
-     , m_dashboard(dashboard)
+    , m_dashboard(dashboard)
 {
 }
 
@@ -40,8 +40,23 @@ void WifiScanner::initializeWifiscanner()
 
 }
 
+void WifiScanner::checkWifiIP()
+{
+    qDebug()<< " CHECK IP ";
+    QString prog = "sudo /sbin/iwconfig";
+    QStringList arguments;
+    arguments << "wlan0 "<<"egrep 'SSID'";
+    QProcess proc;
+    proc.start(prog , arguments);
+    proc.waitForFinished();
+    QString output = proc.readAllStandardOutput();
+    //m_dashBoard->setSerialStat("Rebooting");
+
+}
 void WifiScanner::findActiveWirelesses()
 {
+    // m_dashboard->setSerialStat("Hello");
+    /*
     QNetworkConfigurationManager ncm;
     netcfgList = ncm.allConfigurations();
     wifilist.clear();
@@ -53,15 +68,23 @@ void WifiScanner::findActiveWirelesses()
             if(x.name() == "")
                 wifilist << "Unknown(Other Network)";
             else
-               wifilist << x.name();
+                wifilist << x.name();
 
-           //  qDebug() << "Type" <<x.type();
-           //  qDebug() << "Network found :"<<x.name();
-           //  qDebug() << "State :"<<x.state();
+            //  qDebug() << "Type" <<x.type();
+            //  qDebug() << "Network found :"<<x.name();
+            //  qDebug() << "State :"<<x.state();
         }
-    }
-    m_dashboard->setwifi(wifilist);
-    qDebug() << wifilist ;
+    }*/
+    QString prog = "sudo /sbin/iwconfig";
+    QStringList arguments;
+    arguments << "wlan0 "<<"egrep 'SSID'";
+    QProcess proc;
+    proc.start(prog , arguments);
+    proc.waitForFinished();
+    QString output = proc.readAllStandardOutput();
+    m_dashboard->setSerialStat(output);
+    //m_dashBoard->setSerialStat("Rebooting");
+   // qDebug() << output ;
 }
 
 void WifiScanner::readData()
@@ -102,23 +125,23 @@ void WifiScanner::setwifi(const QString &country,const QString &ssid1,const QStr
     file.remove(); //remove file if it exists to avoid appending of existing file
     if ( file.open(QIODevice::ReadWrite) )
     {
-            QTextStream out(&file);
+        QTextStream out(&file);
 
-            out     << "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" << "\r\n"
-                    << "update_config=1" << "\r\n"
-                    << "country="+country << "\r\n"
-                    << "#Primary WIFI" << "\r\n"
-                    << "network={" << "\r\n"
-                    << "ssid=" << "\"" << ssid1 << "\"" << "\r\n"
-                    << "psk=" << "\"" << psk1  << "\"" << "\r\n"
-                    << "}" << "\r\n"
+        out     << "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" << "\r\n"
+                << "update_config=1" << "\r\n"
+                << "country="+country << "\r\n"
+                << "#Primary WIFI" << "\r\n"
+                << "network={" << "\r\n"
+                << "ssid=" << "\"" << ssid1 << "\"" << "\r\n"
+                << "psk=" << "\"" << psk1  << "\"" << "\r\n"
+                << "}" << "\r\n"
                    // << "#Secondary WIFI" << "\r\n"
                    // << "network={" << "\r\n"
                    // << "ssid="<< "\"" << ssid2 << "\"" << "\r\n"
                    // << "psk=" << "\"" << psk2 << "\"" << "\r\n"
                    // << "}" << "\r\n"
-                    << endl;
-            file.close();
-        }
+                << endl;
+        file.close();
     }
+}
 

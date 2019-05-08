@@ -29,6 +29,7 @@ public:
     QList<QNetworkConfiguration> netcfgList;
     Q_INVOKABLE void initializeWifiscanner();
     Q_INVOKABLE void setwifi(const QString &country,const QString &ssid1,const QString &psk1,const QString &ssid2,const QString &psk2);
+    Q_INVOKABLE void checkWifiIP();
 
 public slots:
     void findActiveWirelesses();

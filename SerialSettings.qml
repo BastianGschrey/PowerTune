@@ -1454,7 +1454,10 @@ Quick1.TabView {
 /////////////////////////////////////////////////////////////////////////////////////////////
     Quick1.Tab {
         title: "Extra"// Tab index 9
-        Component.onCompleted: Wifiscanner.initializeWifiscanner();
+        Component.onCompleted: {
+            Wifiscanner.findActiveWirelesses();
+            Wifiscanner.initializeWifiscanner();
+        }
         Rectangle{
             id: extrarect
             anchors.fill: parent
@@ -1516,6 +1519,7 @@ Quick1.TabView {
                     font.pixelSize: extrarect.width / 55
                     onClicked: {
                                 Wifiscanner.initializeWifiscanner();
+                        Wifiscanner.findActiveWirelesses();
                                 //btnScanNetwork.enabled =false;
                         }
                 }
