@@ -1613,9 +1613,9 @@ Quick1.TabView {
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
                     onClicked: {
-                        Wifiscanner.setwifi(wificountrynames.get(wificountrycbx.currentIndex).countryname,wifilistbox.textAt(wifilistbox.currentIndex),pw1.text,wifilistbox2.textAt(wifilistbox2.currentIndex),pw2.text )
-                        GPS.closeConnection()
-                        Connect.reboot()
+                        Wifiscanner.setwifi(wificountrynames.get(wificountrycbx.currentIndex).countryname,wifilistbox.textAt(wifilistbox.currentIndex),pw1.text,wifilistbox2.textAt(wifilistbox2.currentIndex),pw2.text );
+
+                        Connect.reboot();
                     }
                 }
             }
