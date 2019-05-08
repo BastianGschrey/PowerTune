@@ -24,7 +24,7 @@ Rectangle {
                   property alias title: titleText.text
                   property alias type: gauge.value
                   property alias gaugetype: gauge.orientation
-                  property string information: "Square gauge"
+                  property string information: "Bar gauge"
 
                  // width: 260
                  //   height: 85
