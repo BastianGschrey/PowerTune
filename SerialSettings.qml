@@ -566,7 +566,7 @@ Quick1.TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.86 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.86F ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
