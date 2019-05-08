@@ -567,7 +567,7 @@ Quick1.TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.87 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.87a ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -1454,10 +1454,7 @@ Quick1.TabView {
 /////////////////////////////////////////////////////////////////////////////////////////////
     Quick1.Tab {
         title: "Extra"// Tab index 9
-        Component.onCompleted: {
-            Wifiscanner.findActiveWirelesses();
-            Wifiscanner.initializeWifiscanner();
-        }
+
         Rectangle{
             id: extrarect
             anchors.fill: parent
@@ -1466,7 +1463,7 @@ Quick1.TabView {
                 target: Dashboard
                 onSerialStatChanged : {
                     consoleText.append(Dashboard.SerialStat);
-                    console.log(Dashboard.SerialStat);
+                    //console.log(Dashboard.SerialStat);
                  scrollBar.increase();
                 }
             }
@@ -1519,7 +1516,7 @@ Quick1.TabView {
                     font.pixelSize: extrarect.width / 55
                     onClicked: {
                                 Wifiscanner.initializeWifiscanner();
-                        Wifiscanner.findActiveWirelesses();
+                                Wifiscanner.findActiveWirelesses();
                                 //btnScanNetwork.enabled =false;
                         }
                 }
@@ -1618,6 +1615,11 @@ Quick1.TabView {
                     width: extrarect.width / 5
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
+                    Component.onCompleted: {
+                        consoleText.clear();
+                        Wifiscanner.findActiveWirelesses();
+                        Wifiscanner.initializeWifiscanner();
+                    }
                     onClicked: {
                         //Wifiscanner.setwifi(wificountrynames.get(wificountrycbx.currentIndex).countryname,wifilistbox.textAt(wifilistbox.currentIndex),pw1.text,wifilistbox2.textAt(wifilistbox2.currentIndex),pw2.text );
                         Wifiscanner.setwifi(wificountrynames.get(wificountrycbx.currentIndex).countryname,wifilistbox.textAt(wifilistbox.currentIndex),pw1.text,"placeholder","placeholder" );

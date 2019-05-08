@@ -45,8 +45,9 @@ void WifiScanner::checkWifiIP()
     qDebug()<< " CHECK IP ";
     QString prog = "sudo /sbin/iwconfig";
     QStringList arguments;
-    arguments << "wlan0 "<<"egrep 'SSID'";
+    arguments << "wlan0"<<"egrep 'SSID'";
     QProcess proc;
+    qDebug() << "calling " << prog << arguments;
     proc.start(prog , arguments);
     proc.waitForFinished();
     QString output = proc.readAllStandardOutput();
@@ -55,7 +56,7 @@ void WifiScanner::checkWifiIP()
 }
 void WifiScanner::findActiveWirelesses()
 {
-    // m_dashboard->setSerialStat("Hello");
+    m_dashboard->setSerialStat("Currently connected WIFI:");
     /*
     QNetworkConfigurationManager ncm;
     netcfgList = ncm.allConfigurations();
@@ -75,23 +76,29 @@ void WifiScanner::findActiveWirelesses()
             //  qDebug() << "State :"<<x.state();
         }
     }*/
-    QString prog = "sudo /sbin/iwconfig";
-    QStringList arguments;
-    arguments << "wlan0 "<<"egrep 'SSID'";
+
     QProcess proc;
-    proc.start(prog , arguments);
+    proc.start("sh", QStringList()<<"-c"<<"iwconfig 2>&1 | grep ESSID");
     proc.waitForFinished();
     QString output = proc.readAllStandardOutput();
     m_dashboard->setSerialStat(output);
     //m_dashBoard->setSerialStat("Rebooting");
    // qDebug() << output ;
+    m_dashboard->setSerialStat("IP Adress:");
+    QProcess proc2;
+    proc2.start("sh", QStringList()<<"-c"<<"ifconfig wlan0 2>&1 | grep inet");
+    proc2.waitForFinished();
+    QString output2 = proc2.readAllStandardOutput();
+    m_dashboard->setSerialStat(output2);
+
+
 }
 
 void WifiScanner::readData()
 {
     QString line = process->readAllStandardOutput();        // read data from serial port
     outputline.append(line);
-    qDebug() << "Line :"<< line;
+   // qDebug() << "Line :"<< line;
 }
 
 void WifiScanner::finalize(int exitCode, QProcess::ExitStatus exitStatus)
@@ -100,7 +107,7 @@ void WifiScanner::finalize(int exitCode, QProcess::ExitStatus exitStatus)
     int i =0;
     QStringList fields = outputline.split(QRegExp("[\n]"));
     //Parse List and delete all items without SSID in them
-    qDebug() << "elements :" << fields.count();
+    //qDebug() << "elements :" << fields.count();
     foreach (const QString &str, fields) {
         if (str.contains("SSID"))
         {
