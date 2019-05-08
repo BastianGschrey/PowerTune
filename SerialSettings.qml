@@ -1606,6 +1606,7 @@ Quick1.TabView {
                 }
                 Text { text: " "
                     font.pixelSize: extrarect.width / 55 }
+                /*
                 Button {
                     id: applyWifiSettings
                     text: "Apply WIFI Settings"
@@ -1617,7 +1618,7 @@ Quick1.TabView {
 
                         Connect.reboot();
                     }
-                }
+                }*/
             }
         }
     }
