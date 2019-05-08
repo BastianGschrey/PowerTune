@@ -1504,6 +1504,7 @@ Quick1.TabView {
                     font.pixelSize: extrarect.width / 55 }
                 Button {
                     id: btnScanNetwork
+                    visible: false
                     text: "Scan WIFI"
                     width: extrarect.width / 5
                     height: extrarect.height /15
@@ -1514,9 +1515,11 @@ Quick1.TabView {
                         }
                 }
                 Text { text: "Wifi Networks :"
+                    visible: false
                     font.pixelSize: extrarect.width / 55 }
                 ComboBox {
                     id: wifilistbox
+                    visible: false
                     width: extrarect.width / 5
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
