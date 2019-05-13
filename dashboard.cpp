@@ -308,6 +308,17 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_draggable(0)
     ,  m_wifi()
     ,  m_SerialStat("Test")
+    ,  m_Analog1(0)
+    ,  m_Analog2(0)
+    ,  m_Analog3(0)
+    ,  m_Analog4(0)
+    ,  m_Analog5(0)
+    ,  m_Analog6(0)
+    ,  m_Analog7(0)
+    ,  m_Analog8(0)
+    ,  m_Analog9(0)
+    ,  m_Analog10(0)
+
 
 
 {
@@ -2582,6 +2593,79 @@ void DashBoard::setwifi(const QStringList &wifi)
     emit wifiChanged(wifi);
 }
 
+void DashBoard::setAnalog1(const qreal &Analog1)
+{
+    if (m_Analog1== Analog1)
+        return;
+    m_Analog1 = Analog1;
+    emit Analog1Changed(Analog1);
+}
+void DashBoard::setAnalog2(const qreal &Analog2)
+{
+    if (m_Analog2 == Analog2)
+        return;
+    m_Analog2 = Analog2;
+    emit Analog2Changed(Analog2);
+}
+void DashBoard::setAnalog3(const qreal &Analog3)
+{
+    if (m_Analog3 == Analog3)
+        return;
+    m_Analog3 = Analog3;
+    emit Analog3Changed(Analog3);
+}
+void DashBoard::setAnalog4(const qreal &Analog4)
+{
+    if (m_Analog4 == Analog4)
+        return;
+    m_Analog4 = Analog4;
+    emit Analog4Changed(Analog4);
+}
+void DashBoard::setAnalog5(const qreal &Analog5)
+{
+    if (m_Analog5 == Analog5)
+        return;
+    m_Analog5 = Analog5;
+    emit Analog5Changed(Analog5);
+}
+void DashBoard::setAnalog6(const qreal &Analog6)
+{
+    if (m_Analog6 == Analog6)
+        return;
+    m_Analog6 = Analog6;
+    emit Analog6Changed(Analog6);
+}
+void DashBoard::setAnalog7(const qreal &Analog7)
+{
+    if (m_Analog7 == Analog7)
+        return;
+    m_Analog7 = Analog7;
+    emit Analog7Changed(Analog7);
+}
+void DashBoard::setAnalog8(const qreal &Analog8)
+{
+    if (m_Analog8 == Analog8)
+        return;
+    m_Analog8 = Analog8;
+    emit Analog8Changed(Analog8);
+}
+void DashBoard::setAnalog9(const qreal &Analog9)
+{
+    if (m_Analog9 == Analog9)
+        return;
+    m_Analog9 = Analog9;
+    emit Analog9Changed(Analog9);
+}
+void DashBoard::setAnalog10(const qreal &Analog10)
+{
+    if (m_Analog10 == Analog10)
+        return;
+    m_Analog10 = Analog10;
+    emit Analog10Changed(Analog10);
+}
+
+
+
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
 
@@ -2908,7 +2992,16 @@ int DashBoard::draggable() const { return m_draggable; }
 
 QStringList DashBoard::wifi() const {return m_wifi; }
 
-
+qreal DashBoard::Analog1() const {return m_Analog1; }
+qreal DashBoard::Analog2() const {return m_Analog2; }
+qreal DashBoard::Analog3() const {return m_Analog3; }
+qreal DashBoard::Analog4() const {return m_Analog4; }
+qreal DashBoard::Analog5() const {return m_Analog5; }
+qreal DashBoard::Analog6() const {return m_Analog6; }
+qreal DashBoard::Analog7() const {return m_Analog7; }
+qreal DashBoard::Analog8() const {return m_Analog8; }
+qreal DashBoard::Analog9() const {return m_Analog9; }
+qreal DashBoard::Analog10() const {return m_Analog10; }
 
 // Sensor Strings
 

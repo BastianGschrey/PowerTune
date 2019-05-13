@@ -337,6 +337,18 @@ class DashBoard : public QObject
 
     Q_PROPERTY(int draggable READ draggable WRITE setdraggable NOTIFY draggableChanged)
     Q_PROPERTY(QStringList wifi READ wifi WRITE setwifi NOTIFY wifiChanged)
+
+    Q_PROPERTY(qreal Analog1 READ Analog1 WRITE setAnalog1 NOTIFY Analog1Changed)
+    Q_PROPERTY(qreal Analog2 READ Analog2 WRITE setAnalog2 NOTIFY Analog2Changed)
+    Q_PROPERTY(qreal Analog3 READ Analog3 WRITE setAnalog3 NOTIFY Analog3Changed)
+    Q_PROPERTY(qreal Analog4 READ Analog4 WRITE setAnalog4 NOTIFY Analog4Changed)
+    Q_PROPERTY(qreal Analog5 READ Analog5 WRITE setAnalog5 NOTIFY Analog5Changed)
+    Q_PROPERTY(qreal Analog6 READ Analog6 WRITE setAnalog6 NOTIFY Analog6Changed)
+    Q_PROPERTY(qreal Analog7 READ Analog7 WRITE setAnalog7 NOTIFY Analog7Changed)
+    Q_PROPERTY(qreal Analog8 READ Analog8 WRITE setAnalog8 NOTIFY Analog8Changed)
+    Q_PROPERTY(qreal Analog9 READ Analog9 WRITE setAnalog9 NOTIFY Analog9Changed)
+    Q_PROPERTY(qreal Analog10 READ Analog10 WRITE setAnalog10 NOTIFY Analog10Changed)
+
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
     public:
     DashBoard(QObject *parent = 0);
@@ -676,6 +688,24 @@ class DashBoard : public QObject
 
     Q_INVOKABLE void setdraggable(const int &draggable);
     void setwifi(const QStringList&wifi);
+
+
+    void setAnalog1(const qreal &Analog1);
+    void setAnalog2(const qreal &Analog2);
+    void setAnalog3(const qreal &Analog3);
+    void setAnalog4(const qreal &Analog4);
+    void setAnalog5(const qreal &Analog5);
+    void setAnalog6(const qreal &Analog6);
+    void setAnalog7(const qreal &Analog7);
+    void setAnalog8(const qreal &Analog8);
+    void setAnalog9(const qreal &Analog9);
+    void setAnalog10(const qreal &Analog10);
+
+
+
+
+
+
     qreal Odo() const;
 
     //Tripmeter
@@ -1007,6 +1037,18 @@ class DashBoard : public QObject
 
     int draggable() const;
     QStringList wifi() const;
+
+    qreal Analog1() const;
+    qreal Analog2() const;
+    qreal Analog3() const;
+    qreal Analog4() const;
+    qreal Analog5() const;
+    qreal Analog6() const;
+    qreal Analog7() const;
+    qreal Analog8() const;
+    qreal Analog9() const;
+    qreal Analog10() const;
+
 signals:
 
     //Odometer
@@ -1328,6 +1370,19 @@ signals:
     void bestlaptimeChanged(QString bestlaptime);
     void draggableChanged(int draggable);
     void wifiChanged(QStringList wifi);
+
+    void Analog1Changed(qreal Analog1);
+    void Analog2Changed(qreal Analog2);
+    void Analog3Changed(qreal Analog3);
+    void Analog4Changed(qreal Analog4);
+    void Analog5Changed(qreal Analog5);
+    void Analog6Changed(qreal Analog6);
+    void Analog7Changed(qreal Analog7);
+    void Analog8Changed(qreal Analog8);
+    void Analog9Changed(qreal Analog9);
+    void Analog10Changed(qreal Analog10);
+
+
 private:
     // Odometer
 
@@ -1663,6 +1718,18 @@ private:
 
     int m_draggable;
     QStringList m_wifi;
+
+    qreal m_Analog1;
+    qreal m_Analog2;
+    qreal m_Analog3;
+    qreal m_Analog4;
+    qreal m_Analog5;
+    qreal m_Analog6;
+    qreal m_Analog7;
+    qreal m_Analog8;
+    qreal m_Analog9;
+    qreal m_Analog10;
+
 
 
 };
