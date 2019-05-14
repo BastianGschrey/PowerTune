@@ -1416,7 +1416,7 @@ Quick1.TabView {
                     width: daemons.width / 5
                     height: daemons.height /15
                     font.pixelSize: daemons.width / 55
-                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","Apexi","OBD2"]
+                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","Apexi","OBD2","Hondata"]
                     delegate: ItemDelegate {
                         width: daemonselect.width
                         text: daemonselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
