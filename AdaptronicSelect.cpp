@@ -119,24 +119,24 @@ void AdaptronicSelect::decodeAdaptronic(QModbusDataUnit unit)
     m_dashboard->setrpm(unit.value(0));
     m_dashboard->setMAP(unit.value(1));
     m_dashboard->setIntaketemp(unit.value(2));
-    m_dashboard->setWatertemp(unit.value(3));
-    m_dashboard->setAUXT(unit.value(4));
-    m_dashboard->setauxcalc1(unit.value(5)/2570.00);
-    m_dashboard->setKnock(unit.value(6)/256);
-    m_dashboard->setTPS(unit.value(7));
-    m_dashboard->setIdleValue(unit.value(8));
-    m_dashboard->setBatteryV(unit.value(9)/10);
-    m_dashboard->setMVSS(unit.value(10));
-    m_dashboard->setSVSS(unit.value(11));
-    m_dashboard->setInj1((unit.value(12)/3)*2);
-    m_dashboard->setInj2((unit.value(13)/3)*2);
-    m_dashboard->setInj3((unit.value(14)/3)*2);
-    m_dashboard->setInj4((unit.value(15)/3)*2);
-    m_dashboard->setIgn1((unit.value(16)/5));
-    m_dashboard->setIgn2((unit.value(17)/5));
-    m_dashboard->setIgn3((unit.value(18)/5));
-    m_dashboard->setIgn4((unit.value(19)/5));
-    m_dashboard->setTRIM((unit.value(20)));
+    //m_dashboard->setWatertemp(unit.value(3));
+    //m_dashboard->setAUXT(unit.value(4));
+    //m_dashboard->setauxcalc1(unit.value(5)/2570.00);
+    //m_dashboard->setKnock(unit.value(6)/256);
+    //m_dashboard->setTPS(unit.value(7));
+    //m_dashboard->setIdleValue(unit.value(8));
+    //m_dashboard->setBatteryV(unit.value(9)/10);
+    //m_dashboard->setMVSS(unit.value(10));
+    //m_dashboard->setSVSS(unit.value(11));
+    //m_dashboard->setInj1((unit.value(12)/3)*2);
+    //m_dashboard->setInj2((unit.value(13)/3)*2);
+    //m_dashboard->setInj3((unit.value(14)/3)*2);
+    //m_dashboard->setInj4((unit.value(15)/3)*2);
+    //m_dashboard->setIgn1((unit.value(16)/5));
+    //m_dashboard->setIgn2((unit.value(17)/5));
+    //m_dashboard->setIgn3((unit.value(18)/5));
+    //m_dashboard->setIgn4((unit.value(19)/5));
+    //m_dashboard->setTRIM((unit.value(20)));
 
 
     // Convert absolute pressure in KPA to relative pressure mmhg/Kg/cm2
