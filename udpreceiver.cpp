@@ -733,34 +733,34 @@ void udpreceiver::processPendingDatagrams()
             //Turbo Speed Sensor 2
             break;
         case 261:
-            //Generic Sensor 1
+             m_dashboard->setAnalog1(Value);
             break;
         case 262:
-            //Generic Sensor 2
+            m_dashboard->setAnalog2(Value);
             break;
         case 263:
-            //Generic Sensor 3
+            m_dashboard->setAnalog3(Value);
             break;
         case 264:
-            //Generic Sensor 4
+            m_dashboard->setAnalog4(Value);
             break;
         case 265:
-            //Generic Sensor 5
+            m_dashboard->setAnalog5(Value);
             break;
         case 266:
-            //Generic Sensor 6
+            m_dashboard->setAnalog6(Value);
             break;
         case 267:
-            //Generic Sensor 7
+            m_dashboard->setAnalog7(Value);
             break;
         case 268:
-            //Generic Sensor 8
+            m_dashboard->setAnalog8(Value);
             break;
         case 269:
-            //Generic Sensor 9
+            m_dashboard->setAnalog9(Value);
             break;
         case 270:
-            //Generic Sensor 10
+            m_dashboard->setAnalog10(Value);
             break;
         case 271:
             //Gearbox Oil Pressure
