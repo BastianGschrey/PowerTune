@@ -734,6 +734,9 @@ void Connect::daemonstartup(const int &daemon)
     case 6:
         daemonstart = "./OBD /dev/ttyUSB0";
         break;
+    case 7:
+        daemonstart = "./Hondatad";
+        break;
 
     }
     QString fileName = "/home/pi/startdaemon.sh";//This will be the correct path on pi
