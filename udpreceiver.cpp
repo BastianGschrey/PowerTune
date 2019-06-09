@@ -733,7 +733,7 @@ void udpreceiver::processPendingDatagrams()
             //Turbo Speed Sensor 2
             break;
         case 261:
-             m_dashboard->setAnalog1(Value);
+            m_dashboard->setAnalog1(Value);
             break;
         case 262:
             m_dashboard->setAnalog2(Value);

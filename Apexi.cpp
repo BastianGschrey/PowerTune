@@ -530,7 +530,7 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         m_dashboard->setMAF1V(packageADV2[2]);
         m_dashboard->setMAF2V(packageADV2[3]);
         m_dashboard->setinjms(packageADV2[4]);
-        m_dashboard->setInj(packageADV2[5]);
+        m_dashboard->setInjDuty(packageADV2[5]);
         m_dashboard->setIgn(packageADV2[6]);
         m_dashboard->setDwell(packageADV2[7]);
         m_dashboard->setBoostPres(packageADV2[8]);
@@ -543,7 +543,7 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         m_dashboard->setMAFactivity(packageADV2[15]);
         m_dashboard->setO2volt(packageADV2[16]);
         m_dashboard->setO2volt_2(packageADV2[17]);
-        m_dashboard->setThrottleV(packageADV2[18]);
+        m_dashboard->setThrottleV((packageADV2[18]*100)/4.38);
         
     }
     //Toyota

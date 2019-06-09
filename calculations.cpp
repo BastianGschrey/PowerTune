@@ -156,5 +156,7 @@ void calculations::calculate()
     PreviousSpeed = m_dashboard->speed();
 */
 
+    //Voltage
+
 }
 
