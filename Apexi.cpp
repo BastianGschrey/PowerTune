@@ -530,7 +530,7 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         m_dashboard->setMAF1V(packageADV2[2]);
         m_dashboard->setMAF2V(packageADV2[3]);
         m_dashboard->setinjms(packageADV2[4]);
-        m_dashboard->setInjDuty(packageADV2[5]);
+        //m_dashboard->setFue(packageADV2[5]);
         m_dashboard->setIgn(packageADV2[6]);
         m_dashboard->setDwell(packageADV2[7]);
         m_dashboard->setBoostPres(packageADV2[8]);
@@ -728,7 +728,7 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
         }
       }
 */
-    // m_dashboard->setInjDuty(packageBasic[0]);
+    m_dashboard->setInjDuty(packageBasic[0]);
     m_dashboard->setLeadingign(packageBasic[1]);
     m_dashboard->setTrailingign(packageBasic[2]);
     m_dashboard->setrpm(packageBasic[3]);
