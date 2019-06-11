@@ -72,5 +72,6 @@
         <file>Gauges/Picture.qml</file>
         <file>graphics/slectImage.png</file>
         <file>WifiCountryList.qml</file>
+        <file>AnalogInputs.qml</file>
     </qresource>
 </RCC>

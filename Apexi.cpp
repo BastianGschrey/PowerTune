@@ -16,7 +16,8 @@ QByteArray fullFuelBase;
 qreal AN1AN2calc;
 qreal AN3AN4calc;
 qreal test;
-
+int reconnect = 0;
+QString port;
 //QBitArray flagArray;
 QString Logfile;
 QString Auxname1;
@@ -101,9 +102,10 @@ void Apexi::clear()
 //function to open serial port
 void Apexi::openConnection(const QString &portName)
 {
-    qDebug()<<"open Apexi";
+    //qDebug()<<"open Apexi";
+    port = portName;
     initSerialPort();
-    m_serialport->setPortName(portName);
+    m_serialport->setPortName(port);
     m_serialport->setBaudRate(QSerialPort::Baud57600);
     m_serialport->setParity(QSerialPort::NoParity);
     m_serialport->setDataBits(QSerialPort::Data8);
@@ -115,6 +117,15 @@ void Apexi::openConnection(const QString &portName)
         m_dashboard->setSerialStat(m_serialport->errorString());
         Apexi::closeConnection();
     }
+    if (reconnect == 0)
+    {
+       //qDebug() << "reconnect";
+       Apexi::closeConnection();
+       reconnect = 1;
+       Apexi::openConnection(port);
+
+    }
+
     else
     {
         m_dashboard->setSerialStat(QString("Connected to Serialport"));
@@ -728,7 +739,7 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
         }
       }
 */
-    m_dashboard->setInjDuty(packageBasic[0]);
+    //m_dashboard->setInjDuty(packageBasic[0]);
     m_dashboard->setLeadingign(packageBasic[1]);
     m_dashboard->setTrailingign(packageBasic[2]);
     m_dashboard->setrpm(packageBasic[3]);

@@ -567,7 +567,7 @@ Quick1.TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.87d ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.87e ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -1276,7 +1276,7 @@ Quick1.TabView {
                 //console.log(Dashboard.ecu)
                 if(Dashboard.ecu == "4")pageLoader.source = "qrc:/ConsultRegs.qml",regtab.title = "Consult";
                 if(Dashboard.ecu == "7")pageLoader.source = "qrc:/OBDPIDS.qml",regtab.title = "OBD";
-
+                else pageLoader.source = "qrc:/AnalogInputs.qml",regtab.title = "Analog";
             }
             Component.onCompleted: {loadersource(),tabView.currentIndex = 6;}
             Connections{
