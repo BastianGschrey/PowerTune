@@ -730,7 +730,7 @@ void udpreceiver::processPendingDatagrams()
             //AAC Valve
             break;
         case 260:
-            //Turbo Speed Sensor 2
+            m_dashboard->setAnalog0(Value);
             break;
         case 261:
             m_dashboard->setAnalog1(Value);
