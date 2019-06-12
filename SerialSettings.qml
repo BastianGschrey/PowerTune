@@ -816,7 +816,7 @@ Quick1.TabView {
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
                         model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
-                        currentIndex: 1
+                        //currentIndex: 1
                         onCurrentIndexChanged:{select1.selDash1() }
                         //Component.onCompleted: {select1.selDash1() }
                         delegate: ItemDelegate {
@@ -836,7 +836,7 @@ Quick1.TabView {
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
                         model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
-                        currentIndex: 1
+                        //currentIndex: 1
                         onCurrentIndexChanged:{select2.selDash2() }
                         delegate: ItemDelegate {
                             width: dash2.width
@@ -856,7 +856,7 @@ Quick1.TabView {
                         font.pixelSize: dashselector.width / 55
                         model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
                         onCurrentIndexChanged:{select3.selDash3() }
-                        currentIndex: 1
+                        //currentIndex: 1
                         delegate: ItemDelegate {
                             width: dash3.width
                             text: dash3.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -873,7 +873,7 @@ Quick1.TabView {
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
                         model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
-                        currentIndex: 1
+                        //currentIndex: 1
                         onCurrentIndexChanged:{select4.selDash4() }
                         delegate: ItemDelegate {
                             width: dash4.width

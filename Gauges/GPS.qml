@@ -4,7 +4,7 @@ import QtPositioning 5.9
 import QtQuick.Controls 2.1
 
 
-Item {
+Rectangle {
     id: mapItem
     anchors.fill: parent
 
@@ -110,31 +110,7 @@ Item {
                     spacing: 5
                     anchors.left: map.right
                     anchors.top: countryselect.bottom
-/*
 
-                     Timer {
-                       id: timer
-                       interval: 1
-                       running: false
-                       repeat: true
-                       onTriggered: count += 1
-                     }
-                     Text {
-                       id: text
-                       font.pixelSize: 100
-                       text: (count / 100).toFixed(3)
-                     }
-
-                     Button {
-                       text: timer.running ? "Stop" : "Start"
-                       onClicked: timer.running = !timer.running
-                     }
-                     Button {
-                       text: "Reset"
-                       onClicked: count = 0
-                     }
-                     //
-*/
                     Text { text: "Current Time: "
                         font.pixelSize: 20
                         font.bold: true
@@ -220,6 +196,7 @@ Item {
             changetrack.change()
         }
         }
+
         Item
         {
             id: changetrack
