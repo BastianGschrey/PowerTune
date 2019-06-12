@@ -117,15 +117,6 @@ void Apexi::openConnection(const QString &portName)
         m_dashboard->setSerialStat(m_serialport->errorString());
         Apexi::closeConnection();
     }
-    if (reconnect == 0)
-    {
-       //qDebug() << "reconnect";
-       Apexi::closeConnection();
-       reconnect = 1;
-       Apexi::openConnection(port);
-
-    }
-
     else
     {
         m_dashboard->setSerialStat(QString("Connected to Serialport"));
@@ -144,7 +135,10 @@ void Apexi::closeConnection()
     disconnect(&m_timer, &QTimer::timeout, this, &Apexi::handleTimeout);
     m_serialport->close();
 }
-
+void Apexi::retryconnect()
+{
+    Apexi::openConnection(port);
+}
 void Apexi::handleTimeout()
 {
     m_dashboard->setTimeoutStat(QString("Is Timeout : Y"));
@@ -288,6 +282,16 @@ void Apexi::readData(QByteArray rawmessagedata)
             break;
         case ID::Init:
             Apexi::decodeInit(rawmessagedata);
+            if (reconnect == 0)
+            {
+               qDebug() << "reconnect";
+               reconnect = 1;
+               requestIndex = 0;
+               Apexi::closeConnection();
+               QTimer::singleShot(2000, this, SLOT(retryconnect()));
+
+
+            }
             break;
             
             /*

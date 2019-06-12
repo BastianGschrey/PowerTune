@@ -388,6 +388,7 @@ public slots:
     void initSerialPort();
     void openConnection(const QString &portName);
     void closeConnection();
+    void retryconnect();
     void clear();
     void apexiECU(const QByteArray &buffer);
     void sendRequest(int requestIndex);
