@@ -487,14 +487,14 @@ Quick1.TabView {
                             width: windowbackround.width / 5
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
-                            onClicked: { Qt.quit()}
+                            onClicked: { Qt.quit();}
                         }
                         Button {
                             text: "Shutdown"
                             width: windowbackround.width / 5
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
-                            onClicked: {Connect.shutdown()}
+                            onClicked: {Connect.shutdown();}
                         }
                         Button {
                             text: "Reboot"
@@ -502,8 +502,8 @@ Quick1.TabView {
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
                             onClicked: {
-                                GPS.closeConnection()
-                                Connect.reboot()
+                                GPS.closeConnection();
+                                Connect.reboot();
                             }
                         }
 
@@ -567,7 +567,7 @@ Quick1.TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.87f ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.87g ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -878,7 +878,7 @@ Quick1.TabView {
                         delegate: ItemDelegate {
                             width: dash4.width
                             text: dash4.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                            font.weight: dash4.currentIndex === index ? Font.DemiBold : Font.Normal
+                            font.weight: dash4.currentIndex == index ? Font.DemiBold : Font.Normal
                             font.family: dash4.font.family
                             font.pixelSize: dash4.font.pixelSize
                             highlighted: dash4.highlightedIndex === index
@@ -1255,7 +1255,7 @@ Quick1.TabView {
                     text:  "100"
                     inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
                     Component.onCompleted: {Dashboard.setspeedpercent(speedpercent.text /100);
-                                            tabView.currentIndex = 6;}
+                                            tabView.currentIndex = 5;}
                     onEditingFinished: Dashboard.setspeedpercent(speedpercent.text /100)
                 }
             }
@@ -1274,11 +1274,17 @@ Quick1.TabView {
             function loadersource()
             {
                 //console.log(Dashboard.ecu)
-                if(Dashboard.ecu == "4")pageLoader.source = "qrc:/ConsultRegs.qml",regtab.title = "Consult";
-                if(Dashboard.ecu == "7")pageLoader.source = "qrc:/OBDPIDS.qml",regtab.title = "OBD";
+                if(Dashboard.ecu === "4"){
+                    pageLoader.source = "qrc:/ConsultRegs.qml"
+                    regtab.title = "Consult";}
+                if(Dashboard.ecu === "7"){
+                pageLoader.source = "qrc:/OBDPIDS.qml"
+                regtab.title = "OBD";}
                 else pageLoader.source = "qrc:/AnalogInputs.qml",regtab.title = "Analog";
             }
-            Component.onCompleted: {loadersource(),tabView.currentIndex = 6;}
+            Component.onCompleted: {
+                loadersource()
+                tabView.currentIndex = 6;}
             Connections{
                 target: Dashboard
                 onEcuChanged :{loadersource()}
