@@ -502,7 +502,7 @@ Quick1.TabView {
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
                             onClicked: {
-                                GPS.closeConnection();
+                                //GPS.closeConnection();
                                 Connect.reboot();
                             }
                         }
