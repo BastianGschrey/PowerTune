@@ -7,6 +7,28 @@ QVector<int>averageSpeed(0);
 QVector<int>averageRPM(0);
 int avgspeed;
 int avgrpm;
+qreal AN00;
+qreal AN05;
+qreal AN10;
+qreal AN15;
+qreal AN20;
+qreal AN25;
+qreal AN30;
+qreal AN35;
+qreal AN40;
+qreal AN45;
+qreal AN50;
+qreal AN55;
+qreal AN60;
+qreal AN65;
+qreal AN70;
+qreal AN75;
+qreal AN80;
+qreal AN85;
+qreal AN90;
+qreal AN95;
+qreal AN100;
+qreal AN105;
 
 DashBoard::DashBoard(QObject *parent)
     : QObject(parent)
@@ -308,6 +330,7 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_draggable(0)
     ,  m_wifi()
     ,  m_SerialStat("Test")
+    ,  m_Analog0(0)
     ,  m_Analog1(0)
     ,  m_Analog2(0)
     ,  m_Analog3(0)
@@ -318,6 +341,18 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_Analog8(0)
     ,  m_Analog9(0)
     ,  m_Analog10(0)
+    ,  m_AnalogCalc0()
+    ,  m_AnalogCalc1()
+    ,  m_AnalogCalc2()
+    ,  m_AnalogCalc3()
+    ,  m_AnalogCalc4()
+    ,  m_AnalogCalc5()
+    ,  m_AnalogCalc6()
+    ,  m_AnalogCalc7()
+    ,  m_AnalogCalc8()
+    ,  m_AnalogCalc9()
+    ,  m_AnalogCalc10()
+
 
 
 
@@ -342,6 +377,32 @@ void DashBoard::setTrip(const qreal &Trip)
         return;
     m_Trip = Trip;
     emit tripChanged(Trip);
+}
+void DashBoard::setAnalogVal(const qreal &A00,const qreal &A05,const qreal &A10,const qreal &A15,const qreal &A20,const qreal &A25,const qreal &A30,const qreal &A35,const qreal &A40,const qreal &A45,const qreal &A50,const qreal &A55,const qreal &A60,const qreal &A65,const qreal &A70,const qreal &A75,const qreal &A80,const qreal &A85,const qreal &A90,const qreal &A95,const qreal &A100,const qreal &A105)
+{
+    AN00 = A00;
+    AN05 = A05;
+    AN10 = A10;
+    AN15 = A15;
+    AN20 = A20;
+    AN25 = A25;
+    AN30 = A30;
+    AN35 = A35;
+    AN40 = A40;
+    AN45 = A45;
+    AN50 = A50;
+    AN55 = A55;
+    AN60 = A60;
+    AN65 = A65;
+    AN70 = A70;
+    AN75 = A75;
+    AN80 = A80;
+    AN85 = A85;
+    AN90 = A90;
+    AN95 = A95;
+    AN100 = A100;
+    AN105 = A105;
+    qDebug()<< "AN75 " <<AN75;
 }
 
 // Advanced Info FD3S
@@ -2592,13 +2653,22 @@ void DashBoard::setwifi(const QStringList &wifi)
     m_wifi = wifi;
     emit wifiChanged(wifi);
 }
+void DashBoard::setAnalog0(const qreal &Analog0)
+{
+    if (m_Analog0== Analog0)
+        return;
+    m_Analog0 = Analog0;
+    emit Analog0Changed(Analog0);
+    setAnalogCalc0(((AN05-AN00)*0.2)*Analog0+AN00);
 
+}
 void DashBoard::setAnalog1(const qreal &Analog1)
 {
     if (m_Analog1== Analog1)
         return;
     m_Analog1 = Analog1;
     emit Analog1Changed(Analog1);
+    setAnalogCalc1(((AN15-AN10)*0.2)*Analog1+AN10);
 }
 void DashBoard::setAnalog2(const qreal &Analog2)
 {
@@ -2606,6 +2676,7 @@ void DashBoard::setAnalog2(const qreal &Analog2)
         return;
     m_Analog2 = Analog2;
     emit Analog2Changed(Analog2);
+    setAnalogCalc2(((AN25-AN20)*0.2)*Analog2+AN20);
 }
 void DashBoard::setAnalog3(const qreal &Analog3)
 {
@@ -2613,6 +2684,7 @@ void DashBoard::setAnalog3(const qreal &Analog3)
         return;
     m_Analog3 = Analog3;
     emit Analog3Changed(Analog3);
+    setAnalogCalc3(((AN35-AN30)*0.2)*Analog3+AN30);
 }
 void DashBoard::setAnalog4(const qreal &Analog4)
 {
@@ -2620,6 +2692,7 @@ void DashBoard::setAnalog4(const qreal &Analog4)
         return;
     m_Analog4 = Analog4;
     emit Analog4Changed(Analog4);
+    setAnalogCalc4(((AN45-AN40)*0.2)*Analog4+AN40);
 }
 void DashBoard::setAnalog5(const qreal &Analog5)
 {
@@ -2627,6 +2700,7 @@ void DashBoard::setAnalog5(const qreal &Analog5)
         return;
     m_Analog5 = Analog5;
     emit Analog5Changed(Analog5);
+    setAnalogCalc5(((AN55-AN50)*0.2)*Analog5+AN50);
 }
 void DashBoard::setAnalog6(const qreal &Analog6)
 {
@@ -2634,6 +2708,7 @@ void DashBoard::setAnalog6(const qreal &Analog6)
         return;
     m_Analog6 = Analog6;
     emit Analog6Changed(Analog6);
+    setAnalogCalc6(((AN65-AN60)*0.2)*Analog6+AN60);
 }
 void DashBoard::setAnalog7(const qreal &Analog7)
 {
@@ -2641,6 +2716,7 @@ void DashBoard::setAnalog7(const qreal &Analog7)
         return;
     m_Analog7 = Analog7;
     emit Analog7Changed(Analog7);
+    setAnalogCalc7(((AN75-AN70)*0.2)*Analog7+AN70);
 }
 void DashBoard::setAnalog8(const qreal &Analog8)
 {
@@ -2648,6 +2724,7 @@ void DashBoard::setAnalog8(const qreal &Analog8)
         return;
     m_Analog8 = Analog8;
     emit Analog8Changed(Analog8);
+    setAnalogCalc8(((AN85-AN80)*0.2)*Analog8+AN80);
 }
 void DashBoard::setAnalog9(const qreal &Analog9)
 {
@@ -2655,6 +2732,7 @@ void DashBoard::setAnalog9(const qreal &Analog9)
         return;
     m_Analog9 = Analog9;
     emit Analog9Changed(Analog9);
+    setAnalogCalc9(((AN95-AN90)*0.2)*Analog9+AN90);
 }
 void DashBoard::setAnalog10(const qreal &Analog10)
 {
@@ -2662,9 +2740,85 @@ void DashBoard::setAnalog10(const qreal &Analog10)
         return;
     m_Analog10 = Analog10;
     emit Analog10Changed(Analog10);
+    setAnalogCalc10(((AN105-AN100)*0.2)*Analog10+AN100);
 }
-
-
+void DashBoard::setAnalogCalc0(const qreal &AnalogCalc0)
+{
+    if (m_AnalogCalc0 == AnalogCalc0)
+        return;
+    m_AnalogCalc0 = AnalogCalc0;
+    emit AnalogCalc0Changed(AnalogCalc0);
+}
+void DashBoard::setAnalogCalc1(const qreal &AnalogCalc1)
+{
+    if (m_AnalogCalc1 == AnalogCalc1)
+        return;
+    m_AnalogCalc1 = AnalogCalc1;
+    emit AnalogCalc1Changed(AnalogCalc1);
+}
+void DashBoard::setAnalogCalc2(const qreal &AnalogCalc2)
+{
+    if (m_AnalogCalc2 == AnalogCalc2)
+        return;
+    m_AnalogCalc2 = AnalogCalc2;
+    emit AnalogCalc2Changed(AnalogCalc2);
+}
+void DashBoard::setAnalogCalc3(const qreal &AnalogCalc3)
+{
+    if (m_AnalogCalc3 == AnalogCalc3)
+        return;
+    m_AnalogCalc3 = AnalogCalc3;
+    emit AnalogCalc3Changed(AnalogCalc3);
+}
+void DashBoard::setAnalogCalc4(const qreal &AnalogCalc4)
+{
+    if (m_AnalogCalc4 == AnalogCalc4)
+        return;
+    m_AnalogCalc4 = AnalogCalc4;
+    emit AnalogCalc4Changed(AnalogCalc4);
+}
+void DashBoard::setAnalogCalc5(const qreal &AnalogCalc5)
+{
+    if (m_AnalogCalc5 == AnalogCalc5)
+        return;
+    m_AnalogCalc5 = AnalogCalc5;
+    emit AnalogCalc5Changed(AnalogCalc5);
+}
+void DashBoard::setAnalogCalc6(const qreal &AnalogCalc6)
+{
+    if (m_AnalogCalc6 == AnalogCalc6)
+        return;
+    m_AnalogCalc6 = AnalogCalc6;
+    emit AnalogCalc6Changed(AnalogCalc6);
+}
+void DashBoard::setAnalogCalc7(const qreal &AnalogCalc7)
+{
+    if (m_AnalogCalc7 == AnalogCalc7)
+        return;
+    m_AnalogCalc7 = AnalogCalc7;
+    emit AnalogCalc7Changed(AnalogCalc7);
+}
+void DashBoard::setAnalogCalc8(const qreal &AnalogCalc8)
+{
+    if (m_AnalogCalc8 == AnalogCalc8)
+        return;
+    m_AnalogCalc8 = AnalogCalc8;
+    emit AnalogCalc8Changed(AnalogCalc8);
+}
+void DashBoard::setAnalogCalc9(const qreal &AnalogCalc9)
+{
+    if (m_AnalogCalc9 == AnalogCalc9)
+        return;
+    m_AnalogCalc9 = AnalogCalc9;
+    emit AnalogCalc9Changed(AnalogCalc9);
+}
+void DashBoard::setAnalogCalc10(const qreal &AnalogCalc10)
+{
+    if (m_AnalogCalc10 == AnalogCalc10)
+        return;
+    m_AnalogCalc10 = AnalogCalc10;
+    emit AnalogCalc10Changed(AnalogCalc10);
+}
 
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
@@ -2992,6 +3146,7 @@ int DashBoard::draggable() const { return m_draggable; }
 
 QStringList DashBoard::wifi() const {return m_wifi; }
 
+qreal DashBoard::Analog0() const {return m_Analog0; }
 qreal DashBoard::Analog1() const {return m_Analog1; }
 qreal DashBoard::Analog2() const {return m_Analog2; }
 qreal DashBoard::Analog3() const {return m_Analog3; }
@@ -3002,6 +3157,20 @@ qreal DashBoard::Analog7() const {return m_Analog7; }
 qreal DashBoard::Analog8() const {return m_Analog8; }
 qreal DashBoard::Analog9() const {return m_Analog9; }
 qreal DashBoard::Analog10() const {return m_Analog10; }
+
+
+qreal DashBoard::AnalogCalc0() const {return m_AnalogCalc0; }
+qreal DashBoard::AnalogCalc1() const {return m_AnalogCalc1; }
+qreal DashBoard::AnalogCalc2() const {return m_AnalogCalc2; }
+qreal DashBoard::AnalogCalc3() const {return m_AnalogCalc3; }
+qreal DashBoard::AnalogCalc4() const {return m_AnalogCalc4; }
+qreal DashBoard::AnalogCalc5() const {return m_AnalogCalc5; }
+qreal DashBoard::AnalogCalc6() const {return m_AnalogCalc6; }
+qreal DashBoard::AnalogCalc7() const {return m_AnalogCalc7; }
+qreal DashBoard::AnalogCalc8() const {return m_AnalogCalc8; }
+qreal DashBoard::AnalogCalc9() const {return m_AnalogCalc9; }
+qreal DashBoard::AnalogCalc10() const {return m_AnalogCalc10; }
+
 
 // Sensor Strings
 

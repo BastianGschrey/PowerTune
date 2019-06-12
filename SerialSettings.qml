@@ -348,7 +348,7 @@ Quick1.TabView {
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
                             text: qsTr("0")
-                            inputMethodHints: Qt.ImhDigitsOnly
+                            inputMethodHints: Qt.ImhFormattedNumbersOnly
                             //enterKeyAction: EnterKeyAction.Next
                         }
                         Text
@@ -380,7 +380,7 @@ Quick1.TabView {
                             width: windowbackround.width / 5
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
-                            inputMethodHints: Qt.ImhDigitsOnly
+                            inputMethodHints: Qt.ImhFormattedNumbersOnly
 
                         }
                         Text
@@ -569,7 +569,7 @@ Quick1.TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.87g ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.87h ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -620,7 +620,7 @@ Quick1.TabView {
                                 height: windowbackround.height /15
                                 font.pixelSize: windowbackround.width / 55
                                 //validator: DoubleValidator {bottom: -1000.0; top: 1000.0;notation : DoubleValidator.StandardNotation ; decimals : 1}
-                                //inputMethodHints: Qt.ImhDigitsOnly
+                                inputMethodHints: Qt.ImhFormattedNumbersOnly
                                 placeholderText: qsTr("9")
                             }
                             TextField {
@@ -629,7 +629,7 @@ Quick1.TabView {
                                 height: windowbackround.height /15
                                 font.pixelSize: windowbackround.width / 55
                                 // validator: DoubleValidator {bottom: -1000.0; top: 1000.0;notation : DoubleValidator.StandardNotation ; decimals : 1}
-                                //inputMethodHints: Qt.ImhDigitsOnly
+                                inputMethodHints: Qt.ImhFormattedNumbersOnly
                                 placeholderText: qsTr("16")
                             }
 
@@ -647,8 +647,8 @@ Quick1.TabView {
                                 height: windowbackround.height /15
                                 font.pixelSize: windowbackround.width / 55
                                 //validator: DoubleValidator {bottom: -1000.0; top: 1000.0;notation : DoubleValidator.StandardNotation ; decimals : 1}
-                                //inputMethodHints: Qt.ImhDigitsOnly
-                                placeholderText: qsTr("Value @ 0V")
+                                inputMethodHints: Qt.ImhFormattedNumbersOnly
+                                placeholderText: qsTr("0")
 
                             }
                             TextField {
@@ -657,8 +657,8 @@ Quick1.TabView {
                                 height: windowbackround.height /15
                                 font.pixelSize: windowbackround.width / 55
                                 //validator: DoubleValidator {bottom: -1000.0; top: 1000.0;notation : DoubleValidator.StandardNotation ; decimals : 1}
-                                //inputMethodHints: Qt.ImhDigitsOnly
-                                placeholderText: qsTr("Value @ 5V")
+                                inputMethodHints: Qt.ImhFormattedNumbersOnly
+                                placeholderText: qsTr("5")
                             }
                             TextField {
                                 id: unitaux2
@@ -1091,7 +1091,7 @@ Quick1.TabView {
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
                         text:  "110"
-                        inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
                         onEditingFinished: Dashboard.setwaterwarn(watertempwarn.text)
                         Component.onCompleted: Dashboard.setwaterwarn(watertempwarn.text)
 
@@ -1101,7 +1101,7 @@ Quick1.TabView {
                         width: warningsettings.width / 10
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
-                        inputMethodHints: Qt.ImhDigitsOnly
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
                         text:  "0.9"
                         onEditingFinished: Dashboard.setboostwarn(boostwarn.text)
                         Component.onCompleted: Dashboard.setboostwarn(boostwarn.text)
@@ -1111,7 +1111,7 @@ Quick1.TabView {
                         width: warningsettings.width / 10
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
-                        inputMethodHints: Qt.ImhDigitsOnly
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
                         text:  "10000"
                         onEditingFinished: Dashboard.setrpmwarn(rpmwarn.text)
                         Component.onCompleted: Dashboard.setrpmwarn(rpmwarn.text)
@@ -1121,7 +1121,7 @@ Quick1.TabView {
                         width: warningsettings.width / 10
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
-                        inputMethodHints: Qt.ImhDigitsOnly
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
                         text:  "80"
                         onEditingFinished: Dashboard.setknockwarn(knockwarn.text)
                         Component.onCompleted: Dashboard.setknockwarn(knockwarn.text),tabView.currentIndex = 4; // opens the 5th tab
@@ -1174,7 +1174,7 @@ Quick1.TabView {
                         width: warningsettings.width / 10
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
-                        inputMethodHints: Qt.ImhDigitsOnly
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
                         text:  "120"
                         onEditingFinished: Dashboard.setgearcalc1(valgear1.text)
                         Component.onCompleted: Dashboard.setgearcalc1(valgear1.text)
@@ -1184,7 +1184,7 @@ Quick1.TabView {
                         width: warningsettings.width / 10
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
-                        inputMethodHints: Qt.ImhDigitsOnly
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
                         text:  "74"
                         onEditingFinished: Dashboard.setgearcalc2(valgear2.text)
                         Component.onCompleted: Dashboard.setgearcalc2(valgear2.text)
@@ -1194,7 +1194,7 @@ Quick1.TabView {
                         width: warningsettings.width / 10
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
-                        inputMethodHints: Qt.ImhDigitsOnly
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
                         text:  "54"
                         onEditingFinished: Dashboard.setgearcalc3(valgear3.text)
                         Component.onCompleted: Dashboard.setgearcalc3(valgear3.text)
@@ -1204,7 +1204,7 @@ Quick1.TabView {
                         width: warningsettings.width / 10
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
-                        inputMethodHints: Qt.ImhDigitsOnly
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
                         text:  "37"
                         onEditingFinished: Dashboard.setgearcalc4(valgear4.text)
                         Component.onCompleted: Dashboard.setgearcalc4(valgear4.text)
@@ -1214,7 +1214,7 @@ Quick1.TabView {
                         width: warningsettings.width / 10
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
-                        inputMethodHints: Qt.ImhDigitsOnly
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
                         text:  "28"
                         onEditingFinished: Dashboard.setgearcalc5(valgear5.text)
                         Component.onCompleted: Dashboard.setgearcalc5(valgear5.text)
@@ -1224,7 +1224,7 @@ Quick1.TabView {
                         width: warningsettings.width / 10
                         height: warningsettings.height /15
                         font.pixelSize: warningsettings.width / 55
-                        inputMethodHints: Qt.ImhDigitsOnly
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
                         text:  ""
                         onEditingFinished: Dashboard.setgearcalc6(valgear6.text)
                         Component.onCompleted: Dashboard.setgearcalc6(valgear6.text)
@@ -1260,7 +1260,7 @@ Quick1.TabView {
                     height: calcs.height /15
                     font.pixelSize: calcs.width / 55
                     text:  "100"
-                    inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+                    inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
                     Component.onCompleted: {Dashboard.setspeedpercent(speedpercent.text /100);
                                             tabView.currentIndex = 5;}
                     onEditingFinished: Dashboard.setspeedpercent(speedpercent.text /100)
@@ -1340,7 +1340,7 @@ Quick1.TabView {
                     height: rpmSettings.height /15
                     font.pixelSize: rpmSettings.width / 55
                     text:  "10000"
-                    inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+                    inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
                     onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
                     Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
                 }
@@ -1350,7 +1350,7 @@ Quick1.TabView {
                     height: rpmSettings.height /15
                     font.pixelSize: rpmSettings.width / 55
                     text:  "3000"
-                    inputMethodHints: Qt.ImhDigitsOnly
+                    inputMethodHints: Qt.ImhFormattedNumbersOnly
                     onEditingFinished:Dashboard.setrpmStage1(stage1.text)
                     Component.onCompleted:Dashboard.setrpmStage1(stage1.text)
                 }
@@ -1360,7 +1360,7 @@ Quick1.TabView {
                     height: rpmSettings.height /15
                     font.pixelSize: rpmSettings.width / 55
                     text:  "5500"
-                    inputMethodHints: Qt.ImhDigitsOnly
+                    inputMethodHints: Qt.ImhFormattedNumbersOnly
                     onEditingFinished:Dashboard.setrpmStage2(stage2.text)
                     Component.onCompleted:Dashboard.setrpmStage2(stage2.text)
                 }
@@ -1370,7 +1370,7 @@ Quick1.TabView {
                     height: rpmSettings.height /15
                     font.pixelSize: rpmSettings.width / 55
                     text:  "5500"
-                    inputMethodHints: Qt.ImhDigitsOnly
+                    inputMethodHints: Qt.ImhFormattedNumbersOnly
                     onEditingFinished:Dashboard.setrpmStage3(stage3.text)
                     Component.onCompleted:Dashboard.setrpmStage3(stage3.text)
 
@@ -1381,7 +1381,7 @@ Quick1.TabView {
                     height: rpmSettings.height /15
                     font.pixelSize: rpmSettings.width / 55
                     text:  "7500"
-                    inputMethodHints: Qt.ImhDigitsOnly
+                    inputMethodHints: Qt.ImhFormattedNumbersOnly
                     onEditingFinished: Dashboard.setrpmStage4(stage4.text)
                     Component.onCompleted: Dashboard.setrpmStage4(stage4.text),tabView.currentIndex++;
                 }

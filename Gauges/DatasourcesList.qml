@@ -3,6 +3,229 @@ import QtQuick 2.8
 ListModel {
     id: datasources
 
+
+    ListElement {
+        titlename: "Analog0"
+        defaultsymbol: "V"
+        sourcename:"Analog0"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog1"
+        defaultsymbol: "V"
+        sourcename:"Analog1"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog2"
+        defaultsymbol: "V"
+        sourcename:"Analog2"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog3"
+        defaultsymbol: "V"
+        sourcename:"Analog3"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog4"
+        defaultsymbol: "V"
+        sourcename:"Analog4"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog5"
+        defaultsymbol: "V"
+        sourcename:"Analog5"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog6"
+        defaultsymbol: "V"
+        sourcename:"Analog6"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog7"
+        defaultsymbol: "V"
+        sourcename:"Analog7"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog8"
+        defaultsymbol: "V"
+        sourcename:"Analog8"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog9"
+        defaultsymbol: "V"
+        sourcename:"Analog9"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog10"
+        defaultsymbol: "V"
+        sourcename:"Analog10"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog 0 Calc"
+        defaultsymbol: ""
+        sourcename:"AnalogCalc0"
+        supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog 1 Calc"
+        defaultsymbol: ""
+        sourcename:"AnalogCalc1"
+        supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog 2 Calc"
+        defaultsymbol: ""
+        sourcename:"AnalogCalc2"
+        supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog 3 Calc"
+        defaultsymbol: ""
+        sourcename:"AnalogCalc3"
+        supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog 4 Calc"
+        defaultsymbol: ""
+        sourcename:"AnalogCalc4"
+        supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog 5 Calc"
+        defaultsymbol: ""
+        sourcename:"AnalogCalc5"
+        supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog 6 Calc"
+        defaultsymbol: ""
+        sourcename:"AnalogCalc6"
+        supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog 7 Calc"
+        defaultsymbol: ""
+        sourcename:"AnalogCalc7"
+        supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog 8 Calc"
+        defaultsymbol: ""
+        sourcename:"AnalogCalc8"
+        supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog 9 Calc"
+        defaultsymbol: ""
+        sourcename:"AnalogCalc9"
+        supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Analog 10 Calc"
+        defaultsymbol: ""
+        sourcename:"AnalogCalc10"
+        supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+
+////////////////
     ListElement {
         titlename: "Accel Ped Pos."
         defaultsymbol: "%"
