@@ -442,11 +442,12 @@ Quick1.TabView {
                             font.pixelSize: windowbackround.width / 55
                             Component.onCompleted: autoconnectGPS.auto()
                             onClicked: {
-                                autoconnectGPS.auto()
-                                // console.log("clicked GPS")
-                                GPS.openConnection(serialNameGPS.currentText,"9600")
+
+                                //console.log("clicked GPS")
                                 connectButtonGPS.enabled=false
                                 disconnectButtonGPS.enabled=true
+                                autoconnectGPS.auto()
+                                //console.log("gps disconnect enabled")
                             }
                         }
                         Button {
@@ -457,9 +458,10 @@ Quick1.TabView {
                             font.pixelSize: windowbackround.width / 55
                             enabled: false
                             onClicked: {
-                                GPS.closeConnection()
-                                connectButtonGPS.enabled = true;
-                                disconnectButtonGPS.enabled = false;
+                                connectButtonGPS.enabled = true
+                                disconnectButtonGPS.enabled = false
+                                Gps.closeConnection()
+
                             }
                         }
 
@@ -688,7 +690,12 @@ Quick1.TabView {
                 {
 
                     // if (gpsswitch.checked == true)GPS.startGPScom(serialNameGPS.currentText,serialGPSBaud.currentText);
-                    if (connectButtonGPS.enabled == false)GPS.openConnection(serialNameGPS.currentText,"9600"),disconnectButtonGPS.enabled=true;
+                    if (connectButtonGPS.enabled == false)
+                    {
+                        Gps.openConnection(serialNameGPS.currentText,"9600")
+                        disconnectButtonGPS.enabled=true
+                    }
+                    //if (connectButtonGPS.enabled == true)GPS.openConnection(serialNameGPS.currentText,"9600"),disconnectButtonGPS.enabled=false;
                     //if (gpsswitch.checked === false)GPS.closeConnection(),console.log("GPS CLOSED BY QML");
                 }
             }

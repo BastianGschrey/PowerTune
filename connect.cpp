@@ -106,7 +106,7 @@ Connect::Connect(QObject *parent) :
     engine->rootContext()->setContextProperty("Dashboard", m_dashBoard);
     engine->rootContext()->setContextProperty("AppSettings", m_appSettings);
     engine->rootContext()->setContextProperty("GoPro", m_gopro);
-    engine->rootContext()->setContextProperty("GPS", m_gps);
+    engine->rootContext()->setContextProperty("Gps", m_gps);
     engine->rootContext()->setContextProperty("Sens", m_sensors);
     engine->rootContext()->setContextProperty("Logger", m_datalogger);
     engine->rootContext()->setContextProperty("Calculations", m_calculations);
