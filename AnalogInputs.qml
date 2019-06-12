@@ -9,9 +9,15 @@ Rectangle {
     id: main
     Grid {
 
-        rows:11
+        rows:12
         columns: 3
         spacing: 5
+        Text { text: "  "
+            font.pixelSize: main.width / 55;color:"white"}
+        Text { text: "Value @ 0V"
+            font.pixelSize: main.width / 55;color:"white"}
+        Text { text: "Value @ 5V"
+            font.pixelSize: main.width / 55;color:"white"}
         Text { text: "Analog 0"
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
@@ -19,8 +25,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "0"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -29,8 +35,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "5"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -41,8 +47,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "0"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -51,8 +57,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "5"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -63,8 +69,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "0"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -73,8 +79,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "5"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -85,8 +91,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "0"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -95,8 +101,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "5"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -107,8 +113,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "0"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -117,8 +123,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "5"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -129,8 +135,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "0"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -139,8 +145,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "5"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -151,8 +157,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "0"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -161,8 +167,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "5"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -173,8 +179,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "0"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -183,8 +189,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "5"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -195,8 +201,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "0"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -205,8 +211,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "5"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -217,8 +223,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "0"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -227,8 +233,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "5"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -239,8 +245,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "0"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
@@ -249,8 +255,8 @@ Rectangle {
             width: main.width / 5.5
             height: main.height /15
             font.pixelSize: main.width / 55
-            text:  "10000"
-            inputMethodHints: Qt.ImhDigitsOnly // this ensures valid inputs are number only
+            placeholderText: "5"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             //onEditingFinished: Dashboard.setmaxRPM(maxRPM.text)
             //Component.onCompleted: Dashboard.setmaxRPM(maxRPM.text)
         }
