@@ -569,7 +569,7 @@ Quick1.TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.87h ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.87i ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -1429,7 +1429,7 @@ Quick1.TabView {
                     width: daemons.width / 5
                     height: daemons.height /15
                     font.pixelSize: daemons.width / 55
-                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","Apexi","OBD2","Hondata"]
+                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","Apexi","OBD2","Hondata","Adaptronic CAN"]
                     delegate: ItemDelegate {
                         width: daemonselect.width
                         text: daemonselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
