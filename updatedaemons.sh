@@ -11,6 +11,7 @@ sudo pkill Apexid
 sudo pkill Microtechd 
 sudo pkill Linkd
 sudo pkill Hondatad
+sudo pkill AdaptronicCANd
 echo "Updating Daemons"
 cp -r /home/pi/src/daemons/. /home/pi/daemons/
 cd /home/pi/daemons
@@ -21,6 +22,7 @@ chmod +x Apexid
 chmod +x Microtechd 
 chmod +x Linkd
 chmod +x Hondatad
+chmod +x AdaptronicCANd
 #chmod +x BRZ86d
 #chmod +x MazdaCAN
 #chmod +x EM80d
