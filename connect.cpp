@@ -1072,6 +1072,8 @@ void Connect::turnscreen()
     QProcess *process = new QProcess(this);
     process->start("sudo cp /home/pi/src/config.txt /boot/config.txt");
     process->waitForFinished(100); // 10 minutes time before timeout
+    Connect::reboot();
+
 }
 void Connect::candump()
 {
