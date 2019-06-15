@@ -1422,11 +1422,13 @@ Quick1.TabView {
                     text: "apply"
                     onClicked: Connect.daemonstartup(daemonselect.currentIndex)
                 }
+                Text { text: "Remove screen rotate :"
+                    font.pixelSize: daemons.width / 55 }
                 Button {
                     id: rotate
                     width: daemons.width / 5
                     height: daemons.height /15
-                    text: "apply"
+                    text: "screen fix"
                     onClicked: Connect.turnscreen();
                 }
                 Text { text: "Start up Daemon :"
