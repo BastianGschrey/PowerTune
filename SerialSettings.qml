@@ -569,7 +569,7 @@ Quick1.TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.87i ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.87j ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -1421,6 +1421,13 @@ Quick1.TabView {
                     height: daemons.height /15
                     text: "apply"
                     onClicked: Connect.daemonstartup(daemonselect.currentIndex)
+                }
+                Button {
+                    id: rotate
+                    width: daemons.width / 5
+                    height: daemons.height /15
+                    text: "apply"
+                    onClicked: Connect.turnscreen();
                 }
                 Text { text: "Start up Daemon :"
                     font.pixelSize: daemons.width / 55 }

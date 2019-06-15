@@ -1065,6 +1065,14 @@ void Connect::reboot()
     process->start("sudo reboot");
     process->waitForFinished(100); // 10 minutes time before timeout
 }
+
+void Connect::turnscreen()
+{
+    m_dashBoard->setSerialStat("turn screen");
+    QProcess *process = new QProcess(this);
+    process->start("sudo cp /home/pi/src/config.txt /boot/config.txt");
+    process->waitForFinished(100); // 10 minutes time before timeout
+}
 void Connect::candump()
 {
     QProcess *p = new QProcess( this );

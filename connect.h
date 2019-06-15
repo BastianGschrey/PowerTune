@@ -82,6 +82,7 @@ public:
     Q_INVOKABLE void update();
     Q_INVOKABLE void shutdown();
     Q_INVOKABLE void reboot();
+    Q_INVOKABLE void turnscreen();
     Q_INVOKABLE void candump();
     Q_INVOKABLE void minicom();
     Q_INVOKABLE void RequestLicence();

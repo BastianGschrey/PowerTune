@@ -22,6 +22,7 @@ Rectangle {
             id: mapPlugin
             name: "osm"
             //Offline directory for Map Tiles
+            PluginParameter { name: "osm.useragent"; value: "PowerTune" }
            PluginParameter {
                 name: 'osm.mapping.offline.directory'
                 //value: ':/GPSTracks/'
