@@ -1422,6 +1422,7 @@ Quick1.TabView {
                     text: "apply"
                     onClicked: Connect.daemonstartup(daemonselect.currentIndex)
                 }
+                /*
                 Text { text: "Remove screen rotate :"
                     font.pixelSize: daemons.width / 55 }
                 Button {
@@ -1430,7 +1431,7 @@ Quick1.TabView {
                     height: daemons.height /15
                     text: "screen fix"
                     onClicked: Connect.turnscreen();
-                }
+                }*/
                 Text { text: "Start up Daemon :"
                     font.pixelSize: daemons.width / 55 }
                 ComboBox {
