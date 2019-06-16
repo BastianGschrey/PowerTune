@@ -59,6 +59,7 @@ void AdaptronicSelect::openConnection(const QString &portName)
             modbusDevice->connectDevice();
             if (modbusDevice->state() != QModbusDevice::ConnectedState)
             {
+                qDebug()<< "error creating Modbus device";
                 delete modbusDevice;
                 modbusDevice = nullptr;
             }
@@ -99,6 +100,7 @@ void AdaptronicSelect::readyToRead()
 {
 
         auto reply = qobject_cast<QModbusReply *>(sender());
+        qDebug()<< "recieve :" <<reply;
         if(!reply)
             return;
         if(reply->error() == QModbusDevice::NoError){
@@ -114,7 +116,7 @@ void AdaptronicSelect::decodeAdaptronic(QModbusDataUnit unit)
     qreal realBoost;
     int Boostconv;
 
-
+    qDebug()<<"Watertemp: " <<unit.value(3);
     m_dashboard->setSpeed(unit.value(10)); // <-This is for the "main" speedo KMH
     m_dashboard->setrpm(unit.value(0));
     m_dashboard->setMAP(unit.value(1));
