@@ -357,7 +357,7 @@ void udpreceiver::processPendingDatagrams()
             //            m_dashboard->setgpsLongitude(Value);
             break;
         case 111:
-            //            m_dashboard->setgpsSpeed(Value);
+            m_dashboard->setgpsSpeed(Value);
             break;
         case 112:
             //            m_dashboard->setgpsTime(Value);

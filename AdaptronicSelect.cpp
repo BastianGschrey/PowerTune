@@ -49,7 +49,7 @@ void AdaptronicSelect::openConnection(const QString &portName)
 
         if (modbusDevice->state() != QModbusDevice::ConnectedState)
         {
-            modbusDevice->setConnectionParameter(QModbusDevice::SerialPortNameParameter,"/dev/ttyDUMMY");
+            modbusDevice->setConnectionParameter(QModbusDevice::SerialPortNameParameter,portName);
             modbusDevice->setConnectionParameter(QModbusDevice::SerialBaudRateParameter,57600);
             modbusDevice->setConnectionParameter(QModbusDevice::SerialDataBitsParameter,8);
             modbusDevice->setConnectionParameter(QModbusDevice::SerialParityParameter,0);
