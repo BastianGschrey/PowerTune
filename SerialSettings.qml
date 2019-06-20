@@ -156,10 +156,10 @@ Quick1.TabView {
                             delegate: ItemDelegate {
                                 width: serialName.width
                                 text: serialName.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                                font.weight: serialName.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.weight: serialName.currentIndex == index ? Font.DemiBold : Font.Normal
                                 font.family: serialName.font.family
                                 font.pixelSize: serialName.font.pixelSize
-                                highlighted: serialName.highlightedIndex === index
+                                highlighted: serialName.highlightedIndex == index
                                 hoverEnabled: serialName.hoverEnabled
                             }
                         }
@@ -179,10 +179,10 @@ Quick1.TabView {
                             delegate: ItemDelegate {
                                 width: serialNameGPS.width
                                 text: serialNameGPS.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                                font.weight: serialNameGPS.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.weight: serialNameGPS.currentIndex == index ? Font.DemiBold : Font.Normal
                                 font.family: serialNameGPS.font.family
                                 font.pixelSize: serialNameGPS.font.pixelSize
-                                highlighted: serialNameGPS.highlightedIndex === index
+                                highlighted: serialNameGPS.highlightedIndex == index
                                 hoverEnabled: serialNameGPS.hoverEnabled
                             }
                         }
@@ -203,10 +203,10 @@ Quick1.TabView {
                             delegate: ItemDelegate {
                                 width: unitSelect1.width
                                 text: unitSelect1.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                                font.weight: unitSelect1.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.weight: unitSelect1.currentIndex == index ? Font.DemiBold : Font.Normal
                                 font.family: unitSelect1.font.family
                                 font.pixelSize: unitSelect1.font.pixelSize
-                                highlighted: unitSelect1.highlightedIndex === index
+                                highlighted: unitSelect1.highlightedIndex == index
                                 hoverEnabled: unitSelect1.hoverEnabled
                             }
 
@@ -228,10 +228,10 @@ Quick1.TabView {
                             delegate: ItemDelegate {
                                 width: unitSelect.width
                                 text: unitSelect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                                font.weight: unitSelect.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.weight: unitSelect.currentIndex == index ? Font.DemiBold : Font.Normal
                                 font.family: unitSelect.font.family
                                 font.pixelSize: unitSelect.font.pixelSize
-                                highlighted: unitSelect.highlightedIndex === index
+                                highlighted: unitSelect.highlightedIndex == index
                                 hoverEnabled: unitSelect.hoverEnabled
                             }
 
@@ -253,10 +253,10 @@ Quick1.TabView {
                             delegate: ItemDelegate {
                                 width: unitSelect.width
                                 text: unitSelect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                                font.weight: unitSelect.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.weight: unitSelect.currentIndex == index ? Font.DemiBold : Font.Normal
                                 font.family: unitSelect.font.family
                                 font.pixelSize: unitSelect.font.pixelSize
-                                highlighted: unitSelect.highlightedIndex === index
+                                highlighted: unitSelect.highlightedIndex == index
                                 hoverEnabled: unitSelect.hoverEnabled
                             }
 
@@ -278,10 +278,10 @@ Quick1.TabView {
                             delegate: ItemDelegate {
                                 width: ecuSelect.width
                                 text: ecuSelect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                                font.weight: ecuSelect.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.weight: ecuSelect.currentIndex == index ? Font.DemiBold : Font.Normal
                                 font.family: ecuSelect.font.family
                                 font.pixelSize: ecuSelect.font.pixelSize
-                                highlighted: ecuSelect.highlightedIndex === index
+                                highlighted: ecuSelect.highlightedIndex == index
                                 hoverEnabled: ecuSelect.hoverEnabled
                             }
                         }
@@ -299,10 +299,10 @@ Quick1.TabView {
                             delegate: ItemDelegate {
                                 width: goProSelect.width
                                 text: goProSelect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                                font.weight: goProSelect.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.weight: goProSelect.currentIndex == index ? Font.DemiBold : Font.Normal
                                 font.family: goProSelect.font.family
                                 font.pixelSize: goProSelect.font.pixelSize
-                                highlighted: goProSelect.highlightedIndex === index
+                                highlighted: goProSelect.highlightedIndex == index
                                 hoverEnabled: goProSelect.hoverEnabled
                             }
 
@@ -523,10 +523,10 @@ Quick1.TabView {
                             delegate: ItemDelegate {
                                 width: smoothrpm.width
                                 text: smoothrpm.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                                font.weight: smoothrpm.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.weight: smoothrpm.currentIndex == index ? Font.DemiBold : Font.Normal
                                 font.family: smoothrpm.font.family
                                 font.pixelSize: smoothrpm.font.pixelSize
-                                highlighted: smoothrpm.highlightedIndex === index
+                                highlighted: smoothrpm.highlightedIndex == index
                                 hoverEnabled: smoothrpm.hoverEnabled
                             }
                         }
@@ -544,10 +544,10 @@ Quick1.TabView {
                             delegate: ItemDelegate {
                                 width: smoothspeed.width
                                 text: smoothspeed.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                                font.weight: smoothspeed.currentIndex === index ? Font.DemiBold : Font.Normal
+                                font.weight: smoothspeed.currentIndex == index ? Font.DemiBold : Font.Normal
                                 font.family: smoothspeed.font.family
                                 font.pixelSize: smoothspeed.font.pixelSize
-                                highlighted: smoothspeed.highlightedIndex === index
+                                highlighted: smoothspeed.highlightedIndex == index
                                 hoverEnabled: smoothspeed.hoverEnabled
                             }
                         }
@@ -569,7 +569,7 @@ Quick1.TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.87k ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.87l ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -696,7 +696,7 @@ Quick1.TabView {
                         disconnectButtonGPS.enabled=true
                     }
                     //if (connectButtonGPS.enabled == true)GPS.openConnection(serialNameGPS.currentText,"9600"),disconnectButtonGPS.enabled=false;
-                    //if (gpsswitch.checked === false)GPS.closeConnection(),console.log("GPS CLOSED BY QML");
+                    //if (gpsswitch.checked == false)GPS.closeConnection(),console.log("GPS CLOSED BY QML");
                 }
             }
             Item {
@@ -829,10 +829,10 @@ Quick1.TabView {
                         delegate: ItemDelegate {
                             width: dash1.width
                             text: dash1.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                            font.weight: dash1.currentIndex === index ? Font.DemiBold : Font.Normal
+                            font.weight: dash1.currentIndex == index ? Font.DemiBold : Font.Normal
                             font.family: dash1.font.family
                             font.pixelSize: dash1.font.pixelSize
-                            highlighted: dash1.highlightedIndex === index
+                            highlighted: dash1.highlightedIndex == index
                             hoverEnabled: dash1.hoverEnabled
                         }
                     }
@@ -848,10 +848,10 @@ Quick1.TabView {
                         delegate: ItemDelegate {
                             width: dash2.width
                             text: dash2.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                            font.weight: dash2.currentIndex === index ? Font.DemiBold : Font.Normal
+                            font.weight: dash2.currentIndex == index ? Font.DemiBold : Font.Normal
                             font.family: dash2.font.family
                             font.pixelSize: dash2.font.pixelSize
-                            highlighted: dash2.highlightedIndex === index
+                            highlighted: dash2.highlightedIndex == index
                             hoverEnabled: dash2.hoverEnabled
                         }
                     }
@@ -867,10 +867,10 @@ Quick1.TabView {
                         delegate: ItemDelegate {
                             width: dash3.width
                             text: dash3.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                            font.weight: dash3.currentIndex === index ? Font.DemiBold : Font.Normal
+                            font.weight: dash3.currentIndex == index ? Font.DemiBold : Font.Normal
                             font.family: dash3.font.family
                             font.pixelSize: dash3.font.pixelSize
-                            highlighted: dash3.highlightedIndex === index
+                            highlighted: dash3.highlightedIndex == index
                             hoverEnabled: dash3.hoverEnabled
                         }
                     }
@@ -888,7 +888,7 @@ Quick1.TabView {
                             font.weight: dash4.currentIndex == index ? Font.DemiBold : Font.Normal
                             font.family: dash4.font.family
                             font.pixelSize: dash4.font.pixelSize
-                            highlighted: dash4.highlightedIndex === index
+                            highlighted: dash4.highlightedIndex == index
                             hoverEnabled: dash4.hoverEnabled
                         }
                     }
@@ -1281,10 +1281,10 @@ Quick1.TabView {
             function loadersource()
             {
                 //console.log(Dashboard.ecu)
-                if(Dashboard.ecu === "4"){
+                if(Dashboard.ecu == "4"){
                     pageLoader.source = "qrc:/ConsultRegs.qml"
                     regtab.title = "Consult";}
-                if(Dashboard.ecu === "7"){
+                if(Dashboard.ecu == "7"){
                 pageLoader.source = "qrc:/OBDPIDS.qml"
                 regtab.title = "OBD";}
                 else pageLoader.source = "qrc:/AnalogInputs.qml",regtab.title = "Analog";
@@ -1443,10 +1443,10 @@ Quick1.TabView {
                     delegate: ItemDelegate {
                         width: daemonselect.width
                         text: daemonselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                        font.weight: daemonselect.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.weight: daemonselect.currentIndex == index ? Font.DemiBold : Font.Normal
                         font.family: daemonselect.font.family
                         font.pixelSize: daemonselect.font.pixelSize
-                        highlighted: daemonselect.highlightedIndex === index
+                        highlighted: daemonselect.highlightedIndex == index
                         hoverEnabled: daemonselect.hoverEnabled
                     }
                     //Component.onCompleted: tabView.currentIndex = 0;
@@ -1464,10 +1464,10 @@ Quick1.TabView {
                     delegate: ItemDelegate {
                         width: mainspeedsource.width
                         text: mainspeedsource.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                        font.weight: mainspeedsource.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.weight: mainspeedsource.currentIndex == index ? Font.DemiBold : Font.Normal
                         font.family: mainspeedsource.font.family
                         font.pixelSize: mainspeedsource.font.pixelSize
-                        highlighted: mainspeedsource.highlightedIndex === index
+                        highlighted: mainspeedsource.highlightedIndex == index
                         hoverEnabled: mainspeedsource.hoverEnabled
                     }
                 }
@@ -1570,10 +1570,10 @@ Quick1.TabView {
                     delegate: ItemDelegate {
                         width: wifilistbox.width
                         text: wifilistbox.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                        font.weight: wifilistbox.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.weight: wifilistbox.currentIndex == index ? Font.DemiBold : Font.Normal
                         font.family: wifilistbox.font.family
                         font.pixelSize: wifilistbox.font.pixelSize
-                        highlighted: wifilistbox.highlightedIndex === index
+                        highlighted: wifilistbox.highlightedIndex == index
                         hoverEnabled: wifilistbox.hoverEnabled
                     }
                 }
@@ -1602,10 +1602,10 @@ Quick1.TabView {
                     delegate: ItemDelegate {
                         width: wifilistbox2.width
                         text: wifilistbox2.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                        font.weight: wifilistbox2.currentIndex === index ? Font.DemiBold : Font.Normal
+                        font.weight: wifilistbox2.currentIndex == index ? Font.DemiBold : Font.Normal
                         font.family: wifilistbox2.font.family
                         font.pixelSize: wifilistbox2.font.pixelSize
-                        highlighted: wifilistbox2.highlightedIndex === index
+                        highlighted: wifilistbox2.highlightedIndex == index
                         hoverEnabled: wifilistbox2.hoverEnabled
                     }
                 }
