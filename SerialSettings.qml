@@ -1461,6 +1461,7 @@ Quick1.TabView {
                     model: ["ECU Speed","LF Wheelspeed","RF Wheelspeed","LR Wheelspeed","RR Wheelspeed","GPS"]
                     onCurrentIndexChanged: Dashboard.setExternalSpeed(mainspeedsource.currentIndex)//,console.log(mainspeedsource.currentIndex)
                     property bool initialized: false
+                    Component.onCompleted: tabView.currentIndex = 0;
                     delegate: ItemDelegate {
                         width: mainspeedsource.width
                         text: mainspeedsource.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
