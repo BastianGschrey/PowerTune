@@ -254,7 +254,7 @@ Item {
                 height: parent.height
                 width: height
 
-                value: Dashboard.speed
+                value: (Dashboard.speed).toFixed(0);
                 anchors.verticalCenter: parent.verticalCenter
                 maximumValue: 320
 
@@ -303,7 +303,7 @@ Item {
             }
             Text {
                 id: speedinnertext
-                text: Dashboard.speed
+                text: (Dashboard.speed).toFixed(0);
                 font.pixelSize: scalerect.width / 20
                 anchors.centerIn: parent
                 font.family: "Eurostile"

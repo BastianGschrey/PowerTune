@@ -43,7 +43,7 @@ Rectangle {
 
   }
   Text {
-      text: (Dashboard.speed)
+      text: (Dashboard.speed).toFixed(0)
       font.pixelSize: 100
       y: 130
       x: 570
