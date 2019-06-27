@@ -751,6 +751,7 @@ void Connect::daemonstartup(const int &daemon)
         << "sudo ifdown can0"
         << endl
         << "sudo ifup can0"
+        << endl
         << "cd /home/pi/daemons"
         << endl
         << daemonstart
