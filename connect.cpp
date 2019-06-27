@@ -748,6 +748,9 @@ void Connect::daemonstartup(const int &daemon)
     QTextStream out(&mFile);
     out << "#!/bin/sh"
         << endl
+        << "sudo ifdown can0"
+        << endl
+        << "sudo ifup can0"
         << "cd /home/pi/daemons"
         << endl
         << daemonstart
