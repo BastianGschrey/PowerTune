@@ -39,7 +39,7 @@ void Arduino::openConnection(const QString &portName)
 
     initSerialPort();
     m_serialport->setPortName(portName);
-    m_serialport->setBaudRate(QSerialPort::Baud57600);
+    m_serialport->setBaudRate(QSerialPort::Baud38400);
     m_serialport->setParity(QSerialPort::NoParity);
     m_serialport->setDataBits(QSerialPort::Data8);
     m_serialport->setStopBits(QSerialPort::OneStop);
@@ -80,17 +80,28 @@ void Arduino::handleError(QSerialPort::SerialPortError serialPortError)
 
 void Arduino::readyToRead()
 {
-    m_readData = m_serialport->readLine();
-    qDebug()<< "Arduino"+m_readData;
-    Arduino::assemblemessage(m_readData);
+    QByteArray test;
+    test =m_readData = m_serialport->readAll();
+    QString fileName = "AdaptronicOutputTest.txt";
+    QFile mFile(fileName);
+    if(!mFile.open(QFile::Append | QFile::Text)){
+    }
+    QTextStream out(&mFile);
+    out  << (test.toHex()) <<endl;
+    mFile.close();
+    m_dashboard->setSerialStat(test.toHex());
+    //qDebug()<< "Arduino"+m_readData;
+    //Arduino::assemblemessage(m_readData);
 }
 
 
 void Arduino::assemblemessage(const QByteArray &buffer)
 {
 
+
+/*
     m_buffer.append(buffer);
-    QByteArray endpattern = QByteArray::fromStdString("\r\n");
+    QByteArray startpattern = //828180//QByteArray::fromStdString("\r\n");
     QByteArrayMatcher endmatcher(endpattern);
 
     int pos = 0;
@@ -118,5 +129,5 @@ void Arduino::assemblemessage(const QByteArray &buffer)
         }
 
 
-}
+}*/
 }

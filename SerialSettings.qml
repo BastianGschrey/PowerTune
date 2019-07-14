@@ -569,7 +569,7 @@ Quick1.TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.88a ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.88b ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -1649,6 +1649,39 @@ Quick1.TabView {
                         //Wifiscanner.setwifi(wificountrynames.get(wificountrycbx.currentIndex).countryname,wifilistbox.textAt(wifilistbox.currentIndex),pw1.text,wifilistbox2.textAt(wifilistbox2.currentIndex),pw2.text );
                         Wifiscanner.setwifi(wificountrynames.get(wificountrycbx.currentIndex).countryname,wifilistbox.textAt(wifilistbox.currentIndex),pw1.text,"placeholder","placeholder" );
                         Connect.reboot();
+                    }
+                }
+
+                Text { text: " "
+                    font.pixelSize: extrarect.width / 55 }
+
+                Button {
+                    id: develtest
+                    text: "Development Test on"
+                    width: extrarect.width / 5
+                    height: extrarect.height /15
+                    font.pixelSize: extrarect.width / 55
+
+                    onClicked: {
+                    //Arduino.openConnection("COM11");
+                    Arduino.openConnection("/dev/ttyAMA0");
+                    develtest.enabled = false;
+                    }
+                }
+
+                Text { text: " "
+                    font.pixelSize: extrarect.width / 55 }
+
+                Button {
+                    id: develtest1
+                    text: "Development test off"
+                    width: extrarect.width / 5
+                    height: extrarect.height /15
+                    font.pixelSize: extrarect.width / 55
+
+                    onClicked: {
+                    Arduino.closeConnection();
+                    develtest.enabled = true;
                     }
                 }
             }
