@@ -523,6 +523,12 @@ Rectangle {
                 }
             }
             MenuItem {
+                text: "%"
+                onClicked: {
+                    mainvalueunittextfield.text = "%"
+                }
+            }
+            MenuItem {
                 text: "°F"
                 onClicked: {
                     mainvalueunittextfield.text = "°F"
