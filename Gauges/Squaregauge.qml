@@ -630,6 +630,7 @@ Rectangle {
             visible: false
             onClicked: {
                 hidemenues();
+                warnvaluelow = txtMinValue.text;
             }
         }
     }
