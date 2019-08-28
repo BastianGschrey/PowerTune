@@ -569,7 +569,7 @@ Quick1.TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.88c ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.88d ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -1281,13 +1281,31 @@ Quick1.TabView {
             function loadersource()
             {
                 //console.log(Dashboard.ecu)
+                if(Dashboard.ecu == "0"){
+                    pageLoader.source = "qrc:/AnalogInputs.qml"
+                    regtab.title = "Analog";}
+                if(Dashboard.ecu == "1"){
+                    pageLoader.source = "qrc:/AnalogInputs.qml"
+                    regtab.title = "Analog";}
+                if(Dashboard.ecu == "2"){
+                    pageLoader.source = "qrc:/AnalogInputs.qml"
+                    regtab.title = "Analog";}
+                if(Dashboard.ecu == "3"){
+                    pageLoader.source = "qrc:/AnalogInputs.qml"
+                    regtab.title = "Analog";}
                 if(Dashboard.ecu == "4"){
                     pageLoader.source = "qrc:/ConsultRegs.qml"
                     regtab.title = "Consult";}
+                if(Dashboard.ecu == "5"){
+                    pageLoader.source = "qrc:/AnalogInputs.qml"
+                    regtab.title = "Analog";}
+                if(Dashboard.ecu == "6"){
+                    pageLoader.source = "qrc:/AnalogInputs.qml"
+                    regtab.title = "Analog";}
                 if(Dashboard.ecu == "7"){
                 pageLoader.source = "qrc:/OBDPIDS.qml"
                 regtab.title = "OBD";}
-                else pageLoader.source = "qrc:/AnalogInputs.qml",regtab.title = "Analog";
+                //else pageLoader.source = "qrc:/AnalogInputs.qml",regtab.title = "Analog";
             }
             Component.onCompleted: {
                 loadersource()
