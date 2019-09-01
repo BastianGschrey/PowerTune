@@ -787,25 +787,25 @@ void udpreceiver::processPendingDatagrams()
             //Manifold Gauge Pressure kPa
             break;
         case 279:
-            //
+            //Digital Input 1
             break;
         case 280:
-            //
+            //Digital Input 2
             break;
         case 281:
-            //
+            //Digital Input 3
             break;
         case 282:
-            //
+            //Digital Input 4
             break;
         case 283:
-            //
+            //Digital Input 5
             break;
         case 284:
-            //
+            //Digital Input 6
             break;
         case 285:
-            //
+            //Digital Input 7
             break;
         case 286:
             //
