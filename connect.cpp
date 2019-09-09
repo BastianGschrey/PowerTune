@@ -730,7 +730,8 @@ void Connect::daemonstartup(const int &daemon)
         daemonstart = "./Consult /dev/ttyUSB0";
         break;
     case 5:
-        daemonstart = "./Apexid /dev/ttyUSB0";
+        daemonstart = "./M800ADLSet1d";
+        //daemonstart = "./Apexid /dev/ttyUSB0";
         break;
     case 6:
         daemonstart = "./OBD /dev/ttyUSB0";
