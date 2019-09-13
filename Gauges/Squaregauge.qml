@@ -13,7 +13,6 @@ Rectangle {
     border.color: "#9f9f9f"
     border.width: 2
     Component.onCompleted: {set();
-
     }
 
     property string mainvaluename
@@ -23,7 +22,7 @@ Rectangle {
     property alias vertgaugevisible: vertgauge.visible
     property alias horigaugevisible: horizgauge.visible
     property alias secvaluevisible: secondaryvaluetextfield.visible
-    property alias secvalue: placeholder2.text//secondaryvaluetextfield.text
+    property alias secvalue  : placeholder2.text
     property alias mainvalue : placeholder.text
     property double maxvalue: vertgauge.maximumValue
     property alias titlecolor: titlebar.color
@@ -74,16 +73,17 @@ Rectangle {
         target: Dashboard
         onDraggableChanged:togglemousearea()
     }
+
     Text {
         id : placeholder
-        onTextChanged: { toggledecimal();}
-        Component.onCompleted: {toggledecimal();}
+        //onTextChanged: { toggledecimal();}
+        //Component.onCompleted: {toggledecimal();}
         visible: false
     }
     Text {
         id : placeholder2
-        onTextChanged: { toggledecimal();}
-        Component.onCompleted: {toggledecimal();}
+        //onTextChanged: { toggledecimal();}
+        //Component.onCompleted: {toggledecimal();}
         visible: false
     }
     MouseArea {
@@ -94,6 +94,8 @@ Rectangle {
         //drag.active:
         onDoubleClicked: {
             popupmenu.popup(touchArea.mouseX, touchArea.mouseY);
+        }
+        Component.onCompleted: {toggledecimal();
         }
     }
 
@@ -274,12 +276,19 @@ Rectangle {
     {
         if (decimalpoints < 4)
         {
-            mainvaluetextfield.text = parseFloat(placeholder.text).toFixed(decimalpoints);
-            secondaryvaluetextfield.text = parseFloat(placeholder2.text).toFixed(decimalpoints2);
+            mainvaluetextfield.text = Qt.binding(function(){return Dashboard[mainvaluename].toFixed(decimalpoints)});
         }
         else
-            mainvaluetextfield.text = placeholder.text;
-            secondaryvaluetextfield.text =placeholder2.text;
+            mainvaluetextfield.text = mainvalue;
+    }
+    function toggledecimal2()
+    {
+        if (decimalpoints2 < 4)
+        {
+            secondaryvaluetextfield.text =  Qt.binding(function(){return Dashboard[secvaluename].toFixed(decimalpoints2)});
+        }
+        else
+            secondaryvaluetextfield.text = secvalue;
     }
     function hidemenues()
     {
