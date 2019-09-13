@@ -130,14 +130,16 @@ Connect::~Connect()
 void Connect::saveDashtoFile(const QString &filename,const QString &dashstring)
 {
    //      qDebug()<<"Filename" << filename + "txt";
-    QStringList fields = dashstring.split(QRegExp("[\r\n]"));
+    QString fixformat = dashstring;
+    fixformat.replace(",,",", ,");
+    QStringList fields = fixformat.split(QRegExp("[\r\n]"));
     QFile file( "/home/pi/UserDashboards/"+filename + ".txt" );
     //QFile file(filename + ".txt" );
     file.remove(); //remove file if it exists to avoid appending of existing file
     if ( file.open(QIODevice::ReadWrite) )
     {
         QTextStream stream( &file );
-        stream << dashstring << endl;
+        stream << fixformat << endl;
     }
     file.close();
 }
