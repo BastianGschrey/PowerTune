@@ -3,11 +3,11 @@
 var component;
 var gauge;
 
-function createSquareGauge(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec,Setwarnvaluehigh,Setwarnvaluelow,Setframeclolor,Setbackroundcolor,Settitlecolor,Settitletextcolor,Settextcolor,Setbarcolor,SetTitlefontsize,SetMainfontsize) {
+function createSquareGauge(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec,Setwarnvaluehigh,Setwarnvaluelow,Setframeclolor,Setbackroundcolor,Settitlecolor,Settitletextcolor,Settextcolor,Setbarcolor,SetTitlefontsize,SetMainfontsize,setDecPlace2) {
     component = Qt.createComponent("Squaregauge.qml");
     if (component.status === Component.Ready){
        // console.log("component ready");
-        finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec,Setwarnvaluehigh,Setwarnvaluelow,Setframeclolor,Setbackroundcolor,Settitlecolor,Settitletextcolor,Settextcolor,Setbarcolor,SetTitlefontsize,SetMainfontsize);
+        finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec,Setwarnvaluehigh,Setwarnvaluelow,Setframeclolor,Setbackroundcolor,Settitlecolor,Settitletextcolor,Settextcolor,Setbarcolor,SetTitlefontsize,SetMainfontsize,setDecPlace2);
     }
     else {
         component.statusChanged.connect(finishCreation);
@@ -15,7 +15,7 @@ function createSquareGauge(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,
     }
 }
 
-function finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec,Setwarnvaluehigh,Setwarnvaluelow,Setframeclolor,Setbackroundcolor,Settitlecolor,Settitletextcolor,Settextcolor,Setbarcolor,SetTitlefontsize,SetMainfontsize) {
+function finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec,Setwarnvaluehigh,Setwarnvaluelow,Setframeclolor,Setbackroundcolor,Settitlecolor,Settitletextcolor,Settextcolor,Setbarcolor,SetTitlefontsize,SetMainfontsize,setDecPlace2) {
     if (component.status === Component.Ready) {
         gauge = component.createObject(userDash, {"id": setID, "title":setID, "width": setWidth, "height": setHeight,
                                            //"mainvalue": Qt.binding(function(){return Dashboard[SetValuePropertyMain].toFixed(setDecPlace)}),
@@ -23,6 +23,7 @@ function finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,set
                                            "mainvalue": Qt.binding(function(){return Dashboard[SetValuePropertyMain]}),
                                            "secvalue": Qt.binding(function(){return Dashboard[SetValuePropertySec]}),
                                            "decimalpoints":setDecPlace,
+                                           "decimalpoints2":setDecPlace2,
                                            "mainvaluename":SetValuePropertyMain,
                                            "secvaluename":SetValuePropertySec,
                                            "maxvalue": setMaxValue,

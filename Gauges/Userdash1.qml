@@ -119,7 +119,7 @@ Item {
                 if (dashvalue.textAt(0) === "Square gauge")
                 {
                     //console.log("create Square Gauge")
-                    CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),dashvalue.textAt(8),(dashvalue.textAt(9).toLowerCase() === 'true' ? true : false),(dashvalue.textAt(10).toLowerCase() === 'true' ? true : false),(dashvalue.textAt(11).toLowerCase() === 'true' ? true : false),dashvalue.textAt(12),dashvalue.textAt(13),dashvalue.textAt(14),dashvalue.textAt(15),dashvalue.textAt(16),dashvalue.textAt(17),dashvalue.textAt(18),dashvalue.textAt(19),dashvalue.textAt(20),dashvalue.textAt(21),dashvalue.textAt(22),dashvalue.textAt(23));
+                    CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),dashvalue.textAt(8),(dashvalue.textAt(9).toLowerCase() === 'true' ? true : false),(dashvalue.textAt(10).toLowerCase() === 'true' ? true : false),(dashvalue.textAt(11).toLowerCase() === 'true' ? true : false),dashvalue.textAt(12),dashvalue.textAt(13),dashvalue.textAt(14),dashvalue.textAt(15),dashvalue.textAt(16),dashvalue.textAt(17),dashvalue.textAt(18),dashvalue.textAt(19),dashvalue.textAt(20),dashvalue.textAt(21),dashvalue.textAt(22),dashvalue.textAt(23),dashvalue.textAt(24));
                 }
 
                 if (dashvalue.textAt(0) === "gauge image")
@@ -696,7 +696,7 @@ Item {
             }
             if (userDash.children[i].information === "Square gauge")
             {
-                saveDashtofilestring += (userDash.children[i].information+","+userDash.children[i].width+","+userDash.children[i].height+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].maxvalue+","+userDash.children[i].decimalpoints+","+userDash.children[i].mainunit+","+userDash.children[i].title+","+userDash.children[i].vertgaugevisible+","+userDash.children[i].horigaugevisible+","+userDash.children[i].secvaluevisible+","+"Dashboard"+","+userDash.children[i].mainvaluename+","+userDash.children[i].secvaluename+","+userDash.children[i].warnvaluehigh+","+userDash.children[i].warnvaluelow+","+userDash.children[i].framecolor+","+userDash.children[i].resetbackroundcolor+","+userDash.children[i].resettitlecolor+","+userDash.children[i].titletextcolor+","+userDash.children[i].textcolor+","+userDash.children[i].barcolor+","+userDash.children[i].titlefontsize+","+userDash.children[i].mainfontsize+"\r\n");
+                saveDashtofilestring += (userDash.children[i].information+","+userDash.children[i].width+","+userDash.children[i].height+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].maxvalue+","+userDash.children[i].decimalpoints+","+userDash.children[i].mainunit+","+userDash.children[i].title+","+userDash.children[i].vertgaugevisible+","+userDash.children[i].horigaugevisible+","+userDash.children[i].secvaluevisible+","+"Dashboard"+","+userDash.children[i].mainvaluename+","+userDash.children[i].secvaluename+","+userDash.children[i].warnvaluehigh+","+userDash.children[i].warnvaluelow+","+userDash.children[i].framecolor+","+userDash.children[i].resetbackroundcolor+","+userDash.children[i].resettitlecolor+","+userDash.children[i].titletextcolor+","+userDash.children[i].textcolor+","+userDash.children[i].barcolor+","+userDash.children[i].titlefontsize+","+userDash.children[i].mainfontsize+","+userDash.children[i].decimalpoints2+"\r\n");
             }
             if (userDash.children[i].information === "gauge image")
             {
@@ -793,7 +793,7 @@ Item {
             }
 
             case "Square gauge": {
-                CreateSquareGaugeScript.createSquareGauge(gaugelist.get(i).width,gaugelist.get(i).height,gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).maxvalue,gaugelist.get(i).decplace,gaugelist.get(i).unit,gaugelist.get(i).id,gaugelist.get(i).vertgaugevis,gaugelist.get(i).horigaugevis,gaugelist.get(i).secvaluevis,"Dashboard",gaugelist.get(i).valuepropertymain,gaugelist.get(i).valuepropertysec,gaugelist.get(i).warnvaluehigh,gaugelist.get(i).warnvaluelow,gaugelist.get(i).framecolor,gaugelist.get(i).backroundcolor,gaugelist.get(i).titlecolor,gaugelist.get(i).titletextcolor,gaugelist.get(i).textcolor,gaugelist.get(i).barcolor,gaugelist.get(i).titlefontsize,gaugelist.get(i).mainfontsize),gaugelist.get(i).decplace2;
+                CreateSquareGaugeScript.createSquareGauge(gaugelist.get(i).width,gaugelist.get(i).height,gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).maxvalue,gaugelist.get(i).decplace,gaugelist.get(i).unit,gaugelist.get(i).id,gaugelist.get(i).vertgaugevis,gaugelist.get(i).horigaugevis,gaugelist.get(i).secvaluevis,"Dashboard",gaugelist.get(i).valuepropertymain,gaugelist.get(i).valuepropertysec,gaugelist.get(i).warnvaluehigh,gaugelist.get(i).warnvaluelow,gaugelist.get(i).framecolor,gaugelist.get(i).backroundcolor,gaugelist.get(i).titlecolor,gaugelist.get(i).titletextcolor,gaugelist.get(i).textcolor,gaugelist.get(i).barcolor,gaugelist.get(i).titlefontsize,gaugelist.get(i).mainfontsize,gaugelist.get(i).decplace2);
                 break;
             }
             case "gauge image": {
