@@ -271,7 +271,7 @@ Quick1.TabView {
                             width: windowbackround.width / 5
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
-                            model: [ "PowerFC","UDP","Adaptronic Select Modbus","CAN Adaptronic Modular","Consult","HaltechV1","HaltechV2","OBD2"]
+                            model: [ "PowerFC","UDP","None","CAN Adaptronic Modular","Consult","HaltechV1","HaltechV2","OBD2"]
                             property bool initialized: false
                             onCurrentIndexChanged: {if (initialized) AppSettings.setECU( currentIndex ),Dashboard.setecu(ecuSelect.currentIndex);}
                             Component.onCompleted: { currentIndex = AppSettings.getECU(),Dashboard.setecu(ecuSelect.currentIndex),initialized = true; }
@@ -569,7 +569,7 @@ Quick1.TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.88g ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.88h ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -1457,7 +1457,7 @@ Quick1.TabView {
                     width: daemons.width / 5
                     height: daemons.height /15
                     font.pixelSize: daemons.width / 55
-                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata","Adaptronic CAN","Motec M1"]
+                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata","Adaptronic CAN","Motec M1","AEM V2"]
                     delegate: ItemDelegate {
                         width: daemonselect.width
                         text: daemonselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData

@@ -731,7 +731,6 @@ void Connect::daemonstartup(const int &daemon)
         break;
     case 5:
         daemonstart = "./M800ADLSet1d";
-        //daemonstart = "./Apexid /dev/ttyUSB0";
         break;
     case 6:
         daemonstart = "./OBD /dev/ttyUSB0";
@@ -744,6 +743,9 @@ void Connect::daemonstartup(const int &daemon)
         break;
     case 9:
         daemonstart = "./MotecM1d";
+        break;
+    case 10:
+        daemonstart = "./AEMV2d";
         break;
     }
     QString fileName = "/home/pi/startdaemon.sh";//This will be the correct path on pi
@@ -902,10 +904,10 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
     {
         m_udpreceiver->startreceiver();
     }
-    //Adaptronic
+    //None
     if (ecuSelect == 2)
     {
-        m_adaptronicselect->openConnection(portName);
+        //m_adaptronicselect->openConnection(portName);
 
     }
 
