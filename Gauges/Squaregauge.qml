@@ -367,6 +367,15 @@ Rectangle {
                 }
             }
             MenuItem {
+                text: "Change main value"
+                font.pixelSize: 15
+                onClicked: {
+                    hidemenues();
+                    cbxMain.visible = true;
+                    btnMainSrc.visible = true;
+                }
+            }
+            MenuItem {
                 text: "Change sec value"
                 font.pixelSize: 15
                 onClicked: {
@@ -649,7 +658,6 @@ Rectangle {
                 secondaryvaluetextfield.visible = true;
             }
         }
-
     }
     Item {
         id: minValueSelect
