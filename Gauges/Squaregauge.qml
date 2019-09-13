@@ -390,7 +390,7 @@ Rectangle {
                 onClicked: {
                     hidemenues();
                     cbx_decimalplaces.visible = true;
-                    cbx_decimalplaces2.visible  = false;
+                    cbx_decimalplaces2.visible  = true;
                     btndecimalplaces.visible = true;
                 }
             }
@@ -697,6 +697,7 @@ Rectangle {
         ComboBox {
             id: cbx_decimalplaces2
             visible: false
+            anchors.top: cbx_decimalplaces.bottom
             model: ["0","1","2","3","N/A"]
         }
         Button {
