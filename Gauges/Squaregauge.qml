@@ -91,11 +91,11 @@ Rectangle {
         anchors.fill: parent
         drag.target: parent
         enabled: false
-        //drag.active:
         onDoubleClicked: {
             popupmenu.popup(touchArea.mouseX, touchArea.mouseY);
         }
         Component.onCompleted: {toggledecimal();
+            toggledecimal2();
         }
     }
 
@@ -304,7 +304,7 @@ Rectangle {
         cbx_gaugefontsize.visible =false;
         btngaugefontsize.visible =false;
         cbx_decimalplaces.visible  = false;
-        //cbx_decimalplaces2.visible  = false;
+        cbx_decimalplaces2.visible  = false;
         btndecimalplaces.visible = false;
     }
     Gauge {
@@ -408,7 +408,7 @@ Rectangle {
                 onClicked: {
                     hidemenues();
                     cbx_decimalplaces.visible = true;
-                    //cbx_decimalplaces2.visible  = true;
+                    cbx_decimalplaces2.visible  = true;
                     btndecimalplaces.visible = true;
                 }
             }
@@ -761,6 +761,7 @@ Rectangle {
                 decimalpoints = cbx_decimalplaces.currentIndex;
                 decimalpoints2 = cbx_decimalplaces2.currentIndex;
                 toggledecimal();
+                toggledecimal2();
             }
         }
     }
