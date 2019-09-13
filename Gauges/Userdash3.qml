@@ -774,7 +774,7 @@ Item {
                                          userDash.children[i].peakneedletipwidth+","+
                                          userDash.children[i].peakneedleoffset+","+
                                          userDash.children[i].peakneedlevisible+","+
-                                         +"\r\n")
+                                         +"\r\n");
             }
         }
     }
