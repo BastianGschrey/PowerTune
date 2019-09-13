@@ -275,7 +275,7 @@ Rectangle {
         if (decimalpoints < 4)
         {
             mainvaluetextfield.text = parseFloat(placeholder.text).toFixed(decimalpoints);
-            secondaryvaluetextfield.text = parseFloat(placeholder2.text).toFixed(decimalpoints);
+            secondaryvaluetextfield.text = parseFloat(placeholder2.text).toFixed(decimalpoints2);
         }
         else
             mainvaluetextfield.text = placeholder.text;
@@ -295,7 +295,7 @@ Rectangle {
         cbx_gaugefontsize.visible =false;
         btngaugefontsize.visible =false;
         cbx_decimalplaces.visible  = false;
-        cbx_decimalplaces2.visible  = false;
+        //cbx_decimalplaces2.visible  = false;
         btndecimalplaces.visible = false;
     }
     Gauge {
@@ -390,7 +390,7 @@ Rectangle {
                 onClicked: {
                     hidemenues();
                     cbx_decimalplaces.visible = true;
-                    cbx_decimalplaces2.visible  = true;
+                    //cbx_decimalplaces2.visible  = true;
                     btndecimalplaces.visible = true;
                 }
             }
@@ -594,7 +594,34 @@ Rectangle {
             }
         }
     }
+    Item {
+        id: mainSourceSelector
+        anchors.fill: parent
 
+
+        ComboBox {
+            id: cbxMain
+            visible: false
+            textRole: "titlename"
+            model: powertunedatasource
+        }
+        Button {
+            id: btnMainSrc
+            x: 150
+            visible: false
+            text: "apply"
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            onClicked: {
+                cbxMain.visible = false;
+                btnMainSrc.visible = false;
+                mainvalue = Qt.binding(function(){return Dashboard[powertunedatasource.get(cbxMain.currentIndex).sourcename]});
+            }
+        }
+
+    }
     Item {
         id: secSourceSelector
         anchors.fill: parent
@@ -694,6 +721,7 @@ Rectangle {
             visible: false
             model: ["0","1","2","3","N/A"]
         }
+
         ComboBox {
             id: cbx_decimalplaces2
             visible: false
