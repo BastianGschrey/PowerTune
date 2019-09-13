@@ -626,6 +626,7 @@ Rectangle {
             onClicked: {
                 cbxMain.visible = false;
                 btnMainSrc.visible = false;
+                mainvaluename = powertunedatasource.get(cbxMain.currentIndex).sourcename;
                 mainvalue = Qt.binding(function(){return Dashboard[powertunedatasource.get(cbxMain.currentIndex).sourcename]});
             }
         }
@@ -654,6 +655,7 @@ Rectangle {
             onClicked: {
                 cbxSecondary.visible = false;
                 btnSecSrc.visible = false;
+                secvaluename = powertunedatasource.get(cbxSecondary.currentIndex).sourcename;
                 secvalue = Qt.binding(function(){return Dashboard[powertunedatasource.get(cbxSecondary.currentIndex).sourcename]});
                 secondaryvaluetextfield.visible = true;
             }
