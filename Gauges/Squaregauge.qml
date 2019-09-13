@@ -23,7 +23,7 @@ Rectangle {
     property alias vertgaugevisible: vertgauge.visible
     property alias horigaugevisible: horizgauge.visible
     property alias secvaluevisible: secondaryvaluetextfield.visible
-    property alias secvalue: secondaryvaluetextfield.text
+    property alias secvalue: placeholder2.text//secondaryvaluetextfield.text
     property alias mainvalue : placeholder.text
     property double maxvalue: vertgauge.maximumValue
     property alias titlecolor: titlebar.color
@@ -36,6 +36,7 @@ Rectangle {
     property string textcolor
     property string barcolor
     property int decimalpoints
+    property int decimalpoints2
     property double warnvaluehigh: 20000
     property double warnvaluelow : -20000
 
@@ -75,6 +76,12 @@ Rectangle {
     }
     Text {
         id : placeholder
+        onTextChanged: { toggledecimal();}
+        Component.onCompleted: {toggledecimal();}
+        visible: false
+    }
+    Text {
+        id : placeholder2
         onTextChanged: { toggledecimal();}
         Component.onCompleted: {toggledecimal();}
         visible: false
@@ -228,7 +235,6 @@ Rectangle {
                 color: barcolor
             }
         }
-
     }
     Item {
         id: warningindication
@@ -269,9 +275,11 @@ Rectangle {
         if (decimalpoints < 4)
         {
             mainvaluetextfield.text = parseFloat(placeholder.text).toFixed(decimalpoints);
+            secondaryvaluetextfield.text = parseFloat(placeholder2.text).toFixed(decimalpoints);
         }
         else
             mainvaluetextfield.text = placeholder.text;
+            secondaryvaluetextfield.text =placeholder2.text;
     }
     function hidemenues()
     {
@@ -287,6 +295,7 @@ Rectangle {
         cbx_gaugefontsize.visible =false;
         btngaugefontsize.visible =false;
         cbx_decimalplaces.visible  = false;
+        cbx_decimalplaces2.visible  = false;
         btndecimalplaces.visible = false;
     }
     Gauge {
@@ -381,6 +390,7 @@ Rectangle {
                 onClicked: {
                     hidemenues();
                     cbx_decimalplaces.visible = true;
+                    cbx_decimalplaces2.visible  = false;
                     btndecimalplaces.visible = true;
                 }
             }
@@ -684,6 +694,11 @@ Rectangle {
             visible: false
             model: ["0","1","2","3","N/A"]
         }
+        ComboBox {
+            id: cbx_decimalplaces2
+            visible: false
+            model: ["0","1","2","3","N/A"]
+        }
         Button {
             id: btndecimalplaces
             x: 119
@@ -696,6 +711,7 @@ Rectangle {
             onClicked: {
                 hidemenues();
                 decimalpoints = cbx_decimalplaces.currentIndex;
+                decimalpoints2 = cbx_decimalplaces2.currentIndex;
                 toggledecimal();
             }
         }

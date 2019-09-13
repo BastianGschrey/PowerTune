@@ -3,6 +3,9 @@ import QtQuick 2.8
 ListModel {
        id: colorModel
        ListElement {
+           itemColor: "           "
+       }
+       ListElement {
            itemColor: "transparent"
        }
        ListElement {
