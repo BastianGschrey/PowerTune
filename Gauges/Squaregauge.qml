@@ -622,6 +622,7 @@ Rectangle {
             visible: false
             textRole: "titlename"
             model: powertunedatasource
+            Component.onCompleted: {for(var i = 0; i < cbxMain.model.count; ++i) if (powertunedatasource.get(i).sourcename === mainvaluename)cbxMain.currentIndex = i}
         }
         Button {
             id: btnMainSrc
@@ -652,6 +653,7 @@ Rectangle {
             visible: false
             textRole: "titlename"
             model: powertunedatasource
+            Component.onCompleted: {for(var i = 0; i < cbxSecondary.model.count; ++i) if (powertunedatasource.get(i).sourcename === secvaluename)cbxSecondary.currentIndex = i}
         }
         Button {
             id: btnSecSrc
@@ -740,6 +742,13 @@ Rectangle {
             id: cbx_decimalplaces
             visible: false
             model: ["0","1","2","3","N/A"]
+            Component.onCompleted: {
+                    for(var i = 0; i < 5; ++i)
+                    if (cbx_decimalplaces.textAt(i) === decimalpoints.toString())
+                    {
+                        cbx_decimalplaces.currentIndex = i;
+                    }
+            }
         }
 
         ComboBox {
@@ -747,6 +756,13 @@ Rectangle {
             visible: false
             anchors.top: cbx_decimalplaces.bottom
             model: ["0","1","2","3","N/A"]
+            Component.onCompleted: {
+                    for(var i = 0; i < 5; ++i)
+                    if (cbx_decimalplaces2.textAt(i) === decimalpoints2.toString())
+                    {
+                        cbx_decimalplaces2.currentIndex = i;
+                    }
+            }
         }
         Button {
             id: btndecimalplaces
