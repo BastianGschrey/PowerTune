@@ -279,7 +279,7 @@ Rectangle {
             mainvaluetextfield.text = Qt.binding(function(){return Dashboard[mainvaluename].toFixed(decimalpoints)});
         }
         else
-            mainvaluetextfield.text = mainvalue;
+            mainvaluetextfield.text = Dashboard[mainvaluename];
     }
     function toggledecimal2()
     {
@@ -288,7 +288,7 @@ Rectangle {
             secondaryvaluetextfield.text =  Qt.binding(function(){return Dashboard[secvaluename].toFixed(decimalpoints2)});
         }
         else
-            secondaryvaluetextfield.text = secvalue;
+            secondaryvaluetextfield.text = Dashboard[secvaluename];
     }
     function hidemenues()
     {
@@ -636,7 +636,8 @@ Rectangle {
                 cbxMain.visible = false;
                 btnMainSrc.visible = false;
                 mainvaluename = powertunedatasource.get(cbxMain.currentIndex).sourcename;
-                mainvalue = Qt.binding(function(){return Dashboard[powertunedatasource.get(cbxMain.currentIndex).sourcename]});
+                toggledecimal();
+                //mainvalue = Qt.binding(function(){return Dashboard[powertunedatasource.get(cbxMain.currentIndex).sourcename]});
             }
         }
 
@@ -665,8 +666,8 @@ Rectangle {
                 cbxSecondary.visible = false;
                 btnSecSrc.visible = false;
                 secvaluename = powertunedatasource.get(cbxSecondary.currentIndex).sourcename;
-                secvalue = Qt.binding(function(){return Dashboard[powertunedatasource.get(cbxSecondary.currentIndex).sourcename]});
-                secondaryvaluetextfield.visible = true;
+                toggledecimal2();
+                //secvalue = Qt.binding(function(){return Dashboard[powertunedatasource.get(cbxSecondary.currentIndex).sourcename]});
             }
         }
     }
