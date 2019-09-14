@@ -1,4 +1,4 @@
-import QtQuick 2.8
+mport QtQuick 2.8
 import QtQuick.Extras 1.4
 import QtQuick.Dialogs 1.0
 import QtQuick.Controls.Styles 1.4
@@ -23,7 +23,7 @@ Item {
     property string datastore: ""
     property string saveDashtofilestring : ""
     property string gaugeType : ""
-    property string backroundpicturesource1 : ""
+    property string backroundpicturesource2 : ""
     property bool val1: false
     property bool val2: false
     property bool val3: false
@@ -52,7 +52,7 @@ Item {
         anchors.fill: parent
     }
     Image {
-        id:backroundpicture1
+        id:backroundpicture2
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
         z: 0
@@ -87,11 +87,11 @@ Item {
     }
 
     Settings {
-        property alias datastore2: mainwindow.datastore
-        property alias rpmbackround2: rpmstyleselector.currentIndex
-        property alias extraLoader2: extraSelector.currentIndex
-        property alias savebackroundpicture2: backroundpicture1.source
-        property alias savemainbackroundcolor2: mainbackroundcolor.color
+        property alias datastore1: mainwindow.datastore
+        property alias rpmbackround1: rpmstyleselector.currentIndex
+        property alias extraLoader1: extraSelector.currentIndex
+        property alias savebackroundpicture2: backroundpicture2.source
+        property alias savemainbackroundcolor: mainbackroundcolor.color
 
     }
 
@@ -103,8 +103,8 @@ Item {
         onDashsetup2Changed:
         {
             if (dashvalue.textAt(1) !== "") {
-                //console.log("Dashseptup changed");
-                //console.log(dashvalue.textAt(0) );
+
+                console.log("new item " +dashvalue.textAt(0) );
                 if (dashvalue.textAt(0) === "Bar gauge")
                 {
                     //  console.log("Create Bar Gauge")
@@ -312,10 +312,10 @@ Item {
                 model: Dashboard.backroundpictures
                 currentIndex: 0
                 onCurrentIndexChanged: {
-                    backroundpicturesource1 = "file:///home/pi/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
-                    //backroundpicturesource1 = "file:///c:/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
-                    // backroundpicturesource1 = "file:" + backroundSelector.textAt(backroundSelector.currentIndex);
-                    backroundpicture1.source = backroundpicturesource1;
+                    backroundpicturesource2 = "file:///home/pi/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
+                    //backroundpicturesource2 = "file:///c:/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
+                    // backroundpicturesource2 = "file:" + backroundSelector.textAt(backroundSelector.currentIndex);
+                    backroundpicture2.source = backroundpicturesource2;
                 }
                 delegate: ItemDelegate {
                     width: backroundSelector.width
@@ -692,7 +692,7 @@ Item {
         {
             if (userDash.children[i].information === "Bar gauge")
             {
-                saveDashtofilestring += (userDash.children[i].information+","+userDash.children[i].width+","+userDash.children[i].height+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].minvalue+","+userDash.children[i].maxvalue+","+userDash.children[i].decimalpoints+","+userDash.children[i].gaugename+","+userDash.children[i].mainvaluename+","+userDash.children[i].warnvaluehigh+","+userDash.children[i].warnvaluelow+"\r\n");
+                saveDashtofilestring += (userDash.children[i].information+","+userDash.children[i].width+","+userDash.children[i].height+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].minvalue+","+userDash.children[i].maxvalue+","+userDash.children[i].decimalpoints+","+userDash.children[i].gaugename+","+userDash.children[i].mainvaluename+","+userDash.children[i].warnvaluehigh+","+userDash.children[i].warnvaluelow+","+userDash.children[i].decimalpoints2+"\r\n");
             }
             if (userDash.children[i].information === "Square gauge")
             {
@@ -791,8 +791,9 @@ Item {
                 CreateBargaugeScript.createVerticalGauge(gaugelist.get(i).width,gaugelist.get(i).height,gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).minvalue,gaugelist.get(i).maxvalue,gaugelist.get(i).decplace,gaugelist.get(i).unit,gaugelist.get(i).valuepropertymain,gaugelist.get(i).warnvaluehigh,gaugelist.get(i).warnvaluelow);
                 break;
             }
+
             case "Square gauge": {
-                CreateSquareGaugeScript.createSquareGauge(gaugelist.get(i).width,gaugelist.get(i).height,gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).maxvalue,gaugelist.get(i).decplace,gaugelist.get(i).unit,gaugelist.get(i).id,gaugelist.get(i).vertgaugevis,gaugelist.get(i).horigaugevis,gaugelist.get(i).secvaluevis,"Dashboard",gaugelist.get(i).valuepropertymain,gaugelist.get(i).valuepropertysec,gaugelist.get(i).warnvaluehigh,gaugelist.get(i).warnvaluelow,gaugelist.get(i).framecolor,gaugelist.get(i).backroundcolor,gaugelist.get(i).titlecolor,gaugelist.get(i).titletextcolor,gaugelist.get(i).textcolor,gaugelist.get(i).barcolor,gaugelist.get(i).titlefontsize,gaugelist.get(i).mainfontsize,gaugelist.get(i).mainfontsize,gaugelist.get(i).decplace2);
+                CreateSquareGaugeScript.createSquareGauge(gaugelist.get(i).width,gaugelist.get(i).height,gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).maxvalue,gaugelist.get(i).decplace,gaugelist.get(i).unit,gaugelist.get(i).id,gaugelist.get(i).vertgaugevis,gaugelist.get(i).horigaugevis,gaugelist.get(i).secvaluevis,"Dashboard",gaugelist.get(i).valuepropertymain,gaugelist.get(i).valuepropertysec,gaugelist.get(i).warnvaluehigh,gaugelist.get(i).warnvaluelow,gaugelist.get(i).framecolor,gaugelist.get(i).backroundcolor,gaugelist.get(i).titlecolor,gaugelist.get(i).titletextcolor,gaugelist.get(i).textcolor,gaugelist.get(i).barcolor,gaugelist.get(i).titlefontsize,gaugelist.get(i).mainfontsize,gaugelist.get(i).decplace2);
                 break;
             }
             case "gauge image": {
@@ -956,8 +957,9 @@ Item {
             if(userDash.children[i].information === "Square gauge"){
                 //console.log("Save Square");
                 //Apend all values of each gauge to the List Model
-                gaugelist.append({"type": userDash.children[i].title,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"maxvalue":userDash.children[i].maxvalue,"decplace":userDash.children[i].decimalpoints,"unit":userDash.children[i].mainunit,"id":userDash.children[i].title,"vertgaugevis":userDash.children[i].vertgaugevisible,"horigaugevis":userDash.children[i].horigaugevisible,"secvaluevis":userDash.children[i].secvaluevisible,"valuepropertymain":userDash.children[i].mainvaluename,"valuepropertysec":userDash.children[i].secvaluename,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow,"framecolor":userDash.children[i].framecolor,"backroundcolor":userDash.children[i].resetbackroundcolor,"titlecolor":userDash.children[i].resettitlecolor,"titletextcolor":userDash.children[i].titletextcolor,"textcolor":userDash.children[i].textcolor,"barcolor":userDash.children[i].barcolor,"titlefontsize":userDash.children[i].titlefontsize,"mainfontsize":userDash.children[i].mainfontsize,"info":userDash.children[i].information,"info":userDash.children[i].information,"decplace2":userDash.children[i].decimalpoints2})
-                //console.log(gaugelist.get(i).width)
+                gaugelist.append({"type": userDash.children[i].title,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"maxvalue":userDash.children[i].maxvalue,"decplace":userDash.children[i].decimalpoints,"unit":userDash.children[i].mainunit,"id":userDash.children[i].title,"vertgaugevis":userDash.children[i].vertgaugevisible,"horigaugevis":userDash.children[i].horigaugevisible,"secvaluevis":userDash.children[i].secvaluevisible,"valuepropertymain":userDash.children[i].mainvaluename,"valuepropertysec":userDash.children[i].secvaluename,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow,"framecolor":userDash.children[i].framecolor,"backroundcolor":userDash.children[i].resetbackroundcolor,"titlecolor":userDash.children[i].resettitlecolor,"titletextcolor":userDash.children[i].titletextcolor,"textcolor":userDash.children[i].textcolor,"barcolor":userDash.children[i].barcolor,"titlefontsize":userDash.children[i].titlefontsize,"mainfontsize":userDash.children[i].mainfontsize,"info":userDash.children[i].information,"decplace2":userDash.children[i].decimalpoints2})
+                //console.log(gaugelist.get(i).warnvaluelow)
+                //console.log(userDash.children[i].warnvaluelow)
 
             }
             if(userDash.children[i].information === "Bar gauge"){
