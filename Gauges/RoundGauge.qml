@@ -88,6 +88,7 @@ Rectangle{
     property string peakneedlevisible
 
     Drag.active: true
+    DatasourcesList{id: powertunedatasource}
 
     SequentialAnimation {
         id: intro
@@ -360,6 +361,12 @@ Rectangle{
                 onClicked: intro.running = true;
             }
             MenuItem {
+                text: "Datasource"
+                font.pixelSize: 15
+                onClicked: {datasourcemenue.popup(touchArea.mouseX, touchArea.mouseY);//gaugesizesmenue.visible= true;
+                }
+            }
+            MenuItem {
                 text: "Size and ring"
                 font.pixelSize: 15
                 onClicked: {gaugesizesmenue.popup(touchArea.mouseX, touchArea.mouseY);//gaugesizesmenue.visible= true;
@@ -459,6 +466,43 @@ Rectangle{
         anchors.fill: parent
         drag.target: parent
         enabled: false
+    }
+    Menu{
+        id : datasourcemenue
+        closePolicy :Popup.NoAutoClose
+        Rectangle {
+            color: "darkgrey"
+            width:popupmenu.width
+            height: 100
+            radius: 10
+            Grid {
+                id :datasourcemenuegrid
+                rows: 2
+                columns: 1
+                rowSpacing :5
+                leftPadding: 5
+        ComboBox {
+            id: cbxDatasource
+            width:popupmenu.width
+            visible: true
+            textRole: "titlename"
+            model: powertunedatasource
+            //powertunedatasource.get(cbxMain.currentIndex).sourcename;
+            Component.onCompleted: {for(var i = 0; i < cbxDatasource.model.count; ++i) if (powertunedatasource.get(i).sourcename === mainvaluename)cbxDatasource.currentIndex = i}
+
+        }
+        RoundButton{
+            text: "Close menu"
+            font.bold: true
+            font.pixelSize : 15
+            width: parent.width /1.07
+            onClicked: {
+                mainvaluename = powertunedatasource.get(cbxDatasource.currentIndex).sourcename;
+                datasourcemenue.close();
+                touchArea.enabled = true;}
+        }
+    }
+    }
     }
     Menu{
         id : gaugesizesmenue
