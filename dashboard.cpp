@@ -29,7 +29,7 @@ qreal AN90;
 qreal AN95;
 qreal AN100;
 qreal AN105;
-qreal lamdamultiplicator;
+qreal lamdamultiplicator = 1;
 
 DashBoard::DashBoard(QObject *parent)
     : QObject(parent)
@@ -1530,8 +1530,8 @@ void DashBoard::setLAMBDA(const qreal &LAMBDA)
 {
     if (m_LAMBDA == LAMBDA)
         return;
-    m_LAMBDA = LAMBDA;
-    emit lAMBDAChanged(LAMBDA * lamdamultiplicator);
+    m_LAMBDA = LAMBDA* lamdamultiplicator;
+    emit lAMBDAChanged(m_LAMBDA);
 }
 
 void DashBoard::setLAMBDATarget(const qreal &LAMBDATarget)
@@ -2124,22 +2124,22 @@ void DashBoard::setlambda2(const qreal &lambda2)
 {
     if (m_lambda2 == lambda2)
         return;
-    m_lambda2 = lambda2;
-    emit lambda2Changed(lambda2 * lamdamultiplicator);
+    m_lambda2 = lambda2* lamdamultiplicator;
+    emit lambda2Changed(m_lambda2);
 }
 void DashBoard::setlambda3(const qreal &lambda3)
 {
     if (m_lambda3 == lambda3)
         return;
-    m_lambda3 = lambda3;
-    emit lambda3Changed(lambda3 *lamdamultiplicator);
+    m_lambda3 = lambda3* lamdamultiplicator;
+    emit lambda3Changed(m_lambda3);
 }
 void DashBoard::setlambda4(const qreal &lambda4)
 {
     if (m_lambda4 == lambda4)
         return;
-    m_lambda4 = lambda4;
-    emit lambda4Changed(lambda4 * lamdamultiplicator);
+    m_lambda4 = lambda4 * lamdamultiplicator;
+    emit lambda4Changed(m_lambda4);
 }
 void DashBoard::setlaunchcontolfuelenrich(const qreal &launchcontolfuelenrich)
 {
