@@ -23,7 +23,7 @@ Item {
     property string datastore: ""
     property string saveDashtofilestring : ""
     property string gaugeType : ""
-    property string backroundpicturesource1 : ""
+    property string backroundpicturesource3 : ""
     property bool val1: false
     property bool val2: false
     property bool val3: false
@@ -52,7 +52,7 @@ Item {
         anchors.fill: parent
     }
     Image {
-        id:backroundpicture1
+        id:backroundpicture3
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
         z: 0
@@ -90,7 +90,7 @@ Item {
         property alias datastore3: mainwindow.datastore
         property alias rpmbackround3: rpmstyleselector.currentIndex
         property alias extraLoader3: extraSelector.currentIndex
-        property alias savebackroundpicture3: backroundpicture1.source
+        property alias savebackroundpicture3: backroundpicture3.source
         property alias savemainbackroundcolor3: mainbackroundcolor.color
 
     }
@@ -311,10 +311,10 @@ Item {
                 model: Dashboard.backroundpictures
                 currentIndex: 0
                 onCurrentIndexChanged: {
-                    backroundpicturesource1 = "file:///home/pi/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
-                    //backroundpicturesource1 = "file:///c:/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
-                    // backroundpicturesource1 = "file:" + backroundSelector.textAt(backroundSelector.currentIndex);
-                    backroundpicture1.source = backroundpicturesource1;
+                    backroundpicturesource3 = "file:///home/pi/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
+                    //backroundpicturesource3 = "file:///c:/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
+                    // backroundpicturesource3 = "file:" + backroundSelector.textAt(backroundSelector.currentIndex);
+                    backroundpicture3.source = backroundpicturesource3;
                 }
                 delegate: ItemDelegate {
                     width: backroundSelector.width

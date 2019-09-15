@@ -87,11 +87,11 @@ Item {
     }
 
     Settings {
-        property alias datastore1: mainwindow.datastore
-        property alias rpmbackround1: rpmstyleselector.currentIndex
-        property alias extraLoader1: extraSelector.currentIndex
+        property alias datastore2: mainwindow.datastore
+        property alias rpmbackround2: rpmstyleselector.currentIndex
+        property alias extraLoader2: extraSelector.currentIndex
         property alias savebackroundpicture2: backroundpicture2.source
-        property alias savemainbackroundcolor: mainbackroundcolor.color
+        property alias savemainbackroundcolor2: mainbackroundcolor.color
 
     }
 
