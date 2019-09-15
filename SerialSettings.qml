@@ -569,7 +569,7 @@ Quick1.TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.89 ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.89a ";color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -1062,6 +1062,7 @@ Quick1.TabView {
                     property alias boostwarning: boostwarn.text
                     property alias rpmwarning: rpmwarn.text
                     property alias knockwarning: knockwarn.text
+                    property alias lambdamultiplier: lambdamultiply.text
                     property alias gearcalcselectswitch: gearcalcselect.checked
                     property alias gearval1: valgear1.text
                     property alias gearval2: valgear2.text
@@ -1075,7 +1076,7 @@ Quick1.TabView {
                 Grid {
                     id: speedcorrgrid
                     rows:3
-                    columns: 4
+                    columns: 5
                     spacing: warningsettings.height /150
                     Text { text: "WaterTemp"
                         font.pixelSize: warningsettings.width / 55;color:"white"}
@@ -1084,6 +1085,8 @@ Quick1.TabView {
                     Text { text: "Revs"
                         font.pixelSize: warningsettings.width / 55;color:"white"}
                     Text { text: "Knock"
+                        font.pixelSize: warningsettings.width / 55;color:"white"}
+                    Text { text: "Lamda multiply"
                         font.pixelSize: warningsettings.width / 55;color:"white"}
                     TextField {
                         id: watertempwarn
@@ -1124,8 +1127,18 @@ Quick1.TabView {
                         inputMethodHints: Qt.ImhFormattedNumbersOnly
                         text:  "80"
                         onEditingFinished: Dashboard.setknockwarn(knockwarn.text)
-                        Component.onCompleted: Dashboard.setknockwarn(knockwarn.text),tabView.currentIndex = 4; // opens the 5th tab
+
                     }
+                        TextField {
+                            id: lambdamultiply
+                            width: warningsettings.width / 7
+                            height: warningsettings.height /15
+                            font.pixelSize: warningsettings.width / 55
+                            inputMethodHints: Qt.ImhFormattedNumbersOnly
+                            text:  "14.7"
+                            onEditingFinished: Dashboard.setLambdamultiply(lambdamultiply.text)
+                            Component.onCompleted: Dashboard.setLambdamultiply(lambdamultiply.text),tabView.currentIndex = 4; // opens the 5th tab
+                        }
 
                 }
 

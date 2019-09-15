@@ -29,6 +29,7 @@ qreal AN90;
 qreal AN95;
 qreal AN100;
 qreal AN105;
+qreal lamdamultiplicator;
 
 DashBoard::DashBoard(QObject *parent)
     : QObject(parent)
@@ -351,6 +352,7 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_AnalogCalc8()
     ,  m_AnalogCalc9()
     ,  m_AnalogCalc10()
+    ,  m_Lambdamultiply()
 
 
 
@@ -1529,7 +1531,7 @@ void DashBoard::setLAMBDA(const qreal &LAMBDA)
     if (m_LAMBDA == LAMBDA)
         return;
     m_LAMBDA = LAMBDA;
-    emit lAMBDAChanged(LAMBDA);
+    emit lAMBDAChanged(LAMBDA * lamdamultiplicator);
 }
 
 void DashBoard::setLAMBDATarget(const qreal &LAMBDATarget)
@@ -2123,21 +2125,21 @@ void DashBoard::setlambda2(const qreal &lambda2)
     if (m_lambda2 == lambda2)
         return;
     m_lambda2 = lambda2;
-    emit lambda2Changed(lambda2);
+    emit lambda2Changed(lambda2 * lamdamultiplicator);
 }
 void DashBoard::setlambda3(const qreal &lambda3)
 {
     if (m_lambda3 == lambda3)
         return;
     m_lambda3 = lambda3;
-    emit lambda3Changed(lambda3);
+    emit lambda3Changed(lambda3 *lamdamultiplicator);
 }
 void DashBoard::setlambda4(const qreal &lambda4)
 {
     if (m_lambda4 == lambda4)
         return;
     m_lambda4 = lambda4;
-    emit lambda4Changed(lambda4);
+    emit lambda4Changed(lambda4 * lamdamultiplicator);
 }
 void DashBoard::setlaunchcontolfuelenrich(const qreal &launchcontolfuelenrich)
 {
@@ -2825,6 +2827,14 @@ void DashBoard::setAnalogCalc10(const qreal &AnalogCalc10)
     m_AnalogCalc10 = AnalogCalc10;
     emit AnalogCalc10Changed(AnalogCalc10);
 }
+void DashBoard::setLambdamultiply(const qreal &Lambdamultiply)
+{
+    if (m_Lambdamultiply == Lambdamultiply)
+        return;
+    m_Lambdamultiply = Lambdamultiply;
+    lamdamultiplicator = Lambdamultiply;
+    emit LambdamultiplyChanged(Lambdamultiply);
+}
 
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
@@ -3175,8 +3185,8 @@ qreal DashBoard::AnalogCalc6() const {return m_AnalogCalc6; }
 qreal DashBoard::AnalogCalc7() const {return m_AnalogCalc7; }
 qreal DashBoard::AnalogCalc8() const {return m_AnalogCalc8; }
 qreal DashBoard::AnalogCalc9() const {return m_AnalogCalc9; }
-qreal DashBoard::AnalogCalc10() const {return m_AnalogCalc10; }
-
+qreal DashBoard::AnalogCalc10() const {return m_AnalogCalc10;}
+qreal DashBoard::Lambdamultiply() const {return m_Lambdamultiply;}
 
 // Sensor Strings
 

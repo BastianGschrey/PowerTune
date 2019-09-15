@@ -362,6 +362,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal AnalogCalc8 READ AnalogCalc8 WRITE setAnalogCalc8 NOTIFY AnalogCalc8Changed)
     Q_PROPERTY(qreal AnalogCalc9 READ AnalogCalc9 WRITE setAnalogCalc9 NOTIFY AnalogCalc9Changed)
     Q_PROPERTY(qreal AnalogCalc10 READ AnalogCalc10 WRITE setAnalogCalc10 NOTIFY AnalogCalc10Changed)
+    Q_PROPERTY(qreal Lambdamultiply READ Lambdamultiply WRITE setLambdamultiply NOTIFY LambdamultiplyChanged)
 
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
     public:
@@ -727,7 +728,7 @@ class DashBoard : public QObject
     void setAnalogCalc8(const qreal &AnalogCalc8);
     void setAnalogCalc9(const qreal &AnalogCalc9);
     void setAnalogCalc10(const qreal &AnalogCalc10);
-
+    Q_INVOKABLE void setLambdamultiply(const qreal &Lambdamultiply);
 
 
 
@@ -1086,6 +1087,7 @@ class DashBoard : public QObject
     qreal AnalogCalc8() const;
     qreal AnalogCalc9() const;
     qreal AnalogCalc10() const;
+    qreal Lambdamultiply()const;
 signals:
 
     //Odometer
@@ -1431,6 +1433,8 @@ signals:
     void AnalogCalc8Changed(qreal AnalogCalc8);
     void AnalogCalc9Changed(qreal AnalogCalc9);
     void AnalogCalc10Changed(qreal AnalogCalc10);
+    void LambdamultiplyChanged(qreal Lambdamultiply);
+
 
 private:
     // Odometer
@@ -1791,6 +1795,7 @@ private:
     qreal m_AnalogCalc8;
     qreal m_AnalogCalc9;
     qreal m_AnalogCalc10;
+    qreal m_Lambdamultiply;
 
 };
 
