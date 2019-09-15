@@ -1,0 +1,226 @@
+import QtQuick 2.5
+import QtQuick.Controls 2.1
+
+Item {
+    id: statepicture
+    height: pictureheight
+    width : pictureheight
+    property string information: "state image"
+    property string statepicturesourceoff
+    property string statepicturesourceon
+    property int pictureheight
+    property string increasedecreaseident
+    property string mainvaluename
+    property double warnvaluehigh: 1
+    property double warnvaluelow : 0
+    Drag.active: true
+    DatasourcesList{id: powertunedatasource}
+    Component.onCompleted: togglemousearea();
+
+    Connections{
+        target: Dashboard
+        onDraggableChanged: togglemousearea();
+    }
+
+    Text {
+        id: mainvaluetextfield
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        font.pixelSize: 50
+        font.family: "Eurostile"
+        color: "white"
+        visible: false
+        onTextChanged: {
+            warningindication.warn();
+        }
+    }
+
+    Image {
+        anchors.fill: parent
+        id: statepictureoff
+        fillMode: Image.PreserveAspectFit
+        source:  statepicturesourceoff
+        visible: true
+    }
+    Image {
+        anchors.fill: parent
+        id: statepictureon
+        fillMode: Image.PreserveAspectFit
+        source:  statepicturesourceon
+        visible: false
+    }
+    MouseArea {
+        id: touchArea
+        anchors.fill: parent
+        drag.target: parent
+        enabled: false
+        onDoubleClicked: {
+            //console.log("double clicked");
+            changesize.visible = true;
+            Connect.readavailablebackrounds();
+            changesize.x = touchArea.mouseX;
+            changesize.y = touchArea.mouseY;
+        }
+    }
+    Rectangle{
+        id : changesize
+        color: "darkgrey"
+        visible: false
+        width : 200
+        height :150
+        Drag.active: true
+        MouseArea {
+            anchors.fill: parent
+            drag.target: parent
+            enabled: true
+        }
+        Grid { width: parent.width
+            height:parent.height
+            rows: 7
+            columns: 1
+            rowSpacing :5
+            Grid {
+                rows: 1
+                columns: 3
+                rowSpacing :5
+                RoundButton{text: "-"
+                    width: changesize.width /3.2
+                    onPressAndHold: {timer.running = true;
+                        increasedecreaseident = "decreasePicture"}
+                    onReleased: {timer.running = false;}
+                    onClicked: {pictureheight--}
+                }
+                Text{id: sizeTxt
+                    text: pictureheight
+                    font.pixelSize: 15
+                    width: changesize.width /3.2
+                    horizontalAlignment: Text.AlignHCenter
+                    onTextChanged: {pictureheight = sizeTxt.text}
+                }
+                RoundButton{ text: "+"
+                    width: changesize.width /3.2
+                    onPressAndHold: {timer.running = true;
+                        increasedecreaseident = "increasePicture"}
+                    onReleased: {timer.running = false;}
+                    onClicked: {pictureheight++}
+                }
+            }
+            ComboBox {
+                id: pictureSelectoroff
+                width: 200
+                height: 40
+                font.pixelSize: 15
+                model: Dashboard.backroundpictures
+                currentIndex: 0
+                onCurrentIndexChanged: {
+                    picturesourceoff = "file:///home/pi/Logo/" + pictureSelectoroff.textAt(pictureSelectoroff.currentIndex);
+                    //picturesource = "file:" + pictureSelector.textAt(pictureSelector.currentIndex); // windows
+                    statepictureoff.source = picturesourceoff;
+                                       }
+                delegate: ItemDelegate {
+                    width: pictureSelectoroff.width
+                    text: pictureSelectoroff.textRole ? (Array.isArray(pictureSelectoroff.model) ? modelData[pictureSelectoroff.textRole] : model[pictureSelectoroff.textRole]) : modelData
+                    font.weight: pictureSelectoroff.currentIndex === index ? Font.DemiBold : Font.Normal
+                    font.family: pictureSelectoroff.font.family
+                    font.pixelSize: pictureSelectoroff.font.pixelSize
+                    highlighted: pictureSelectoroff.highlightedIndex === index
+                    hoverEnabled: pictureSelectoroff.hoverEnabled
+                }
+            }
+            ComboBox {
+                id: pictureSelectoron
+                width: 200
+                height: 40
+                font.pixelSize: 15
+                model: Dashboard.backroundpictures
+                currentIndex: 0
+                onCurrentIndexChanged: {
+                    picturesourceon = "file:///home/pi/Logo/" + pictureSelectoron.textAt(pictureSelectoron.currentIndex);
+                    //picturesource = "file:" + pictureSelector.textAt(pictureSelector.currentIndex); // windows
+                    statepictureoon.source = picturesourceon;
+                                       }
+                delegate: ItemDelegate {
+                    width: pictureSelectoron.width
+                    text: pictureSelectoron.textRole ? (Array.isArray(pictureSelector.model) ? modelData[pictureSelector.textRole] : model[pictureSelector.textRole]) : modelData
+                    font.weight: pictureSelectoron.currentIndex === index ? Font.DemiBold : Font.Normal
+                    font.family: pictureSelectoron.font.family
+                    font.pixelSize: pictureSelectoron.font.pixelSize
+                    highlighted: pictureSelectoron.highlightedIndex === index
+                    hoverEnabled: pictureSelectoron.hoverEnabled
+                }
+            }
+            ComboBox {
+                id: cbxMain
+                textRole: "titlename"
+                model: powertunedatasource
+                Component.onCompleted: {for(var i = 0; i < cbxMain.model.count; ++i) if (powertunedatasource.get(i).sourcename === mainvaluename)cbxMain.currentIndex = i}
+            }
+            TextField {
+                id: triggeronvalue
+                width: 94
+                height: 40
+                visible: false
+                text: warnvaluehigh
+                oned4
+
+            }
+            RoundButton{
+                width: parent.width
+                text: "Delete picture"
+                font.pixelSize: 15
+                onClicked: statepicture.destroy();
+            }
+            RoundButton{
+                width: parent.width
+                text: "Close"
+                onClicked: changesize.visible = false;
+            }
+        }
+    }
+
+    Item {
+        Timer {
+            id: timer
+            interval: 50; running: false; repeat: true
+            onTriggered: {increaseDecrease()}
+        }
+
+        Text { id: time }
+    }
+    Item {
+        id: warningindication
+        function warn()
+        {
+
+            if (mainvaluetextfield.text == warnvaluehigh || mainvaluetextfield.text > warnvaluehigh )statepictureoff.visible = false,statepictureon.visible = true;
+            else statepictureoff.visible = false,statepictureon.visible = false;
+
+        }
+    }
+    function togglemousearea()
+    {
+    //    console.log("toggle" + Dashboard.draggable);
+        if (Dashboard.draggable === 1)
+        {
+            touchArea.enabled = true;
+        }
+        else
+            touchArea.enabled = false;
+    }
+    function increaseDecrease()
+    {
+        //console.log("ident "+ increasedecreaseident);
+        switch(increasedecreaseident)
+        {
+
+        case "increasePicture": {
+            pictureheight++;
+            break;
+        }
+        case "decreasePicture": {
+            pictureheight--;
+            break;
+        }
+        }
+    }
+}
