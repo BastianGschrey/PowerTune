@@ -2359,7 +2359,7 @@ void DashBoard::setwheelspdftleft(const qreal &wheelspdftleft)
     if (m_speedunits == "metric")
     {m_speed = wheelspdftleft;}
     if (m_speedunits == "imperial")
-    {m_speed = qRound(wheelspdftleft * 1.8 + 32);}
+    {m_speed = qRound((wheelspdftleft * 0.621371) * m_speedpercent);}
     emit wheelspdftleftChanged(wheelspdftleft);
     if (m_ExternalSpeed == 1){
     emit speedChanged(wheelspdftleft);
@@ -2370,11 +2370,11 @@ void DashBoard::setwheelspdftright(const qreal &wheelspdftright)
 {
     if (m_wheelspdftright == wheelspdftright)
         return;
-    m_wheelspdftright = wheelspdftright;
+    m_wheelspdftright = wheelspdftright * m_speedpercent;
     if (m_speedunits == "metric")
-    {m_speed = wheelspdftright;}
+    {m_speed = wheelspdftright * m_speedpercent;}
     if (m_speedunits == "imperial")
-    {m_speed = qRound(wheelspdftright * 1.8 + 32);}
+    {m_speed = qRound((wheelspdftright * 0.621371) * m_speedpercent);}
     emit wheelspdftrightChanged(m_wheelspdftright);
     if (m_ExternalSpeed == 2){
         emit speedChanged(m_wheelspdftright);
@@ -2385,11 +2385,11 @@ void DashBoard::setwheelspdrearleft(const qreal &wheelspdrearleft)
 {
     if (m_wheelspdrearleft == wheelspdrearleft)
         return;
-    m_wheelspdrearleft = wheelspdrearleft;
+    m_wheelspdrearleft = wheelspdrearleft * m_speedpercent;
     if (m_speedunits == "metric")
-    {m_speed = wheelspdrearleft;}
+    {m_speed = wheelspdrearleft * m_speedpercent;}
     if (m_speedunits == "imperial")
-    {m_speed = qRound(wheelspdrearleft * 1.8 + 32);}
+    {m_speed = qRound((wheelspdrearleft * 0.621371) * m_speedpercent);}
     emit wheelspdrearleftChanged(wheelspdrearleft);
     if (m_ExternalSpeed == 3){
         emit speedChanged(wheelspdrearleft);
@@ -2399,11 +2399,11 @@ void DashBoard::setwheelspdrearright(const qreal &wheelspdrearright)
 {
     if (m_wheelspdrearright == wheelspdrearright)
         return;
-    m_wheelspdrearright = wheelspdrearright;
+    m_wheelspdrearright = wheelspdrearright* m_speedpercent;
     if (m_speedunits == "metric")
-    {m_speed = wheelspdrearright;}
+    {m_speed = wheelspdrearright * m_speedpercent;}
     if (m_speedunits == "imperial")
-    {m_speed = qRound(wheelspdrearright * 1.8 + 32);}
+    {m_speed = qRound((wheelspdrearright * 0.621371) * m_speedpercent);}
     emit wheelspdrearrightChanged(m_wheelspdrearright);
     if (m_ExternalSpeed == 4){
         emit speedChanged(m_wheelspdrearright);
