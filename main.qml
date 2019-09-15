@@ -10,7 +10,7 @@ ApplicationWindow {
     height: 480
     minimumWidth: 800
     minimumHeight: 480
-    title: qsTr("PowerTune ") + Dashboard.Platform + "  V 1.85"
+    title: qsTr("PowerTune ") + Dashboard.Platform + "  V 1.89a"
     color: "black"
     Item {
         id: name
