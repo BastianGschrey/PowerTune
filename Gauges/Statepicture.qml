@@ -117,9 +117,9 @@ Item {
                 model: Dashboard.backroundpictures
                 currentIndex: 0
                 onCurrentIndexChanged: {
-                    picturesourceoff = "file:///home/pi/Logo/" + pictureSelectoroff.textAt(pictureSelectoroff.currentIndex);
+                    statepicturesourceoff = "file:///home/pi/Logo/" + pictureSelectoroff.textAt(pictureSelectoroff.currentIndex);
                     //picturesource = "file:" + pictureSelector.textAt(pictureSelector.currentIndex); // windows
-                    statepictureoff.source = picturesourceoff;
+                    statepictureoff.source = statepicturesourceoff;
                                        }
                 delegate: ItemDelegate {
                     width: pictureSelectoroff.width
@@ -142,9 +142,9 @@ Item {
                 model: Dashboard.backroundpictures
                 currentIndex: 0
                 onCurrentIndexChanged: {
-                    picturesourceon = "file:///home/pi/Logo/" + pictureSelectoron.textAt(pictureSelectoron.currentIndex);
+                    statepicturesourceon = "file:///home/pi/Logo/" + pictureSelectoron.textAt(pictureSelectoron.currentIndex);
                     //picturesource = "file:" + pictureSelector.textAt(pictureSelector.currentIndex); // windows
-                    statepictureoon.source = picturesourceon;
+                    statepictureon.source = statepicturesourceon;
                                        }
                 delegate: ItemDelegate {
                     width: pictureSelectoron.width
