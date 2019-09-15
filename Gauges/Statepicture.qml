@@ -5,34 +5,22 @@ Item {
     id: statepicture
     height: pictureheight
     width : pictureheight
-    property string information: "state image"
+    property string information: "State image"
     property string statepicturesourceoff
     property string statepicturesourceon
     property int pictureheight
     property string increasedecreaseident
     property string mainvaluename
-    property double warnvaluehigh: 1
-    property double warnvaluelow : 0
+    property double triggervalue: 1
     Drag.active: true
     DatasourcesList{id: powertunedatasource}
-    Component.onCompleted: togglemousearea();
+    Component.onCompleted: {togglemousearea();
+                            bind();
+                            }
 
     Connections{
         target: Dashboard
         onDraggableChanged: togglemousearea();
-    }
-
-    Text {
-        id: mainvaluetextfield
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        font.pixelSize: 50
-        font.family: "Eurostile"
-        color: "white"
-        visible: false
-        onTextChanged: {
-            warningindication.warn();
-        }
     }
 
     Image {
@@ -48,6 +36,13 @@ Item {
         fillMode: Image.PreserveAspectFit
         source:  statepicturesourceon
         visible: false
+    }
+    Text {
+        id: mainvaluetextfield
+        visible: false
+        onTextChanged: {
+            warningindication.warn();
+        }
     }
     MouseArea {
         id: touchArea
@@ -67,7 +62,7 @@ Item {
         color: "darkgrey"
         visible: false
         width : 200
-        height :150
+        height :320
         Drag.active: true
         MouseArea {
             anchors.fill: parent
@@ -105,9 +100,18 @@ Item {
                     onClicked: {pictureheight++}
                 }
             }
+            Grid {
+                rows: 4
+                columns: 2
+                rowSpacing :5
+            Text{
+                text: "Pic. Off"
+
+            }
+
             ComboBox {
                 id: pictureSelectoroff
-                width: 200
+                width: 140
                 height: 40
                 font.pixelSize: 15
                 model: Dashboard.backroundpictures
@@ -127,9 +131,12 @@ Item {
                     hoverEnabled: pictureSelectoroff.hoverEnabled
                 }
             }
+            Text{
+                text: "Pic. On"
+            }
             ComboBox {
                 id: pictureSelectoron
-                width: 200
+                width: 140
                 height: 40
                 font.pixelSize: 15
                 model: Dashboard.backroundpictures
@@ -149,20 +156,27 @@ Item {
                     hoverEnabled: pictureSelectoron.hoverEnabled
                 }
             }
+            Text{
+                text: "Source"
+            }
             ComboBox {
                 id: cbxMain
                 textRole: "titlename"
                 model: powertunedatasource
-                Component.onCompleted: {for(var i = 0; i < cbxMain.model.count; ++i) if (powertunedatasource.get(i).sourcename === mainvaluename)cbxMain.currentIndex = i}
+                width: 140
+                height: 40
+                onCurrentIndexChanged: {bind()}
+                Component.onCompleted: {for(var i = 0; i < cbxMain.model.count; ++i) if (powertunedatasource.get(i).sourcename === mainvaluename)cbxMain.currentIndex = i,bind()}
+            }
+            Text{
+                text: "Trigger"
             }
             TextField {
                 id: triggeronvalue
-                width: 94
+                width: 140
                 height: 40
-                visible: false
-                text: warnvaluehigh
-                oned4
-
+                text: triggervalue
+            }
             }
             RoundButton{
                 width: parent.width
@@ -192,8 +206,8 @@ Item {
         function warn()
         {
 
-            if (mainvaluetextfield.text == warnvaluehigh || mainvaluetextfield.text > warnvaluehigh )statepictureoff.visible = false,statepictureon.visible = true;
-            else statepictureoff.visible = false,statepictureon.visible = false;
+            if (mainvaluetextfield.text == triggervalue || mainvaluetextfield.text > triggervalue ){statepictureoff.visible = false,statepictureon.visible = true}
+            else {statepictureoff.visible = true,statepictureon.visible = false};
 
         }
     }
@@ -222,5 +236,9 @@ Item {
             break;
         }
         }
+    }
+    function bind()
+    {
+        mainvaluetextfield.text = Qt.binding(function(){return Dashboard[mainvaluename]});
     }
 }
