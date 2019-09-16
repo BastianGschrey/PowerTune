@@ -118,7 +118,7 @@ Item {
                 currentIndex: 0
                 onCurrentIndexChanged: {
                     statepicturesourceoff = "file:///home/pi/Logo/" + pictureSelectoroff.textAt(pictureSelectoroff.currentIndex);
-                    //picturesource = "file:" + pictureSelector.textAt(pictureSelector.currentIndex); // windows
+                    //statepicturesourceoff = "file:" + pictureSelectoroff.textAt(pictureSelectoroff.currentIndex); // windows
                     statepictureoff.source = statepicturesourceoff;
                                        }
                 delegate: ItemDelegate {
@@ -143,7 +143,7 @@ Item {
                 currentIndex: 0
                 onCurrentIndexChanged: {
                     statepicturesourceon = "file:///home/pi/Logo/" + pictureSelectoron.textAt(pictureSelectoron.currentIndex);
-                    //picturesource = "file:" + pictureSelector.textAt(pictureSelector.currentIndex); // windows
+                    //statepicturesourceon = "file:" + pictureSelectoron.textAt(pictureSelectoron.currentIndex); // windows
                     statepictureon.source = statepicturesourceon;
                                        }
                 delegate: ItemDelegate {
@@ -165,8 +165,11 @@ Item {
                 model: powertunedatasource
                 width: 140
                 height: 40
-                onCurrentIndexChanged: {bind()}
-                Component.onCompleted: {for(var i = 0; i < cbxMain.model.count; ++i) if (powertunedatasource.get(i).sourcename === mainvaluename)cbxMain.currentIndex = i,bind()}
+                onCurrentIndexChanged: {bind();
+                                        console.log(mainvaluename);
+                                        }
+
+                Component.onCompleted: {for(var i = 0; i < cbxMain.model.count; ++i) if (powertunedatasource.get(i).sourcename === mainvaluename)cbxMain.currentIndex = i,console.log(mainvaluename),bind()}
             }
             Text{
                 text: "Trigger"
@@ -205,7 +208,7 @@ Item {
         id: warningindication
         function warn()
         {
-
+console.log("warning" +mainvaluetextfield.text);
             if (mainvaluetextfield.text == triggervalue || mainvaluetextfield.text > triggervalue ){statepictureoff.visible = false,statepictureon.visible = true}
             else {statepictureoff.visible = true,statepictureon.visible = false};
 
