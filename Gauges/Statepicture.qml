@@ -5,7 +5,7 @@ Item {
     id: statepicture
     height: pictureheight
     width : pictureheight
-    property string information: "State image gauge"
+    property string information: "State gauge"
     property string statepicturesourceoff
     property string statepicturesourceon
     property int pictureheight

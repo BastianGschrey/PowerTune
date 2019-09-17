@@ -108,7 +108,7 @@ Item {
 
                 console.log("new item " +dashvalue.textAt(0) );
 
-                if (dashvalue.textAt(0) === "State image gauge")
+                if (dashvalue.textAt(0) === "State gauge")
                 {
                     CreateStatePictureScript.createPicture(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7));
                 }
@@ -237,6 +237,7 @@ Item {
             btnaddRound.visible = true;
             btnaddText.visible = true;
             btnaddPicture.visible = true;
+            btnaddStatePicture.visible = true;
             btnaddBar.visible = true;
             Dashboard.setdraggable(1);
         }
@@ -550,7 +551,7 @@ Item {
                 text: qsTr("Add State Img")
                 font.pixelSize: 12
                 onClicked: {
-                    console.log("create State image gauge ");
+                    console.log("create State gauge ");
                     CreateStatePictureScript.createPicture(10,10,100,"speed",1,"qrc:/graphics/selectStateImage.png","qrc:/graphics/selectStateImage.png");
                     squaregaugemenu.visible = false;
                     selectcolor.visible =false;
@@ -610,6 +611,7 @@ Item {
                     btnaddRound.visible = false;
                     btnaddText.visible = false;
                     btnaddPicture.visible = false;
+                    btnaddStatePicture.visible = false;
                     btnaddBar.visible = false;
                     btncancelload.visible = true;
                     loadfromfile.visible = false;
@@ -641,6 +643,7 @@ Item {
                     btnaddRound.visible = false;
                     btnaddText.visible = false;
                     btnaddPicture.visible = false;
+                    btnaddStatePicture.visible = false;
                     selectcolor.visible =false;
                     savedash();
                     saveDashtofile();
@@ -817,7 +820,7 @@ Item {
                                          userDash.children[i].peakneedleoffset+","+
                                          userDash.children[i].peakneedlevisible+"\r\n");
             }
-            if (userDash.children[i].information === "State image gauge")
+            if (userDash.children[i].information === "State gauge")
             {
                 saveDashtofilestring += (userDash.children[i].information+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].pictureheight+","+userDash.children[i].mainvaluename+","+userDash.children[i].triggervalue+","+userDash.children[i].statepicturesourceoff+","+userDash.children[i].statepicturesourceon+"\r\n");
             }
@@ -919,7 +922,7 @@ Item {
                                                         );
                 break;
             }
-            case "State image gauge": {
+            case "State gauge": {
                 console.log("Save state");
                 CreateStatePictureScript.createPicture(gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).height,gaugelist.get(i).source,gaugelist.get(i).trigger,gaugelist.get(i).pictureoff,gaugelist.get(i).pictureon);
                 break;
@@ -1102,7 +1105,7 @@ Item {
                                  })
             }
 
-            if(userDash.children[i].information === "State image gauge"){
+            if(userDash.children[i].information === "State gauge"){
                 console.log("Save Image");
                 gaugelist.append({   "info":userDash.children[i].information,
                                      "x":userDash.children[i].x,
