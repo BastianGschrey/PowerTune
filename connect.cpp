@@ -226,14 +226,15 @@ void Connect::readdashsetup3()
         {
             QString line = in.readLine();
             QStringList list;
-            if (line.contains("gauge")){
+            //if (line.contains("gauge")){
             list = line.split(QRegExp("\\,"));
-            }
+            //}
+            /*
             else
             {
              line.prepend("Square gauge,");
              list = line.split(QRegExp("\\,"));
-            }
+            }*/
             list.removeAll(QString(""));
             m_dashBoard->setdashsetup3(list);
         }
@@ -255,14 +256,15 @@ void Connect::readdashsetup2()
         {
             QString line = in.readLine();
             QStringList list;
-            if (line.contains("gauge")){
+            //if (line.contains("gauge")){
             list = line.split(QRegExp("\\,"));
-            }
+            //}
+            /*
             else
             {
              line.prepend("Square gauge,");
              list = line.split(QRegExp("\\,"));
-            }
+            }*/
             list.removeAll(QString(""));
             m_dashBoard->setdashsetup2(list);
         }
@@ -284,14 +286,15 @@ void Connect::readdashsetup1()
         {
             QString line = in.readLine();
             QStringList list;
-            if (line.contains("gauge")){
+            //if (line.contains("gauge")){
             list = line.split(QRegExp("\\,"));
-            }
+            //}
+            /*
             else
             {
              line.prepend("Square gauge,");
              list = line.split(QRegExp("\\,"));
-            }
+            }*/
             list.removeAll(QString(""));
             m_dashBoard->setdashsetup1(list);
         }
