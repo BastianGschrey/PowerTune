@@ -129,7 +129,7 @@ Connect::~Connect()
 }
 void Connect::saveDashtoFile(const QString &filename,const QString &dashstring)
 {
-   //      qDebug()<<"Filename" << filename + "txt";
+         qDebug()<<"Filename" << filename + "txt";
     QString fixformat = dashstring;
     fixformat.replace(",,",", ,");
     QStringList fields = fixformat.split(QRegExp("[\r\n]"));

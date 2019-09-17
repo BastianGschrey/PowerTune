@@ -15,12 +15,12 @@ import "qrc:/Gauges/createsquaregaugeUserDash.js" as CreateSquareGaugeScript
 import "qrc:/Gauges/createverticalbargauge.js" as CreateBargaugeScript
 import "qrc:/Gauges/createText.js" as CreateTextScript
 import "qrc:/Gauges/createPicture.js" as CreatePictureScript
-
+import "qrc:/Gauges/createStatePicture.js" as CreateStatePictureScript
 
 Item {
     id: mainwindow
     anchors.fill: parent
-    property string datastore: ""
+    property string datastore2: ""
     property string saveDashtofilestring : ""
     property string gaugeType : ""
     property string backroundpicturesource2 : ""
@@ -50,6 +50,7 @@ Item {
     Rectangle{
         id: mainbackroundcolor
         anchors.fill: parent
+
     }
     Image {
         id:backroundpicture2
@@ -78,16 +79,16 @@ Item {
     DatasourcesList{id: powertunedatasource}
 
     Component.onCompleted: {
-        if (datastore) {
+        if (datastore2) {
             gaugelist.clear()
-            var datamodel = JSON.parse(datastore)
+            var datamodel = JSON.parse(datastore2)
             for (var i = 0; i < datamodel.length; ++i) gaugelist.append(datamodel[i])
         }
         createDash()
     }
 
     Settings {
-        property alias datastore2: mainwindow.datastore
+        property alias datastore2: mainwindow.datastore2
         property alias rpmbackround2: rpmstyleselector.currentIndex
         property alias extraLoader2: extraSelector.currentIndex
         property alias savebackroundpicture2: backroundpicture2.source
@@ -100,6 +101,7 @@ Item {
     Connections{
         target: Dashboard
 
+        onBackroundpicturesChanged: updatppiclist();
         onDashsetup2Changed:
         {
             if (dashvalue.textAt(1) !== "") {
@@ -132,10 +134,10 @@ Item {
                     //console.log("Create Text label")
                     CreateTextScript.createText(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),(dashvalue.textAt(8).toLowerCase() === 'true' ? true : false),dashvalue.textAt(9));
                 }
-                if (dashvalue.textAt(0) === "State image")
+                if (dashvalue.textAt(0) === "State image gauge")
                 {
-                    //console.log("State image")
-                    CreateTextScript.createText(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7));
+                    // console.log("Create image")
+                    CreateStatePictureScript.createPicture(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7));
                 }
             }
 
@@ -185,6 +187,15 @@ Item {
             }
         }
     }
+
+    function updatppiclist()
+    {
+                    for(var i = 0; i < backroundSelector.count; ++i)
+                    if (backroundpicture2.source == "file:///home/pi/Logo/" + backroundSelector.textAt(i))
+                    backroundSelector.currentIndex = i
+    }
+
+
     Rectangle{
         anchors.fill: parent
         z:300 //This makes the Rectangle appear in front of the bar gauges
@@ -313,13 +324,14 @@ Item {
                 id: backroundSelector
                 width: 200
                 height: 40
-                font.pixelSize: 15
+                font.pixelSize: 12
                 model: Dashboard.backroundpictures
                 currentIndex: 0
                 onCurrentIndexChanged: {
-                    backroundpicturesource2 = "file:///home/pi/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
+
+                     backroundpicturesource2 = "file:///home/pi/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
                     //backroundpicturesource2 = "file:///c:/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
-                    // backroundpicturesource2 = "file:" + backroundSelector.textAt(backroundSelector.currentIndex);
+                    //backroundpicturesource2 = "file:" + backroundSelector.textAt(backroundSelector.currentIndex);
                     backroundpicture2.source = backroundpicturesource2;
                 }
                 delegate: ItemDelegate {
@@ -344,7 +356,8 @@ Item {
                 model: ColorList{}
                 visible: true
                 font.pixelSize: 15
-                onCurrentIndexChanged: mainbackroundcolor.color = mainbackroundcolorselect.textAt(mainbackroundcolorselect.currentIndex)
+
+
                 delegate:
 
                     ItemDelegate {
@@ -352,7 +365,7 @@ Item {
                     width: mainbackroundcolorselect.width
                     font.pixelSize: 15
                     Rectangle {
-
+                        id: backroundcolorcbxcolor
                         width: mainbackroundcolorselect.width
                         height: 50
                         color:  itemColor
@@ -365,6 +378,13 @@ Item {
                         }
                     }
                 }
+                Component.onCompleted: {
+                    for(var i = 1; i < mainbackroundcolorselect.model.count; ++i)
+                   if (Qt.colorEqual(mainbackroundcolor.color,mainbackroundcolorselect.textAt(i)))
+                    mainbackroundcolorselect.currentIndex = i
+                }
+                 onCurrentIndexChanged:  mainbackroundcolor.color = mainbackroundcolorselect.textAt(mainbackroundcolorselect.currentIndex)
+
             }
             Text {
                 text: qsTr("Extra:")
@@ -402,7 +422,7 @@ Item {
     Rectangle{
         id: squaregaugemenu
         width: 200
-        height: 350
+        height: 400
         color : "darkgrey"
         x :590
         y: 0
@@ -449,7 +469,7 @@ Item {
         }
 
         Grid{
-            rows:6
+            rows:7
             columns: 2
             //anchors.top : cbx_sources.bottom
             spacing:10
@@ -516,6 +536,20 @@ Item {
                 font.pixelSize: 12
                 onClicked: {
                     CreatePictureScript.createPicture(10,10,100,"qrc:/graphics/slectImage.png")
+                    squaregaugemenu.visible = false;
+                    selectcolor.visible =false;
+                    Dashboard.setdraggable(0);
+                }
+            }
+            Button {
+                id: btnaddStatePicture
+                width: 95
+                height: 40
+                text: qsTr("Add State Img")
+                font.pixelSize: 12
+                onClicked: {
+                    console.log("create State image gauge ");
+                    CreateStatePictureScript.createPicture(10,10,100,"speed",1,"qrc:/graphics/selectStateImage.png","qrc:/graphics/selectStateImage.png");
                     squaregaugemenu.visible = false;
                     selectcolor.visible =false;
                     Dashboard.setdraggable(0);
@@ -781,6 +815,10 @@ Item {
                                          userDash.children[i].peakneedleoffset+","+
                                          userDash.children[i].peakneedlevisible+"\r\n");
             }
+            if (userDash.children[i].information === "State image gauge")
+            {
+                saveDashtofilestring += (userDash.children[i].information+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].pictureheight+","+userDash.children[i].mainvaluename+","+userDash.children[i].triggervalue+","+userDash.children[i].statepicturesourceoff+","+userDash.children[i].statepicturesourceon+"\r\n");
+            }
         }
     }
     function createDash()
@@ -877,6 +915,11 @@ Item {
                                                         gaugelist.get(i).peakneedleoffset,
                                                         gaugelist.get(i).peakneedlevisible
                                                         );
+                break;
+            }
+            case "State image gauge": {
+                console.log("Save state");
+                CreateStatePictureScript.createPicture(gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).height,gaugelist.get(i).source,gaugelist.get(i).trigger,gaugelist.get(i).pictureoff,gaugelist.get(i).pictureon);
                 break;
             }
             }
@@ -1056,10 +1099,22 @@ Item {
                                      "peakneedlevisible":userDash.children[i].peakneedlevisible
                                  })
             }
+
+            if(userDash.children[i].information === "State image gauge"){
+                console.log("Save Image");
+                gaugelist.append({   "info":userDash.children[i].information,
+                                     "x":userDash.children[i].x,
+                                     "y":userDash.children[i].y,
+                                     "height":userDash.children[i].pictureheight,
+                                     "source":userDash.children[i].mainvaluename,
+                                     "trigger":userDash.children[i].triggervalue,
+                                     "pictureoff":userDash.children[i].statepicturesourceoff,
+                                     "pictureon":userDash.children[i].statepicturesourceon})
+            }
         }
         var datamodel = []
         for (var j = 0; j < gaugelist.count; ++j) datamodel.push(gaugelist.get(j))
-        datastore = JSON.stringify(datamodel)
+        datastore2 = JSON.stringify(datamodel)
     }
     //Color Selection panel
     Rectangle{

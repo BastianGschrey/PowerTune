@@ -50,6 +50,7 @@ Item {
     Rectangle{
         id: mainbackroundcolor
         anchors.fill: parent
+
     }
     Image {
         id:backroundpicture1
@@ -100,11 +101,18 @@ Item {
     Connections{
         target: Dashboard
 
+        onBackroundpicturesChanged: updatppiclist();
         onDashsetup1Changed:
         {
             if (dashvalue.textAt(1) !== "") {
 
                 console.log("new item " +dashvalue.textAt(0) );
+
+                if (dashvalue.textAt(0) === "State image gauge")
+                {
+                    CreateStatePictureScript.createPicture(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7));
+                }
+
                 if (dashvalue.textAt(0) === "Bar gauge")
                 {
                     //  console.log("Create Bar Gauge")
@@ -132,11 +140,7 @@ Item {
                     //console.log("Create Text label")
                     CreateTextScript.createText(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),(dashvalue.textAt(8).toLowerCase() === 'true' ? true : false),dashvalue.textAt(9));
                 }
-                if (dashvalue.textAt(0) === "State image")
-                {
-                    // console.log("Create image")
-                    CreateStatePictureScript.createPicture(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7));
-                }
+
             }
 
         }
@@ -185,6 +189,15 @@ Item {
             }
         }
     }
+
+    function updatppiclist()
+    {
+                    for(var i = 0; i < backroundSelector.count; ++i)
+                    if (backroundpicture1.source == "file:///home/pi/Logo/" + backroundSelector.textAt(i))
+                    backroundSelector.currentIndex = i
+    }
+
+
     Rectangle{
         anchors.fill: parent
         z:300 //This makes the Rectangle appear in front of the bar gauges
@@ -313,13 +326,14 @@ Item {
                 id: backroundSelector
                 width: 200
                 height: 40
-                font.pixelSize: 15
+                font.pixelSize: 12
                 model: Dashboard.backroundpictures
                 currentIndex: 0
                 onCurrentIndexChanged: {
-                    backroundpicturesource1 = "file:///home/pi/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
+
+                     backroundpicturesource1 = "file:///home/pi/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
                     //backroundpicturesource1 = "file:///c:/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
-                    // backroundpicturesource1 = "file:" + backroundSelector.textAt(backroundSelector.currentIndex);
+                    //backroundpicturesource1 = "file:" + backroundSelector.textAt(backroundSelector.currentIndex);
                     backroundpicture1.source = backroundpicturesource1;
                 }
                 delegate: ItemDelegate {
@@ -344,7 +358,8 @@ Item {
                 model: ColorList{}
                 visible: true
                 font.pixelSize: 15
-                onCurrentIndexChanged: mainbackroundcolor.color = mainbackroundcolorselect.textAt(mainbackroundcolorselect.currentIndex)
+
+
                 delegate:
 
                     ItemDelegate {
@@ -352,7 +367,7 @@ Item {
                     width: mainbackroundcolorselect.width
                     font.pixelSize: 15
                     Rectangle {
-
+                        id: backroundcolorcbxcolor
                         width: mainbackroundcolorselect.width
                         height: 50
                         color:  itemColor
@@ -365,6 +380,13 @@ Item {
                         }
                     }
                 }
+                Component.onCompleted: {
+                    for(var i = 1; i < mainbackroundcolorselect.model.count; ++i)
+                   if (Qt.colorEqual(mainbackroundcolor.color,mainbackroundcolorselect.textAt(i)))
+                    mainbackroundcolorselect.currentIndex = i
+                }
+                 onCurrentIndexChanged:  mainbackroundcolor.color = mainbackroundcolorselect.textAt(mainbackroundcolorselect.currentIndex)
+
             }
             Text {
                 text: qsTr("Extra:")
@@ -528,7 +550,7 @@ Item {
                 text: qsTr("Add State Img")
                 font.pixelSize: 12
                 onClicked: {
-                    console.log("create state image ");
+                    console.log("create State image gauge ");
                     CreateStatePictureScript.createPicture(10,10,100,"speed",1,"qrc:/graphics/selectStateImage.png","qrc:/graphics/selectStateImage.png");
                     squaregaugemenu.visible = false;
                     selectcolor.visible =false;
@@ -795,12 +817,11 @@ Item {
                                          userDash.children[i].peakneedleoffset+","+
                                          userDash.children[i].peakneedlevisible+"\r\n");
             }
+            if (userDash.children[i].information === "State image gauge")
+            {
+                saveDashtofilestring += (userDash.children[i].information+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].pictureheight+","+userDash.children[i].mainvaluename+","+userDash.children[i].triggervalue+","+userDash.children[i].statepicturesourceoff+","+userDash.children[i].statepicturesourceon+"\r\n");
+            }
         }
-        if (userDash.children[i].information === "State image")
-        {
-            saveDashtofilestring += (userDash.children[i].information+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].pictureheight+","+userDash.children[i].mainvaluename+","+userDash.children[i].triggervalue+","+userDash.children[i].statepicturesourceoff+","+userDash.children[i].statepicturesourceon+"\r\n");
-        }
-
     }
     function createDash()
     {
@@ -898,7 +919,7 @@ Item {
                                                         );
                 break;
             }
-            case "State image": {
+            case "State image gauge": {
                 console.log("Save state");
                 CreateStatePictureScript.createPicture(gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).height,gaugelist.get(i).source,gaugelist.get(i).trigger,gaugelist.get(i).pictureoff,gaugelist.get(i).pictureon);
                 break;
@@ -1081,7 +1102,7 @@ Item {
                                  })
             }
 
-            if(userDash.children[i].information === "State image"){
+            if(userDash.children[i].information === "State image gauge"){
                 console.log("Save Image");
                 gaugelist.append({   "info":userDash.children[i].information,
                                      "x":userDash.children[i].x,

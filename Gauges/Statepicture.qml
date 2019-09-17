@@ -5,7 +5,7 @@ Item {
     id: statepicture
     height: pictureheight
     width : pictureheight
-    property string information: "State image"
+    property string information: "State image gauge"
     property string statepicturesourceoff
     property string statepicturesourceon
     property int pictureheight
@@ -18,9 +18,11 @@ Item {
                             bind();
                             }
 
+
     Connections{
         target: Dashboard
         onDraggableChanged: togglemousearea();
+        onBackroundpicturesChanged: updatppiclist();
     }
 
     Image {
@@ -50,7 +52,6 @@ Item {
         drag.target: parent
         enabled: false
         onDoubleClicked: {
-            //console.log("double clicked");
             changesize.visible = true;
             Connect.readavailablebackrounds();
             changesize.x = touchArea.mouseX;
@@ -80,6 +81,7 @@ Item {
                 rowSpacing :5
                 RoundButton{text: "-"
                     width: changesize.width /3.2
+                    font.pixelSize: 15
                     onPressAndHold: {timer.running = true;
                         increasedecreaseident = "decreasePicture"}
                     onReleased: {timer.running = false;}
@@ -93,6 +95,7 @@ Item {
                     onTextChanged: {pictureheight = sizeTxt.text}
                 }
                 RoundButton{ text: "+"
+                    font.pixelSize: 15
                     width: changesize.width /3.2
                     onPressAndHold: {timer.running = true;
                         increasedecreaseident = "increasePicture"}
@@ -106,6 +109,7 @@ Item {
                 rowSpacing :5
             Text{
                 text: "Pic. Off"
+                font.pixelSize: 12
 
             }
 
@@ -113,7 +117,7 @@ Item {
                 id: pictureSelectoroff
                 width: 140
                 height: 40
-                font.pixelSize: 15
+                font.pixelSize: 12
                 model: Dashboard.backroundpictures
                 currentIndex: 0
                 onCurrentIndexChanged: {
@@ -133,19 +137,23 @@ Item {
             }
             Text{
                 text: "Pic. On"
+                font.pixelSize: 12
             }
             ComboBox {
                 id: pictureSelectoron
                 width: 140
                 height: 40
-                font.pixelSize: 15
+                font.pixelSize: 12
                 model: Dashboard.backroundpictures
                 currentIndex: 0
                 onCurrentIndexChanged: {
                     statepicturesourceon = "file:///home/pi/Logo/" + pictureSelectoron.textAt(pictureSelectoron.currentIndex);
                     //statepicturesourceon = "file:" + pictureSelectoron.textAt(pictureSelectoron.currentIndex); // windows
                     statepictureon.source = statepicturesourceon;
-                                       }
+                }
+
+
+
                 delegate: ItemDelegate {
                     width: pictureSelectoron.width
                     text: pictureSelectoron.textRole ? (Array.isArray(pictureSelector.model) ? modelData[pictureSelector.textRole] : model[pictureSelector.textRole]) : modelData
@@ -158,6 +166,7 @@ Item {
             }
             Text{
                 text: "Source"
+                font.pixelSize: 12
             }
             ComboBox {
                 id: cbxMain
@@ -165,6 +174,7 @@ Item {
                 model: powertunedatasource
                 width: 140
                 height: 40
+                font.pixelSize: 12
                 onCurrentIndexChanged: {bind();
                                         console.log(mainvaluename);
                                         }
@@ -173,12 +183,14 @@ Item {
             }
             Text{
                 text: "Trigger"
+                font.pixelSize: 12
             }
             TextField {
                 id: triggeronvalue
                 width: 140
                 height: 40
                 text: triggervalue
+                font.pixelSize: 12
             }
             }
             RoundButton{
@@ -190,6 +202,7 @@ Item {
             RoundButton{
                 width: parent.width
                 text: "Close"
+                font.pixelSize: 15
                 onClicked: changesize.visible = false;
             }
         }
@@ -243,5 +256,20 @@ console.log("warning" +mainvaluetextfield.text);
     function bind()
     {
         mainvaluetextfield.text = Qt.binding(function(){return Dashboard[mainvaluename]});
+    }
+
+    // These functions update the Picture sources in the ComboBoxes
+    function updatppiclist()
+    {
+                    for(var i = 0; i < pictureSelectoron.count; ++i) //
+                    if (statepicturesourceon === "file:///home/pi/Logo/" + pictureSelectoron.textAt(i))
+                    pictureSelectoron.currentIndex = i
+                    updatppiclistoff()
+    }
+    function updatppiclistoff()
+    {
+                    for(var i = 0; i < pictureSelectoroff.count; ++i) //
+                    if (statepicturesourceoff === "file:///home/pi/Logo/" + pictureSelectoroff.textAt(i))
+                    pictureSelectoroff.currentIndex = i
     }
 }
