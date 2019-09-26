@@ -231,8 +231,8 @@ void Apexi::apexiECU(const QByteArray &buffer)
         m_apexiMsg =  m_buffer;
         m_buffer.clear();
         m_timer.stop();
-        if(requestIndex <= 5){requestIndex++;}
-        else{requestIndex = 2;}
+        if(requestIndex <= 6){requestIndex++;}
+        else{requestIndex = 3;}
         readData(m_apexiMsg);
         m_apexiMsg.clear();
         Apexi::sendRequest(requestIndex);
@@ -354,30 +354,34 @@ void Apexi::sendRequest(int requestIndex)
             Apexi::writeRequestPFC(QByteArray::fromHex("DD0220"));
             expectedbytes = 83;
             break;
-            
-            // Live Data
         case 2:
+            //Init Platform (This returns the Platform String )
+            Apexi::writeRequestPFC(QByteArray::fromHex("F3020A"));
+            expectedbytes = 11;
+            break;
+            // Live Data
+        case 3:
             //Apexi::getAdvData();
             Apexi::writeRequestPFC(QByteArray::fromHex("F0020D"));
             expectedbytes = 33;
             break;
             
-        case 3:
+        case 4:
             //Apexi::getMapIndices();
             Apexi::writeRequestPFC(QByteArray::fromHex("DB0222"));
             expectedbytes = 5;
             break;
-        case 4:
+        case 5:
             //Apexi::getSensorData();
             Apexi::writeRequestPFC(QByteArray::fromHex("DE021F"));
             expectedbytes = 21;
             break;
-        case 5:
+        case 6:
             //Apexi::getBasic();
             Apexi::writeRequestPFC(QByteArray::fromHex("DA0223"));
             expectedbytes = 23;
             break;
-        case 6:
+        case 7:
             //Apexi::getAux();
             Apexi::writeRequestPFC(QByteArray::fromHex("0002FD"));
             expectedbytes = 7;
@@ -558,7 +562,8 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         m_dashboard->setMAFactivity(packageADV2[15]);
         m_dashboard->setO2volt(packageADV2[16]);
         m_dashboard->setO2volt_2(packageADV2[17]);
-        m_dashboard->setThrottleV((packageADV2[18]*100)/4.38);
+        m_dashboard->setThrottleV((packageADV2[18]*100));
+        m_dashboard->setTPS((packageADV2[18]*100)/4.38);
         
     }
     //Toyota
