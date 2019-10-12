@@ -1329,20 +1329,44 @@ ListModel {
         stepsize : "100"
         divisor : "1"
     }
-    /*
+
     ListElement {
         sourcename:"knocklevlogged1"
+        defaultsymbol: "dB"
+        titlename:"Knock"
+        decimalpoints : "2"
+        maxvalue : "400"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"knocklevlogged2"
+        defaultsymbol: "dB"
+        titlename:"Knock"
+        decimalpoints : "2"
+        maxvalue : "400"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"knockretardbank1"
+        defaultsymbol: "°"
+        titlename:"Knock"
+        decimalpoints : "0"
+        maxvalue : "30"
+        stepsize : "1"
+        divisor : "1"
     }
     ListElement {
         sourcename:"knockretardbank2"
+        defaultsymbol: "°"
+        titlename:"Knock"
+        decimalpoints : "0"
+        maxvalue : "30"
+        stepsize : "1"
+        divisor : "1"
     }
-    */
+
     ListElement {
         sourcename:"LAMBDA"
         defaultsymbol: "λ"
