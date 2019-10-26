@@ -1176,4 +1176,5 @@ void Connect::restartDaemon()
 {
 QProcess *process = new QProcess(this);
 process->start("/home/pi/startdaemon.sh");
+connect( process, SIGNAL(readyReadStandardOutput()), this, SLOT(processOutput()) );
 }
