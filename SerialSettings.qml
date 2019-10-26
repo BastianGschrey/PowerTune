@@ -569,7 +569,7 @@ Quick1.TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.90c " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.90d " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -1688,21 +1688,22 @@ Quick1.TabView {
 
                 Button {
                     id: develtest
-                    text: "Development Test on"
+                    text: "Restart daemon"
                     width: extrarect.width / 5
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
 
                     onClicked: {
                     //Arduino.openConnection("COM11");
-                    Arduino.openConnection("/dev/ttyAMA0");
-                    develtest.enabled = false;
+                    Connect.restartDaemon();
+                    //develtest.enabled = false;
                     }
                 }
 
                 Text { text: " "
                     font.pixelSize: extrarect.width / 55 }
 
+                /*
                 Button {
                     id: develtest1
                     text: "Development test off"
@@ -1714,7 +1715,7 @@ Quick1.TabView {
                     Arduino.closeConnection();
                     develtest.enabled = true;
                     }
-                }
+                }*/
             }
         }
     }

@@ -86,6 +86,7 @@ public:
     Q_INVOKABLE void candump();
     Q_INVOKABLE void minicom();
     Q_INVOKABLE void RequestLicence();
+    Q_INVOKABLE void restartDaemon();
 
 
 public:

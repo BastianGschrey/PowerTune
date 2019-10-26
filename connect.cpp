@@ -1171,3 +1171,9 @@ void Connect::RequestLicence()
         inputFile.close();
     }
 }
+
+void Connect::restartDaemon()
+{
+QProcess *process = new QProcess(this);
+process->start("/home/pi/startdaemon.sh");
+}
