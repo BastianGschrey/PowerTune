@@ -808,16 +808,16 @@ void udpreceiver::processPendingDatagrams()
             //Digital Input 7
             break;
         case 286:
-            //
+            m_dashboard->setUserchannel1(Value);
             break;
         case 287:
-            //
+            m_dashboard->setUserchannel2(Value);
             break;
         case 288:
-            //
+            m_dashboard->setUserchannel3(Value);
             break;
         case 289:
-            //
+            m_dashboard->setUserchannel4(Value);
             break;
         case 290:
             //
