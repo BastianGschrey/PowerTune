@@ -1847,6 +1847,42 @@ ListModel {
         divisor : "1"
     }
     ListElement {
+        sourcename:"Userchannel1"
+        defaultsymbol: ""
+        titlename:"User Channel 1"
+        decimalpoints : "1"
+        maxvalue : "100000"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Userchannel2"
+        defaultsymbol: ""
+        titlename:"User Channel 2"
+        decimalpoints : "1"
+        maxvalue : "100000"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Userchannel3"
+        defaultsymbol: ""
+        titlename:"User Channel 3"
+        decimalpoints : "1"
+        maxvalue : "100000"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Userchannel4"
+        defaultsymbol: ""
+        titlename:"User Channel 4"
+        decimalpoints : "1"
+        maxvalue : "100000"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
         sourcename:"wastegatepress"
         defaultsymbol: "kPa"
         titlename:"Waste gate Pres."

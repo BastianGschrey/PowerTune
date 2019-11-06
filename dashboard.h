@@ -363,6 +363,10 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal AnalogCalc9 READ AnalogCalc9 WRITE setAnalogCalc9 NOTIFY AnalogCalc9Changed)
     Q_PROPERTY(qreal AnalogCalc10 READ AnalogCalc10 WRITE setAnalogCalc10 NOTIFY AnalogCalc10Changed)
     Q_PROPERTY(qreal Lambdamultiply READ Lambdamultiply WRITE setLambdamultiply NOTIFY LambdamultiplyChanged)
+    Q_PROPERTY(qreal Userchannel1 READ Userchannel1 WRITE setUserchannel1 NOTIFY Userchannel1Changed)
+    Q_PROPERTY(qreal Userchannel2 READ Userchannel2 WRITE setUserchannel2 NOTIFY Userchannel2Changed)
+    Q_PROPERTY(qreal Userchannel3 READ Userchannel3 WRITE setUserchannel3 NOTIFY Userchannel3Changed)
+    Q_PROPERTY(qreal Userchannel4 READ Userchannel4 WRITE setUserchannel4 NOTIFY Userchannel4Changed)
 
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
     public:
@@ -729,6 +733,10 @@ class DashBoard : public QObject
     void setAnalogCalc9(const qreal &AnalogCalc9);
     void setAnalogCalc10(const qreal &AnalogCalc10);
     Q_INVOKABLE void setLambdamultiply(const qreal &Lambdamultiply);
+    void setUserchannel1(const qreal &Userchannel1);
+    void setUserchannel2(const qreal &Userchannel2);
+    void setUserchannel3(const qreal &Userchannel3);
+    void setUserchannel4(const qreal &Userchannel4);
 
 
 
@@ -1088,6 +1096,11 @@ class DashBoard : public QObject
     qreal AnalogCalc9() const;
     qreal AnalogCalc10() const;
     qreal Lambdamultiply()const;
+    qreal Userchannel1()const;
+    qreal Userchannel2()const;
+    qreal Userchannel3()const;
+    qreal Userchannel4()const;
+
 signals:
 
     //Odometer
@@ -1434,7 +1447,10 @@ signals:
     void AnalogCalc9Changed(qreal AnalogCalc9);
     void AnalogCalc10Changed(qreal AnalogCalc10);
     void LambdamultiplyChanged(qreal Lambdamultiply);
-
+    void Userchannel1Changed(qreal Userchannel1);
+    void Userchannel2Changed(qreal Userchannel2);
+    void Userchannel3Changed(qreal Userchannel3);
+    void Userchannel4Changed(qreal Userchannel4);
 
 private:
     // Odometer
@@ -1796,7 +1812,10 @@ private:
     qreal m_AnalogCalc9;
     qreal m_AnalogCalc10;
     qreal m_Lambdamultiply;
-
+    qreal m_Userchannel1;
+    qreal m_Userchannel2;
+    qreal m_Userchannel3;
+    qreal m_Userchannel4;
 };
 
 #endif // DASHBOARD_H

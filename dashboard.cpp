@@ -353,9 +353,10 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_AnalogCalc9()
     ,  m_AnalogCalc10()
     ,  m_Lambdamultiply()
-
-
-
+    ,  m_Userchannel1()
+    ,  m_Userchannel2()
+    ,  m_Userchannel3()
+    ,  m_Userchannel4()
 
 {
 
@@ -403,7 +404,8 @@ void DashBoard::setAnalogVal(const qreal &A00,const qreal &A05,const qreal &A10,
     AN95 = A95;
     AN100 = A100;
     AN105 = A105;
-    qDebug()<< "AN75 " <<AN75;
+
+    //qDebug()<< "AN75 " <<AN75;
 }
 
 // Advanced Info FD3S
@@ -2839,6 +2841,34 @@ void DashBoard::setLambdamultiply(const qreal &Lambdamultiply)
     lamdamultiplicator = Lambdamultiply;
     emit LambdamultiplyChanged(Lambdamultiply);
 }
+void DashBoard::setUserchannel1(const qreal &Userchannel1)
+{
+    if (m_Userchannel1 == Userchannel1)
+        return;
+    m_Userchannel1 = Userchannel1;
+    emit Userchannel1Changed(Userchannel1);
+}
+void DashBoard::setUserchannel2(const qreal &Userchannel2)
+{
+    if (m_Userchannel2 == Userchannel2)
+        return;
+    m_Userchannel2 = Userchannel2;
+    emit Userchannel2Changed(Userchannel2);
+}
+void DashBoard::setUserchannel3(const qreal &Userchannel3)
+{
+    if (m_Userchannel3 == Userchannel3)
+        return;
+    m_Userchannel3 = Userchannel3;
+    emit Userchannel3Changed(Userchannel3);
+}
+void DashBoard::setUserchannel4(const qreal &Userchannel4)
+{
+    if (m_Userchannel4 == Userchannel4)
+        return;
+    m_Userchannel4 = Userchannel4;
+    emit Userchannel4Changed(Userchannel4);
+}
 
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
@@ -3191,7 +3221,10 @@ qreal DashBoard::AnalogCalc8() const {return m_AnalogCalc8; }
 qreal DashBoard::AnalogCalc9() const {return m_AnalogCalc9; }
 qreal DashBoard::AnalogCalc10() const {return m_AnalogCalc10;}
 qreal DashBoard::Lambdamultiply() const {return m_Lambdamultiply;}
-
+qreal DashBoard::Userchannel1() const {return m_Userchannel1;}
+qreal DashBoard::Userchannel2() const {return m_Userchannel2;}
+qreal DashBoard::Userchannel3() const {return m_Userchannel3;}
+qreal DashBoard::Userchannel4() const {return m_Userchannel4;}
 // Sensor Strings
 
 

@@ -48,8 +48,11 @@ void GoPro::goProSettings(const int &goProSelect, const QString &goPropass)
 
     if (Index == 0)
     {
-    ADRESS = "http://10.5.5.9/gp/gpControl/command/shutter?p=";
-    Command = QString (ADRESS) + QString (OPTION);
+    //ADRESS = "http://10.5.5.9/gp/gpControl/command/shutter?p=";
+    //http://10.5.5.9/gp/gpControl/status
+    ADRESS = "http://10.5.5.9/gp/gpControl/status";
+    //Command = QString (ADRESS) + QString (OPTION);
+    Command = QString (ADRESS);
     }
 
     //HERO 2
@@ -96,6 +99,6 @@ void GoPro::goprorec(const QString &record)
 }
  void GoPro::replyFinished(QNetworkReply *net_reply)
 {
-     QByteArray data = net_reply->readAll();
-    //qDebug() << "reply finished" << data.toInt();
+     QString data = net_reply->readAll();
+    qDebug() << "reply raw" << data;
  }
