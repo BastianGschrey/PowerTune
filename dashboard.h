@@ -367,6 +367,8 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal Userchannel2 READ Userchannel2 WRITE setUserchannel2 NOTIFY Userchannel2Changed)
     Q_PROPERTY(qreal Userchannel3 READ Userchannel3 WRITE setUserchannel3 NOTIFY Userchannel3Changed)
     Q_PROPERTY(qreal Userchannel4 READ Userchannel4 WRITE setUserchannel4 NOTIFY Userchannel4Changed)
+    Q_PROPERTY(qreal FuelLevel READ FuelLevel WRITE setFuelLevel NOTIFY FuelLevelChanged)
+
 
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
     public:
@@ -737,6 +739,8 @@ class DashBoard : public QObject
     void setUserchannel2(const qreal &Userchannel2);
     void setUserchannel3(const qreal &Userchannel3);
     void setUserchannel4(const qreal &Userchannel4);
+    void setFuelLevel(const qreal &FuelLevel);
+
 
 
 
@@ -1100,6 +1104,8 @@ class DashBoard : public QObject
     qreal Userchannel2()const;
     qreal Userchannel3()const;
     qreal Userchannel4()const;
+    qreal FuelLevel()const;
+
 
 signals:
 
@@ -1451,6 +1457,8 @@ signals:
     void Userchannel2Changed(qreal Userchannel2);
     void Userchannel3Changed(qreal Userchannel3);
     void Userchannel4Changed(qreal Userchannel4);
+    void FuelLevelChanged(qreal FuelLevel);
+
 
 private:
     // Odometer
@@ -1816,6 +1824,8 @@ private:
     qreal m_Userchannel2;
     qreal m_Userchannel3;
     qreal m_Userchannel4;
+    qreal m_FuelLevel;
+
 };
 
 #endif // DASHBOARD_H

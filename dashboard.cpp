@@ -357,6 +357,7 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_Userchannel2()
     ,  m_Userchannel3()
     ,  m_Userchannel4()
+    ,  m_FuelLevel()
 
 {
 
@@ -2870,6 +2871,14 @@ void DashBoard::setUserchannel4(const qreal &Userchannel4)
     emit Userchannel4Changed(Userchannel4);
 }
 
+void DashBoard::setFuelLevel(const qreal &FuelLevel)
+{
+    if (m_FuelLevel == FuelLevel)
+        return;
+    m_FuelLevel = FuelLevel;
+    emit FuelLevelChanged(FuelLevel);
+}
+
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
 
@@ -3225,6 +3234,8 @@ qreal DashBoard::Userchannel1() const {return m_Userchannel1;}
 qreal DashBoard::Userchannel2() const {return m_Userchannel2;}
 qreal DashBoard::Userchannel3() const {return m_Userchannel3;}
 qreal DashBoard::Userchannel4() const {return m_Userchannel4;}
+qreal DashBoard::FuelLevel() const {return m_FuelLevel;}
+
 // Sensor Strings
 
 

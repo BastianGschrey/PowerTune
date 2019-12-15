@@ -598,6 +598,7 @@ void udpreceiver::processPendingDatagrams()
             break;
         case 191:
             //Fuel Level
+            m_dashboard->setFuelLevel(Value);
             break;
         case 192:
             //Turbo Timer - Time Remaining
