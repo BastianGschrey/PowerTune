@@ -953,15 +953,6 @@ ListModel {
     ListElement {
         sourcename:"fuelclevel"
         defaultsymbol: ""
-        titlename:"Fuel level"
-        decimalpoints : "0"
-        maxvalue : "100"
-        stepsize : "20"
-        divisor : "1"
-    }
-    ListElement {
-        sourcename:"fuelclevel"
-        defaultsymbol: ""
         titlename:"Fuel cor. level"
         decimalpoints : "0"
         maxvalue : "100"
