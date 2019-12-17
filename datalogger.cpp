@@ -202,6 +202,27 @@ void datalogger::updateLog()
                     << endl;
             mFile.close();
             break;
+            case 2: ////Toyota86 BRZ FRS
+                out << (loggerStartT.msecsTo(QTime::currentTime())) << ","
+                    << m_dashboard->rpm() << ","
+                    << m_dashboard->Watertemp()  << ","
+                                   << m_dashboard->oiltemp() << ","
+                                   << m_dashboard->wheelspdftleft()  << ","
+                                   << m_dashboard->wheelspdrearleft()  << ","
+                                   << m_dashboard->wheelspdftright()  << ","
+                                   << m_dashboard->wheelspdrearright()  << ","
+                                   << m_dashboard->SteeringWheelAngle()<< ","
+                                   << m_dashboard->brakepress()<< ","
+                                   << m_dashboard->gpsTime()   << ","
+                                   << m_dashboard->gpsAltitude()   << ","
+                                   << m_dashboard->gpsLatitude()   << ","
+                                   << m_dashboard->gpsLongitude()   << ","
+                                   << m_dashboard->gpsSpeed()   << ","
+                                   << m_dashboard->currentLap() << ","
+                                   << m_dashboard->laptime()  << ","
+                                   << endl;
+                mFile.close();
+                break;
 
 
         }
@@ -373,6 +394,27 @@ QTextStream out(&mFile);
             mFile.close();
                 break;
 
+            case 2: ////Toyota86 BRZ FRS
+            out     << "Time ms" << ","
+            << "RPM" << ","
+            << "Coolant Temp" << ","
+                           << "Oil Temp" << ","
+                           << "LF Wheel Speed"  << ","
+                           << "LR Wheel Speed"  << ","
+                           << "RF Wheel Speed"  << ","
+                           << "RR Wheel Speed"  << ","
+                           << "Steering Wheel Angle "<< ","
+                           << "Brake Pressure" ","
+                           << "GPS Time"   << ","
+                           << "GPS Altitude"  << ","
+                           << "GPS Latitude" << ","
+                           << "GPS Longitude"   << ","
+                           << "GPS Speed"  << ","
+                           << "Current LAP"    << ","
+                           << "LAP TIME"  << ","
+                              << endl;
+                              mFile.close();
+                                  break;
         }
         }
     }

@@ -608,6 +608,7 @@ void udpreceiver::processPendingDatagrams()
             break;
         case 194:
             //Steering Wheel Angle
+            m_dashboard->setSteeringWheelAngle(Value);
             break;
         case 195:
             //Driveshaft RPM

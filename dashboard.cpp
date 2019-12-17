@@ -358,6 +358,7 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_Userchannel3()
     ,  m_Userchannel4()
     ,  m_FuelLevel()
+    ,  m_SteeringWheelAngle()
 
 {
 
@@ -2878,6 +2879,14 @@ void DashBoard::setFuelLevel(const qreal &FuelLevel)
     m_FuelLevel = FuelLevel;
     emit FuelLevelChanged(FuelLevel);
 }
+void DashBoard::setSteeringWheelAngle(const qreal &SteeringWheelAngle)
+{
+    if (m_SteeringWheelAngle == SteeringWheelAngle)
+        return;
+    m_SteeringWheelAngle = SteeringWheelAngle;
+    emit SteeringWheelAngleChanged(SteeringWheelAngle);
+}
+
 
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
@@ -3235,6 +3244,8 @@ qreal DashBoard::Userchannel2() const {return m_Userchannel2;}
 qreal DashBoard::Userchannel3() const {return m_Userchannel3;}
 qreal DashBoard::Userchannel4() const {return m_Userchannel4;}
 qreal DashBoard::FuelLevel() const {return m_FuelLevel;}
+qreal DashBoard::SteeringWheelAngle() const {return m_SteeringWheelAngle;}
+
 
 // Sensor Strings
 

@@ -368,7 +368,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal Userchannel3 READ Userchannel3 WRITE setUserchannel3 NOTIFY Userchannel3Changed)
     Q_PROPERTY(qreal Userchannel4 READ Userchannel4 WRITE setUserchannel4 NOTIFY Userchannel4Changed)
     Q_PROPERTY(qreal FuelLevel READ FuelLevel WRITE setFuelLevel NOTIFY FuelLevelChanged)
-
+    Q_PROPERTY(qreal SteeringWheelAngle READ SteeringWheelAngle WRITE setSteeringWheelAngle NOTIFY SteeringWheelAngleChanged)
 
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
     public:
@@ -740,6 +740,8 @@ class DashBoard : public QObject
     void setUserchannel3(const qreal &Userchannel3);
     void setUserchannel4(const qreal &Userchannel4);
     void setFuelLevel(const qreal &FuelLevel);
+    void setSteeringWheelAngle(const qreal &SteeringWheelAngle);
+
 
 
 
@@ -1105,7 +1107,7 @@ class DashBoard : public QObject
     qreal Userchannel3()const;
     qreal Userchannel4()const;
     qreal FuelLevel()const;
-
+    qreal SteeringWheelAngle()const;
 
 signals:
 
@@ -1458,6 +1460,9 @@ signals:
     void Userchannel3Changed(qreal Userchannel3);
     void Userchannel4Changed(qreal Userchannel4);
     void FuelLevelChanged(qreal FuelLevel);
+    void SteeringWheelAngleChanged(qreal SteeringWheelAngle);
+
+
 
 
 private:
@@ -1825,6 +1830,8 @@ private:
     qreal m_Userchannel3;
     qreal m_Userchannel4;
     qreal m_FuelLevel;
+    qreal m_SteeringWheelAngle;
+
 
 };
 

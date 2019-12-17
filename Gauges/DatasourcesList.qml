@@ -1703,6 +1703,17 @@ ListModel {
         stepsize : "40"
         divisor : "1"
     }
+
+    ListElement {
+        sourcename:"SteeringWheelAngle"
+        defaultsymbol: "°"
+        titlename:"Steering Wheel Angle"
+        decimalpoints : "0"
+        maxvalue : "920"
+        stepsize : "45"
+        divisor : "1"
+    }
+
     ListElement {
         sourcename:"targetbstlelkpa"
         defaultsymbol: "kPa"
