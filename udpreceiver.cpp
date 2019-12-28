@@ -363,7 +363,7 @@ void udpreceiver::processPendingDatagrams()
             //            m_dashboard->setgpsTime(Value);
             break;
         case 113:
-            //            m_dashboard->setgpsVisibleSatelites(Value);
+            m_dashboard->setlowBeam(Value);
             break;
         case 114:
             m_dashboard->setgyrox(Value);
