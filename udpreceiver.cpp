@@ -822,7 +822,7 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setUserchannel4(Value);
             break;
         case 290:
-            //
+            m_dashboard->settractionControl(Value);
             break;
         case 800:
             m_dashboard->setSensorString1(list[1]);

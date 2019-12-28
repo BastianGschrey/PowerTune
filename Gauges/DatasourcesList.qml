@@ -1197,6 +1197,15 @@ ListModel {
         divisor : "1"
     }
     ListElement {
+        sourcename:"lowbeam"
+        defaultsymbol: ""
+        titlename:"Lowbeam"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
         sourcename:"homeccounter"
         defaultsymbol: ""
         titlename:"Homecounter"
@@ -1795,6 +1804,16 @@ ListModel {
         stepsize : "20"
         divisor : "1"
     }
+    ListElement {
+        sourcename:"tractionControl"
+        defaultsymbol: ""
+        titlename:"Traction Control"
+        decimalpoints : "0"
+        maxvalue : "11"
+        stepsize : "1"
+        divisor : "1"
+    }
+
     ListElement {
         sourcename:"Trailingign"
         defaultsymbol: ""
