@@ -258,6 +258,8 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_gearswitch(0)
     ,  m_handbrake(0)
     ,  m_highbeam(0)
+    ,  m_lowBeam(0)
+    ,  m_tractionControl(0)
     ,  m_homeccounter(0)
     ,  m_incamangle1(0)
     ,  m_incamangle2(0)
@@ -2075,6 +2077,21 @@ void DashBoard::sethighbeam(const qreal &highbeam)
     m_highbeam = highbeam;
     emit highbeamChanged(highbeam);
 }
+void DashBoard::setlowBeam(const qreal &lowBeam)
+{
+    if (m_lowBeam == lowBeam)
+        return;
+    m_lowBeam = lowBeam;
+    emit lowBeamChanged(lowBeam);
+}
+void DashBoard::settractionControl(const qreal &tractionControl)
+{
+    if (m_tractionControl == tractionControl)
+        return;
+    m_tractionControl = tractionControl;
+    emit tractionControlChanged(tractionControl);
+}
+
 void DashBoard::sethomeccounter(const qreal &homeccounter)
 {
     if (m_homeccounter == homeccounter)
@@ -3133,6 +3150,8 @@ qreal DashBoard::fueltrimshorttbank2() const { return m_fueltrimshorttbank2; }
 qreal DashBoard::gearswitch() const { return m_gearswitch; }
 qreal DashBoard::handbrake() const { return m_handbrake; }
 qreal DashBoard::highbeam() const { return m_highbeam; }
+qreal DashBoard::lowBeam() const { return m_lowBeam; }
+qreal DashBoard::tractionControl() const { return m_tractionControl; }
 qreal DashBoard::homeccounter() const { return m_homeccounter; }
 qreal DashBoard::incamangle1() const { return m_incamangle1; }
 qreal DashBoard::incamangle2() const { return m_incamangle2; }

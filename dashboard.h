@@ -250,6 +250,8 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal gearswitch READ gearswitch WRITE setgearswitch NOTIFY gearswitchChanged)
     Q_PROPERTY(qreal handbrake READ handbrake WRITE sethandbrake NOTIFY handbrakeChanged)
     Q_PROPERTY(qreal highbeam READ highbeam WRITE sethighbeam NOTIFY highbeamChanged)
+    Q_PROPERTY(qreal lowBeam READ lowBeam WRITE setlowBeam NOTIFY lowBeamChanged)
+    Q_PROPERTY(qreal tractionControl READ tractionControl WRITE settractionControl NOTIFY tractionControlChanged)
     Q_PROPERTY(qreal homeccounter READ homeccounter WRITE sethomeccounter NOTIFY homeccounterChanged)
     Q_PROPERTY(qreal incamangle1 READ incamangle1 WRITE setincamangle1 NOTIFY incamangle1Changed)
     Q_PROPERTY(qreal incamangle2 READ incamangle2 WRITE setincamangle2 NOTIFY incamangle2Changed)
@@ -628,6 +630,9 @@ class DashBoard : public QObject
     void setgearswitch(const qreal &gearswitch);
     void sethandbrake(const qreal &handbrake);
     void sethighbeam(const qreal &highbeam);
+    void setlowBeam(const qreal &lowBeam);
+    void settractionControl(const qreal &tractionControl);
+
     void sethomeccounter(const qreal &homeccounter);
     void setincamangle1(const qreal &incamangle1);
     void setincamangle2(const qreal &incamangle2);
@@ -995,6 +1000,9 @@ class DashBoard : public QObject
     qreal gearswitch() const;
     qreal handbrake() const;
     qreal highbeam() const;
+    qreal lowBeam() const;
+    qreal tractionControl() const;
+
     qreal homeccounter() const;
     qreal incamangle1() const;
     qreal incamangle2() const;
@@ -1353,6 +1361,8 @@ signals:
     void gearswitchChanged(qreal gearswitch);
     void handbrakeChanged(qreal handbrake);
     void highbeamChanged(qreal highbeam);
+    void lowBeamChanged(qreal lowBeam);
+    void tractionControlChanged(qreal tractionControl);
     void homeccounterChanged(qreal homeccounter);
     void incamangle1Changed(qreal incamangle1);
     void incamangle2Changed(qreal incamangle2);
@@ -1718,6 +1728,8 @@ private:
     qreal m_gearswitch;
     qreal m_handbrake;
     qreal m_highbeam;
+    qreal m_lowBeam;
+    qreal m_tractionControl;
     qreal m_homeccounter;
     qreal m_incamangle1;
     qreal m_incamangle2;
