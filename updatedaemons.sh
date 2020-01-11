@@ -13,7 +13,8 @@ sudo pkill Linkd
 sudo pkill Hondatad
 sudo pkill AdaptronicCANd
 sudo pkill AEMV2d
-sudi pkill BRZFRS86d
+sudo pkill BRZFRS86d
+sudo pkill EMUCANd
 echo "Updating Daemons"
 cp -r /home/pi/src/daemons/. /home/pi/daemons/
 cd /home/pi/daemons
