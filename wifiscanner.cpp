@@ -113,7 +113,7 @@ void WifiScanner::finalize(int exitCode, QProcess::ExitStatus exitStatus)
         {
             QString raw;
             raw = str;
-            raw.replace(" ", "");
+            raw.replace("SSID: ", "");
             raw.remove(QChar('"'), Qt::CaseInsensitive);
             //raw.remove(QChar('\'), Qt::CaseInsensitive);
             raw.remove(0,6);
