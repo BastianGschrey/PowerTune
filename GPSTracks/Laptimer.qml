@@ -345,8 +345,8 @@ Rectangle{
                 if (trackselect.textAt(trackselect.currentIndex) == "Dezzi"){map.center= QtPositioning.coordinate(-30.770474, 30.426004),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 22}
                 if (trackselect.textAt(trackselect.currentIndex) == "Buttonwillow"){map.center= QtPositioning.coordinate(35.491242, -119.545396),map.zoomLevel = 15.4,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(35.488681,-119.544514,35.488858,-119.544521,2)}
                 if (trackselect.textAt(trackselect.currentIndex) == "Sepang"){map.center= QtPositioning.coordinate(2.760217, 101.738092),map.zoomLevel = 15.6,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(2.760652,101.738394,2.760894,101.738374,2)}
-                if (trackselect.textAt(trackselect.currentIndex) == "Barbagallo Raceway"){map.center= QtPositioning.coordinate(-31.664326, 115.789962),map.zoomLevel = 15.7,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(-31.664168,115.786292,-31.664171,115.786459,2)}
-                if (trackselect.textAt(trackselect.currentIndex) == "Collie Motorplex"){map.center= QtPositioning.coordinate(-33.431971, 116.244369),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(-33.430061,116.243180,-33.430184, 116.243386,2)}
+                if (trackselect.textAt(trackselect.currentIndex) == "Barbagallo Raceway"){map.center= QtPositioning.coordinate(-31.664326, 115.789962),map.zoomLevel = 15.7,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(-31.664168,115.786292,-31.664171,115.786459,1)}
+                if (trackselect.textAt(trackselect.currentIndex) == "Collie Motorplex"){map.center= QtPositioning.coordinate(-33.431971, 116.244369),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(-33.430061,116.243180,-33.430184, 116.243386,1)}
 
             }
         }
