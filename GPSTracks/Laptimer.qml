@@ -98,10 +98,10 @@ Rectangle {
         Map {
             id: map
             height : 480
-            width : 400
+            width : 40
             plugin: mapPlugin
             zoomLevel: 16
-            activeMapType: map.supportedMapTypes[6] //6 is good to get tracks
+            activeMapType: map.supportedMapTypes[1] //6 is good to get tracks
             copyrightsVisible : false
             gesture.enabled: false
             tilt: 0
