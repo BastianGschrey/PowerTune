@@ -222,7 +222,7 @@ Item {
         function warn()
         {
 console.log("warning" +mainvaluetextfield.text);
-            if (mainvaluetextfield.text == triggervalue || mainvaluetextfield.text > triggervalue ){statepictureoff.visible = false,statepictureon.visible = true}
+            if (mainvaluetextfield.text == triggervalue.text || mainvaluetextfield.text > triggervalue.text ){statepictureoff.visible = false,statepictureon.visible = true}
             else {statepictureoff.visible = true,statepictureon.visible = false};
 
         }
