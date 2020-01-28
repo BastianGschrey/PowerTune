@@ -225,8 +225,9 @@ Item {
         {
           //  console.log("warning" +mainvaluetextfield.text);
           //  console.log("Trigger" +mainvaluetextfield.text);
-            if (mainvaluetextfield.text > triggervalue ){statepictureoff.visible = false,statepictureon.visible = true}
-            else {statepictureoff.visible = true,statepictureon.visible = false};
+            if (mainvaluetextfield.text >= triggervalue ){statepictureoff.visible = false,statepictureon.visible = true}
+            if (mainvaluetextfield.text < triggervalue ){statepictureoff.visible = ture,statepictureon.visible = false}
+//            else {statepictureoff.visible = true,statepictureon.visible = false};
 
         }
     }
