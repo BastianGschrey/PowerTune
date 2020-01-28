@@ -11,7 +11,7 @@ Item {
     property int pictureheight
     property string increasedecreaseident
     property string mainvaluename
-    property double triggervalue: 1
+    property double triggervalue
     Drag.active: true
     DatasourcesList{id: powertunedatasource}
     Component.onCompleted: {togglemousearea();
@@ -189,7 +189,8 @@ Item {
                 id: triggeronvalue
                 width: 140
                 height: 40
-                text: triggervalue
+                //text: triggervalue
+                onTextChanged: triggervalue = triggeronvalue.text
                 font.pixelSize: 12
             }
             }
@@ -222,7 +223,7 @@ Item {
         function warn()
         {
 console.log("warning" +mainvaluetextfield.text);
-            if (mainvaluetextfield.text == triggeronvalue.text || mainvaluetextfield.text > triggeronvalue.text ){statepictureoff.visible = false,statepictureon.visible = true}
+            if (mainvaluetextfield.text == triggervalue || mainvaluetextfield.text > triggervalue ){statepictureoff.visible = false,statepictureon.visible = true}
             else {statepictureoff.visible = true,statepictureon.visible = false};
 
         }
