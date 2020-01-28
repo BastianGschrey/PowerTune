@@ -16,6 +16,7 @@ Item {
     DatasourcesList{id: powertunedatasource}
     Component.onCompleted: {togglemousearea();
                             bind();
+        console.log("created trigger:",triggervalue);
                             }
 
 
