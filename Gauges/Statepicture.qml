@@ -11,7 +11,7 @@ Item {
     property int pictureheight
     property string increasedecreaseident
     property string mainvaluename
-    property double triggervalue
+    property double triggervalue : 1
     Drag.active: true
     DatasourcesList{id: powertunedatasource}
     Component.onCompleted: {togglemousearea();
