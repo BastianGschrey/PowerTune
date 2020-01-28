@@ -199,9 +199,6 @@ Item {
                 text: "Delete picture"
                 font.pixelSize: 15
                 onClicked: statepicture.destroy();
-                Component.onCompleted: {
-                triggervalue = triggeronvalue.text;
-                }
             }
             RoundButton{
                 width: parent.width
