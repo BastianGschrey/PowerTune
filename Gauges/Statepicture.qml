@@ -189,8 +189,8 @@ Item {
                 id: triggeronvalue
                 width: 140
                 height: 40
-                //text: triggervalue
-                onTextChanged: triggervalue = triggeronvalue.text
+                text: triggervalue
+                //onTextChanged: triggervalue = triggeronvalue.text
                 font.pixelSize: 12
             }
             }
@@ -199,6 +199,9 @@ Item {
                 text: "Delete picture"
                 font.pixelSize: 15
                 onClicked: statepicture.destroy();
+                Component.onCompleted: {
+                triggervalue = triggeronvalue.text;
+                }
             }
             RoundButton{
                 width: parent.width
@@ -222,7 +225,8 @@ Item {
         id: warningindication
         function warn()
         {
-console.log("warning" +mainvaluetextfield.text);
+          //  console.log("warning" +mainvaluetextfield.text);
+          //  console.log("Trigger" +mainvaluetextfield.text);
             if (mainvaluetextfield.text == triggervalue || mainvaluetextfield.text > triggervalue ){statepictureoff.visible = false,statepictureon.visible = true}
             else {statepictureoff.visible = true,statepictureon.visible = false};
 
