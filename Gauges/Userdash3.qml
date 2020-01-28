@@ -106,37 +106,37 @@ Item {
         {
             if (dashvalue.textAt(1) !== "") {
 
-                console.log("new item " +dashvalue.textAt(0) );
+                //console.log("new item " +dashvalue.textAt(0) );
                 if (dashvalue.textAt(0) === "Bar gauge")
                 {
-                    //  console.log("Create Bar Gauge")
+                    //  //console.log("Create Bar Gauge")
                     CreateBargaugeScript.createVerticalGauge(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),dashvalue.textAt(8),dashvalue.textAt(9),dashvalue.textAt(10),dashvalue.textAt(11));
                 }
                 if (dashvalue.textAt(0) === "Round gauge")
                 {
-                    //console.log("create Round Gauge")
+                    ////console.log("create Round Gauge")
                     CreateRoundgaugeScript.createRoundGauge(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),dashvalue.textAt(8),dashvalue.textAt(9),dashvalue.textAt(10),dashvalue.textAt(11),dashvalue.textAt(12),dashvalue.textAt(13),dashvalue.textAt(14),dashvalue.textAt(15),dashvalue.textAt(16),dashvalue.textAt(17),dashvalue.textAt(18),dashvalue.textAt(19),dashvalue.textAt(20),dashvalue.textAt(21),dashvalue.textAt(22),dashvalue.textAt(23),dashvalue.textAt(24),dashvalue.textAt(25),dashvalue.textAt(26),dashvalue.textAt(27),dashvalue.textAt(28),dashvalue.textAt(29),dashvalue.textAt(30),dashvalue.textAt(31),dashvalue.textAt(32),dashvalue.textAt(33),dashvalue.textAt(34),dashvalue.textAt(35),dashvalue.textAt(36),dashvalue.textAt(37),dashvalue.textAt(38),dashvalue.textAt(39),dashvalue.textAt(40),dashvalue.textAt(41),dashvalue.textAt(42),dashvalue.textAt(43),dashvalue.textAt(44),dashvalue.textAt(45),dashvalue.textAt(46),dashvalue.textAt(47),dashvalue.textAt(48),(dashvalue.textAt(49).toLowerCase() === 'true' ? true : false),(dashvalue.textAt(50).toLowerCase() === 'true' ? true : false),(dashvalue.textAt(51).toLowerCase() === 'true' ? true : false),dashvalue.textAt(52),dashvalue.textAt(53),dashvalue.textAt(54),dashvalue.textAt(55),(dashvalue.textAt(56).toLowerCase() === 'true' ? true : false),dashvalue.textAt(57),dashvalue.textAt(58),dashvalue.textAt(59),dashvalue.textAt(60),dashvalue.textAt(61),dashvalue.textAt(62),dashvalue.textAt(63),dashvalue.textAt(64),dashvalue.textAt(65),(dashvalue.textAt(66).toLowerCase() === 'true' ? true : false));
                 }
 
                 if (dashvalue.textAt(0) === "Square gauge")
                 {
-                    //console.log("create Square Gauge")
+                    ////console.log("create Square Gauge")
                     CreateSquareGaugeScript.createSquareGauge(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),dashvalue.textAt(8),(dashvalue.textAt(9).toLowerCase() === 'true' ? true : false),(dashvalue.textAt(10).toLowerCase() === 'true' ? true : false),(dashvalue.textAt(11).toLowerCase() === 'true' ? true : false),dashvalue.textAt(12),dashvalue.textAt(13),dashvalue.textAt(14),dashvalue.textAt(15),dashvalue.textAt(16),dashvalue.textAt(17),dashvalue.textAt(18),dashvalue.textAt(19),dashvalue.textAt(20),dashvalue.textAt(21),dashvalue.textAt(22),dashvalue.textAt(23),dashvalue.textAt(24));
                 }
 
                 if (dashvalue.textAt(0) === "gauge image")
                 {
-                    // console.log("Create image")
+                    // //console.log("Create image")
                     CreatePictureScript.createPicture(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4));
                 }
                 if (dashvalue.textAt(0) === "Text label gauge")
                 {
-                    //console.log("Create Text label")
+                    ////console.log("Create Text label")
                     CreateTextScript.createText(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),(dashvalue.textAt(8).toLowerCase() === 'true' ? true : false),dashvalue.textAt(9));
                 }
                 if (dashvalue.textAt(0) === "State gauge")
                 {
-                    // console.log("Create image")
+                    // //console.log("Create image")
                     CreateStatePictureScript.createPicture(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7));
                 }
             }
@@ -549,7 +549,7 @@ Item {
                 text: qsTr("Add State Img")
                 font.pixelSize: 12
                 onClicked: {
-                    console.log("create State gauge ");
+                    //console.log("create State gauge ");
                     CreateStatePictureScript.createPicture(10,10,100,"speed",1,"qrc:/graphics/selectStateImage.png","qrc:/graphics/selectStateImage.png");
                     squaregaugemenu.visible = false;
                     selectcolor.visible =false;
@@ -826,7 +826,7 @@ Item {
     }
     function createDash()
     {
-        //console.log("create Dashboard")
+        ////console.log("create Dashboard")
 
         for (var i=0; i<gaugelist.rowCount(); ++i)
         {
@@ -921,7 +921,7 @@ Item {
                 break;
             }
             case "State gauge": {
-                console.log("Save state");
+                //console.log("Save state");
                 CreateStatePictureScript.createPicture(gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).height,gaugelist.get(i).source,gaugelist.get(i).trigger,gaugelist.get(i).pictureoff,gaugelist.get(i).pictureon);
                 break;
             }
@@ -1006,31 +1006,31 @@ Item {
 
             //Check which type of gauges we have and send info to console
             if(userDash.children[i].information === "Square gauge"){
-                //console.log("Save Square");
+                ////console.log("Save Square");
                 //Apend all values of each gauge to the List Model
                 gaugelist.append({"type": userDash.children[i].title,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"maxvalue":userDash.children[i].maxvalue,"decplace":userDash.children[i].decimalpoints,"unit":userDash.children[i].mainunit,"id":userDash.children[i].title,"vertgaugevis":userDash.children[i].vertgaugevisible,"horigaugevis":userDash.children[i].horigaugevisible,"secvaluevis":userDash.children[i].secvaluevisible,"valuepropertymain":userDash.children[i].mainvaluename,"valuepropertysec":userDash.children[i].secvaluename,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow,"framecolor":userDash.children[i].framecolor,"backroundcolor":userDash.children[i].resetbackroundcolor,"titlecolor":userDash.children[i].resettitlecolor,"titletextcolor":userDash.children[i].titletextcolor,"textcolor":userDash.children[i].textcolor,"barcolor":userDash.children[i].barcolor,"titlefontsize":userDash.children[i].titlefontsize,"mainfontsize":userDash.children[i].mainfontsize,"info":userDash.children[i].information,"decplace2":userDash.children[i].decimalpoints2})
-                //console.log(gaugelist.get(i).warnvaluelow)
-                //console.log(userDash.children[i].warnvaluelow)
+                ////console.log(gaugelist.get(i).warnvaluelow)
+                ////console.log(userDash.children[i].warnvaluelow)
 
             }
             if(userDash.children[i].information === "Bar gauge"){
-                //console.log("Save Bar");
+                ////console.log("Save Bar");
                 gaugelist.append({"type": userDash.children[i].title,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"maxvalue":userDash.children[i].maxvalue,"decplace":userDash.children[i].decimalpoints,"unit":userDash.children[i].gaugename,"id":userDash.children[i].title,"valuepropertymain":userDash.children[i].mainvaluename,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow,"info":userDash.children[i].information,"minval":userDash.children[i].minvalue})
 
             }
             if(userDash.children[i].information === "gauge image"){
-                //console.log("Save Image");
+                ////console.log("Save Image");
                 gaugelist.append({"info":userDash.children[i].information,"x":userDash.children[i].x,"y":userDash.children[i].y,"pictureheight":userDash.children[i].pictureheight,"picturesource":userDash.children[i].picturesource})
             }
             if(userDash.children[i].information === "Text label gauge"){
-                //console.log("Text label gauge");
+                ////console.log("Text label gauge");
 
                 gaugelist.append({"info":userDash.children[i].information,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"displaytext":userDash.children[i].displaytext,"fonttype":userDash.children[i].fonttype,"fontsize":userDash.children[i].fontsize,"textcolor":userDash.children[i].textcolor,"datasourcename":userDash.children[i].datasourcename,"fontbold":userDash.children[i].fontbold,"decimalpoints":userDash.children[i].decimalpoints})
 
             }
 
             if(userDash.children[i].information === "Round gauge"){
-                //console.log("Round gauge");
+                ////console.log("Round gauge");
                 //                                                                                              Width,                               setX,                     setY,                         Setmainvalue,                                    Setmaxvalue,                               Setminvalue,                              Setwarnvaluehigh,                                      Setwarnvaluelow,                                 Setredareastart,                                    Setdivider,                              Setneedletipwidth,                                    Setneedlelenght,                                    Setneedlebasewidth,                                     Setstartangle,                                 Setendangle,                               Settickmarksteps,                                     Setminortickmarksteps,                                         Setlabelsteps,                                    Setlabelinset,                                    Setminortickmarkinset,                                            Setmajortickmarkinset,                                           Setredareainset,                                   Settickmarkcolor,                                    Setneedlecolor,                                    Setdecimalpoints,                                  Setouterneedlecolortrail,                                            Setmiddleneedlecortrail,                                            Setlowerneedlecolortrail,                                           Setinnerneedlecolortrail,                                            Setwarningcolor,                                    Setlabelfontsize,                                    Setlabelcolor1,                                 Setlabelcolor2,                                  Setminortickmarkheight,                                          Setminortickmarkwidth,                                          Settickmarkheight,                                     Settickmarkwidth,                                   Setneedlevisible,S                                    etRingvisible,                                   SetBackroundcolor
                 gaugelist.append({  "info":userDash.children[i].information,
                                      "width":userDash.children[i].width,
@@ -1104,7 +1104,7 @@ Item {
             }
 
             if(userDash.children[i].information === "State gauge"){
-                console.log("Save Image");
+                //console.log("Save Image");
                 gaugelist.append({   "info":userDash.children[i].information,
                                      "x":userDash.children[i].x,
                                      "y":userDash.children[i].y,

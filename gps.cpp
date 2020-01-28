@@ -59,7 +59,7 @@ void GPS::clear()
 void GPS::openConnection(const QString &portName,const QString &Baud)
 {   
     GPSPort = portName;
-    qDebug()<< "GPS Port Name : " + GPSPort;
+    //qDebug()<< "GPS Port Name : " + GPSPort;
     initSerialPort();
     m_timeouttimer.start(5000);
     m_dashboard->setgpsFIXtype("open Serial " + portName);
@@ -237,7 +237,7 @@ void GPS::ProcessMessage(QByteArray messageline)
     */
     if (messageline.contains(ACK10HZ))
     {
-        qDebug() << "ACK 10Hz" <<messageline.toHex();
+        //qDebug() << "ACK 10Hz" <<messageline.toHex();
         m_dashboard->setgpsFIXtype("10Hz ACK");
         rateset = 1;
         removeNMEAmsg();

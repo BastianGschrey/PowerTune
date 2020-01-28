@@ -106,7 +106,7 @@ Item {
         {
             if (dashvalue.textAt(1) !== "") {
 
-                console.log("new item " +dashvalue.textAt(0) );
+              //  console.log("new item " +dashvalue.textAt(0) );
 
                 if (dashvalue.textAt(0) === "State gauge")
                 {
@@ -551,7 +551,7 @@ Item {
                 text: qsTr("Add State Img")
                 font.pixelSize: 12
                 onClicked: {
-                    console.log("create State gauge ");
+                   // console.log("create State gauge ");
                     CreateStatePictureScript.createPicture(10,10,100,"speed",1,"qrc:/graphics/selectStateImage.png","qrc:/graphics/selectStateImage.png");
                     squaregaugemenu.visible = false;
                     selectcolor.visible =false;
@@ -923,7 +923,7 @@ Item {
                 break;
             }
             case "State gauge": {
-                console.log("Save state");
+                //console.log("Save state");
                 CreateStatePictureScript.createPicture(gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).height,gaugelist.get(i).source,gaugelist.get(i).trigger,gaugelist.get(i).pictureoff,gaugelist.get(i).pictureon);
                 break;
             }
@@ -1106,7 +1106,7 @@ Item {
             }
 
             if(userDash.children[i].information === "State gauge"){
-                console.log("Save Image");
+                //console.log("Save Image" ,userDash.children[i].mainvaluename);
                 gaugelist.append({   "info":userDash.children[i].information,
                                      "x":userDash.children[i].x,
                                      "y":userDash.children[i].y,

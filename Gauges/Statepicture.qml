@@ -16,7 +16,7 @@ Item {
     DatasourcesList{id: powertunedatasource}
     Component.onCompleted: {togglemousearea();
                             bind();
-        console.log("created trigger:",triggervalue);
+       // //console.log("created trigger:",triggervalue);
                             }
 
 
@@ -176,11 +176,8 @@ Item {
                 width: 140
                 height: 40
                 font.pixelSize: 12
-                onCurrentIndexChanged: {bind();
-                                        //console.log(mainvaluename);
-                                        }
-
-                Component.onCompleted: {for(var i = 0; i < cbxMain.model.count; ++i) if (powertunedatasource.get(i).sourcename === mainvaluename)cbxMain.currentIndex = i,console.log(mainvaluename),bind()}
+                Component.onCompleted: {for(var i = 0; i < cbxMain.model.count; ++i) if (powertunedatasource.get(i).sourcename === mainvaluename)cbxMain.currentIndex = i,bind()}
+                onCurrentIndexChanged: bind();
             }
             Text{
                 text: "Trigger"
@@ -205,8 +202,12 @@ Item {
                 width: parent.width
                 text: "Close"
                 font.pixelSize: 15
-                onClicked: changesize.visible = false;
+                onClicked: {
+                    triggervalue = triggeronvalue.text;
+                    mainvaluename = powertunedatasource.get(cbxMain.currentIndex).sourcename;
+                    changesize.visible = false;
             }
+                }
         }
     }
 
@@ -223,8 +224,8 @@ Item {
         id: warningindication
         function warn()
         {
-          //  console.log("warning" +mainvaluetextfield.text);
-          //  console.log("Trigger" +mainvaluetextfield.text);
+          //  //console.log("warning" +mainvaluetextfield.text);
+          //  //console.log("Trigger" +mainvaluetextfield.text);
             if (mainvaluetextfield.text >= triggervalue ){statepictureoff.visible = false,statepictureon.visible = true}
             if (mainvaluetextfield.text < triggervalue ){statepictureoff.visible = true,statepictureon.visible = false}
 //            else {statepictureoff.visible = true,statepictureon.visible = false};
@@ -233,7 +234,7 @@ Item {
     }
     function togglemousearea()
     {
-    //    console.log("toggle" + Dashboard.draggable);
+    //    //console.log("toggle" + Dashboard.draggable);
         if (Dashboard.draggable === 1)
         {
             touchArea.enabled = true;
@@ -243,7 +244,7 @@ Item {
     }
     function increaseDecrease()
     {
-        //console.log("ident "+ increasedecreaseident);
+        ////console.log("ident "+ increasedecreaseident);
         switch(increasedecreaseident)
         {
 
