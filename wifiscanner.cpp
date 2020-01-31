@@ -35,7 +35,9 @@ void WifiScanner::initializeWifiscanner()
     result.clear();
     outputline.clear();
     //process->start("sudo /sbin/iw wlan0 scan | egrep 'SSID'");
-    process->start("sudo /sbin/iwlist wlan0 scan");  // start the process
+    //ifconfig wlan0 | egrep 'inet 1'
+    process->start("ifconfig wlan0 | egrep 'inet 1'");  // start the process
+   // process->start("sudo /sbin/iwlist wlan0 scan");  // start the process
     process->waitForFinished();
 
 }
