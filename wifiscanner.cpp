@@ -36,8 +36,8 @@ void WifiScanner::initializeWifiscanner()
     outputline.clear();
     //process->start("sudo /sbin/iw wlan0 scan | egrep 'SSID'");
     //ifconfig wlan0 | egrep 'inet 1'
-    process->start("ifconfig wlan0 | egrep 'inet 1'");  // start the process
-   // process->start("sudo /sbin/iwlist wlan0 scan");  // start the process
+    //process->start("ifconfig wlan0 | egrep 'inet 1'");  // start the process
+    process->start("sudo /sbin/iwlist wlan0 scan");  // start the process
     process->waitForFinished();
 
 }
@@ -88,7 +88,9 @@ void WifiScanner::findActiveWirelesses()
    // qDebug() << output ;
     m_dashboard->setSerialStat("IP Adress:");
     QProcess proc2;
-    proc2.start("sh", QStringList()<<"-c"<<"ifconfig wlan0 2>&1 | grep inet");
+    proc2.start("sh", QStringList()<<"-c"<<"ifconfig wlan0 2>&1 | egrep 'inet 1'");
+
+    //proc2.start("sh", QStringList()<<"-c"<<"ifconfig wlan0 2>&1 | grep inet 1");
     proc2.waitForFinished();
     QString output2 = proc2.readAllStandardOutput();
     m_dashboard->setSerialStat(output2);
