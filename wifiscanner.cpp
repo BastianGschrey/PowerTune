@@ -44,12 +44,12 @@ void WifiScanner::initializeWifiscanner()
 
 void WifiScanner::checkWifiIP()
 {
-    qDebug()<< " CHECK IP ";
+    //qDebug()<< " CHECK IP ";
     QString prog = "sudo /sbin/iwconfig";
     QStringList arguments;
     arguments << "wlan0"<<"egrep 'SSID'";
     QProcess proc;
-    qDebug() << "calling " << prog << arguments;
+   // qDebug() << "calling " << prog << arguments;
     proc.start(prog , arguments);
     proc.waitForFinished();
     QString output = proc.readAllStandardOutput();
@@ -58,7 +58,7 @@ void WifiScanner::checkWifiIP()
 }
 void WifiScanner::findActiveWirelesses()
 {
-    m_dashboard->setSerialStat("Currently connected WIFI:");
+    //m_dashboard->setSerialStat("Currently connected WIFI:");
     /*
     QNetworkConfigurationManager ncm;
     netcfgList = ncm.allConfigurations();
@@ -86,28 +86,31 @@ void WifiScanner::findActiveWirelesses()
     m_dashboard->setSerialStat(output);
     //m_dashBoard->setSerialStat("Rebooting");
    // qDebug() << output ;
-    m_dashboard->setSerialStat("IP Adress:");
+    m_dashboard->setSerialStat("WLAN IP Adress:");
     QProcess proc2;
     proc2.start("sh", QStringList()<<"-c"<<"ifconfig wlan0 2>&1 | egrep 'inet 1'");
-
-    //proc2.start("sh", QStringList()<<"-c"<<"ifconfig wlan0 2>&1 | grep inet 1");
     proc2.waitForFinished();
     QString output2 = proc2.readAllStandardOutput();
-    m_dashboard->setSerialStat(output2);
+    m_dashboard->setSerialStat("Ethernet IP Adress:");
+    QProcess proc3;
+    proc3.start("sh", QStringList()<<"-c"<<"ifconfig wlan0 2>&1 | egrep 'inet 1'");
+    proc3.waitForFinished();
+    QString output3 = proc3.readAllStandardOutput();
+    m_dashboard->setSerialStat(output3);
 
 
 }
 
 void WifiScanner::readData()
 {
-    QString line = process->readAllStandardOutput();        // read data from serial port
+    QString line = process->readAllStandardOutput();        // read data from console
     outputline.append(line);
    // qDebug() << "Line :"<< line;
 }
 
 void WifiScanner::finalize(int exitCode, QProcess::ExitStatus exitStatus)
 {
-    qDebug() << "done :";
+    //Clean up The line which contains the SSID to only show the SSID name
     int i =0;
     QStringList fields = outputline.split(QRegExp("[\n]"));
     //Parse List and delete all items without SSID in them
