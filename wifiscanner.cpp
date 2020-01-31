@@ -94,7 +94,7 @@ void WifiScanner::findActiveWirelesses()
     m_dashboard->setSerialStat(output2);
     m_dashboard->setSerialStat("Ethernet IP Adress:");
     QProcess proc3;
-    proc3.start("sh", QStringList()<<"-c"<<"ifconfig wlan0 2>&1 | egrep 'inet 1'");
+    proc3.start("sh", QStringList()<<"-c"<<"ifconfig eth0 2>&1 | egrep 'inet 1'");
     proc3.waitForFinished();
     QString output3 = proc3.readAllStandardOutput();
     m_dashboard->setSerialStat(output3);
