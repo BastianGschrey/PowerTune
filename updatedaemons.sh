@@ -15,6 +15,8 @@ sudo pkill AdaptronicCANd
 sudo pkill AEMV2d
 sudo pkill BRZFRS86d
 sudo pkill EMUCANd
+sudo pkill M800ADLSet1d
+sudo pkill MotecM1d
 echo "Updating Daemons"
 sudo cp -r /home/pi/src/daemons/. /home/pi/daemons/
 
