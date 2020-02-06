@@ -223,7 +223,43 @@ void datalogger::updateLog()
                                    << endl;
                 mFile.close();
                 break;
+            case 5: ////ECU MASTERS EMU CAN
+                out << (loggerStartT.msecsTo(QTime::currentTime())) << ","
 
+                                   << m_dashboard->rpm() << ","
+                                   << m_dashboard->TPS()  << ","
+                                   << m_dashboard->injms() << ","
+                                   << m_dashboard->speed()  << ","
+                                   << m_dashboard->ambipress()  << ","
+                                   << m_dashboard->oiltemp()  << ","
+                                   << m_dashboard->oilpres()  << ","
+                                   << m_dashboard->FuelPress()<< ","
+                                   << m_dashboard->Watertemp()<< ","
+                                   << m_dashboard->Ign()<< ","
+                                   << m_dashboard->Dwell()<< ","
+                                   << m_dashboard->LAMBDA()<< ","
+                                   << m_dashboard->LAMBDA()<< ","
+                                   << m_dashboard->egt1()<< ","
+                                   << m_dashboard->egt2()<< ","
+                                   << m_dashboard->Gear()<< ","
+                                   << m_dashboard->BatteryV()<< ","
+                                   << m_dashboard->fuelcomposition()<< ","
+                                   << m_dashboard->Analog1()<< ","
+                                   << m_dashboard->Analog2()<< ","
+                                   << m_dashboard->Analog3()<< ","
+                                   << m_dashboard->Analog4()<< ","
+                                   << m_dashboard->Analog5()<< ","
+                                   << m_dashboard->Analog6()<< ","
+                                   << m_dashboard->gpsTime()   << ","
+                                   << m_dashboard->gpsAltitude()   << ","
+                                   << m_dashboard->gpsLatitude()   << ","
+                                   << m_dashboard->gpsLongitude()   << ","
+                                   << m_dashboard->gpsSpeed()   << ","
+                                   << m_dashboard->currentLap() << ","
+                                   << m_dashboard->laptime()  << ","
+                                   << endl;
+                mFile.close();
+                break;
 
         }
     }
@@ -405,6 +441,45 @@ QTextStream out(&mFile);
                            << "RR Wheel Speed"  << ","
                            << "Steering Wheel Angle "<< ","
                            << "Brake Pressure" ","
+                           << "GPS Time"   << ","
+                           << "GPS Altitude"  << ","
+                           << "GPS Latitude" << ","
+                           << "GPS Longitude"   << ","
+                           << "GPS Speed"  << ","
+                           << "Current LAP"    << ","
+                           << "LAP TIME"  << ","
+                              << endl;
+                              mFile.close();
+                                  break;
+
+            case 5: ////EMU CAN
+            out     << "Time ms" << ","
+                           << "RPM" << ","
+                           << "TPS" << ","
+                           << "IAT" << ","
+                           << "MAP"  << ","
+                           << "Inj PW (ms)"  << ","
+                           << "Speed"  << ","
+                           << "Barometric Pressure"  << ","
+                           << "Oil Temp"<< ","
+                           << "Oil Pressure" ","
+                           << "Fuel Pressure" ","
+                           << "Coolant Temp" ","
+                           << "Ignition Angle" ","
+                           << "Dwell (ms)" ","
+                           << "LAMDA λ" ","
+                           << "LAMDA Corr. %" ","
+                           << "EGT 1" ","
+                           << "EGT 2" ","
+                           << "Gear" ","
+                           << "Battery V" ","
+                           << "Ethanol %" ","
+                           << "Analog 1 V" ","
+                           << "Analog 2 V" ","
+                           << "Analog 3 V" ","
+                           << "Analog 4 V" ","
+                           << "Analog 5 V" ","
+                           << "Analog 6 V" ","
                            << "GPS Time"   << ","
                            << "GPS Altitude"  << ","
                            << "GPS Latitude" << ","
