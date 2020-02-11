@@ -83,7 +83,7 @@ Button {
                 text: qsTr("Intake mani abs pres")
                 font.pixelSize: obdselect.width / 55
             }
-
+// 12 and 13 are RPM and speed and are polled by default
             CheckBox {
                 id: obd14
                 visible: false;
@@ -93,7 +93,7 @@ Button {
             CheckBox {
                 id: obd15
                 visible: false;
-                text: qsTr("Intake air temp")
+                text: qsTr("Intake air temp (IAT)")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
@@ -306,22 +306,17 @@ Button {
                 visible: false;
                 text: qsTr("Cat Temp: Bank 2,S2")
                 font.pixelSize: obdselect.width / 55
-            }				CheckBox {
-                id: obd64
-                visible: false;
-                text: qsTr("")
-                font.pixelSize: obdselect.width / 55
             }
-            CheckBox {
+          /*  CheckBox {
                 id: obd65
                 visible: false;
                 text: qsTr("Mon stat this drive cycle")
                 font.pixelSize: obdselect.width / 55
-            }
+            }*/
             CheckBox {
                 id: obd66
                 visible: false;
-                text: qsTr("Control module voltage")
+                text: qsTr("Battery voltage")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
@@ -330,12 +325,13 @@ Button {
                 text: qsTr("Absolute load value")
                 font.pixelSize: obdselect.width / 55
             }
+            /*
             CheckBox {
                 id: obd68
                 visible: false;
-                //text: qsTr("Fuel–Air commanded equivalence ratio")
+                text: qsTr("Fuel–Air commanded equivalence ratio")
                 font.pixelSize: obdselect.width / 55
-            }
+            }*/
             CheckBox {
                 id: obd69
                 visible: false;
@@ -537,7 +533,7 @@ Button {
             CheckBox {
                 id: obd102
                 visible: false;
-                text: qsTr("Engine coolant temp")
+                text: qsTr("Engine coolant temp (ECT)")
                 font.pixelSize: obdselect.width / 55
             }
             CheckBox {
