@@ -49,7 +49,7 @@ Item {
         font.bold: fontbold
         color: textcolor
         //anchors.centerIn: parent
-        anchors.right: parent.right
+        //anchors.right: parent.right
         //verticalAlignment:  mytext.AlignVCenter
         //horizontalAlignment: mytext.AlignHCenter
 
