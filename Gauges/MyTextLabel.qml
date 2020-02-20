@@ -48,7 +48,8 @@ Item {
         font.pointSize: fontsize
         font.bold: fontbold
         color: textcolor
-        verticalAlignment:  Text.AlignRight
+        //verticalAlignment:  Text.AlignRight
+        horizontalAlignment: Text.AlignHCenter
     }
     }
     Rectangle{
