@@ -48,8 +48,11 @@ Item {
         font.pointSize: fontsize
         font.bold: fontbold
         color: textcolor
-        //verticalAlignment:  Text.AlignRight
-        horizontalAlignment: Text.AlignHCenter
+        //anchors.centerIn: parent
+        anchors.right: parent.right
+        //verticalAlignment:  mytext.AlignVCenter
+        //horizontalAlignment: mytext.AlignHCenter
+
     }
     }
     Rectangle{
@@ -103,6 +106,7 @@ Item {
                 width: parent.width
                 font.pixelSize: 15
                 onTextChanged:  displaytext = changetext.text;
+
             }
             ComboBox {
                 id: colorselect
