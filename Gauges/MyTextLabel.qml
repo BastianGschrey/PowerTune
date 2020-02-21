@@ -39,8 +39,8 @@ Item {
             for(var j = 0; j < cbx_sources.model.count; ++j) if (powertunedatasource.get(j).sourcename === datasourcename)cbx_sources.currentIndex = j;
         }
     }
-    Item {
-
+Rectangle{
+            id : textrect
     Text {
         id: mytext
         text: displaytext
@@ -49,12 +49,12 @@ Item {
         font.bold: fontbold
         color: textcolor
         //anchors.centerIn: parent
-        //anchors.right: parent.right
+        anchors.centerIn: parent
         verticalAlignment:  mytext.AlignVCenter
         horizontalAlignment: mytext.AlignHCenter
+}
+    }
 
-    }
-    }
     Rectangle{
         id : changesize
         color: "darkgrey"
