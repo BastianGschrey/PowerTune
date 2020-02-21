@@ -50,8 +50,8 @@ Item {
         color: textcolor
         //anchors.centerIn: parent
         //anchors.right: parent.right
-        //verticalAlignment:  mytext.AlignVCenter
-        //horizontalAlignment: mytext.AlignHCenter
+        verticalAlignment:  mytext.AlignVCenter
+        horizontalAlignment: mytext.AlignHCenter
 
     }
     }
