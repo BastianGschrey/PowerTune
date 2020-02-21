@@ -1,10 +1,10 @@
 import QtQuick 2.8
 import QtQuick.Controls 2.1
-Rectangle {
+Item {
     id:mytextlabel
     height: fontsize
     width:  fontsize
-    //color: "blue"
+    //color: "tra"
     property string information: "Text label gauge"
     property string displaytext
     property string fonttype
