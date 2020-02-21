@@ -1,9 +1,10 @@
 import QtQuick 2.8
 import QtQuick.Controls 2.1
-Item {
+Rectangle {
     id:mytextlabel
-    height: mytext.height
-    width:  mytext.width
+    height: fontsize
+    width:  fontsize
+    //color: "blue"
     property string information: "Text label gauge"
     property string displaytext
     property string fonttype
@@ -39,8 +40,11 @@ Item {
             for(var j = 0; j < cbx_sources.model.count; ++j) if (powertunedatasource.get(j).sourcename === datasourcename)cbx_sources.currentIndex = j;
         }
     }
-Rectangle{
-            id : textrect
+//Rectangle{
+      //      id : textrect
+      //      color: "blue"
+      //      height: mytext.height
+      //      width:  mytext.width
     Text {
         id: mytext
         text: displaytext
@@ -48,12 +52,12 @@ Rectangle{
         font.pointSize: fontsize
         font.bold: fontbold
         color: textcolor
-        //anchors.centerIn: parent
         anchors.centerIn: parent
+        //anchors.verticalCenter:  textrect
         verticalAlignment:  mytext.AlignVCenter
         horizontalAlignment: mytext.AlignHCenter
-}
-    }
+        }
+ //   }
 
     Rectangle{
         id : changesize
