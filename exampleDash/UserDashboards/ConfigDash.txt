@@ -1,0 +1,13 @@
+Square gauge,150,95,32.9812734082397,54.38461538461539,248,0, ,MAP,false,true,false,Dashboard,MAP,MAP,10000,-20000,transparent,transparent,transparent,snow,gold,blue,25,40,0
+Square gauge,150,93,34,273,248,1, ,BATTERY,false,true,false,Dashboard,BatteryV,BatteryV,10000,-20000,transparent,transparent,transparent,snow,gold,blue,25,40,0
+Round gauge,426,189,48,rpm,9000,0,10000,-1000,-180,90,8000,1000,1000,1,1000,0,-47,22,3,-1,8,3,10,4,0.5,0.4,0.33,0.25,23,1,53,6,1,51,red,darkred,transparent,transparent,grey,darkgrey,ghostwhite,gainsboro,black,floralwhite,darkblue,darkslateblue,cornflowerblue,transparent,true,false,false,Eurostile,30,50,10,false,Eurostile, ,red, ,, ,, ,,
+Square gauge,266,119,268,186,248,0, ,,false,false,false,Dashboard,speed,speed,10000,-20000,transparent,transparent,transparent,snow,gold,blue,70,70,0
+Square gauge,160,40,409,301,248,1, ,Trip,false,false,false,Dashboard,Trip,Trip,10000,-20000,transparent,transparent,transparent,snow,gold,blue,12,18,0
+Square gauge,120,40,417,354,248,0, ,Odo,false,false,false,Dashboard,Odo,Odo,10000,-20000,transparent,transparent,transparent,snow,gold,blue,12,18,0
+Square gauge,150,95,34,163,248,0, ,IAT,false,true,false,Dashboard,Intaketemp,Intaketemp,10000,-20000,transparent,transparent,transparent,snow,gold,blue,25,40,0
+Square gauge,150,95,625,163,248,0, ,Oil Temp.,false,true,false,Dashboard,oiltemp,oiltemp,10000,-20000,transparent,transparent,transparent,snow,gold,blue,25,40,0
+Square gauge,150,95,623,54,248,0, ,ECT,false,true,false,Dashboard,Watertemp,Watertemp,10000,-20000,transparent,transparent,transparent,snow,gold,blue,25,40,0
+Square gauge,150,95,33,375,248,0,%,TPS,false,true,false,Dashboard,TPS,TPS,10000,-20000,transparent,transparent,transparent,snow,gold,blue,25,40,0
+Square gauge,150,95,625,271,248,1, ,Oil Pres,false,true,false,Dashboard,oilpres,oilpres,10000,-20000,transparent,transparent,transparent,snow,gold,blue,25,40,0
+Square gauge,150,95,626,377,248,3, , LAMDA,false,true,false,Dashboard,LAMBDA,LAMBDA,10000,-20000,transparent,transparent,transparent,snow,gold,blue,25,40,0
+

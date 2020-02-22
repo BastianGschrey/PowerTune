@@ -1,0 +1,12 @@
+266,120,1,0,8500,0,rpm,RPM,false,true,false,Dashboard,rpm,rpm,8600,-1,yellow,black,yellow,black,yellow,gold,25,35
+266,120,267,0,6000,3,ms,Inj ms,false,true,false,Dashboard,injms,injms,8600,-1,yellow,black,yellow,black,yellow,gold,25,35
+266,120,533,0,8500,0,°,IAT,false,true,false,Dashboard,Intaketemp,Intaketemp,80,-1,yellow,black,yellow,black,yellow,gold,25,35
+266,120,1,120,100,0,%,Eng. Load,false,true,false,Dashboard,EngLoad,EngLoad,8600,-1,yellow,black,yellow,black,yellow,gold,25,35
+266,120,267,120,8500,0,°,IGN,false,true,false,Dashboard,Ign,Ign,8600,-40,yellow,black,yellow,black,yellow,gold,25,35
+266,120,533,120,120,0,,Knock,false,true,false,Dashboard,Knock,Knock,70,-1,yellow,black,yellow,black,yellow,gold,25,35
+266,120,1,240,5,2,V,MAF1,false,true,false,Dashboard,MAF1V,MAF1V,8600,-1,yellow,black,yellow,black,yellow,gold,25,35
+266,120,267,240,8500,0,,Dwell,false,false,false,Dashboard,Dwell,Dwell,8600,-1,yellow,black,yellow,black,yellow,gold,25,35
+266,120,533,240,16,2,V,Battery,false,true,false,Dashboard,BatteryV,BatteryV,8600,11.5,yellow,black,yellow,black,yellow,gold,25,35
+266,120,1,360,5,2,V,MAF2,false,true,false,Dashboard,MAF2V,MAF2V,8600,-1,yellow,black,yellow,black,yellow,gold,25,35
+266,120,267,360,95,0,°,ECT,false,true,false,Dashboard,Watertemp,Watertemp,98,-1,yellow,black,yellow,black,yellow,gold,25,35
+266,120,533,360,100,2,V,TPS V,false,true,false,Dashboard,ThrottleV,ThrottleV,8600,-1,yellow,black,yellow,black,yellow,gold,25,35

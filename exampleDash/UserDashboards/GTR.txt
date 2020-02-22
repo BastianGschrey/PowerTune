@@ -1,0 +1,18 @@
+Round gauge,215,23,30,Intaketemp,120,0,50,-1000,-90,90,50,1,20,1,20,0,2,-16,3,3,8,3,15,5,0.5,0.4,0.33,0.25,20,5,93,8,4,9,red,darkred,transparent,transparent,grey,darkgrey,darkgrey,black,cornsilk,gray,dodgerblue,deepskyblue,lightskyblue,transparent,false,false,false,Eurostile,25,55,14,false,Eurostile,INTAKE TEMP,seashell
+Text label gauge,101,106,0,Eurostile,21,seashell,Intaketemp,true,0
+Text label gauge,124,82,C,Eurostile,15,seashell,,true,0
+Round gauge,215,289,29,Watertemp,120,0,95,-1000,-90,90,95,1,20,1,20,0,2,-18,3,3,8,3,15,5,0.5,0.4,0.33,0.25,20,5,93,8,4,9,red,darkred,transparent,transparent,grey,darkgrey,darkgrey,black,azure,darkgray,dodgerblue,deepskyblue,lightskyblue,transparent,false,false,false,Eurostile,28,55,14,false,Eurostile,Coolant Temp,seashell
+Text label gauge,363,109,0,Eurostile,21,seashell,Watertemp,true,0
+Text label gauge,397,83,C,Eurostile,15,seashell,,true,0
+Round gauge,215,22,270,BatteryV,20,0,20,-993,-90,90,20,1,4,1,5,1,2,-18,3,3,8,3,15,5,0.5,0.4,0.33,0.25,20,5,93,8,0,0,red,darkred,transparent,transparent,grey,darkgrey,darkgrey,black,grey,darkgray,dodgerblue,deepskyblue,lightskyblue,transparent,false,false,false,Eurostile,20,50,14,false,Eurostile,Battery Voltage,seashell
+Text label gauge,120,311,V,Eurostile,15,seashell,,true,0
+Text label gauge,96,339,0.0,Eurostile,21,seashell,BatteryV,true,1
+Round gauge,215,286,265,oiltemp,120,0,120,-1000,-90,90,120,1,20,1,20,0,2,-18,3,3,8,3,15,5,0.5,0.4,0.33,0.25,20,5,93,8,0,0,red,darkred,transparent,transparent,grey,darkgrey,darkgrey,black,grey,darkgray,dodgerblue,deepskyblue,lightskyblue,transparent,false,false,false,Eurostile,30,50,14,false,Eurostile,Oil Temp.,seashell
+Text label gauge,399,311,C,Eurostile,15,seashell,,true,0
+Text label gauge,364,338,0,Eurostile,21,seashell,oiltemp,true,0
+Round gauge,215,555,29,MAP,300,0,300,-1000,-90,90,300,1,100,1,100,0,2,-18,3,3,8,3,15,5,0.5,0.4,0.33,0.25,20,5,93,8,0,0,red,darkred,transparent,transparent,grey,darkgrey,darkgrey,black,grey,darkgrey,dodgerblue,deepskyblue,lightskyblue,transparent,false,false,false,Eurostile,36,55,14,false,Eurostile,MAP,seashell
+Text label gauge,637,107,0,Eurostile,21,seashell,MAP,true,0
+Text label gauge,648,79,kPa,Eurostile,15,seashell,,true,0
+Round gauge,215,556,266,oilpres,400,0,400,-1000,-90,90,400,1,100,1,100,1,2,-18,3,3,8,3,15,5,0.5,0.4,0.33,0.25,20,5,93,8,0,0,red,darkred,transparent,transparent,grey,darkgrey,darkgrey,black,aliceblue,darkgray,dodgerblue,deepskyblue,lightskyblue,transparent,false,false,false,Eurostile,35,50,15,false,Eurostile,Oil Pres,seashell
+Text label gauge,658,314,kPa,Eurostile,15,seashell,,true,0
+Text label gauge,624,343,0.0,Eurostile,21,seashell,oilpres,true,0

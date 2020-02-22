@@ -1,0 +1,4 @@
+﻿266,120,267,239,120,0,,ECT,false,true,false,Dashboard,Watertemp,Watertemp,20000,-2000,transparent,black,transparent,grey,white,blue,25,40
+266,120,534,239,120,0,,IAT,false,true,false,Dashboard,Intaketemp,Intaketemp,20000,-2000,transparent,black,transparent,grey,white,blue,25,40
+266,120,267,360,120,0,,Knock,false,true,false,Dashboard,Knock,Knock,20000,-2000,transparent,black,transparent,grey,white,blue,25,40
+266,120,534,360,25,2,,Boost,false,true,false,Dashboard,BoostPres,BoostPres,20000,-2000,transparent,black,transparent,grey,white,blue,25,40
