@@ -569,7 +569,7 @@ Quick1.TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.90k " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.90l " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness
@@ -1470,7 +1470,7 @@ Quick1.TabView {
                     width: daemons.width / 5
                     height: daemons.height /15
                     font.pixelSize: daemons.width / 55
-                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata","Adaptronic CAN","Motec M1","AEM V2","AUDI B7","BRZ FRS 86","ECU Masters","Audi B8"]
+                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata","Adaptronic CAN","Motec M1","AEM V2","AUDI B7","BRZ FRS 86","ECU Masters","Audi B8","Emtron"]
                     delegate: ItemDelegate {
                         width: daemonselect.width
                         text: daemonselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData

@@ -764,6 +764,9 @@ void Connect::daemonstartup(const int &daemon)
     case 14:
         daemonstart = "./AudiB8d";
         break;
+    case 15:
+        daemonstart = "./Emtrond";
+        break;
     }
     QString fileName = "/home/pi/startdaemon.sh";//This will be the correct path on pi
     //QString fileName = "startdaemon.sh";//for testing on windows

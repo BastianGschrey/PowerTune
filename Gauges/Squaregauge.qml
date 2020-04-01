@@ -182,7 +182,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.rightMargin: 5
         anchors.verticalCenter: parent.verticalCenter
-        font.pixelSize: 28
+        font.pixelSize: mainvaluetextfield.font.pixelSize / 1.8 //28
         font.family: "Eurostile"
         font.bold: true
         color: textcolor
