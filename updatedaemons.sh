@@ -17,6 +17,10 @@ sudo pkill BRZFRS86d
 sudo pkill EMUCANd
 sudo pkill M800ADLSet1d
 sudo pkill MotecM1d
+sudo pkill AudiB7d
+sudo pkill AudiB8d
+sudo pkill Emtrond
+sudo pkill Holleyd
 echo "Updating Daemons"
 sudo cp -r /home/pi/src/daemons/. /home/pi/daemons/
 
