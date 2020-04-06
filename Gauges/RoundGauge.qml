@@ -93,9 +93,10 @@ Rectangle{
     SequentialAnimation {
         id: intro
         running: true
-        onRunningChanged:{
-            if (intro.running == false )gauge.value  = Qt.binding(function(){return Dashboard[mainvaluename]});
-        }
+       onRunningChanged:{
+            if (intro.running == false )
+                gauge.value  = Qt.binding(function(){return Dashboard[mainvaluename]});
+       }
         NumberAnimation {
             id :animation
             target: gauge
@@ -105,11 +106,12 @@ Rectangle{
             to: maxvalue
             duration: 1000
         }
+
         NumberAnimation {
             id :animation1
             target: gauge
             property: "value"
-            easing.type: Easing.InOutSine
+            easing.type: Easing.InBack
             from: maxvalue
             to: minvalue
             duration: 1000
@@ -282,6 +284,7 @@ Rectangle{
                 Canvas {
                     id: needletrail
                     property int value: gauge.value
+
                     anchors.fill: parent
                     onValueChanged: requestPaint()
 
@@ -291,6 +294,7 @@ Rectangle{
                     }
 
                     onPaint: {
+                       // console.log(gauge.value)
                         var ctx = getContext("2d");
                         var gradient2;
                         gradient2 = ctx.createRadialGradient((parent.width / 2),(parent.height / 2), 0, (parent.width / 2),(parent.height / 2),parent.height );
