@@ -631,8 +631,8 @@ Rectangle {
             text: "apply"
             anchors.top: parent.top
             anchors.topMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
+            anchors.left: cbxMain.right
+            anchors.leftMargin: 2
             onClicked: {
                 cbxMain.visible = false;
                 btnMainSrc.visible = false;
@@ -662,8 +662,8 @@ Rectangle {
             text: "apply"
             anchors.top: parent.top
             anchors.topMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
+            anchors.left: cbxSecondary.right
+            anchors.leftMargin: 2
             onClicked: {
                 cbxSecondary.visible = false;
                 btnSecSrc.visible = false;
@@ -690,8 +690,8 @@ Rectangle {
             text: qsTr("OK")
             anchors.top: parent.top
             anchors.topMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
+            anchors.left: txtMinValue.right
+            anchors.leftMargin: 2
             visible: false
             onClicked: {
                 hidemenues();
@@ -724,8 +724,8 @@ Rectangle {
             text: qsTr("OK")
             anchors.top: parent.top
             anchors.topMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
+            anchors.left: txtwidth.right
+            anchors.leftMargin: 2
             visible: false
             onClicked: {
                 hidemenues();
@@ -741,6 +741,7 @@ Rectangle {
         ComboBox {
             id: cbx_decimalplaces
             visible: false
+            width: 94
             model: ["0","1","2","3","N/A"]
             Component.onCompleted: {
                     for(var i = 0; i < 5; ++i)
@@ -754,6 +755,7 @@ Rectangle {
         ComboBox {
             id: cbx_decimalplaces2
             visible: false
+            width: 94
             anchors.top: cbx_decimalplaces.bottom
             model: ["0","1","2","3","N/A"]
             Component.onCompleted: {
@@ -770,8 +772,8 @@ Rectangle {
             text: qsTr("OK")
             anchors.top: parent.top
             anchors.topMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
+            anchors.left: cbx_decimalplaces.right
+            anchors.leftMargin: 2
             visible: false
             onClicked: {
                 hidemenues();
@@ -784,7 +786,7 @@ Rectangle {
     }
     Item {
         id: titlefontsizeSelect
-        anchors.fill: parent
+        anchors.bottom: parent.top
 
         ComboBox {
             id: cbx_titlefontsize
@@ -797,8 +799,8 @@ Rectangle {
             text: qsTr("OK")
             anchors.top: parent.top
             anchors.topMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
+            anchors.left: cbx_titlefontsize.right
+            anchors.leftMargin: 0
             visible: false
             onClicked: {
                 hidemenues();
@@ -821,8 +823,8 @@ Rectangle {
             text: qsTr("OK")
             anchors.top: parent.top
             anchors.topMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
+            anchors.left: cbx_gaugefontsize.right
+            anchors.leftMargin: 2
             visible: false
             onClicked: {
                 hidemenues();
@@ -853,8 +855,8 @@ Rectangle {
             text: qsTr("OK")
             anchors.top: parent.top
             anchors.topMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
+            anchors.left: txtMaxValue.right
+            anchors.leftMargin: 2
             visible: false
             onClicked: {
                 hidemenues();
@@ -881,8 +883,8 @@ Rectangle {
             text: qsTr("OK")
             anchors.top: parent.top
             anchors.topMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
+            anchors.left: titlenameValue.right
+            anchors.leftMargin: 2
             visible: false
             onClicked: {
                 hidemenues();
@@ -910,8 +912,8 @@ Rectangle {
             text: qsTr("OK")
             anchors.top: parent.top
             anchors.topMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
+            anchors.left: bargaugeMax.right
+            anchors.leftMargin: 2
             visible: false
             onClicked: {
                 hidemenues();
