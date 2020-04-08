@@ -916,42 +916,33 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
 {
     ecu = ecuSelect;
     selectedPort = portName;
+//model: [ "None","CAN","PowerFC","Consult","OBD2"]
 
+
+    //UDP receiver
+    if (ecuSelect == 1)
+    {
+        m_udpreceiver->startreceiver();
+    }
     //Apexi
-    if (ecuSelect == 0)
+    if (ecuSelect == 2)
     {
 
         m_apexi->openConnection(portName);
 
     }
-
-    //UDP receiver
-    if (ecu == 1)
-    {
-        m_udpreceiver->startreceiver();
-    }
-    //None
-    if (ecuSelect == 2)
-    {
-        //m_adaptronicselect->openConnection(portName);
-
-    }
-
-    //Adaptronic ModularCAN protocol
     if (ecuSelect == 3)
     {
-        QProcess *process = new QProcess(this);
-        process->start("/home/pi/Adaptronic/AdaptronicCAN");
+        //NissanConsult
+
         m_udpreceiver->startreceiver();
     }
     if (ecuSelect == 4)
     {
-        //NissanConsult
-        //QProcess *process = new QProcess(this);
-        //process->start("/home/pi/Consult/Consult /dev/"+(portName));
-        //qDebug() << "/dev/"+(portName);
+        //OBD2
         m_udpreceiver->startreceiver();
     }
+    /*
     if (ecuSelect == 5)
     {
         //HaltechV1
@@ -991,7 +982,7 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
     {
         m_udpreceiver->startreceiver();
     }
-    /* //Dicktator
+     //Dicktator
     if (ecuSelect == 9)
     {
 
