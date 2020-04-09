@@ -141,7 +141,7 @@ Quick1.TabView {
                             text: "ECU Serial Port: "
                             font.pixelSize: windowbackround.width / 55
                             color: "white"
-                            visible: { (ecuSelect.currentIndex >= "5") ? false: true; }
+                            visible: { (ecuSelect.currentIndex != "2") ? false: true; }
                         }
                         ComboBox {
                             id: serialName
@@ -149,7 +149,7 @@ Quick1.TabView {
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
                             model: Connect.portsNames
-                            visible: { (ecuSelect.currentIndex >= "5") ? false: true; }
+                            visible: { (ecuSelect.currentIndex != "2") ? false: true; }
                             property bool initialized: false
                             onCurrentIndexChanged: if (initialized) AppSettings.setBaudRate( currentIndex )
                             Component.onCompleted: { currentIndex = AppSettings.getBaudRate(); initialized = true; autoconnect.auto(); }
@@ -586,7 +586,7 @@ Quick1.TabView {
                         }
 
                         Grid {
-                            visible: { (ecuSelect.currentIndex >= "1") ? false: true; }
+                            visible: { (ecuSelect.currentIndex != "2") ? false: true; }
                             rows: 10
                             columns: 4
                             spacing: windowbackround.width / 150
@@ -1301,22 +1301,10 @@ Quick1.TabView {
                 if(Dashboard.ecu == "1"){
                     pageLoader.source = "qrc:/AnalogInputs.qml"
                     regtab.title = "Analog";}
-                if(Dashboard.ecu == "2"){
-                    pageLoader.source = "qrc:/AnalogInputs.qml"
-                    regtab.title = "Analog";}
                 if(Dashboard.ecu == "3"){
-                    pageLoader.source = "qrc:/AnalogInputs.qml"
-                    regtab.title = "Analog";}
-                if(Dashboard.ecu == "4"){
                     pageLoader.source = "qrc:/ConsultRegs.qml"
                     regtab.title = "Consult";}
-                if(Dashboard.ecu == "5"){
-                    pageLoader.source = "qrc:/AnalogInputs.qml"
-                    regtab.title = "Analog";}
-                if(Dashboard.ecu == "6"){
-                    pageLoader.source = "qrc:/AnalogInputs.qml"
-                    regtab.title = "Analog";}
-                if(Dashboard.ecu == "7"){
+                if(Dashboard.ecu == "4"){
                 pageLoader.source = "qrc:/OBDPIDS.qml"
                 regtab.title = "OBD";}
                 //else pageLoader.source = "qrc:/AnalogInputs.qml",regtab.title = "Analog";
