@@ -586,7 +586,7 @@ Quick1.TabView {
                         }
 
                         Grid {
-                            visible: { (ecuSelect.currentIndex != "2") ? false: true; }
+                            visible: { (ecuSelect.currentIndex != "0") ? false: true; }
                             rows: 10
                             columns: 4
                             spacing: windowbackround.width / 150
