@@ -1007,58 +1007,16 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
 }
 void Connect::closeConnection()
 {
-
+//model: [ "None","CAN","PowerFC","Consult","OBD2"]
     m_calculations->stop();
     //Apexi
-    if (ecu == 0)
+    if (ecu == 2)
     {
 
         m_apexi->closeConnection();
 
     }
-    //UDP receiver
-    if (ecu == 1)
-    {
-        m_udpreceiver->closeConnection();
-    }
-
-    //Adaptronic Select
-    if (ecu == 2)
-    {
-        m_adaptronicselect->closeConnection();
-
-    }
-    //Adaptronic ModularCAN protocol
-    if (ecu == 3)
-    {
-
-        m_udpreceiver->closeConnection();
-
-    }
-    if (ecu == 4)
-    {
-
-        // QProcess *process = new QProcess(this);
-        // process->start("sudo pkill Consult");
-        // qDebug()<<"Kill";
-        m_udpreceiver->closeConnection();
-    }
-    if (ecu == 5)
-    {
-
-        QProcess *process = new QProcess(this);
-        process->start("sudo pkill HaltechV1");
-        qDebug()<<"Kill";
-
-    }
-    if (ecu == 6)
-    {
-
-        QProcess *process = new QProcess(this);
-        process->start("sudo pkill HaltechV2");
-        qDebug()<<"Kill";
-
-    }
+    else m_udpreceiver->closeConnection();
 
 }
 
