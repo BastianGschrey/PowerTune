@@ -102,7 +102,7 @@ void Apexi::clear()
 //function to open serial port
 void Apexi::openConnection(const QString &portName)
 {
-    //qDebug()<<"open Apexi";
+    qDebug()<<"open Apexi";
     port = portName;
     initSerialPort();
     m_serialport->setPortName(port);

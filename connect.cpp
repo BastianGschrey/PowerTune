@@ -916,17 +916,17 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
 {
     ecu = ecuSelect;
     selectedPort = portName;
-//model: [ "None","CAN","PowerFC","Consult","OBD2"]
+//model: [ "CAN","PowerFC","Consult","OBD2"]
 
     //Apexi
-    if (ecuSelect == 0)
+    if (ecuSelect == 1)
     {
 
         m_apexi->openConnection(portName);
 
     }
     //UDP receiver
-    if (ecuSelect == 1)
+    if (ecuSelect == 0)
     {
         m_udpreceiver->startreceiver();
     }
@@ -1007,16 +1007,30 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
 }
 void Connect::closeConnection()
 {
-//model: [ "PowerFC","CAN","None","Consult","OBD2"]
-    m_calculations->stop();
-    //Apexi
-    if (ecu == 0)
+    //qDebug() << "Closing"<<ecu;
+     m_calculations->stop();
+    switch (ecu)
     {
 
+    case 0:
+        m_udpreceiver->closeConnection();
+        break;
+    case 1: //Apexi
         m_apexi->closeConnection();
-
+        break;
+    case 2:
+        //qDebug() << "Clsoing now";
+        m_udpreceiver->closeConnection();
+        break;
+    case 3:
+        m_udpreceiver->closeConnection();
+        break;
+    default:
+        m_udpreceiver->closeConnection();
+        break;
     }
-    else m_udpreceiver->closeConnection();
+//model: [ "CAN","PowerFC","Consult","OBD2"]
+    m_calculations->stop();
 
 }
 

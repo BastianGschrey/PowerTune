@@ -31,8 +31,15 @@ void udpreceiver::startreceiver()
 
 void udpreceiver::closeConnection()
 {
-    udpSocket->close();
-    delete udpSocket;
+    //qDebug()<< udpSocket->state();
+/*
+    if (udpSocket->isOpen())
+    {
+        qDebug()<< "UDP is open";
+        //udpSocket->close();
+        //delete udpSocket;
+    }
+*/
 }
 void udpreceiver::processPendingDatagrams()
 {
