@@ -272,7 +272,7 @@ Quick1.TabView {
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
                             //model: [ "PowerFC","UDP","None","CAN Adaptronic Modular","Consult","HaltechV1","HaltechV2","OBD2"]
-                            model: [ "None","CAN","PowerFC","Consult","OBD2"]
+                            model: [ "PowerFC","CAN","None","Consult","OBD2"]
                             property bool initialized: false
                             onCurrentIndexChanged: {if (initialized) AppSettings.setECU( currentIndex ),Dashboard.setecu(ecuSelect.currentIndex);}
                             Component.onCompleted: { currentIndex = AppSettings.getECU(),Dashboard.setecu(ecuSelect.currentIndex),initialized = true; }
@@ -570,7 +570,7 @@ Quick1.TabView {
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                         }
-                        Text  { text: "V 1.91a " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.91b " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
                         Slider {
                             id:brightness

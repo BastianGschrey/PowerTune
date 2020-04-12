@@ -918,19 +918,19 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
     selectedPort = portName;
 //model: [ "None","CAN","PowerFC","Consult","OBD2"]
 
-
-    //UDP receiver
-    if (ecuSelect == 1)
-    {
-        m_udpreceiver->startreceiver();
-    }
     //Apexi
-    if (ecuSelect == 2)
+    if (ecuSelect == 0)
     {
 
         m_apexi->openConnection(portName);
 
     }
+    //UDP receiver
+    if (ecuSelect == 1)
+    {
+        m_udpreceiver->startreceiver();
+    }
+
     if (ecuSelect == 3)
     {
         //NissanConsult
@@ -1007,10 +1007,10 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
 }
 void Connect::closeConnection()
 {
-//model: [ "None","CAN","PowerFC","Consult","OBD2"]
+//model: [ "PowerFC","CAN","None","Consult","OBD2"]
     m_calculations->stop();
     //Apexi
-    if (ecu == 2)
+    if (ecu == 0)
     {
 
         m_apexi->closeConnection();
