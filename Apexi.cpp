@@ -26,10 +26,12 @@ QString Modelname;
 int Model = 0;
 int Logging =3;
 int Loggerstat;
-int auxval1;
-int auxval2;
-int auxval3;
-int auxval4;
+
+float auxval1; // an1-2 v0
+float auxval2; // an1-2 v5
+float auxval3; // an3-4 v0
+float auxval4; // an3-4 v5
+
 int requestIndex = 0; //ID for requested data type Power FC
 int expectedbytes;
 int Bytes;
