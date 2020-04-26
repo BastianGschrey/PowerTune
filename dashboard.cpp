@@ -30,6 +30,7 @@ qreal AN95;
 qreal AN100;
 qreal AN105;
 qreal lamdamultiplicator = 1;
+int brightness;
 
 DashBoard::DashBoard(QObject *parent)
     : QObject(parent)
@@ -361,6 +362,7 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_Userchannel4()
     ,  m_FuelLevel()
     ,  m_SteeringWheelAngle()
+    ,  m_Brightness()
 
 {
 
@@ -2903,7 +2905,13 @@ void DashBoard::setSteeringWheelAngle(const qreal &SteeringWheelAngle)
     m_SteeringWheelAngle = SteeringWheelAngle;
     emit SteeringWheelAngleChanged(SteeringWheelAngle);
 }
-
+void DashBoard::setBrightness(const int &Brightness)
+{
+    if (m_Brightness == Brightness)
+        return;
+    m_Brightness = Brightness;
+    emit BrightnessChanged(Brightness);
+}
 
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
@@ -3264,6 +3272,8 @@ qreal DashBoard::Userchannel3() const {return m_Userchannel3;}
 qreal DashBoard::Userchannel4() const {return m_Userchannel4;}
 qreal DashBoard::FuelLevel() const {return m_FuelLevel;}
 qreal DashBoard::SteeringWheelAngle() const {return m_SteeringWheelAngle;}
+int DashBoard::Brightness() const {return m_Brightness;}
+
 
 
 // Sensor Strings

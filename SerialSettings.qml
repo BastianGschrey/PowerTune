@@ -79,7 +79,7 @@ Quick1.TabView {
             Item {
                 id: powerTuneSettings
                 Settings {
-                    property alias brightnessselect: brightness.value
+                    //property alias brightnessselect: brightness.value
                     // property alias connectAtStartUp: connectAtStart.checked
                     property alias connectECUAtStartup: connectButton.enabled
                     property alias connectGPSAtStartup: connectButtonGPS.enabled
@@ -319,6 +319,7 @@ Quick1.TabView {
                             height: windowbackround.height /15
                             font.pixelSize: windowbackround.width / 55
                             placeholderText: qsTr("GoPro Password")
+                            //InputMethod:Qt.
                             inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhPreferLowercase | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
                             Component.onCompleted: {transferSettings.sendSettings() }
                         }
@@ -569,9 +570,10 @@ Quick1.TabView {
                             font.pixelSize: windowbackround.width / 55
                             text: qsTr("GoPro rec")
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
+                            Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                         }
-                        Text  { text: "V 1.91c " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
-
+                        Text  { text: "V 1.91d " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+/*
                         Slider {
                             id:brightness
                             width: windowbackround.width / 5
@@ -579,12 +581,12 @@ Quick1.TabView {
                             stepSize: 5
                             from: 20
                             to: 255
-                            //value: brightnessselect
+                            value: Dashboard.Brightness
                             visible: Dashboard.screen
-                            Component.onCompleted: Connect.setSreenbrightness(brightness.value),tabView.currentIndex = 1; // opens the 2nd tab
+                            Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                             onPositionChanged: Connect.setSreenbrightness(brightness.value);
                         }
-
+*/
                         Grid {
                             visible: { (ecuSelect.currentIndex != "1") ? false: true; }
                             rows: 10

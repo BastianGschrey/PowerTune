@@ -165,11 +165,20 @@ void Connect::setrpm(const int &dash1,const int &dash2,const int &dash3)
 void Connect::checkifraspberrypi()
 {
     QString path = "/sys/class/backlight/rpi_backlight/brightness";
+    QFile inputFile(path);
+    if (inputFile.open(QIODevice::ReadOnly))
+    {
+        QTextStream in(&inputFile);
+            QString line = in.readLine();
+            bool ok;
+            int val = line.toInt(&ok);
+            qDebug() <<"Bright " << val ;
+            m_dashBoard->setBrightness(val);
+        inputFile.close();
+    }
     if (QFileInfo::exists(path))
     {
-
         m_dashBoard->setscreen(true);
-
     }
     else
     {
@@ -196,6 +205,7 @@ void Connect::readavailablebackrounds()
 
 void Connect::readMaindashsetup()
 {
+
     //QString path = "MainDash.txt";//for Windows
     QString path = "/home/pi/UserDashboards/MainDash.txt";
     QFile inputFile(path);
