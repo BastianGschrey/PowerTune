@@ -38,6 +38,8 @@ Rectangle {
     property int decimalpoints2
     property double warnvaluehigh: 20000
     property double warnvaluelow : -20000
+    property string textFonttype
+    property string valueFonttype
 
     Drag.active: true
     DatasourcesList{id: powertunedatasource}
@@ -160,7 +162,7 @@ Rectangle {
         anchors.horizontalCenter: titlebar.horizontalCenter
         font.pixelSize: 23
         font.bold: true
-        font.family: "Eurostile"
+        font.family: textFonttype
         color: titletextcolor
 
     }
@@ -170,7 +172,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 50
-        font.family: "Eurostile"
+        font.family: valueFonttype
         color: "white"
         onTextChanged: {
             warningindication.warn();
@@ -183,7 +185,7 @@ Rectangle {
         anchors.rightMargin: 5
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: mainvaluetextfield.font.pixelSize / 1.8 //28
-        font.family: "Eurostile"
+        font.family: textFonttype
         font.bold: true
         color: textcolor
     }
@@ -197,7 +199,7 @@ Rectangle {
         anchors.rightMargin: 10
         height: parent.height * 0.2
         font.pixelSize: 28
-        font.family: "Eurostile"
+        font.family: valueFonttype
         color: textcolor
     }
 
@@ -306,6 +308,10 @@ Rectangle {
         cbx_decimalplaces.visible  = false;
         cbx_decimalplaces2.visible  = false;
         btndecimalplaces.visible = false;
+        cbx_titlefontstyle.visible =false;
+        btn_titlefontstyle.visible = false;
+        btn_valuefontstyle.visible = false;
+        cbx_valuefontstyle.visible = false;
     }
     Gauge {
         id: horizgauge
@@ -358,7 +364,7 @@ Rectangle {
                 onClicked: sizemenu.popup(touchArea.mouseX, touchArea.mouseY)
             }
             MenuItem {
-                text: "Title font size"
+                text: "Text font size"
                 font.pixelSize: 15
                 onClicked:    {
                     cbx_titlefontsize.visible =true;
@@ -367,12 +373,28 @@ Rectangle {
 
             }
             MenuItem {
+                text: "Text font style"
+                font.pixelSize: 15
+                onClicked:    {
+                    cbx_titlefontstyle.visible = true;
+                    btn_titlefontstyle.visible = true;
+                }
+            }
+            MenuItem {
                 text: "Gauge font size"
                 font.pixelSize: 15
                 onClicked:
                 {
                     btngaugefontsize.visible =true;
                     cbx_gaugefontsize.visible =true;
+                }
+            }
+            MenuItem {
+                text: "Gauge font style"
+                font.pixelSize: 15
+                onClicked:    {
+                    btn_valuefontstyle.visible = true;
+                    cbx_valuefontstyle.visible = true;
                 }
             }
             MenuItem {
@@ -807,7 +829,72 @@ Rectangle {
                 gaugetextfield.font.pixelSize = cbx_titlefontsize.textAt(cbx_titlefontsize.currentIndex);
             }
         }
+        ComboBox{
+            id: cbx_titlefontstyle
+            width: btntitlefontsize.width
+            model: Qt.fontFamilies()
+            visible:false
+            font.pixelSize: 15
+            currentIndex: 1
+            onCurrentIndexChanged: {textFonttype = cbx_titlefontstyle.textAt(cbx_titlefontstyle.currentIndex)
+            }
+            delegate:
+                ItemDelegate {
+                text: modelData
+                width: cbx_titlefontstyle.width
+                font.pixelSize: 15
+                font.family: modelData
+            }
+        }
+        Button {
+            id: btn_titlefontstyle
+            x: 119
+            text: qsTr("OK")
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.left: cbx_titlefontstyle.right
+            anchors.leftMargin: 0
+            visible: false
+            onClicked: {
+                hidemenues();
+                gaugetextfield.font.pixelSize = cbx_titlefontsize.textAt(cbx_titlefontsize.currentIndex);
+                textFonttype = cbx_titlefontstyle.textAt(cbx_titlefontstyle.currentIndex);
+            }
+        }
+
+        ComboBox{
+            id: cbx_valuefontstyle
+            width: btntitlefontsize.width
+            model: Qt.fontFamilies()
+            visible:false
+            font.pixelSize: 15
+            currentIndex: 1
+            onCurrentIndexChanged: {valueFonttype = cbx_valuefontstyle.textAt(cbx_valuefontstyle.currentIndex)
+            }
+            delegate:
+                ItemDelegate {
+                text: modelData
+                width: cbx_valuefontstyle.width
+                font.pixelSize: 15
+                font.family: modelData
+            }
+        }
+        Button {
+            id: btn_valuefontstyle
+            x: 119
+            text: qsTr("OK")
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.left: cbx_valuefontstyle.right
+            anchors.leftMargin: 0
+            visible: false
+            onClicked: {
+                hidemenues();
+                valueFonttype = cbx_valuefontstyle.textAt(cbx_valuefontstyle.currentIndex);
+            }
+        }
     }
+
     Item {
         id: gaugefontsizeSelect
         anchors.fill: parent
