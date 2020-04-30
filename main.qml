@@ -138,30 +138,29 @@ ApplicationWindow {
         }
         Grid {
             id :row2
-            rows: 2
-            columns: 1
+            rows: 1
+            columns: 2
             spacing: window.width /50
             anchors.top: row1.bottom
             anchors.topMargin: drawerpopup.height/30
             anchors.horizontalCenter: parent.horizontalCenter
-        Text {
-            id: brightnestext
-            //anchors.horizontalCenter: row2.horizontalCenter
-            font.pixelSize: window.width / 35
-           // horizontalAlignment: Text.AlignHCenter
-           // verticalAlignment: Text.AlignVCenter
-            text: qsTr("Screen brightness")
-        }
+            visible: Dashboard.screen
+            Image {
+                height: window.height /15
+                width:height
+                id: brightnessimage
+                source: "qrc:/graphics/brightness.png"
+            }
         Slider {
             id:brightness
             width: window.width / 3
-            height: window.height /8
-            anchors.top: brightnestext.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
+            height: window.height /15
+            //anchors.top: brightnestext.bottom
+            //anchors.horizontalCenter: parent.horizontalCenter
             stepSize: 5
             from: 20
             to: 255
-            visible: Dashboard.screen
+            //visible: Dashboard.screen
             value: Dashboard.Brightness
             //Component.onCompleted: Connect.setSreenbrightness(brightness.value);
             onPositionChanged: Connect.setSreenbrightness(brightness.value);

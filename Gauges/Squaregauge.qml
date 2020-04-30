@@ -857,7 +857,6 @@ Rectangle {
             visible: false
             onClicked: {
                 hidemenues();
-                gaugetextfield.font.pixelSize = cbx_titlefontsize.textAt(cbx_titlefontsize.currentIndex);
                 textFonttype = cbx_titlefontstyle.textAt(cbx_titlefontstyle.currentIndex);
             }
         }
