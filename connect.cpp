@@ -927,27 +927,25 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
     ecu = ecuSelect;
     selectedPort = portName;
 //model: [ "CAN","PowerFC","Consult","OBD2"]
-
-    //Apexi
-    if (ecuSelect == 1)
-    {
-
-        m_apexi->openConnection(portName);
-
-    }
+//model: [ "CAN","PowerFC","Consult","OBD2"]
     //UDP receiver
     if (ecuSelect == 0)
     {
         m_udpreceiver->startreceiver();
     }
+    //Apexi
+    if (ecuSelect == 1)
+    {
+        m_apexi->openConnection(portName);
+    }
 
-    if (ecuSelect == 3)
+    if (ecuSelect == 2)
     {
         //NissanConsult
 
         m_udpreceiver->startreceiver();
     }
-    if (ecuSelect == 4)
+    if (ecuSelect == 3)
     {
         //OBD2
         m_udpreceiver->startreceiver();
