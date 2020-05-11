@@ -8,6 +8,9 @@ function createSquareGauge(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,
     if (component.status === Component.Ready){
        // console.log("component ready");
         finishCreation(setWidth,setHeight,setX,setY,setMaxValue,setDecPlace,setUnit,setID,setVertGaugeVis,setHoriGaugeVis,setSecValueVis,SetValueObject,SetValuePropertyMain,SetValuePropertySec,Setwarnvaluehigh,Setwarnvaluelow,Setframeclolor,Setbackroundcolor,Settitlecolor,Settitletextcolor,Settextcolor,Setbarcolor,SetTitlefontsize,SetMainfontsize,setDecPlace2,setTextfont,setValuefont);
+     //console.log("setting 1 decimal"+ setDecPlace);
+     //console.log("setting 2 decimal"+ setDecPlace2);
+
     }
     else {
         component.statusChanged.connect(finishCreation);

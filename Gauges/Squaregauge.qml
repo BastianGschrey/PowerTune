@@ -40,6 +40,7 @@ Rectangle {
     property double warnvaluelow : -20000
     property string textFonttype
     property string valueFonttype
+    property real peakval: 0
 
     Drag.active: true
     DatasourcesList{id: powertunedatasource}
@@ -247,6 +248,8 @@ Rectangle {
 
             if (mainvaluetextfield.text > warnvaluehigh || mainvaluetextfield.text < warnvaluelow )anim.running = true,anim2.running = true;
             else anim.running = false,anim2.running = false,titlebar.color = resettitlecolor ,gauge.color = resetbackroundcolor;
+            if (mainvaluetextfield.text > peakval)peakval = mainvaluetextfield.text;
+            //console.log (peakval);
 
         }
     }
@@ -276,21 +279,28 @@ Rectangle {
     //
     function toggledecimal()
     {
-        if (decimalpoints < 4)
+        //console.log("Decimalpints loaded " + decimalpoints);
+        if (decimalpoints2 < 4)
         {
-            mainvaluetextfield.text = Qt.binding(function(){return Dashboard[mainvaluename].toFixed(decimalpoints)});
+             mainvaluetextfield.text = Qt.binding(function(){return Dashboard[mainvaluename].toFixed(decimalpoints)});
         }
         else
-            mainvaluetextfield.text = Dashboard[mainvaluename];
+            mainvaluetextfield.text = Qt.binding(function(){return Dashboard[mainvaluename]});
+        vertgauge.value = 0;
+        horizgauge.value = 0;
     }
     function toggledecimal2()
     {
+        //console.log("toggle sec decimal "+decimalpoints2)
         if (decimalpoints2 < 4)
         {
             secondaryvaluetextfield.text =  Qt.binding(function(){return Dashboard[secvaluename].toFixed(decimalpoints2)});
         }
         else
-            secondaryvaluetextfield.text = Dashboard[secvaluename];
+            secondaryvaluetextfield.text = Qt.binding(function(){return Dashboard[secvaluename]});
+        vertgauge.value = 0;
+        horizgauge.value = 0;
+
     }
     function hidemenues()
     {

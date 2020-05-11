@@ -4,11 +4,12 @@ ListModel {
     id: datasources
 
     ListElement {
-        titlename: "AutoGear"
+        titlename: "Auto Trans"
         defaultsymbol: " "
         sourcename:"autogear"
         supportedECU: ""
-        decimalpoints : "5" // Anything greater than 3 treats it as text instead of a number
+        decimalpoints : "4" // 4 means its treated as a string
+        decimalpoints2 : "4" // 4 means its treated as a string
         maxvalue : "10"
         stepsize : "1"
         divisor : "1"
