@@ -3,7 +3,16 @@ import QtQuick 2.8
 ListModel {
     id: datasources
 
-
+    ListElement {
+        titlename: "AutoGear"
+        defaultsymbol: " "
+        sourcename:"autogear"
+        supportedECU: ""
+        decimalpoints : "5" // Anything greater than 3 treats it as text instead of a number
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
     ListElement {
         titlename: "Analog0"
         defaultsymbol: "V"

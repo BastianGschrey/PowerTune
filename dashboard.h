@@ -327,6 +327,7 @@ class DashBoard : public QObject
     Q_PROPERTY(int rpmstyle3 READ rpmstyle3 WRITE setrpmstyle3 NOTIFY rpmstyle3Changed)
 
     Q_PROPERTY(QString Error READ Error WRITE setError NOTIFY ErrorChanged)
+    Q_PROPERTY(QString autogear READ autogear WRITE setautogear NOTIFY autogearChanged)
 
     Q_PROPERTY(int ExternalSpeed READ ExternalSpeed WRITE setExternalSpeed NOTIFY ExternalSpeedChanged)
 
@@ -684,6 +685,8 @@ class DashBoard : public QObject
     void setrpmstyle2(const int &rpmstyle2);
     void setrpmstyle3(const int &rpmstyle3);
     void setError(const QString &Error);
+    void setautogear(const QString &autogear);
+
     Q_INVOKABLE void setExternalSpeed(const int &ExternalSpeed);
     Q_INVOKABLE void setspeedpercent(const qreal &speedpercent);
 
@@ -1076,6 +1079,8 @@ class DashBoard : public QObject
     int rpmstyle2() const;
     int rpmstyle3() const;
     QString Error() const;
+    QString autogear() const;
+
     int ExternalSpeed() const;
 
     //laptimer
@@ -1433,6 +1438,8 @@ signals:
     void rpmstyle2Changed(int rpmstyle2);
     void rpmstyle3Changed(int rpmstyle3);
     void ErrorChanged(QString Error);
+    void autogearChanged(QString autogear);
+
     void ExternalSpeedChanged(int ExternalSpeed);
 
     //laptimer
@@ -1806,6 +1813,8 @@ private:
     int m_rpmstyle2;
     int m_rpmstyle3;
     QString m_Error;
+    QString m_autogear;
+
     int m_ExternalSpeed;
 
     //laptimer

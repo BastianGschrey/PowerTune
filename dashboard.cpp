@@ -323,6 +323,7 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_gearcalcactivation(0)
     ,  m_ecu(0)
     ,  m_Error("")
+    ,  m_autogear("")
     ,  m_ExternalSpeed(0)
 
     //laptimer
@@ -2628,12 +2629,20 @@ void DashBoard::setrpmstyle3(const int &rpmstyle3)
     emit rpmstyle3Changed(rpmstyle3);
 }
 
+
 void DashBoard::setError(const QString &Error)
 {
     if (m_ecu == Error)
         return;
     m_Error = Error;
     emit ErrorChanged(Error);
+}
+void DashBoard::setautogear(const QString &autogear)
+{
+    if (m_autogear == autogear)
+        return;
+    m_autogear = autogear;
+    emit autogearChanged(autogear);
 }
 
 void DashBoard::setExternalSpeed(const int &ExternalSpeed)
@@ -3229,6 +3238,8 @@ int DashBoard::rpmstyle2() const { return m_rpmstyle2; }
 int DashBoard::rpmstyle3() const { return m_rpmstyle3; }
 
 QString DashBoard::Error() const { return m_Error; }
+QString DashBoard::autogear() const { return m_autogear; }
+
 int DashBoard::ExternalSpeed() const {return m_ExternalSpeed; }
 
 //laptimer
