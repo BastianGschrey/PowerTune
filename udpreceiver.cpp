@@ -52,8 +52,14 @@ void udpreceiver::processPendingDatagrams()
 
         QDataStream in(&datagram, QIODevice::ReadOnly);
         QString raw = datagram.data();
-        // qDebug()<<raw;
+        //qDebug()<<raw;
         if (raw.isEmpty())
+        {raw ="0,0";}
+        if (raw.contains(","))
+        {
+            //do nothing
+        }
+        else
         {raw ="0,0";}
         QStringList list = raw.split( "," );
         int ident =list[0].toInt();

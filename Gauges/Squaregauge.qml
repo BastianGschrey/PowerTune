@@ -39,7 +39,7 @@ Rectangle {
     property double warnvaluehigh: 20000
     property double warnvaluelow : -20000
     property string textFonttype
-    property string valueFonttype
+    property string valueFonttype :"Verdana"
     property real peakval: 0
 
     Drag.active: true
