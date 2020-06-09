@@ -285,9 +285,11 @@ Rectangle {
              mainvaluetextfield.text = Qt.binding(function(){return Dashboard[mainvaluename].toFixed(decimalpoints)});
         }
         else
+        {
             mainvaluetextfield.text = Qt.binding(function(){return Dashboard[mainvaluename]});
         vertgauge.value = 0;
         horizgauge.value = 0;
+        }
     }
     function toggledecimal2()
     {
@@ -297,9 +299,11 @@ Rectangle {
             secondaryvaluetextfield.text =  Qt.binding(function(){return Dashboard[secvaluename].toFixed(decimalpoints2)});
         }
         else
+        {
             secondaryvaluetextfield.text = Qt.binding(function(){return Dashboard[secvaluename]});
         vertgauge.value = 0;
         horizgauge.value = 0;
+        }
 
     }
     function hidemenues()
