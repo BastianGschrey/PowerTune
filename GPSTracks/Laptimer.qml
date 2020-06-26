@@ -313,7 +313,7 @@ Rectangle{
 
                 if (countryselect.textAt(countryselect.currentIndex) == "Current Position"){trackselect.model = ["Tilt 0", "Tilt 45"],map.center= QtPositioning.coordinate(-25.804219,28.300091)};
                 //if (countryselect.textAt(countryselect.currentIndex) == "Current Position"){trackselect.model = ["Tilt 0", "Tilt 45"],map.center= QtPositioning.coordinate(Dashboard.gpsLatitude,Dashboard.gpsLongitude)};
-                if (countryselect.textAt(countryselect.currentIndex) == "Australia"){trackselect.model = ["Barbagallo Raceway","Carrnell Raceway","Collie Motorplex","Wakefield Park"]};
+                if (countryselect.textAt(countryselect.currentIndex) == "Australia"){trackselect.model = ["Barbagallo Raceway","Carrnell Raceway","Collie Motorplex","Lakeside Raceway","Wakefield Park"]};
                 if (countryselect.textAt(countryselect.currentIndex) == "Germany"){trackselect.model = ["Hockenheim","Nürburgring"]};
                 if (countryselect.textAt(countryselect.currentIndex) == "New Zealand"){trackselect.model = ["Pukekohe Park"]};
                 if (countryselect.textAt(countryselect.currentIndex) == "Malaysia"){trackselect.model = ["Sepang"]};
@@ -347,6 +347,7 @@ Rectangle{
                 if (trackselect.textAt(trackselect.currentIndex) == "Sepang"){map.center= QtPositioning.coordinate(2.760217, 101.738092),map.zoomLevel = 15.6,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(2.760652,101.738394,2.760894,101.738374,2)}
                 if (trackselect.textAt(trackselect.currentIndex) == "Barbagallo Raceway"){map.center= QtPositioning.coordinate(-31.664326, 115.789962),map.zoomLevel = 15.7,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(-31.664168,115.786292,-31.664171,115.786459,1)}
                 if (trackselect.textAt(trackselect.currentIndex) == "Collie Motorplex"){map.center= QtPositioning.coordinate(-33.431971, 116.244369),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(-33.430061,116.243180,-33.430184, 116.243386,1)}
+                if (trackselect.textAt(trackselect.currentIndex) == "Lakeside Raceway"){map.center= QtPositioning.coordinate(-27.228108, 152.964956),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 90,Gps.defineFinishLine(-27.228400,152.964926,-27.228562,152.964876)}
 
             }
         }
