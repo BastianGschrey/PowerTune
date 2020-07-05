@@ -2,8 +2,8 @@ import QtQuick 2.8
 import QtQuick.Controls 2.1
 Item {
     id:mytextlabel
-    height: fontsize
-    width:  fontsize
+    height: mytext.height
+    width:  mytext.width
     //color: "tra"
     property string information: "Text label gauge"
     property string displaytext
@@ -64,7 +64,7 @@ Item {
         color: "darkgrey"
         visible: false
         width : 200
-        height :330
+        height :430
         Drag.active: true
         MouseArea {
             anchors.fill: parent
@@ -74,12 +74,12 @@ Item {
 
         Grid { width: parent.width
             height:parent.height
-            rows: 7
+            rows: 10
             columns: 1
             rowSpacing :5
             Grid {
                 rows: 1
-                columns: 3
+                columns: 5
                 rowSpacing :5
                 RoundButton{text: "-"
                     width: changesize.width /3
@@ -103,7 +103,10 @@ Item {
                     onClicked: {fontsize++}
                 }
             }
+///////////////
 
+
+///////////////
             TextField{
                 id: changetext
                 text : displaytext
@@ -142,6 +145,23 @@ Item {
                     width: colorselect.width
                     height: colorselect.height
                     color:  colorselect.currentText
+                }
+            }
+            ComboBox{
+                id: cbx_titlefontstyle
+                width: parent.width
+                model: Qt.fontFamilies()
+                visible:true
+                font.pixelSize: 15
+                currentIndex: 1
+                onCurrentIndexChanged: {fonttype = cbx_titlefontstyle.textAt(cbx_titlefontstyle.currentIndex)
+                }
+                delegate:
+                    ItemDelegate {
+                    text: modelData
+                    width: cbx_titlefontstyle.width
+                    font.pixelSize: 15
+                    font.family: modelData
                 }
             }
             ComboBox {

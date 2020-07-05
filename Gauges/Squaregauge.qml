@@ -280,7 +280,7 @@ Rectangle {
     function toggledecimal()
     {
         //console.log("Decimalpints loaded " + decimalpoints);
-        if (decimalpoints2 < 4)
+        if (decimalpoints < 4)
         {
              mainvaluetextfield.text = Qt.binding(function(){return Dashboard[mainvaluename].toFixed(decimalpoints)});
         }

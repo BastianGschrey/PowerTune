@@ -523,7 +523,7 @@ Item {
                 text: qsTr("Add Text")
                 font.pixelSize: 12
                 onClicked: {
-                    CreateTextScript.createText(10,10,"Textelement","Lato",15,"red","",true,0)
+                    CreateTextScript.createText(100,50,"Textelement","Lato",15,"red","",true,0)
                     squaregaugemenu.visible = false;
                     selectcolor.visible =false;
                     Dashboard.setdraggable(0);

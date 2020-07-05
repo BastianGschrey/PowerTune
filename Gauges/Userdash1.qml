@@ -193,7 +193,10 @@ Item {
     function updatppiclist()
     {
                     for(var i = 0; i < backroundSelector.count; ++i)
-                    if (backroundpicture1.source == "file:///home/pi/Logo/" + backroundSelector.textAt(i))
+//                    if (backroundpicture1.source == "file:///home/pi/Logo/" + backroundSelector.textAt(i))
+                        if (backroundpicture1.source == "file:"  + backroundSelector.textAt(i))
+
+
                     backroundSelector.currentIndex = i
     }
 
@@ -332,9 +335,9 @@ Item {
                 currentIndex: 0
                 onCurrentIndexChanged: {
 
-                     backroundpicturesource1 = "file:///home/pi/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
+                    // backroundpicturesource1 = "file:///home/pi/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
                     //backroundpicturesource1 = "file:///c:/Logo/" + backroundSelector.textAt(backroundSelector.currentIndex);
-                    //backroundpicturesource1 = "file:" + backroundSelector.textAt(backroundSelector.currentIndex);
+                    backroundpicturesource1 = "file:" + backroundSelector.textAt(backroundSelector.currentIndex);
                     backroundpicture1.source = backroundpicturesource1;
                 }
                 delegate: ItemDelegate {
@@ -526,7 +529,7 @@ Item {
                 text: qsTr("Add Text")
                 font.pixelSize: 12
                 onClicked: {
-                    CreateTextScript.createText(10,10,"Textelement","Lato",15,"red","",true,0)
+                    CreateTextScript.createText(100,50,"Textelement","Lato",15,"red","",true,0)
                     squaregaugemenu.visible = false;
                     selectcolor.visible =false;
                     Dashboard.setdraggable(0);
