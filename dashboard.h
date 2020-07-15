@@ -373,6 +373,10 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal FuelLevel READ FuelLevel WRITE setFuelLevel NOTIFY FuelLevelChanged)
     Q_PROPERTY(qreal SteeringWheelAngle READ SteeringWheelAngle WRITE setSteeringWheelAngle NOTIFY SteeringWheelAngleChanged)
     Q_PROPERTY(int Brightness READ Brightness WRITE setBrightness NOTIFY BrightnessChanged)
+    Q_PROPERTY(int oilpressurelamp READ oilpressurelamp WRITE setoilpressurelamp NOTIFY oilpressurelampChanged)
+    Q_PROPERTY(int overtempalarm READ overtempalarm WRITE setovertempalarm NOTIFY overtempalarmChanged)
+    Q_PROPERTY(int alternatorfail READ alternatorfail WRITE setalternatorfail NOTIFY alternatorfailChanged)
+
 
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
     public:
@@ -751,8 +755,9 @@ class DashBoard : public QObject
     void setFuelLevel(const qreal &FuelLevel);
     void setSteeringWheelAngle(const qreal &SteeringWheelAngle);
     void setBrightness(const int &Brightness);
-
-
+    void setoilpressurelamp(const int &oilpressurelamp);
+    void setovertempalarm(const int &overtempalarm);
+    void setalternatorfail(const int &alternatorfail);
 
 
 
@@ -1124,6 +1129,10 @@ class DashBoard : public QObject
     qreal FuelLevel()const;
     qreal SteeringWheelAngle()const;
     int Brightness()const;
+    int oilpressurelamp()const;
+    int overtempalarm()const;
+    int alternatorfail()const;
+
 
 signals:
 
@@ -1482,10 +1491,9 @@ signals:
     void FuelLevelChanged(qreal FuelLevel);
     void SteeringWheelAngleChanged(qreal SteeringWheelAngle);
     void BrightnessChanged(int Brightness);
-
-
-
-
+    void oilpressurelampChanged(int oilpressurelamp);
+    void overtempalarmChanged(int overtempalarm);
+    void alternatorfailChanged(int alternatorfail);
 
 private:
     // Odometer
@@ -1858,6 +1866,9 @@ private:
     qreal m_FuelLevel;
     qreal m_SteeringWheelAngle;
     int m_Brightness;
+    int m_oilpressurelamp;
+    int m_overtempalarm;
+    int m_alternatorfail;
 
 
 };

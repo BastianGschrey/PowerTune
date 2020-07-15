@@ -3,6 +3,42 @@ import QtQuick 2.8
 ListModel {
     id: datasources
 
+///////////
+    ListElement {
+        titlename: "Alternator Light"
+        defaultsymbol: " "
+        sourcename:"alternatorfail"
+        supportedECU: ""
+        decimalpoints : "0" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "Overtemp Light"
+        defaultsymbol: " "
+        sourcename:"overtempalarm"
+        supportedECU: ""
+        decimalpoints : "0" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "OilP Light"
+        defaultsymbol: " "
+        sourcename:"oilpressurelamp"
+        supportedECU: ""
+        decimalpoints : "0" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+
+//////////////
     ListElement {
         titlename: "Auto Trans"
         defaultsymbol: " "
@@ -1441,6 +1477,42 @@ ListModel {
         stepsize : "0.5"
         divisor : "1"
     }
+
+    /*
+    ,  m_currentLap(0)
+    ,  m_laptime("00:00.000")
+    ,  m_Lastlaptime("00:00.000")
+    ,  m_bestlaptime("00:00.000")
+      */
+    ListElement {
+        sourcename:"currentLap"
+        defaultsymbol: " "
+        titlename:"Current LAP No"
+        decimalpoints : "4"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"laptime"
+        defaultsymbol: " "
+        titlename:"Current Lap Time"
+        decimalpoints : "4"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"bestlaptime"
+        defaultsymbol: " "
+        titlename:"Last Lap Time"
+        decimalpoints : "4"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
+    }
+
+
     ListElement {
         sourcename:"launchcontolfuelenrich"
         defaultsymbol: "%"

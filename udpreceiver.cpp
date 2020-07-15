@@ -917,7 +917,17 @@ void udpreceiver::processPendingDatagrams()
             break;
         case 826:
             m_dashboard->setautogear(list[1]);
+            break;       
+        case 827:
+            m_dashboard->setoilpressurelamp(Value);
             break;
+        case 828:
+            m_dashboard->setovertempalarm(Value);
+            break;
+        case 829:
+            m_dashboard->setalternatorfail(Value);
+            break;
+
 
         case 999:
             break;
