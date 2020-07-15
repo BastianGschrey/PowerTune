@@ -928,7 +928,8 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setalternatorfail(Value);
             break;
 
-
+        case 830:
+            m_dashboard->setturborpm2(Value);
         case 999:
             break;
         default:

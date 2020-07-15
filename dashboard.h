@@ -286,6 +286,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal triggerccounter READ triggerccounter WRITE settriggerccounter NOTIFY triggerccounterChanged)
     Q_PROPERTY(qreal triggersrsinceasthome READ triggersrsinceasthome WRITE settriggersrsinceasthome NOTIFY triggersrsinceasthomeChanged)
     Q_PROPERTY(qreal turborpm READ turborpm WRITE setturborpm NOTIFY turborpmChanged)
+    Q_PROPERTY(qreal turborpm2 READ turborpm2 WRITE setturborpm2 NOTIFY turborpm2Changed)
     Q_PROPERTY(qreal wastegatepress READ wastegatepress WRITE setwastegatepress NOTIFY wastegatepressChanged)
     Q_PROPERTY(qreal wheeldiff READ wheeldiff WRITE setwheeldiff NOTIFY wheeldiffChanged)
     Q_PROPERTY(qreal wheelslip READ wheelslip WRITE setwheelslip NOTIFY wheelslipChanged)
@@ -673,6 +674,7 @@ class DashBoard : public QObject
     void settriggerccounter(const qreal &triggerccounter);
     void settriggersrsinceasthome(const qreal &triggersrsinceasthome);
     void setturborpm(const qreal &turborpm);
+    void setturborpm2(const qreal &turborpm2);
     void setwastegatepress(const qreal &wastegatepress);
     void setwheeldiff(const qreal &wheeldiff);
     void setwheelslip(const qreal &wheelslip);
@@ -1047,6 +1049,7 @@ class DashBoard : public QObject
     qreal triggerccounter() const;
     qreal triggersrsinceasthome() const;
     qreal turborpm() const;
+    qreal turborpm2() const;
     qreal wastegatepress() const;
     qreal wheeldiff() const;
     qreal wheelslip() const;
@@ -1414,6 +1417,7 @@ signals:
     void triggerccounterChanged(qreal triggerccounter);
     void triggersrsinceasthomeChanged(qreal triggersrsinceasthome);
     void turborpmChanged(qreal turborpm);
+    void turborpm2Changed(qreal turborpm2);
     void wastegatepressChanged(qreal wastegatepress);
     void wheeldiffChanged(qreal wheeldiff);
     void wheelslipChanged(qreal wheelslip);
@@ -1784,6 +1788,7 @@ private:
     qreal m_triggerccounter;
     qreal m_triggersrsinceasthome;
     qreal m_turborpm;
+    qreal m_turborpm2;
     qreal m_wastegatepress;
     qreal m_wheeldiff;
     qreal m_wheelslip;

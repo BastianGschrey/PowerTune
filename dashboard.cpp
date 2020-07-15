@@ -297,6 +297,7 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_triggerccounter(0)
     ,  m_triggersrsinceasthome(0)
     ,  m_turborpm(0)
+    ,  m_turborpm2(0)
     ,  m_wastegatepress(0)
     ,  m_wheeldiff(0)
     ,  m_wheelslip(0)
@@ -2350,6 +2351,15 @@ void DashBoard::setturborpm(const qreal &turborpm)
     m_turborpm = turborpm;
     emit turborpmChanged(turborpm);
 }
+void DashBoard::setturborpm2(const qreal &turborpm2)
+{
+    if (m_turborpm2 == turborpm2)
+        return;
+    m_turborpm2 = turborpm2;
+    emit turborpm2Changed(turborpm2);
+}
+
+
 void DashBoard::setwastegatepress(const qreal &wastegatepress)
 {
     if (m_wastegatepress == wastegatepress)
@@ -3232,6 +3242,7 @@ qreal DashBoard::transoiltemp() const { return m_transoiltemp; }
 qreal DashBoard::triggerccounter() const { return m_triggerccounter; }
 qreal DashBoard::triggersrsinceasthome() const { return m_triggersrsinceasthome; }
 qreal DashBoard::turborpm() const { return m_turborpm; }
+qreal DashBoard::turborpm2() const { return m_turborpm2; }
 qreal DashBoard::wastegatepress() const { return m_wastegatepress; }
 qreal DashBoard::wheeldiff() const { return m_wheeldiff; }
 qreal DashBoard::wheelslip() const { return m_wheelslip; }

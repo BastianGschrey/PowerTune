@@ -1969,6 +1969,15 @@ ListModel {
         divisor : "1"
     }
     ListElement {
+        sourcename:"turborpm2"
+        defaultsymbol: "rpm"
+        titlename:"Turbo rpm 2"
+        decimalpoints : "0"
+        maxvalue : "100000"
+        stepsize : "10000"
+        divisor : "1"
+    }
+    ListElement {
         sourcename:"Userchannel1"
         defaultsymbol: ""
         titlename:"User Channel 1"
