@@ -787,6 +787,12 @@ void Connect::daemonstartup(const int &daemon)
         daemonstart = "./FordBarraFGMK1CAN";
         break;
     case 19:
+        daemonstart = "./FordBarraBXCAN";
+        break;
+    case 20:
+        daemonstart = "./FordBarraFG2XCAN";
+        break;
+    case 21:
         daemonstart = "./350Z";
         break;
     }
