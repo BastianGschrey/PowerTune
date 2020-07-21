@@ -2955,7 +2955,7 @@ void DashBoard::setalternatorfail(const int &alternatorfail)
     if (m_alternatorfail == alternatorfail)
         return;
     m_alternatorfail = alternatorfail;
-    emit BrightnessChanged(alternatorfail);
+    emit overtempalarmChanged(alternatorfail);
 }
 
 
