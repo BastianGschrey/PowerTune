@@ -796,6 +796,9 @@ void Connect::daemonstartup(const int &daemon)
         daemonstart = "./EVOXCAN";
         break;
     case 22:
+        daemonstart = "./BlackboxM3";
+        break;
+    case 23:
         daemonstart = "./350Z";
         break;
     }
