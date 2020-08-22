@@ -799,12 +799,15 @@ void Connect::daemonstartup(const int &daemon)
         daemonstart = "./FordBarraFG2xCAN";
         break;
     case 23:
-        daemonstart = "./EVOXCAN";
+        daemonstart = "./FordBarraFG2xCANOBD";
         break;
     case 24:
-        daemonstart = "./BlackboxM3";
+        daemonstart = "./EVOXCAN";
         break;
     case 25:
+        daemonstart = "./BlackboxM3";
+        break;
+    case 26:
         daemonstart = "./370Z";
         break;
     }

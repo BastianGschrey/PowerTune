@@ -572,7 +572,7 @@ Quick1.TabView {
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                             Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                         }
-                        Text  { text: "V 1.91s" + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.91t" + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 /*
                         Slider {
                             id:brightness
@@ -1461,7 +1461,7 @@ Quick1.TabView {
                     width: daemons.width / 3
                     height: daemons.height /15
                     font.pixelSize: daemons.width / 55
-                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata","Adaptronic CAN","Motec M1","AEM V2","AUDI B7","BRZ FRS 86","ECU Masters","Audi B8","Emtron","Holley","MaxxECU","Barra FG MK1","Barra FG MK1 + OBD Polling","Barra BX ","Barra BX + OBD Polling","Barra FG2x","EVO X Test","Blackbox M3"]
+                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata","Adaptronic CAN","Motec M1","AEM V2","AUDI B7","BRZ FRS 86","ECU Masters","Audi B8","Emtron","Holley","MaxxECU","Barra FG MK1","Barra FG MK1 + OBD Polling","Barra BX ","Barra BX + OBD Polling","Barra FG2x","Barra FG2x + OBD Polling","EVO X Test","Blackbox M3"]
                     delegate: ItemDelegate {
                         width: daemonselect.width
                         text: daemonselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -1494,11 +1494,20 @@ Quick1.TabView {
                         hoverEnabled: mainspeedsource.hoverEnabled
                     }
                 }
-                Text { text: "DO not select this daemon while Tuning !!"
-                    font.pixelSize: daemons.width / 55
-                    color: "red"
-                    visible: { (daemonselect.currentIndex == 19 || daemonselect.currentIndex == 21 ) ? true:false; }
-                }
+
+            }
+            Text {
+                id:warningtext
+                text: "DO NOT SELECT ANY START UP DAEMON THAT INCLUDES OBD/OBD2 WHILST TUNING YOUR VEHICLE or working with the ECU/PCM. PowerTune Digital users MUST disable OBD polling when tuning or performing any task related to the ECU/PCM by changing the start up daemon above to a NON OBD/OBD2 option and pressing apply, or disconnecting the dash entirely whilst tuning or working with any vehicle electronics. PowerTune Digital assumes no liability for damage to your vehicle/ECU/PCM if polling OBD data at the same time as another device causes an interruption, or for any other reason. Refer to our warranty at https://www.powertunedigital.com/pages/manual "
+                font.pixelSize: daemons.width / 55
+                font.bold: true
+                width: parent.width /1.5
+                horizontalAlignment: Text.AlignHCenter
+                anchors.top: startupgrid.bottom
+                anchors.horizontalCenter: daemons.horizontalCenter
+                color: "red"
+                wrapMode: Text.WordWrap
+                visible: { (daemonselect.currentIndex == 19 || daemonselect.currentIndex == 21 || daemonselect.currentIndex == 23 ) ? true:false; }
             }
         }
     }
