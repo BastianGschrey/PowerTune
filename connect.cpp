@@ -793,15 +793,18 @@ void Connect::daemonstartup(const int &daemon)
         daemonstart = "./FordBarraBXCAN";
         break;
     case 21:
-        daemonstart = "./FordBarraFG2xCAN";
+        daemonstart = "./FordBarraBXCANOBD";
         break;
     case 22:
-        daemonstart = "./EVOXCAN";
+        daemonstart = "./FordBarraFG2xCAN";
         break;
     case 23:
-        daemonstart = "./BlackboxM3";
+        daemonstart = "./EVOXCAN";
         break;
     case 24:
+        daemonstart = "./BlackboxM3";
+        break;
+    case 25:
         daemonstart = "./370Z";
         break;
     }

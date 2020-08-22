@@ -1461,7 +1461,7 @@ Quick1.TabView {
                     width: daemons.width / 3
                     height: daemons.height /15
                     font.pixelSize: daemons.width / 55
-                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata","Adaptronic CAN","Motec M1","AEM V2","AUDI B7","BRZ FRS 86","ECU Masters","Audi B8","Emtron","Holley","MaxxECU","Barra FG MK1","Barra FG MK1 + OBD Polling","Barra BX","Barra FG2x","EVO X Test","Blackbox M3"]
+                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata","Adaptronic CAN","Motec M1","AEM V2","AUDI B7","BRZ FRS 86","ECU Masters","Audi B8","Emtron","Holley","MaxxECU","Barra FG MK1","Barra FG MK1 + OBD Polling","Barra BX ","Barra BX + OBD Polling","Barra FG2x","EVO X Test","Blackbox M3"]
                     delegate: ItemDelegate {
                         width: daemonselect.width
                         text: daemonselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -1497,7 +1497,7 @@ Quick1.TabView {
                 Text { text: "DO not select this daemon while Tuning !!"
                     font.pixelSize: daemons.width / 55
                     color: "red"
-                    visible: { (daemonselect.currentIndex == 19 ) ? true:false; }
+                    visible: { (daemonselect.currentIndex == 19 || daemonselect.currentIndex == 21 ) ? true:false; }
                 }
             }
         }
