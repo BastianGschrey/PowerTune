@@ -572,7 +572,7 @@ Quick1.TabView {
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                             Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                         }
-                        Text  { text: "V 1.91r" + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.91s" + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 /*
                         Slider {
                             id:brightness
@@ -1439,7 +1439,7 @@ Quick1.TabView {
                     font.pixelSize: daemons.width / 55 }
                 Button {
                     id: apply
-                    width: daemons.width / 5
+                    width: daemons.width / 3
                     height: daemons.height /15
                     text: "apply"
                     onClicked: Connect.daemonstartup(daemonselect.currentIndex)
@@ -1458,10 +1458,10 @@ Quick1.TabView {
                     font.pixelSize: daemons.width / 55 }
                 ComboBox {
                     id: daemonselect
-                    width: daemons.width / 5
+                    width: daemons.width / 3
                     height: daemons.height /15
                     font.pixelSize: daemons.width / 55
-                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata","Adaptronic CAN","Motec M1","AEM V2","AUDI B7","BRZ FRS 86","ECU Masters","Audi B8","Emtron","Holley","MaxxECU","Barra FG MK1","Barra BX","Barra FG2x","EVO X Test","Blackbox M3"]
+                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata","Adaptronic CAN","Motec M1","AEM V2","AUDI B7","BRZ FRS 86","ECU Masters","Audi B8","Emtron","Holley","MaxxECU","Barra FG MK1","Barra FG MK1 + OBD Polling","Barra BX","Barra FG2x","EVO X Test","Blackbox M3"]
                     delegate: ItemDelegate {
                         width: daemonselect.width
                         text: daemonselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -1477,7 +1477,7 @@ Quick1.TabView {
                     font.pixelSize: daemons.width / 55 }
                 ComboBox {
                     id: mainspeedsource
-                    width: daemons.width / 5
+                    width: daemons.width / 3
                     height: daemons.height /15
                     font.pixelSize: daemons.width / 55
                     model: ["ECU Speed","LF Wheelspeed","RF Wheelspeed","LR Wheelspeed","RR Wheelspeed","GPS"]
@@ -1493,6 +1493,11 @@ Quick1.TabView {
                         highlighted: mainspeedsource.highlightedIndex == index
                         hoverEnabled: mainspeedsource.hoverEnabled
                     }
+                }
+                Text { text: "DO not select this daemon while Tuning !!"
+                    font.pixelSize: daemons.width / 55
+                    color: "red"
+                    visible: { (daemonselect.currentIndex == 19 ) ? true:false; }
                 }
             }
         }

@@ -787,19 +787,22 @@ void Connect::daemonstartup(const int &daemon)
         daemonstart = "./FordBarraFGMK1CAN";
         break;
     case 19:
-        daemonstart = "./FordBarraBXCAN";
+        daemonstart = "./FordBarraFGMK1CANOBD";
         break;
     case 20:
-        daemonstart = "./FordBarraFG2xCAN";
+        daemonstart = "./FordBarraBXCAN";
         break;
     case 21:
-        daemonstart = "./EVOXCAN";
+        daemonstart = "./FordBarraFG2xCAN";
         break;
     case 22:
-        daemonstart = "./BlackboxM3";
+        daemonstart = "./EVOXCAN";
         break;
     case 23:
-        daemonstart = "./350Z";
+        daemonstart = "./BlackboxM3";
+        break;
+    case 24:
+        daemonstart = "./370Z";
         break;
     }
     QString fileName = "/home/pi/startdaemon.sh";//This will be the correct path on pi
