@@ -4,23 +4,65 @@ cd /home/pi/src
 git pull
 cd
 echo "Killing all  Daemons"
-sudo pkill OBD
-sudo pkill Haltechd
-sudo pkill Consult
-sudo pkill Apexid 
-sudo pkill Microtechd 
-sudo pkill Linkd
-sudo pkill Hondatad
 sudo pkill AdaptronicCANd
 sudo pkill AEMV2d
-sudo pkill BRZFRS86d
-sudo pkill EMUCANd
-sudo pkill M800ADLSet1d
-sudo pkill MotecM1d
+sudo pkill Apexid
 sudo pkill AudiB7d
 sudo pkill AudiB8d
+sudo pkill BlackboxM3
+sudo pkill BRZFRS86d
+sudo pkill Consult
 sudo pkill Emtrond
+sudo pkill EMUCANd
+sudo pkill EVOXCAN
+sudo pkill FordBarraBXCAN
+sudo pkill FordBarraBXCANOBD
+sudo pkill FordBarraFG2xCAN
+sudo pkill FordBarraFG2XCANOBD
+sudo pkill FordBarraFGMK1CAN
+sudo pkill FordBarraFGMK1CANOBD
+sudo pkill Haltechd
 sudo pkill Holleyd
+sudo pkill Hondatad
+sudo pkill Linkd
+sudo pkill M800ADLSet1d
+sudo pkill MaxxECUd
+sudo pkill Microtechd
+sudo pkill MotecM1d
+sudo pkill NISSAN370Z
+sudo pkill OBD
+
+echo "Removing previous Versions"
+
+sudo rm /home/pi/daemons/AdaptronicCANd
+sudo rm /home/pi/daemons/AEMV2d
+sudo rm /home/pi/daemons/Apexid
+sudo rm /home/pi/daemons/AudiB7d
+sudo rm /home/pi/daemons/AudiB8d
+sudo rm /home/pi/daemons/BlackboxM3
+sudo rm /home/pi/daemons/BRZFRS86d
+sudo rm /home/pi/daemons/Consult
+sudo rm /home/pi/daemons/Emtrond
+sudo rm /home/pi/daemons/EMUCANd
+sudo rm /home/pi/daemons/EVOXCAN
+sudo rm /home/pi/daemons/FordBarraBXCAN
+sudo rm /home/pi/daemons/FordBarraBXCANOBD
+sudo rm /home/pi/daemons/FordBarraFG2xCAN
+sudo rm /home/pi/daemons/FordBarraFG2XCANOBD
+sudo rm /home/pi/daemons/FordBarraFGMK1CAN
+sudo rm /home/pi/daemons/FordBarraFGMK1CANOBD
+sudo rm /home/pi/daemons/Haltechd
+sudo rm /home/pi/daemons/Holleyd
+sudo rm /home/pi/daemons/Hondatad
+sudo rm /home/pi/daemons/Linkd
+sudo rm /home/pi/daemons/M800ADLSet1d
+sudo rm /home/pi/daemons/MaxxECUd
+sudo rm /home/pi/daemons/Microtechd
+sudo rm /home/pi/daemons/MotecM1d
+sudo rm /home/pi/daemons/NISSAN370Z
+sudo rm /home/pi/daemons/OBD
+
+
 echo "Updating Daemons"
-sudo cp -r /home/pi/src/daemons/. /home/pi/daemons/
+cp -r /home/pi/src/daemons/. /home/pi/daemons/
 
