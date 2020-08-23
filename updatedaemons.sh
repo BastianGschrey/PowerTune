@@ -65,4 +65,4 @@ sudo rm /home/pi/daemons/OBD
 
 echo "Updating Daemons"
 cp -r /home/pi/src/daemons/. /home/pi/daemons/
-
+cp /home/pi/src/*.sh /home/pi/
