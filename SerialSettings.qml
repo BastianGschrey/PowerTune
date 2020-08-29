@@ -935,13 +935,13 @@ Quick1.TabView {
 
                         }
 
-                        /*
+
                         //Add Dashes Back
                         while (view.count < lastdashamount +2)
                         {
 
                             console.log("add item ")
-                        }*/
+                        }
                         //numberofdashes
                         //Loop previous amount of dashes - current ammount of dashes
                         //if higher takeitem
