@@ -799,7 +799,7 @@ Quick1.TabView {
                     property alias dashselect2 : dash2.currentIndex
                     property alias dashselect3 : dash3.currentIndex
                     property alias dashselect4 : dash4.currentIndex
-                    property alias numberofdash : numberofdashes.currentIndex
+                   // property alias numberofdash : numberofdashes.currentIndex
 
 
                 }
@@ -922,7 +922,7 @@ Quick1.TabView {
                         hoverEnabled: numberofdashes.hoverEnabled
                     }
                 }
-*/
+
                 Item {
                     id: addremovedashpage
                     function adremove()
@@ -951,6 +951,7 @@ Quick1.TabView {
                         console.log(lastdashamount)
                     }
                     }
+                */
                 //Function to select Dash1
                 Item {
                     id: select1
