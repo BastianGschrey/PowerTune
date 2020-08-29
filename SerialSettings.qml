@@ -1739,19 +1739,7 @@ Quick1.TabView {
                     placeholderText: qsTr("Passphrase")
                     width: extrarect.width / 5
                     font.pixelSize: extrarect.width / 55 }*/
-                Text { text: " "
-                    font.pixelSize: extrarect.width / 55 }
-                Button {
-                    id: updateBtn
-                    text: "Update"
-                    width: extrarect.width / 5
-                    height: extrarect.height /15
-                    font.pixelSize: extrarect.width / 55
-                    onClicked: {
-                                Connect.update();
-                                updateBtn.enabled =false;
-                        }
-                }
+
                 Text { text: " "
                     font.pixelSize: extrarect.width / 55 }
 
@@ -1772,6 +1760,21 @@ Quick1.TabView {
                         Connect.reboot();
                     }
                 }
+
+                Text { text: " "
+                    font.pixelSize: extrarect.width / 55 }
+                Button {
+                    id: updateBtn
+                    text: "Update"
+                    width: extrarect.width / 5
+                    height: extrarect.height /15
+                    font.pixelSize: extrarect.width / 55
+                    onClicked: {
+                                Connect.update();
+                                updateBtn.enabled =false;
+                        }
+                }
+
 
                 Text { text: " "
                     font.pixelSize: extrarect.width / 55 }

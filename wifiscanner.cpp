@@ -112,6 +112,8 @@ void WifiScanner::readData()
 void WifiScanner::finalize(int exitCode, QProcess::ExitStatus exitStatus)
 {
     //Clean up The line which contains the SSID to only show the SSID name
+    //ESSID:"Marku\xE2\x80\x99s iPhone"==> "\xE2\x80\x99"suould be apostrophy
+
     int i =0;
     QStringList fields = outputline.split(QRegExp("[\n]"));
     //Parse List and delete all items without SSID in them
@@ -122,10 +124,8 @@ void WifiScanner::finalize(int exitCode, QProcess::ExitStatus exitStatus)
 
             QString raw;
             raw = str;
-           // qDebug()<< raw;
-           // raw.replace("                    ESSID:\", "");
             raw.remove(QChar('"'), Qt::CaseInsensitive);
-            //raw.remove(QChar('\'), Qt::CaseInsensitive);
+            raw.replace("\xE2\x80\x99","'");
             raw.remove(0,26);
             result += raw;
         }
