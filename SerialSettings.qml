@@ -574,7 +574,7 @@ Quick1.TabView {
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                             Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                         }
-                        Text  { text: "V 1.91u" + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.91v" + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 /*
                         Slider {
                             id:brightness
@@ -1483,6 +1483,7 @@ Quick1.TabView {
                 Settings {
                     property alias mainspeedsource : mainspeedsource.currentIndex
                     property alias daemonselect : daemonselect.currentIndex
+                    property alias bitrateselect :canbitrateselect.currentIndex
                 }
             }
 
@@ -1501,9 +1502,14 @@ Quick1.TabView {
                     width: daemons.width / 3
                     height: daemons.height /15
                     text: "apply"
-                    onClicked: Connect.daemonstartup(daemonselect.currentIndex)
+                    onClicked: {Connect.daemonstartup(daemonselect.currentIndex)
+                                Connect.canbitratesetup(canbitrateselect.currentIndex)
+                                }
+
 
                 }
+
+
                 /*
                 Text { text: "Remove screen rotate :"
                     font.pixelSize: daemons.width / 55 }
@@ -1530,6 +1536,25 @@ Quick1.TabView {
                         font.pixelSize: daemonselect.font.pixelSize
                         highlighted: daemonselect.highlightedIndex == index
                         hoverEnabled: daemonselect.hoverEnabled
+                    }
+                    //Component.onCompleted: tabView.currentIndex = 0;
+                }
+                Text { text: "CAN Bitrate :"
+                    font.pixelSize: daemons.width / 55 }
+                ComboBox {
+                    id: canbitrateselect
+                    width: daemons.width / 3
+                    height: daemons.height /15
+                    font.pixelSize: daemons.width / 55
+                    model: [ "500 kbit/s","1 Mbit/s"]
+                    delegate: ItemDelegate {
+                        width: canbitrateselect.width
+                        text: canbitrateselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: canbitrateselect.currentIndex == index ? Font.DemiBold : Font.Normal
+                        font.family: canbitrateselect.font.family
+                        font.pixelSize: canbitrateselect.font.pixelSize
+                        highlighted: canbitrateselect.highlightedIndex == index
+                        hoverEnabled: canbitrateselect.hoverEnabled
                     }
                     //Component.onCompleted: tabView.currentIndex = 0;
                 }
@@ -1768,7 +1793,7 @@ Quick1.TabView {
                 Text { text: " "
                     font.pixelSize: extrarect.width / 55 }
 
-
+/*
                 Button {
                     id: develtest1
                     text: "Development dont click"
@@ -1777,7 +1802,7 @@ Quick1.TabView {
                     font.pixelSize: extrarect.width / 55
                     onClicked: Connect.canbitratesetup(0)
 
-                }
+                }*/
             }
         }
     }
