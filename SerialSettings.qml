@@ -1502,6 +1502,7 @@ Quick1.TabView {
                     height: daemons.height /15
                     text: "apply"
                     onClicked: Connect.daemonstartup(daemonselect.currentIndex)
+
                 }
                 /*
                 Text { text: "Remove screen rotate :"
@@ -1767,19 +1768,16 @@ Quick1.TabView {
                 Text { text: " "
                     font.pixelSize: extrarect.width / 55 }
 
-                /*
+
                 Button {
                     id: develtest1
-                    text: "Development test off"
+                    text: "Development dont click"
                     width: extrarect.width / 5
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
+                    onClicked: Connect.canbitratesetup(0)
 
-                    onClicked: {
-                    Arduino.closeConnection();
-                    develtest.enabled = true;
-                    }
-                }*/
+                }
             }
         }
     }

@@ -837,7 +837,55 @@ void Connect::daemonstartup(const int &daemon)
     process->start("sudo reboot");
     process->waitForFinished(100); // 10 minutes time before timeout
 }
+//////////////
+void Connect::canbitratesetup(const int &cansetting)
+{
+    QString canbitrate;
+    switch (cansetting)
+    {
+    case 0:
+        canbitrate = "500000";
+        break;
+    case 1:
+        canbitrate = "1000000";
+        break;
 
+    }
+    QString fileName = "/etc/network/interfaces";
+    QFile mFile(fileName);
+    mFile.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text);
+    QTextStream out(&mFile);
+    out << "# interfaces(5) file used by ifup(8) and ifdown(8)"
+        << endl
+        << "# Please note that this file is written to be used with dhcpcd"
+        << endl
+        << "# For static IP, consult /etc/dhcpcd.conf and 'man dhcpcd.conf'"
+        << endl
+        << "# Include files from /etc/network/interfaces.d:"
+        << endl
+        << "source-directory /etc/network/interfaces.d"
+        << endl
+        << "#Automatically start CAN Interface"
+        << endl
+        << "auto can0"
+        << endl
+        << "iface can0 can static"
+        << endl
+        << "bitrate " << canbitrate
+        << endl;
+
+    mFile.close();
+
+    //Reboot the PI for settings to take Effect
+    m_dashBoard->setSerialStat("Rebooting ");
+    QProcess *process = new QProcess(this);
+    process->start("sudo reboot");
+    process->waitForFinished(100); // 10 minutes time before timeout
+}
+
+
+
+//////////
 void Connect::LiveReqMsg(const int &val1, const int &val2, const int &val3, const int &val4, const int &val5, const int &val6, const int &val7, const int &val8, const int &val9, const int &val10, const int &val11, const int &val12, const int &val13, const int &val14, const int &val15, const int &val16, const int &val17, const int &val18, const int &val19, const int &val20, const int &val21, const int &val22, const int &val23, const int &val24, const int &val25, const int &val26, const int &val27, const int &val28, const int &val29, const int &val30, const int &val31, const int &val32, const int &val33, const int &val34, const int &val35, const int &val36, const int &val37, const int &val38, const int &val39, const int &val40, const int &val41, const int &val42, const int &val43, const int &val44 , const int &val45)
 {
     QString Message;
