@@ -32,24 +32,24 @@ ApplicationWindow {
 
         Loader {
             id: firstPageLoader
-            active: SwipeView.isCurrentItem || SwipeView.isPreviousItem || firstPageLoader.source == "qrc:/GPSTracks/Laptimer.qml"
+            //active: SwipeView.isCurrentItem || SwipeView.isPreviousItem || firstPageLoader.source == "qrc:/GPSTracks/Laptimer.qml"
             source: "qrc:/Intro.qml"
         }
 
         Loader {
             id: secondPageLoader
-            active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || secondPageLoader.source == "qrc:/GPSTracks/Laptimer.qml"
+            //active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || secondPageLoader.source == "qrc:/GPSTracks/Laptimer.qml"
             source: ""
         }
         Loader {
             id: thirdPageLoader
-            active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || thirdPageLoader.source == "qrc:/GPSTracks/Laptimer.qml"
+            //active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || thirdPageLoader.source == "qrc:/GPSTracks/Laptimer.qml"
             source: ""
         }
         
         Loader {
             id: fourthPageLoader
-            active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || fourthPageLoader.source == "qrc:/GPSTracks/Laptimer.qml"
+           // active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || fourthPageLoader.source == "qrc:/GPSTracks/Laptimer.qml"
             source: ""
         }
 
