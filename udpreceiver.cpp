@@ -505,7 +505,7 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setMAP(Value);
             break;
         case 156:
-            //            m_dashboard->setMAP2(Value);
+            m_dashboard->setMAP2(Value);
             break;
         case 157:
             m_dashboard->setmil(Value);

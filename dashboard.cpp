@@ -160,6 +160,7 @@ DashBoard::DashBoard(QObject *parent)
 
     //Adaptronic extra
     , m_MAP(0)
+    , m_MAP2(0)
     , m_AUXT(0)
     , m_AFR(0)
     , m_TPS(0)
@@ -1414,6 +1415,14 @@ void DashBoard::setMAP(const qreal &MAP)
     emit mAPChanged(MAP);
 }
 
+void DashBoard::setMAP2(const qreal &MAP2)
+{
+    if (m_pressureunits == "metric")
+    { m_MAP2 = MAP2;}
+    if (m_pressureunits == "imperial")
+    {m_MAP2 = MAP2 * 0.145038;}
+    emit mAP2Changed(MAP2);
+}
 void DashBoard::setAUXT(const qreal &AUXT)
 {
     if (m_AUXT == AUXT)
@@ -3114,6 +3123,7 @@ QString DashBoard::pressureunits() const { return m_pressureunits; }
 
 
 qreal DashBoard::MAP() const { return m_MAP; }
+qreal DashBoard::MAP2() const { return m_MAP2; }
 qreal DashBoard::AUXT() const { return m_AUXT; }
 qreal DashBoard::AFR() const { return m_AFR; }
 qreal DashBoard::TPS() const { return m_TPS; }

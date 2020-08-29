@@ -139,6 +139,7 @@ class DashBoard : public QObject
     //Adaptronic extra
 
     Q_PROPERTY(qreal MAP READ MAP WRITE setMAP NOTIFY mAPChanged)
+    Q_PROPERTY(qreal MAP2 READ MAP2 WRITE setMAP2 NOTIFY mAP2Changed)
     Q_PROPERTY(qreal AUXT READ AUXT WRITE setAUXT NOTIFY aUXTChanged)
     Q_PROPERTY(qreal AFR READ AFR WRITE setAFR NOTIFY aFRChanged)
     Q_PROPERTY(qreal TPS READ TPS WRITE setTPS NOTIFY tPSChanged)
@@ -541,6 +542,7 @@ class DashBoard : public QObject
     //Adaptronic extra
 
     void setMAP(const qreal &MAP);
+    void setMAP2(const qreal &MAP2);
     void setAUXT(const qreal &AUXT);
     void setAFR(const qreal &AFR);
     void setTPS(const qreal &TPS);
@@ -917,6 +919,7 @@ class DashBoard : public QObject
     //Adaptronic extra
 
     qreal MAP() const;
+    qreal MAP2() const;
     qreal AUXT() const;
     qreal AFR() const;
     qreal TPS() const;
@@ -1289,6 +1292,7 @@ signals:
     //Adaptronic extra
 
     void mAPChanged(qreal MAP);
+    void mAP2Changed(qreal MAP2);
     void aUXTChanged(qreal AUXT);
     void aFRChanged(qreal AFR);
     void tPSChanged(qreal TPS);
@@ -1642,6 +1646,7 @@ private:
     //Adaptronic extra
 
     qreal m_MAP;
+    qreal m_MAP2;
     qreal m_AUXT;
     qreal m_AFR;
     qreal m_TPS;

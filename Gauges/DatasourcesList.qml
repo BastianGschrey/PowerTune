@@ -1478,12 +1478,7 @@ ListModel {
         divisor : "1"
     }
 
-    /*
-    ,  m_currentLap(0)
-    ,  m_laptime("00:00.000")
-    ,  m_Lastlaptime("00:00.000")
-    ,  m_bestlaptime("00:00.000")
-      */
+
     ListElement {
         sourcename:"currentLap"
         defaultsymbol: " "
@@ -1493,24 +1488,7 @@ ListModel {
         stepsize : "20"
         divisor : "1"
     }
-    ListElement {
-        sourcename:"laptime"
-        defaultsymbol: " "
-        titlename:"Current Lap Time"
-        decimalpoints : "4"
-        maxvalue : "100"
-        stepsize : "20"
-        divisor : "1"
-    }
-    ListElement {
-        sourcename:"bestlaptime"
-        defaultsymbol: " "
-        titlename:"Last Lap Time"
-        decimalpoints : "4"
-        maxvalue : "100"
-        stepsize : "20"
-        divisor : "1"
-    }
+
 
 
     ListElement {

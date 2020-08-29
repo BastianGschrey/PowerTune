@@ -12,6 +12,8 @@ Quick1.TabView {
     id: tabView
     anchors.fill: parent
 
+    property int lastdashamount
+
     Rectangle{
         id: keyboardcontainer
         color: "darkgrey"
@@ -572,7 +574,7 @@ Quick1.TabView {
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                             Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                         }
-                        Text  { text: "V 1.91t" + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.91u" + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 /*
                         Slider {
                             id:brightness
@@ -797,6 +799,7 @@ Quick1.TabView {
                     property alias dashselect2 : dash2.currentIndex
                     property alias dashselect3 : dash3.currentIndex
                     property alias dashselect4 : dash4.currentIndex
+                    property alias numberofdash : numberofdashes.currentIndex
 
 
                 }
@@ -847,7 +850,8 @@ Quick1.TabView {
                         font.pixelSize: dashselector.width / 55
                         model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
                         //currentIndex: 1
-                        onCurrentIndexChanged:{select2.selDash2() }
+                        //onCurrentIndexChanged:{select2.selDash2() }
+                        onCurrentIndexChanged:{if (dash2.visible == true){select2.selDash2()} }
                         delegate: ItemDelegate {
                             width: dash2.width
                             text: dash2.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -865,7 +869,8 @@ Quick1.TabView {
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
                         model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
-                        onCurrentIndexChanged:{select3.selDash3() }
+                       // onCurrentIndexChanged:{select3.selDash3() }
+                        onCurrentIndexChanged:{if (dash3.visible == true){select3.selDash3()} }
                         //currentIndex: 1
                         delegate: ItemDelegate {
                             width: dash3.width
@@ -884,7 +889,8 @@ Quick1.TabView {
                         font.pixelSize: dashselector.width / 55
                         model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
                         //currentIndex: 1
-                        onCurrentIndexChanged:{select4.selDash4() }
+                        //onCurrentIndexChanged:{select4.selDash4() }
+                        onCurrentIndexChanged:{if (dash4.visible == true){select4.selDash4()} }
                         delegate: ItemDelegate {
                             width: dash4.width
                             text: dash4.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -896,8 +902,55 @@ Quick1.TabView {
                         }
                     }
                 }
+/* for later use
+                ComboBox {
+                    id: numberofdashes
+                    width: dashselector.width / 5
+                    height: dashselector.height /15
+                    font.pixelSize: dashselector.width / 55
+                    model: ["1","2","3","4"]
+                    currentIndex: 3
+                    onCurrentIndexChanged:{addremovedashpage.adremove()}
+                   // onCurrentIndexChanged:{if (dash4.visible == true){select4.selDash4()} }
+                    delegate: ItemDelegate {
+                        width: numberofdashes.width
+                        text: numberofdashes.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                        font.weight: numberofdashes.currentIndex == index ? Font.DemiBold : Font.Normal
+                        font.family: numberofdashes.font.family
+                        font.pixelSize: numberofdashes.font.pixelSize
+                        highlighted: numberofdashes.highlightedIndex == index
+                        hoverEnabled: numberofdashes.hoverEnabled
+                    }
+                }
+*/
+                Item {
+                    id: addremovedashpage
+                    function adremove()
+                    {
 
+                        console.log(lastdashamount)
+                        while (view.count > numberofdashes.currentIndex+2)
+                        {
+                          view.takeItem( view.count - 2 )
 
+                        }
+
+                        /*
+                        //Add Dashes Back
+                        while (view.count < lastdashamount +2)
+                        {
+
+                            console.log("add item ")
+                        }*/
+                        //numberofdashes
+                        //Loop previous amount of dashes - current ammount of dashes
+                        //if higher takeitem
+                        //takeitem
+                        // if higher additem
+                        lastdashamount = numberofdashes.currentIndex+1;
+                        console.log(lastdashamount)
+                    }
+                    }
                 //Function to select Dash1
                 Item {
                     id: select1
@@ -914,6 +967,8 @@ Quick1.TabView {
                         if (dash1.currentIndex == "8") {firstPageLoader.source = "qrc:/Gauges/Dyno.qml"};
                         if (dash1.currentIndex == "9"){firstPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                         if (dash1.currentIndex == "10"){firstPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
+                        //if (dash1.currentIndex == "11"){view.addItem(firstPageLoader)};
+                        console.log("selecting DASH 1")
                     }
                 }
                 Item {
@@ -932,8 +987,9 @@ Quick1.TabView {
                         if (dash2.currentIndex == "8") {secondPageLoader.source = "qrc:/Gauges/Dyno.qml"};
                         if (dash2.currentIndex == "9"){secondPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                         if (dash2.currentIndex == "10"){secondPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
-
-}
+                        //if (dash2.currentIndex == "11"){view.takeItem(1)};
+                        console.log("selecting DASH 2")
+                    }
                 }
                 Item {
                     id: select3
@@ -950,6 +1006,7 @@ Quick1.TabView {
                         if (dash3.currentIndex == "8") {thirdPageLoader.source = "qrc:/Gauges/Dyno.qml"};
                         if (dash3.currentIndex == "9"){thirdPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                         if (dash3.currentIndex == "10"){thirdPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
+                        console.log("selecting DASH 3")
                     }
                 }
                 Item {
@@ -967,6 +1024,7 @@ Quick1.TabView {
                         if (dash4.currentIndex == "8") {fourthPageLoader.source = "qrc:/Gauges/Dyno.qml"};
                         if (dash4.currentIndex == "9") {fourthPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                         if (dash4.currentIndex == "10") {fourthPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
+                        console.log("selecting DASH 4")
                     }
                     Component.onCompleted: tabView.currentIndex = 2 // opens the 3rd tab
                 }
