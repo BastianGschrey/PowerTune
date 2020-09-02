@@ -34,6 +34,7 @@ int brightness;
 
 
 
+
 DashBoard::DashBoard(QObject *parent)
     : QObject(parent)
 
@@ -368,6 +369,7 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_FuelLevel()
     ,  m_SteeringWheelAngle()
     ,  m_Brightness()
+    ,  m_Visibledashes(1)
     ,  m_oilpressurelamp()
     ,  m_overtempalarm()
     ,  m_alternatorfail()
@@ -2945,6 +2947,14 @@ void DashBoard::setBrightness(const int &Brightness)
     m_Brightness = Brightness;
     emit BrightnessChanged(Brightness);
 }
+void DashBoard::setVisibledashes(const int &Visibledashes)
+{
+    if (m_Visibledashes == Visibledashes)
+        return;
+    m_Visibledashes = Visibledashes;
+    emit VisibledashesChanged(Visibledashes);
+}
+
 void DashBoard::setoilpressurelamp(const int &oilpressurelamp)
 {
     if (m_oilpressurelamp == oilpressurelamp)
@@ -3334,6 +3344,7 @@ qreal DashBoard::Userchannel4() const {return m_Userchannel4;}
 qreal DashBoard::FuelLevel() const {return m_FuelLevel;}
 qreal DashBoard::SteeringWheelAngle() const {return m_SteeringWheelAngle;}
 int DashBoard::Brightness() const {return m_Brightness;}
+int DashBoard::Visibledashes() const {return m_Visibledashes;}
 int DashBoard::oilpressurelamp() const {return m_oilpressurelamp;}
 int DashBoard::overtempalarm() const {return m_overtempalarm;}
 int DashBoard::alternatorfail() const {return m_alternatorfail;}

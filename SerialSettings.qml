@@ -574,7 +574,7 @@ Quick1.TabView {
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                             Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                         }
-                        Text  { text: "V 1.92a" + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.93" + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 /*
                         Slider {
                             id:brightness
@@ -799,30 +799,66 @@ Quick1.TabView {
                     property alias dashselect2 : dash2.currentIndex
                     property alias dashselect3 : dash3.currentIndex
                     property alias dashselect4 : dash4.currentIndex
-                   // property alias numberofdash : numberofdashes.currentIndex
+                    property alias numberofdash : numberofdashes.currentIndex
 
 
                 }
+            }
+                /*
                 Rectangle{
                     id: firstgrid
                     width: 800
                     height: 100
                     color:"grey"
 
-                }
+
+
+                }*/
                 Grid {
+                    id: dashselectorgrid
                     rows: 2
-                    columns: 4
-                    anchors.centerIn: firstgrid
-                    spacing: dashselector.width / 150
+                    columns: 1
+                    anchors.centerIn: parent
+                   // x: 100
+                   // y: 100
+
+                    Text { text: "Active Dashboards"
+
+                        font.pixelSize: dashselector.width / 55 }
+
+                    ComboBox {
+                        id: numberofdashes
+
+                        width: dashselector.width / 5
+                        height: dashselector.height /15
+                        font.pixelSize: dashselector.width / 55
+                        model: ["1","2","3","4"]
+                        currentIndex: -1
+                        onCurrentIndexChanged:{addremovedashpage.adremove()}
+
+                        delegate: ItemDelegate {
+                            width: numberofdashes.width
+                            text: numberofdashes.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
+                            font.weight: numberofdashes.currentIndex == index ? Font.DemiBold : Font.Normal
+                            font.family: numberofdashes.font.family
+                            font.pixelSize: numberofdashes.font.pixelSize
+                            highlighted: numberofdashes.highlightedIndex == index
+                            hoverEnabled: numberofdashes.hoverEnabled
+                        }
+                    }
+                }
+
+                Grid {
+                    id: dash1grid
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.margins:dashselector.width / 60
+                    rows: 2
+                    columns: 1
+
                     Text { text: "Dash1"
                         font.pixelSize: dashselector.width / 55 }
-                    Text { text: "Dash2"
-                        font.pixelSize: dashselector.width / 55}
-                    Text { text: "Dash3"
-                        font.pixelSize: dashselector.width / 55}
-                    Text { text: "Dash4"
-                        font.pixelSize: dashselector.width / 55}
+
                     ComboBox {
                         id: dash1
                         width: dashselector.width / 5
@@ -842,6 +878,17 @@ Quick1.TabView {
                             hoverEnabled: dash1.hoverEnabled
                         }
                     }
+                }
+                Grid {
+                    id: dash2grid
+                    anchors.top: parent.top
+                    anchors.left: dash1grid.right
+                    anchors.margins:dashselector.width / 60
+                    rows: 2
+                    columns: 1
+                    Text { text: "Dash2"
+                        visible: Dashboard.Visibledashes >1
+                        font.pixelSize: dashselector.width / 55}
 
                     ComboBox {
                         id: dash2
@@ -851,7 +898,9 @@ Quick1.TabView {
                         model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
                         //currentIndex: 1
                         //onCurrentIndexChanged:{select2.selDash2() }
+                        visible: Dashboard.Visibledashes >1
                         onCurrentIndexChanged:{if (dash2.visible == true){select2.selDash2()} }
+                        onVisibleChanged:{if (dash2.visible == true){select2.selDash2()} }
                         delegate: ItemDelegate {
                             width: dash2.width
                             text: dash2.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -862,16 +911,26 @@ Quick1.TabView {
                             hoverEnabled: dash2.hoverEnabled
                         }
                     }
-
+                }
+                Grid {
+                    id: dash3grid
+                    anchors.top: parent.top
+                    anchors.left: dash2grid.right
+                    anchors.margins:dashselector.width / 60
+                    rows: 2
+                    columns: 1
+                    Text { text: "Dash3"
+                        visible: Dashboard.Visibledashes >2
+                        font.pixelSize: dashselector.width / 55}
                     ComboBox {
                         id: dash3
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
                         model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
-                       // onCurrentIndexChanged:{select3.selDash3() }
+                        visible: Dashboard.Visibledashes >2
                         onCurrentIndexChanged:{if (dash3.visible == true){select3.selDash3()} }
-                        //currentIndex: 1
+                        onVisibleChanged: {if (dash3.visible == true){select3.selDash3()} }
                         delegate: ItemDelegate {
                             width: dash3.width
                             text: dash3.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -882,15 +941,27 @@ Quick1.TabView {
                             hoverEnabled: dash3.hoverEnabled
                         }
                     }
+                }
+                Grid {
+                    id: dash4grid
+                    anchors.top: parent.top
+                    anchors.left: dash3grid.right
+                    anchors.margins:dashselector.width / 60
+                    rows: 2
+                    columns: 1
+                    Text { text: "Dash4"
+                        visible: Dashboard.Visibledashes >3
+                        font.pixelSize: dashselector.width / 55}
+
                     ComboBox {
                         id: dash4
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
                         model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
-                        //currentIndex: 1
-                        //onCurrentIndexChanged:{select4.selDash4() }
+                        visible: Dashboard.Visibledashes >3
                         onCurrentIndexChanged:{if (dash4.visible == true){select4.selDash4()} }
+                        onVisibleChanged: {if (dash4.visible == true){select4.selDash4()} }
                         delegate: ItemDelegate {
                             width: dash4.width
                             text: dash4.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -901,57 +972,51 @@ Quick1.TabView {
                             hoverEnabled: dash4.hoverEnabled
                         }
                     }
-                }
-/* for later use
-                ComboBox {
-                    id: numberofdashes
-                    width: dashselector.width / 5
-                    height: dashselector.height /15
-                    font.pixelSize: dashselector.width / 55
-                    model: ["1","2","3","4"]
-                    currentIndex: 3
-                    onCurrentIndexChanged:{addremovedashpage.adremove()}
-                   // onCurrentIndexChanged:{if (dash4.visible == true){select4.selDash4()} }
-                    delegate: ItemDelegate {
-                        width: numberofdashes.width
-                        text: numberofdashes.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
-                        font.weight: numberofdashes.currentIndex == index ? Font.DemiBold : Font.Normal
-                        font.family: numberofdashes.font.family
-                        font.pixelSize: numberofdashes.font.pixelSize
-                        highlighted: numberofdashes.highlightedIndex == index
-                        hoverEnabled: numberofdashes.hoverEnabled
-                    }
-                }
+
+
+
+
 
                 Item {
                     id: addremovedashpage
                     function adremove()
                     {
+                      //Setting amount of Active Dashes loaded
+                       Dashboard.Visibledashes = numberofdashes.currentIndex +1;
 
-                        console.log(lastdashamount)
-                        while (view.count > numberofdashes.currentIndex+2)
-                        {
-                          view.takeItem( view.count - 2 )
+                      while (dashView.count > numberofdashes.currentIndex +2)
+                      {
+                      dashView.takeItem(dashView.count -2)
+                      //console.log("removing", dashView.count -2)
+                      }
 
-                        }
+                      //Adding Dashes back
+                      while (dashView.count < numberofdashes.currentIndex +2)
+                      {
+                          console.log("We have currently ", dashView.count)
+                      switch (dashView.count) {
 
+                          case 2: {
+                              dashView.insertItem(1,secondPageLoader)
+                              console.log("add second page")
+                              break;
+                          }
+                          case 3: {
+                              dashView.insertItem(2,thirdPageLoader)
+                              console.log("add 3rd page", dashView.count)
+                              break;
+                          }
+                          case 4: {
+                              dashView.insertItem(3,fourthPageLoader)
+                              console.log("add 4th page", dashView.count)
+                              break;
+                          }
+                      }
 
-                        //Add Dashes Back
-                        while (view.count < lastdashamount +2)
-                        {
-
-                            console.log("add item ")
-                        }
-                        //numberofdashes
-                        //Loop previous amount of dashes - current ammount of dashes
-                        //if higher takeitem
-                        //takeitem
-                        // if higher additem
-                        lastdashamount = numberofdashes.currentIndex+1;
-                        console.log(lastdashamount)
+                      }
                     }
                     }
-                */
+
                 //Function to select Dash1
                 Item {
                     id: select1

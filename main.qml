@@ -24,7 +24,7 @@ ApplicationWindow {
         Component.onCompleted: Connect.checkifraspberrypi()
     }
     SwipeView {
-        id: view
+        id: dashView
 
         currentIndex: 0
         anchors.fill: parent
@@ -38,18 +38,18 @@ ApplicationWindow {
 
         Loader {
             id: secondPageLoader
-            //active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || secondPageLoader.source == "qrc:/GPSTracks/Laptimer.qml"
+            active: Dashboard.Visibledashes > 1
             source: ""
         }
         Loader {
             id: thirdPageLoader
-            //active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || thirdPageLoader.source == "qrc:/GPSTracks/Laptimer.qml"
+            active: Dashboard.Visibledashes > 2;
             source: ""
         }
         
         Loader {
             id: fourthPageLoader
-           // active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || fourthPageLoader.source == "qrc:/GPSTracks/Laptimer.qml"
+            active: Dashboard.Visibledashes > 3;
             source: ""
         }
 
@@ -173,9 +173,9 @@ ApplicationWindow {
     }
     PageIndicator {
         id: indicator
-        count: view.count
-        currentIndex: view.currentIndex
-        anchors.bottom: view.bottom
+        count: dashView.count
+        currentIndex: dashView.currentIndex
+        anchors.bottom: dashView.bottom
         anchors.horizontalCenter: parent.horizontalCenter
     }
 }
