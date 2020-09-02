@@ -1483,6 +1483,25 @@ ListModel {
         sourcename:"currentLap"
         defaultsymbol: " "
         titlename:"Current LAP No"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"laptime"
+        defaultsymbol: " "
+        titlename:"Lap Time"
+        decimalpoints : "4"
+        maxvalue : "100"
+        stepsize : "20"
+        divisor : "1"
+    }
+
+    ListElement {
+        sourcename:"bestlaptime"
+        defaultsymbol: " "
+        titlename:"Best Laptime"
         decimalpoints : "4"
         maxvalue : "100"
         stepsize : "20"
