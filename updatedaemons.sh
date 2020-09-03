@@ -21,6 +21,7 @@ sudo pkill FordBarraFG2xCAN
 sudo pkill FordBarraFG2XCANOBD
 sudo pkill FordBarraFGMK1CAN
 sudo pkill FordBarraFGMK1CANOBD
+sudo pkill GMCANd
 sudo pkill Haltechd
 sudo pkill Holleyd
 sudo pkill Hondatad
@@ -61,7 +62,7 @@ sudo rm /home/pi/daemons/Microtechd
 sudo rm /home/pi/daemons/MotecM1d
 sudo rm /home/pi/daemons/NISSAN370Z
 sudo rm /home/pi/daemons/OBD
-
+sudo rm /home/pi/daemons/GMCANd
 
 echo "Updating Daemons"
 cp -r /home/pi/src/daemons/. /home/pi/daemons/
