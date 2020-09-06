@@ -4,6 +4,8 @@ import QtPositioning 5.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Styles 1.4
 
+import QtQuick.Layouts 1.0
+import QtQuick.XmlListModel 2.0
 
 Rectangle {
     id: mapItem
@@ -108,6 +110,19 @@ Rectangle {
             bearing: Dashboard.gpsbaering
             color: "black"
 
+            // Draw polyline
+            Map {
+                MapPolyline {
+                    line.width: 10
+                    line.color: 'green'
+                    path: [
+                        //152.9653575639266,-27.22864613746248,0 152.9640338064991,-27.22827994189477,0 152.9634960611712,-27.22815172828676,0 152.963237125486,-27.22808317144805,
+                        { latitude: -27.22864613746248, longitude: 152.9653575639266 },
+                        { latitude: -27.22815172828676, longitude: 152.963237125486},
+
+                    ]
+                }
+            }
 
             // Draw a small red circle for current Vehicle Location
             MapQuickItem {
@@ -313,7 +328,7 @@ Rectangle{
 
                 if (countryselect.textAt(countryselect.currentIndex) == "Current Position"){trackselect.model = ["Tilt 0", "Tilt 45"],map.center= QtPositioning.coordinate(-25.804219,28.300091)};
                 //if (countryselect.textAt(countryselect.currentIndex) == "Current Position"){trackselect.model = ["Tilt 0", "Tilt 45"],map.center= QtPositioning.coordinate(Dashboard.gpsLatitude,Dashboard.gpsLongitude)};
-                if (countryselect.textAt(countryselect.currentIndex) == "Australia"){trackselect.model = ["Barbagallo Raceway","Carrnell Raceway","Collie Motorplex","Lakeside Raceway","Wakefield Park"]};
+                if (countryselect.textAt(countryselect.currentIndex) == "Australia"){trackselect.model = ["Barbagallo Raceway","Carrnell Raceway","Collie Motorplex","Lakeside Raceway","Luddenham Raceway","Queensland Raceway","Wakefield Park"]};
                 if (countryselect.textAt(countryselect.currentIndex) == "Germany"){trackselect.model = ["Hockenheim","Nürburgring"]};
                 if (countryselect.textAt(countryselect.currentIndex) == "New Zealand"){trackselect.model = ["Pukekohe Park"]};
                 if (countryselect.textAt(countryselect.currentIndex) == "Malaysia"){trackselect.model = ["Sepang"]};
@@ -348,6 +363,9 @@ Rectangle{
                 if (trackselect.textAt(trackselect.currentIndex) == "Barbagallo Raceway"){map.center= QtPositioning.coordinate(-31.664326, 115.789962),map.zoomLevel = 15.7,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(-31.664168,115.786292,-31.664171,115.786459,1)}
                 if (trackselect.textAt(trackselect.currentIndex) == "Collie Motorplex"){map.center= QtPositioning.coordinate(-33.431971, 116.244369),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(-33.430061,116.243180,-33.430184, 116.243386,1)}
                 if (trackselect.textAt(trackselect.currentIndex) == "Lakeside Raceway"){map.center= QtPositioning.coordinate(-27.228108, 152.964956),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 90,Gps.defineFinishLine(-27.228568, 152.964881,-27.228397, 152.964931,2)}
+                if (trackselect.textAt(trackselect.currentIndex) == "Queensland Raceway"){map.center= QtPositioning.coordinate(-27.690381, 152.653035),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(-27.690635, 152.654481,-27.690637, 152.654713,1)}
+                if (trackselect.textAt(trackselect.currentIndex) == "Luddenham Raceway"){map.center= QtPositioning.coordinate(-33.857640, 150.717556),map.zoomLevel = 16.7,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(-33.858250, 150.718023,-33.858430, 150.718117,1)}
+
 
             }
         }
