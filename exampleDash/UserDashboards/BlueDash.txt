@@ -1,0 +1,5 @@
+Round gauge,329,28,37,speed,300,0,320,-1000,-180,90,300,1,25,1,25,0,-55,24,3,1,5,2,10,3,0.5,0.4,0.33,0.25,13,5,45,8,6,0,slateblue,dodgerblue,transparent,transparent,darkviolet,darkgray,azure,dimgray,floralwhite,darkgrey,royalblue,slateblue,transparent,transparent,true,false,false,Eurostile,30,50,10,false,Eurostile,red,0,,,,,,,,0
+Round gauge,326,449,42,rpm,8000,0,7000,-1000,-90,180,7000,1000,1000,9,1000,0,-56,25,0,-1,8,2,15,3,0.5,0.4,0.33,0.25,22,3,46,8,0,11,slateblue,dodgerblue,transparent,transparent,blue,darkgrey,azure,dimgray,azure,darkgrey,royalblue,slateblue,transparent,transparent,true,false,false,Eurostile,30,50,10,false,Eurostile,RPM,transparent,,,,,,,,0
+Text label gauge,172,159,0,Eurostile,40,snow,speed,true,0
+Text label gauge,591,168,0,Eurostile,28,snow,rpm,true,0
+

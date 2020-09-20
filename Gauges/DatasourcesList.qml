@@ -4,6 +4,19 @@ ListModel {
     id: datasources
 
 ///////////
+
+
+    ListElement {
+        titlename: "Average Fuel Economy"
+        defaultsymbol: " "
+        sourcename:"avfueleconomy"
+        supportedECU: ""
+        decimalpoints : "0" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "100"
+        stepsize : "1"
+        divisor : "1"
+    }
     ListElement {
         titlename: "Alternator Light"
         defaultsymbol: " "

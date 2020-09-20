@@ -1,0 +1,15 @@
+State gauge,672,-26,100,rightindicator,1,file:///home/pi/Logo/Indicator_right_off.png,file:///home/pi/Logo/Indicator_right.png
+State gauge,17,-20,100,leftindicator,1,file:///home/pi/Logo/Indicator_left_off.png,file:///home/pi/Logo/Indicator_left.png
+State gauge,9,44,45,lowBeam,1,file:///home/pi/Logo/None,file:///home/pi/Logo/low beam.png
+State gauge,-1,96,49,tractionControl,1,file:///home/pi/Logo/,file:///home/pi/Logo/TCS.png
+State gauge,52,35,60,highbeam,1,file:///home/pi/Logo/,file:///home/pi/Logo/High Beam.png
+State gauge,44,84,54,handbrake,1,file:///home/pi/Logo/,file:///home/pi/Logo/handbrake.png
+State gauge,145,218,100,speed,1,file:///home/pi/Logo/None,file:///home/pi/Logo/ledgreen.png
+Square gauge,266,119,267,361,248,0,kPa,Brake Pres.,false,true,false,Dashboard,brakepress,brakepress,10000,-20000,lightsteelblue,black,lightsteelblue,white,white,blue,25,40,0,Lato,Lato,
+Square gauge,199,119,143,238,248,0,°C,ECT,false,true,false,Dashboard,Watertemp,Watertemp,10000,-20000,lightsteelblue,black,lightsteelblue,white,white,blue,25,40,0,Lato,Lato,
+Square gauge,266,119,534,361,248,1,V,Battery Voltage,false,true,false,Dashboard,BatteryV,BatteryV,10000,-20000,lightsteelblue,black,lightsteelblue,white,white,blue,25,40,0,Lato,Lato,
+Square gauge,199,119,343,238,248,0,°C,Oil Temp.,false,true,false,Dashboard,oiltemp,oiltemp,10000,-20000,lightsteelblue,black,lightsteelblue,white,white,blue,25,40,0,Lato,Lato,
+Square gauge,266,119,0,361,248,0,%,Accel Ped Pos.,false,true,false,Dashboard,accelpedpos,accelpedpos,10000,-20000,lightsteelblue,black,lightsteelblue,white,white,blue,25,40,0,Lato,Lato,
+Square gauge,110,119,690,238,100,0, ,Fuel,false,true,false,Dashboard,FuelLevel,FuelLevel,10000,-20000,lightsteelblue,black,lightsteelblue,white,white,blue,25,40,0,Lato,Lato,
+Square gauge,145,119,544,238,248,0,°,Steer. w.,false,false,false,Dashboard,SteeringWheelAngle,SteeringWheelAngle,10000,-20000,lightsteelblue,black,lightsteelblue,white,white,blue,25,40,0,Lato,Lato,
+Square gauge,140,119,1,238,1,0, ,Clutch Sw,false,true,false,Dashboard,clutchswitchstate,clutchswitchstate,10000,-20000,lightsteelblue,black,lightsteelblue,white,white,blue,25,40,0,Lato,Lato,
