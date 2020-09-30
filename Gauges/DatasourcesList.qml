@@ -29,6 +29,17 @@ ListModel {
         divisor : "1"
     }
     ListElement {
+        titlename: "Aux Temp 1"
+        defaultsymbol: " "
+        sourcename:"AuxTemp1"
+        supportedECU: ""
+        decimalpoints : "0" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "110"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
         titlename: "Overtemp Light"
         defaultsymbol: " "
         sourcename:"overtempalarm"

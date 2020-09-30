@@ -930,6 +930,8 @@ void udpreceiver::processPendingDatagrams()
 
         case 830:
             m_dashboard->setturborpm2(Value);
+        case 831:
+            m_dashboard->setAuxTemp1(Value);
         case 999:
             break;
         default:

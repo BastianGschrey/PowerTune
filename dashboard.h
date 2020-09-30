@@ -379,7 +379,7 @@ class DashBoard : public QObject
     Q_PROPERTY(int oilpressurelamp READ oilpressurelamp WRITE setoilpressurelamp NOTIFY oilpressurelampChanged)
     Q_PROPERTY(int overtempalarm READ overtempalarm WRITE setovertempalarm NOTIFY overtempalarmChanged)
     Q_PROPERTY(int alternatorfail READ alternatorfail WRITE setalternatorfail NOTIFY alternatorfailChanged)
-
+    Q_PROPERTY(int AuxTemp1 READ AuxTemp1 WRITE setAuxTemp1 NOTIFY AuxTemp1Changed)
 
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
     public:
@@ -764,7 +764,7 @@ class DashBoard : public QObject
     void setoilpressurelamp(const int &oilpressurelamp);
     void setovertempalarm(const int &overtempalarm);
     void setalternatorfail(const int &alternatorfail);
-
+    void setAuxTemp1(const int &AuxTemp1);
 
 
     qreal Odo() const;
@@ -1141,6 +1141,7 @@ class DashBoard : public QObject
     int oilpressurelamp()const;
     int overtempalarm()const;
     int alternatorfail()const;
+    int AuxTemp1()const;
 
 
 signals:
@@ -1506,6 +1507,8 @@ signals:
     void oilpressurelampChanged(int oilpressurelamp);
     void overtempalarmChanged(int overtempalarm);
     void alternatorfailChanged(int alternatorfail);
+    void AuxTemp1Changed(int AuxTemp1);
+
 
 private:
     // Odometer
@@ -1884,6 +1887,8 @@ private:
     int m_oilpressurelamp;
     int m_overtempalarm;
     int m_alternatorfail;
+    int m_AuxTemp1;
+
 
 
 };

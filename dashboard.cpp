@@ -373,6 +373,8 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_oilpressurelamp()
     ,  m_overtempalarm()
     ,  m_alternatorfail()
+    ,  m_AuxTemp1()
+
 
 {
 
@@ -2977,7 +2979,13 @@ void DashBoard::setalternatorfail(const int &alternatorfail)
     emit alternatorfailChanged(alternatorfail);
 }
 
-
+void DashBoard::setAuxTemp1(const int &AuxTemp1)
+{
+    if (m_AuxTemp1 == AuxTemp1)
+        return;
+    m_AuxTemp1 = AuxTemp1;
+    emit AuxTemp1Changed(AuxTemp1);
+}
 
 
 // Odometer
@@ -3348,7 +3356,7 @@ int DashBoard::Visibledashes() const {return m_Visibledashes;}
 int DashBoard::oilpressurelamp() const {return m_oilpressurelamp;}
 int DashBoard::overtempalarm() const {return m_overtempalarm;}
 int DashBoard::alternatorfail() const {return m_alternatorfail;}
-
+int DashBoard::AuxTemp1() const {return m_AuxTemp1;}
 
 
 
