@@ -31,7 +31,10 @@ sudo pkill MaxxECUd
 sudo pkill Microtechd
 sudo pkill MotecM1d
 sudo pkill NISSAN370Z
+sudo pkill NISSAN350Z
 sudo pkill OBD
+sudo pkill MegasquirtCan
+
 
 echo "Removing previous Versions"
 
