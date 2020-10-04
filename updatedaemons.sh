@@ -34,7 +34,7 @@ sudo pkill NISSAN370Z
 sudo pkill NISSAN350Z
 sudo pkill OBD
 sudo pkill MegasquirtCan
-
+sudo pkill EMSCAN
 
 echo "Removing previous Versions"
 
