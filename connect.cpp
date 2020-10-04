@@ -819,6 +819,9 @@ void Connect::daemonstartup(const int &daemon)
     case 29:
         daemonstart = "./MegasquirtCan";
         break;
+    case 30:
+        daemonstart = "./EMSCAN";
+        break;
     }
     QString fileName = "/home/pi/startdaemon.sh";//This will be the correct path on pi
     //QString fileName = "startdaemon.sh";//for testing on windows
@@ -850,9 +853,12 @@ void Connect::canbitratesetup(const int &cansetting)
     switch (cansetting)
     {
     case 0:
-        canbitrate = "500000";
+        canbitrate = "250000";
         break;
     case 1:
+        canbitrate = "500000";
+        break;
+    case 2:
         canbitrate = "1000000";
         break;
 

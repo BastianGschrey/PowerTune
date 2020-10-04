@@ -1592,7 +1592,7 @@ Quick1.TabView {
                     width: daemons.width / 3
                     height: daemons.height /15
                     font.pixelSize: daemons.width / 55
-                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata","Adaptronic CAN","Motec M1","AEM V2","AUDI B7","BRZ FRS 86","ECU Masters","Audi B8","Emtron","Holley","MaxxECU","Barra FG MK1","Barra FG MK1 + OBD Polling","Barra BX ","Barra BX + OBD Polling","Barra FG2x","Barra FG2x + OBD Polling","EVO X Test","Blackbox M3","NISSAN 370Z Test","GM: LS2-LS7 CAN","NISSAN 350Z Test","Test Megasquirt CAN Simplified"]
+                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata","Adaptronic CAN","Motec M1","AEM V2","AUDI B7","BRZ FRS 86","ECU Masters","Audi B8","Emtron","Holley","MaxxECU","Barra FG MK1","Barra FG MK1 + OBD Polling","Barra BX ","Barra BX + OBD Polling","Barra FG2x","Barra FG2x + OBD Polling","EVO X Test","Blackbox M3","NISSAN 370Z Test","GM: LS2-LS7 CAN","NISSAN 350Z Test","Test Megasquirt CAN Simplified","Test EMTECH EMS CAN"]
                     delegate: ItemDelegate {
                         width: daemonselect.width
                         text: daemonselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -1611,7 +1611,7 @@ Quick1.TabView {
                     width: daemons.width / 3
                     height: daemons.height /15
                     font.pixelSize: daemons.width / 55
-                    model: [ "500 kbit/s","1 Mbit/s"]
+                    model: [ "250 kbit/s","500 kbit/s","1 Mbit/s"]
                     delegate: ItemDelegate {
                         width: canbitrateselect.width
                         text: canbitrateselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
