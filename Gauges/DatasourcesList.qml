@@ -35,7 +35,7 @@ ListModel {
         supportedECU: ""
         decimalpoints : "0" // 4 means its treated as a string
         decimalpoints2 : "0" // 4 means its treated as a string
-        maxvalue : "110"
+        maxvalue : "300"
         stepsize : "1"
         divisor : "1"
     }
