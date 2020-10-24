@@ -1731,7 +1731,7 @@ Quick1.TabView {
                                 //btnScanNetwork.enabled =false;
                         }
                 }
-                Text { text: "Wifi Country :"
+                Text { text: "WIFI Country :"
                     font.pixelSize: extrarect.width / 55 }
                 ComboBox {
                     id: wificountrycbx
@@ -1810,7 +1810,7 @@ Quick1.TabView {
 
                 Button {
                     id: applyWifiSettings
-                    text: "Apply Settings"
+                    text: "Connect WIFI"
                     width: extrarect.width / 5
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
