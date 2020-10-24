@@ -574,7 +574,7 @@ Quick1.TabView {
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                             Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                         }
-                        Text  { text: "V 1.93d" + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.93e" + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 /*
                         Slider {
                             id:brightness
@@ -780,6 +780,7 @@ Quick1.TabView {
                     if (warnsound.playing == false) warnsound.play();
                 }
             }
+
         }
     }
     Quick1.Tab {
@@ -1602,13 +1603,14 @@ Quick1.TabView {
                         highlighted: daemonselect.highlightedIndex == index
                         hoverEnabled: daemonselect.hoverEnabled
                     }
+                    onCurrentIndexChanged: autochangecanspeed.start();
                     //Component.onCompleted: tabView.currentIndex = 0;
                 }
                 Text { text: "CAN Bitrate :"
                     font.pixelSize: daemons.width / 55 }
                 ComboBox {
                     id: canbitrateselect
-                    width: daemons.width / 3
+                     width: daemons.width / 3
                     height: daemons.height /15
                     font.pixelSize: daemons.width / 55
                     model: [ "250 kbit/s","500 kbit/s","1 Mbit/s"]
@@ -1622,6 +1624,63 @@ Quick1.TabView {
                         hoverEnabled: canbitrateselect.hoverEnabled
                     }
                     //Component.onCompleted: tabView.currentIndex = 0;
+                }
+                Item {
+                    //Function to automatically change can speeds
+                    id: autochangecanspeed
+                    function start()
+                    {
+                        //if (daemonselect.textAt(daemonselect.currentIndex) == "OBD2"|| daemonselect.textAt(daemonselect.currentIndex) == "AUDI B7"|| daemonselect.textAt(daemonselect.currentIndex) == "BRZ FRS 86"|| daemonselect.textAt(daemonselect.currentIndex) =="Audi B8"|| daemonselect.textAt(daemonselect.currentIndex) == "Barra FG MK1"|| daemonselect.textAt(daemonselect.currentIndex) =="Barra FG MK1 + OBD Polling"||daemonselect.textAt(daemonselect.currentIndex) =="Barra BX "||daemonselect.textAt(daemonselect.currentIndex) =="Barra BX + OBD Polling"||daemonselect.textAt(daemonselect.currentIndex) =="Barra FG2x" || daemonselect.textAt(daemonselect.currentIndex) =="Barra FG2x + OBD Polling"||daemonselect.textAt(daemonselect.currentIndex)== "EVO X Test"||"NISSAN 370Z Test"||daemonselect.textAt(daemonselect.currentIndex) =="GM: LS2-LS7 CAN"||daemonselect.textAt(daemonselect.currentIndex) == "NISSAN 350Z Test")
+                        //if (daemonselect.textAt(daemonselect.currentIndex) == "OBD2")
+                        switch(daemonselect.textAt(daemonselect.currentIndex))
+                        {
+                        case "OBD2":
+                            canbitrateselect.currentIndex = 1 // 500 Kbs
+                            break;
+                        case "AUDI B7":
+                            canbitrateselect.currentIndex = 1 // 500 Kbs
+                            break;
+                        case "BRZ FRS 86":
+                            canbitrateselect.currentIndex = 1 // 500 Kbs
+                            break;
+                        case "Audi B8":
+                            canbitrateselect.currentIndex = 1 // 500 Kbs
+                            break;
+                        case "Barra FG MK1":
+                            canbitrateselect.currentIndex = 1 // 500 Kbs
+                            break;
+                        case "Barra FG MK1 + OBD Polling":
+                            canbitrateselect.currentIndex = 1 // 500 Kbs
+                            break;
+                        case "Barra BX ":
+                            canbitrateselect.currentIndex = 1 // 500 Kbs
+                            break;
+                        case "Barra BX + OBD Polling":
+                            canbitrateselect.currentIndex = 1 // 500 Kbs
+                            break;
+                        case "Barra FG2x":
+                            canbitrateselect.currentIndex = 1 // 500 Kbs
+                            break;
+                        case "Barra FG2x + OBD Polling":
+                            canbitrateselect.currentIndex = 1 // 500 Kbs
+                            break;
+                        case "EVO X Test":
+                            canbitrateselect.currentIndex = 1 // 500 Kbs
+                            break;
+                        case "NISSAN 370Z Test":
+                            canbitrateselect.currentIndex = 1 // 500 Kbs
+                            break;
+                        case "GM: LS2-LS7 CAN":
+                            canbitrateselect.currentIndex = 1 // 500 Kbs
+                            break;
+                        case "NISSAN 350Z Test":canbitrateselect.currentIndex = 1 // 500 Kbs
+                            break;
+                        default:
+                            console.log("1000 kbs")
+                        canbitrateselect.currentIndex = 2 // 1Mbit
+                        break;
+                        }
+                    }
                 }
                 Text { text: "Main Speed Source :"
                     font.pixelSize: daemons.width / 55 }
