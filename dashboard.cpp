@@ -212,6 +212,7 @@ DashBoard::DashBoard(QObject *parent)
     //   ,m_RecvData("----")
     //calculations
     , m_Gear(0)
+    , m_GearCalculation(0)
     , m_Power(0)
     , m_Torque(0)
     , m_AccelTimer(0)
@@ -1660,8 +1661,16 @@ void DashBoard::setGear(const qreal &Gear)
     if (m_Gear == Gear)
         return;
     m_Gear = Gear;
-    emit gearChanged(Gear);
+    emit GearChanged(Gear);
 }
+void DashBoard::setGearCalculation(const qreal &GearCalculation)
+{
+    if (m_GearCalculation == GearCalculation)
+        return;
+    m_GearCalculation = GearCalculation;
+    emit GearCalculationChanged(GearCalculation);
+}
+
 void DashBoard::setPower(const qreal &Power)
 {
     if (m_Power == Power)
@@ -3174,6 +3183,7 @@ qreal DashBoard::ambipress() const { return m_ambipress; }
 
 //calculations
 qreal DashBoard::Gear() const { return m_Gear; }
+qreal DashBoard::GearCalculation() const { return m_GearCalculation; }
 qreal DashBoard::Power() const { return m_Power; }
 qreal DashBoard::Torque() const { return m_Torque; }
 qreal DashBoard::AccelTimer() const { return m_AccelTimer; }

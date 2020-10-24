@@ -1158,6 +1158,16 @@ ListModel {
         divisor : "1"
     }
     ListElement {
+        sourcename:"GearCalculation"
+        defaultsymbol: ""
+        titlename:"Gear Caluclation"
+        decimalpoints : "0"
+        maxvalue : "6"
+        stepsize : "1"
+        divisor : "1"
+    }
+
+    ListElement {
         sourcename:"gearswitch"
         defaultsymbol: ""
         titlename:"Gear sw."

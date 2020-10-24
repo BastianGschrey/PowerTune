@@ -187,7 +187,9 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal ambipress READ ambipress WRITE setambipress NOTIFY ambipressChanged)
 
     //Calculations
-    Q_PROPERTY(qreal Gear READ Gear WRITE setGear NOTIFY gearChanged)
+    Q_PROPERTY(qreal Gear READ Gear WRITE setGear NOTIFY GearChanged)
+    Q_PROPERTY(qreal GearCalculation READ GearCalculation WRITE setGearCalculation NOTIFY GearCalculationChanged)
+
     Q_PROPERTY(qreal Power READ Power WRITE setPower NOTIFY powerChanged)
     Q_PROPERTY(qreal Torque READ Torque WRITE setTorque NOTIFY torqueChanged)
     Q_PROPERTY(qreal AccelTimer READ AccelTimer WRITE setAccelTimer NOTIFY accelTimerChanged)
@@ -577,6 +579,7 @@ class DashBoard : public QObject
 
     // calculations
     void setGear(const qreal &Gear);
+    void setGearCalculation(const qreal &GearCalculation);
     void setPower(const qreal &Power);
     void setTorque(const qreal &Torque);
     void setAccelTimer(const qreal &AccelTimer);
@@ -955,6 +958,7 @@ class DashBoard : public QObject
 
     //calculations
     qreal Gear() const;
+    qreal GearCalculation() const;
     qreal Power() const;
     qreal Torque() const;
     qreal AccelTimer() const;
@@ -1327,7 +1331,8 @@ signals:
     void ambipressChanged(qreal ambipress);
 
     // calculations
-    void gearChanged(qreal Gear);
+    void GearChanged(qreal Gear);
+    void GearCalculationChanged(qreal GearCalculation);
     void powerChanged(qreal Power);
     void torqueChanged(qreal Torque);
     void accelTimerChanged(qreal AccelTimer);
@@ -1705,6 +1710,7 @@ private:
     //calculations
 
     qreal m_Gear;
+    qreal m_GearCalculation;
     qreal m_Power;
     qreal m_Torque;
     qreal m_AccelTimer;

@@ -30,6 +30,7 @@ public slots:
 private:
     DashBoard *m_dashboard;
     QTimer      m_updatetimer;
+    QTimer      m_dynotimer;
 
 };
 
