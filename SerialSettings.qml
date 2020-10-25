@@ -574,7 +574,7 @@ Quick1.TabView {
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                             Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                         }
-                        Text  { text: "V 1.93e" + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.93f" + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 /*
                         Slider {
                             id:brightness
@@ -959,7 +959,7 @@ Quick1.TabView {
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
-                        model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
+                        model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle","Drag Timer Beta"]
                         visible: Dashboard.Visibledashes >3
                         onCurrentIndexChanged:{if (dash4.visible == true){select4.selDash4()} }
                         onVisibleChanged: {if (dash4.visible == true){select4.selDash4()} }
@@ -1034,6 +1034,7 @@ Quick1.TabView {
                         if (dash1.currentIndex == "8") {firstPageLoader.source = "qrc:/Gauges/Dyno.qml"};
                         if (dash1.currentIndex == "9"){firstPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                         if (dash1.currentIndex == "10"){firstPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
+                        if (dash1.currentIndex == "11") {firstPageLoader.source = "qrc:/Gauges/SpeedMeasurements.qml"};
                         //if (dash1.currentIndex == "11"){view.addItem(firstPageLoader)};
                         console.log("selecting DASH 1")
                     }
@@ -1054,6 +1055,7 @@ Quick1.TabView {
                         if (dash2.currentIndex == "8") {secondPageLoader.source = "qrc:/Gauges/Dyno.qml"};
                         if (dash2.currentIndex == "9"){secondPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                         if (dash2.currentIndex == "10"){secondPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
+                        if (dash2.currentIndex == "11") {secondPageLoader.source = "qrc:/Gauges/SpeedMeasurements.qml"};
                         //if (dash2.currentIndex == "11"){view.takeItem(1)};
                         console.log("selecting DASH 2")
                     }
@@ -1073,6 +1075,7 @@ Quick1.TabView {
                         if (dash3.currentIndex == "8") {thirdPageLoader.source = "qrc:/Gauges/Dyno.qml"};
                         if (dash3.currentIndex == "9"){thirdPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                         if (dash3.currentIndex == "10"){thirdPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
+                        if (dash3.currentIndex == "11") {thirdPageLoader.source = "qrc:/Gauges/SpeedMeasurements.qml"};
                         console.log("selecting DASH 3")
                     }
                 }
@@ -1091,6 +1094,7 @@ Quick1.TabView {
                         if (dash4.currentIndex == "8") {fourthPageLoader.source = "qrc:/Gauges/Dyno.qml"};
                         if (dash4.currentIndex == "9") {fourthPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                         if (dash4.currentIndex == "10") {fourthPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
+                        if (dash4.currentIndex == "11") {fourthPageLoader.source = "qrc:/Gauges/SpeedMeasurements.qml"};
                         console.log("selecting DASH 4")
                     }
                     Component.onCompleted: tabView.currentIndex = 2 // opens the 3rd tab
@@ -1914,6 +1918,17 @@ Quick1.TabView {
                     //Arduino.openConnection("COM11");
                     Connect.restartDaemon();
                     //develtest.enabled = false;
+                    }
+                }
+                Button {
+                    id: develtest2
+                    text: "Development test"
+                    width: extrarect.width / 5
+                    height: extrarect.height /15
+                    font.pixelSize: extrarect.width / 55
+
+                    onClicked: {
+                    Calculations.startdragtimer();
                     }
                 }
 

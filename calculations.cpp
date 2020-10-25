@@ -15,7 +15,27 @@ qreal Torque;
 qreal odometer;
 qreal tripmeter;
 qreal traveleddistance;
+
 QTime startTime = QTime::currentTime();
+QTime reactiontimerdiff = QTime::currentTime();
+qreal dragdistance;
+qreal dragdistancetotal;
+qreal totaldragtime;
+qreal zerotohundredtime;
+qreal twohundredtime;
+qreal threehundredtime;
+qreal reactiontime;
+
+int zerotohundredset = 0;
+int hundredtotwohundredset = 0;
+int twohundredtothreehundredset = 0;
+int sixtyfootset = 0;
+int threhundredthirtyfootset = 0;
+int eightmileset = 0;
+int quartermileset = 0;
+int thousandfootset = 0;
+int startdragcalculation = 0;
+
 int weight; //just set this to 1300 for testing
 int gearratio;
 int odoisset;
@@ -60,8 +80,43 @@ void calculations::resettrip()
     m_dashboard->setTrip(0);
 
 }
+void calculations::startdragtimer()
+{
 
+    zerotohundredtime= 0;
+    twohundredtime = 0;
+    threehundredtime = 0;
 
+    dragdistance = 0;
+    totaldragtime = 0;
+    dragdistancetotal = 0;
+    zerotohundredset = 0;
+    hundredtotwohundredset = 0;
+    twohundredtothreehundredset = 0;
+    sixtyfootset = 0,
+    threhundredthirtyfootset = 0;
+    eightmileset = 0;
+    quartermileset = 0;
+    thousandfootset = 0;
+    startdragcalculation = 0;
+    startdragcalculation = 1;
+}
+void calculations::startreactiontimer()
+{
+    reactiontime = 0;
+    m_reactiontimer.start();
+    reactiontimerdiff.restart();
+}
+void calculations::stopreactiontimer()
+{
+    m_reactiontimer.stop();
+    reactiontime = (reactiontimerdiff.msecsTo(QTime::currentTime())); // reactiontime
+    m_dashboard->setreactiontime((reactiontime / 1000) - 0.4) ;
+}
+
+// 1 foot = 0,00018939 miles =
+// 60 Feet = 0,0113634 miles = 0,01828762 km
+// 330 Feet  = 0,0624987 miles = 0,10058191 km
 void calculations::calculate()
 {
 
@@ -71,6 +126,116 @@ void calculations::calculate()
     //starting the timer again with 25 ms
     m_updatetimer.start(25);
 
+// Dragracing Calculations
+if (m_dashboard->speedunits() == "metric" && startdragcalculation == 1)
+    {
+    dragdistance = ((startTime.msecsTo(QTime::currentTime())) * ((m_dashboard->speed()) / 3600000)); // Odometer
+    totaldragtime += (startTime.msecsTo(QTime::currentTime()));
+    dragdistancetotal += dragdistance;
+    if (dragdistancetotal >= 0.01828762 && sixtyfootset == 0)
+       {
+        m_dashboard->setsixtyfoottime(totaldragtime / 1000);
+        m_dashboard->setsixtyfootspeed(m_dashboard->speed());
+        sixtyfootset = 1;
+       }
+    if (dragdistancetotal >= 0.10058191 &&  threhundredthirtyfootset == 0)
+       {
+        m_dashboard->setthreehundredthirtyfoottime(totaldragtime / 1000);
+        m_dashboard->setthreehundredthirtyfootspeed(m_dashboard->speed());
+        threhundredthirtyfootset = 1;
+       }
+    if (dragdistancetotal >= 0.201168 && eightmileset == 0)
+       {
+        m_dashboard->seteightmiletime(totaldragtime / 1000);
+        m_dashboard->seteightmilespeed(m_dashboard->speed());
+        eightmileset = 1;
+       }
+    if (dragdistancetotal >= 0.402336 && quartermileset == 0)
+       {
+        m_dashboard->setquartermiletime(totaldragtime / 1000);
+        m_dashboard->setquartermilespeed(m_dashboard->speed());
+        quartermileset = 1;
+       }
+    if (dragdistancetotal >= 0.3048 &&  thousandfootset == 0)
+       {
+        m_dashboard->setthousandfoottime(totaldragtime / 1000);
+        m_dashboard->setthousandfootspeed(m_dashboard->speed());
+        thousandfootset = 1;
+       }
+    if (m_dashboard->speed() >= 100 && zerotohundredset == 0)
+        {
+        zerotohundredtime = totaldragtime;
+        m_dashboard->setzerotohundredt(totaldragtime / 1000);
+        zerotohundredset = 1;
+        }
+    if (m_dashboard->speed() >= 200 && hundredtotwohundredset == 0)
+        {
+        twohundredtime = totaldragtime - zerotohundredtime;
+        m_dashboard->sethundredtotwohundredtime(twohundredtime / 1000);
+        hundredtotwohundredset = 1;
+        }
+    if (m_dashboard->speed() >= 300 && twohundredtothreehundredset == 0)
+        {
+        threehundredtime = totaldragtime - zerotohundredtime - twohundredtime;
+        m_dashboard->settwohundredtothreehundredtime(threehundredtime / 1000);
+        twohundredtothreehundredset = 1;
+        }
+}
+if (m_dashboard->speedunits()  == "imperial"  && startdragcalculation == 1)
+{    dragdistance = ((startTime.msecsTo(QTime::currentTime())) * ((m_dashboard->speed()) / 3600000)); // Odometer
+     totaldragtime += (startTime.msecsTo(QTime::currentTime()));
+     dragdistancetotal += dragdistance;
+     if (dragdistancetotal >= 0.0113634 && sixtyfootset == 0)
+        {
+         m_dashboard->setsixtyfoottime(totaldragtime / 1000);
+         m_dashboard->setsixtyfootspeed(m_dashboard->speed());
+         sixtyfootset = 1;
+        }
+     if (dragdistancetotal >= 0.0624987 &&  threhundredthirtyfootset == 0)
+        {
+         m_dashboard->setthreehundredthirtyfoottime(totaldragtime / 1000);
+         m_dashboard->setthreehundredthirtyfootspeed(m_dashboard->speed());
+         threhundredthirtyfootset = 1;
+        }
+     if (dragdistancetotal >= 0.125 && eightmileset == 0)
+        {
+         m_dashboard->seteightmiletime(totaldragtime / 1000);
+         m_dashboard->seteightmilespeed(m_dashboard->speed());
+         eightmileset = 1;
+        }
+     if (dragdistancetotal >= 0.25 && quartermileset == 0)
+        {
+         m_dashboard->setquartermiletime(totaldragtime / 1000);
+         m_dashboard->setquartermilespeed(m_dashboard->speed());
+         quartermileset = 1;
+        }
+     if (dragdistancetotal >= 0.18939394 &&  thousandfootset == 0)
+        {
+         m_dashboard->setthousandfoottime(totaldragtime / 1000);
+         m_dashboard->setthousandfootspeed(m_dashboard->speed());
+         thousandfootset = 1;
+        }
+     if (m_dashboard->speed() >= 60 && zerotohundredset == 0)
+         {
+         zerotohundredtime = totaldragtime;
+         m_dashboard->setzerotohundredt(totaldragtime / 1000);
+         zerotohundredset = 1;
+         }
+     if (m_dashboard->speed() >= 120 && hundredtotwohundredset == 0)
+         {
+         twohundredtime = totaldragtime - zerotohundredtime;
+         m_dashboard->sethundredtotwohundredtime(twohundredtime / 1000);
+         hundredtotwohundredset = 1;
+         }
+     if (m_dashboard->speed() >= 180 && twohundredtothreehundredset == 0)
+         {
+         threehundredtime = totaldragtime - zerotohundredtime - twohundredtime;
+         m_dashboard->settwohundredtothreehundredtime(threehundredtime / 1000);
+         twohundredtothreehundredset = 1;
+         }
+}
+
+// Dragracing Calculations END
    if (m_dashboard->gearcalcactivation() == 1)
      {
      //Gear Calculation borrowed from Raspexi big thanks to Jacob Donley

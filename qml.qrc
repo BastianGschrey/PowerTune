@@ -77,5 +77,6 @@
         <file>Gauges/createStatePicture.js</file>
         <file>graphics/selectStateImage.png</file>
         <file>graphics/brightness.png</file>
+        <file>Gauges/SpeedMeasurements.qml</file>
     </qresource>
 </RCC>

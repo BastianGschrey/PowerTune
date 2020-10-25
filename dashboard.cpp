@@ -375,7 +375,22 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_overtempalarm()
     ,  m_alternatorfail()
     ,  m_AuxTemp1()
+//Quartermiletimer
 
+    ,  m_sixtyfoottime()
+    ,  m_sixtyfootspeed()
+    ,  m_threehundredthirtyfoottime()
+    ,  m_threehundredthirtyfootspeed()
+    ,  m_eightmiletime()
+    ,  m_eightmilespeed()
+    ,  m_quartermiletime()
+    ,  m_quartermilespeed()
+    ,  m_thousandfoottime()
+    ,  m_thousandfootspeed()
+    ,  m_zerotohundredt()
+    ,  m_hundredtotwohundredtime()
+    ,  m_twohundredtothreehundredtime()
+    ,  m_reactiontime()
 
 {
 
@@ -2995,8 +3010,106 @@ void DashBoard::setAuxTemp1(const int &AuxTemp1)
     m_AuxTemp1 = AuxTemp1;
     emit AuxTemp1Changed(AuxTemp1);
 }
+void DashBoard::setsixtyfoottime(const qreal &sixtyfoottime)
+{
+    if (m_sixtyfoottime == sixtyfoottime)
+        return;
+    m_sixtyfoottime = sixtyfoottime;
+    emit sixtyfoottimeChanged(sixtyfoottime);
+}
+void DashBoard::setsixtyfootspeed(const qreal &sixtyfootspeed)
+{
+    if (m_sixtyfootspeed == sixtyfootspeed)
+        return;
+    m_sixtyfootspeed = sixtyfootspeed;
+    emit sixtyfootspeedChanged(sixtyfootspeed);
+}
+void DashBoard::setthreehundredthirtyfoottime(const qreal &threehundredthirtyfoottime)
+{
+    if (m_threehundredthirtyfoottime == threehundredthirtyfoottime)
+        return;
+    m_threehundredthirtyfoottime = threehundredthirtyfoottime;
+    emit threehundredthirtyfoottimeChanged(threehundredthirtyfoottime);
+}
+void DashBoard::setthreehundredthirtyfootspeed(const qreal &threehundredthirtyfootspeed)
+{
+    if (m_threehundredthirtyfootspeed == threehundredthirtyfootspeed)
+        return;
+    m_threehundredthirtyfootspeed = threehundredthirtyfootspeed;
+    emit threehundredthirtyfootspeedChanged(threehundredthirtyfootspeed);
+}
+void DashBoard::seteightmiletime(const qreal &eightmiletime)
+{
+    if (m_eightmiletime == eightmiletime)
+        return;
+    m_eightmiletime = eightmiletime;
+    emit eightmiletimeChanged(eightmiletime);
+}
+void DashBoard::seteightmilespeed(const qreal &eightmilespeed)
+{
+    if (m_eightmilespeed == eightmilespeed)
+        return;
+    m_eightmilespeed = eightmilespeed;
+    emit eightmilespeedChanged(eightmilespeed);
+}
+void DashBoard::setquartermiletime(const qreal &quartermiletime)
+{
+    if (m_quartermiletime == quartermiletime)
+        return;
+    m_quartermiletime = quartermiletime;
+    emit quartermiletimeChanged(quartermiletime);
+}
+void DashBoard::setquartermilespeed(const qreal &quartermilespeed)
+{
+    if (m_quartermilespeed == quartermilespeed)
+        return;
+    m_quartermilespeed = quartermilespeed;
+    emit quartermilespeedChanged(quartermilespeed);
+}
+void DashBoard::setthousandfoottime(const qreal &thousandfoottime)
+{
+    if (m_thousandfoottime == thousandfoottime)
+        return;
+    m_thousandfoottime = thousandfoottime;
+    emit thousandfoottimeChanged(thousandfoottime);
+}
+void DashBoard::setthousandfootspeed(const qreal &thousandfootspeed)
+{
+    if (m_thousandfootspeed == thousandfootspeed)
+        return;
+    m_thousandfootspeed = thousandfootspeed;
+    emit thousandfootspeedChanged(thousandfootspeed);
+}
+void DashBoard::setzerotohundredt(const qreal &zerotohundredt)
+{
+    if (m_zerotohundredt == zerotohundredt)
+        return;
+    m_zerotohundredt = zerotohundredt;
+    emit zerotohundredtChanged(zerotohundredt);
+}
+void DashBoard::sethundredtotwohundredtime(const qreal &hundredtotwohundredtime)
+{
+    if (m_hundredtotwohundredtime == hundredtotwohundredtime)
+        return;
+    m_hundredtotwohundredtime = hundredtotwohundredtime;
+    emit hundredtotwohundredtimeChanged(hundredtotwohundredtime);
+}
 
+void DashBoard::settwohundredtothreehundredtime(const qreal &twohundredtothreehundredtime)
+{
+    if (m_twohundredtothreehundredtime == twohundredtothreehundredtime)
+        return;
+    m_twohundredtothreehundredtime = twohundredtothreehundredtime;
+    emit twohundredtothreehundredtimeChanged(twohundredtothreehundredtime);
+}
 
+void DashBoard::setreactiontime(const qreal &reactiontime)
+{
+    if (m_reactiontime == reactiontime)
+        return;
+    m_reactiontime = reactiontime;
+    emit reactiontimeChanged(reactiontime);
+}
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
 
@@ -3368,6 +3481,20 @@ int DashBoard::overtempalarm() const {return m_overtempalarm;}
 int DashBoard::alternatorfail() const {return m_alternatorfail;}
 int DashBoard::AuxTemp1() const {return m_AuxTemp1;}
 
+qreal DashBoard::sixtyfoottime() const {return m_sixtyfoottime;}
+qreal DashBoard::sixtyfootspeed() const {return m_sixtyfootspeed;}
+qreal DashBoard::threehundredthirtyfoottime() const {return m_threehundredthirtyfoottime;}
+qreal DashBoard::threehundredthirtyfootspeed() const {return m_threehundredthirtyfootspeed;}
+qreal DashBoard::eightmiletime() const {return m_eightmiletime;}
+qreal DashBoard::eightmilespeed() const {return m_eightmilespeed;}
+qreal DashBoard::quartermiletime() const {return m_quartermiletime;}
+qreal DashBoard::quartermilespeed() const {return m_quartermilespeed;}
+qreal DashBoard::thousandfoottime() const {return m_thousandfoottime;}
+qreal DashBoard::thousandfootspeed() const {return m_thousandfootspeed;}
+qreal DashBoard::zerotohundredt() const {return m_zerotohundredt;}
+qreal DashBoard::hundredtotwohundredtime() const {return m_hundredtotwohundredtime;}
+qreal DashBoard::twohundredtothreehundredtime() const {return m_twohundredtothreehundredtime;}
+qreal DashBoard::reactiontime() const {return m_reactiontime;}
 
 
 // Sensor Strings

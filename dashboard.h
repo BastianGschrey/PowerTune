@@ -383,6 +383,23 @@ class DashBoard : public QObject
     Q_PROPERTY(int alternatorfail READ alternatorfail WRITE setalternatorfail NOTIFY alternatorfailChanged)
     Q_PROPERTY(int AuxTemp1 READ AuxTemp1 WRITE setAuxTemp1 NOTIFY AuxTemp1Changed)
 
+    Q_PROPERTY(qreal SteeringWheelAngle READ SteeringWheelAngle WRITE setSteeringWheelAngle NOTIFY SteeringWheelAngleChanged)
+
+    Q_PROPERTY(qreal sixtyfoottime READ sixtyfoottime WRITE setsixtyfoottime NOTIFY sixtyfoottimeChanged)
+    Q_PROPERTY(qreal sixtyfootspeed READ sixtyfootspeed WRITE setsixtyfootspeed NOTIFY sixtyfootspeedChanged)
+    Q_PROPERTY(qreal threehundredthirtyfoottime READ threehundredthirtyfoottime WRITE setthreehundredthirtyfoottime NOTIFY threehundredthirtyfoottimeChanged)
+    Q_PROPERTY(qreal threehundredthirtyfootspeed READ threehundredthirtyfootspeed WRITE setthreehundredthirtyfootspeed NOTIFY threehundredthirtyfootspeedChanged)
+    Q_PROPERTY(qreal eightmiletime READ eightmiletime WRITE seteightmiletime NOTIFY eightmiletimeChanged)
+    Q_PROPERTY(qreal eightmilespeed READ eightmilespeed WRITE seteightmilespeed NOTIFY eightmilespeedChanged)
+    Q_PROPERTY(qreal quartermiletime READ quartermiletime WRITE setquartermiletime NOTIFY quartermiletimeChanged)
+    Q_PROPERTY(qreal quartermilespeed READ quartermilespeed WRITE setquartermilespeed NOTIFY quartermilespeedChanged)
+    Q_PROPERTY(qreal thousandfoottime READ thousandfoottime WRITE setthousandfoottime NOTIFY thousandfoottimeChanged)
+    Q_PROPERTY(qreal thousandfootspeed READ thousandfootspeed WRITE setthousandfootspeed NOTIFY thousandfootspeedChanged)
+    Q_PROPERTY(qreal zerotohundredt READ zerotohundredt WRITE setzerotohundredt NOTIFY zerotohundredtChanged)
+    Q_PROPERTY(qreal hundredtotwohundredtime READ hundredtotwohundredtime WRITE sethundredtotwohundredtime NOTIFY hundredtotwohundredtimeChanged)
+    Q_PROPERTY(qreal twohundredtothreehundredtime READ twohundredtothreehundredtime WRITE settwohundredtothreehundredtime NOTIFY twohundredtothreehundredtimeChanged)
+
+    Q_PROPERTY(qreal reactiontime READ reactiontime WRITE setreactiontime NOTIFY reactiontimeChanged)
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
     public:
     DashBoard(QObject *parent = 0);
@@ -769,6 +786,20 @@ class DashBoard : public QObject
     void setalternatorfail(const int &alternatorfail);
     void setAuxTemp1(const int &AuxTemp1);
 
+    void setsixtyfoottime(const qreal &sixtyfoottime);
+    void setsixtyfootspeed(const qreal &sixtyfootspeed);
+    void setthreehundredthirtyfoottime(const qreal &threehundredthirtyfoottime);
+    void setthreehundredthirtyfootspeed(const qreal &threehundredthirtyfootspeed);
+    void seteightmiletime(const qreal &eightmiletime);
+    void seteightmilespeed(const qreal &eightmilespeed);
+    void setquartermiletime(const qreal &quartermiletime);
+    void setquartermilespeed(const qreal &quartermilespeed);
+    void setthousandfoottime(const qreal &thousandfoottime);
+    void setthousandfootspeed(const qreal &thousandfootspeed);
+    void setzerotohundredt(const qreal &zerotohundredt);
+    void sethundredtotwohundredtime(const qreal &hundredtotwohundredtime);
+    void settwohundredtothreehundredtime(const qreal &twohundredtothreehundredtime);
+    void setreactiontime(const qreal &reactiontime);
 
     qreal Odo() const;
 
@@ -1147,6 +1178,21 @@ class DashBoard : public QObject
     int alternatorfail()const;
     int AuxTemp1()const;
 
+    qreal sixtyfoottime()const;
+    qreal sixtyfootspeed()const;
+    qreal threehundredthirtyfoottime()const;
+    qreal threehundredthirtyfootspeed()const;
+    qreal eightmiletime()const;
+    qreal eightmilespeed()const;
+    qreal quartermiletime()const;
+    qreal quartermilespeed()const;
+    qreal thousandfoottime()const;
+    qreal thousandfootspeed()const;
+    qreal zerotohundredt()const;
+    qreal hundredtotwohundredtime()const;
+    qreal twohundredtothreehundredtime()const;
+    qreal reactiontime()const;
+
 
 signals:
 
@@ -1513,6 +1559,21 @@ signals:
     void overtempalarmChanged(int overtempalarm);
     void alternatorfailChanged(int alternatorfail);
     void AuxTemp1Changed(int AuxTemp1);
+
+    void sixtyfoottimeChanged(qreal sixtyfoottime);
+    void sixtyfootspeedChanged(qreal sixtyfootspeed);
+    void threehundredthirtyfoottimeChanged(qreal threehundredthirtyfoottime);
+    void threehundredthirtyfootspeedChanged(qreal threehundredthirtyfootspeed);
+    void eightmiletimeChanged(qreal eightmiletime);
+    void eightmilespeedChanged(qreal eightmilespeed);
+    void quartermiletimeChanged(qreal quartermiletime);
+    void quartermilespeedChanged(qreal quartermilespeed);
+    void thousandfoottimeChanged(qreal thousandfoottime);
+    void thousandfootspeedChanged(qreal thousandfootspeed);
+    void zerotohundredtChanged(qreal zerotohundredt);
+    void hundredtotwohundredtimeChanged(qreal hundredtotwohundredtime);
+    void twohundredtothreehundredtimeChanged(qreal twohundredtothreehundredtime);
+    void reactiontimeChanged(qreal reactiontime);
 
 
 private:
@@ -1894,6 +1955,22 @@ private:
     int m_overtempalarm;
     int m_alternatorfail;
     int m_AuxTemp1;
+
+
+    qreal m_sixtyfoottime;
+    qreal m_sixtyfootspeed;
+    qreal m_threehundredthirtyfoottime;
+    qreal m_threehundredthirtyfootspeed;
+    qreal m_eightmiletime;
+    qreal m_eightmilespeed;
+    qreal m_quartermiletime;
+    qreal m_quartermilespeed;
+    qreal m_thousandfoottime;
+    qreal m_thousandfootspeed;
+    qreal m_zerotohundredt;
+    qreal m_hundredtotwohundredtime;
+    qreal m_twohundredtothreehundredtime;
+    qreal m_reactiontime;
 
 
 
