@@ -865,7 +865,7 @@ Quick1.TabView {
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
-                        model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
+                        model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle","Drag Timer Beta"]
                         //currentIndex: 1
                         onCurrentIndexChanged:{select1.selDash1() }
                         //Component.onCompleted: {select1.selDash1() }
@@ -896,7 +896,7 @@ Quick1.TabView {
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
-                        model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
+                        model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle","Drag Timer Beta"]
                         //currentIndex: 1
                         //onCurrentIndexChanged:{select2.selDash2() }
                         visible: Dashboard.Visibledashes >1
@@ -928,7 +928,7 @@ Quick1.TabView {
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
-                        model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle"]
+                        model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle","Drag Timer Beta"]
                         visible: Dashboard.Visibledashes >2
                         onCurrentIndexChanged:{if (dash3.visible == true){select3.selDash3()} }
                         onVisibleChanged: {if (dash3.visible == true){select3.selDash3()} }
@@ -1035,8 +1035,7 @@ Quick1.TabView {
                         if (dash1.currentIndex == "9"){firstPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                         if (dash1.currentIndex == "10"){firstPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
                         if (dash1.currentIndex == "11") {firstPageLoader.source = "qrc:/Gauges/SpeedMeasurements.qml"};
-                        //if (dash1.currentIndex == "11"){view.addItem(firstPageLoader)};
-                        console.log("selecting DASH 1")
+
                     }
                 }
                 Item {
@@ -1056,8 +1055,8 @@ Quick1.TabView {
                         if (dash2.currentIndex == "9"){secondPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                         if (dash2.currentIndex == "10"){secondPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
                         if (dash2.currentIndex == "11") {secondPageLoader.source = "qrc:/Gauges/SpeedMeasurements.qml"};
-                        //if (dash2.currentIndex == "11"){view.takeItem(1)};
-                        console.log("selecting DASH 2")
+
+
                     }
                 }
                 Item {
@@ -1076,7 +1075,8 @@ Quick1.TabView {
                         if (dash3.currentIndex == "9"){thirdPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                         if (dash3.currentIndex == "10"){thirdPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
                         if (dash3.currentIndex == "11") {thirdPageLoader.source = "qrc:/Gauges/SpeedMeasurements.qml"};
-                        console.log("selecting DASH 3")
+
+
                     }
                 }
                 Item {
@@ -1095,7 +1095,7 @@ Quick1.TabView {
                         if (dash4.currentIndex == "9") {fourthPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                         if (dash4.currentIndex == "10") {fourthPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
                         if (dash4.currentIndex == "11") {fourthPageLoader.source = "qrc:/Gauges/SpeedMeasurements.qml"};
-                        console.log("selecting DASH 4")
+
                     }
                     Component.onCompleted: tabView.currentIndex = 2 // opens the 3rd tab
                 }
@@ -1597,7 +1597,7 @@ Quick1.TabView {
                     width: daemons.width / 3
                     height: daemons.height /15
                     font.pixelSize: daemons.width / 55
-                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata","Adaptronic CAN","Motec M1","AEM V2","AUDI B7","BRZ FRS 86","ECU Masters","Audi B8","Emtron","Holley","MaxxECU","Barra FG MK1","Barra FG MK1 + OBD Polling","Barra BX ","Barra BX + OBD Polling","Barra FG2x","Barra FG2x + OBD Polling","EVO X Test","Blackbox M3","NISSAN 370Z Test","GM: LS2-LS7 CAN","NISSAN 350Z Test","Test Megasquirt CAN Simplified","Test EMTECH EMS CAN"]
+                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata","Adaptronic CAN","Motec M1","AEM V2","AUDI B7","BRZ FRS 86","ECU Masters","Audi B8","Emtron","Holley","MaxxECU","Barra FG MK1","Barra FG MK1 + OBD Polling","Barra BX ","Barra BX + OBD Polling","Barra FG2x","Barra FG2x + OBD Polling","EVO X Test","Blackbox M3","NISSAN 370Z Test","GM: LS2-LS7 CAN","NISSAN 350Z Test","Test Megasquirt CAN Simplified","Test EMTECH EMS CAN","Subaru Test"]
                     delegate: ItemDelegate {
                         width: daemonselect.width
                         text: daemonselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -1679,8 +1679,9 @@ Quick1.TabView {
                             break;
                         case "NISSAN 350Z Test":canbitrateselect.currentIndex = 1 // 500 Kbs
                             break;
+                        case "Subaru Test":canbitrateselect.currentIndex = 1 // 500 Kbs
+                            break;
                         default:
-                            console.log("1000 kbs")
                         canbitrateselect.currentIndex = 2 // 1Mbit
                         break;
                         }

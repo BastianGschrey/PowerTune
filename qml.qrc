@@ -78,5 +78,6 @@
         <file>graphics/selectStateImage.png</file>
         <file>graphics/brightness.png</file>
         <file>Gauges/SpeedMeasurements.qml</file>
+        <file>graphics/green_Light.png</file>
     </qresource>
 </RCC>

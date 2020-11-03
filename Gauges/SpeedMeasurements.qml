@@ -10,7 +10,13 @@ Rectangle {
     color: "black"
     Component.onCompleted: units.start()
     //////////////////////////////
-       //STAGING Lights
+    Loader {
+        id: rpmbarloader
+        anchors.fill: measurements
+        source: "qrc:/Gauges/RPMBarStyle1.qml"
+    }
+
+    //STAGING Lights
     Connections{
         target: Dashboard
         onSpeedChanged :{speedchange.start()}
@@ -19,8 +25,16 @@ Rectangle {
         target: Dashboard
         onSpeedunitsChanged :{units.start()}
     }
+
+    Connections{
+        target: Dashboard
+        onReactiontimeChanged :{reactiontimecheck.start()}
+    }
+
+
     property int measurementstarted : 0;
     property int startmeasurement : 0;
+    property var sliptextcolor: "white";
     //Function
     Item {
         id: speedchange
@@ -28,12 +42,28 @@ Rectangle {
         {
         if (Dashboard.speed > 0 && startmeasurement === 1 &&measurementstarted === 0)
        {
-            measurementstarted = 1;
+        measurementstarted = 1;
         Calculations.stopreactiontimer();
         Calculations.startdragtimer();
         }
         }
     }
+
+    Item {
+        id: reactiontimecheck
+        function start()
+        {
+           // console.log("Reactiontime changed")
+        if (Dashboard.reactiontime < 0 )
+       {
+            //reactiotimertimetext.color = "red"
+            //reactiotimertext.color = "red"
+            redled.source = "qrc:/graphics/ledred.png"
+        }
+
+        }
+    }
+
     Item {
         id: units
         function start()
@@ -58,7 +88,7 @@ Row{
     id: staginglight
     anchors.right: parent.right
     anchors.rightMargin: parent.width /15
-    anchors.top: parent.top
+    anchors.bottom: staginglights2.top
     anchors.topMargin: parent.height / 10
     spacing: 20
     Image {
@@ -75,11 +105,12 @@ Row{
     }
     }
             Column {
+                id: staginglights2
                 anchors.right: parent.right
                 anchors.rightMargin: parent.width /15
-                anchors.top: staginglight.bottom
-                anchors.topMargin: parent.width /50
-                spacing: 20
+                anchors.bottom: measurements.bottom
+                anchors.bottomMargin: parent.width /150
+                spacing: parent.width /200
                 Image {
                     id : orangeled1
                     height: 35
@@ -116,306 +147,188 @@ Row{
 
 
     Grid {
-        anchors.top :parent.top
+        id:timegrid
+        anchors.bottom: measurements.bottom
         anchors.topMargin: parent.height / 20
-        spacing: parent.width /150
-        rows: 20
-        columns: 4
-        //spacing: measurements.width /150
-        // [0]
-        Button {
-            id: trafficButton
-            text: "Start Staging Tree"
-            width: measurements.width / 5
-            height: measurements.height /10
-            font.pixelSize: measurements.width / 55
-            onClicked: {
-                Dashboard.reactiontime = 0;
-                Dashboard.sixtyfoottime = 0;
-                Dashboard.sixtyfootspeed = 0;
-                Dashboard.threehundredthirtyfoottime = 0;
-                Dashboard.threehundredthirtyfootspeed = 0;
-                Dashboard.eightmiletime = 0;
-                Dashboard.eightmilespeed = 0;
-                Dashboard.quartermiletime = 0;
-                Dashboard.quartermilespeed = 0;
-                Dashboard.eightmiletime = 0;
-                Dashboard.eightmilespeed = 0;
-                Dashboard.thousandfoottime = 0;
-                Dashboard.thousandfootspeed = 0;
-                Dashboard.zerotohundredt = 0;
-                Dashboard.hundredtotwohundredtime = 0;
-                Dashboard.twohundredtothreehundredtime = 0;
-                Dashboard.reactiontime = 0;
-            startmeasurement = 0;
-            measurementstarted = 0;
-            greenled.source = "qrc:/graphics/ledoff.png"
-            redled.source = "qrc:/graphics/ledoff.png"
-            stagelight1.source = "qrc:/graphics/ledyellow.png"
-            stagelight2 .source = "qrc:/graphics/ledyellow.png"
-            redled.source = "qrc:/graphics/ledoff.png"
-            stagelight.running = true;
-
-            }
-        }
- /*
-        Button {
-            id: nostagebutton
-            text: "Start Measurement"
-            width: measurements.width / 5
-            height: measurements.height /10
-            font.pixelSize: measurements.width / 55
-            onClicked: {
-                Dashboard.reactiontime = 0;
-                Dashboard.sixtyfoottime = 0;
-                Dashboard.sixtyfootspeed = 0;
-                Dashboard.threehundredthirtyfoottime = 0;
-                Dashboard.threehundredthirtyfootspeed = 0;
-                Dashboard.eightmiletime = 0;
-                Dashboard.eightmilespeed = 0;
-                Dashboard.quartermiletime = 0;
-                Dashboard.quartermilespeed = 0;
-                Dashboard.eightmiletime = 0;
-                Dashboard.eightmilespeed = 0;
-                Dashboard.thousandfoottime = 0;
-                Dashboard.thousandfootspeed = 0;
-                Dashboard.zerotohundredt = 0;
-                Dashboard.hundredtotwohundredtime = 0;
-                Dashboard.twohundredtothreehundredtime = 0;
-                Dashboard.reactiontime = 0;
-                greenled.source = "qrc:/graphics/ledgreen.png"
-                redled.source = "qrc:/graphics/ledoff.png"
-                stagelight1.source = "qrc:/graphics/ledyellow.png"
-                stagelight2 .source = "qrc:/graphics/ledyellow.png"
-                redled.source = "qrc:/graphics/ledoff.png"
-            startmeasurement = 1;
-            measurementstarted = 0;
-            }
-        }
-*/        Text {
-            width: measurements.width / 5
-            text: " "
-            font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-
+        spacing: parent.width /200
+        rows: 9
+        columns: 2
 
         Text {
-            text: " "
-            font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-        Text {
-            text: " "
-            font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-////
-        Text {
+            id:reactiotimertext
             text: "R/T : "
             font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
         Text {
+            id:reactiotimertimetext
             text: (Dashboard.reactiontime).toFixed(3)
             font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-        Text {
-            text: " "
-            font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-        Text {
-            text: " "
-            font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
         Text {
             text: "60' TIME: "
             font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
         Text {
             text: (Dashboard.sixtyfoottime)
             font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
-        Text {
-            text: "60' TOP SPEED: "
-            font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-        Text {
-            text: (Dashboard.sixtyfootspeed)
-            font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-
         Text {
             text: "330' TIME: "
             font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
         Text {
-            text: (Dashboard.threehundredthirtyfoottime)
+            text:  (Dashboard.threehundredthirtyfoottime)
             font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
-        Text {
-            text: "330' TOP SPEED: "
-            font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-        Text {
-            text: (Dashboard.threehundredthirtyfootspeed)
-            font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-
-
 
 
         Text {
             text: "1/8 MILE TIME: "
             font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
         Text {
             text: (Dashboard.eightmiletime)
             font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-
-        Text {
-            text: "1/8 MILE TOP SPEED: "
-            font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-        Text {
-            text:  (Dashboard.eightmilespeed)
-            font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
         Text {
             text: "1000' TIME: "
             font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
 
         Text {
             text:  (Dashboard.thousandfoottime)
             font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-        Text {
-            text: "1000' TOP SPEED: "
-            font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-        Text {
-            text:  (Dashboard.thousandfootspeed)
-            font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
         Text {
             text: "1/4 TIME: "
             font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
         Text {
             text:  (Dashboard.quartermiletime)
             font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
-        Text {
-            text: "1/4 TOP SPEED: "
-            font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-        Text {
-            text:  (Dashboard.quartermilespeed)
-            font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-
         Text {
             id : hundred
             text: "0-100 km/h TIME: "
             font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
         Text {
             text:  (Dashboard.zerotohundredt)
             font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-        Text {
-            text: " "
-            font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-        Text {
-            text: " "
-            font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
         Text {
             id : twohundred
             text:"100-200 km/h TIME: "
             font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
         Text {
             text:  (Dashboard.hundredtotwohundredtime)
             font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-        Text {
-            text: " "
-            font.pixelSize: measurements.width / 40
-            color: "white"
-        }
-        Text {
-            text: " "
-            font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
         Text {
             id : threehundred
             text:"200-300 km/h TIME: "
             font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
         Text {
             text:  (Dashboard.twohundredtothreehundredtime)
             font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
+        }
+
+}
+
+    Grid {
+        anchors.bottom: measurements.bottom
+        anchors.bottomMargin: parent.height / 7
+        anchors.left: timegrid.right
+        anchors.leftMargin: parent.width /20
+        spacing: parent.width /200
+        rows: 9
+        columns: 2
+        Text {
+            text: "60' TOP SPEED: "
+            font.pixelSize: measurements.width / 40
+            color: sliptextcolor
         }
         Text {
-            text: " "
+            text: (Dashboard.sixtyfootspeed)
             font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
         Text {
-            text: " "
+            text: "330' TOP SPEED: "
             font.pixelSize: measurements.width / 40
-            color: "white"
+            color: sliptextcolor
         }
-
-
-
-
+        Text {
+            text: (Dashboard.threehundredthirtyfootspeed)
+            font.pixelSize: measurements.width / 40
+            color: sliptextcolor
+        }
+        Text {
+            text: "1/8 MILE TOP SPEED: "
+            font.pixelSize: measurements.width / 40
+            color: sliptextcolor
+        }
+        Text {
+            text:  (Dashboard.eightmilespeed)
+            font.pixelSize: measurements.width / 40
+            color: sliptextcolor
+        }
+    Text {
+        text: "1000' TOP SPEED: "
+        font.pixelSize: measurements.width / 40
+        color: sliptextcolor
     }
+    Text {
+        text:  (Dashboard.thousandfootspeed)
+        font.pixelSize: measurements.width / 40
+        color: sliptextcolor
+    }
+    Text {
+        text: "1/4 TOP SPEED: "
+        font.pixelSize: measurements.width / 40
+        color: sliptextcolor
+    }
+    Text {
+        text:  (Dashboard.quartermilespeed)
+        font.pixelSize: measurements.width / 40
+        color: sliptextcolor
+    }
+
+
+
+}
     Item {
         Timer {
             id: stagelight
             interval: 5000;
             running: false
             onTriggered: {
+            startmeasurement = 1;
             stagelight1.source = "qrc:/graphics/ledoff.png"
             stagelight2 .source = "qrc:/graphics/ledoff.png"
             orangeled1.source = "qrc:/graphics/ledyellow.png"
+            measurements.color = "#ffb366"
+            sliptextcolor = "transparent"
             orange1.running = true
             }
         }
@@ -426,6 +339,8 @@ Row{
             interval: 500;
             running: false
             onTriggered: {
+            measurements.color = "#ffd966"
+            sliptextcolor = "transparent"
             orange2.running = true
             orangeled1.source = "qrc:/graphics/ledoff.png"
             orangeled2.source = "qrc:/graphics/ledyellow.png"
@@ -439,6 +354,9 @@ Row{
             running: false
             onTriggered: {
                 orange3.running = true
+
+                measurements.color = "yellow"
+                sliptextcolor = "transparent"
                 orangeled2.source = "qrc:/graphics/ledoff.png"
                 orangeled3.source = "qrc:/graphics/ledyellow.png"
             }
@@ -450,26 +368,83 @@ Row{
             interval: 500;
             running: false
             onTriggered: {
-                green.running = true
+                backroundcolortimer.running = true
                 orangeled3.source = "qrc:/graphics/ledoff.png"
                 greenled.source = "qrc:/graphics/ledgreen.png"
-                Calculations.startreactiontimer();
+                measurements.color = "limegreen"
+                sliptextcolor = "transparent"
+                calculationtimer.running = true
+                Calculations.qmlrealtime();
             }
         }
     }
     Item {
         Timer {
-            id: green
-            interval: 400;
+            id: backroundcolortimer
+            interval: 200;
             running: false
             onTriggered: {
-                // CHeck the time difference
-                if (Dashboard.speed >0)
-                {
-                redled.source = "qrc:/graphics/ledred.png"
-                }
-                startmeasurement = 1;
+                 measurements.color = "black"
+                sliptextcolor = "white"
             }
         }
     }
+    Item {
+        Timer {
+            id: calculationtimer
+            interval: 3000;
+            running: false
+            onTriggered: {
+                Calculations.calculatereactiontime();
+            }
+        }
+    }
+    Button {
+        id: trafficButton
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        text: "Start Staging Tree"
+        width: measurements.width / 5
+        height: measurements.height /10
+        font.pixelSize: measurements.width / 55
+        onClicked: {
+            Dashboard.reactiontime = 0;
+            Dashboard.sixtyfoottime = 0;
+            Dashboard.sixtyfootspeed = 0;
+            Dashboard.threehundredthirtyfoottime = 0;
+            Dashboard.threehundredthirtyfootspeed = 0;
+            Dashboard.eightmiletime = 0;
+            Dashboard.eightmilespeed = 0;
+            Dashboard.quartermiletime = 0;
+            Dashboard.quartermilespeed = 0;
+            Dashboard.eightmiletime = 0;
+            Dashboard.eightmilespeed = 0;
+            Dashboard.thousandfoottime = 0;
+            Dashboard.thousandfootspeed = 0;
+            Dashboard.zerotohundredt = 0;
+            Dashboard.hundredtotwohundredtime = 0;
+            Dashboard.twohundredtothreehundredtime = 0;
+            Dashboard.reactiontime = 0;
+        startmeasurement = 0;
+        measurementstarted = 0;
+        greenled.source = "qrc:/graphics/ledoff.png"
+        redled.source = "qrc:/graphics/ledoff.png"
+        stagelight1.source = "qrc:/graphics/ledyellow.png"
+        stagelight2 .source = "qrc:/graphics/ledyellow.png"
+        redled.source = "qrc:/graphics/ledoff.png"
+        stagelight.running = true;
+        measurements.color = "orange"
+        sliptextcolor = "transparent"
+        startmeasurement = 1;
+        Calculations.startreactiontimer();
+        if (Dashboard.speed > 0)
+        {
+        stagelight.running = false;
+        startmeasurement = 0;
+        measurements.color = "red"
+        sliptextcolor = "transparent"
+        }
+        }
+    }
+
 }

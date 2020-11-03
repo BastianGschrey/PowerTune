@@ -25,6 +25,7 @@ qreal zerotohundredtime;
 qreal twohundredtime;
 qreal threehundredtime;
 qreal reactiontime;
+qreal qmlgreentime;
 
 int zerotohundredset = 0;
 int hundredtotwohundredset = 0;
@@ -103,17 +104,30 @@ void calculations::startdragtimer()
 }
 void calculations::startreactiontimer()
 {
+    qDebug() << "Reactiontimer start";
     reactiontime = 0;
+    qmlgreentime = 0;
+    reactiontimerdiff = QTime::currentTime();
     m_reactiontimer.start();
-    reactiontimerdiff.restart();
+}
+
+void calculations::qmlrealtime()
+{
+    qDebug() << "QML Light Green";
+    qmlgreentime = (reactiontimerdiff.msecsTo(QTime::currentTime())/ 1000); // reactiontime
+
 }
 void calculations::stopreactiontimer()
 {
+    qDebug() << "stop reaction timer";
     m_reactiontimer.stop();
     reactiontime = (reactiontimerdiff.msecsTo(QTime::currentTime())); // reactiontime
-    m_dashboard->setreactiontime((reactiontime / 1000) - 0.4) ;
-}
 
+}
+void calculations::calculatereactiontime()
+{
+    m_dashboard->setreactiontime((reactiontime / 1000) - qmlgreentime) ;
+}
 // 1 foot = 0,00018939 miles =
 // 60 Feet = 0,0113634 miles = 0,01828762 km
 // 330 Feet  = 0,0624987 miles = 0,10058191 km

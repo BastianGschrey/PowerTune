@@ -700,6 +700,7 @@ Item {
                     Connect.readavailablebackrounds();
                 }
             }
+
             Button {
                 id: btncancel
                 width: 95
