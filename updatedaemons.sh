@@ -35,6 +35,7 @@ sudo pkill NISSAN350Z
 sudo pkill OBD
 sudo pkill MegasquirtCan
 sudo pkill EMSCAN
+sudo pkill WRX2012
 
 echo "Removing previous Versions"
 
@@ -64,11 +65,11 @@ sudo rm /home/pi/daemons/MaxxECUd
 sudo rm /home/pi/daemons/Microtechd
 sudo rm /home/pi/daemons/MotecM1d
 sudo rm /home/pi/daemons/NISSAN370Z
-sduo rm /home/pi/daemons/NISSAN350Z
+sudo rm /home/pi/daemons/NISSAN350Z
 sudo rm /home/pi/daemons/OBD
 sudo rm /home/pi/daemons/GMCANd
 sudo rm /home/pi/daemons/MegasquirtCan
-
+sudo rm /home/pi/WRX2012
 
 
 echo "Updating Daemons"
