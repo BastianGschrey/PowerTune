@@ -69,7 +69,7 @@ sudo rm /home/pi/daemons/NISSAN350Z
 sudo rm /home/pi/daemons/OBD
 sudo rm /home/pi/daemons/GMCANd
 sudo rm /home/pi/daemons/MegasquirtCan
-sudo rm /home/pi/WRX2012
+sudo rm /home/pi/daemons/WRX2012
 
 
 echo "Updating Daemons"
