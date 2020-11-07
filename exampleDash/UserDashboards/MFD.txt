@@ -1,0 +1,19 @@
+Square gauge,455,119,195.75530586766547,33.43035343035348,248,0,°C,ECT,false,true,false,Dashboard,Watertemp,Watertemp,10000,-20000,transparent,transparent,transparent,transparent,transparent,chartreuse,20,10,0,Lato,Lato,
+Square gauge,455,119,195.75530586766536,-19.459459459459424,248,0,°C,Oil Temp.,false,true,false,Dashboard,oiltemp,oiltemp,10000,-20000,transparent,transparent,transparent,transparent,transparent,chartreuse,25,40,0,Lato,Lato,
+Square gauge,455,119,198.7515605493133,-73.3471933471933,248,0,kPa,MAP,false,true,false,Dashboard,MAP,MAP,10000,-20000,transparent,transparent,transparent,transparent,transparent,chartreuse,25,40,0,Lato,Lato,
+Square gauge,455,119,195.7553058676654,88.31600831600832,248,1,kPa,Oil Pres,false,true,false,Dashboard,oilpres,oilpres,10000,-20000,transparent,transparent,transparent,transparent,transparent,chartreuse,25,40,0,Lato,Lato,
+Square gauge,455,119,195.7553058676654,142.2037422037422,248,0,kPa,Fuel Pres.,false,true,false,Dashboard,FuelPress,FuelPress,10000,-20000,transparent,transparent,transparent,transparent,transparent,chartreuse,25,40,0,Lato,Lato,
+Square gauge,455,119,198.7515605493134,196.09147609147607,248,0,kPa,Fuel Pres.,false,true,false,Dashboard,Intaketemp,Intaketemp,10000,-20000,transparent,transparent,transparent,transparent,transparent,chartreuse,10,40,0,Lato,Lato,
+Square gauge,455,119,198.75156054931338,249.97920997921,248,0,kPa,Fuel Pres.,false,true,false,Dashboard,FuelPress,FuelPress,10000,-20000,transparent,transparent,transparent,transparent,transparent,chartreuse,25,40,0,Lato,Lato,
+Square gauge,455,119,197.75280898876406,304.8648648648649,248,1,V,Battery Voltage,false,true,false,Dashboard,TPS,TPS,10000,-20000,transparent,transparent,transparent,transparent,transparent,chartreuse,10,40,0,Lato,Lato,
+Square gauge,455,119,196.75405742821465,358.75259875259883,248,3,λ,Lambda 1,false,true,false,Dashboard,LAMBDA,LAMBDA,10000,-20000,transparent,transparent,transparent,transparent,transparent,chartreuse,25,40,0,Lato,Lato,
+Text label gauge,687.2659176029963,8.087318087318103,0,Nissan,15,seashell,MAP,true,0
+Text label gauge,690.2621722846442,60.977130977130955,0,Nissan,15,seashell,oiltemp,true,0
+Text label gauge,692.2596754057425,114.8648648648649,0,Nissan,15,seashell,Watertemp,true,0
+Text label gauge,675.2808988764045,169.75051975051974,0.0,Nissan,15,seashell,oilpres,true,1
+Text label gauge,691.2609238451932,223.63825363825362,0,Nissan,15,seashell,FuelPress,true,0
+Text label gauge,691.2609238451935,276.5280665280665,0,Nissan,15,seashell,Intaketemp,true,0
+Text label gauge,662.2971285892634,333.4095634095634,0.00,Nissan,15,seashell,TPS,true,2
+Text label gauge,678.2771535580524,385.3014553014553,0.0,Nissan,15,seashell,BatteryV,true,1
+Text label gauge,655.3058676654181,441.18503118503116,0.000,Nissan,15,seashell,LAMBDA,true,3
+
