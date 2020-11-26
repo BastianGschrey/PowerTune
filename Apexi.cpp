@@ -554,7 +554,7 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         //m_dashboard->setFue(packageADV2[5]);
         m_dashboard->setIgn(packageADV2[6]);
         m_dashboard->setDwell(packageADV2[7]);
-        m_dashboard->setBoostPres(packageADV2[8]);
+        m_dashboard->setMAP(packageADV2[8]);
         m_dashboard->setBoostDuty(packageADV2[9]);
         m_dashboard->setWatertemp(packageADV2[10]);
         m_dashboard->setIntaketemp(packageADV2[11]);
@@ -787,7 +787,7 @@ void Apexi::decodeInit(QByteArray rawmessagedata)
         Model =1;
     }   
     //Nissan
-    if (Modelname == "NISSAN-L" || Modelname == "CA18DET " || Modelname == "SR20DE1 " || Modelname == "SR20DE2 " || Modelname == "SR20DE3 " || Modelname == "SR20DE4 " || Modelname == "SR20DET1" || Modelname == "SR20DET2" || Modelname == "SR20DET3" || Modelname == "SR20DET4" || Modelname == "SR20DET5" || Modelname == "SR20DET6" || Modelname == "RB20DET " || Modelname == "RB25DET " || Modelname == "RB25DET2" || Modelname == "RB26DETT" || Modelname == "VG30DETT" || Modelname == "CA181PRO" || Modelname == "SR2N1PRO" || Modelname == "SR2N2PRO" || Modelname == "SR2N3PRO" || Modelname == "SR2N4PRO" || Modelname == "SR201PRO" || Modelname == "SR202PRO" || Modelname == "SR203PRO" || Modelname == "SR204PRO" || Modelname == "SR205PRO" || Modelname == "SR206PRO" || Modelname == "RB201PRO" || Modelname == "RB251PRO" || Modelname == "RB252PRO" || Modelname == "RB261PRO" || Modelname == "RB262PRO" || Modelname == "RB26Pro " || Modelname == "RB26PRO " || Modelname == "RB26PRO1" || Modelname == "RB25PRO2" || Modelname == "CA18T1-D" || Modelname == "SR20T1-D" || Modelname == "SR20T2-D" || Modelname == "SR20T3-D" || Modelname == "SR20T4-D" || Modelname == "SR20T5-D" || Modelname == "RB26_1-D" || Modelname == "RB26_2-D" || Modelname == "VG30TT-D")
+    if (Modelname == "NISSAN-L" || Modelname == "CA18DET " || Modelname == "SR20DE1 " || Modelname == "SR20DE2 " || Modelname == "SR20DE3 " || Modelname == "SR20DE4 " || Modelname == "SR20DET1" || Modelname == "SR20DET2" || Modelname == "SR20DET3" || Modelname == "SR20DET4" || Modelname == "SR20DET5" || Modelname == "SR20DET6" || Modelname == "SR20T1-D" || Modelname == "SR20T2-D" || Modelname == "SR20T5-D" ||Modelname == "RB20DET " || Modelname == "RB25DET " || Modelname == "RB25DET2" || Modelname == "RB26DETT" || Modelname == "VG30DETT" || Modelname == "CA181PRO" || Modelname == "SR2N1PRO" || Modelname == "SR2N2PRO" || Modelname == "SR2N3PRO" || Modelname == "SR2N4PRO" || Modelname == "SR201PRO" || Modelname == "SR202PRO" || Modelname == "SR203PRO" || Modelname == "SR204PRO" || Modelname == "SR205PRO" || Modelname == "SR206PRO" || Modelname == "RB201PRO" || Modelname == "RB251PRO" || Modelname == "RB252PRO" || Modelname == "RB261PRO" || Modelname == "RB262PRO" || Modelname == "RB26Pro " || Modelname == "RB26PRO " || Modelname == "RB26PRO1" || Modelname == "RB25PRO2" || Modelname == "CA18T1-D" || Modelname == "SR20T1-D" || Modelname == "SR20T2-D" || Modelname == "SR20T3-D" || Modelname == "SR20T4-D" || Modelname == "SR20T5-D" || Modelname == "RB26_1-D" || Modelname == "RB26_2-D" || Modelname == "VG30TT-D")
     {
         Model =2;
     }
@@ -811,7 +811,7 @@ void Apexi::decodeInit(QByteArray rawmessagedata)
     {
         Model =3;
     }    
-    m_dashboard->setPlatform(QString(rawmessagedata).mid(2,8));
+    m_dashboard->setPlatform(QString(rawmessagedata).mid(2,8) + QString::number(Model));
 }
 
 void Apexi::decodeSensorStrings(QByteArray rawmessagedata)

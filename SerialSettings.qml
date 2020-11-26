@@ -13,6 +13,9 @@ Quick1.TabView {
     anchors.fill: parent
 
     property int lastdashamount
+    //property alias language: "japanese"
+
+    Translations{id: translationlist}
 
     Rectangle{
         id: keyboardcontainer
@@ -574,7 +577,7 @@ Quick1.TabView {
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                             Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                         }
-                        Text  { text: "V 1.93h" + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: "V 1.93i " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 /*
                         Slider {
                             id:brightness
