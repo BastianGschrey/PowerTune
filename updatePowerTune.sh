@@ -4,8 +4,6 @@ if nc -zw5 www.github.com 443; then
 		if [ -d /home/pi/src ]; then
 		echo "Updating to latest source "
 		cd /home/pi/src
-		git reset --hard
-		git clean -fd
 		git pull
 		./updatedaemons.sh
 		./updateUserDashboards.sh
