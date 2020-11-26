@@ -13,9 +13,7 @@ Quick1.TabView {
     anchors.fill: parent
 
     property int lastdashamount
-    //property alias language: "japanese"
 
-    Translations{id: translationlist}
 
     Rectangle{
         id: keyboardcontainer
