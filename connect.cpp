@@ -837,6 +837,11 @@ void Connect::daemonstartup(const int &daemon)
         << endl
         << "sudo ifup can0"
         << endl
+        << "#PLMS Consult Cable drivers"
+        << endl
+        << "sudo modprobe ftdi_sio"
+        << endl
+        << "sudo sh -c 'echo \"0403 c7d9\" > /sys/bus/usb-serial/drivers/ftdi_sio/new_id'"
         << "cd /home/pi/daemons"
         << endl
         << daemonstart
