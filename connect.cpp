@@ -842,6 +842,7 @@ void Connect::daemonstartup(const int &daemon)
         << "sudo modprobe ftdi_sio"
         << endl
         << "sudo sh -c 'echo \"0403 c7d9\" > /sys/bus/usb-serial/drivers/ftdi_sio/new_id'"
+        << endl
         << "cd /home/pi/daemons"
         << endl
         << daemonstart
