@@ -49,7 +49,8 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal Inj READ Inj WRITE setInj NOTIFY injChanged)
     Q_PROPERTY(qreal Ign READ Ign WRITE setIgn NOTIFY ignChanged)
     Q_PROPERTY(qreal Dwell READ Dwell WRITE setDwell NOTIFY dwellChanged)
-    Q_PROPERTY(qreal BoostPres READ BoostPres WRITE setBoostPres NOTIFY boostPresChanged)
+    Q_PROPERTY(qreal BoostPres READ BoostPres WRITE setBoostPres NOTIFY BoostPresChanged)
+    Q_PROPERTY(qreal BoostPreskpa READ BoostPreskpa WRITE setBoostPreskpa NOTIFY BoostPreskpaChanged)
     Q_PROPERTY(qreal BoostDuty READ BoostDuty WRITE setBoostDuty NOTIFY boostDutyChanged)
     Q_PROPERTY(qreal MAFactivity READ MAFactivity WRITE setMAFactivity NOTIFY mAFactivityChanged)
     Q_PROPERTY(qreal O2volt_2 READ O2volt_2 WRITE setO2volt_2 NOTIFY o2volt_2Changed)
@@ -444,6 +445,7 @@ class DashBoard : public QObject
     void setIgn(const qreal &Ign);
     void setDwell(const qreal &Dwell);
     void setBoostPres(const qreal &BoostPres);
+    void setBoostPreskpa(const qreal &BoostPreskpa);
     void setBoostDuty(const qreal &BoostDuty);
     void setMAFactivity(const qreal &MAFactivity);
     void setO2volt_2(const qreal &O2volt_2);
@@ -841,6 +843,7 @@ class DashBoard : public QObject
     qreal Ign() const;
     qreal Dwell() const;
     qreal BoostPres() const;
+    qreal BoostPreskpa() const;
     qreal BoostDuty() const;
     qreal MAFactivity() const;
     qreal O2volt_2() const;
@@ -1233,7 +1236,9 @@ signals:
     void injChanged(qreal Inj);
     void ignChanged(qreal Ign);
     void dwellChanged(qreal Dwell);
-    void boostPresChanged(qreal BoostPres);
+    void BoostPresChanged(qreal BoostPres);
+    void BoostPreskpaChanged(qreal BoostPreskpa);
+
     void boostDutyChanged(qreal BoostDuty);
     void mAFactivityChanged(qreal MAFactivity);
     void o2volt_2Changed(qreal O2volt_2);
@@ -1619,6 +1624,7 @@ private:
     qreal m_Ign;
     qreal m_Dwell;
     qreal m_BoostPres;
+    qreal m_BoostPreskpa;
     qreal m_BoostDuty;
     qreal m_MAFactivity;
     qreal m_O2volt_2;

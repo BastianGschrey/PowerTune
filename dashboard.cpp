@@ -73,6 +73,7 @@ DashBoard::DashBoard(QObject *parent)
     , m_Ign(0)
     , m_Dwell(0)
     , m_BoostPres(0)
+    , m_BoostPreskpa(0)
     , m_BoostDuty(0)
     , m_MAFactivity(0)
     , m_O2volt_2(0)
@@ -729,7 +730,22 @@ void DashBoard::setBoostPres(const qreal &BoostPres)
         m_BoostPres = (temp/10);
         }
     }
-    emit boostPresChanged(BoostPres);
+    emit BoostPresChanged(BoostPres);
+
+
+}
+void DashBoard::setBoostPreskpa(const qreal &BoostPreskpa)
+{
+    if (m_BoostPreskpa == BoostPreskpa)
+        return;
+    if (m_pressureunits == "metric")
+    {m_BoostPreskpa = BoostPreskpa;}
+    if (m_pressureunits == "imperial")
+    {
+       m_BoostPreskpa = BoostPreskpa * 0.039370079197446;
+
+    }
+    emit BoostPreskpaChanged(BoostPreskpa);
 
 
 }
@@ -3150,6 +3166,7 @@ qreal DashBoard::Inj() const { return m_Inj; }
 qreal DashBoard::Ign() const { return m_Ign; }
 qreal DashBoard::Dwell() const { return m_Dwell; }
 qreal DashBoard::BoostPres() const { return m_BoostPres; }
+qreal DashBoard::BoostPreskpa() const { return m_BoostPreskpa; }
 qreal DashBoard::BoostDuty() const { return m_BoostDuty; }
 qreal DashBoard::MAFactivity() const { return m_MAFactivity; }
 qreal DashBoard::O2volt_2() const { return m_O2volt_2; }

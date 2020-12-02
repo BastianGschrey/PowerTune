@@ -507,6 +507,15 @@ ListModel {
         divisor : "1"
     }
     ListElement {
+        sourcename:"BoostPreskpa"
+        defaultsymbol: ""
+        titlename:"Boost kPa"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "20"
+        divisor : "1"
+    }
+    ListElement {
         sourcename:"Boosttp"
         defaultsymbol: "%"
         titlename:"Boost Tp"

@@ -16,6 +16,7 @@ QByteArray fullFuelBase;
 qreal AN1AN2calc;
 qreal AN3AN4calc;
 qreal test;
+qreal kpaboost;
 int reconnect = 0;
 QString port;
 //QBitArray flagArray;
@@ -520,6 +521,8 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
     // Nissan and Subaru
     if (Model == 2)
     {
+
+
         fc_adv_info_t2* info=reinterpret_cast<fc_adv_info_t2*>(rawmessagedata.data());
         
         packageADV2[0] = info->RPM;
@@ -532,9 +535,17 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         packageADV2[7] = info->Dwell;
         packageADV2[8] = -760 + info->BoostPres;
         if (packageADV2[8] >= 0x8000)
-            packageADV2[8] = (packageADV[8] - 0x8000) * 0.01;
+        {
+            packageADV2[8] = (packageADV[8] - 0x8000) * 0.01;  //Positive Boost kgcm2
+
+        }
         else
-            packageADV2[8] = (1.0 / 2560 + 0.001) * packageADV[8];
+        {
+
+            packageADV2[8] = (1.0 / 2560 + 0.001) * packageADV[8]; //Negative Boost in mmhg
+
+
+        }
         packageADV2[9] = info->BoostDuty *0.005;
         packageADV2[10] = info->Watertemp -80;
         packageADV2[11] = info->Intaketemp -80;
@@ -554,7 +565,8 @@ void Apexi::decodeAdv(QByteArray rawmessagedata)
         //m_dashboard->setFue(packageADV2[5]);
         m_dashboard->setIgn(packageADV2[6]);
         m_dashboard->setDwell(packageADV2[7]);
-        m_dashboard->setMAP(packageADV2[8]);
+        //m_dashboard->setMAP(packageADV2[8]);
+        //m_dashboard->setBoostPreskpa(kpaboost);
         m_dashboard->setBoostDuty(packageADV2[9]);
         m_dashboard->setWatertemp(packageADV2[10]);
         m_dashboard->setIntaketemp(packageADV2[11]);
@@ -733,29 +745,21 @@ void Apexi::decodeBasic(QByteArray rawmessagedata)
         {
             int test = (unsigned char)rawmessagedata[12];
             Boost = test * 0.01;
+            kpaboost = test * 0.980665;
          }
         else{
             Boost = (packageBasic[5] -760);
+            kpaboost = Boost * 0.133322;
         }
 
-/*
-    else{
-       // qDebug()<< "Mdl1" << packageBasic[5];
-        if (packageBasic[5] >= 0)
-        {
-            Boost = (packageBasic[5] -760) * 0.01;
-        }
-        else{
-            Boost = packageBasic[5] -760; // while boost pressure is negative show pressure in mmhg
-        }
-      }
-*/
+
     //m_dashboard->setInjDuty(packageBasic[0]);
     m_dashboard->setLeadingign(packageBasic[1]);
     m_dashboard->setTrailingign(packageBasic[2]);
     m_dashboard->setrpm(packageBasic[3]);
     m_dashboard->setSpeed(packageBasic[4]);
     m_dashboard->setBoostPres(Boost);
+    m_dashboard->setBoostPreskpa(kpaboost);
     m_dashboard->setKnock(packageBasic[6]);
     m_dashboard->setWatertemp(packageBasic[7]);
     m_dashboard->setIntaketemp(packageBasic[8]);
