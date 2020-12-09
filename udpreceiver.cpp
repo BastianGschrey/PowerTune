@@ -799,7 +799,7 @@ void udpreceiver::processPendingDatagrams()
             //Catalyst Temp Bank1 S1
             break;
         case 278:
-            //Manifold Gauge Pressure kPa
+            m_dashboard->setBoostPreskpa(Value);
             break;
         case 279:
             //Digital Input 1
