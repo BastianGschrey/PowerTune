@@ -742,7 +742,7 @@ void DashBoard::setBoostPreskpa(const qreal &BoostPreskpa)
     {m_BoostPreskpa = BoostPreskpa;}
     if (m_pressureunits == "imperial")
     {
-       m_BoostPreskpa = BoostPreskpa * 0.039370079197446;
+       m_BoostPreskpa = BoostPreskpa * 0.145038;
 
     }
     emit BoostPreskpaChanged(BoostPreskpa);
