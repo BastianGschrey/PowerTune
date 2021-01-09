@@ -16,6 +16,7 @@ import "qrc:/Gauges/createverticalbargauge.js" as CreateBargaugeScript
 import "qrc:/Gauges/createText.js" as CreateTextScript
 import "qrc:/Gauges/createPicture.js" as CreatePictureScript
 import "qrc:/Gauges/createStatePicture.js" as CreateStatePictureScript
+import "qrc:/Gauges/createStateGIF.js" as CreateStateGIFScript
 
 Item {
     id: mainwindow
@@ -139,6 +140,11 @@ Item {
                     // //console.log("Create image")
                     CreateStatePictureScript.createPicture(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7));
                 }
+                if (dashvalue.textAt(0) === "State GIF")
+                {
+                    // //console.log("Create image")
+                    CreateStateGIFScript.createPicture(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7));
+                }
             }
 
         }
@@ -236,6 +242,7 @@ Item {
             btnaddText.visible = true;
             btnaddPicture.visible = true;
             btnaddStatePicture.visible = true;
+            btnaddStateGIF.visible = true;
             btnaddBar.visible = true;
             Dashboard.setdraggable(1);
         }
@@ -546,7 +553,7 @@ Item {
                 id: btnaddStatePicture
                 width: 95
                 height: 40
-                text: qsTr("Add State Img")
+                text: qsTr("State Img")
                 font.pixelSize: 12
                 onClicked: {
                     //console.log("create State gauge ");
@@ -556,7 +563,20 @@ Item {
                     Dashboard.setdraggable(0);
                 }
             }
-
+            Button {
+                id: btnaddStateGIF
+                width: 95
+                height: 40
+                text: qsTr("State GIF")
+                font.pixelSize: 12
+                onClicked: {
+                   // console.log("create State gauge ");
+                    CreateStateGIFScript.createPicture(10,10,100,"speed",1,"qrc:/graphics/StateGIF.gif","qrc:/graphics/StateGIF.gif");
+                    squaregaugemenu.visible = false;
+                    selectcolor.visible =false;
+                    Dashboard.setdraggable(0);
+                }
+            }
             Button {
                 id: btnsave
                 width: 95
@@ -610,6 +630,7 @@ Item {
                     btnaddText.visible = false;
                     btnaddPicture.visible = false;
                     btnaddStatePicture.visible = false;
+                    btnaddStateGIF.visible = false;
                     btnaddBar.visible = false;
                     btncancelload.visible = true;
                     loadfromfile.visible = false;
@@ -822,6 +843,10 @@ Item {
             {
                 saveDashtofilestring += (userDash.children[i].information+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].pictureheight+","+userDash.children[i].mainvaluename+","+userDash.children[i].triggervalue+","+userDash.children[i].statepicturesourceoff+","+userDash.children[i].statepicturesourceon+"\r\n");
             }
+            if (userDash.children[i].information === "State GIF")
+            {
+                saveDashtofilestring += (userDash.children[i].information+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].pictureheight+","+userDash.children[i].mainvaluename+","+userDash.children[i].triggervalue+","+userDash.children[i].statepicturesourceoff+","+userDash.children[i].statepicturesourceon+"\r\n");
+            }
         }
     }
     function createDash()
@@ -922,6 +947,11 @@ Item {
             case "State gauge": {
                 //console.log("Save state");
                 CreateStatePictureScript.createPicture(gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).height,gaugelist.get(i).source,gaugelist.get(i).trigger,gaugelist.get(i).pictureoff,gaugelist.get(i).pictureon);
+                break;
+            }
+            case "State GIF": {
+                //console.log("Save state");
+                CreateStateGIFScript.createPicture(gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).height,gaugelist.get(i).source,gaugelist.get(i).trigger,gaugelist.get(i).pictureoff,gaugelist.get(i).pictureon);
                 break;
             }
             }
@@ -1101,6 +1131,17 @@ Item {
 
             if(userDash.children[i].information === "State gauge"){
                 //console.log("Save Image");
+                gaugelist.append({   "info":userDash.children[i].information,
+                                     "x":userDash.children[i].x,
+                                     "y":userDash.children[i].y,
+                                     "height":userDash.children[i].pictureheight,
+                                     "source":userDash.children[i].mainvaluename,
+                                     "trigger":userDash.children[i].triggervalue,
+                                     "pictureoff":userDash.children[i].statepicturesourceoff,
+                                     "pictureon":userDash.children[i].statepicturesourceon})
+            }
+            if(userDash.children[i].information === "State GIF"){
+                //console.log("Save Image" ,userDash.children[i].mainvaluename);
                 gaugelist.append({   "info":userDash.children[i].information,
                                      "x":userDash.children[i].x,
                                      "y":userDash.children[i].y,

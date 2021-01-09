@@ -79,5 +79,8 @@
         <file>graphics/brightness.png</file>
         <file>Gauges/SpeedMeasurements.qml</file>
         <file>graphics/green_Light.png</file>
+        <file>Gauges/StateGIF.qml</file>
+        <file>Gauges/createStateGIF.js</file>
+        <file>graphics/StateGIF.gif</file>
     </qresource>
 </RCC>

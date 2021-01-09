@@ -198,7 +198,7 @@ void Connect::readavailablebackrounds()
 {
     //QDir directory(""); //for Windows
     QDir directory("/home/pi/Logo");
-    QStringList dashfiles = directory.entryList(QStringList() << "*.png",QDir::Files);
+    QStringList dashfiles = directory.entryList(QStringList() << "*.png" << "*.gif",QDir::Files);
     dashfiles.prepend("None");
     m_dashBoard->setbackroundpictures(dashfiles);
 }
