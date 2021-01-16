@@ -27,6 +27,7 @@ sudo pkill Holleyd
 sudo pkill Hondatad
 sudo pkill Linkd
 sudo pkill M800ADLSet1d
+sudo pkill M800ADLSet3d
 sudo pkill MaxxECUd
 sudo pkill Microtechd
 sudo pkill MotecM1d
@@ -61,6 +62,7 @@ sudo rm /home/pi/daemons/Holleyd
 sudo rm /home/pi/daemons/Hondatad
 sudo rm /home/pi/daemons/Linkd
 sudo rm /home/pi/daemons/M800ADLSet1d
+sudo rm /home/pi/daemons/M800ADLSet3d
 sudo rm /home/pi/daemons/MaxxECUd
 sudo rm /home/pi/daemons/Microtechd
 sudo rm /home/pi/daemons/MotecM1d
