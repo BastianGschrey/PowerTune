@@ -2154,6 +2154,290 @@ ListModel {
         stepsize : "1"
         divisor : "1"
     }
+    ListElement {
+        sourcename:"IGBTPhaseATemp"
+        defaultsymbol: ""
+        titlename:"IGBTPhaseATemp"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+
+    ListElement {
+        sourcename:"IGBTPhaseBTemp"
+        defaultsymbol: ""
+        titlename:"IGBTPhaseBTemp"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"IGBTPhaseCTemp"
+        defaultsymbol: ""
+        titlename:"IGBTPhaseCTemp"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"GateDriverTemp"
+        defaultsymbol: ""
+        titlename:"GateDriverTemp"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"ControlBoardTemp"
+        defaultsymbol: ""
+        titlename:"ControlBoardTemp"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"DigInput1FowardSw"
+        defaultsymbol: ""
+        titlename:"DigInput1FowardSw"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"RtdTemp2"
+        defaultsymbol: ""
+        titlename:"RtdTemp2"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"RtdTemp3"
+        defaultsymbol: ""
+        titlename:"RtdTemp3"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"RtdTemp4"
+        defaultsymbol: ""
+        titlename:"RtdTemp4"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"RtdTemp5"
+        defaultsymbol: ""
+        titlename:"RtdTemp5"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EMotorTemperature"
+        defaultsymbol: ""
+        titlename:"EMotorTemperature"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"TorqueShudder"
+        defaultsymbol: ""
+        titlename:"TorqueShudder"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"DigInput2ReverseSw"
+        defaultsymbol: ""
+        titlename:"DigInput2ReverseSwDigInput2ReverseSw"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"DigInput3BrakeSw"
+        defaultsymbol: ""
+        titlename:"DigInput3BrakeSw"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+      ListElement {
+        sourcename:"DigInput4RegenDisableSw"
+        defaultsymbol: ""
+        titlename:"DigInput4RegenDisableSw"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"DigInput5IgnSw"
+        defaultsymbol: ""
+        titlename:"DigInput5IgnSw"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"DigInput6StartSw"
+        defaultsymbol: ""
+        titlename:"DigInput6StartSw"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"DigInput7Bool"
+        defaultsymbol: ""
+        titlename:"DigInput7Bool"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"DigInput8Bool"
+        defaultsymbol: ""
+        titlename:"DigInput8Bool"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EMotorAngle"
+        defaultsymbol: ""
+        titlename:"EMotorAngle"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"ElectricalOutFreq"
+        defaultsymbol: ""
+        titlename:"ElectricalOutFreq"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"DeltaResolverFiltered"
+        defaultsymbol: ""
+        titlename:"DeltaResolverFiltered"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"PhaseACurrent"
+        defaultsymbol: ""
+        titlename:"PhaseACurrent"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EMotorSpeed"
+        defaultsymbol: ""
+        titlename:"EMotorSpeed"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"PhaseBCurrent"
+        defaultsymbol: ""
+        titlename:"PhaseBCurrent"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"PhaseCCurrent"
+        defaultsymbol: ""
+        titlename:"PhaseCCurrent"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+
+    ListElement {
+        sourcename:"DCBusCurrent"
+        defaultsymbol: ""
+        titlename:"DCBusCurrent"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+
+    ListElement {
+        sourcename:"DCBusVoltage"
+        defaultsymbol: ""
+        titlename:"DCBusVoltage"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+
+    ListElement {
+        sourcename:"OutputVoltage"
+        defaultsymbol: ""
+        titlename:"OutputVoltage"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"VABvdVoltage"
+        defaultsymbol: ""
+        titlename:"VABvdVoltage"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+
+    ListElement {
+        sourcename:"VBCvqVoltage"
+        defaultsymbol: ""
+        titlename:"VBCvqVoltage"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
 }
 
 

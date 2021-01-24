@@ -399,8 +399,41 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal zerotohundredt READ zerotohundredt WRITE setzerotohundredt NOTIFY zerotohundredtChanged)
     Q_PROPERTY(qreal hundredtotwohundredtime READ hundredtotwohundredtime WRITE sethundredtotwohundredtime NOTIFY hundredtotwohundredtimeChanged)
     Q_PROPERTY(qreal twohundredtothreehundredtime READ twohundredtothreehundredtime WRITE settwohundredtothreehundredtime NOTIFY twohundredtothreehundredtimeChanged)
-
     Q_PROPERTY(qreal reactiontime READ reactiontime WRITE setreactiontime NOTIFY reactiontimeChanged)
+    Q_PROPERTY(qreal IGBTPhaseATemp READ IGBTPhaseATemp WRITE setIGBTPhaseATemp NOTIFY IGBTPhaseATempChanged)
+    Q_PROPERTY(qreal IGBTPhaseBTemp READ IGBTPhaseBTemp WRITE setIGBTPhaseBTemp NOTIFY IGBTPhaseBTempChanged)
+    Q_PROPERTY(qreal IGBTPhaseCTemp READ IGBTPhaseCTemp WRITE setIGBTPhaseCTemp NOTIFY IGBTPhaseCTempChanged)
+    Q_PROPERTY(qreal GateDriverTemp READ GateDriverTemp WRITE setGateDriverTemp NOTIFY GateDriverTempChanged)
+    Q_PROPERTY(qreal ControlBoardTemp READ ControlBoardTemp WRITE setControlBoardTemp NOTIFY ControlBoardTempChanged)
+    Q_PROPERTY(qreal RtdTemp1 READ RtdTemp1 WRITE setRtdTemp1 NOTIFY RtdTemp1Changed)
+    Q_PROPERTY(qreal RtdTemp2 READ RtdTemp2 WRITE setRtdTemp2 NOTIFY RtdTemp2Changed)
+    Q_PROPERTY(qreal RtdTemp3 READ RtdTemp3 WRITE setRtdTemp3 NOTIFY RtdTemp3Changed)
+    Q_PROPERTY(qreal RtdTemp4 READ RtdTemp4 WRITE setRtdTemp4 NOTIFY RtdTemp4Changed)
+    Q_PROPERTY(qreal RtdTemp5 READ RtdTemp5 WRITE setRtdTemp5 NOTIFY RtdTemp5Changed)
+    Q_PROPERTY(qreal EMotorTemperature READ EMotorTemperature WRITE setEMotorTemperature NOTIFY EMotorTemperatureChanged)
+    Q_PROPERTY(qreal TorqueShudder READ TorqueShudder WRITE setTorqueShudder NOTIFY TorqueShudderChanged)
+    Q_PROPERTY(qreal DigInput1FowardSw READ DigInput1FowardSw WRITE setDigInput1FowardSw NOTIFY DigInput1FowardSwChanged)
+    Q_PROPERTY(qreal DigInput2ReverseSw READ DigInput2ReverseSw WRITE setDigInput2ReverseSw NOTIFY DigInput2ReverseSwChanged)
+    Q_PROPERTY(qreal DigInput3BrakeSw READ DigInput3BrakeSw WRITE setDigInput3BrakeSw NOTIFY DigInput3BrakeSwChanged)
+    Q_PROPERTY(qreal DigInput4RegenDisableSw READ DigInput4RegenDisableSw WRITE setDigInput4RegenDisableSw NOTIFY DigInput4RegenDisableSwChanged)
+    Q_PROPERTY(qreal DigInput5IgnSw READ DigInput5IgnSw WRITE setDigInput5IgnSw NOTIFY DigInput5IgnSwChanged)
+    Q_PROPERTY(qreal DigInput6StartSw READ DigInput6StartSw WRITE setDigInput6StartSw NOTIFY DigInput6StartSwChanged)
+    Q_PROPERTY(qreal DigInput7Bool READ DigInput7Bool WRITE setDigInput7Bool NOTIFY DigInput7BoolChanged)
+    Q_PROPERTY(qreal DigInput8Bool READ DigInput8Bool WRITE setDigInput8Bool NOTIFY DigInput8BoolChanged)
+    Q_PROPERTY(qreal EMotorAngle READ EMotorAngle WRITE setEMotorAngle NOTIFY EMotorAngleChanged)
+    Q_PROPERTY(qreal EMotorSpeed READ EMotorSpeed WRITE setEMotorSpeed NOTIFY EMotorSpeedChanged)
+    Q_PROPERTY(qreal ElectricalOutFreq READ ElectricalOutFreq WRITE setElectricalOutFreq NOTIFY ElectricalOutFreqChanged)
+    Q_PROPERTY(qreal DeltaResolverFiltered READ DeltaResolverFiltered WRITE setDeltaResolverFiltered NOTIFY DeltaResolverFilteredChanged)
+    Q_PROPERTY(qreal PhaseACurrent READ PhaseACurrent WRITE setPhaseACurrent NOTIFY PhaseACurrentChanged)
+    Q_PROPERTY(qreal PhaseBCurrent READ PhaseBCurrent WRITE setPhaseBCurrent NOTIFY PhaseBCurrentChanged)
+    Q_PROPERTY(qreal PhaseCCurrent READ PhaseCCurrent WRITE setPhaseCCurrent NOTIFY PhaseCCurrentChanged)
+    Q_PROPERTY(qreal DCBusCurrent READ DCBusCurrent WRITE setDCBusCurrent NOTIFY DCBusCurrentChanged)
+    Q_PROPERTY(qreal DCBusVoltage READ DCBusVoltage WRITE setDCBusVoltage NOTIFY DCBusVoltageChanged)
+    Q_PROPERTY(qreal OutputVoltage READ OutputVoltage WRITE setOutputVoltage NOTIFY OutputVoltageChanged)
+    Q_PROPERTY(qreal VABvdVoltage READ VABvdVoltage WRITE setVABvdVoltage NOTIFY VABvdVoltageChanged)
+    Q_PROPERTY(qreal VBCvqVoltage READ VBCvqVoltage WRITE setVBCvqVoltage NOTIFY VBCvqVoltageChanged)
+
+
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
     public:
     DashBoard(QObject *parent = 0);
@@ -803,6 +836,39 @@ class DashBoard : public QObject
     void settwohundredtothreehundredtime(const qreal &twohundredtothreehundredtime);
     void setreactiontime(const qreal &reactiontime);
 
+    void setIGBTPhaseATemp(const qreal &IGBTPhaseATemp);
+    void setIGBTPhaseBTemp(const qreal &IGBTPhaseBTemp);
+    void setIGBTPhaseCTemp(const qreal &IGBTPhaseCTemp);
+    void setGateDriverTemp(const qreal &GateDriverTemp);
+    void setControlBoardTemp(const qreal &ControlBoardTemp);
+    void setRtdTemp1(const qreal &RtdTemp1);
+    void setRtdTemp2(const qreal &RtdTemp2);
+    void setRtdTemp3(const qreal &RtdTemp3);
+    void setRtdTemp4(const qreal &RtdTemp4);
+    void setRtdTemp5(const qreal &RtdTemp5);
+    void setEMotorTemperature(const qreal &EMotorTemperature);
+    void setTorqueShudder(const qreal &TorqueShudder);
+    void setDigInput1FowardSw(const qreal &DigInput1FowardSw);
+    void setDigInput2ReverseSw(const qreal &DigInput2ReverseSw);
+    void setDigInput3BrakeSw(const qreal &DigInput3BrakeSw);
+    void setDigInput4RegenDisableSw(const qreal &DigInput4RegenDisableSw);
+    void setDigInput5IgnSw(const qreal &DigInput5IgnSw);
+    void setDigInput6StartSw(const qreal &DigInput6StartSw);
+    void setDigInput7Bool(const qreal &DigInput7Bool);
+    void setDigInput8Bool(const qreal &DigInput8Bool);
+    void setEMotorAngle(const qreal &EMotorAngle);
+    void setEMotorSpeed(const qreal &EMotorSpeed);
+    void setElectricalOutFreq(const qreal &ElectricalOutFreq);
+    void setDeltaResolverFiltered(const qreal &DeltaResolverFiltered);
+    void setPhaseACurrent(const qreal &PhaseACurrent);
+    void setPhaseBCurrent(const qreal &PhaseBCurrent);
+    void setPhaseCCurrent(const qreal &PhaseCCurrent);
+    void setDCBusCurrent(const qreal &DCBusCurrent);
+    void setDCBusVoltage(const qreal &DCBusVoltage);
+    void setOutputVoltage(const qreal &OutputVoltage);
+    void setVABvdVoltage(const qreal &VABvdVoltage);
+    void setVBCvqVoltage(const qreal &VBCvqVoltage);
+
     qreal Odo() const;
 
     //Tripmeter
@@ -1197,6 +1263,41 @@ class DashBoard : public QObject
     qreal reactiontime()const;
 
 
+    qreal IGBTPhaseATemp()const;
+    qreal IGBTPhaseBTemp()const;
+    qreal IGBTPhaseCTemp()const;
+    qreal GateDriverTemp()const;
+    qreal ControlBoardTemp()const;
+    qreal RtdTemp1()const;
+    qreal RtdTemp2()const;
+    qreal RtdTemp3()const;
+    qreal RtdTemp4()const;
+    qreal RtdTemp5()const;
+    qreal EMotorTemperature()const;
+    qreal TorqueShudder()const;
+    qreal DigInput1FowardSw()const;
+    qreal DigInput2ReverseSw()const;
+    qreal DigInput3BrakeSw()const;
+    qreal DigInput4RegenDisableSw()const;
+    qreal DigInput5IgnSw()const;
+    qreal DigInput6StartSw()const;
+    qreal DigInput7Bool()const;
+    qreal DigInput8Bool()const;
+    qreal EMotorAngle()const;
+    qreal EMotorSpeed()const;
+    qreal ElectricalOutFreq()const;
+    qreal DeltaResolverFiltered()const;
+    qreal PhaseACurrent()const;
+    qreal PhaseBCurrent()const;
+    qreal PhaseCCurrent()const;
+    qreal DCBusCurrent()const;
+    qreal DCBusVoltage()const;
+    qreal OutputVoltage()const;
+    qreal VABvdVoltage()const;
+    qreal VBCvqVoltage()const;
+
+
+
 signals:
 
     //Odometer
@@ -1580,7 +1681,38 @@ signals:
     void twohundredtothreehundredtimeChanged(qreal twohundredtothreehundredtime);
     void reactiontimeChanged(qreal reactiontime);
 
-
+    void IGBTPhaseATempChanged(qreal IGBTPhaseATemp);
+    void IGBTPhaseBTempChanged(qreal IGBTPhaseBTemp);
+    void IGBTPhaseCTempChanged(qreal IGBTPhaseCTemp);
+    void GateDriverTempChanged(qreal GateDriverTemp);
+    void ControlBoardTempChanged(qreal ControlBoardTemp);
+    void RtdTemp1Changed(qreal RtdTemp1);
+    void RtdTemp2Changed(qreal RtdTemp2);
+    void RtdTemp3Changed(qreal RtdTemp3);
+    void RtdTemp4Changed(qreal RtdTemp4);
+    void RtdTemp5Changed(qreal RtdTemp5);
+    void EMotorTemperatureChanged(qreal EMotorTemperature);
+    void TorqueShudderChanged(qreal TorqueShudder);
+    void DigInput1FowardSwChanged(qreal DigInput1FowardSw);
+    void DigInput2ReverseSwChanged(qreal DigInput2ReverseSw);
+    void DigInput3BrakeSwChanged(qreal DigInput3BrakeSw);
+    void DigInput4RegenDisableSwChanged(qreal DigInput4RegenDisableSw);
+    void DigInput5IgnSwChanged(qreal DigInput5IgnSw);
+    void DigInput6StartSwChanged(qreal DigInput6StartSw);
+    void DigInput7BoolChanged(qreal DigInput7Bool);
+    void DigInput8BoolChanged(qreal DigInput8Bool);
+    void EMotorAngleChanged(qreal EMotorAngle);
+    void EMotorSpeedChanged(qreal EMotorSpeed);
+    void ElectricalOutFreqChanged(qreal ElectricalOutFreq);
+    void DeltaResolverFilteredChanged(qreal DeltaResolverFiltered);
+    void PhaseACurrentChanged(qreal PhaseACurrent);
+    void PhaseBCurrentChanged(qreal PhaseBCurrent);
+    void PhaseCCurrentChanged(qreal PhaseCCurrent);
+    void DCBusCurrentChanged(qreal DCBusCurrent);
+    void DCBusVoltageChanged(qreal DCBusVoltage);
+    void OutputVoltageChanged(qreal OutputVoltage);
+    void VABvdVoltageChanged(qreal VABvdVoltage);
+    void VBCvqVoltageChanged(qreal VBCvqVoltage);
 private:
     // Odometer
 
@@ -1978,7 +2110,38 @@ private:
     qreal m_twohundredtothreehundredtime;
     qreal m_reactiontime;
 
-
+    qreal m_IGBTPhaseATemp;
+    qreal m_IGBTPhaseBTemp;
+    qreal m_IGBTPhaseCTemp;
+    qreal m_GateDriverTemp;
+    qreal m_ControlBoardTemp;
+    qreal m_RtdTemp1;
+    qreal m_RtdTemp2;
+    qreal m_RtdTemp3;
+    qreal m_RtdTemp4;
+    qreal m_RtdTemp5;
+    qreal m_EMotorTemperature;
+    qreal m_TorqueShudder;
+    qreal m_DigInput1FowardSw;
+    qreal m_DigInput2ReverseSw;
+    qreal m_DigInput3BrakeSw;
+    qreal m_DigInput4RegenDisableSw;
+    qreal m_DigInput5IgnSw;
+    qreal m_DigInput6StartSw;
+    qreal m_DigInput7Bool;
+    qreal m_DigInput8Bool;
+    qreal m_EMotorAngle;
+    qreal m_EMotorSpeed;
+    qreal m_ElectricalOutFreq;
+    qreal m_DeltaResolverFiltered;
+    qreal m_PhaseACurrent;
+    qreal m_PhaseBCurrent;
+    qreal m_PhaseCCurrent;
+    qreal m_DCBusCurrent;
+    qreal m_DCBusVoltage;
+    qreal m_OutputVoltage;
+    qreal m_VABvdVoltage;
+    qreal m_VBCvqVoltage;
 
 };
 

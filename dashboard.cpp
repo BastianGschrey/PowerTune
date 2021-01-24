@@ -392,7 +392,38 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_hundredtotwohundredtime()
     ,  m_twohundredtothreehundredtime()
     ,  m_reactiontime()
-
+    ,  m_IGBTPhaseATemp()
+    ,  m_IGBTPhaseBTemp()
+    ,  m_IGBTPhaseCTemp()
+    ,  m_GateDriverTemp()
+    ,  m_ControlBoardTemp()
+    ,  m_RtdTemp1()
+    ,  m_RtdTemp2()
+    ,  m_RtdTemp3()
+    ,  m_RtdTemp4()
+    ,  m_RtdTemp5()
+    ,  m_EMotorTemperature()
+    ,  m_TorqueShudder()
+    ,  m_DigInput1FowardSw()
+    ,  m_DigInput2ReverseSw()
+    ,  m_DigInput3BrakeSw()
+    ,  m_DigInput4RegenDisableSw()
+    ,  m_DigInput5IgnSw()
+    ,  m_DigInput6StartSw()
+    ,  m_DigInput7Bool()
+    ,  m_DigInput8Bool()
+    ,  m_EMotorAngle()
+    ,  m_EMotorSpeed()
+    ,  m_ElectricalOutFreq()
+    ,  m_DeltaResolverFiltered()
+    ,  m_PhaseACurrent()
+    ,  m_PhaseBCurrent()
+    ,  m_PhaseCCurrent()
+    ,  m_DCBusCurrent()
+    ,  m_DCBusVoltage()
+    ,  m_OutputVoltage()
+    ,  m_VABvdVoltage()
+    ,  m_VBCvqVoltage()
 {
 
 }
@@ -3126,6 +3157,276 @@ void DashBoard::setreactiontime(const qreal &reactiontime)
     m_reactiontime = reactiontime;
     emit reactiontimeChanged(reactiontime);
 }
+
+
+
+//________________________________________________________
+void DashBoard::setIGBTPhaseATemp(const qreal &IGBTPhaseATemp)
+{
+    if (m_IGBTPhaseATemp == IGBTPhaseATemp)
+        return;
+    if (m_units == "metric")
+    {m_IGBTPhaseATemp = IGBTPhaseATemp;}
+    if (m_units == "imperial")
+    {m_IGBTPhaseATemp = IGBTPhaseATemp * 1.8 + 32;}
+    emit IGBTPhaseATempChanged(IGBTPhaseATemp);
+}
+
+void DashBoard::setIGBTPhaseBTemp(const qreal &IGBTPhaseBTemp)
+{
+    if (m_IGBTPhaseBTemp == IGBTPhaseBTemp)
+        return;
+    if (m_units == "metric")
+    {m_IGBTPhaseBTemp = IGBTPhaseBTemp;}
+    if (m_units == "imperial")
+    {m_IGBTPhaseBTemp = IGBTPhaseBTemp * 1.8 + 32;}
+    emit IGBTPhaseBTempChanged(IGBTPhaseBTemp);
+}
+void DashBoard::setIGBTPhaseCTemp(const qreal &IGBTPhaseCTemp)
+{
+    if (m_IGBTPhaseCTemp == IGBTPhaseCTemp)
+        return;
+    if (m_units == "metric")
+    {m_IGBTPhaseCTemp = IGBTPhaseCTemp;}
+    if (m_units == "imperial")
+    {m_IGBTPhaseCTemp = IGBTPhaseCTemp * 1.8 + 32;}
+    emit IGBTPhaseCTempChanged(IGBTPhaseCTemp);
+}
+void DashBoard::setGateDriverTemp(const qreal &GateDriverTemp)
+{
+    if (m_GateDriverTemp == GateDriverTemp)
+        return;
+    if (m_units == "metric")
+    {m_GateDriverTemp = GateDriverTemp;}
+    if (m_units == "imperial")
+    {m_GateDriverTemp = GateDriverTemp * 1.8 + 32;}
+    emit GateDriverTempChanged(GateDriverTemp);
+}
+void DashBoard::setControlBoardTemp(const qreal &ControlBoardTemp)
+{
+    if (m_ControlBoardTemp== ControlBoardTemp)
+        return;
+    if (m_units == "metric")
+    {m_ControlBoardTemp = ControlBoardTemp;}
+    if (m_units == "imperial")
+    {m_ControlBoardTemp = ControlBoardTemp * 1.8 + 32;}
+    emit ControlBoardTempChanged(ControlBoardTemp);
+}
+void DashBoard::setRtdTemp1(const qreal &RtdTemp1)
+{
+    if (m_RtdTemp1 == RtdTemp1)
+        return;
+    if (m_units == "metric")
+    {m_RtdTemp1 = RtdTemp1;}
+    if (m_units == "imperial")
+    {m_RtdTemp1 = RtdTemp1 * 1.8 + 32;}
+    emit RtdTemp1Changed(RtdTemp1);
+}
+void DashBoard::setRtdTemp2(const qreal &RtdTemp2)
+{
+    if (m_RtdTemp2 == RtdTemp2)
+        return;
+    if (m_units == "metric")
+    {m_RtdTemp2 = RtdTemp2;}
+    if (m_units == "imperial")
+    {m_RtdTemp2 = RtdTemp2 * 1.8 + 32;}
+    emit RtdTemp2Changed(RtdTemp2);
+}
+void DashBoard::setRtdTemp3(const qreal &RtdTemp3)
+{
+    if (m_RtdTemp3 == RtdTemp3)
+        return;
+    if (m_units == "metric")
+    {m_RtdTemp3 = RtdTemp3;}
+    if (m_units == "imperial")
+    {m_RtdTemp3 = RtdTemp3 * 1.8 + 32;}
+    emit RtdTemp3Changed(RtdTemp3);
+}
+void DashBoard::setRtdTemp4(const qreal &RtdTemp4)
+{
+    if (m_RtdTemp4 == RtdTemp4)
+        return;
+    if (m_units == "metric")
+    {m_RtdTemp4 = RtdTemp4;}
+    if (m_units == "imperial")
+    {m_RtdTemp4 = RtdTemp4 * 1.8 + 32;}
+    emit RtdTemp4Changed(RtdTemp4);
+}
+void DashBoard::setRtdTemp5(const qreal &RtdTemp5)
+{
+    if (m_RtdTemp5 == RtdTemp5)
+        return;
+    if (m_units == "metric")
+    {m_RtdTemp5 = RtdTemp5;}
+    if (m_units == "imperial")
+    {m_RtdTemp5 = RtdTemp5 * 1.8 + 32;}
+    emit RtdTemp5Changed(RtdTemp5);
+}
+void DashBoard::setEMotorTemperature(const qreal &EMotorTemperature)
+{
+    if (m_EMotorTemperature == EMotorTemperature)
+        return;
+    if (m_units == "metric")
+    {m_EMotorTemperature = EMotorTemperature;}
+    if (m_units == "imperial")
+    {m_EMotorTemperature = EMotorTemperature * 1.8 + 32;}
+    emit EMotorTemperatureChanged(EMotorTemperature);
+}
+void DashBoard::setTorqueShudder(const qreal &TorqueShudder)
+{
+    if (m_TorqueShudder == TorqueShudder)
+        return;
+    if (m_units == "metric")
+    {m_TorqueShudder = TorqueShudder;}
+    if (m_units == "imperial")
+    {m_TorqueShudder = TorqueShudder * 1.8 + 32;}
+    emit TorqueShudderChanged(TorqueShudder);
+}
+void DashBoard::setDigInput1FowardSw(const qreal &DigInput1FowardSw)
+{
+    if (m_DigInput1FowardSw == DigInput1FowardSw)
+        return;
+    m_DigInput1FowardSw = DigInput1FowardSw;
+    emit DigInput1FowardSwChanged(DigInput1FowardSw);
+}
+void DashBoard::setDigInput2ReverseSw(const qreal &DigInput2ReverseSw)
+{
+    if (m_DigInput2ReverseSw == DigInput2ReverseSw)
+        return;
+    m_DigInput2ReverseSw = DigInput2ReverseSw;
+    emit DigInput2ReverseSwChanged(DigInput2ReverseSw);
+}
+void DashBoard::setDigInput3BrakeSw(const qreal &DigInput3BrakeSw)
+{
+    if (m_DigInput3BrakeSw == DigInput3BrakeSw)
+        return;
+    m_DigInput3BrakeSw = DigInput3BrakeSw;
+    emit DigInput3BrakeSwChanged(DigInput3BrakeSw);
+}
+void DashBoard::setDigInput4RegenDisableSw(const qreal &DigInput4RegenDisableSw)
+{
+    if (m_DigInput4RegenDisableSw == DigInput4RegenDisableSw)
+        return;
+    m_DigInput4RegenDisableSw = DigInput4RegenDisableSw;
+    emit DigInput4RegenDisableSwChanged(DigInput4RegenDisableSw);
+}
+void DashBoard::setDigInput5IgnSw(const qreal &DigInput5IgnSw)
+{
+    if (m_DigInput5IgnSw == DigInput5IgnSw)
+        return;
+    m_DigInput5IgnSw = DigInput5IgnSw;
+    emit DigInput5IgnSwChanged(DigInput5IgnSw);
+}
+void DashBoard::setDigInput6StartSw(const qreal &DigInput6StartSw)
+{
+    if (m_DigInput6StartSw == DigInput6StartSw)
+        return;
+    m_DigInput6StartSw = DigInput6StartSw;
+    emit DigInput6StartSwChanged(DigInput6StartSw);
+}
+void DashBoard::setDigInput7Bool(const qreal &DigInput7Bool)
+{
+    if (m_DigInput7Bool == DigInput7Bool)
+        return;
+    m_DigInput7Bool = DigInput7Bool;
+    emit DigInput7BoolChanged(DigInput7Bool);
+}
+void DashBoard::setDigInput8Bool(const qreal &DigInput8Bool)
+{
+    if (m_DigInput8Bool == DigInput8Bool)
+        return;
+    m_DigInput8Bool = DigInput8Bool;
+    emit DigInput8BoolChanged(DigInput8Bool);
+}
+void DashBoard::setEMotorAngle(const qreal &EMotorAngle)
+{
+    if (m_EMotorAngle == EMotorAngle)
+        return;
+    m_EMotorAngle = EMotorAngle;
+    emit EMotorAngleChanged(EMotorAngle);
+}
+void DashBoard::setEMotorSpeed(const qreal &EMotorSpeed)
+{
+    if (m_EMotorSpeed == EMotorSpeed)
+        return;
+    m_EMotorSpeed = EMotorSpeed;
+    emit EMotorSpeedChanged(EMotorSpeed);
+}
+void DashBoard::setElectricalOutFreq(const qreal &ElectricalOutFreq)
+{
+    if (m_ElectricalOutFreq == ElectricalOutFreq)
+        return;
+    m_ElectricalOutFreq= ElectricalOutFreq;
+    emit ElectricalOutFreqChanged(ElectricalOutFreq);
+}
+void DashBoard::setDeltaResolverFiltered(const qreal &DeltaResolverFiltered)
+{
+    if (m_DeltaResolverFiltered == DeltaResolverFiltered)
+        return;
+    m_DeltaResolverFiltered = DeltaResolverFiltered;
+    emit DeltaResolverFilteredChanged(DeltaResolverFiltered);
+}
+void DashBoard::setPhaseACurrent(const qreal &PhaseACurrent)
+{
+    if (m_PhaseACurrent == PhaseACurrent)
+        return;
+    m_PhaseACurrent = PhaseACurrent;
+    emit PhaseACurrentChanged(PhaseACurrent);
+}
+void DashBoard::setPhaseBCurrent(const qreal &PhaseBCurrent)
+{
+    if (m_PhaseBCurrent == PhaseBCurrent)
+        return;
+    m_PhaseBCurrent = PhaseBCurrent;
+    emit PhaseBCurrentChanged(PhaseBCurrent);
+}
+void DashBoard::setPhaseCCurrent(const qreal &PhaseCCurrent)
+{
+    if (m_PhaseCCurrent == PhaseCCurrent)
+        return;
+    m_PhaseCCurrent = PhaseCCurrent;
+    emit PhaseCCurrentChanged(PhaseCCurrent);
+}
+void DashBoard::setDCBusCurrent(const qreal &DCBusCurrent)
+{
+    if (m_DCBusCurrent == DCBusCurrent)
+        return;
+    m_DCBusCurrent = DCBusCurrent;
+    emit DCBusCurrentChanged(DCBusCurrent);
+}
+void DashBoard::setDCBusVoltage(const qreal &DCBusVoltage)
+{
+    if (m_DCBusVoltage == DCBusVoltage)
+        return;
+    m_DCBusVoltage = DCBusVoltage;
+    emit DCBusVoltageChanged(DCBusVoltage);
+}
+void DashBoard::setOutputVoltage(const qreal &OutputVoltage)
+{
+    if (m_OutputVoltage == OutputVoltage)
+        return;
+    m_OutputVoltage = OutputVoltage;
+    emit OutputVoltageChanged(OutputVoltage);
+}
+void DashBoard::setVABvdVoltage(const qreal &VABvdVoltage)
+{
+    if (m_VABvdVoltage == VABvdVoltage)
+        return;
+    m_VABvdVoltage = VABvdVoltage;
+    emit VABvdVoltageChanged(VABvdVoltage);
+}
+void DashBoard::setVBCvqVoltage(const qreal &VBCvqVoltage)
+{
+    if (m_VBCvqVoltage == VBCvqVoltage)
+        return;
+    m_VBCvqVoltage = VBCvqVoltage;
+    emit VBCvqVoltageChanged(VBCvqVoltage);
+}
+
+
+
+
+
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
 
@@ -3513,7 +3814,38 @@ qreal DashBoard::hundredtotwohundredtime() const {return m_hundredtotwohundredti
 qreal DashBoard::twohundredtothreehundredtime() const {return m_twohundredtothreehundredtime;}
 qreal DashBoard::reactiontime() const {return m_reactiontime;}
 
-
+qreal DashBoard::IGBTPhaseATemp() const {return m_IGBTPhaseATemp;}
+qreal DashBoard::IGBTPhaseBTemp() const {return m_IGBTPhaseBTemp;}
+qreal DashBoard::IGBTPhaseCTemp() const {return m_IGBTPhaseCTemp;}
+qreal DashBoard::GateDriverTemp() const {return m_GateDriverTemp;}
+qreal DashBoard::ControlBoardTemp() const {return m_ControlBoardTemp;}
+qreal DashBoard::RtdTemp1() const {return m_RtdTemp1;}
+qreal DashBoard::RtdTemp2() const {return m_RtdTemp2;}
+qreal DashBoard::RtdTemp3() const {return m_RtdTemp3;}
+qreal DashBoard::RtdTemp4() const {return m_RtdTemp4;}
+qreal DashBoard::RtdTemp5() const {return m_RtdTemp5;}
+qreal DashBoard::EMotorTemperature() const {return m_EMotorTemperature;}
+qreal DashBoard::TorqueShudder() const {return m_reactiontime;}
+qreal DashBoard::DigInput1FowardSw() const {return m_TorqueShudder;}
+qreal DashBoard::DigInput2ReverseSw() const {return m_DigInput2ReverseSw;}
+qreal DashBoard::DigInput3BrakeSw() const {return m_DigInput3BrakeSw;}
+qreal DashBoard::DigInput4RegenDisableSw() const {return m_DigInput4RegenDisableSw;}
+qreal DashBoard::DigInput5IgnSw() const {return m_DigInput5IgnSw;}
+qreal DashBoard::DigInput6StartSw() const {return m_DigInput6StartSw;}
+qreal DashBoard::DigInput7Bool() const {return m_DigInput7Bool;}
+qreal DashBoard::DigInput8Bool() const {return m_DigInput8Bool;}
+qreal DashBoard::EMotorAngle() const {return m_EMotorAngle;}
+qreal DashBoard::EMotorSpeed() const {return m_EMotorSpeed;}
+qreal DashBoard::ElectricalOutFreq() const {return m_ElectricalOutFreq;}
+qreal DashBoard::DeltaResolverFiltered() const {return m_DeltaResolverFiltered;}
+qreal DashBoard::PhaseACurrent() const {return m_PhaseACurrent;}
+qreal DashBoard::PhaseBCurrent() const {return m_PhaseBCurrent;}
+qreal DashBoard::PhaseCCurrent() const {return m_PhaseCCurrent;}
+qreal DashBoard::DCBusCurrent() const {return m_DCBusCurrent;}
+qreal DashBoard::DCBusVoltage() const {return m_DCBusVoltage;}
+qreal DashBoard::OutputVoltage() const {return m_OutputVoltage;}
+qreal DashBoard::VABvdVoltage() const {return m_VABvdVoltage;}
+qreal DashBoard::VBCvqVoltage() const {return m_VBCvqVoltage;}
 // Sensor Strings
 
 
