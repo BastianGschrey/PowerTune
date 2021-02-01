@@ -424,6 +424,16 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_OutputVoltage()
     ,  m_VABvdVoltage()
     ,  m_VBCvqVoltage()
+    , m_TirepresLF()
+    , m_TirepresRF()
+    , m_TirepresRR()
+    , m_TirepresLR()
+
+    , m_TiretempLF()
+    , m_TiretempRF()
+    , m_TiretempRR()
+    , m_TiretempLR()
+
 {
 
 }
@@ -3424,9 +3434,87 @@ void DashBoard::setVBCvqVoltage(const qreal &VBCvqVoltage)
 }
 
 
+void DashBoard::setTiretempLF(const qreal &TiretempLF)
+{
+if (m_TiretempLF == TiretempLF)
+    return;
+if (m_units == "metric")
+{m_TiretempLF = TiretempLF;}
+if (m_units == "imperial")
+{m_TiretempLF = qRound(TiretempLF * 1.8 + 32);}
+emit TiretempLFChanged(TiretempLF);
+}
+void DashBoard::setTiretempRF(const qreal &TiretempRF)
+{
+if (m_TiretempRF == TiretempRF)
+    return;
+if (m_units == "metric")
+{m_TiretempRF = TiretempRF;}
+if (m_units == "imperial")
+{m_TiretempRF = qRound(TiretempRF * 1.8 + 32);}
+emit TiretempRFChanged(TiretempRF);
+}
+void DashBoard::setTiretempRR(const qreal &TiretempRR)
+{
+if (m_TiretempRR == TiretempRR)
+    return;
+if (m_units == "metric")
+{m_TiretempRR = TiretempRR;}
+if (m_units == "imperial")
+{m_TiretempRR = qRound(TiretempRR * 1.8 + 32);}
+emit TiretempRRChanged(TiretempRR);
+}
+void DashBoard::setTiretempLR(const qreal &TiretempLR)
+{
+if (m_TiretempLR == TiretempLR)
+    return;
+if (m_units == "metric")
+{m_TiretempLR = TiretempLR;}
+if (m_units == "imperial")
+{m_TiretempLR = qRound(TiretempLR * 1.8 + 32);}
+emit TiretempLRChanged(TiretempLR);
+}
 
-
-
+void DashBoard::setTirepresLF(const qreal &TirepresLF)
+{
+    if(m_TirepresLF == TirepresLF)
+        return;
+    if (m_pressureunits == "metric")
+    { m_TirepresLF = TirepresLF;}
+    if (m_pressureunits == "imperial")
+    {m_TirepresLF = TirepresLF * 0.145038;}
+    emit TirepresLFChanged(TirepresLF);
+}
+void DashBoard::setTirepresRF(const qreal &TirepresRF)
+{
+    if(m_TirepresRF == TirepresRF)
+        return;
+    if (m_pressureunits == "metric")
+    { m_TirepresRF = TirepresRF;}
+    if (m_pressureunits == "imperial")
+    {m_TirepresRF = TirepresRF * 0.145038;}
+    emit TirepresRFChanged(TirepresRF);
+}
+void DashBoard::setTirepresRR(const qreal &TirepresRR)
+{
+    if(m_TirepresRR == TirepresRR)
+        return;
+    if (m_pressureunits == "metric")
+    { m_TirepresRR = TirepresRR;}
+    if (m_pressureunits == "imperial")
+    {m_TirepresRR = TirepresRR * 0.145038;}
+    emit TirepresRRChanged(TirepresRR);
+}
+void DashBoard::setTirepresLR(const qreal &TirepresLR)
+{
+    if(m_TirepresLR == TirepresLR)
+        return;
+    if (m_pressureunits == "metric")
+    { m_TirepresLR = TirepresLR;}
+    if (m_pressureunits == "imperial")
+    {m_TirepresLR = TirepresLR * 0.145038;}
+    emit TirepresLRChanged(TirepresLR);
+}
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
 
@@ -3846,6 +3934,14 @@ qreal DashBoard::DCBusVoltage() const {return m_DCBusVoltage;}
 qreal DashBoard::OutputVoltage() const {return m_OutputVoltage;}
 qreal DashBoard::VABvdVoltage() const {return m_VABvdVoltage;}
 qreal DashBoard::VBCvqVoltage() const {return m_VBCvqVoltage;}
+qreal DashBoard::TirepresLF() const {return m_TirepresLF;}
+qreal DashBoard::TirepresRF() const {return m_TirepresRF;}
+qreal DashBoard::TirepresRR() const {return m_TirepresRR;}
+qreal DashBoard::TirepresLR() const {return m_TirepresLR;}
+qreal DashBoard::TiretempLF() const {return m_TiretempLF;}
+qreal DashBoard::TiretempRF() const {return m_TiretempRF;}
+qreal DashBoard::TiretempRR() const {return m_TiretempRR;}
+qreal DashBoard::TiretempLR() const {return m_TiretempLR;}
 // Sensor Strings
 
 

@@ -433,6 +433,16 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal VABvdVoltage READ VABvdVoltage WRITE setVABvdVoltage NOTIFY VABvdVoltageChanged)
     Q_PROPERTY(qreal VBCvqVoltage READ VBCvqVoltage WRITE setVBCvqVoltage NOTIFY VBCvqVoltageChanged)
 
+    Q_PROPERTY(qreal TirepresLF READ TirepresLF WRITE setTirepresLF NOTIFY TirepresLFChanged)
+    Q_PROPERTY(qreal TirepresRF READ TirepresRF WRITE setTirepresRF NOTIFY TirepresRFChanged)
+    Q_PROPERTY(qreal TirepresLR READ TirepresLR WRITE setTirepresLR NOTIFY TirepresLRChanged)
+    Q_PROPERTY(qreal TirepresRR READ TirepresRR WRITE setTirepresRR NOTIFY TirepresRRChanged)
+
+    Q_PROPERTY(qreal TiretempLF READ TiretempLF WRITE setTiretempLF NOTIFY TiretempLFChanged)
+    Q_PROPERTY(qreal TiretempRF READ TiretempRF WRITE setTiretempRF NOTIFY TiretempRFChanged)
+    Q_PROPERTY(qreal TiretempLR READ TiretempLR WRITE setTiretempLR NOTIFY TiretempLRChanged)
+    Q_PROPERTY(qreal TiretempRR READ TiretempRR WRITE setTiretempRR NOTIFY TiretempRRChanged)
+
 
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
     public:
@@ -869,6 +879,15 @@ class DashBoard : public QObject
     void setVABvdVoltage(const qreal &VABvdVoltage);
     void setVBCvqVoltage(const qreal &VBCvqVoltage);
 
+    void setTirepresLF(const qreal &TirepresLF);
+    void setTirepresRF(const qreal &TirepresRF);
+    void setTirepresRR(const qreal &TirepresRR);
+    void setTirepresLR(const qreal &TirepresLR);
+
+    void setTiretempLF(const qreal &TiretempLF);
+    void setTiretempRF(const qreal &TiretempRF);
+    void setTiretempRR(const qreal &TiretempRR);
+    void setTiretempLR(const qreal &TiretempLR);
     qreal Odo() const;
 
     //Tripmeter
@@ -1296,6 +1315,15 @@ class DashBoard : public QObject
     qreal VABvdVoltage()const;
     qreal VBCvqVoltage()const;
 
+    qreal TirepresLF()const;
+    qreal TirepresRF()const;
+    qreal TirepresRR()const;
+    qreal TirepresLR()const;
+
+    qreal TiretempLF()const;
+    qreal TiretempRF()const;
+    qreal TiretempRR()const;
+    qreal TiretempLR()const;
 
 
 signals:
@@ -1713,6 +1741,16 @@ signals:
     void OutputVoltageChanged(qreal OutputVoltage);
     void VABvdVoltageChanged(qreal VABvdVoltage);
     void VBCvqVoltageChanged(qreal VBCvqVoltage);
+
+    void TirepresLFChanged(qreal TirepresLF);
+    void TirepresRFChanged(qreal TirepresRF);
+    void TirepresRRChanged(qreal TirepresRR);
+    void TirepresLRChanged(qreal TirepresLR);
+
+    void TiretempLFChanged(qreal TiretempLF);
+    void TiretempRFChanged(qreal TiretempRF);
+    void TiretempRRChanged(qreal TiretempRR);
+    void TiretempLRChanged(qreal TiretempLR);
 private:
     // Odometer
 
@@ -2142,6 +2180,16 @@ private:
     qreal m_OutputVoltage;
     qreal m_VABvdVoltage;
     qreal m_VBCvqVoltage;
+
+    qreal m_TirepresLF;
+    qreal m_TirepresRF;
+    qreal m_TirepresRR;
+    qreal m_TirepresLR;
+
+    qreal m_TiretempLF;
+    qreal m_TiretempRF;
+    qreal m_TiretempRR;
+    qreal m_TiretempLR;
 
 };
 

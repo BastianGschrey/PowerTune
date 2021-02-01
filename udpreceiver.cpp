@@ -1030,6 +1030,32 @@ void udpreceiver::processPendingDatagrams()
              break;
 
 
+        case 864:
+            m_dashboard->setTiretempLF(Value);
+            break;
+        case 865:
+            m_dashboard->setTiretempRF(Value);
+            break;
+        case 866:
+            m_dashboard->setTiretempLR(Value);
+            break;
+        case 867:
+            m_dashboard->setTiretempRR(Value);
+            break;
+        case 868:
+            m_dashboard->setTirepresLF(Value);
+            break;
+        case 869:
+            m_dashboard->setTirepresRF(Value);
+            break;
+        case 870:
+            m_dashboard->setTirepresLR(Value);
+            break;
+        case 871:
+            m_dashboard->setTirepresRR(Value);
+            break;
+
+
         case 999:
             break;
         default:
