@@ -2438,6 +2438,83 @@ ListModel {
         stepsize : "1"
         divisor : "1"
     }
+    ListElement {
+        sourcename:"TiretempLF"
+        defaultsymbol: "°C"
+        titlename:"TiretempLF"
+        decimalpoints : "0"
+        maxvalue : "150"
+        stepsize : "10"
+        divisor : "1"
+    }
+
+    ListElement {
+        sourcename:"TiretempRF"
+        defaultsymbol: "°C"
+        titlename:"TiretempRF"
+        decimalpoints : "0"
+        maxvalue : "150"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"TiretempLR"
+        defaultsymbol: "°C"
+        titlename:"TiretempLR"
+        decimalpoints : "0"
+        maxvalue : "150"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"TiretempRR"
+        defaultsymbol: "°C"
+        titlename:"TiretempRR"
+        decimalpoints : "0"
+        maxvalue : "150"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"TirepresLF"
+        defaultsymbol: "kPa"
+        titlename:"TirepresLF"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+
+    ListElement {
+        sourcename:"TirepresRF"
+        defaultsymbol: "kPa"
+        titlename:"TirepresRF"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+
+    ListElement {
+        sourcename:"TirepresLR"
+        defaultsymbol: "kPa"
+        titlename:"TirepresLR"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+
+    ListElement {
+        sourcename:"TirepresRR"
+        defaultsymbol: "kPa"
+        titlename:"TirepresRR"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+
 }
 
 
