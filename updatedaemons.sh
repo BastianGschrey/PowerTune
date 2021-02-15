@@ -38,6 +38,7 @@ sudo pkill MegasquirtCan
 sudo pkill EMSCAN
 sudo pkill WRX2012
 sudo pkill Testdaemon
+sudo pkill ecoboost
 
 echo "Removing previous Versions"
 
@@ -74,6 +75,7 @@ sudo rm /home/pi/daemons/GMCANd
 sudo rm /home/pi/daemons/MegasquirtCan
 sudo rm /home/pi/daemons/WRX2012
 sudo rm /home/pi/daemons/Testdaemon
+sudo rm /home/pi/daemons/ecoboost
 
 echo "Updating Daemons"
 cp -r /home/pi/src/daemons/. /home/pi/daemons/
