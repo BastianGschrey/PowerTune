@@ -434,6 +434,14 @@ DashBoard::DashBoard(QObject *parent)
     , m_TiretempRR()
     , m_TiretempLR()
 
+    , m_DigitalInput1()
+    , m_DigitalInput2()
+    , m_DigitalInput3()
+    , m_DigitalInput4()
+    , m_DigitalInput5()
+    , m_DigitalInput6()
+    , m_DigitalInput7()
+
 {
 
 }
@@ -3515,6 +3523,56 @@ void DashBoard::setTirepresLR(const qreal &TirepresLR)
     {m_TirepresLR = TirepresLR * 0.145038;}
     emit TirepresLRChanged(TirepresLR);
 }
+
+void DashBoard::setDigitalInput1(const qreal &DigitalInput1)
+{
+    if(m_DigitalInput1 == DigitalInput1)
+        return;
+    m_DigitalInput1 = DigitalInput1;
+    emit DigitalInput1Changed(DigitalInput1);
+}
+void DashBoard::setDigitalInput2(const qreal &DigitalInput2)
+{
+    if(m_DigitalInput2 == DigitalInput2)
+        return;
+    m_DigitalInput2 = DigitalInput2;
+    emit DigitalInput2Changed(DigitalInput2);
+}
+void DashBoard::setDigitalInput3(const qreal &DigitalInput3)
+{
+    if(m_DigitalInput3 == DigitalInput3)
+        return;
+    m_DigitalInput3 = DigitalInput3;
+    emit DigitalInput3Changed(DigitalInput3);
+}
+void DashBoard::setDigitalInput4(const qreal &DigitalInput4)
+{
+    if(m_DigitalInput4 == DigitalInput4)
+        return;
+    m_DigitalInput4 = DigitalInput4;
+    emit DigitalInput4Changed(DigitalInput4);
+}
+void DashBoard::setDigitalInput5(const qreal &DigitalInput5)
+{
+    if(m_DigitalInput5 == DigitalInput5)
+        return;
+    m_DigitalInput5 = DigitalInput5;
+    emit DigitalInput5Changed(DigitalInput5);
+}
+void DashBoard::setDigitalInput6(const qreal &DigitalInput6)
+{
+    if(m_DigitalInput6 == DigitalInput6)
+        return;
+    m_DigitalInput6 = DigitalInput6;
+    emit DigitalInput6Changed(DigitalInput6);
+}
+void DashBoard::setDigitalInput7(const qreal &DigitalInput7)
+{
+    if(m_DigitalInput7 == DigitalInput7)
+        return;
+    m_DigitalInput7 = DigitalInput7;
+    emit DigitalInput7Changed(DigitalInput7);
+}
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
 
@@ -3942,6 +4000,15 @@ qreal DashBoard::TiretempLF() const {return m_TiretempLF;}
 qreal DashBoard::TiretempRF() const {return m_TiretempRF;}
 qreal DashBoard::TiretempRR() const {return m_TiretempRR;}
 qreal DashBoard::TiretempLR() const {return m_TiretempLR;}
+
+qreal DashBoard::DigitalInput1() const {return m_DigitalInput1;}
+qreal DashBoard::DigitalInput2() const {return m_DigitalInput2;}
+qreal DashBoard::DigitalInput3() const {return m_DigitalInput3;}
+qreal DashBoard::DigitalInput4() const {return m_DigitalInput4;}
+qreal DashBoard::DigitalInput5() const {return m_DigitalInput5;}
+qreal DashBoard::DigitalInput6() const {return m_DigitalInput6;}
+qreal DashBoard::DigitalInput7() const {return m_DigitalInput7;}
+
 // Sensor Strings
 
 

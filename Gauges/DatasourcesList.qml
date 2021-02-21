@@ -598,6 +598,73 @@ ListModel {
         stepsize : "30"
         divisor : "1"
     }
+
+    ListElement {
+        sourcename:"DigitalInput1"
+        defaultsymbol: ""
+        titlename:"DigitalInput 1"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"DigitalInput2"
+        defaultsymbol: ""
+        titlename:"DigitalInput 2"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"DigitalInput3"
+        defaultsymbol: ""
+        titlename:"DigitalInput 3"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"DigitalInput4"
+        defaultsymbol: ""
+        titlename:"DigitalInput 4"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"DigitalInput5"
+        defaultsymbol: ""
+        titlename:"DigitalInput 5"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"DigitalInput6"
+        defaultsymbol: ""
+        titlename:"DigitalInput 6"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"DigitalInput7"
+        defaultsymbol: ""
+        titlename:"DigitalInput 7"
+        decimalpoints : "0"
+        maxvalue : "1"
+        stepsize : "1"
+        divisor : "1"
+    }
+
+
+
     ListElement {
         sourcename:"distancetoempty"
         defaultsymbol: "km"

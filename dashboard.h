@@ -443,6 +443,13 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal TiretempLR READ TiretempLR WRITE setTiretempLR NOTIFY TiretempLRChanged)
     Q_PROPERTY(qreal TiretempRR READ TiretempRR WRITE setTiretempRR NOTIFY TiretempRRChanged)
 
+    Q_PROPERTY(qreal DigitalInput1 READ DigitalInput1 WRITE setDigitalInput1 NOTIFY DigitalInput1Changed)
+    Q_PROPERTY(qreal DigitalInput2 READ DigitalInput2 WRITE setDigitalInput2 NOTIFY DigitalInput2Changed)
+    Q_PROPERTY(qreal DigitalInput3 READ DigitalInput3 WRITE setDigitalInput3 NOTIFY DigitalInput3Changed)
+    Q_PROPERTY(qreal DigitalInput4 READ DigitalInput4 WRITE setDigitalInput4 NOTIFY DigitalInput4Changed)
+    Q_PROPERTY(qreal DigitalInput5 READ DigitalInput5 WRITE setDigitalInput5 NOTIFY DigitalInput5Changed)
+    Q_PROPERTY(qreal DigitalInput6 READ DigitalInput6 WRITE setDigitalInput6 NOTIFY DigitalInput6Changed)
+    Q_PROPERTY(qreal DigitalInput7 READ DigitalInput7 WRITE setDigitalInput7 NOTIFY DigitalInput7Changed)
 
     //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
     public:
@@ -888,6 +895,15 @@ class DashBoard : public QObject
     void setTiretempRF(const qreal &TiretempRF);
     void setTiretempRR(const qreal &TiretempRR);
     void setTiretempLR(const qreal &TiretempLR);
+
+    void setDigitalInput1(const qreal &DigitalInput1);
+    void setDigitalInput2(const qreal &DigitalInput2);
+    void setDigitalInput3(const qreal &DigitalInput3);
+    void setDigitalInput4(const qreal &DigitalInput4);
+    void setDigitalInput5(const qreal &DigitalInput5);
+    void setDigitalInput6(const qreal &DigitalInput6);
+    void setDigitalInput7(const qreal &DigitalInput7);
+
     qreal Odo() const;
 
     //Tripmeter
@@ -1325,6 +1341,16 @@ class DashBoard : public QObject
     qreal TiretempRR()const;
     qreal TiretempLR()const;
 
+    qreal DigitalInput1()const;
+    qreal DigitalInput2()const;
+    qreal DigitalInput3()const;
+    qreal DigitalInput4()const;
+    qreal DigitalInput5()const;
+    qreal DigitalInput6()const;
+    qreal DigitalInput7()const;
+
+
+
 
 signals:
 
@@ -1751,6 +1777,16 @@ signals:
     void TiretempRFChanged(qreal TiretempRF);
     void TiretempRRChanged(qreal TiretempRR);
     void TiretempLRChanged(qreal TiretempLR);
+
+    void DigitalInput1Changed(qreal DigitalInput1);
+    void DigitalInput2Changed(qreal DigitalInput2);
+    void DigitalInput3Changed(qreal DigitalInput3);
+    void DigitalInput4Changed(qreal DigitalInput4);
+    void DigitalInput5Changed(qreal DigitalInput5);
+    void DigitalInput6Changed(qreal DigitalInput6);
+    void DigitalInput7Changed(qreal DigitalInput7);
+
+
 private:
     // Odometer
 
@@ -2190,6 +2226,14 @@ private:
     qreal m_TiretempRF;
     qreal m_TiretempRR;
     qreal m_TiretempLR;
+
+    qreal m_DigitalInput1;
+    qreal m_DigitalInput2;
+    qreal m_DigitalInput3;
+    qreal m_DigitalInput4;
+    qreal m_DigitalInput5;
+    qreal m_DigitalInput6;
+    qreal m_DigitalInput7;
 
 };
 

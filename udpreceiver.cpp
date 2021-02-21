@@ -802,25 +802,25 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setBoostPreskpa(Value);
             break;
         case 279:
-            //Digital Input 1
+            m_dashboard->setDigitalInput1(Value);
             break;
         case 280:
-            //Digital Input 2
+            m_dashboard->setDigitalInput2(Value);
             break;
         case 281:
-            //Digital Input 3
+            m_dashboard->setDigitalInput3(Value);
             break;
         case 282:
-            //Digital Input 4
+            m_dashboard->setDigitalInput4(Value);
             break;
         case 283:
-            //Digital Input 5
+            m_dashboard->setDigitalInput5(Value);
             break;
         case 284:
-            //Digital Input 6
+            m_dashboard->setDigitalInput6(Value);
             break;
         case 285:
-            //Digital Input 7
+            m_dashboard->setDigitalInput7(Value);
             break;
         case 286:
             m_dashboard->setUserchannel1(Value);
