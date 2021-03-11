@@ -10,3 +10,4 @@ echo -e "\e[39m"
 rm ~/test.tmp
 echo -e "\e[32mFinished"
 echo -e "\e[39m"
+vcgencmd measure_volts core
