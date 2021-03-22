@@ -93,7 +93,7 @@ void GoPro::goprorec(const QString &record)
 
 
     QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-    GoPro::connect(manager, SIGNAL(finished(QNetworkReply*)),this, SLOT(replyFinished(QNetworkReply*)));
+    //GoPro::connect(manager, SIGNAL(finished(QNetworkReply*)),this, SLOT(replyFinished(QNetworkReply*)));
     manager->get(QNetworkRequest(QUrl(QString (Command) + QString (cmdstatus))));
     //qDebug() << "sending HTTP request " <<QString (Command) + QString (cmdstatus);
 }
