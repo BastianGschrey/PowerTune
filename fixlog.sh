@@ -7,4 +7,4 @@ echo "Modify Journal.conf"
 sudo sed -i -e 's/#Storage=auto/Storage=none/g' /etc/systemd/journald.conf
 #Disable rsyslog
 echo "Disable rsyslog"
-sudo systemctl stop rsyslog
+sudo systemctl disable rsyslog
