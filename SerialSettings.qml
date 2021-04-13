@@ -575,7 +575,7 @@ Quick1.TabView {
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                             Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                         }
-                        Text  { text: " V 1.93w " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: " V 1.93x " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 /*
                         Slider {
                             id:brightness
@@ -1922,7 +1922,7 @@ Quick1.TabView {
                     //develtest.enabled = false;
                     }
                 }
-                Button {
+                /*Button {
                     id: develtest2
                     text: "Development test"
                     width: extrarect.width / 5
@@ -1933,7 +1933,7 @@ Quick1.TabView {
                     Calculations.startdragtimer();
                     }
                 }
-
+/*
                 Text { text: " "
                     font.pixelSize: extrarect.width / 55 }
 
