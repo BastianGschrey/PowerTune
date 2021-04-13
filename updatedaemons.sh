@@ -1,4 +1,7 @@
 #!/bin/sh
+echo "Disable System Logs"
+cd /home/pi/src
+./fixlog.sh
 echo "Fetching latest Daemons"
 cd /home/pi/src
 git pull
