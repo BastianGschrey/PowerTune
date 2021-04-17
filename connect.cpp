@@ -1187,19 +1187,10 @@ void Connect::update()
 }
 void Connect::changefolderpermission()
 {
-
-    QProcess *p = new QProcess( this );
-
-    if (p)
-    {
-        p->setEnvironment( QProcess::systemEnvironment() );
-        p->setProcessChannelMode( QProcess::MergedChannels );
-        p->start("sudo chown -R pi:pi /home/pi/KTracks", QStringList() << "echo" << "hi" );
-        p->waitForStarted();
-
-        connect( p, SIGNAL(readyReadStandardOutput()), this, SLOT(processOutput()) );
-        reboot();
-    }
+    QProcess *process = new QProcess(this);
+    process->start("sudo chown -R pi:pi /home/pi/KTracks");
+    process->waitForFinished(100); // 10 minutes time before timeout
+    reboot();
 }
 void Connect::shutdown()
 {
