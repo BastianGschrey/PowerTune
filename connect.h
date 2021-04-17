@@ -81,6 +81,7 @@ public:
     Q_INVOKABLE void openConnection(const QString &portName, const int &ecuSelect);
     Q_INVOKABLE void closeConnection();
     Q_INVOKABLE void update();
+    Q_INVOKABLE void changefolderpermission();
     Q_INVOKABLE void shutdown();
     Q_INVOKABLE void reboot();
     Q_INVOKABLE void turnscreen();

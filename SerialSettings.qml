@@ -7,13 +7,17 @@ import QtSensors 5.0
 import QtQuick.Controls.Styles 1.4
 import QtMultimedia 5.8
 import "qrc:/Gauges/"
+import DLM 1.0
 
 Quick1.TabView {
     id: tabView
     anchors.fill: parent
 
     property int lastdashamount
-
+    DLM
+    {
+        id:downloadManager
+    }
 
     Rectangle{
         id: keyboardcontainer
@@ -575,7 +579,7 @@ Quick1.TabView {
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                             Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                         }
-                        Text  { text: " V 1.93x " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: " V 1.95 " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 /*
                         Slider {
                             id:brightness
@@ -1598,7 +1602,7 @@ Quick1.TabView {
                     width: daemons.width / 3
                     height: daemons.height /15
                     font.pixelSize: daemons.width / 55
-                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata","Adaptronic CAN","Motec M1","AEM V2","AUDI B7","BRZ FRS 86","ECU Masters","Audi B8","Emtron","Holley","MaxxECU","Barra FG MK1","Barra FG MK1 + OBD Polling","Barra BX ","Barra BX + OBD Polling","Barra FG2x","Barra FG2x + OBD Polling","EVO X Test","Blackbox M3","NISSAN 370Z Test","GM: LS2-LS7 CAN","NISSAN 350Z Test","Test Megasquirt CAN Simplified","Test EMTECH EMS CAN","Subaru Test","Motec Set3 ADL","Testdaemon","Ecoboost","Emerald ECU","WolfEMSbeta"]
+                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata","Adaptronic CAN","Motec M1","AEM V2","AUDI B7","BRZ FRS 86","ECU Masters","Audi B8","Emtron","Holley","MaxxECU","Barra FG MK1","Barra FG MK1 + OBD Polling","Barra BX ","Barra BX + OBD Polling","Barra FG2x","Barra FG2x + OBD Polling","EVO X Test","Blackbox M3","NISSAN 370Z Test","GM: LS2-LS7 CAN","NISSAN 350Z Test","Test Megasquirt CAN Simplified","Test EMTECH EMS CAN","Subaru Test","Motec Set3 ADL","Testdaemon","Ecoboost","Emerald ECU"]
                     delegate: ItemDelegate {
                         width: daemonselect.width
                         text: daemonselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -1775,7 +1779,7 @@ Quick1.TabView {
                 anchors.top :parent.top
                 anchors.topMargin: parent.height / 20
                 anchors.right: parent.right
-                rows: 10
+                rows: 12
                 columns: 2
                 spacing: parent.width /150
 
@@ -1917,26 +1921,61 @@ Quick1.TabView {
                     font.pixelSize: extrarect.width / 55
 
                     onClicked: {
+
                     //Arduino.openConnection("COM11");
                     Connect.restartDaemon();
                     //develtest.enabled = false;
                     }
                 }
-                /*Button {
-                    id: develtest2
-                    text: "Development test"
+                Text { text: " "
+                    font.pixelSize: extrarect.width / 55 }
+                Button {
+                    id: trackUpdate
+                    text: "Update Tracks"
                     width: extrarect.width / 5
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
-
                     onClicked: {
-                    Calculations.startdragtimer();
+                    downloadManager.append(""); // needed as a workarround
+                    downloadManager.append("https://gitlab.com/PowerTuneDigital/PowertuneTracks/-/raw/main/repo.txt");
+                    downloadManager.append(""); // needed as a workarround
+                    consoleText.append("Downloading Tracks for Laptimer :");
+                    trackUpdate.enabled = false;
+                    downloadprogress.indeterminate = true;
                     }
                 }
-/*
                 Text { text: " "
                     font.pixelSize: extrarect.width / 55 }
+                Quick1.ProgressBar {
+                    id: downloadprogress
+                    width: extrarect.width / 5
+                    height: extrarect.height /15
 
+                }
+                Text { text: " "
+                    font.pixelSize: extrarect.width / 55 }
+                Text {
+                    id: downloadspeedtext
+                    text: downloadManager.downloadStatus
+                    font.pixelSize: extrarect.width / 55
+                    onTextChanged: {
+                        if(downloadspeedtext.text == "Finished")
+                        {
+                            //trackUpdate.enabled = true;
+                            downloadprogress.indeterminate = false;
+                            downloadspeedtext.text = " ";
+                            Connect.changefolderpermission();
+                            Connect.reboot();
+                        }
+                    }
+                    }
+                Text {
+                    id: downloadfilenametext
+                    text: downloadManager.downloadFilename
+                    font.pixelSize: extrarect.width / 55
+                    visible: false
+                    onTextChanged: consoleText.append(downloadManager.downloadFilename);
+                    }
 /*
                 Button {
                     id: develtest1
@@ -1950,5 +1989,5 @@ Quick1.TabView {
             }
         }
     }
-///////////////////////////////////////////////////////////////////////////////////////////
+
 }

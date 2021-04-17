@@ -4,7 +4,10 @@
 #include <QtQml>
 #include <QFileSystemModel>
 #include "connect.h"
-
+#include "iomapdata.h"
+#include "downloadmanager.h"
+#include <cstdio>
+    ioMapData mpd;
 
 int main(int argc, char *argv[])
 {
@@ -27,11 +30,14 @@ int main(int argc, char *argv[])
     filemodel.setFilter(QDir::NoDotAndDotDot |QDir::Files);
     engine.rootContext()->setContextProperty("my_model", &pathmodel);
     */
+    qmlRegisterType<ioMapData>("IMD", 1, 0, "IMD");
+    qmlRegisterType<DownloadManager>("DLM", 1, 0, "DLM");
     qmlRegisterType<Connect>("com.powertune", 1, 0, "ConnectObject");
+    //engine.rootContext()->setContextProperty("geopath", QVariant::fromValue(mpd.loadMapData("Australia","Luddenham.txt")));
+    engine.rootContext()->setContextProperty("IMD", new ioMapData(&engine));
+    engine.rootContext()->setContextProperty("DLM", new DownloadManager(&engine));
     engine.rootContext()->setContextProperty("Connect", new Connect(&engine));
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-
-
     return app.exec();
 
 }

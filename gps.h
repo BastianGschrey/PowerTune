@@ -14,7 +14,8 @@ class GPS : public QObject
 public:
     explicit GPS(QObject *parent = 0);
     explicit GPS(DashBoard *dashboard, QObject *parent = 0);
-    Q_INVOKABLE void defineFinishLine(const double & Y1,const double & X1,const double & Y2,const double & X2,const int & linedir);
+    Q_INVOKABLE void defineFinishLine(const qreal & Y1,const qreal & X1,const qreal & Y2,const qreal & X2);
+    Q_INVOKABLE void defineFinishLine2(const qreal & Y1,const qreal & X1,const qreal & Y2,const qreal & X2);
     Q_INVOKABLE void resetLaptimer();
 
 private:

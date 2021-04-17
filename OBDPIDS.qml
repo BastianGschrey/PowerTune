@@ -307,12 +307,18 @@ Button {
                 text: qsTr("Cat Temp: Bank 2,S2")
                 font.pixelSize: obdselect.width / 55
             }
-          /*  CheckBox {
+            CheckBox {
+                id: obd64
+                visible: false;
+                text: qsTr("")
+                font.pixelSize: obdselect.width / 55
+            }
+            CheckBox {
                 id: obd65
                 visible: false;
-                text: qsTr("Mon stat this drive cycle")
+                text: qsTr("")
                 font.pixelSize: obdselect.width / 55
-            }*/
+            }
             CheckBox {
                 id: obd66
                 visible: false;

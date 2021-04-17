@@ -1185,7 +1185,22 @@ void Connect::update()
         //connect( p, SIGNAL(readyReadStandardError()), this, SLOT(ReadErr()) );
     }
 }
+void Connect::changefolderpermission()
+{
 
+    QProcess *p = new QProcess( this );
+
+    if (p)
+    {
+        p->setEnvironment( QProcess::systemEnvironment() );
+        p->setProcessChannelMode( QProcess::MergedChannels );
+        p->start("chown -R pi:pi /home/pi/KTracks", QStringList() << "echo" << "hi" );
+        p->waitForStarted();
+
+        connect( p, SIGNAL(readyReadStandardOutput()), this, SLOT(processOutput()) );
+
+    }
+}
 void Connect::shutdown()
 {
     m_dashBoard->setSerialStat("Shutting Down");

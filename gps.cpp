@@ -16,17 +16,28 @@ QByteArray ACK10HZ = QByteArray::fromHex("b562050102000608");
 QByteArray NACK10HZ = QByteArray::fromHex("050002");
 QByteArray line;
 int Laps = 0;
-double startlineX1 ; //Longitude
-double startlineX2 ; //Longitude
-double startlineY1 ; //Latitude
-double startlineY2 ; //Latitude
-double m;
-double b;
-double interrim;
-double intercept;
-double currentintercept;
-double previousintercept;
+qreal startlineX1 ; //Longitude
+qreal startlineX2 ; //Longitude
+qreal startlineY1 ; //Latitude
+qreal startlineY2 ; //Latitude
+qreal start2lineX1 ; //Longitude
+qreal start2lineX2 ; //Longitude
+qreal start2lineY1 ; //Latitude
+qreal start2lineY2 ; //Latitude
+qreal m;
+qreal b;
+qreal m2;
+qreal b2;
+qreal interrim;
+qreal intercept;
+qreal currentintercept;
+qreal currentintercept2;
+qreal previousintercept;
+qreal previousintercept2;
 int linedirection; // Direction of the finish line 0 = Latitude 1 = Longitude
+int line2direction = 2; // Direction of the finish line 0 = Latitude 1 = Longitude
+int zeroslope;
+int zeroslope2;
 
 GPS::GPS(QObject *parent)
     : QObject(parent)
@@ -348,16 +359,69 @@ QString GPS::convertToDecimal(const QString & coord, const QString & dir)
 
 //Laptimer
 
-void GPS::defineFinishLine(const double & Y1,const double & X1,const double & Y2,const double & X2,const int & linedir)
+void GPS::defineFinishLine(const qreal & Y1,const qreal & X1,const qreal & Y2,const qreal & X2)
 {
-    linedirection = linedir;
+    //linedirection = linedir;
     startlineX1 = X1; //Longitude
     startlineX2 = X2; //Longitude
     startlineY1 = Y1; //Latitude
     startlineY2 = Y2; //Latitude
     m = (startlineY1-startlineY2) / (startlineX1-startlineX2);
-    b = startlineY1 - (m*startlineX1);
-    qDebug()<<"Linedir"<< Y1<<X1<<Y2<<X2;
+    qDebug()<<"Finish Line 1 "<< Y1<<X1<<Y2<<X2;
+    if (startlineX1-startlineX2 == 0 )
+    {
+        qDebug()<<"Zero Slope ";
+         b = startlineY1;
+        zeroslope = 0;
+    }
+    else
+    {
+        zeroslope = 1;
+        b = startlineY1 - (m*startlineX1);
+    }
+    if (startlineY1 - startlineY2 == 0  )
+    {
+        qDebug()<<"Zero Slope ";
+        zeroslope = 0;
+        b = startlineY1;
+    }
+    else
+    {
+        zeroslope = 1;
+        b = startlineY1 - (m*startlineX1);
+    }
+}
+
+void GPS::defineFinishLine2(const qreal & Y1,const qreal & X1,const qreal & Y2,const qreal & X2)
+{
+    start2lineX1 = X1; //Longitude
+    start2lineX2 = X2; //Longitude
+    start2lineY1 = Y1; //Latitude
+    start2lineY2 = Y2; //Latitude
+    m2 = (start2lineY1-start2lineY2) / (start2lineX1-start2lineX2);
+    if (start2lineX1-start2lineX2 == 0 )
+    {
+        qDebug()<<"Zero Slope ";
+         b2 = start2lineY1;
+        zeroslope2 = 0;
+    }
+    else
+    {
+        zeroslope2 = 1;
+        b2 = start2lineY1 - (m2*start2lineX1);
+    }
+    if (start2lineY1 - start2lineY2 == 0  )
+    {
+        qDebug()<<"Zero Slope ";
+        zeroslope2 = 0;
+        b2 = start2lineY1;
+    }
+    else
+    {
+        zeroslope2 = 1;
+        b2 = start2lineY1 - (m2*start2lineX1);
+    }
+
 }
 void GPS::resetLaptimer()
 {
@@ -367,81 +431,111 @@ void GPS::resetLaptimer()
 }
 void GPS::checknewLap()
 {
-    currentintercept = m_dashboard->gpsLatitude() -( (m * m_dashboard->gpsLongitude()) + b);
-    if ((previousintercept <= 0 && currentintercept >= 0) || (previousintercept >= 0 && currentintercept <= 0) || (currentintercept == 0))
+    //Somehow we need to add something that if the Second Finishline exists it needs to stop the timer
+       //needed for Finish Line1
+
+
+
+
+    //Somehow we need to add something that if the Second Finishline exists it needs to stop the timer
+    if (zeroslope != 0)
     {
-        switch (linedirection)
-        {
-        case 1:
-
-        //Finish Line East to West
-        if (m_dashboard->gpsLongitude() <= startlineX2 && m_dashboard->gpsLongitude() >= startlineX1 )
-        {
-            qDebug() << "1";
-            if (m_timer.isValid() == true)
-            {
-                QTime y(0, 0);
-                                y = y.addMSecs(m_timer.elapsed());
-                                if (Laps == 1)
-                                {
-                                    fastestlap = y;
-                                    m_dashboard->setbestlaptime(fastestlap.toString("mm:ss.zzz"));
-                                }
-                                if (y < fastestlap)
-                                {
-                                   // qDebug() << "y is smaller";
-                                fastestlap = y;
-                                m_dashboard->setbestlaptime(y.toString("mm:ss.zzz"));
-                                }
-                                Laps++;
-                                m_dashboard->setlaptime(y.toString("mm:ss.zzz"));
-                                m_dashboard->setcurrentLap(Laps);
-                                m_timer.restart();
-            }
-            else{
-                m_timer.start();
-                Laps++;
-                m_dashboard->setcurrentLap(Laps);
-            }
-        }
-            break;
-        case 2:
-
-        //Finish Line North to South
-        if (m_dashboard->gpsLatitude() <= startlineY2 && m_dashboard->gpsLatitude() >= startlineY1 )
-        {
-            //qDebug() << "2";
-            if (m_timer.isValid() == true)
-            {
-                QTime y(0, 0);
-                                y = y.addMSecs(m_timer.elapsed());
-                                if (Laps == 1)
-                                {
-                                    fastestlap = y;
-                                    m_dashboard->setbestlaptime(fastestlap.toString("mm:ss.zzz"));
-                                }
-                                if (y < fastestlap)
-                                {
-                                   // qDebug() << "y is smaller";
-                                fastestlap = y;
-                                m_dashboard->setbestlaptime(y.toString("mm:ss.zzz"));
-                                }
-                                Laps++;
-                                m_dashboard->setlaptime(y.toString("mm:ss.zzz"));
-                                m_dashboard->setcurrentLap(Laps);
-                                m_timer.restart();
-            }
-            else{
-                m_timer.start();
-                Laps++;
-                m_dashboard->setcurrentLap(Laps);
-            }
-        }
-        break;
-
-    default:
-        break;
+    currentintercept = m_dashboard->gpsLatitude() -( (m * m_dashboard->gpsLongitude()) + b);     //needed for Finish Line1
     }
+    else
+    {
+    currentintercept = m_dashboard->gpsLatitude() - b;
+    }
+
+    // Intercept 2  for second finish line
+
+    if (zeroslope2 != 0)
+    {
+    currentintercept2 = m_dashboard->gpsLatitude() -( (m2 * m_dashboard->gpsLongitude()) + b2); //needed for Finish Line2
+    }
+    else
+    {
+    currentintercept2 = m_dashboard->gpsLatitude() - b2; //needed for Finish Line2
+    }
+    if ((previousintercept <= 0 && currentintercept >= 0) || (previousintercept >= 0 && currentintercept <= 0) || (currentintercept == 0) ||(previousintercept2 <= 0 && currentintercept2 >= 0) || (previousintercept2 >= 0 && currentintercept2 <= 0) || (currentintercept2 == 0))
+    {
+
+        //Finish Line 1
+        if (((m_dashboard->gpsLongitude() <= startlineX2 && m_dashboard->gpsLongitude() >= startlineX1 )) || ((m_dashboard->gpsLatitude() <= startlineY2 && m_dashboard->gpsLatitude() >= startlineY1 )))
+        {
+            if (m_timer.isValid() == true)
+            {
+                QTime y(0, 0);
+                                y = y.addMSecs(m_timer.elapsed());
+                                if (Laps == 1)
+                                {
+                                    fastestlap = y;
+                                    m_dashboard->setbestlaptime(fastestlap.toString("mm:ss.zzz"));
+                                }
+                                if (y < fastestlap)
+                                {
+                                   // qDebug() << "y is smaller";
+                                fastestlap = y;
+                                m_dashboard->setbestlaptime(y.toString("mm:ss.zzz"));
+                                }
+                                Laps++;
+                                m_dashboard->setlaptime(y.toString("mm:ss.zzz"));
+                                m_dashboard->setcurrentLap(Laps);
+                                if(line2direction == 2)
+                                {
+                                    m_timer.restart();
+                                }
+                                else
+                                {
+                                    m_timer.invalidate();
+                                }
+            }
+            else{
+                m_timer.start();
+                Laps++;
+                m_dashboard->setcurrentLap(Laps);
+            }
+        }
+
+
+        if (((m_dashboard->gpsLongitude() <= start2lineX2 && m_dashboard->gpsLongitude() >= start2lineX1 ))||((m_dashboard->gpsLatitude() <= start2lineY2 && m_dashboard->gpsLatitude() >= start2lineY1 )))
+        {
+
+            if (m_timer.isValid() == true)
+            {
+                QTime y(0, 0);
+                                y = y.addMSecs(m_timer.elapsed());
+                                if (Laps == 1)
+                                {
+                                    fastestlap = y;
+                                    m_dashboard->setbestlaptime(fastestlap.toString("mm:ss.zzz"));
+                                }
+                                if (y < fastestlap)
+                                {
+                                   // qDebug() << "y is smaller";
+                                fastestlap = y;
+                                m_dashboard->setbestlaptime(y.toString("mm:ss.zzz"));
+                                }
+                                Laps++;
+                                m_dashboard->setlaptime(y.toString("mm:ss.zzz"));
+                                m_dashboard->setcurrentLap(Laps);
+                                if(line2direction == 2)
+                                {
+                                    m_timer.restart();
+                                }
+                                else
+                                {
+                                    m_timer.invalidate();
+                                }
+            }
+            else{
+                m_timer.start();
+                Laps++;
+                m_dashboard->setcurrentLap(Laps);
+            }
+        }    
     }
     previousintercept = currentintercept;
+    previousintercept2 = currentintercept2;
+
 }

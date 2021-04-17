@@ -82,5 +82,28 @@
         <file>Gauges/StateGIF.qml</file>
         <file>Gauges/createStateGIF.js</file>
         <file>graphics/StateGIF.gif</file>
+        <file>KTracks/Countries.txt</file>
+        <file>KTracks/Australia/Luddenham.txt</file>
+        <file>KTracks/Australia/Archer Field Drift Park.txt</file>
+        <file>KTracks/Canada/Toronto Motorsports Park.txt</file>
+        <file>KTracks/Australia/Lakeside Park.txt</file>
+        <file>KTracks/South Africa/Redstar Raceway.txt</file>
+        <file>KTracks/Japan/Mt Haruna (Akina).txt</file>
+        <file>KTracks/Australia/Barbagallo Large.txt</file>
+        <file>KTracks/New Zealand/Bruce McLaren Motorsportpark Large.txt</file>
+        <file>KTracks/Japan/Tsukuba Circuit.txt</file>
+        <file>KTracks/Malaysia/Sepang F1 Circuit.txt</file>
+        <file>KTracks/Germany/Nürburgring Nordschleife.txt</file>
+        <file>KTracks/Australia/Queensland Layout 1.txt</file>
+        <file>KTracks/Australia/Queensland Layout 2.txt</file>
+        <file>KTracks/Australia/Queensland Layout 3.txt</file>
+        <file>KTracks/Australia/Wakefield inner Circuit.txt</file>
+        <file>KTracks/Australia/Wakefield outer Circuit.txt</file>
+        <file>KTracks/Australia/Collie Motorplex.txt</file>
+        <file>KTracks/New Zealand/Pukekohe Park Raceway.txt</file>
+        <file>KTracks/Australia/Carnell Raceway.txt</file>
+        <file>KTracks/USA/Button Willow 1.txt</file>
+        <file>KTracks/South Africa/Zwartkops Raceway.txt</file>
+        <file>KTracks/South Africa/Phakisa.txt</file>
     </qresource>
 </RCC>

@@ -6,6 +6,11 @@ import QtQuick.Controls.Styles 1.4
 
 import QtQuick.Layouts 1.0
 import QtQuick.XmlListModel 2.0
+import IMD 1.0
+
+
+
+
 
 Rectangle {
     id: mapItem
@@ -15,11 +20,17 @@ Rectangle {
     property double startTime: 0
     property int msecondsElapsed: 0
 
+    property real linex1;
+    property real  liney1;
+    property real linex2;
+    property real  liney2;
+
     function restartCounter()  {
 
         mapItem.startTime = 0;
 
     }
+
 
     function timeChanged()  {
         if(mapItem.startTime==0)
@@ -29,6 +40,7 @@ Rectangle {
         var currentTime = new Date().getTime();
         mapItem.msecondsElapsed = (currentTime-startTime)/100;
     }
+
 
     Timer  {
         id: elapsedTimer
@@ -42,6 +54,7 @@ Rectangle {
 
         }
     }
+
 
     Connections{
         target: Dashboard
@@ -63,31 +76,6 @@ Rectangle {
     Rectangle{
         anchors.fill: parent
         color: "black"
-        Plugin {
-            id: mapPlugin
-            name: "osm"
-            //Offline directory for Map Tiles
-            PluginParameter {
-                name: 'osm.mapping.offline.directory'
-                //value: ':/GPSTracks/'
-                value: "/home/pi/maptiles/"
-            }
-            PluginParameter {
-                name: 'osm.mapping.providersrepository.disabled'
-                value: true
-            }
-
-            PluginParameter {
-                name: "osm.mapping.providersrepository.address"
-                //value: 'qrc:/GPSTracks/'
-                value: "/home/pi/maptiles/"
-            }
-
-        }
-
-
-
-
 
         Connections{
             target: Dashboard
@@ -98,31 +86,54 @@ Rectangle {
         }
 
         Map {
-            id: map
-            height : 480
-            width : 400
-            plugin: mapPlugin
-            zoomLevel: 16
-            activeMapType: map.supportedMapTypes[1] //6 is good to get tracks
-            copyrightsVisible : false
-            gesture.enabled: false
-            tilt: 0
-            bearing: Dashboard.gpsbaering
-            color: "black"
+                id: map
+                copyrightsVisible : false
+                height : 480
+                width : 400
+                //plugin: Plugin { name: "osm" }
+                tilt: 0
+        }
 
-            // Draw polyline
+
             Map {
-                MapPolyline {
-                    line.width: 10
-                    line.color: 'green'
-                    path: [
-                        //152.9653575639266,-27.22864613746248,0 152.9640338064991,-27.22827994189477,0 152.9634960611712,-27.22815172828676,0 152.963237125486,-27.22808317144805,
-                        { latitude: -27.22864613746248, longitude: 152.9653575639266 },
-                        { latitude: -27.22815172828676, longitude: 152.963237125486},
+                id: mapOverlay
+                anchors.fill: map
+                plugin: Plugin { name: "itemsoverlay" }
+                gesture.enabled: false
+                center: map.center
+                color: 'transparent' // Necessary to make this map transparent
+                zoomLevel: map.zoomLevel
+                tilt: map.tilt;
 
-                    ]
+                MapPolyline
+                {
+                    id: trackLine
+                    line.width: 10
+                    line.color: 'white'
                 }
-            }
+
+                MapPolyline {
+                    id:startline
+                    line.width: 6
+                    line.color: 'green'
+                }
+                MapPolyline {
+                    id:finishline2
+                    line.width: 6
+                    line.color: 'red'
+
+                }
+                
+                Component.onCompleted:
+                {
+                    var lines = []
+                    for(var i=0;i<geopath.size();i++)
+                    {
+                        lines[i] = geopath.coordinateAt(i)
+                    }
+                    trackLine.path = lines
+
+                }
 
             // Draw a small red circle for current Vehicle Location
             MapQuickItem {
@@ -146,8 +157,8 @@ Rectangle {
             height: 30
             anchors.left: map.right
             font.pixelSize: 20
-            //model: [ "Current Position","Australia","Germany","New Zealand","South Africa","United Kingdom","USA"]
-            model: ["Current Position","Australia","Germany","New Zealand","Malaysia","South Africa","USA"]
+           // model: ["Current Position","Australia","Germany","Japan","New Zealand","Malaysia","South Africa","USA"]
+
             delegate: ItemDelegate {
                 width: countryselect.width
                 text: countryselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -158,6 +169,14 @@ Rectangle {
                 hoverEnabled: countryselect.hoverEnabled
             }
             onCurrentIndexChanged: changecountry.change()
+            Component.onCompleted: {
+                var countrylist = []
+                for(var i=0;i<mapIO.getCountryCount();i++)
+                {
+                    countrylist[i] = mapIO.getCountries()[i];
+                }
+                countryselect.model = countrylist;
+                }
         }
         ComboBox {
             id: trackselect
@@ -165,7 +184,6 @@ Rectangle {
             height: 30
             anchors.left: countryselect.right
             font.pixelSize: 20
-            model: [ "Wakefield Park"]
             delegate: ItemDelegate {
                 width: trackselect.width
                 text: trackselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -176,9 +194,23 @@ Rectangle {
                 hoverEnabled: trackselect.hoverEnabled
             }
             onCurrentIndexChanged: changetrack.change()
-
+            onModelChanged: changetrack.change()//needed if when the Country is changed
         }
-
+        /*
+        ComboBox {
+            id: cbxzoom
+            //visible: false
+            model:["12","13","14","15","16","17","18","19","20"]
+            width: 170
+            height: 30
+            anchors.right: stop.left
+             anchors.bottom: parent.bottom
+             anchors.margins: 20
+            font.pixelSize: 20
+            onCurrentIndexChanged: {
+                        map.zoomLevel = cbxzoom.textAt(cbxzoom.currentIndex)
+                        }
+        }*/
         Button {
             id: stop
             //visible: false
@@ -318,7 +350,10 @@ Rectangle{
 
 
 }
-
+IMD
+{
+    id:mapIO
+}
 
 
         Item
@@ -326,7 +361,7 @@ Rectangle{
             id: changecountry
             function change(){
 
-                if (countryselect.textAt(countryselect.currentIndex) == "Current Position"){trackselect.model = ["Tilt 0", "Tilt 45"],map.center= QtPositioning.coordinate(-25.804219,28.300091)};
+               /* if (countryselect.textAt(countryselect.currentIndex) == "Current Position"){trackselect.model = ["Tilt 0", "Tilt 45"],map.center= QtPositioning.coordinate(-25.804219,28.300091)};
                 //if (countryselect.textAt(countryselect.currentIndex) == "Current Position"){trackselect.model = ["Tilt 0", "Tilt 45"],map.center= QtPositioning.coordinate(Dashboard.gpsLatitude,Dashboard.gpsLongitude)};
                 if (countryselect.textAt(countryselect.currentIndex) == "Australia"){trackselect.model = ["Barbagallo Raceway","Carrnell Raceway","Collie Motorplex","Lakeside Raceway","Luddenham Raceway","Queensland Raceway","Wakefield Park"]};
                 if (countryselect.textAt(countryselect.currentIndex) == "Germany"){trackselect.model = ["Hockenheim","Nürburgring"]};
@@ -335,38 +370,83 @@ Rectangle{
 
                 if (countryselect.textAt(countryselect.currentIndex) == "South Africa"){trackselect.model = ["Dezzi","Midvaal","Phakisa","Redstar","Zwartkops"]};
                 //if (countryselect.textAt(countryselect.currentIndex) == "United Kingdom"){trackselect.model = ["Silverstone"]};
-                if (countryselect.textAt(countryselect.currentIndex) == "USA"){trackselect.model = ["Buttonwillow"]};
+                if (countryselect.textAt(countryselect.currentIndex) == "USA"){trackselect.model = ["Buttonwillow"]};*/
+                //if (countryselect.textAt(countryselect.currentIndex) == "Australia"){trackselect.model =[ mapIO.getTracks("Australia")];}
+
+                    var lines = []
+                    var l2 = mapIO.getTracks(countryselect.textAt(countryselect.currentIndex));
+                    for(var i=0;i<mapIO.getTrackCount(countryselect.textAt(countryselect.currentIndex));i++)
+                    {
+                        lines[i] = mapIO.getTracks(countryselect.textAt(countryselect.currentIndex))[i];
+                    }
+                    trackselect.model = lines;
+
+
                 console.log(countryselect.textAt(countryselect.currentIndex))
-                changetrack.change()
+                //changetrack.change()
             }
         }
         Item
         {
             id: changetrack
-            function change(){
-                console.log(trackselect.textAt(trackselect.currentIndex))
-                if (trackselect.textAt(trackselect.currentIndex) == "Tilt 0"){map.tilt = 0};
-                if (trackselect.textAt(trackselect.currentIndex) == "Tilt 45"){map.tilt = 45};
-                if (trackselect.textAt(trackselect.currentIndex) == "Bruce McLaren Motorsport Park"){map.center= QtPositioning.coordinate(-38.666331,176.1430453,17),map.zoomLevel = 15.6,map.bearing  = 43,map.tilt = 0};
-                if (trackselect.textAt(trackselect.currentIndex) == "Redstar"){map.center= QtPositioning.coordinate(-26.074283, 28.751711),map.zoomLevel = 16,map.bearing  = 0,map.tilt = 0,Gps.defineFinishLine(-26.075097, 28.755060,-26.075111,28.755229,1)};
+            function change()
+            {
+                /*
+
                 if (trackselect.textAt(trackselect.currentIndex) == "Utah Motorsport Park"){map.center= QtPositioning.coordinate(40.579618,-112.3805621,398),map.zoomLevel = 15.1 ,map.bearing  = 90,map.tilt = 0};
-                if (trackselect.textAt(trackselect.currentIndex) == "Wakefield Park"){map.center= QtPositioning.coordinate(-34.840764,149.686800),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(-34.840111,149.685229,-34.840172,149.685433,1)};
-                if (trackselect.textAt(trackselect.currentIndex) == "Nürburgring"){map.center= QtPositioning.coordinate(50.358917, 6.965215),map.zoomLevel = 16,map.bearing  = 0,map.tilt = 0};
-                if (trackselect.textAt(trackselect.currentIndex) == "Zwartkops"){map.center= QtPositioning.coordinate(-25.809960, 28.111175),map.zoomLevel = 16.6,map.bearing  = 0,map.tilt = 0,Gps.defineFinishLine(-25.809477,28.112105,-25.809404,28.112276,1)};
-                if (trackselect.textAt(trackselect.currentIndex) == "Pukekohe Park"){map.center= QtPositioning.coordinate(-37.215300, 174.919707),map.zoomLevel = 15.6,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(-37.215564,174.915710,-37.215510, 174.915914,1)}
-                if (trackselect.textAt(trackselect.currentIndex) == "Carrnell Raceway"){map.center= QtPositioning.coordinate(-28.685079, 151.938694),map.zoomLevel = 17,map.tilt = 0,map.bearing  = 22}
-                if (trackselect.textAt(trackselect.currentIndex) == "Phakisa"){map.center= QtPositioning.coordinate(-27.904231, 26.713996),map.zoomLevel = 15.6,map.tilt = 0,map.bearing  = 22}
                 if (trackselect.textAt(trackselect.currentIndex) == "Midvaal"){map.center= QtPositioning.coordinate(-26.612376, 28.059484),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 22,Gps.defineFinishLine(-26.613392, 28.058586,-26.613509,28.058717,1)}
                 if (trackselect.textAt(trackselect.currentIndex) == "Dezzi"){map.center= QtPositioning.coordinate(-30.770474, 30.426004),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 22}
-                if (trackselect.textAt(trackselect.currentIndex) == "Buttonwillow"){map.center= QtPositioning.coordinate(35.491242, -119.545396),map.zoomLevel = 15.4,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(35.488681,-119.544514,35.488858,-119.544521,2)}
-                if (trackselect.textAt(trackselect.currentIndex) == "Sepang"){map.center= QtPositioning.coordinate(2.760217, 101.738092),map.zoomLevel = 15.6,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(2.760652,101.738394,2.760894,101.738374,2)}
-                if (trackselect.textAt(trackselect.currentIndex) == "Barbagallo Raceway"){map.center= QtPositioning.coordinate(-31.664326, 115.789962),map.zoomLevel = 15.7,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(-31.664168,115.786292,-31.664171,115.786459,1)}
-                if (trackselect.textAt(trackselect.currentIndex) == "Collie Motorplex"){map.center= QtPositioning.coordinate(-33.431971, 116.244369),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(-33.430061,116.243180,-33.430184, 116.243386,1)}
-                if (trackselect.textAt(trackselect.currentIndex) == "Lakeside Raceway"){map.center= QtPositioning.coordinate(-27.228108, 152.964956),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 90,Gps.defineFinishLine(-27.228568, 152.964881,-27.228397, 152.964931,2)}
-                if (trackselect.textAt(trackselect.currentIndex) == "Queensland Raceway"){map.center= QtPositioning.coordinate(-27.690381, 152.653035),map.zoomLevel = 16,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(-27.690635, 152.654481,-27.690637, 152.654713,1)}
-                if (trackselect.textAt(trackselect.currentIndex) == "Luddenham Raceway"){map.center= QtPositioning.coordinate(-33.857640, 150.717556),map.zoomLevel = 16.7,map.tilt = 0,map.bearing  = 0,Gps.defineFinishLine(-33.858250, 150.718023,-33.858430, 150.718117,1)}
 
 
+
+*/
+                if(mapIO.getTrackExists(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex)))
+                {
+                    //console.log("getcentreqml");
+                    //console.log(mapIO.getCenter(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex)) + " Position 0");
+
+                    map.center=QtPositioning.coordinate(parseFloat(mapIO.getCenter(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex))[0]),parseFloat(mapIO.getCenter(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex))[1]));
+                    map.zoomLevel = mapIO.getZOOMLEVEL(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex));
+                    map.tilt = 0;
+                    map.bearing = 0;
+                    map.fitViewportToVisibleMapItems()
+                   // console.log("Map Items " + mapOverlay.mapItems )
+
+
+                    linex1 = mapIO.getStartFinishLine(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex))[0];
+                    liney1 = mapIO.getStartFinishLine(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex))[1];
+                    linex2 = mapIO.getStartFinishLine(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex))[2];
+                    liney2 = mapIO.getStartFinishLine(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex))[3];
+                    //TODO fill in DefineFinishLine
+
+                    console.log("QML X1 " +linex1);
+                    Gps.defineFinishLine(linex1,liney1,linex2,liney2);
+                  //
+                    //console.log(mapIO.getStartFinishLine(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex))[0]);
+                    //var lines = []
+                    trackLine.setPath( mapIO.loadMapData(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex)));
+                    startline.path = [
+                                { latitude: linex1, longitude: liney1 },
+                                { latitude: linex2, longitude: liney2},
+                                       ]
+                    //console.log("Tracklinepath " +trackLine.path);
+                    //console.log(lines);
+
+                    if(mapIO.getExistsSecondFinish(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex)))
+                    {
+
+                        var linex21 = mapIO.getSecondFinishLine(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex))[0];
+                        var liney21 = mapIO.getSecondFinishLine(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex))[1];
+                        var linex22 = mapIO.getSecondFinishLine(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex))[2];
+                        var liney22 = mapIO.getSecondFinishLine(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex))[3];
+                        //var direction2 = mapIO.getSecondFinishDirection(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex));
+                        Gps.defineFinishLine2(linex21,liney21,linex22,liney22);
+                        finishline2.path = [
+                                    { latitude: linex21, longitude: liney21 },
+                                    { latitude: linex22, longitude: liney22},
+                                           ]
+                    }
+                }
             }
         }
 

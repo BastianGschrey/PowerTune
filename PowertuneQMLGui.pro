@@ -11,6 +11,9 @@ static {
 
 SOURCES += main.cpp \
     dashboard.cpp \
+    downloadmanager.cpp \
+    iomapdata.cpp \
+    parsegithubdata.cpp \
     serialport.cpp \
     appsettings.cpp \
     gopro.cpp \
@@ -21,6 +24,7 @@ SOURCES += main.cpp \
     AdaptronicSelect.cpp \
     connect.cpp \
     calculations.cpp \
+    textprogressbar.cpp \
     udpreceiver.cpp \
     arduino.cpp \
     wifiscanner.cpp
@@ -36,6 +40,9 @@ include(deployment.pri)
 
 HEADERS += \
     dashboard.h \
+    downloadmanager.h \
+    iomapdata.h \
+    parsegithubdata.h \
     serialport.h \
     appsettings.h \
     gopro.h \
@@ -46,6 +53,7 @@ HEADERS += \
     AdaptronicSelect.h \
     connect.h \
     calculations.h \
+    textprogressbar.h \
     udpreceiver.h \
     arduino.h \
     wifiscanner.h
@@ -53,6 +61,10 @@ HEADERS += \
 
 FORMS +=
 
-DISTFILES +=
+DISTFILES += \
+    KTracks/Australia/KimTestTrack - Copy.txt \
+    KTracks/Australia/stupid2.txt \
+    KTracks/Australia/stupid3.txt \
+    KTracks/Australia/stupid4.txt
 
 
