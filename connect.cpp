@@ -1194,11 +1194,11 @@ void Connect::changefolderpermission()
     {
         p->setEnvironment( QProcess::systemEnvironment() );
         p->setProcessChannelMode( QProcess::MergedChannels );
-        p->start("chown -R pi:pi /home/pi/KTracks", QStringList() << "echo" << "hi" );
+        p->start("sudo chown -R pi:pi /home/pi/KTracks", QStringList() << "echo" << "hi" );
         p->waitForStarted();
 
         connect( p, SIGNAL(readyReadStandardOutput()), this, SLOT(processOutput()) );
-
+        reboot();
     }
 }
 void Connect::shutdown()

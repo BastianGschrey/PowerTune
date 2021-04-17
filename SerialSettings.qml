@@ -1965,7 +1965,7 @@ Quick1.TabView {
                             downloadprogress.indeterminate = false;
                             downloadspeedtext.text = " ";
                             Connect.changefolderpermission();
-                            Connect.reboot();
+
                         }
                     }
                     }
