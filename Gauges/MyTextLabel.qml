@@ -199,7 +199,7 @@ Item {
             }
         Text{
             text: "Warn value high :"
-            font.pointSize: 15
+            font.pointSize: 7
             }
             ////
             Grid {
@@ -231,7 +231,7 @@ Item {
             }
             Text{
                 text: "Warn value low :"
-                font.pointSize: 15
+                font.pointSize: 7
                 }
             Grid {
                 rows: 1
