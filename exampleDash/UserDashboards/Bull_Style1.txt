@@ -1,24 +1,24 @@
 Round gauge,480,159.9987515605493,2.012474012474115,rpm,9000,0,9000,-1000,-180,92,9000,1,-1,-1,0,0,2,38,0,-1,-1,-1,-1,-1,0.5,0.4,0.33,0.25,0,3,92,4,0,0,red,darkred,transparent,transparent,grey,transparent,transparent,transparent,grey,transparent,crimson,transparent,transparent,transparent,true,false,false,Lato,30,50,10,false,Lato,Alternator Light,transparent, ,, ,, ,,
-Text label gauge,530.0249687890135,273.99376299376286,3,DejaVu Sans,18,black,speed,true,0
-Text label gauge,4,91,Fuel pres.,Verdana,10,seashell, ,true,0
-Text label gauge,129.043695380774,88.004158004158,36,Nissan,15,seashell,FuelPress,true,0
-Text label gauge,6,229,BOOST,Verdana,12,gold, ,true,0
-Text label gauge,127,229,5,Nissan,15,seashell,MAP,true,0
-Text label gauge,2,298,BATTERY,Lato,11,gold, ,true,0
-Text label gauge,122,296,14.1,Nissan,12,seashell,BatteryV,true,1
-Text label gauge,5,364,Lambda,Verdana,11,seashell, ,true,0
-Text label gauge,115,366,0.000,Nissan,13,seashell,LAMBDA,true,3
-Text label gauge,690,92,Ethanol,Lato,11,seashell, ,true,0
-Text label gauge,632,89,0,Nissan,15,seashell,fuelcomposition,true,0
-Text label gauge,704,156,WATER,Verdana,11,gold, ,true,0
-Text label gauge,648,155,73,Nissan,15,seashell,Watertemp,true,0
-Text label gauge,716,225,OIL T,Verdana,13,gold, ,true,0
-Text label gauge,658,227,60,Nissan,15,seashell,oiltemp,true,0
-Text label gauge,708,289,OIL P,Verdana,14,gold, ,true,0
-Text label gauge,627,293,49.6,Nissan,14,seashell,oilpres,true,1
-Text label gauge,732,365,ODO,Verdana,12,seashell, ,true,0
-Text label gauge,639,371,105.10,Nissan,9,seashell,Odo,true,2
-Text label gauge,420.9900124843945,216.94178794178796,1188,Nissan,15,seashell,rpm,true,0
-Text label gauge,10,171,IAT,Lato,12,gold, ,true,0
-Text label gauge,121,166,28,Lato,15,seashell,Intaketemp,true,0
+Text label gauge,530.0249687890135,273.99376299376286,3,DejaVu Sans,18,black,speed,true,0,20000,-20000
+Text label gauge,4,91,Fuel pres.,Verdana,10,seashell, ,true,0,20000,-20000
+Text label gauge,129.043695380774,88.004158004158,36,Nissan,15,seashell,FuelPress,true,0,20000,-20000
+Text label gauge,6,229,BOOST,Verdana,12,gold, ,true,0,20000,-20000
+Text label gauge,127,229,5,Nissan,15,seashell,MAP,true,0,20000,-20000
+Text label gauge,2,298,BATTERY,Lato,11,gold, ,true,0,20000,-20000
+Text label gauge,122,296,14.1,Nissan,12,seashell,BatteryV,true,1,20000,-20000
+Text label gauge,5,364,Lambda,Verdana,11,seashell, ,true,0,20000,-20000
+Text label gauge,115,366,0.000,Nissan,13,seashell,LAMBDA,true,3,20000,-20000
+Text label gauge,690,92,Ethanol,Lato,11,seashell, ,true,0,20000,-20000
+Text label gauge,632,89,0,Nissan,15,seashell,fuelcomposition,true,0,20000,-20000
+Text label gauge,704,156,WATER,Verdana,11,gold, ,true,0,20000,-20000
+Text label gauge,648,155,73,Nissan,15,seashell,Watertemp,true,0,20000,-20000
+Text label gauge,716,225,OIL T,Verdana,13,gold, ,true,0,20000,-20000
+Text label gauge,658,227,60,Nissan,15,seashell,oiltemp,true,0,20000,-20000
+Text label gauge,708,289,OIL P,Verdana,14,gold, ,true,0,20000,-20000
+Text label gauge,627,293,49.6,Nissan,14,seashell,oilpres,true,1,20000,-20000
+Text label gauge,732,365,ODO,Verdana,12,seashell, ,true,0,20000,-20000
+Text label gauge,639,371,105.10,Nissan,9,seashell,Odo,true,2,20000,-20000
+Text label gauge,420.9900124843945,216.94178794178796,1188,Nissan,15,seashell,rpm,true,0,20000,-20000
+Text label gauge,10,171,IAT,Lato,12,gold, ,true,0,20000,-20000
+Text label gauge,121,166,28,Lato,15,seashell,Intaketemp,true,0,20000,-20000
 

@@ -1,15 +1,15 @@
-Text label gauge,557,146,BOOST,Nissan,12,red, ,true,0
-Text label gauge,50,415,0.000,Nissan,18,seashell,LAMBDA,true,3
-Text label gauge,291,415,28,Nissan,18,seashell,Intaketemp,true,0
-Text label gauge,284,389,IAT,Nissan,12,red, ,true,0
-Text label gauge,440,388,Oil pres,Nissan,14,red, ,true,0
-Text label gauge,462,418,22.9,Nissan,17,seashell,oilpres,true,1
-Text label gauge,645,387,Coolant,Nissan,14,red, ,true,0
-Text label gauge,682,414,74,Nissan,18,seashell,Watertemp,true,0
-Text label gauge,49,383,Lambda,Nissan,15,red, ,true,0
-Text label gauge,167,131,RPM,Lato,11,red, ,true,0
-Text label gauge,241.03995006242195,267.00000000000006,664,Nissan,18,seashell,rpm,true,0
+Text label gauge,557,146,BOOST,Nissan,12,red, ,true,0,20000,-20000
+Text label gauge,50,415,0.000,Nissan,18,seashell,LAMBDA,true,3,20000,-20000
+Text label gauge,291,415,28,Nissan,18,seashell,Intaketemp,true,0,20000,-20000
+Text label gauge,284,389,IAT,Nissan,12,red, ,true,0,20000,-20000
+Text label gauge,440,388,Oil pres,Nissan,14,red, ,true,0,20000,-20000
+Text label gauge,462,418,22.9,Nissan,17,seashell,oilpres,true,1,20000,-20000
+Text label gauge,645,387,Coolant,Nissan,14,red, ,true,0,20000,-20000
+Text label gauge,682,414,74,Nissan,18,seashell,Watertemp,true,0,20000,-20000
+Text label gauge,49,383,Lambda,Nissan,15,red, ,true,0,20000,-20000
+Text label gauge,167,131,RPM,Lato,11,red, ,true,0,20000,-20000
+Text label gauge,241.03995006242195,267.00000000000006,664,Nissan,18,seashell,rpm,true,0,20000,-20000
 Round gauge,394,3.0062421972533,13.993762993762914,rpm,9001,0,9001,-1000,-180,90,9000,1,100,0,-1,0,2,0,0,3,0,0,15,5,0.5,0.4,0.33,0.25,0,5,93,2,0,0,red,darkred,transparent,transparent,transparent,transparent,transparent,transparent,grey,transparent,darkred,transparent,transparent,transparent,true,false,false,Lato,30,50,10,false,Lato,MAP,transparent, ,, ,, ,,
 Round gauge,393,402.99750312109836,13.002079002079,MAP,35,0,35,-1000,-119,90,35,1,0,0,0,0,2,0,0,0,0,0,0,0,0.5,0.4,0.33,0.25,0,5,93,2,0,0,red,darkred,transparent,transparent,grey,transparent,transparent,transparent,grey,transparent,darkred,transparent,transparent,transparent,true,false,false,Lato,30,50,10,false,Lato,Alternator Light,transparent, ,, ,, ,,
-Text label gauge,679,257,8,Nissan,18,azure,MAP,true,0
+Text label gauge,679,257,8,Nissan,18,azure,MAP,true,0,20000,-20000
 

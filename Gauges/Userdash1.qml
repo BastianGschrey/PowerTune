@@ -134,7 +134,7 @@ Item {
                 if (dashvalue.textAt(0) === "Text label gauge")
                 {
                     //console.log("Create Text label")
-                    CreateTextScript.createText(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),(dashvalue.textAt(8).toLowerCase() === 'true' ? true : false),dashvalue.textAt(9));
+                    CreateTextScript.createText(dashvalue.textAt(1),dashvalue.textAt(2),dashvalue.textAt(3),dashvalue.textAt(4),dashvalue.textAt(5),dashvalue.textAt(6),dashvalue.textAt(7),(dashvalue.textAt(8).toLowerCase() === 'true' ? true : false),dashvalue.textAt(9),dashvalue.textAt(10),dashvalue.textAt(11));
                 }
                 if (dashvalue.textAt(0) === "State gauge")
                 {
@@ -536,7 +536,7 @@ Item {
                 text: qsTr("Add Text")
                 font.pixelSize: 12
                 onClicked: {
-                    CreateTextScript.createText(100,50,"Textelement","Lato",15,"red","",true,0)
+                    CreateTextScript.createText(100,50,"Textelement","Lato",15,"red","",true,0,20000,-20000)
                     squaregaugemenu.visible = false;
                     selectcolor.visible =false;
                     Dashboard.setdraggable(0);
@@ -775,7 +775,7 @@ Item {
             }
             if (userDash.children[i].information === "Text label gauge")
             {
-                saveDashtofilestring += (userDash.children[i].information+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].displaytext+","+userDash.children[i].fonttype+","+userDash.children[i].fontsize+","+userDash.children[i].textcolor+","+userDash.children[i].datasourcename+","+userDash.children[i].fontbold+","+userDash.children[i].decimalpoints+"\r\n");
+                saveDashtofilestring += (userDash.children[i].information+","+userDash.children[i].x+","+userDash.children[i].y+","+userDash.children[i].displaytext+","+userDash.children[i].fonttype+","+userDash.children[i].fontsize+","+userDash.children[i].textcolor+","+userDash.children[i].datasourcename+","+userDash.children[i].fontbold+","+userDash.children[i].decimalpoints+","+userDash.children[i].warnvaluehigh+","+userDash.children[i].warnvaluelow+",\r\n");
             }
             if (userDash.children[i].information === "Round gauge")
             {
@@ -880,7 +880,7 @@ Item {
                 break;
             }
             case "Text label gauge": {
-                CreateTextScript.createText(gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).displaytext,gaugelist.get(i).fonttype,gaugelist.get(i).fontsize,gaugelist.get(i).textcolor,gaugelist.get(i).datasourcename,gaugelist.get(i).fontbold,gaugelist.get(i).decimalpoints);
+                CreateTextScript.createText(gaugelist.get(i).x,gaugelist.get(i).y,gaugelist.get(i).displaytext,gaugelist.get(i).fonttype,gaugelist.get(i).fontsize,gaugelist.get(i).textcolor,gaugelist.get(i).datasourcename,gaugelist.get(i).fontbold,gaugelist.get(i).decimalpoints,gaugelist.get(i).warnvaluehigh,gaugelist.get(i).warnvaluelow);
                 break;
             }
             case "Round gauge": {
@@ -1061,7 +1061,7 @@ Item {
             if(userDash.children[i].information === "Text label gauge"){
                 //console.log("Text label gauge");
 
-                gaugelist.append({"info":userDash.children[i].information,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"displaytext":userDash.children[i].displaytext,"fonttype":userDash.children[i].fonttype,"fontsize":userDash.children[i].fontsize,"textcolor":userDash.children[i].textcolor,"datasourcename":userDash.children[i].datasourcename,"fontbold":userDash.children[i].fontbold,"decimalpoints":userDash.children[i].decimalpoints})
+                gaugelist.append({"info":userDash.children[i].information,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"displaytext":userDash.children[i].displaytext,"fonttype":userDash.children[i].fonttype,"fontsize":userDash.children[i].fontsize,"textcolor":userDash.children[i].textcolor,"datasourcename":userDash.children[i].datasourcename,"fontbold":userDash.children[i].fontbold,"decimalpoints":userDash.children[i].decimalpoints,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow})
 
             }
 

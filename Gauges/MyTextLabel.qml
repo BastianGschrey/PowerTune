@@ -14,6 +14,9 @@ Item {
     property bool fontbold
     property int decimalpoints
     property string increasedecreaseident
+    property double warnvaluehigh: 20000
+    property double warnvaluelow : -20000
+    property string resettextcolor
     Drag.active: true
 
     Component.onCompleted: {togglemousearea();
@@ -53,18 +56,27 @@ Item {
         font.bold: fontbold
         color: textcolor
         anchors.centerIn: parent
-        //anchors.verticalCenter:  textrect
-        //verticalAlignment:  mytext.AlignVCenter
-        //horizontalAlignment: mytext.AlignHCenter
+        onTextChanged: warningindication.warn();
         }
  //   }
-
+    SequentialAnimation {
+        id: anim
+        loops: Animation.Infinite
+        running: false
+        PropertyAnimation {
+            target: mytext
+            property: "color"
+            from: "darkred"
+            to: "orange"
+            duration: 700
+        }
+    }
     Rectangle{
         id : changesize
         color: "darkgrey"
         visible: false
         width : 200
-        height :430
+        height :480
         Drag.active: true
         MouseArea {
             anchors.fill: parent
@@ -74,7 +86,8 @@ Item {
 
         Grid { width: parent.width
             height:parent.height
-            rows: 10
+            id: popupgrid
+            rows: 12
             columns: 1
             rowSpacing :5
             Grid {
@@ -111,8 +124,10 @@ Item {
                 id: changetext
                 text : displaytext
                 width: parent.width
-                font.pixelSize: 15
-                onTextChanged:  displaytext = changetext.text;
+                font.pixelSize: 15 
+                onTextChanged: {
+                    displaytext = changetext.text;
+                    }
 
             }
             ComboBox {
@@ -182,6 +197,69 @@ Item {
                     hoverEnabled: cbx_sources.hoverEnabled
                 }
             }
+        Text{
+            text: "Warn value high :"
+            font.pointSize: 15
+            }
+            ////
+            Grid {
+                //anchors.horizontalCenter: popupgrid.horizontalCenter
+                rows: 1
+                columns: 3
+                rowSpacing :5
+                RoundButton{text: "-"
+                    width: popupgrid.width /3.2
+                    onPressAndHold: {timer.running = true;
+                        increasedecreaseident = "decreasewarnvaluehigh"}
+                    onReleased: {timer.running = false;}
+                    onClicked: {warnvaluehigh--}
+                }
+                TextField{id: warnvaluehightxt
+                    text: warnvaluehigh
+                    width: popupgrid.width /3.2
+                    horizontalAlignment: Text.AlignHCenter
+                    inputMethodHints: Qt.ImhDigitsOnly
+                    onTextChanged: warnvaluehigh = warnvaluehightxt.text
+                }
+                RoundButton{ text: "+"
+                    width: popupgrid.width /3.2
+                    onPressAndHold: {timer.running = true;
+                        increasedecreaseident = "increasewarnvaluehigh"}
+                    onReleased: {timer.running = false;}
+                    onClicked: {warnvaluehigh++}
+                }
+            }
+            Text{
+                text: "Warn value low :"
+                font.pointSize: 15
+                }
+            Grid {
+                rows: 1
+                columns: 3
+                rowSpacing :5
+                //anchors.horizontalCenter: popupgrid.horizontalCenter
+                RoundButton{text: "-"
+                    width: popupgrid.width /3.2
+                    onPressAndHold: {timer.running = true;
+                        increasedecreaseident = "decreasewarnvaluelow"}
+                    onReleased: {timer.running = false;}
+                    onClicked: {warnvaluelow--}
+                }
+                TextField{id: warnvaluelowxt
+                    text: warnvaluelow
+                    width: popupgrid.width /3.2
+                    horizontalAlignment: Text.AlignHCenter
+                    onTextChanged: warnvaluelow = warnvaluelowxt.text
+                    inputMethodHints: Qt.ImhDigitsOnly
+                }
+                RoundButton{ text: "+"
+                    width: popupgrid.width /3.2
+                    onPressAndHold: {timer.running = true;
+                        increasedecreaseident = "increasewarnvaluelow"}
+                    onReleased: {timer.running = false;}
+                    onClicked: {warnvaluelow++}
+                }
+            }
             RoundButton{
                 text: "Use Datasource"
                 width: parent.width
@@ -227,7 +305,19 @@ Item {
                 changetext.text  = Qt.binding(function(){return Dashboard[datasourcename]});
         }
     }
+    Item {
+        id: warningindication
+        function warn()
+        {
+            console.log("Textwarning triggered")
+            console.log(mytext.text)
+            if (mytext.text > warnvaluehigh || mytext.text < warnvaluelow )anim.running = true;
+            else anim.running = false,mytext.color = resettextcolor;
+            //if (displaytext.text > peakval)peakval = displaytext.text;
+            //console.log (peakval);
 
+        }
+    }
     function togglemousearea()
     {
         //console.log("toggle" + Dashboard.draggable);
@@ -246,6 +336,22 @@ Item {
 
         case "increasefontsize": {
             fontsize++;
+            break;
+        }
+        case "increasewarnvaluelow" :{
+            warnvaluelow++;
+            break;
+        }
+        case "increasewarnvaluehigh" :{
+            warnvaluehigh++;
+            break;
+        }
+        case "decreasewarnvaluelow" :{
+            warnvaluelow--;
+            break;
+        }
+        case "decreasewarnvaluehigh" :{
+            warnvaluehigh--;
             break;
         }
         case "decreasefontsize": {

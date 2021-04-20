@@ -3,17 +3,17 @@ var component;
 var gauge;
 
 
-function createText(setX,setY,setdisplaytext,setfonttype,setfontsize,settextcolor,setdatasourcename,setfontbold,setdecimalpoints) {
+function createText(setX,setY,setdisplaytext,setfonttype,setfontsize,settextcolor,setdatasourcename,setfontbold,setdecimalpoints,setWarnvaluehigh,setwarnvaluelow) {
     component = Qt.createComponent("MyTextLabel.qml");
     if (component.status === Component.Ready){
        // console.log("text component ready");
-        finishCreation(setX,setY,setdisplaytext,setfonttype,setfontsize,settextcolor,setdatasourcename,setfontbold,setdecimalpoints);
+        finishCreation(setX,setY,setdisplaytext,setfonttype,setfontsize,settextcolor,setdatasourcename,setfontbold,setdecimalpoints,setWarnvaluehigh,setwarnvaluelow);
     }
      else
         component.statusChanged.connect(finishCreation);
 }
 
-function finishCreation(setX,setY,setdisplaytext,setfonttype,setfontsize,settextcolor,setdatasourcename,setfontbold,setdecimalpoints) {
+function finishCreation(setX,setY,setdisplaytext,setfonttype,setfontsize,settextcolor,setdatasourcename,setfontbold,setdecimalpoints,setWarnvaluehigh,setwarnvaluelow) {
     if (component.status === Component.Ready) {
         gauge = component.createObject(userDash, {
                                            "x" :setX,
@@ -22,9 +22,12 @@ function finishCreation(setX,setY,setdisplaytext,setfonttype,setfontsize,settext
                                            "fonttype" :setfonttype,
                                            "fontsize" : setfontsize,
                                            "textcolor" :settextcolor,
+                                           "resettextcolor" :settextcolor,
                                            "datasourcename": setdatasourcename,
                                            "fontbold" :setfontbold,
-                                           "decimalpoints" :setdecimalpoints
+                                           "decimalpoints" :setdecimalpoints,
+                                           "warnvaluehigh" :setWarnvaluehigh,
+                                           "warnvaluelow" :setwarnvaluelow
                                        });
 
         if (gauge === null) {
