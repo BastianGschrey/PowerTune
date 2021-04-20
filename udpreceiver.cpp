@@ -1054,8 +1054,55 @@ void udpreceiver::processPendingDatagrams()
         case 871:
             m_dashboard->setTirepresRR(Value);
             break;
-
-
+//EX Board
+        case 900:
+            m_dashboard->setEXAnalogInput1(Value);
+            break;
+        case 901:
+            m_dashboard->setEXAnalogInput2(Value);
+            break;
+        case 902:
+            m_dashboard->setEXAnalogInput3(Value);
+            break;
+        case 903:
+            m_dashboard->setEXAnalogInput4(Value);
+            break;
+        case 904:
+            m_dashboard->setEXAnalogInput5(Value);
+            break;
+        case 905:
+            m_dashboard->setEXAnalogInput6(Value);
+            break;
+        case 906:
+            m_dashboard->setEXAnalogInput7(Value);
+            break;
+        case 907:
+            m_dashboard->setEXAnalogInput8(Value);
+            break;
+        case 908:
+            m_dashboard->setEXAnalogInput1(Value);
+            break;
+        case 909:
+            m_dashboard->setEXAnalogInput2(Value);
+            break;
+        case 910:
+            m_dashboard->setEXAnalogInput3(Value);
+            break;
+        case 911:
+            m_dashboard->setEXAnalogInput4(Value);
+            break;
+        case 912:
+            m_dashboard->setEXAnalogInput5(Value);
+            break;
+        case 913:
+            m_dashboard->setEXAnalogInput6(Value);
+            break;
+        case 914:
+            m_dashboard->setEXAnalogInput7(Value);
+            break;
+        case 915:
+            m_dashboard->setEXAnalogInput8(Value);
+            break;
         case 999:
             break;
         default:

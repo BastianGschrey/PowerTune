@@ -217,6 +217,7 @@ Item {
                 TextField{id: warnvaluehightxt
                     text: warnvaluehigh
                     width: popupgrid.width /3.2
+                    font.pointSize: 7
                     horizontalAlignment: Text.AlignHCenter
                     inputMethodHints: Qt.ImhDigitsOnly
                     onTextChanged: warnvaluehigh = warnvaluehightxt.text
@@ -248,6 +249,7 @@ Item {
                 TextField{id: warnvaluelowxt
                     text: warnvaluelow
                     width: popupgrid.width /3.2
+                    font.pointSize: 7
                     horizontalAlignment: Text.AlignHCenter
                     onTextChanged: warnvaluelow = warnvaluelowxt.text
                     inputMethodHints: Qt.ImhDigitsOnly

@@ -442,6 +442,25 @@ DashBoard::DashBoard(QObject *parent)
     , m_DigitalInput6()
     , m_DigitalInput7()
 
+    // EXBoard
+
+    , m_EXDigitalInput1()
+    , m_EXDigitalInput2()
+    , m_EXDigitalInput3()
+    , m_EXDigitalInput4()
+    , m_EXDigitalInput5()
+    , m_EXDigitalInput6()
+    , m_EXDigitalInput7()
+    , m_EXDigitalInput8()
+
+    , m_EXAnalogInput1()
+    , m_EXAnalogInput2()
+    , m_EXAnalogInput3()
+    , m_EXAnalogInput4()
+    , m_EXAnalogInput5()
+    , m_EXAnalogInput6()
+    , m_EXAnalogInput7()
+    , m_EXAnalogInput8()
 {
 
 }
@@ -3573,6 +3592,121 @@ void DashBoard::setDigitalInput7(const qreal &DigitalInput7)
     m_DigitalInput7 = DigitalInput7;
     emit DigitalInput7Changed(DigitalInput7);
 }
+
+//EX Board
+
+void DashBoard::setEXDigitalInput1(const qreal &EXDigitalInput1)
+{
+    if(m_EXDigitalInput1 == EXDigitalInput1)
+        return;
+    m_EXDigitalInput1 = EXDigitalInput1;
+    emit EXDigitalInput1Changed(EXDigitalInput1);
+}
+void DashBoard::setEXDigitalInput2(const qreal &EXDigitalInput2)
+{
+    if(m_EXDigitalInput2 == EXDigitalInput2)
+        return;
+    m_EXDigitalInput2 = EXDigitalInput2;
+    emit EXDigitalInput2Changed(EXDigitalInput2);
+}
+void DashBoard::setEXDigitalInput3(const qreal &EXDigitalInput3)
+{
+    if(m_EXDigitalInput3 == EXDigitalInput3)
+        return;
+    m_EXDigitalInput3 = EXDigitalInput3;
+    emit EXDigitalInput3Changed(EXDigitalInput3);
+}
+void DashBoard::setEXDigitalInput4(const qreal &EXDigitalInput4)
+{
+    if(m_EXDigitalInput4 == EXDigitalInput4)
+        return;
+    m_EXDigitalInput4 = EXDigitalInput4;
+    emit EXDigitalInput4Changed(EXDigitalInput4);
+}
+void DashBoard::setEXDigitalInput5(const qreal &EXDigitalInput5)
+{
+    if(m_EXDigitalInput5 == EXDigitalInput5)
+        return;
+    m_EXDigitalInput5 = EXDigitalInput5;
+    emit EXDigitalInput5Changed(EXDigitalInput5);
+}
+void DashBoard::setEXDigitalInput6(const qreal &EXDigitalInput6)
+{
+    if(m_EXDigitalInput6 == EXDigitalInput6)
+        return;
+    m_EXDigitalInput6 = EXDigitalInput6;
+    emit EXDigitalInput6Changed(EXDigitalInput6);
+}
+void DashBoard::setEXDigitalInput7(const qreal &EXDigitalInput7)
+{
+    if(m_EXDigitalInput7 == EXDigitalInput7)
+        return;
+    m_EXDigitalInput7 = EXDigitalInput7;
+    emit EXDigitalInput7Changed(EXDigitalInput7);
+}
+void DashBoard::setEXDigitalInput8(const qreal &EXDigitalInput8)
+{
+    if(m_EXDigitalInput8 == EXDigitalInput8)
+        return;
+    m_EXDigitalInput8 = EXDigitalInput8;
+    emit EXDigitalInput8Changed(EXDigitalInput8);
+}
+void DashBoard::setEXAnalogInput1(const qreal &EXAnalogInput1)
+{
+    if(m_EXAnalogInput1 == EXAnalogInput1)
+        return;
+    m_EXAnalogInput1 = EXAnalogInput1;
+    emit EXAnalogInput1Changed(EXAnalogInput1);
+}
+void DashBoard::setEXAnalogInput2(const qreal &EXAnalogInput2)
+{
+    if(m_EXAnalogInput2 == EXAnalogInput2)
+        return;
+    m_EXAnalogInput2 = EXAnalogInput2;
+    emit EXAnalogInput2Changed(EXAnalogInput2);
+}
+void DashBoard::setEXAnalogInput3(const qreal &EXAnalogInput3)
+{
+    if(m_EXAnalogInput3 == EXAnalogInput3)
+        return;
+    m_EXAnalogInput3 = EXAnalogInput3;
+    emit EXAnalogInput3Changed(EXAnalogInput3);
+}
+void DashBoard::setEXAnalogInput4(const qreal &EXAnalogInput4)
+{
+    if(m_EXAnalogInput4 == EXAnalogInput4)
+        return;
+    m_EXAnalogInput4 = EXAnalogInput4;
+    emit EXAnalogInput4Changed(EXAnalogInput4);
+}
+void DashBoard::setEXAnalogInput5(const qreal &EXAnalogInput5)
+{
+    if(m_EXAnalogInput5 == EXAnalogInput5)
+        return;
+    m_EXAnalogInput5 = EXAnalogInput5;
+    emit EXAnalogInput5Changed(EXAnalogInput5);
+}
+void DashBoard::setEXAnalogInput6(const qreal &EXAnalogInput6)
+{
+    if(m_EXAnalogInput6 == EXAnalogInput6)
+        return;
+    m_EXAnalogInput6 = EXAnalogInput6;
+    emit EXAnalogInput6Changed(EXAnalogInput6);
+}
+void DashBoard::setEXAnalogInput7(const qreal &EXAnalogInput7)
+{
+    if(m_EXAnalogInput7 == EXAnalogInput7)
+        return;
+    m_EXAnalogInput7 = EXAnalogInput7;
+    emit EXAnalogInput7Changed(EXAnalogInput7);
+}
+void DashBoard::setEXAnalogInput8(const qreal &EXAnalogInput8)
+{
+    if(m_EXAnalogInput8 == EXAnalogInput8)
+        return;
+    m_EXAnalogInput8 = EXAnalogInput8;
+    emit EXAnalogInput8Changed(EXAnalogInput8);
+}
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
 
@@ -4009,7 +4143,25 @@ qreal DashBoard::DigitalInput5() const {return m_DigitalInput5;}
 qreal DashBoard::DigitalInput6() const {return m_DigitalInput6;}
 qreal DashBoard::DigitalInput7() const {return m_DigitalInput7;}
 
-// Sensor Strings
+// EXBoard
+
+qreal DashBoard::EXDigitalInput1() const {return m_EXDigitalInput1;}
+qreal DashBoard::EXDigitalInput2() const {return m_EXDigitalInput2;}
+qreal DashBoard::EXDigitalInput3() const {return m_EXDigitalInput3;}
+qreal DashBoard::EXDigitalInput4() const {return m_EXDigitalInput4;}
+qreal DashBoard::EXDigitalInput5() const {return m_EXDigitalInput5;}
+qreal DashBoard::EXDigitalInput6() const {return m_EXDigitalInput6;}
+qreal DashBoard::EXDigitalInput7() const {return m_EXDigitalInput7;}
+qreal DashBoard::EXDigitalInput8() const {return m_EXDigitalInput8;}
+
+qreal DashBoard::EXAnalogInput1() const {return m_EXAnalogInput1;}
+qreal DashBoard::EXAnalogInput2() const {return m_EXAnalogInput2;}
+qreal DashBoard::EXAnalogInput3() const {return m_EXAnalogInput3;}
+qreal DashBoard::EXAnalogInput4() const {return m_EXAnalogInput4;}
+qreal DashBoard::EXAnalogInput5() const {return m_EXAnalogInput5;}
+qreal DashBoard::EXAnalogInput6() const {return m_EXAnalogInput6;}
+qreal DashBoard::EXAnalogInput7() const {return m_EXAnalogInput7;}
+qreal DashBoard::EXAnalogInput8() const {return m_EXAnalogInput8;}
 
 
 

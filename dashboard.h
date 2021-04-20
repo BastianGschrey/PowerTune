@@ -451,7 +451,26 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal DigitalInput6 READ DigitalInput6 WRITE setDigitalInput6 NOTIFY DigitalInput6Changed)
     Q_PROPERTY(qreal DigitalInput7 READ DigitalInput7 WRITE setDigitalInput7 NOTIFY DigitalInput7Changed)
 
-    //Q_PROPERTY(qreal supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
+
+    //EXBoard
+    Q_PROPERTY(qreal EXDigitalInput1 READ EXDigitalInput1 WRITE setEXDigitalInput1 NOTIFY EXDigitalInput1Changed)
+    Q_PROPERTY(qreal EXDigitalInput2 READ EXDigitalInput2 WRITE setEXDigitalInput2 NOTIFY EXDigitalInput2Changed)
+    Q_PROPERTY(qreal EXDigitalInput3 READ EXDigitalInput3 WRITE setEXDigitalInput3 NOTIFY EXDigitalInput3Changed)
+    Q_PROPERTY(qreal EXDigitalInput4 READ EXDigitalInput4 WRITE setEXDigitalInput4 NOTIFY EXDigitalInput4Changed)
+    Q_PROPERTY(qreal EXDigitalInput5 READ EXDigitalInput5 WRITE setEXDigitalInput5 NOTIFY EXDigitalInput5Changed)
+    Q_PROPERTY(qreal EXDigitalInput6 READ EXDigitalInput6 WRITE setEXDigitalInput6 NOTIFY EXDigitalInput6Changed)
+    Q_PROPERTY(qreal EXDigitalInput7 READ EXDigitalInput7 WRITE setEXDigitalInput7 NOTIFY EXDigitalInput7Changed)
+    Q_PROPERTY(qreal EXDigitalInput8 READ EXDigitalInput8 WRITE setEXDigitalInput8 NOTIFY EXDigitalInput8Changed)
+
+    Q_PROPERTY(qreal EXAnalogInput1 READ EXAnalogInput1 WRITE setEXAnalogInput1 NOTIFY EXAnalogInput1Changed)
+    Q_PROPERTY(qreal EXAnalogInput2 READ EXAnalogInput2 WRITE setEXAnalogInput2 NOTIFY EXAnalogInput2Changed)
+    Q_PROPERTY(qreal EXAnalogInput3 READ EXAnalogInput3 WRITE setEXAnalogInput3 NOTIFY EXAnalogInput3Changed)
+    Q_PROPERTY(qreal EXAnalogInput4 READ EXAnalogInput4 WRITE setEXAnalogInput4 NOTIFY EXAnalogInput4Changed)
+    Q_PROPERTY(qreal EXAnalogInput5 READ EXAnalogInput5 WRITE setEXAnalogInput5 NOTIFY EXAnalogInput5Changed)
+    Q_PROPERTY(qreal EXAnalogInput6 READ EXAnalogInput6 WRITE setEXAnalogInput6 NOTIFY EXAnalogInput6Changed)
+    Q_PROPERTY(qreal EXAnalogInput7 READ EXAnalogInput7 WRITE setEXAnalogInput7 NOTIFY EXAnalogInput7Changed)
+    Q_PROPERTY(qreal EXAnalogInput8 READ EXAnalogInput8 WRITE setEXAnalogInput8 NOTIFY EXAnalogInput8Changed)
+
     public:
     DashBoard(QObject *parent = 0);
 
@@ -768,6 +787,7 @@ class DashBoard : public QObject
     void setError(const QString &Error);
     void setautogear(const QString &autogear);
 
+
     Q_INVOKABLE void setExternalSpeed(const int &ExternalSpeed);
     Q_INVOKABLE void setspeedpercent(const qreal &speedpercent);
 
@@ -904,6 +924,24 @@ class DashBoard : public QObject
     void setDigitalInput6(const qreal &DigitalInput6);
     void setDigitalInput7(const qreal &DigitalInput7);
 
+    //EX Board
+    void setEXDigitalInput1(const qreal &EXDigitalInput1);
+    void setEXDigitalInput2(const qreal &EXDigitalInput2);
+    void setEXDigitalInput3(const qreal &EXDigitalInput3);
+    void setEXDigitalInput4(const qreal &EXDigitalInput4);
+    void setEXDigitalInput5(const qreal &EXDigitalInput5);
+    void setEXDigitalInput6(const qreal &EXDigitalInput6);
+    void setEXDigitalInput7(const qreal &EXDigitalInput7);
+    void setEXDigitalInput8(const qreal &EXDigitalInput8);
+
+    void setEXAnalogInput1(const qreal &EXAnalogInput1);
+    void setEXAnalogInput2(const qreal &EXAnalogInput2);
+    void setEXAnalogInput3(const qreal &EXAnalogInput3);
+    void setEXAnalogInput4(const qreal &EXAnalogInput4);
+    void setEXAnalogInput5(const qreal &EXAnalogInput5);
+    void setEXAnalogInput6(const qreal &EXAnalogInput6);
+    void setEXAnalogInput7(const qreal &EXAnalogInput7);
+    void setEXAnalogInput8(const qreal &EXAnalogInput8);
     qreal Odo() const;
 
     //Tripmeter
@@ -1349,7 +1387,24 @@ class DashBoard : public QObject
     qreal DigitalInput6()const;
     qreal DigitalInput7()const;
 
+    //EX Board
+    qreal EXDigitalInput1()const;
+    qreal EXDigitalInput2()const;
+    qreal EXDigitalInput3()const;
+    qreal EXDigitalInput4()const;
+    qreal EXDigitalInput5()const;
+    qreal EXDigitalInput6()const;
+    qreal EXDigitalInput7()const;
+    qreal EXDigitalInput8()const;
 
+    qreal EXAnalogInput1()const;
+    qreal EXAnalogInput2()const;
+    qreal EXAnalogInput3()const;
+    qreal EXAnalogInput4()const;
+    qreal EXAnalogInput5()const;
+    qreal EXAnalogInput6()const;
+    qreal EXAnalogInput7()const;
+    qreal EXAnalogInput8()const;
 
 
 signals:
@@ -1786,6 +1841,24 @@ signals:
     void DigitalInput6Changed(qreal DigitalInput6);
     void DigitalInput7Changed(qreal DigitalInput7);
 
+    //EX Board
+    void EXDigitalInput1Changed(qreal EXDigitalInput1);
+    void EXDigitalInput2Changed(qreal EXDigitalInput2);
+    void EXDigitalInput3Changed(qreal EXDigitalInput3);
+    void EXDigitalInput4Changed(qreal EXDigitalInput4);
+    void EXDigitalInput5Changed(qreal EXDigitalInput5);
+    void EXDigitalInput6Changed(qreal EXDigitalInput6);
+    void EXDigitalInput7Changed(qreal EXDigitalInput7);
+    void EXDigitalInput8Changed(qreal EXDigitalInput8);
+
+    void EXAnalogInput1Changed(qreal EXAnalogInput1);
+    void EXAnalogInput2Changed(qreal EXAnalogInput2);
+    void EXAnalogInput3Changed(qreal EXAnalogInput3);
+    void EXAnalogInput4Changed(qreal EXAnalogInput4);
+    void EXAnalogInput5Changed(qreal EXAnalogInput5);
+    void EXAnalogInput6Changed(qreal EXAnalogInput6);
+    void EXAnalogInput7Changed(qreal EXAnalogInput7);
+    void EXAnalogInput8Changed(qreal EXAnalogInput8);
 
 private:
     // Odometer
@@ -2235,6 +2308,24 @@ private:
     qreal m_DigitalInput6;
     qreal m_DigitalInput7;
 
+    //EX Board
+    qreal m_EXDigitalInput1;
+    qreal m_EXDigitalInput2;
+    qreal m_EXDigitalInput3;
+    qreal m_EXDigitalInput4;
+    qreal m_EXDigitalInput5;
+    qreal m_EXDigitalInput6;
+    qreal m_EXDigitalInput7;
+    qreal m_EXDigitalInput8;
+
+    qreal m_EXAnalogInput1;
+    qreal m_EXAnalogInput2;
+    qreal m_EXAnalogInput3;
+    qreal m_EXAnalogInput4;
+    qreal m_EXAnalogInput5;
+    qreal m_EXAnalogInput6;
+    qreal m_EXAnalogInput7;
+    qreal m_EXAnalogInput8;
 };
 
 #endif // DASHBOARD_H

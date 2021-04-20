@@ -2581,7 +2581,151 @@ ListModel {
         stepsize : "10"
         divisor : "1"
     }
-
+    //EX Board
+    ListElement {
+        sourcename:"EXAnalogInput1"
+        defaultsymbol: " "
+        titlename:"EX AnalogInput 1"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXAnalogInput2"
+        defaultsymbol: " "
+        titlename:"EX AnalogInput 2"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXAnalogInput3"
+        defaultsymbol: " "
+        titlename:"EX AnalogInput 3"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXAnalogInput4"
+        defaultsymbol: " "
+        titlename:"EX AnalogInput 4"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXAnalogInput5"
+        defaultsymbol: " "
+        titlename:"EX AnalogInput 5"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXAnalogInput6"
+        defaultsymbol: " "
+        titlename:"EX AnalogInput 6"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXAnalogInput7"
+        defaultsymbol: " "
+        titlename:"EX AnalogInput 7"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXAnalogInput8"
+        defaultsymbol: " "
+        titlename:"EX AnalogInput 8"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXDigitalInput1"
+        defaultsymbol: " "
+        titlename:"EX Digital Input 1"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXDigitalInput2"
+        defaultsymbol: " "
+        titlename:"EX Digital Input 2"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXDigitalInput3"
+        defaultsymbol: " "
+        titlename:"EX Digital Input 3"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXDigitalInput4"
+        defaultsymbol: " "
+        titlename:"EX Digital Input 4"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXDigitalInput5"
+        defaultsymbol: " "
+        titlename:"EX Digital Input 5"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXDigitalInput6"
+        defaultsymbol: " "
+        titlename:"EX Digital Input 6"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXDigitalInput7"
+        defaultsymbol: " "
+        titlename:"EX Digital Input 7"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXDigitalInput8"
+        defaultsymbol: " "
+        titlename:"EX Digital Input 8"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
 }
 
 
