@@ -293,10 +293,13 @@ void GPS::processGPRMC(const QString & line){
     QString decLat = convertToDecimal(latitude, latDirection);
     QString decLon = convertToDecimal(longitude, lonDirection);
 
-
+    if ((m_dashboard->gpsFIXtype() == "GPS only") ||(m_dashboard->gpsFIXtype() == "DGPS") )
+    {
     m_dashboard->setgpsLatitude(decLat.toDouble());
     m_dashboard->setgpsLongitude(decLon.toDouble());
     m_dashboard->setgpsSpeed(qRound(speed));// round speed to the nearest integer
+    checknewLap();
+    }
     m_dashboard->setgpsTime(time);
 }
 
@@ -328,12 +331,14 @@ void GPS::processGPGGA(const QString & line)
 
     QString satelitesinview = fields[7];
     QString altitude = fields[9];
+    if ((m_dashboard->gpsFIXtype() == "GPS only") ||(m_dashboard->gpsFIXtype() == "DGPS") )
+    {
     m_dashboard->setgpsLatitude(decLat.toDouble());
     m_dashboard->setgpsLongitude(decLon.toDouble());
-    m_dashboard->setgpsVisibleSatelites(satelitesinview.toInt());
     m_dashboard->setgpsAltitude(altitude.toDouble());
-
     checknewLap();
+    }
+    m_dashboard->setgpsVisibleSatelites(satelitesinview.toInt());
 }
 
 void GPS::processGPVTG(const QString & line)
