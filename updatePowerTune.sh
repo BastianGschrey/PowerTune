@@ -1,6 +1,6 @@
 #!/bin/sh
 if nc -zw5 www.gitlab.com 443; then
-sudo rm -r /home/pi/src
+#sudo rm -r /home/pi/src
 # Get the latest source
 		if [ -d /home/pi/src ]; then
 		echo "Updating to latest source "
@@ -11,7 +11,7 @@ sudo rm -r /home/pi/src
 		else
 		echo "Create source directory and clone PowerTune Repo"
 		mkdir /home/pi/src
-		git clone https://gitlab.com/PowerTuneDigital/PowerTuneDigital.git /home/pi/src  
+		git clone https://github.com/BastianGschrey/PowerTune.git /home/pi/src  
 		cd src
                 cp /home/pi/src/updatePowerTune.sh /home/pi/
                 cp /home/pi/src/updatedaemons.sh /home/pi/
