@@ -20,10 +20,11 @@ Rectangle {
     property double startTime: 0
     property int msecondsElapsed: 0
 
-    property real linex1;
+    property real  linex1;
     property real  liney1;
-    property real linex2;
+    property real  linex2;
     property real  liney2;
+
 
     function restartCounter()  {
 
@@ -211,15 +212,46 @@ Rectangle {
                         map.zoomLevel = cbxzoom.textAt(cbxzoom.currentIndex)
                         }
         }*/
+
+        Grid {
+            id:buttongrid
+            rows: 1
+            columns: 2
+            anchors.margins: 20
+            anchors.bottom: parent.bottom
+            anchors.left: map.right
+            columnSpacing :5
+        Button {
+            id: changeview
+            //visible: false
+            text: "TOP VIEW"
+            width: 170
+            height: 30
+            font.pixelSize: 20
+            onClicked: {
+                if (changeview.text == "DRIVER VIEW" )
+                {
+                    map.center=QtPositioning.coordinate(parseFloat(mapIO.getCenter(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex))[0]),parseFloat(mapIO.getCenter(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex))[1]));
+                    map.zoomLevel = mapIO.getZOOMLEVEL(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex));
+                    map.tilt = 0;
+                    map.bearing = 0;
+                }
+                else
+                {
+                    map.tilt = 45;
+                    map.zoomLevel = 18;
+                }
+                changeview.text == "TOP VIEW" ? changeview.text = "DRIVER VIEW" : changeview.text = "TOP VIEW";
+
+                changeview.text == "DRIVER VIEW" ? changeview.text = "DRIVER VIEW" : changeview.text = "TOP VIEW";
+            }
+        }
+
         Button {
             id: stop
-            //visible: false
             text: "Reset"
             width: 170
             height: 30
-            anchors.right: parent.right
-             anchors.bottom: parent.bottom
-             anchors.margins: 20
             font.pixelSize: 20
             onClicked: {
                         laptimeModel.clear()
@@ -228,6 +260,7 @@ Rectangle {
                         mapItem.startTime = 0
                         GPS.resetLaptimer()
                         }
+        }
         }
         Grid {
             id:grid1
@@ -409,7 +442,8 @@ IMD
                     map.zoomLevel = mapIO.getZOOMLEVEL(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex));
                     map.tilt = 0;
                     map.bearing = 0;
-                    map.fitViewportToVisibleMapItems()
+                    map.fitViewportToVisibleMapItems();
+                    changeview.text = "TOP VIEW";
                    // console.log("Map Items " + mapOverlay.mapItems )
 
 
@@ -419,7 +453,7 @@ IMD
                     liney2 = mapIO.getStartFinishLine(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex))[3];
                     //TODO fill in DefineFinishLine
 
-                    console.log("QML X1 " +linex1);
+
                     Gps.defineFinishLine(linex1,liney1,linex2,liney2);
                   //
                     //console.log(mapIO.getStartFinishLine(countryselect.textAt(countryselect.currentIndex),trackselect.textAt(trackselect.currentIndex))[0]);
@@ -455,7 +489,9 @@ IMD
             //Needed to permanently update the Map Center if Current Position view is selected
             id: pos
             function poschanged(){
-                if (countryselect.textAt(countryselect.currentIndex) == "Current Position"){map.center= QtPositioning.coordinate(Dashboard.gpsLatitude,Dashboard.gpsLongitude)};
+
+                if (changeview.text == "DRIVER VIEW"){map.center= QtPositioning.coordinate(Dashboard.gpsLatitude,Dashboard.gpsLongitude),map.bearing=Dashboard.gpsbaering,map.tilt=45,map.zoomLevel = 18};
+
             }
         }
     }
