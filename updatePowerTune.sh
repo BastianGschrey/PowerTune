@@ -1,7 +1,7 @@
 #!/bin/sh
 if nc -zw5 www.github.com 443; then
 # Get the latest source
-		if [ -d /home/pi/src ]; then
+		if [ -d /home/pi/srcnew ]; then
 		echo "Updating to latest source "
 		cd /home/pi/src
 		git pull
@@ -9,8 +9,8 @@ if nc -zw5 www.github.com 443; then
 		./updateUserDashboards.sh
 		else
 		echo "Create source directory and clone PowerTune Repo"
-		mkdir /home/pi/src
-		git clone https://github.com/BastianGschrey/PowerTune.git /home/pi/src  
+		mkdir /home/pi/srcnew
+		git clone  /home/pi/srcnew  
 		cd src
 		./updatedaemons.sh
 		./updateUserDashboards.sh
@@ -25,10 +25,10 @@ if nc -zw5 www.github.com 443; then
 # Check if the maptiles folder exists
 		if [ -d /home/pi/maptiles];then
 		echo "Update maptiles"
-		cp -a /home/pi/src/GPSTracks/.  /home/pi/maptiles/
+		cp -a /home/pi/srcnew/GPSTracks/.  /home/pi/maptiles/
 		else
 		mkdir /home/pi/maptiles
-		cp -a /home/pi/src/GPSTracks/. /home/pi/maptiles
+		cp -a /home/pi/srcnew/GPSTracks/. /home/pi/maptiles
                 fi
 # Check if there is a build folder
 		if [ -d /home/pi/build ]; then
@@ -54,3 +54,4 @@ if nc -zw5 www.github.com 443; then
 else
 echo "Update not possible , Github not reachable check your connection "
 fi
+
