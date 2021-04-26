@@ -1,8 +1,7 @@
 #!/bin/sh
-if nc -zw5 www.gitlab.com 443; then
-#sudo rm -r /home/pi/src
+if nc -zw5 www.github.com 443; then
 # Get the latest source
-		if [ -d /home/pi/src ]; then
+		if [ -d /home/pi/srcnew ]; then
 		echo "Updating to latest source "
 		cd /home/pi/src
 		git pull
@@ -10,11 +9,9 @@ if nc -zw5 www.gitlab.com 443; then
 		./updateUserDashboards.sh
 		else
 		echo "Create source directory and clone PowerTune Repo"
-		mkdir /home/pi/src
-		git clone https://github.com/BastianGschrey/PowerTune.git /home/pi/src  
+		mkdir /home/pi/srcnew
+		git clone  /home/pi/srcnew  
 		cd src
-                cp /home/pi/src/updatePowerTune.sh /home/pi/
-                cp /home/pi/src/updatedaemons.sh /home/pi/
 		./updatedaemons.sh
 		./updateUserDashboards.sh
 		fi
@@ -27,7 +24,11 @@ if nc -zw5 www.gitlab.com 443; then
 		fi
 # Check if the maptiles folder exists
 		if [ -d /home/pi/maptiles];then
-		sudo rm -r /home/pi/maptiles
+		echo "Update maptiles"
+		cp -a /home/pi/srcnew/GPSTracks/.  /home/pi/maptiles/
+		else
+		mkdir /home/pi/maptiles
+		cp -a /home/pi/srcnew/GPSTracks/. /home/pi/maptiles
                 fi
 # Check if there is a build folder
 		if [ -d /home/pi/build ]; then
@@ -51,5 +52,6 @@ if nc -zw5 www.gitlab.com 443; then
 		sudo rm -r /home/pi/build
 		fi
 else
-echo "Update not possible , Gitlab not reachable check your connection "
+echo "Update not possible , Github not reachable check your connection "
 fi
+
