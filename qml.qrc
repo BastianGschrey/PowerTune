@@ -105,5 +105,13 @@
         <file>KTracks/USA/Button Willow 1.txt</file>
         <file>KTracks/South Africa/Zwartkops Raceway.txt</file>
         <file>KTracks/South Africa/Phakisa.txt</file>
+        <file>KTracks/Australia/Morgan Park B.txt</file>
+        <file>KTracks/Australia/Morgan Park D.txt</file>
+        <file>KTracks/Australia/Morgan Park E.txt</file>
+        <file>KTracks/Australia/Morgan Park K.txt</file>
+        <file>KTracks/Canada/Colabogie Big.txt</file>
+        <file>KTracks/South Africa/Midvaal.txt</file>
+        <file>KTracks/USA/Laguna Seca.txt</file>
+        <file>KTracks/Australia/Eastern Creek GP Circuit.txt</file>
     </qresource>
 </RCC>

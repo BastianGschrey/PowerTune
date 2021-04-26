@@ -362,30 +362,28 @@ QString GPS::convertToDecimal(const QString & coord, const QString & dir)
 void GPS::defineFinishLine(const qreal & Y1,const qreal & X1,const qreal & Y2,const qreal & X2)
 {
     //linedirection = linedir;
+    qDebug()<<"Define Finish Line ";
     startlineX1 = X1; //Longitude
     startlineX2 = X2; //Longitude
     startlineY1 = Y1; //Latitude
     startlineY2 = Y2; //Latitude
     m = (startlineY1-startlineY2) / (startlineX1-startlineX2);
     qDebug()<<"Finish Line 1 "<< Y1<<X1<<Y2<<X2;
-    if (startlineX1-startlineX2 == 0 )
+    qDebug()<<"X1  "<< startlineX1;
+    qDebug()<<"X2  "<< startlineX2;
+    qDebug()<<"result  "<< startlineX1-startlineX2;
+    if (startlineX1 == startlineX2)
     {
-        qDebug()<<"Zero Slope ";
          b = startlineY1;
         zeroslope = 0;
     }
-    else
+
+    if (startlineY1 == startlineY2)
     {
-        zeroslope = 1;
-        b = startlineY1 - (m*startlineX1);
-    }
-    if (startlineY1 - startlineY2 == 0  )
-    {
-        qDebug()<<"Zero Slope ";
         zeroslope = 0;
         b = startlineY1;
     }
-    else
+    if ((startlineY1 != startlineY2) && (startlineX1 != startlineX2))
     {
         zeroslope = 1;
         b = startlineY1 - (m*startlineX1);
@@ -399,24 +397,19 @@ void GPS::defineFinishLine2(const qreal & Y1,const qreal & X1,const qreal & Y2,c
     start2lineY1 = Y1; //Latitude
     start2lineY2 = Y2; //Latitude
     m2 = (start2lineY1-start2lineY2) / (start2lineX1-start2lineX2);
-    if (start2lineX1-start2lineX2 == 0 )
+    if (start2lineX1 ==  start2lineX2 )
     {
         qDebug()<<"Zero Slope ";
          b2 = start2lineY1;
         zeroslope2 = 0;
     }
-    else
-    {
-        zeroslope2 = 1;
-        b2 = start2lineY1 - (m2*start2lineX1);
-    }
-    if (start2lineY1 - start2lineY2 == 0  )
+    if (start2lineY1 ==  start2lineY2 )
     {
         qDebug()<<"Zero Slope ";
         zeroslope2 = 0;
         b2 = start2lineY1;
     }
-    else
+    if ((start2lineX1 !=  start2lineX2 ) && (start2lineY1 !=  start2lineY2 ))
     {
         zeroslope2 = 1;
         b2 = start2lineY1 - (m2*start2lineX1);
@@ -434,15 +427,12 @@ void GPS::checknewLap()
     //Somehow we need to add something that if the Second Finishline exists it needs to stop the timer
        //needed for Finish Line1
 
-
-
-
     //Somehow we need to add something that if the Second Finishline exists it needs to stop the timer
-    if (zeroslope != 0)
+    if (zeroslope == 1)
     {
     currentintercept = m_dashboard->gpsLatitude() -( (m * m_dashboard->gpsLongitude()) + b);     //needed for Finish Line1
     }
-    else
+    if (zeroslope == 0)
     {
     currentintercept = m_dashboard->gpsLatitude() - b;
     }
@@ -457,11 +447,12 @@ void GPS::checknewLap()
     {
     currentintercept2 = m_dashboard->gpsLatitude() - b2; //needed for Finish Line2
     }
+
     if ((previousintercept <= 0 && currentintercept >= 0) || (previousintercept >= 0 && currentintercept <= 0) || (currentintercept == 0) ||(previousintercept2 <= 0 && currentintercept2 >= 0) || (previousintercept2 >= 0 && currentintercept2 <= 0) || (currentintercept2 == 0))
     {
 
         //Finish Line 1
-        if (((m_dashboard->gpsLongitude() <= startlineX2 && m_dashboard->gpsLongitude() >= startlineX1 )) || ((m_dashboard->gpsLatitude() <= startlineY2 && m_dashboard->gpsLatitude() >= startlineY1 )))
+        if ((((m_dashboard->gpsLongitude() <= startlineX2 && m_dashboard->gpsLongitude() >= startlineX1 )) || ((m_dashboard->gpsLatitude() <= startlineY2 && m_dashboard->gpsLatitude() >= startlineY1 ))) ||(((m_dashboard->gpsLongitude() <= startlineX1 && m_dashboard->gpsLongitude() >= startlineX2 )) || ((m_dashboard->gpsLatitude() <= startlineY1 && m_dashboard->gpsLatitude() >= startlineY2 ))))
         {
             if (m_timer.isValid() == true)
             {
@@ -498,7 +489,7 @@ void GPS::checknewLap()
         }
 
 
-        if (((m_dashboard->gpsLongitude() <= start2lineX2 && m_dashboard->gpsLongitude() >= start2lineX1 ))||((m_dashboard->gpsLatitude() <= start2lineY2 && m_dashboard->gpsLatitude() >= start2lineY1 )))
+        if ((((m_dashboard->gpsLongitude() <= start2lineX2 && m_dashboard->gpsLongitude() >= start2lineX1 ))||((m_dashboard->gpsLatitude() <= start2lineY2 && m_dashboard->gpsLatitude() >= start2lineY1 ))) || (((m_dashboard->gpsLongitude() <= start2lineX1 && m_dashboard->gpsLongitude() >= start2lineX2 ))||((m_dashboard->gpsLatitude() <= start2lineY1 && m_dashboard->gpsLatitude() >= start2lineY2 ))))
         {
 
             if (m_timer.isValid() == true)
