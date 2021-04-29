@@ -9,8 +9,8 @@ if nc -zw5 www.github.com 443; then
 		./updateUserDashboards.sh
 		else
 		echo "Create source directory and clone PowerTune Repo"
-		mkdir /home/pi/srcnew
-		git clone  /home/pi/srcnew  
+		mkdir /home/pi/src
+		git clone https://github.com/BastianGschrey/PowerTune.git /home/pi/src  
 		cd src
 		./updatedaemons.sh
 		./updateUserDashboards.sh
@@ -25,7 +25,7 @@ if nc -zw5 www.github.com 443; then
 # Check if the maptiles folder exists
 		if [ -d /home/pi/maptiles];then
 		echo "Update maptiles"
-		cp -a /home/pi/srcnew/GPSTracks/.  /home/pi/maptiles/
+		cp -a /home/pi/src/GPSTracks/.  /home/pi/maptiles/
 		else
 		mkdir /home/pi/maptiles
 		cp -a /home/pi/srcnew/GPSTracks/. /home/pi/maptiles
