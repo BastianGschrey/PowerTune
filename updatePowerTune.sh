@@ -1,9 +1,11 @@
 #!/bin/sh
 if nc -zw5 www.github.com 443; then
 # Get the latest source
-		if [ -d /home/pi/srcnew ]; then
+		if [ -d /home/pi/src ]; then
 		echo "Updating to latest source "
 		cd /home/pi/src
+		git reset --hard
+		git clean -fd
 		git pull
 		./updatedaemons.sh
 		./updateUserDashboards.sh
@@ -24,32 +26,29 @@ if nc -zw5 www.github.com 443; then
 		fi
 # Check if the maptiles folder exists
 		if [ -d /home/pi/maptiles];then
-		echo "Update maptiles"
-		cp -a /home/pi/src/GPSTracks/.  /home/pi/maptiles/
-		else
-		mkdir /home/pi/maptiles
-		cp -a /home/pi/srcnew/GPSTracks/. /home/pi/maptiles
+		sudo rm -r  /home/pi/maptiles/
                 fi
 # Check if there is a build folder
-		if [ -d /home/pi/build ]; then
+		if [ -d /home/pi/building ]; then
 		echo "Delete previous build folder"
-		sudo rm -r /home/pi/build
-		mkdir /home/pi/build
+		sudo rm -r /home/pi/building
+		mkdir /home/pi/building
 		else
-		mkdir /home/pi/build
+		mkdir /home/pi/building
 		fi
 # Compile PowerTune
-		cd /home/pi/build
+		cd /home/pi/building
 		echo "Compiling PowerTune ... go grab a Coffee"
                 /opt/QT5/bin/qmake /home/pi/src
 		make -j4
 # Check if the PowerTune executable exists in the build folder
 		if [ -f /home/pi/build/PowertuneQMLGui ];then
 		echo "Successfully compiled"
+		mv /home/pi/building /home/pi/build
 		sudo reboot
 		else
 		echo "Something went wrong"
-		sudo rm -r /home/pi/build
+		sudo rm -r /home/pi/building
 		fi
 else
 echo "Update not possible , Github not reachable check your connection "
