@@ -367,16 +367,13 @@ QString GPS::convertToDecimal(const QString & coord, const QString & dir)
 void GPS::defineFinishLine(const qreal & Y1,const qreal & X1,const qreal & Y2,const qreal & X2)
 {
     //linedirection = linedir;
-    qDebug()<<"Define Finish Line ";
+
     startlineX1 = X1; //Longitude
     startlineX2 = X2; //Longitude
     startlineY1 = Y1; //Latitude
     startlineY2 = Y2; //Latitude
     m = (startlineY1-startlineY2) / (startlineX1-startlineX2);
-    qDebug()<<"Finish Line 1 "<< Y1<<X1<<Y2<<X2;
-    qDebug()<<"X1  "<< startlineX1;
-    qDebug()<<"X2  "<< startlineX2;
-    qDebug()<<"result  "<< startlineX1-startlineX2;
+
     if (startlineX1 == startlineX2)
     {
          b = startlineY1;
@@ -404,13 +401,11 @@ void GPS::defineFinishLine2(const qreal & Y1,const qreal & X1,const qreal & Y2,c
     m2 = (start2lineY1-start2lineY2) / (start2lineX1-start2lineX2);
     if (start2lineX1 ==  start2lineX2 )
     {
-        qDebug()<<"Zero Slope ";
          b2 = start2lineY1;
         zeroslope2 = 0;
     }
     if (start2lineY1 ==  start2lineY2 )
     {
-        qDebug()<<"Zero Slope ";
         zeroslope2 = 0;
         b2 = start2lineY1;
     }
