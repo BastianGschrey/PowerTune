@@ -42,7 +42,7 @@ if nc -zw5 www.github.com 443; then
                 /opt/QT5/bin/qmake /home/pi/src
 		make -j4
 # Check if the PowerTune executable exists in the build folder
-		if [ -f /home/pi/build/PowertuneQMLGui ];then
+		if [ -f /home/pi/building/PowertuneQMLGui ];then
 		echo "Successfully compiled"
 		mv /home/pi/building /home/pi/build
 		sudo reboot
