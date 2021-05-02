@@ -31,9 +31,8 @@ Button {
                 visible: false
                 font.pixelSize: obdselect.width / 55
                 onClicked: {items = [0,0,0,0,(obd4.checkState),(obd5.checkState),(obd6.checkState),(obd7.checkState),(obd8.checkState),(obd9.checkState),(obd10.checkState),(obd11.checkState),0,0,(obd14.checkState),(obd15.checkState),(obd16.checkState),(obd17.checkState),0,0,(obd20.checkState),(obd21.checkState),(obd22.checkState),(obd23.checkState),(obd24.checkState),(obd25.checkState),(obd26.checkState),(obd27.checkState),0,0,0,0,0,0,(obd34.checkState),(obd35.checkState),(obd36.checkState),(obd37.checkState),(obd38.checkState),(obd39.checkState),(obd40.checkState),(obd41.checkState),(obd42.checkState),(obd43.checkState),0,0,0,(obd47.checkState),0,0,(obd50.checkState),(obd51.checkState),(obd52.checkState),(obd53.checkState),(obd54.checkState),(obd55.checkState),(obd56.checkState),(obd57.checkState),(obd58.checkState),(obd59.checkState),(obd60.checkState),(obd61.checkState),(obd62.checkState),(obd63.checkState),(obd66.checkState)];
-                            Connect.LiveReqMsgOBD(items);
-                            }
             }
+}
 
             CheckBox {
                 id: obd4

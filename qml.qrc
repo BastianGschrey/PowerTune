@@ -113,5 +113,7 @@
         <file>KTracks/South Africa/Midvaal.txt</file>
         <file>KTracks/USA/Laguna Seca.txt</file>
         <file>KTracks/Australia/Eastern Creek GP Circuit.txt</file>
+        <file>KTracks/Australia/The Bend International Circuit.txt</file>
+        <file>KTracks/Australia/The Bend West Circuit.txt</file>
     </qresource>
 </RCC>
