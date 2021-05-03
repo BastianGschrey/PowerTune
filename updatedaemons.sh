@@ -2,6 +2,9 @@
 echo "Disable System Logs"
 cd /home/pi/src
 ./fixlog.sh
+echo "Install fonts"
+cd /home/pi/src/fonts
+sudo cp *.* /usr/local/share/fonts
 echo "Fetching latest Daemons"
 cd /home/pi/src
 git pull
