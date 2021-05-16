@@ -46,6 +46,7 @@ sudo pkill WRX2012
 sudo pkill Testdaemon
 sudo pkill ecoboost
 sudo pkill WolfEMS
+sudo pkill GMCANOBD
 
 echo "Removing previous Versions"
 
@@ -84,6 +85,7 @@ sudo rm /home/pi/daemons/WRX2012
 sudo rm /home/pi/daemons/Testdaemon
 sudo rm /home/pi/daemons/ecoboost
 sudo rm /home/pi/daemons/WolfEMS
+sudo rm /home/pi/daemons/GMCANOBD
 
 echo "Updating Daemons"
 cp -r /home/pi/src/daemons/. /home/pi/daemons/
