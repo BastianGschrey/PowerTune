@@ -842,6 +842,9 @@ void Connect::daemonstartup(const int &daemon)
     case 37:
         daemonstart = "./GMCANOBD";
         break;
+    case 38:
+        daemonstart = "./PTDCAND";
+        break;
     }
     QString fileName = "/home/pi/startdaemon.sh";//This will be the correct path on pi
     //QString fileName = "startdaemon.sh";//for testing on windows
@@ -1066,6 +1069,7 @@ void Connect::openConnection(const QString &portName, const int &ecuSelect)
     //Apexi
     if (ecuSelect == 1)
     {
+        m_udpreceiver->startreceiver();
         m_apexi->openConnection(portName);
     }
 
