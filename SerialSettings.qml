@@ -1686,6 +1686,9 @@ Quick1.TabView {
                             break;
                         case "Subaru Test":canbitrateselect.currentIndex = 1 // 500 Kbs
                             break;
+                        case "genericcan":
+                            canbitrateselect.currentIndex = 1 // 500 Kbs
+                            break;
                         default:
                         canbitrateselect.currentIndex = 2 // 1Mbit
                         break;
