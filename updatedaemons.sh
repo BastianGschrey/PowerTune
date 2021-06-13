@@ -47,6 +47,7 @@ sudo pkill Testdaemon
 sudo pkill ecoboost
 sudo pkill WolfEMS
 sudo pkill GMCANOBD
+sudo pkill genericcan
 
 echo "Removing previous Versions"
 
@@ -86,6 +87,7 @@ sudo rm /home/pi/daemons/Testdaemon
 sudo rm /home/pi/daemons/ecoboost
 sudo rm /home/pi/daemons/WolfEMS
 sudo rm /home/pi/daemons/GMCANOBD
+sudo rm /home/pi/genericcan
 
 echo "Updating Daemons"
 cp -r /home/pi/src/daemons/. /home/pi/daemons/
