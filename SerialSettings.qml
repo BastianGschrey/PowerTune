@@ -579,7 +579,7 @@ Quick1.TabView {
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                             Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                         }
-                        Text  { text: " V 1.95k " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: " V 1.95m " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 /*
                         Slider {
                             id:brightness
@@ -1602,7 +1602,7 @@ Quick1.TabView {
                     width: daemons.width / 3
                     height: daemons.height /15
                     font.pixelSize: daemons.width / 55
-                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata (KPRO)","Adaptronic CAN","Motec M1","AEM V2","AUDI B7","BRZ FRS 86","ECU Masters","Audi B8","Emtron","Holley","MaxxECU","Barra FG MK1","Barra FG MK1 + OBD Polling","Barra BA+BF ","Barra BA+BF + OBD Polling","Barra FG2x","Barra FG2x + OBD Polling","EVO X","Blackbox M3","NISSAN 370Z","GM: LS2-LS7 CAN","NISSAN 350Z","Megasquirt CAN Simplified","EMTECH EMS CAN","WRX 2008-2015","Motec Set3 ADL","Testdaemon","Ecoboost","Emerald ECU","Wolf","GM OBD-CAN","Extension Board","Hondata (S300)","Generic CAN"]
+                    model: [ "None","HaltechV2","Link Generic Dash","Microtech","Consult","M800 Set1","OBD2","Hondata (KPRO)","Adaptronic CAN","Motec M1","AEM V2","AUDI B7","BRZ FRS 86","ECU Masters","Audi B8","Emtron","Holley","MaxxECU","Ford FG MK1","Ford FG MK1 + OBD Polling","Ford BA+BF ","Ford BA+BF + OBD Polling","Ford FG2x","Ford FG2x + OBD Polling","EVO X","Blackbox M3","NISSAN 370Z","GM: LS2-LS7 CAN","NISSAN 350Z","Megasquirt CAN Simplified","EMTECH EMS CAN","WRX 2008-2015","Motec Set3 ADL","Testdaemon","Ecoboost","Emerald ECU","Wolf","GM OBD-CAN","Extension Board","Hondata (S300)","11-Bit CAN","Motorsport Electronics"]
                     delegate: ItemDelegate {
                         width: daemonselect.width
                         text: daemonselect.textRole ? (Array.isArray(control.model) ? modelData[control.textRole] : model[control.textRole]) : modelData
@@ -1655,22 +1655,22 @@ Quick1.TabView {
                         case "Audi B8":
                             canbitrateselect.currentIndex = 1 // 500 Kbs
                             break;
-                        case "Barra FG MK1":
+                        case "Ford FG MK1":
                             canbitrateselect.currentIndex = 1 // 500 Kbs
                             break;
-                        case "Barra FG MK1 + OBD Polling":
+                        case "Ford FG MK1 + OBD Polling":
                             canbitrateselect.currentIndex = 1 // 500 Kbs
                             break;
-                        case "Barra BX ":
+                        case "Ford BX ":
                             canbitrateselect.currentIndex = 1 // 500 Kbs
                             break;
-                        case "Barra BX + OBD Polling":
+                        case "Ford BX + OBD Polling":
                             canbitrateselect.currentIndex = 1 // 500 Kbs
                             break;
-                        case "Barra FG2x":
+                        case "Ford FG2x":
                             canbitrateselect.currentIndex = 1 // 500 Kbs
                             break;
-                        case "Barra FG2x + OBD Polling":
+                        case "Ford FG2x + OBD Polling":
                             canbitrateselect.currentIndex = 1 // 500 Kbs
                             break;
                         case "EVO X Test":
@@ -1686,8 +1686,11 @@ Quick1.TabView {
                             break;
                         case "Subaru Test":canbitrateselect.currentIndex = 1 // 500 Kbs
                             break;
-                        case "genericcan":
+                        case "11-Bit CAN":
                             canbitrateselect.currentIndex = 1 // 500 Kbs
+                            break;
+                        case "Motorsport Electronics":
+                            canbitrateselect.currentIndex = 2 // 500 Kbs
                             break;
                         default:
                         canbitrateselect.currentIndex = 2 // 1Mbit
