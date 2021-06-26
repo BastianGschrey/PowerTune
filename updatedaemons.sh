@@ -48,6 +48,7 @@ sudo pkill ecoboost
 sudo pkill WolfEMS
 sudo pkill GMCANOBD
 sudo pkill genericcan
+sudo pkill FTCAN20
 
 echo "Removing previous Versions"
 
@@ -88,6 +89,7 @@ sudo rm /home/pi/daemons/ecoboost
 sudo rm /home/pi/daemons/WolfEMS
 sudo rm /home/pi/daemons/GMCANOBD
 sudo rm /home/pi/genericcan
+sudo rm /home/pi/FTCAN20
 
 echo "Updating Daemons"
 cp -r /home/pi/src/daemons/. /home/pi/daemons/
