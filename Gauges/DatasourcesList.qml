@@ -75,6 +75,26 @@ ListModel {
         divisor : "1"
     }
     ListElement {
+        titlename: "activeboosttable"
+        defaultsymbol: ""
+        sourcename:"Active boost table"
+        supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "activetunetable"
+        defaultsymbol: ""
+        sourcename:"Active tune table"
+        supportedECU: ""
+        decimalpoints : "0"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
         titlename: "Analog0"
         defaultsymbol: "V"
         sourcename:"Analog0"
@@ -684,6 +704,15 @@ ListModel {
         divisor : "1"
     }
     ListElement {
+        sourcename:"cputempecu"
+        defaultsymbol: "°C"
+        titlename:"ECU CPU temp"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
         sourcename:"egt1"
         defaultsymbol: "°C"
         titlename:"EGT 1"
@@ -786,6 +815,24 @@ ListModel {
         sourcename:"egt12"
         defaultsymbol: "°C"
         titlename:"EGT 12"
+        decimalpoints : "0"
+        maxvalue : "1300"
+        stepsize : "200"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"egthighest"
+        defaultsymbol: "°C"
+        titlename:"EGT highest"
+        decimalpoints : "0"
+        maxvalue : "1300"
+        stepsize : "200"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"egtdiff"
+        defaultsymbol: "°C"
+        titlename:"EGT diff."
         decimalpoints : "0"
         maxvalue : "1300"
         stepsize : "200"
@@ -1541,7 +1588,33 @@ ListModel {
         stepsize : "1"
         divisor : "1"
     }
-
+    ListElement {
+        sourcename:"knockallpeak"
+        defaultsymbol: " "
+        titlename:"Knock all peak"
+        decimalpoints : "0"
+        maxvalue : "30"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"knockcorr"
+        defaultsymbol: " "
+        titlename:"Knock correction"
+        decimalpoints : "0"
+        maxvalue : "30"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"knocklastcyl"
+        defaultsymbol: " "
+        titlename:"Knock last cylinder"
+        decimalpoints : "0"
+        maxvalue : "30"
+        stepsize : "1"
+        divisor : "1"
+    }
     ListElement {
         sourcename:"LAMBDA"
         defaultsymbol: "λ"
@@ -2120,6 +2193,89 @@ ListModel {
         stepsize : "10"
         divisor : "1"
     }
+    ListElement {
+        sourcename:"Userchannel5"
+        defaultsymbol: ""
+        titlename:"User Channel 5"
+        decimalpoints : "1"
+        maxvalue : "100000"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Userchannel6"
+        defaultsymbol: ""
+        titlename:"User Channel 6"
+        decimalpoints : "1"
+        maxvalue : "100000"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Userchannel7"
+        defaultsymbol: ""
+        titlename:"User Channel 7"
+        decimalpoints : "1"
+        maxvalue : "100000"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Userchannel8"
+        defaultsymbol: ""
+        titlename:"User Channel 8"
+        decimalpoints : "1"
+        maxvalue : "100000"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Userchannel9"
+        defaultsymbol: ""
+        titlename:"User Channel 9"
+        decimalpoints : "1"
+        maxvalue : "100000"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Userchannel9"
+        defaultsymbol: ""
+        titlename:"User Channel 9"
+        decimalpoints : "1"
+        maxvalue : "100000"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Userchannel10"
+        defaultsymbol: ""
+        titlename:"User Channel 10"
+        decimalpoints : "1"
+        maxvalue : "100000"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Userchannel11"
+        defaultsymbol: ""
+        titlename:"User Channel 11"
+        decimalpoints : "1"
+        maxvalue : "100000"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Userchannel12"
+        defaultsymbol: ""
+        titlename:"User Channel 12"
+        decimalpoints : "1"
+        maxvalue : "100000"
+        stepsize : "10"
+        divisor : "1"
+    }
+
+
     ListElement {
         sourcename:"wastegatepress"
         defaultsymbol: "kPa"
@@ -2722,6 +2878,90 @@ ListModel {
         defaultsymbol: " "
         titlename:"EX Digital Input 8"
         decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+
+    //////////
+    ListElement {
+        sourcename:"igncut"
+        defaultsymbol: " "
+        titlename:"Ignition cut"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"undrivenavgspeed"
+        defaultsymbol: " "
+        titlename:"Undriven avg. speed"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"drivenavgspeed"
+        defaultsymbol: " "
+        titlename:"Driven avg. speed"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"dsettargetslip"
+        defaultsymbol: " "
+        titlename:"Set Target slip"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"tractionctlpowerlimit"
+        defaultsymbol: " "
+        titlename:"Traction ctrl. power limit"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+
+    ListElement {
+        sourcename:"totalfueltrim"
+        defaultsymbol: " "
+        titlename:"Total fuel trim"
+        decimalpoints : "1"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"totaligncomp"
+        defaultsymbol: " "
+        titlename:"Total ign comp"
+        decimalpoints : "1"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"errorcodecount"
+        defaultsymbol: " "
+        titlename:"Error code count"
+        decimalpoints : "1"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"lostsynccount"
+        defaultsymbol: " "
+        titlename:"Lost sync count"
+        decimalpoints : "1"
         maxvalue : "300"
         stepsize : "10"
         divisor : "1"

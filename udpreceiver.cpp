@@ -837,6 +837,87 @@ void udpreceiver::processPendingDatagrams()
         case 290:
             m_dashboard->settractionControl(Value);
             break;
+        case 291:
+            m_dashboard->setUserchannel5(Value);
+            break;
+        case 292:
+            m_dashboard->setUserchannel6(Value);
+            break;
+        case 293:
+            m_dashboard->setUserchannel7(Value);
+            break;
+        case 294:
+            m_dashboard->setUserchannel8(Value);
+            break;
+        case 295:
+            m_dashboard->setUserchannel9(Value);
+            break;
+        case 296:
+            m_dashboard->setUserchannel10(Value);
+            break;
+        case 297:
+            m_dashboard->setUserchannel11(Value);
+            break;
+        case 298:
+            m_dashboard->setUserchannel12(Value);
+            break;
+
+      /////
+        case 400:
+            m_dashboard->setigncut(Value);
+            break;
+        case 401:
+            m_dashboard->setundrivenavgspeed(Value);
+            break;
+        case 402:
+            m_dashboard->setdrivenavgspeed(Value);
+            break;
+        case 403:
+            m_dashboard->setdsettargetslip(Value);
+            break;
+        case 404:
+            m_dashboard->settractionctlpowerlimit(Value);
+            break;
+        case 405:
+            m_dashboard->setknockallpeak(Value);
+            break;
+        case 406:
+            m_dashboard->setknockcorr(Value);
+            break;
+        case 407:
+            m_dashboard->setknocklastcyl(Value);
+            break;
+        case 408:
+            m_dashboard->settotalfueltrim(Value);
+            break;
+        case 409:
+            m_dashboard->settotaligncomp(Value);
+            break;
+        case 410:
+            m_dashboard->setegthighest(Value);
+            break;
+        case 411:
+            m_dashboard->setcputempecu(Value);
+            break;
+        case 412:
+            m_dashboard->seterrorcodecount(Value);
+            break;
+        case 413:
+            m_dashboard->setlostsynccount(Value);
+            break;
+        case 414:
+            m_dashboard->setegtdiff(Value);
+            break;
+        case 415:
+            m_dashboard->setactiveboosttable(Value);
+            break;
+        case 416:
+            m_dashboard->setactivetunetable(Value);
+            break;
+     /////
+
+
+
         case 800:
             m_dashboard->setSensorString1(list[1]);
             break;

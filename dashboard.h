@@ -375,6 +375,14 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal Userchannel2 READ Userchannel2 WRITE setUserchannel2 NOTIFY Userchannel2Changed)
     Q_PROPERTY(qreal Userchannel3 READ Userchannel3 WRITE setUserchannel3 NOTIFY Userchannel3Changed)
     Q_PROPERTY(qreal Userchannel4 READ Userchannel4 WRITE setUserchannel4 NOTIFY Userchannel4Changed)
+    Q_PROPERTY(qreal Userchannel5 READ Userchannel5 WRITE setUserchannel5 NOTIFY Userchannel5Changed)
+    Q_PROPERTY(qreal Userchannel6 READ Userchannel6 WRITE setUserchannel6 NOTIFY Userchannel6Changed)
+    Q_PROPERTY(qreal Userchannel7 READ Userchannel7 WRITE setUserchannel7 NOTIFY Userchannel7Changed)
+    Q_PROPERTY(qreal Userchannel8 READ Userchannel8 WRITE setUserchannel8 NOTIFY Userchannel8Changed)
+    Q_PROPERTY(qreal Userchannel9 READ Userchannel9 WRITE setUserchannel9 NOTIFY Userchannel9Changed)
+    Q_PROPERTY(qreal Userchannel10 READ Userchannel10 WRITE setUserchannel10 NOTIFY Userchannel10Changed)
+    Q_PROPERTY(qreal Userchannel11 READ Userchannel11 WRITE setUserchannel11 NOTIFY Userchannel11Changed)
+    Q_PROPERTY(qreal Userchannel12 READ Userchannel12 WRITE setUserchannel12 NOTIFY Userchannel12Changed)
     Q_PROPERTY(qreal FuelLevel READ FuelLevel WRITE setFuelLevel NOTIFY FuelLevelChanged)
     Q_PROPERTY(qreal SteeringWheelAngle READ SteeringWheelAngle WRITE setSteeringWheelAngle NOTIFY SteeringWheelAngleChanged)
     Q_PROPERTY(int Brightness READ Brightness WRITE setBrightness NOTIFY BrightnessChanged)
@@ -470,6 +478,28 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal EXAnalogInput6 READ EXAnalogInput6 WRITE setEXAnalogInput6 NOTIFY EXAnalogInput6Changed)
     Q_PROPERTY(qreal EXAnalogInput7 READ EXAnalogInput7 WRITE setEXAnalogInput7 NOTIFY EXAnalogInput7Changed)
     Q_PROPERTY(qreal EXAnalogInput8 READ EXAnalogInput8 WRITE setEXAnalogInput8 NOTIFY EXAnalogInput8Changed)
+
+    ////
+    Q_PROPERTY(qreal igncut READ igncut WRITE setigncut NOTIFY igncutChanged)
+    Q_PROPERTY(qreal undrivenavgspeed READ undrivenavgspeed WRITE setundrivenavgspeed NOTIFY undrivenavgspeedChanged)
+    Q_PROPERTY(qreal drivenavgspeed READ drivenavgspeed WRITE setdrivenavgspeed NOTIFY drivenavgspeedChanged)
+    Q_PROPERTY(qreal dsettargetslip READ dsettargetslip WRITE setdsettargetslip NOTIFY dsettargetslipChanged)
+    Q_PROPERTY(qreal tractionctlpowerlimit READ tractionctlpowerlimit WRITE settractionctlpowerlimit NOTIFY tractionctlpowerlimitChanged)
+    Q_PROPERTY(qreal knockallpeak READ knockallpeak WRITE setknockallpeak NOTIFY knockallpeakChanged)
+    Q_PROPERTY(qreal knockcorr READ knockcorr WRITE setknockcorr NOTIFY knockcorrChanged)
+    Q_PROPERTY(qreal knocklastcyl READ knocklastcyl WRITE setknocklastcyl NOTIFY knocklastcylChanged)
+    Q_PROPERTY(qreal totalfueltrim READ totalfueltrim WRITE settotalfueltrim NOTIFY totalfueltrimChanged)
+    Q_PROPERTY(qreal totaligncomp READ totaligncomp WRITE settotaligncomp NOTIFY totaligncompChanged)
+    Q_PROPERTY(qreal egthighest READ egthighest WRITE setegthighest NOTIFY egthighestChanged)
+    Q_PROPERTY(qreal cputempecu READ cputempecu WRITE setcputempecu NOTIFY cputempecuChanged)
+    Q_PROPERTY(qreal errorcodecount READ errorcodecount WRITE seterrorcodecount NOTIFY errorcodecountChanged)
+    Q_PROPERTY(qreal lostsynccount READ lostsynccount WRITE setlostsynccount NOTIFY lostsynccountChanged)
+    Q_PROPERTY(qreal egtdiff READ egtdiff WRITE setegtdiff NOTIFY egtdiffChanged)
+    Q_PROPERTY(qreal activeboosttable READ activeboosttable WRITE setactiveboosttable NOTIFY activeboosttableChanged)
+    Q_PROPERTY(qreal activetunetable READ activetunetable WRITE setactivetunetable NOTIFY activetunetableChanged)
+
+
+
 
     public:
     DashBoard(QObject *parent = 0);
@@ -849,6 +879,14 @@ class DashBoard : public QObject
     void setUserchannel2(const qreal &Userchannel2);
     void setUserchannel3(const qreal &Userchannel3);
     void setUserchannel4(const qreal &Userchannel4);
+    void setUserchannel5(const qreal &Userchannel5);
+    void setUserchannel6(const qreal &Userchannel6);
+    void setUserchannel7(const qreal &Userchannel7);
+    void setUserchannel8(const qreal &Userchannel8);
+    void setUserchannel9(const qreal &Userchannel9);
+    void setUserchannel10(const qreal &Userchannel10);
+    void setUserchannel11(const qreal &Userchannel11);
+    void setUserchannel12(const qreal &Userchannel12);
     void setFuelLevel(const qreal &FuelLevel);
     void setSteeringWheelAngle(const qreal &SteeringWheelAngle);
     void setBrightness(const int &Brightness);
@@ -942,6 +980,27 @@ class DashBoard : public QObject
     void setEXAnalogInput6(const qreal &EXAnalogInput6);
     void setEXAnalogInput7(const qreal &EXAnalogInput7);
     void setEXAnalogInput8(const qreal &EXAnalogInput8);
+
+
+    ///
+    void setigncut(const qreal &igncut);
+    void setundrivenavgspeed(const qreal &undrivenavgspeed);
+    void setdrivenavgspeed(const qreal &drivenavgspeed);
+    void setdsettargetslip(const qreal &dsettargetslip);
+    void settractionctlpowerlimit(const qreal &tractionctlpowerlimit);
+    void setknockallpeak(const qreal &knockallpeak);
+    void setknockcorr(const qreal &knockcorr);
+    void setknocklastcyl(const qreal &knocklastcyl);
+    void settotalfueltrim(const qreal &totalfueltrim);
+    void settotaligncomp(const qreal &totaligncomp);
+    void setegthighest(const qreal &egthighest);
+    void setcputempecu(const qreal &cputempecu);
+    void seterrorcodecount(const qreal &errorcodecount);
+    void setlostsynccount(const qreal &lostsynccount);
+    void setegtdiff(const qreal &egtdiff);
+    void setactiveboosttable(const qreal &activeboosttable);
+    void setactivetunetable(const qreal &activetunetable);
+
     qreal Odo() const;
 
     //Tripmeter
@@ -1311,6 +1370,14 @@ class DashBoard : public QObject
     qreal Userchannel2()const;
     qreal Userchannel3()const;
     qreal Userchannel4()const;
+    qreal Userchannel5()const;
+    qreal Userchannel6()const;
+    qreal Userchannel7()const;
+    qreal Userchannel8()const;
+    qreal Userchannel9()const;
+    qreal Userchannel10()const;
+    qreal Userchannel11()const;
+    qreal Userchannel12()const;
     qreal FuelLevel()const;
     qreal SteeringWheelAngle()const;
     int Brightness()const;
@@ -1406,7 +1473,24 @@ class DashBoard : public QObject
     qreal EXAnalogInput7()const;
     qreal EXAnalogInput8()const;
 
-
+///
+    qreal igncut()const;
+    qreal undrivenavgspeed()const;
+    qreal drivenavgspeed()const;
+    qreal dsettargetslip()const;
+    qreal tractionctlpowerlimit()const;
+    qreal knockallpeak()const;
+    qreal knockcorr()const;
+    qreal knocklastcyl()const;
+    qreal totalfueltrim()const;
+    qreal totaligncomp()const;
+    qreal egthighest()const;
+    qreal cputempecu()const;
+    qreal errorcodecount()const;
+    qreal lostsynccount()const;
+    qreal egtdiff()const;
+    qreal activeboosttable()const;
+    qreal activetunetable()const;
 signals:
 
     //Odometer
@@ -1766,6 +1850,14 @@ signals:
     void Userchannel2Changed(qreal Userchannel2);
     void Userchannel3Changed(qreal Userchannel3);
     void Userchannel4Changed(qreal Userchannel4);
+    void Userchannel5Changed(qreal Userchannel5);
+    void Userchannel6Changed(qreal Userchannel6);
+    void Userchannel7Changed(qreal Userchannel7);
+    void Userchannel8Changed(qreal Userchannel8);
+    void Userchannel9Changed(qreal Userchannel9);
+    void Userchannel10Changed(qreal Userchannel10);
+    void Userchannel11Changed(qreal Userchannel11);
+    void Userchannel12Changed(qreal Userchannel12);
     void FuelLevelChanged(qreal FuelLevel);
     void SteeringWheelAngleChanged(qreal SteeringWheelAngle);
     void BrightnessChanged(int Brightness);
@@ -1860,6 +1952,26 @@ signals:
     void EXAnalogInput7Changed(qreal EXAnalogInput7);
     void EXAnalogInput8Changed(qreal EXAnalogInput8);
 
+
+    //
+
+    void igncutChanged(qreal igncut);
+    void undrivenavgspeedChanged(qreal undrivenavgspeed);
+    void drivenavgspeedChanged(qreal drivenavgspeed);
+    void dsettargetslipChanged(qreal dsettargetslip);
+    void tractionctlpowerlimitChanged(qreal tractionctlpowerlimit);
+    void knockallpeakChanged(qreal knockallpeak);
+    void knockcorrChanged(qreal knockcorr);
+    void knocklastcylChanged(qreal knocklastcyl);
+    void totalfueltrimChanged(qreal totalfueltrim);
+    void totaligncompChanged(qreal totaligncomp);
+    void egthighestChanged(qreal egthighest);
+    void cputempecuChanged(qreal cputempecu);
+    void errorcodecountChanged(qreal errorcodecount);
+    void lostsynccountChanged(qreal lostsynccount);
+    void egtdiffChanged(qreal egtdiff);
+    void activeboosttableChanged(qreal activeboosttable);
+    void activetunetableChanged(qreal activetunetable);
 private:
     // Odometer
 
@@ -2232,6 +2344,14 @@ private:
     qreal m_Userchannel2;
     qreal m_Userchannel3;
     qreal m_Userchannel4;
+    qreal m_Userchannel5;
+    qreal m_Userchannel6;
+    qreal m_Userchannel7;
+    qreal m_Userchannel8;
+    qreal m_Userchannel9;
+    qreal m_Userchannel10;
+    qreal m_Userchannel11;
+    qreal m_Userchannel12;
     qreal m_FuelLevel;
     qreal m_SteeringWheelAngle;
     int m_Brightness;
@@ -2326,6 +2446,25 @@ private:
     qreal m_EXAnalogInput6;
     qreal m_EXAnalogInput7;
     qreal m_EXAnalogInput8;
+
+    //
+    qreal m_igncut;
+    qreal m_undrivenavgspeed;
+    qreal m_drivenavgspeed;
+    qreal m_dsettargetslip;
+    qreal m_tractionctlpowerlimit;
+    qreal m_knockallpeak;
+    qreal m_knockcorr;
+    qreal m_knocklastcyl;
+    qreal m_totalfueltrim;
+    qreal m_totaligncomp;
+    qreal m_egthighest;
+    qreal m_cputempecu;
+    qreal m_errorcodecount;
+    qreal m_lostsynccount;
+    qreal m_egtdiff;
+    qreal m_activeboosttable;
+    qreal m_activetunetable;
 };
 
 #endif // DASHBOARD_H

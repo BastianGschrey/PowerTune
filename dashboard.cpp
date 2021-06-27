@@ -368,6 +368,14 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_Userchannel2()
     ,  m_Userchannel3()
     ,  m_Userchannel4()
+    ,  m_Userchannel5()
+    ,  m_Userchannel6()
+    ,  m_Userchannel7()
+    ,  m_Userchannel8()
+    ,  m_Userchannel9()
+    ,  m_Userchannel10()
+    ,  m_Userchannel11()
+    ,  m_Userchannel12()
     ,  m_FuelLevel()
     ,  m_SteeringWheelAngle()
     ,  m_Brightness()
@@ -442,25 +450,25 @@ DashBoard::DashBoard(QObject *parent)
     , m_DigitalInput6()
     , m_DigitalInput7()
 
-    // EXBoard
+    //
 
-    , m_EXDigitalInput1()
-    , m_EXDigitalInput2()
-    , m_EXDigitalInput3()
-    , m_EXDigitalInput4()
-    , m_EXDigitalInput5()
-    , m_EXDigitalInput6()
-    , m_EXDigitalInput7()
-    , m_EXDigitalInput8()
-
-    , m_EXAnalogInput1()
-    , m_EXAnalogInput2()
-    , m_EXAnalogInput3()
-    , m_EXAnalogInput4()
-    , m_EXAnalogInput5()
-    , m_EXAnalogInput6()
-    , m_EXAnalogInput7()
-    , m_EXAnalogInput8()
+    , m_igncut()
+    , m_undrivenavgspeed()
+    , m_drivenavgspeed()
+    , m_dsettargetslip()
+    , m_tractionctlpowerlimit()
+    , m_knockallpeak()
+    , m_knockcorr()
+    , m_knocklastcyl()
+    , m_totalfueltrim()
+    , m_totaligncomp()
+    , m_egthighest()
+    , m_cputempecu()
+    , m_errorcodecount()
+    , m_lostsynccount()
+    , m_egtdiff()
+    , m_activeboosttable()
+    , m_activetunetable()
 {
 
 }
@@ -3035,7 +3043,63 @@ void DashBoard::setUserchannel4(const qreal &Userchannel4)
     m_Userchannel4 = Userchannel4;
     emit Userchannel4Changed(Userchannel4);
 }
+void DashBoard::setUserchannel5(const qreal &Userchannel5)
+{
+    if (m_Userchannel5 == Userchannel5)
+        return;
+    m_Userchannel5 = Userchannel5;
+    emit Userchannel5Changed(Userchannel5);
+}
+void DashBoard::setUserchannel6(const qreal &Userchannel6)
+{
+    if (m_Userchannel6 == Userchannel6)
+        return;
+    m_Userchannel6 = Userchannel6;
+    emit Userchannel6Changed(Userchannel6);
+}
+void DashBoard::setUserchannel7(const qreal &Userchannel7)
+{
+    if (m_Userchannel7 == Userchannel7)
+        return;
+    m_Userchannel7 = Userchannel7;
+    emit Userchannel7Changed(Userchannel7);
+}
+void DashBoard::setUserchannel8(const qreal &Userchannel8)
+{
+    if (m_Userchannel8 == Userchannel8)
+        return;
+    m_Userchannel8 = Userchannel8;
+    emit Userchannel8Changed(Userchannel8);
+}
+void DashBoard::setUserchannel9(const qreal &Userchannel9)
+{
+    if (m_Userchannel9 == Userchannel9)
+        return;
+    m_Userchannel9 = Userchannel9;
+    emit Userchannel9Changed(Userchannel9);
+}
+void DashBoard::setUserchannel10(const qreal &Userchannel10)
+{
+    if (m_Userchannel10 == Userchannel10)
+        return;
+    m_Userchannel10 = Userchannel10;
+    emit Userchannel10Changed(Userchannel10);
+}
 
+void DashBoard::setUserchannel11(const qreal &Userchannel11)
+{
+    if (m_Userchannel11 == Userchannel11)
+        return;
+    m_Userchannel11 = Userchannel11;
+    emit Userchannel11Changed(Userchannel11);
+}
+void DashBoard::setUserchannel12(const qreal &Userchannel12)
+{
+    if (m_Userchannel12 == Userchannel12)
+        return;
+    m_Userchannel12 = Userchannel12;
+    emit Userchannel12Changed(Userchannel12);
+}
 void DashBoard::setFuelLevel(const qreal &FuelLevel)
 {
     if (m_FuelLevel == FuelLevel)
@@ -3707,6 +3771,125 @@ void DashBoard::setEXAnalogInput8(const qreal &EXAnalogInput8)
     m_EXAnalogInput8 = EXAnalogInput8;
     emit EXAnalogInput8Changed(EXAnalogInput8);
 }
+void DashBoard::setigncut(const qreal &igncut)
+{
+    if(m_igncut == igncut)
+        return;
+    m_igncut = igncut;
+    emit igncutChanged(igncut);
+}
+void DashBoard::setundrivenavgspeed(const qreal &undrivenavgspeed)
+{
+    if(m_undrivenavgspeed == undrivenavgspeed)
+        return;
+    m_undrivenavgspeed = undrivenavgspeed;
+    emit undrivenavgspeedChanged(undrivenavgspeed);
+}
+void DashBoard::setdrivenavgspeed(const qreal &drivenavgspeed)
+{
+    if(m_drivenavgspeed == drivenavgspeed)
+        return;
+    m_drivenavgspeed = drivenavgspeed;
+    emit drivenavgspeedChanged(drivenavgspeed);
+}
+void DashBoard::setdsettargetslip(const qreal &dsettargetslip)
+{
+    if(m_dsettargetslip == dsettargetslip)
+        return;
+    m_dsettargetslip = dsettargetslip;
+    emit dsettargetslipChanged(dsettargetslip);
+}
+void DashBoard::settractionctlpowerlimit(const qreal &tractionctlpowerlimit)
+{
+    if(m_tractionctlpowerlimit == tractionctlpowerlimit)
+        return;
+    m_tractionctlpowerlimit = tractionctlpowerlimit;
+    emit tractionctlpowerlimitChanged(tractionctlpowerlimit);
+}
+void DashBoard::setknockallpeak(const qreal &knockallpeak)
+{
+    if(m_knockallpeak == knockallpeak)
+        return;
+    m_knockallpeak = knockallpeak;
+    emit knockallpeakChanged(knockallpeak);
+}
+void DashBoard::setknockcorr(const qreal &knockcorr)
+{
+    if(m_knockcorr == knockcorr)
+        return;
+    m_knockcorr = knockcorr;
+    emit knockcorrChanged(knockcorr);
+}
+void DashBoard::setknocklastcyl(const qreal &knocklastcyl)
+{
+    if(m_knocklastcyl == knocklastcyl)
+        return;
+    m_knocklastcyl = knocklastcyl;
+    emit knocklastcylChanged(knocklastcyl);
+}
+void DashBoard::settotalfueltrim(const qreal &totalfueltrim)
+{
+    if(m_totalfueltrim == totalfueltrim)
+        return;
+    m_totalfueltrim = totalfueltrim;
+    emit totalfueltrimChanged(totalfueltrim);
+}
+void DashBoard::settotaligncomp(const qreal &totaligncomp)
+{
+    if(m_totaligncomp == totaligncomp)
+        return;
+    m_totaligncomp = totaligncomp;
+    emit totaligncompChanged(totaligncomp);
+}
+void DashBoard::setegthighest(const qreal &egthighest)
+{
+    if(m_egthighest == egthighest)
+        return;
+    m_egthighest = egthighest;
+    emit egthighestChanged(egthighest);
+}
+void DashBoard::setcputempecu(const qreal &cputempecu)
+{
+    if(m_cputempecu == cputempecu)
+        return;
+    m_cputempecu = cputempecu;
+    emit cputempecuChanged(cputempecu);
+}
+void DashBoard::seterrorcodecount(const qreal &errorcodecount)
+{
+    if(m_errorcodecount == errorcodecount)
+        return;
+    m_errorcodecount = errorcodecount;
+    emit errorcodecountChanged(errorcodecount);
+}
+void DashBoard::setlostsynccount(const qreal &lostsynccount)
+{
+    if(m_lostsynccount == lostsynccount)
+        return;
+    m_lostsynccount = lostsynccount;
+    emit lostsynccountChanged(lostsynccount);
+}
+    void DashBoard::setegtdiff(const qreal &egtdiff)
+    {
+        if(m_egtdiff == egtdiff)
+            return;
+        m_egtdiff = egtdiff;
+        emit egtdiffChanged(egtdiff);
+    }
+    void DashBoard::setactiveboosttable(const qreal &activeboosttable)
+    {
+        if(m_activeboosttable == activeboosttable)
+            return;
+        m_activeboosttable = activeboosttable;
+        emit activeboosttableChanged(activeboosttable);
+    }
+    void DashBoard::setactivetunetable(const qreal &activetunetable)
+    {
+        if(m_activetunetable == activetunetable)
+            return;
+        m_activetunetable = activetunetable;
+        emit activetunetableChanged(activetunetable);
+    }
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
 
@@ -4070,6 +4253,14 @@ qreal DashBoard::Userchannel1() const {return m_Userchannel1;}
 qreal DashBoard::Userchannel2() const {return m_Userchannel2;}
 qreal DashBoard::Userchannel3() const {return m_Userchannel3;}
 qreal DashBoard::Userchannel4() const {return m_Userchannel4;}
+qreal DashBoard::Userchannel5() const {return m_Userchannel5;}
+qreal DashBoard::Userchannel6() const {return m_Userchannel6;}
+qreal DashBoard::Userchannel7() const {return m_Userchannel7;}
+qreal DashBoard::Userchannel8() const {return m_Userchannel8;}
+qreal DashBoard::Userchannel9() const {return m_Userchannel9;}
+qreal DashBoard::Userchannel10() const {return m_Userchannel10;}
+qreal DashBoard::Userchannel11() const {return m_Userchannel11;}
+qreal DashBoard::Userchannel12() const {return m_Userchannel12;}
 qreal DashBoard::FuelLevel() const {return m_FuelLevel;}
 qreal DashBoard::SteeringWheelAngle() const {return m_SteeringWheelAngle;}
 int DashBoard::Brightness() const {return m_Brightness;}
@@ -4164,4 +4355,21 @@ qreal DashBoard::EXAnalogInput7() const {return m_EXAnalogInput7;}
 qreal DashBoard::EXAnalogInput8() const {return m_EXAnalogInput8;}
 
 
-
+//
+qreal DashBoard::igncut() const {return m_igncut;}
+qreal DashBoard::undrivenavgspeed() const {return m_undrivenavgspeed;}
+qreal DashBoard::drivenavgspeed() const {return m_drivenavgspeed;}
+qreal DashBoard::dsettargetslip() const {return m_dsettargetslip;}
+qreal DashBoard::tractionctlpowerlimit() const {return m_tractionctlpowerlimit;}
+qreal DashBoard::knockallpeak() const {return m_knockallpeak;}
+qreal DashBoard::knockcorr() const {return m_knockcorr;}
+qreal DashBoard::knocklastcyl() const {return m_knocklastcyl;}
+qreal DashBoard::totalfueltrim() const {return m_totalfueltrim;}
+qreal DashBoard::totaligncomp() const {return m_totaligncomp;}
+qreal DashBoard::egthighest() const {return m_egthighest;}
+qreal DashBoard::cputempecu() const {return m_cputempecu;}
+qreal DashBoard::errorcodecount() const {return m_errorcodecount;}
+qreal DashBoard::lostsynccount() const {return m_lostsynccount;}
+qreal DashBoard::egtdiff() const {return m_egtdiff;}
+qreal DashBoard::activeboosttable() const {return m_activeboosttable;}
+qreal DashBoard::activetunetable() const {return m_activetunetable;}
