@@ -271,11 +271,14 @@ if (m_dashboard->speedunits()  == "imperial"  && startdragcalculation == 1)
 
 
     //Odometer
+   if (m_dashboard->speed() > 0) // ensure that odo and trip meter only gets updated if the speed is greater  km/h
+   {
     traveleddistance = ((startTime.msecsTo(QTime::currentTime())) * ((m_dashboard->speed()) / 3600000)); // Odometer
     odometer += traveleddistance;
     tripmeter += traveleddistance;
     m_dashboard->setOdo(odometer);
     m_dashboard->setTrip(tripmeter);
+   }
     startTime.restart(); //(QTime::currentTime())
 
     // Virtual Dyno to calculate Wheel Power and Wheel Torque
