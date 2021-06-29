@@ -286,10 +286,7 @@ void GPS::processGPRMC(const QString & line){
     }
 
     double speed = groundspeedknots.toDouble() * 1.852;
-    if (speed < 8)
-    {
-        speed = 0; // this is to ensure we show 0 if we standing as GPS sometimes sends a value greater 0 when standing still
-    }
+
     QString decLat = convertToDecimal(latitude, latDirection);
     QString decLon = convertToDecimal(longitude, lonDirection);
 
