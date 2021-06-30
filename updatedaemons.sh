@@ -62,6 +62,7 @@ sudo rm /home/pi/daemons/BRZFRS86d
 sudo rm /home/pi/daemons/Consult
 sudo rm /home/pi/daemons/Emtrond
 sudo rm /home/pi/daemons/EMUCANd
+sudo rm /home/pi/daemons/EMSCAN
 sudo rm /home/pi/daemons/EVOXCAN
 sudo rm /home/pi/daemons/FordBarraBXCAN
 sudo rm /home/pi/daemons/FordBarraBXCANOBD
