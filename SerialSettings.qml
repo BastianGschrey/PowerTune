@@ -2,12 +2,12 @@ import QtQuick 2.8
 import QtQuick.Controls 1.4 as Quick1
 import QtQuick.Controls 2.1
 import Qt.labs.settings 1.0
-import QtQuick.VirtualKeyboard 2.1
 import QtSensors 5.0
 import QtQuick.Controls.Styles 1.4
 import QtMultimedia 5.8
 import "qrc:/Gauges/"
 import DLM 1.0
+import QtQuick.VirtualKeyboard 2.1
 
 Quick1.TabView {
     id: tabView
@@ -1433,9 +1433,11 @@ Quick1.TabView {
                 //console.log(Dashboard.ecu)
                 if(Dashboard.ecu == "0"){
                     pageLoader.source = "qrc:/AnalogInputs.qml"
+                    //pageLoader.source ="qrc:/ExBoardAnalog.qml"
                     regtab.title = "Analog";}
                 if(Dashboard.ecu == "1"){
                     pageLoader.source = "qrc:/AnalogInputs.qml"
+                    //pageLoader.source ="qrc:/ExBoardAnalog.qml"
                     regtab.title = "Analog";}
                 if(Dashboard.ecu == "2"){
                     pageLoader.source = "qrc:/ConsultRegs.qml"

@@ -3,12 +3,13 @@ import QtQuick.Extras 1.4
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Styles 1.4
 import Qt.labs.settings 1.0
-import QtQuick.VirtualKeyboard 2.1
 
 Rectangle {
     anchors.fill: parent
     color: "grey"
     id: main
+
+
 
     Item {
         id: dashSettings
@@ -45,17 +46,21 @@ Rectangle {
         rows:12
         columns: 3
         spacing: 5
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.topMargin:  20
+        anchors.leftMargin : 40
         Text { text: "  "
             font.pixelSize: main.width / 55;color:"white"}
-        Text { text: "Value @ 0V"
+        Text { text: "Val. @ 0V"
             font.pixelSize: main.width / 55;color:"white"}
-        Text { text: "Value @ 5V"
+        Text { text: "Val. @ 5V"
             font.pixelSize: main.width / 55;color:"white"}
         Text { text: "Analog 0"
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: an00
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -65,7 +70,7 @@ Rectangle {
         }
         TextField {
             id: an05
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -77,7 +82,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: an10
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -87,7 +92,7 @@ Rectangle {
         }
         TextField {
             id: an15
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -99,7 +104,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: an20
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -109,7 +114,7 @@ Rectangle {
         }
         TextField {
             id: an25
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -121,7 +126,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: an30
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -131,7 +136,7 @@ Rectangle {
         }
         TextField {
             id: an35
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -143,7 +148,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: an40
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -153,7 +158,7 @@ Rectangle {
         }
         TextField {
             id: an45
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -165,7 +170,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: an50
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -175,7 +180,7 @@ Rectangle {
         }
         TextField {
             id: an55
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -187,7 +192,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: an60
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -197,7 +202,7 @@ Rectangle {
         }
         TextField {
             id: an65
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -209,7 +214,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: an70
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -219,7 +224,7 @@ Rectangle {
         }
         TextField {
             id: an75
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -231,7 +236,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: an80
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -241,7 +246,7 @@ Rectangle {
         }
         TextField {
             id: an85
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -253,7 +258,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: an90
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -263,7 +268,7 @@ Rectangle {
         }
         TextField {
             id: an95
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -275,7 +280,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: an100
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -285,7 +290,7 @@ Rectangle {
         }
         TextField {
             id: an105
-            width: main.width / 5.5
+            width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -303,4 +308,18 @@ Rectangle {
         }
     }
 
+    Text {
+        id: explanationtext
+        anchors.left: inputgrid.right
+        anchors.leftMargin: 20
+        anchors.top: parent.top
+        anchors.topMargin: 40
+        font.pixelSize: parent.width / 55
+        font.bold: true
+        width: parent.width / 2.5
+        horizontalAlignment: Text.AlignHCenter
+        color: "red"
+        wrapMode: Text.WordWrap
+        text: qsTr("Enter the Value that should be displayed at 0 V in the field Val.@ 0V and the Value that should be displayed at 5 V in the field Val @5V. The calculated values will be available in the corresponding datasource Analog x Calc")
+    }
 }
