@@ -3,6 +3,7 @@ import QtQuick.Extras 1.4
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Styles 1.4
 import Qt.labs.settings 1.0
+import QtQuick.VirtualKeyboard 2.1
 
 Rectangle {
     anchors.fill: parent
@@ -38,8 +39,9 @@ Rectangle {
 
         }
     }
-    Grid {
 
+    Grid {
+        id:inputgrid
         rows:12
         columns: 3
         spacing: 5
@@ -300,4 +302,5 @@ Rectangle {
             }
         }
     }
+
 }
