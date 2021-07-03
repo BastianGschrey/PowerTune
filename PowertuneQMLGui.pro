@@ -24,7 +24,6 @@ SOURCES += main.cpp \
     AdaptronicSelect.cpp \
     connect.cpp \
     calculations.cpp \
-    shcalc.cpp \
     textprogressbar.cpp \
     udpreceiver.cpp \
     arduino.cpp \
@@ -54,7 +53,6 @@ HEADERS += \
     AdaptronicSelect.h \
     connect.h \
     calculations.h \
-    shcalc.h \
     textprogressbar.h \
     udpreceiver.h \
     arduino.h \
