@@ -258,7 +258,8 @@ Rectangle {
             id: inputs
             function setInputs()
             {
-            Dashboard.setEXAnalogVall(ex00.text,ex05.text,ex10.text,ex15.text,ex20.text,ex25.text,ex30.text,ex35.text,ex40.text,ex45.text,ex50.text,ex55.text,ex60.text,ex65.text,ex70.text,ex75.text)
+                console.log("Settinh ANalogs for EX board")
+            Dashboard.setEXAnalogVal(ex00.text,ex05.text,ex10.text,ex15.text,ex20.text,ex25.text,ex30.text,ex35.text,ex40.text,ex45.text,ex50.text,ex55.text,ex60.text,ex65.text,ex70.text,ex75.text)
 
             }
         }
