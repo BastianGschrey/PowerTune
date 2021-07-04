@@ -2810,6 +2810,82 @@ ListModel {
         stepsize : "10"
         divisor : "1"
     }
+   //
+    ListElement {
+        sourcename:"EXAnalogCalc0"
+        defaultsymbol: " "
+        titlename:"EX Analog Calc 0"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXAnalogCalc1"
+        defaultsymbol: " "
+        titlename:"EX Analog Calc 1"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXAnalogCalc2"
+        defaultsymbol: " "
+        titlename:"EX Analog Calc 2"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXAnalogCalc3"
+        defaultsymbol: " "
+        titlename:"EX Analog Calc 3"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXAnalogCalc4"
+        defaultsymbol: " "
+        titlename:"EX Analog Calc 4"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXAnalogCalc5"
+        defaultsymbol: " "
+        titlename:"EX Analog Calc 5"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXAnalogCalc6"
+        defaultsymbol: " "
+        titlename:"EX Analog Calc 6"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"EXAnalogCalc7"
+        defaultsymbol: " "
+        titlename:"EX Analog Calc 7"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+
+
+
     ListElement {
         sourcename:"EXDigitalInput1"
         defaultsymbol: " "

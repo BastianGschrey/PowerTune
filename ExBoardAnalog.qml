@@ -258,8 +258,8 @@ Rectangle {
             id: inputs
             function setInputs()
             {
-            //Dashboard.setEX ANVal(ex00.text,ex05.text,ex10.text,ex15.text,ex20.text,ex25.text,ex30.text,ex35.text,ex40.text,ex45.text,ex50.text,ex55.text,ex60.text,ex65.text,ex70.text,ex75.text,ex80.text,ex85.text,ex90.text,ex95.text,ex100.text,ex105.text)
-            //console.log("Setting inputs")
+            Dashboard.setEXAnalogVall(ex00.text,ex05.text,ex10.text,ex15.text,ex20.text,ex25.text,ex30.text,ex35.text,ex40.text,ex45.text,ex50.text,ex55.text,ex60.text,ex65.text,ex70.text,ex75.text)
+
             }
         }
     }
@@ -501,14 +501,6 @@ Rectangle {
 
         }
     }
-    Item {
-        id: checked
-        function checkset()
-        {
 
-
-
-        }
-        }
     }
 

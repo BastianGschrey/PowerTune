@@ -29,6 +29,23 @@ qreal AN90;
 qreal AN95;
 qreal AN100;
 qreal AN105;
+// Ex Board Analog
+qreal EXAN00;
+qreal EXAN05;
+qreal EXAN10;
+qreal EXAN15;
+qreal EXAN20;
+qreal EXAN25;
+qreal EXAN30;
+qreal EXAN35;
+qreal EXAN40;
+qreal EXAN45;
+qreal EXAN50;
+qreal EXAN55;
+qreal EXAN60;
+qreal EXAN65;
+qreal EXAN70;
+qreal EXAN75;
 qreal lamdamultiplicator = 1;
 int brightness;
 
@@ -363,6 +380,14 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_AnalogCalc8()
     ,  m_AnalogCalc9()
     ,  m_AnalogCalc10()
+    ,  m_EXAnalogCalc0()
+    ,  m_EXAnalogCalc1()
+    ,  m_EXAnalogCalc2()
+    ,  m_EXAnalogCalc3()
+    ,  m_EXAnalogCalc4()
+    ,  m_EXAnalogCalc5()
+    ,  m_EXAnalogCalc6()
+    ,  m_EXAnalogCalc7()
     ,  m_Lambdamultiply()
     ,  m_Userchannel1()
     ,  m_Userchannel2()
@@ -518,7 +543,26 @@ void DashBoard::setAnalogVal(const qreal &A00,const qreal &A05,const qreal &A10,
 
     //qDebug()<< "AN75 " <<AN75;
 }
+void DashBoard::setEXAnalogVal(const qreal &EXA00,const qreal &EXA05,const qreal &EXA10,const qreal &EXA15,const qreal &EXA20,const qreal &EXA25,const qreal &EXA30,const qreal &EXA35,const qreal &EXA40,const qreal &EXA45,const qreal &EXA50,const qreal &EXA55,const qreal &EXA60,const qreal &EXA65,const qreal &EXA70,const qreal &EXA75)
+{
+    EXAN00 = EXA00;
+    EXAN05 = EXA05;
+    EXAN10 = EXA10;
+    EXAN15 = EXA15;
+    EXAN20 = EXA20;
+    EXAN25 = EXA25;
+    EXAN30 = EXA30;
+    EXAN35 = EXA35;
+    EXAN40 = EXA40;
+    EXAN45 = EXA45;
+    EXAN50 = EXA50;
+    EXAN55 = EXA55;
+    EXAN60 = EXA60;
+    EXAN65 = EXA65;
+    EXAN70 = EXA70;
+    EXAN75 = EXA75;
 
+}
 // Advanced Info FD3S
 void DashBoard::setrpm(const qreal &rpm)
 {
@@ -3007,6 +3051,131 @@ void DashBoard::setAnalogCalc10(const qreal &AnalogCalc10)
     m_AnalogCalc10 = AnalogCalc10;
     emit AnalogCalc10Changed(AnalogCalc10);
 }
+// EX Board
+
+void DashBoard::setEXAnalogInput1(const qreal &EXAnalogInput1)
+{
+    if (m_EXAnalogInput1== EXAnalogInput1)
+        return;
+    m_EXAnalogInput1 = EXAnalogInput1;
+    emit EXAnalogInput1Changed(EXAnalogInput1);
+    setEXAnalogCalc0(((EXAN05-EXAN00)*0.2)*EXAnalogInput1+EXAN00);
+
+}
+void DashBoard::setEXAnalogInput2(const qreal &EXAnalogInput2)
+{
+    if (m_EXAnalogInput2== EXAnalogInput2)
+        return;
+    m_EXAnalogInput2 = EXAnalogInput2;
+    emit EXAnalogInput2Changed(EXAnalogInput2);
+    setEXAnalogCalc1(((EXAN15-EXAN10)*0.2)*EXAnalogInput2+EXAN10);
+}
+
+void DashBoard::setEXAnalogInput3(const qreal &EXAnalogInput3)
+{
+    if (m_EXAnalogInput3 == EXAnalogInput3)
+        return;
+    m_EXAnalogInput3 = EXAnalogInput3;
+    emit EXAnalogInput3Changed(EXAnalogInput3);
+    setEXAnalogCalc3(((EXAN25-AN20)*0.2)*EXAnalogInput3+EXAN20);
+}
+void DashBoard::setEXAnalogInput4(const qreal &EXAnalogInput4)
+{
+    if (m_EXAnalogInput4 == EXAnalogInput4)
+        return;
+    m_EXAnalogInput4 = EXAnalogInput4;
+    emit EXAnalogInput4Changed(EXAnalogInput4);
+    setEXAnalogCalc4(((EXAN35-EXAN30)*0.2)*EXAnalogInput4+EXAN30);
+}
+void DashBoard::setEXAnalogInput5(const qreal &EXAnalogInput5)
+{
+    if (m_EXAnalogInput5 == EXAnalogInput5)
+        return;
+    m_EXAnalogInput5 = EXAnalogInput5;
+    emit EXAnalogInput5Changed(EXAnalogInput5);
+    setEXAnalogCalc4(((EXAN45-EXAN40)*0.2)*EXAnalogInput5+EXAN40);
+}
+void DashBoard::setEXAnalogInput6(const qreal &EXAnalogInput6)
+{
+    if (m_EXAnalogInput6 == EXAnalogInput6)
+        return;
+    m_EXAnalogInput6 = EXAnalogInput6;
+    emit EXAnalogInput6Changed(EXAnalogInput6);
+    setEXAnalogCalc5(((EXAN55-EXAN50)*0.2)*EXAnalogInput6+EXAN50);
+}
+void DashBoard::setEXAnalogInput7(const qreal &EXAnalogInput7)
+{
+    if (m_EXAnalogInput7 == EXAnalogInput7)
+        return;
+    m_EXAnalogInput7 = EXAnalogInput7;
+    emit EXAnalogInput7Changed(EXAnalogInput7);
+    setEXAnalogCalc6(((EXAN65-EXAN60)*0.2)*EXAnalogInput7+EXAN60);
+}
+void DashBoard::setEXAnalogInput8(const qreal &EXAnalogInput8)
+{
+    if (m_EXAnalogInput8 == EXAnalogInput8)
+        return;
+    m_EXAnalogInput8 = EXAnalogInput8;
+    emit EXAnalogInput8Changed(EXAnalogInput8);
+    setEXAnalogCalc7(((EXAN75-EXAN70)*0.2)*EXAnalogInput8+EXAN70);
+}
+void DashBoard::setEXAnalogCalc0(const qreal &EXAnalogCalc0)
+{
+    if (m_EXAnalogCalc0 == EXAnalogCalc0)
+        return;
+    m_EXAnalogCalc0 = EXAnalogCalc0;
+    emit EXAnalogCalc0Changed(EXAnalogCalc0);
+}
+void DashBoard::setEXAnalogCalc1(const qreal &EXAnalogCalc1)
+{
+    if (m_EXAnalogCalc1 == EXAnalogCalc1)
+        return;
+    m_EXAnalogCalc1 = EXAnalogCalc1;
+    emit EXAnalogCalc1Changed(EXAnalogCalc1);
+}
+void DashBoard::setEXAnalogCalc2(const qreal &EXAnalogCalc2)
+{
+    if (m_EXAnalogCalc2 == EXAnalogCalc2)
+        return;
+    m_EXAnalogCalc2 = EXAnalogCalc2;
+    emit EXAnalogCalc2Changed(EXAnalogCalc2);
+}
+void DashBoard::setEXAnalogCalc3(const qreal &EXAnalogCalc3)
+{
+    if (m_EXAnalogCalc3 == EXAnalogCalc3)
+        return;
+    m_EXAnalogCalc3 = EXAnalogCalc3;
+    emit EXAnalogCalc3Changed(EXAnalogCalc3);
+}
+void DashBoard::setEXAnalogCalc4(const qreal &EXAnalogCalc4)
+{
+    if (m_EXAnalogCalc4 == EXAnalogCalc4)
+        return;
+    m_EXAnalogCalc4 = EXAnalogCalc4;
+    emit EXAnalogCalc4Changed(EXAnalogCalc4);
+}
+void DashBoard::setEXAnalogCalc5(const qreal &EXAnalogCalc5)
+{
+    if (m_EXAnalogCalc5 == EXAnalogCalc5)
+        return;
+    m_EXAnalogCalc5 = EXAnalogCalc5;
+    emit EXAnalogCalc5Changed(EXAnalogCalc5);
+}
+void DashBoard::setEXAnalogCalc6(const qreal &EXAnalogCalc6)
+{
+    if (m_EXAnalogCalc6 == EXAnalogCalc6)
+        return;
+    m_EXAnalogCalc6 = EXAnalogCalc6;
+    emit EXAnalogCalc6Changed(EXAnalogCalc6);
+}
+void DashBoard::setEXAnalogCalc7(const qreal &EXAnalogCalc7)
+{
+    if (m_EXAnalogCalc7 == EXAnalogCalc7)
+        return;
+    m_EXAnalogCalc7 = EXAnalogCalc7;
+    emit EXAnalogCalc7Changed(EXAnalogCalc7);
+}
+
 void DashBoard::setLambdamultiply(const qreal &Lambdamultiply)
 {
     if (m_Lambdamultiply == Lambdamultiply)
@@ -3715,62 +3884,7 @@ void DashBoard::setEXDigitalInput8(const qreal &EXDigitalInput8)
     m_EXDigitalInput8 = EXDigitalInput8;
     emit EXDigitalInput8Changed(EXDigitalInput8);
 }
-void DashBoard::setEXAnalogInput1(const qreal &EXAnalogInput1)
-{
-    if(m_EXAnalogInput1 == EXAnalogInput1)
-        return;
-    m_EXAnalogInput1 = EXAnalogInput1;
-    emit EXAnalogInput1Changed(EXAnalogInput1);
-}
-void DashBoard::setEXAnalogInput2(const qreal &EXAnalogInput2)
-{
-    if(m_EXAnalogInput2 == EXAnalogInput2)
-        return;
-    m_EXAnalogInput2 = EXAnalogInput2;
-    emit EXAnalogInput2Changed(EXAnalogInput2);
-}
-void DashBoard::setEXAnalogInput3(const qreal &EXAnalogInput3)
-{
-    if(m_EXAnalogInput3 == EXAnalogInput3)
-        return;
-    m_EXAnalogInput3 = EXAnalogInput3;
-    emit EXAnalogInput3Changed(EXAnalogInput3);
-}
-void DashBoard::setEXAnalogInput4(const qreal &EXAnalogInput4)
-{
-    if(m_EXAnalogInput4 == EXAnalogInput4)
-        return;
-    m_EXAnalogInput4 = EXAnalogInput4;
-    emit EXAnalogInput4Changed(EXAnalogInput4);
-}
-void DashBoard::setEXAnalogInput5(const qreal &EXAnalogInput5)
-{
-    if(m_EXAnalogInput5 == EXAnalogInput5)
-        return;
-    m_EXAnalogInput5 = EXAnalogInput5;
-    emit EXAnalogInput5Changed(EXAnalogInput5);
-}
-void DashBoard::setEXAnalogInput6(const qreal &EXAnalogInput6)
-{
-    if(m_EXAnalogInput6 == EXAnalogInput6)
-        return;
-    m_EXAnalogInput6 = EXAnalogInput6;
-    emit EXAnalogInput6Changed(EXAnalogInput6);
-}
-void DashBoard::setEXAnalogInput7(const qreal &EXAnalogInput7)
-{
-    if(m_EXAnalogInput7 == EXAnalogInput7)
-        return;
-    m_EXAnalogInput7 = EXAnalogInput7;
-    emit EXAnalogInput7Changed(EXAnalogInput7);
-}
-void DashBoard::setEXAnalogInput8(const qreal &EXAnalogInput8)
-{
-    if(m_EXAnalogInput8 == EXAnalogInput8)
-        return;
-    m_EXAnalogInput8 = EXAnalogInput8;
-    emit EXAnalogInput8Changed(EXAnalogInput8);
-}
+
 void DashBoard::setigncut(const qreal &igncut)
 {
     if(m_igncut == igncut)
@@ -4248,6 +4362,16 @@ qreal DashBoard::AnalogCalc7() const {return m_AnalogCalc7; }
 qreal DashBoard::AnalogCalc8() const {return m_AnalogCalc8; }
 qreal DashBoard::AnalogCalc9() const {return m_AnalogCalc9; }
 qreal DashBoard::AnalogCalc10() const {return m_AnalogCalc10;}
+
+qreal DashBoard::EXAnalogCalc0() const {return m_EXAnalogCalc0; }
+qreal DashBoard::EXAnalogCalc1() const {return m_EXAnalogCalc1; }
+qreal DashBoard::EXAnalogCalc2() const {return m_EXAnalogCalc2; }
+qreal DashBoard::EXAnalogCalc3() const {return m_EXAnalogCalc3; }
+qreal DashBoard::EXAnalogCalc4() const {return m_EXAnalogCalc4; }
+qreal DashBoard::EXAnalogCalc5() const {return m_EXAnalogCalc5; }
+qreal DashBoard::EXAnalogCalc6() const {return m_EXAnalogCalc6; }
+qreal DashBoard::EXAnalogCalc7() const {return m_EXAnalogCalc7; }
+
 qreal DashBoard::Lambdamultiply() const {return m_Lambdamultiply;}
 qreal DashBoard::Userchannel1() const {return m_Userchannel1;}
 qreal DashBoard::Userchannel2() const {return m_Userchannel2;}

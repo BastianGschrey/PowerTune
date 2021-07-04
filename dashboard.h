@@ -370,6 +370,15 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal AnalogCalc8 READ AnalogCalc8 WRITE setAnalogCalc8 NOTIFY AnalogCalc8Changed)
     Q_PROPERTY(qreal AnalogCalc9 READ AnalogCalc9 WRITE setAnalogCalc9 NOTIFY AnalogCalc9Changed)
     Q_PROPERTY(qreal AnalogCalc10 READ AnalogCalc10 WRITE setAnalogCalc10 NOTIFY AnalogCalc10Changed)
+
+      Q_PROPERTY(qreal EXAnalogCalc0 READ EXAnalogCalc0 WRITE setEXAnalogCalc0 NOTIFY EXAnalogCalc0Changed)
+      Q_PROPERTY(qreal EXAnalogCalc1 READ EXAnalogCalc1 WRITE setEXAnalogCalc1 NOTIFY EXAnalogCalc1Changed)
+      Q_PROPERTY(qreal EXAnalogCalc2 READ EXAnalogCalc2 WRITE setEXAnalogCalc2 NOTIFY EXAnalogCalc2Changed)
+      Q_PROPERTY(qreal EXAnalogCalc3 READ EXAnalogCalc3 WRITE setEXAnalogCalc3 NOTIFY EXAnalogCalc3Changed)
+      Q_PROPERTY(qreal EXAnalogCalc4 READ EXAnalogCalc4 WRITE setEXAnalogCalc4 NOTIFY EXAnalogCalc4Changed)
+      Q_PROPERTY(qreal EXAnalogCalc5 READ EXAnalogCalc5 WRITE setEXAnalogCalc5 NOTIFY EXAnalogCalc5Changed)
+      Q_PROPERTY(qreal EXAnalogCalc6 READ EXAnalogCalc6 WRITE setEXAnalogCalc6 NOTIFY EXAnalogCalc6Changed)
+      Q_PROPERTY(qreal EXAnalogCalc7 READ EXAnalogCalc7 WRITE setEXAnalogCalc7 NOTIFY EXAnalogCalc7Changed)
     Q_PROPERTY(qreal Lambdamultiply READ Lambdamultiply WRITE setLambdamultiply NOTIFY LambdamultiplyChanged)
     Q_PROPERTY(qreal Userchannel1 READ Userchannel1 WRITE setUserchannel1 NOTIFY Userchannel1Changed)
     Q_PROPERTY(qreal Userchannel2 READ Userchannel2 WRITE setUserchannel2 NOTIFY Userchannel2Changed)
@@ -509,6 +518,7 @@ class DashBoard : public QObject
     //Tripmeter
     Q_INVOKABLE void setTrip(const qreal &Trip);
     Q_INVOKABLE void setAnalogVal(const qreal &A00,const qreal &A05,const qreal &A10,const qreal &A15,const qreal &A20,const qreal &A25,const qreal &A30,const qreal &A35,const qreal &A40,const qreal &A45,const qreal &A50,const qreal &A55,const qreal &A60,const qreal &A65,const qreal &A70,const qreal &A75,const qreal &A80,const qreal &A85,const qreal &A90,const qreal &A95,const qreal &A100,const qreal &A105);
+    Q_INVOKABLE void setEXAnalogVal(const qreal &EXA00,const qreal &EXA05,const qreal &EXA10,const qreal &EXA15,const qreal &EXA20,const qreal &EXA25,const qreal &EXA30,const qreal &EXA35,const qreal &EXA40,const qreal &EXA45,const qreal &EXA50,const qreal &EXA55,const qreal &EXA60,const qreal &EXA65,const qreal &EXA70,const qreal &EXA75);
     // Advanced Info
     void setrpm(const qreal &rpm);
     void setIntakepress(const qreal &Intakepress);
@@ -874,6 +884,16 @@ class DashBoard : public QObject
     void setAnalogCalc8(const qreal &AnalogCalc8);
     void setAnalogCalc9(const qreal &AnalogCalc9);
     void setAnalogCalc10(const qreal &AnalogCalc10);
+
+    void setEXAnalogCalc0(const qreal &EXAnalogCalc0);
+    void setEXAnalogCalc1(const qreal &EXAnalogCalc1);
+    void setEXAnalogCalc2(const qreal &EXAnalogCalc2);
+    void setEXAnalogCalc3(const qreal &EXAnalogCalc3);
+    void setEXAnalogCalc4(const qreal &EXAnalogCalc4);
+    void setEXAnalogCalc5(const qreal &EXAnalogCalc5);
+    void setEXAnalogCalc6(const qreal &EXAnalogCalc6);
+    void setEXAnalogCalc7(const qreal &EXAnalogCalc7);
+
     Q_INVOKABLE void setLambdamultiply(const qreal &Lambdamultiply);
     void setUserchannel1(const qreal &Userchannel1);
     void setUserchannel2(const qreal &Userchannel2);
@@ -1365,6 +1385,16 @@ class DashBoard : public QObject
     qreal AnalogCalc8() const;
     qreal AnalogCalc9() const;
     qreal AnalogCalc10() const;
+
+    qreal EXAnalogCalc0() const;
+    qreal EXAnalogCalc1() const;
+    qreal EXAnalogCalc2() const;
+    qreal EXAnalogCalc3() const;
+    qreal EXAnalogCalc4() const;
+    qreal EXAnalogCalc5() const;
+    qreal EXAnalogCalc6() const;
+    qreal EXAnalogCalc7() const;
+
     qreal Lambdamultiply()const;
     qreal Userchannel1()const;
     qreal Userchannel2()const;
@@ -1845,6 +1875,16 @@ signals:
     void AnalogCalc8Changed(qreal AnalogCalc8);
     void AnalogCalc9Changed(qreal AnalogCalc9);
     void AnalogCalc10Changed(qreal AnalogCalc10);
+
+    void EXAnalogCalc0Changed(qreal EXAnalogCalc0);
+    void EXAnalogCalc1Changed(qreal EXAnalogCalc1);
+    void EXAnalogCalc2Changed(qreal EXAnalogCalc2);
+    void EXAnalogCalc3Changed(qreal EXAnalogCalc3);
+    void EXAnalogCalc4Changed(qreal EXAnalogCalc4);
+    void EXAnalogCalc5Changed(qreal EXAnalogCalc5);
+    void EXAnalogCalc6Changed(qreal EXAnalogCalc6);
+    void EXAnalogCalc7Changed(qreal EXAnalogCalc7);
+
     void LambdamultiplyChanged(qreal Lambdamultiply);
     void Userchannel1Changed(qreal Userchannel1);
     void Userchannel2Changed(qreal Userchannel2);
@@ -2339,6 +2379,16 @@ private:
     qreal m_AnalogCalc8;
     qreal m_AnalogCalc9;
     qreal m_AnalogCalc10;
+
+    qreal m_EXAnalogCalc0;
+        qreal m_EXAnalogCalc1;
+        qreal m_EXAnalogCalc2;
+        qreal m_EXAnalogCalc3;
+        qreal m_EXAnalogCalc4;
+        qreal m_EXAnalogCalc5;
+        qreal m_EXAnalogCalc6;
+        qreal m_EXAnalogCalc7;
+
     qreal m_Lambdamultiply;
     qreal m_Userchannel1;
     qreal m_Userchannel2;
