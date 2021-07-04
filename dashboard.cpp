@@ -3,6 +3,11 @@
 #include <QDebug>
 #include <QVector>
 
+
+////
+
+
+
 QVector<int>averageSpeed(0);
 QVector<int>averageRPM(0);
 int avgspeed;
@@ -46,6 +51,11 @@ qreal EXAN60;
 qreal EXAN65;
 qreal EXAN70;
 qreal EXAN75;
+qreal ResistanceEXAN0;
+qreal ResistanceEXAN1;
+qreal ResistanceEXAN2;
+
+
 qreal lamdamultiplicator = 1;
 int brightness;
 
@@ -3063,7 +3073,8 @@ void DashBoard::setEXAnalogInput0(const qreal &EXAnalogInput0)
     m_EXAnalogInput0 = EXAnalogInput0;
     emit EXAnalogInput0Changed(EXAnalogInput0);
     setEXAnalogCalc0(((EXAN05-EXAN00)*0.2)*EXAnalogInput0+EXAN00);
-    //qDebug()<< "EX ANALOG CALC0 ";
+    //Calculate the resistance of a potential NTC at the Analog Input Whereby input voltage is 5V and R1 = 1000 Ohm
+    ResistanceEXAN0= (EXAnalogInput0 * 1000)/(5 - EXAnalogInput0);
 
 }
 void DashBoard::setEXAnalogInput1(const qreal &EXAnalogInput1)
@@ -3073,6 +3084,8 @@ void DashBoard::setEXAnalogInput1(const qreal &EXAnalogInput1)
     m_EXAnalogInput1 = EXAnalogInput1;
     emit EXAnalogInput1Changed(EXAnalogInput1);
     setEXAnalogCalc1(((EXAN15-EXAN10)*0.2)*EXAnalogInput1+EXAN10);
+    //Calculate the resistance of a potential NTC at the Analog Input Whereby input voltage is 5V and R1 = 1000 Ohm
+    ResistanceEXAN1= (EXAnalogInput1 * 1000)/(5 - EXAnalogInput1);
 }
 
 void DashBoard::setEXAnalogInput2(const qreal &EXAnalogInput2)
@@ -3081,7 +3094,9 @@ void DashBoard::setEXAnalogInput2(const qreal &EXAnalogInput2)
         return;
     m_EXAnalogInput2 = EXAnalogInput2;
     emit EXAnalogInput2Changed(EXAnalogInput2);
-    setEXAnalogCalc3(((EXAN25-AN20)*0.2)*EXAnalogInput2+EXAN20);
+    setEXAnalogCalc2(((EXAN25-AN20)*0.2)*EXAnalogInput2+EXAN20);
+    //Calculate the resistance of a potential NTC at the Analog Input Whereby input voltage is 5V and R1 = 1000 Ohm
+    ResistanceEXAN2= (EXAnalogInput2 * 1000)/(5 - EXAnalogInput2);
 }
 void DashBoard::setEXAnalogInput3(const qreal &EXAnalogInput3)
 {
@@ -3089,7 +3104,7 @@ void DashBoard::setEXAnalogInput3(const qreal &EXAnalogInput3)
         return;
     m_EXAnalogInput3 = EXAnalogInput3;
     emit EXAnalogInput3Changed(EXAnalogInput3);
-    setEXAnalogCalc4(((EXAN35-EXAN30)*0.2)*EXAnalogInput3+EXAN30);
+    setEXAnalogCalc3(((EXAN35-EXAN30)*0.2)*EXAnalogInput3+EXAN30);
 }
 void DashBoard::setEXAnalogInput4(const qreal &EXAnalogInput4)
 {

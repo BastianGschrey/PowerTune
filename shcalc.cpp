@@ -6,6 +6,24 @@
 #include <QDebug>
 #include <QSettings>
 
+
+
+/*
+Todo Calculate the resistance of R2 from the Voltage divider circuit
+Vin = 5V
+R1 = 1000 Ohm
+Vout = Value we get from EX analog X channels
+
+R2= (VOUT * R1)/(VIN - VOUT) .
+
+Exalmple
+
+R2EXAN0 =  (m_dashboard->EXAnalog0()*1000)/(5/m_dashboard->EXAnalog0());
+
+With R2 Known we can use the Steinhart-Hart Formula to derive the Temperature of the NTC
+
+*/
+
 SHCalc::SHCalc()
 {
 
