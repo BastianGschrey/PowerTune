@@ -502,6 +502,9 @@ Rectangle {
 
         }
     }
+    Component.onCompleted: {
 
+    inputs.setInputs();
+    }
     }
 

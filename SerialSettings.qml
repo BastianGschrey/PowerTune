@@ -579,7 +579,7 @@ Quick1.TabView {
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                             Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                         }
-                        Text  { text: " V 1.95r " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: " V 1.95s " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 /*
                         Slider {
                             id:brightness
@@ -1548,7 +1548,7 @@ Quick1.TabView {
             }
         }
     }
-                    /*
+
     Quick1.Tab {
         title: "EX Board" // Tab index 6
         Rectangle{
@@ -1556,15 +1556,16 @@ Quick1.TabView {
             anchors.fill : parent
             color: "grey"
             ExBoardAnalog{}
-        }
-        Component.onCompleted: {
+            Component.onCompleted: {
 
-        tabView.currentIndex = 0;
-        console.log("switch tab index ")}
+            tabView.currentIndex = 0;
+            console.log("switch tab index ")}
+        }
+
 
     }
 
-    */
+
 
     Quick1.Tab {
         title: "Startup"// Tab index 8

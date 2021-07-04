@@ -2739,6 +2739,15 @@ ListModel {
     }
     //EX Board
     ListElement {
+        sourcename:"EXAnalogInput0"
+        defaultsymbol: " "
+        titlename:"EX AnalogInput 0"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
         sourcename:"EXAnalogInput1"
         defaultsymbol: " "
         titlename:"EX AnalogInput 1"
@@ -2796,15 +2805,6 @@ ListModel {
         sourcename:"EXAnalogInput7"
         defaultsymbol: " "
         titlename:"EX AnalogInput 7"
-        decimalpoints : "0"
-        maxvalue : "300"
-        stepsize : "10"
-        divisor : "1"
-    }
-    ListElement {
-        sourcename:"EXAnalogInput8"
-        defaultsymbol: " "
-        titlename:"EX AnalogInput 8"
         decimalpoints : "0"
         maxvalue : "300"
         stepsize : "10"

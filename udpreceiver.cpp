@@ -1161,28 +1161,28 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setEXDigitalInput8(Value);
             break;
         case 908:
-            m_dashboard->setEXAnalogInput1(Value);
+            m_dashboard->setEXAnalogInput0(Value/1000);
             break;
         case 909:
-            m_dashboard->setEXAnalogInput2(Value);
+            m_dashboard->setEXAnalogInput1(Value/1000);
             break;
         case 910:
-            m_dashboard->setEXAnalogInput3(Value);
+            m_dashboard->setEXAnalogInput2(Value/1000);
             break;
         case 911:
-            m_dashboard->setEXAnalogInput4(Value);
+            m_dashboard->setEXAnalogInput3(Value/1000);
             break;
         case 912:
-            m_dashboard->setEXAnalogInput5(Value);
+            m_dashboard->setEXAnalogInput4(Value/1000);
             break;
         case 913:
-            m_dashboard->setEXAnalogInput6(Value);
+            m_dashboard->setEXAnalogInput5(Value/1000);
             break;
         case 914:
-            m_dashboard->setEXAnalogInput7(Value);
+            m_dashboard->setEXAnalogInput6(Value/1000);
             break;
         case 915:
-            m_dashboard->setEXAnalogInput8(Value);
+            m_dashboard->setEXAnalogInput7(Value/1000);
             break;
         case 999:
             break;
