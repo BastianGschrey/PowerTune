@@ -1450,7 +1450,8 @@ Quick1.TabView {
             }
             Component.onCompleted: {
                 loadersource()
-                tabView.currentIndex = 7;}
+                tabView.currentIndex = 7;
+            }
             Connections{
                 target: Dashboard
                 onEcuChanged :{loadersource()}
@@ -1547,6 +1548,7 @@ Quick1.TabView {
             }
         }
     }
+                    /*
     Quick1.Tab {
         title: "EX Board" // Tab index 6
         Rectangle{
@@ -1557,12 +1559,12 @@ Quick1.TabView {
         }
         Component.onCompleted: {
 
-        tabView.currentIndex = 1;
+        tabView.currentIndex = 0;
         console.log("switch tab index ")}
 
     }
 
-
+    */
 
     Quick1.Tab {
         title: "Startup"// Tab index 8
