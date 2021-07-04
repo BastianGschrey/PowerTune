@@ -297,7 +297,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "-20"
             enabled: checkan0ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
@@ -308,7 +308,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "15462"
             enabled: checkan0ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
@@ -319,7 +319,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "20"
             enabled: checkan0ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
@@ -330,7 +330,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "2500"
             enabled: checkan0ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
@@ -341,7 +341,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "80"
             enabled: checkan0ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
@@ -352,7 +352,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "323"
             enabled: checkan0ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
@@ -369,7 +369,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "-20"
             enabled: checkan1ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
@@ -380,7 +380,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "14600"
             enabled: checkan1ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
@@ -391,7 +391,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "20"
             enabled: checkan1ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
@@ -402,7 +402,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "2200"
             enabled: checkan1ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
@@ -413,7 +413,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "80"
             enabled: checkan1ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
@@ -424,7 +424,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "290"
             enabled: checkan1ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
@@ -440,7 +440,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "-20"
             enabled: checkan2ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
@@ -451,7 +451,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "14600"
             enabled: checkan2ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
@@ -462,7 +462,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "20"
             enabled: checkan2ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
@@ -473,7 +473,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "2200"
             enabled: checkan2ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
@@ -484,7 +484,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "80"
             enabled: checkan2ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
@@ -495,7 +495,7 @@ Rectangle {
             width: main.width / 12
             height: main.height /15
             font.pixelSize: main.width / 55
-            text: ""
+            text: "290"
             enabled: checkan2ntc.checked == true ? true : false
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
