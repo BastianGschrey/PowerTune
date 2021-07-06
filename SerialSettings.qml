@@ -790,7 +790,7 @@ Quick1.TabView {
     }
     Quick1.Tab {
         id :dash
-        title: "Dash Select"
+        title: "Dash Sel."
         Rectangle{
 
             id: dashselector
