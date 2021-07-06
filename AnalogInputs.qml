@@ -318,7 +318,7 @@ Rectangle {
         font.bold: true
         width: parent.width / 2.5
         horizontalAlignment: Text.AlignHCenter
-        color: "red"
+        color: "black"
         wrapMode: Text.WordWrap
         text: qsTr("Enter the Value that should be displayed at 0 V in the field Val.@ 0V and the Value that should be displayed at 5 V in the field Val @5V. The calculated values will be available in the corresponding datasource Analog x Calc")
     }

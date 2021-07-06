@@ -509,5 +509,20 @@ Rectangle {
 
     inputs.setInputs();
     }
+
+    Text {
+        id: explanationtext
+        anchors.left: inputgrid.right
+        anchors.leftMargin: 20
+        anchors.top: inputgrid2.bottom
+        anchors.topMargin: 20
+        font.pixelSize: parent.width / 55
+        font.bold: true
+        width: parent.width / 1.5
+        horizontalAlignment: Text.AlignHCenter
+        color: "black"
+        wrapMode: Text.WordWrap
+        text: qsTr("Usage : Enter the Value that should be displayed at 0 V in the field Val.@ 0V and the Value that should be displayed at 5 V in the field Val @5V. The calculated values will be available in the corresponding datasource EXAnalogCalcx. Analog 0-3 can also be used for temperature sensors (5V input with 1K Resistor for the Voltage divider).Set the tick for Temp. in , then  Measure the resistance of the sensor at 3 different temperatures and enter each temperature in degree celsis and enter the Temperature values in T1-T3 and the corresponding resistance in R1-R3. The output will be shown in EXanalogcalc x as temperature. The input will have to be done in degrees celsisus for calibration . The output will show in degrees celsius or fahrenheit, dependending on the Temp units selection in the main settings. ")
+    }
     }
 
