@@ -2,7 +2,7 @@
 #include <QStringList>
 #include <QDebug>
 #include <QVector>
-
+#include "math.h"
 
 ////
 
@@ -54,6 +54,9 @@ qreal EXAN75;
 qreal ResistanceEXAN0;
 qreal ResistanceEXAN1;
 qreal ResistanceEXAN2;
+int EXsteinhart0; //Flag to use Steinhart/hart for Analog input 0
+int EXsteinhart1; //Flag to use Steinhart/hart for Analog input 1
+int EXsteinhart2; //Flag to use Steinhart/hart for Analog input 2
 
 
 qreal lamdamultiplicator = 1;
@@ -553,7 +556,7 @@ void DashBoard::setAnalogVal(const qreal &A00,const qreal &A05,const qreal &A10,
 
     //qDebug()<< "AN75 " <<AN75;
 }
-void DashBoard::setEXAnalogVal(const qreal &EXA00,const qreal &EXA05,const qreal &EXA10,const qreal &EXA15,const qreal &EXA20,const qreal &EXA25,const qreal &EXA30,const qreal &EXA35,const qreal &EXA40,const qreal &EXA45,const qreal &EXA50,const qreal &EXA55,const qreal &EXA60,const qreal &EXA65,const qreal &EXA70,const qreal &EXA75)
+void DashBoard::setEXAnalogVal(const qreal &EXA00,const qreal &EXA05,const qreal &EXA10,const qreal &EXA15,const qreal &EXA20,const qreal &EXA25,const qreal &EXA30,const qreal &EXA35,const qreal &EXA40,const qreal &EXA45,const qreal &EXA50,const qreal &EXA55,const qreal &EXA60,const qreal &EXA65,const qreal &EXA70,const qreal &EXA75, const int &steinhartcalc0on, const int &steinhartcalc1on, const int &steinhartcalc2on)
 {
     EXAN00 = EXA00;
     EXAN05 = EXA05;
@@ -571,10 +574,74 @@ void DashBoard::setEXAnalogVal(const qreal &EXA00,const qreal &EXA05,const qreal
     EXAN65 = EXA65;
     EXAN70 = EXA70;
     EXAN75 = EXA75;
+    EXsteinhart0 = steinhartcalc0on;
+    EXsteinhart1 = steinhartcalc0on;
+    EXsteinhart2 = steinhartcalc0on;
 
-   // DashBoard::setEXAnalogInput0(100);
-//qDebug()<< "EXAN00 " <<EXAN00;
-//qDebug()<< "EXAN05 " <<EXAN05;
+}
+
+void DashBoard::setSteinhartcalc(const qreal &T01,const qreal &T02,const qreal &T03,const qreal &R01,const qreal &R02,const qreal &R03,const qreal &T11,const qreal &T12,const qreal &T13,const qreal &R11,const qreal &R12,const qreal &R13,const qreal &T21,const qreal &T22,const qreal &T23,const qreal &R21,const qreal &R22,const qreal &R23)
+{
+    //qDebug() <<"Values :" <<T01 << R01 << T02 <<R02 <<T03 << R03 << T11 << R11 << T12 <<R12 <<T13 << R13 << T21 << R21 << T22 <<R22 <<T23 << R23;
+    //EX Analog 0 Calculation
+    long double L01 = log(R01); //Logrythm of Resistance 1
+    long double L02 = log(R02); //Logrythm of Resistance 2
+    long double L03 = log(R03); //Logrythm of Resistance 3
+
+    //Convert Temperature from CELCIUS to Kelvin and get factor
+    long double Y01 = 1/(T01+273.15);
+    long double Y02 = 1/(T02+273.15);
+    long double Y03 = 1/(T03+273.15);
+
+    //Coefficent of L and Y
+    long double V02 = (Y02-Y01)/(L02-L01);
+    long double V03 = (Y03-Y01)/(L03-L01);
+
+    //Coefficent Calculations
+    C0 = ((V03 - V02)/(L03-L02))*(pow((L01+L02+L02),-1));
+    B0 = (V03-C0*(pow(L01,2)+L01*L02+pow(L02,2)));
+    A0 = Y01 -(B0+pow(L01,2)*C0)*L01;
+
+
+    //EX Analog 1 Calculation
+    long double L11 = log(R11); //Logrythm of Resistance 1
+    long double L12 = log(R12); //Logrythm of Resistance 2
+    long double L13 = log(R13); //Logrythm of Resistance 3
+
+    //Convert Temperature from CELCIUS to Kelvin and get factor
+    long double Y11 = 1/(T11+273.15);
+    long double Y12 = 1/(T12+273.15);
+    long double Y13 = 1/(T13+273.15);
+
+    //Coefficent of L and Y
+    long double V12 = (Y12-Y11)/(L12-L11);
+    long double V13 = (Y13-Y11)/(L13-L11);
+
+    //Coefficent Calculations
+    C1 = ((V13 - V12)/(L13-L12))*(pow((L11+L12+L12),-1));
+    B1 = (V13-C1*(pow(L11,2)+L11*L12+pow(L12,2)));
+    A1 = Y11 -(B1+pow(L11,2)*C1)*L11;
+
+    //EX Analog 2 Calculation
+    long double L21 = log(R21); //Logrythm of Resistance 1
+    long double L22 = log(R22); //Logrythm of Resistance 2
+    long double L23 = log(R23); //Logrythm of Resistance 3
+
+    //Convert Temperature from CELCIUS to Kelvin and get factor
+    long double Y21 = 1/(T21+273.15);
+    long double Y22 = 1/(T22+273.15);
+    long double Y23 = 1/(T23+273.15);
+
+    //Coefficent of L and Y
+    long double V22 = (Y22-Y21)/(L22-L21);
+    long double V23 = (Y23-Y21)/(L23-L21);
+
+    //Coefficent Calculations
+    C2 = ((V23 - V22)/(L23-L22))*(pow((L21+L22+L22),-1));
+    B2 = (V23-C2*(pow(L21,2)+L22*L22+pow(L22,2)));
+    A2 = Y21 -(B2+pow(L21,2)*C2)*L21;
+    //
+
 }
 // Advanced Info FD3S
 void DashBoard::setrpm(const qreal &rpm)
@@ -3072,9 +3139,21 @@ void DashBoard::setEXAnalogInput0(const qreal &EXAnalogInput0)
         return;
     m_EXAnalogInput0 = EXAnalogInput0;
     emit EXAnalogInput0Changed(EXAnalogInput0);
+    if (EXsteinhart0 == 0)
+    {
     setEXAnalogCalc0(((EXAN05-EXAN00)*0.2)*EXAnalogInput0+EXAN00);
+    }
+    else
+    {
     //Calculate the resistance of a potential NTC at the Analog Input Whereby input voltage is 5V and R1 = 1000 Ohm
     ResistanceEXAN0= (EXAnalogInput0 * 1000)/(5 - EXAnalogInput0);
+    //Steinhart-Hart Calculation :
+    qreal tempK = 1/(A0+(B0*log(ResistanceEXAN0)) + C0* pow(log(ResistanceEXAN0),3))-273.15;
+    if (m_units == "metric")
+    { setEXAnalogCalc0(tempK);}
+    if (m_units == "imperial")
+    {setEXAnalogCalc0(tempK * 1.8 + 32);}
+    }
 
 }
 void DashBoard::setEXAnalogInput1(const qreal &EXAnalogInput1)
@@ -3083,9 +3162,20 @@ void DashBoard::setEXAnalogInput1(const qreal &EXAnalogInput1)
         return;
     m_EXAnalogInput1 = EXAnalogInput1;
     emit EXAnalogInput1Changed(EXAnalogInput1);
+    if (EXsteinhart1 == 0)
+    {
     setEXAnalogCalc1(((EXAN15-EXAN10)*0.2)*EXAnalogInput1+EXAN10);
+    }
     //Calculate the resistance of a potential NTC at the Analog Input Whereby input voltage is 5V and R1 = 1000 Ohm
+    else
+    {
     ResistanceEXAN1= (EXAnalogInput1 * 1000)/(5 - EXAnalogInput1);
+    qreal tempK = 1/(A1+(B1*log(ResistanceEXAN1)) + C1* pow(log(ResistanceEXAN1),3))-273.15;
+    if (m_units == "metric")
+    { setEXAnalogCalc1(tempK);}
+    if (m_units == "imperial")
+    {setEXAnalogCalc1(tempK * 1.8 + 32);}
+    }
 }
 
 void DashBoard::setEXAnalogInput2(const qreal &EXAnalogInput2)
@@ -3094,9 +3184,20 @@ void DashBoard::setEXAnalogInput2(const qreal &EXAnalogInput2)
         return;
     m_EXAnalogInput2 = EXAnalogInput2;
     emit EXAnalogInput2Changed(EXAnalogInput2);
+    if (EXsteinhart2 == 0)
+    {
     setEXAnalogCalc2(((EXAN25-AN20)*0.2)*EXAnalogInput2+EXAN20);
+    }
     //Calculate the resistance of a potential NTC at the Analog Input Whereby input voltage is 5V and R1 = 1000 Ohm
+    else
+    {
     ResistanceEXAN2= (EXAnalogInput2 * 1000)/(5 - EXAnalogInput2);
+    qreal tempK = 1/(A2+(B2*log(ResistanceEXAN2)) + C2* pow(log(ResistanceEXAN2),3))-273.15;
+    if (m_units == "metric")
+    { setEXAnalogCalc2(tempK);}
+    if (m_units == "imperial")
+    {setEXAnalogCalc2(tempK * 1.8 + 32);}
+    }
 }
 void DashBoard::setEXAnalogInput3(const qreal &EXAnalogInput3)
 {
