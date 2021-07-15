@@ -579,7 +579,7 @@ Quick1.TabView {
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                             Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                         }
-                        Text  { text: " V 1.95t " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: " V 1.95u " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 /*
                         Slider {
                             id:brightness
@@ -1558,7 +1558,7 @@ Quick1.TabView {
             ExBoardAnalog{}
             Component.onCompleted: {
 
-            tabView.currentIndex = 0;
+            tabView.currentIndex++;
             console.log("switch tab index ")}
         }
 
@@ -1731,7 +1731,7 @@ Quick1.TabView {
                     height: daemons.height /15
                     font.pixelSize: daemons.width / 55
                     model: ["ECU Speed","LF Wheelspeed","RF Wheelspeed","LR Wheelspeed","RR Wheelspeed","GPS"]
-                    onCurrentIndexChanged: Dashboard.setExternalSpeed(mainspeedsource.currentIndex)//,console.log(mainspeedsource.currentIndex)
+                    onCurrentIndexChanged: Dashboard.setExternalSpeed(mainspeedsource.currentIndex),console.log("Setting SPeed")
                     property bool initialized: false
                     Component.onCompleted: tabView.currentIndex = 0;
                     delegate: ItemDelegate {
