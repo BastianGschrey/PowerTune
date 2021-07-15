@@ -1559,7 +1559,7 @@ Quick1.TabView {
             Component.onCompleted: {
 
             tabView.currentIndex++;
-            console.log("switch tab index ")}
+            //console.log("switch tab index ")}
         }
 
 
@@ -1731,7 +1731,7 @@ Quick1.TabView {
                     height: daemons.height /15
                     font.pixelSize: daemons.width / 55
                     model: ["ECU Speed","LF Wheelspeed","RF Wheelspeed","LR Wheelspeed","RR Wheelspeed","GPS"]
-                    onCurrentIndexChanged: Dashboard.setExternalSpeed(mainspeedsource.currentIndex),console.log("Setting SPeed")
+                    onCurrentIndexChanged: Dashboard.setExternalSpeed(mainspeedsource.currentIndex)//,console.log("Setting SPeed")
                     property bool initialized: false
                     Component.onCompleted: tabView.currentIndex = 0;
                     delegate: ItemDelegate {
