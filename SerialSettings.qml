@@ -1559,7 +1559,8 @@ Quick1.TabView {
             Component.onCompleted: {
 
             tabView.currentIndex++;
-            //console.log("switch tab index ")}
+           // console.log("switch tab index ")
+            }
         }
 
 
