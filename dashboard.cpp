@@ -575,8 +575,9 @@ void DashBoard::setEXAnalogVal(const qreal &EXA00,const qreal &EXA05,const qreal
     EXAN70 = EXA70;
     EXAN75 = EXA75;
     EXsteinhart0 = steinhartcalc0on;
-    EXsteinhart1 = steinhartcalc0on;
-    EXsteinhart2 = steinhartcalc0on;
+    EXsteinhart1 = steinhartcalc1on;
+    EXsteinhart2 = steinhartcalc2on;
+    //qDebug() <<"Values :" <<EXsteinhart0 << EXsteinhart1 << EXsteinhart2;
 
 }
 
@@ -3245,8 +3246,6 @@ void DashBoard::setEXAnalogCalc0(const qreal &EXAnalogCalc0)
         return;
     m_EXAnalogCalc0 = EXAnalogCalc0;
     emit EXAnalogCalc0Changed(EXAnalogCalc0);
-    qDebug()<< "EX ANALOG CALC0 value " << EXAnalogCalc0;
-
 }
 void DashBoard::setEXAnalogCalc1(const qreal &EXAnalogCalc1)
 {
