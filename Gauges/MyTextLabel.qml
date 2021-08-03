@@ -137,7 +137,9 @@ Item {
                 visible: true
                 font.pixelSize: 15
                 currentIndex: 1
-                onCurrentIndexChanged: textcolor = colorselect.textAt(colorselect.currentIndex)
+                onCurrentIndexChanged: {textcolor = colorselect.textAt(colorselect.currentIndex);
+                                        mytext.color =  textcolor;
+                }
                 delegate:
 
                     ItemDelegate {
