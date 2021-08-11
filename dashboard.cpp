@@ -3149,10 +3149,15 @@ void DashBoard::setEXAnalogInput0(const qreal &EXAnalogInput0)
     else
     {
     //Calculate the resistance of a potential NTC at the Analog Input Whereby input voltage is 5V and R1 = 1000 Ohm
-    qreal Rtotal = (EXAnalogInput0 * VoltageDividerR1)/(5 - EXAnalogInput0);
-    ResistanceEXAN0= (Rtotal*VoltageDividerR3)/(VoltageDividerR3-Rtotal);
-    //Steinhart-Hart Calculation :
+    //qreal Rtotal = (EXAnalogInput0 * VoltageDividerR1)/(5 - EXAnalogInput0);
+    //R2 and R3 are in parallel
+
+    int R2 =1430;
+    int R3 =1000;
+    ResistanceEXAN0 = ((((R2*R3) / (R2+R3))*(5-EXAnalogInput0)) /EXAnalogInput0) ;
+    //qDebug() <<"R1  :" << ResistanceEXAN0;
     qreal tempK = 1/(A0+(B0*log(ResistanceEXAN0)) + C0* pow(log(ResistanceEXAN0),3))-273.15;
+
     if (m_units == "metric")
     { setEXAnalogCalc0(tempK);}
     if (m_units == "imperial")
@@ -3174,8 +3179,13 @@ void DashBoard::setEXAnalogInput1(const qreal &EXAnalogInput1)
     else
     {
 
-    qreal Rtotal = (EXAnalogInput1 * VoltageDividerR1)/(5 - EXAnalogInput1); // Rtotal is the Resistance of R2 and R3 ( R2 is the sensor R3 is fixed and in parallel to R2)
-    ResistanceEXAN1= (Rtotal*VoltageDividerR3)/(VoltageDividerR3-Rtotal); // R2 has a parallel Resitor R3 which is fixed (Voltage Divider R3)
+   // qreal Rtotal = (((1430*1000)/2430)*(5 - EXAnalogInput1))/EXAnalogInput1;
+    //ResistanceEXAN1 = Rtotal - ((1430*1000)/(1430+1000));
+    //R2 and R3 are in parallel
+
+    int R2 =1430;
+    int R3 =1000;
+    ResistanceEXAN1 = ((((R2*R3) / (R2+R3))*(5-EXAnalogInput1)) /EXAnalogInput1) ;
     qreal tempK = 1/(A1+(B1*log(ResistanceEXAN1)) + C1* pow(log(ResistanceEXAN1),3))-273.15;
     if (m_units == "metric")
     { setEXAnalogCalc1(tempK);}
@@ -3197,9 +3207,12 @@ void DashBoard::setEXAnalogInput2(const qreal &EXAnalogInput2)
     //Calculate the resistance of a potential NTC at the Analog Input Whereby input voltage is 5V and R1 = 1000 Ohm
     else
     {
-    //ResistanceEXAN2= (EXAnalogInput2 * 1000)/(5 - EXAnalogInput2);
-    qreal Rtotal = (EXAnalogInput2 * VoltageDividerR1)/(5 - EXAnalogInput2); // Rtotal is the Resistance of R2 and R3 ( R2 is the sensor R3 is fixed and in parallel to R2)
-    ResistanceEXAN2= (Rtotal*VoltageDividerR3)/(VoltageDividerR3-Rtotal); // R2 has a parallel Resitor R3 which is fixed (Voltage Divider R3)
+
+    //R2 and R3 are in parallel
+
+    int R2 =1430;
+    int R3 =1000;
+    ResistanceEXAN2 = ((((R2*R3) / (R2+R3))*(5-EXAnalogInput2)) /EXAnalogInput2) ;
     qreal tempK = 1/(A2+(B2*log(ResistanceEXAN2)) + C2* pow(log(ResistanceEXAN2),3))-273.15;
     if (m_units == "metric")
     { setEXAnalogCalc2(tempK);}
