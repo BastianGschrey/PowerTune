@@ -182,10 +182,9 @@ void GPS::readyToRead()
     QByteArray rawData = m_serialport->readAll();          // read data from serial port
     //qDebug()<< "chunk " << rawData;
     line.append(rawData);
-    if (line.contains("\r\n"))
+    while (line.contains("\r\n"))
     {
-        //int end = line.indexOf("\r\n") + 2;
-        int end = line.lastIndexOf("\r\n") + 2;
+        int end = line.indexOf("\r\n") + 2;
         QByteArray message = line;
         //qDebug()<< "line raw" << line;
         message.remove(end, line.length());
@@ -194,7 +193,6 @@ void GPS::readyToRead()
         //qDebug()<< "line new" << line;
         ProcessMessage(message);
     }
-
 
 /*
     for (int i=0; i < rawData.size(); i++)
@@ -218,7 +216,8 @@ void GPS::readyToRead()
 
 
         */
-    }
+}
+
 void GPS::ProcessMessage(QByteArray messageline)
 {
     m_timeouttimer.stop();
