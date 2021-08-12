@@ -28,9 +28,15 @@ Rectangle {
             property alias ex60save : ex60.text
             property alias ex65save : ex65.text
             property alias ex70save : ex70.text
-            property alias checkan0ntcsave : checkan0ntc.checkState
-            property alias checkan1ntcsave : checkan1ntc.checkState
-            property alias checkan2ntcsave : checkan2ntc.checkState
+            property alias checkan0ntcsave  : checkan0ntc.checkState
+            property alias checkan1ntcsave  : checkan1ntc.checkState
+            property alias checkan2ntcsave  : checkan2ntc.checkState
+            property alias checkan0100save  : checkan0100.checkState
+            property alias checkan01Ksave   : checkan01k.checkState
+            property alias checkan1100save  : checkan1100.checkState
+            property alias checkan11Ksave   : checkan11k.checkState
+            property alias checkan2100save  : checkan2100.checkState
+            property alias checkan21Ksave   : checkan21k.checkState
             property alias t10save : t10.text
             property alias r10save : r10.text
             property alias t20save : t20.text
@@ -49,6 +55,7 @@ Rectangle {
             property alias r22save : r22.text
             property alias t32save : t32.text
             property alias r32save : r32.text
+            property alias an7dampingfactorsave :an7dampingfactor.text
 
 
         }
@@ -74,7 +81,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: ex00
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -85,7 +92,7 @@ Rectangle {
         }
         TextField {
             id: ex05
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -99,7 +106,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: ex10
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -110,7 +117,7 @@ Rectangle {
         }
         TextField {
             id: ex15
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -123,7 +130,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: ex20
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -134,7 +141,7 @@ Rectangle {
         }
         TextField {
             id: ex25
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -147,7 +154,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: ex30
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -157,7 +164,7 @@ Rectangle {
         }
         TextField {
             id: ex35
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -169,7 +176,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: ex40
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -179,7 +186,7 @@ Rectangle {
         }
         TextField {
             id: ex45
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -191,7 +198,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: ex50
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -201,7 +208,7 @@ Rectangle {
         }
         TextField {
             id: ex55
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -213,7 +220,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: ex60
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -223,7 +230,7 @@ Rectangle {
         }
         TextField {
             id: ex65
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
@@ -235,7 +242,7 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         TextField {
             id: ex70
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "0"
@@ -245,10 +252,31 @@ Rectangle {
         }
         TextField {
             id: ex75
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             text: "5"
+            inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
+            onEditingFinished: inputs.setInputs()
+
+        }
+        Text {
+            text: "Ex AN 7"
+            font.pixelSize: main.width / 55;
+            color:"white"
+        }
+        Text {
+
+            text: "damping "
+            font.pixelSize: main.width / 55;
+            color:"white"
+        }
+        TextField {
+            id:an7dampingfactor
+            width: main.width / 14
+            height: main.height /15
+            font.pixelSize: main.width / 55
+            text: "0"
             inputMethodHints: Qt.ImhFormattedNumbersOnly  // this ensures valid inputs are number only
             onEditingFinished: inputs.setInputs()
 
@@ -258,13 +286,19 @@ Rectangle {
             id: inputs
             function setInputs()
             {
-
-            //console.log("Checkstates :" + checkan0ntc.checkState + checkan1ntc.checkState + checkan2ntc.checkState)
-            Dashboard.setEXAnalogVal(ex00.text,ex05.text,ex10.text,ex15.text,ex20.text,ex25.text,ex30.text,ex35.text,ex40.text,ex45.text,ex50.text,ex55.text,ex60.text,ex65.text,ex70.text,ex75.text,checkan0ntc.checkState,checkan1ntc.checkState,checkan2ntc.checkState)
+            //console.log("QML Damping"+an7dampingfactor.text)
+            //,const int &AN0R3VAL,const int &AN0R4VAL,const int &AN1R3VAL,const int &AN1R4VAL,const int &AN2R3VAL,const int &AN2R4VAL
+            Dashboard.setEXAnalogVal(ex00.text,ex05.text,ex10.text,ex15.text,ex20.text,ex25.text,ex30.text,ex35.text,ex40.text,ex45.text,ex50.text,ex55.text,ex60.text,ex65.text,ex70.text,ex75.text,checkan0ntc.checkState,checkan1ntc.checkState,checkan2ntc.checkState,checkan0100.checkState,checkan01k.checkState,checkan1100.checkState,checkan11k.checkState,checkan2100.checkState,checkan21k.checkState,an7dampingfactor.text)
             Dashboard.setSteinhartcalc(t10.text,t20.text,t30.text,r10.text,r20.text,r30.text,t11.text,t21.text,t31.text,r11.text,r21.text,r31.text,t12.text,t22.text,t32.text,r12.text,r22.text,r32.text)
             }
         }
     }
+    Text {
+        anchors.leftMargin: 10
+        anchors.top: parent.top
+        anchors.right: parent.right
+        text: "Volt. divider jumpers"
+        font.pixelSize: main.width / 55;color:"white"}
     Grid {
         id:inputgrid2
         anchors.left:inputgrid.right
@@ -272,7 +306,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: 40
         rows:4
-        columns: 7
+        columns: 9
         spacing: 5
         Text { text: "Temp. In"
             font.pixelSize: main.width / 55;color:"white"}
@@ -288,15 +322,19 @@ Rectangle {
             font.pixelSize: main.width / 55;color:"white"}
         Text { text: "R3 (Ω)"
             font.pixelSize: main.width / 55;color:"white"}
+        Text { text: "100Ω J."
+            font.pixelSize: main.width / 55;color:"white"}
+        Text { text: "1KΩ J."
+            font.pixelSize: main.width / 55;color:"white"}
         CheckBox {
             id: checkan0ntc
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             onCheckStateChanged: inputs.setInputs();
             }
         TextField {
             id: t10
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             //text: "-20"
@@ -307,7 +345,7 @@ Rectangle {
         }
         TextField {
             id: r10
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             //text: "15462"
@@ -318,7 +356,7 @@ Rectangle {
         }
         TextField {
             id: t20
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             //text: "20"
@@ -329,7 +367,7 @@ Rectangle {
         }
         TextField {
             id: r20
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             //text: "2500"
@@ -340,7 +378,7 @@ Rectangle {
         }
         TextField {
             id: t30
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             //text: "80"
@@ -351,7 +389,7 @@ Rectangle {
         }
         TextField {
             id: r30
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             //text: "323"
@@ -361,14 +399,26 @@ Rectangle {
 
         }
         CheckBox {
+            id: checkan0100
+            width: main.width / 14
+            height: main.height /15
+            onCheckStateChanged: inputs.setInputs();
+            }
+        CheckBox {
+            id: checkan01k
+            width: main.width / 14
+            height: main.height /15
+            onCheckStateChanged: inputs.setInputs();
+            }
+        CheckBox {
             id: checkan1ntc
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             onCheckStateChanged: inputs.setInputs();
             }
         TextField {
             id: t11
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             //text: "-20"
@@ -379,7 +429,7 @@ Rectangle {
         }
         TextField {
             id: r11
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
            // text: "14600"
@@ -390,7 +440,7 @@ Rectangle {
         }
         TextField {
             id: t21
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             //text: "20"
@@ -401,7 +451,7 @@ Rectangle {
         }
         TextField {
             id: r21
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             //text: "2200"
@@ -412,7 +462,7 @@ Rectangle {
         }
         TextField {
             id: t31
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             //text: "80"
@@ -423,7 +473,7 @@ Rectangle {
         }
         TextField {
             id: r31
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             //text: "290"
@@ -433,14 +483,26 @@ Rectangle {
 
         }
         CheckBox {
+            id: checkan1100
+            width: main.width / 14
+            height: main.height /15
+            onCheckStateChanged: inputs.setInputs();
+            }
+        CheckBox {
+            id: checkan11k
+            width: main.width / 14
+            height: main.height /15
+            onCheckStateChanged: inputs.setInputs();
+            }
+        CheckBox {
             id: checkan2ntc
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             onCheckStateChanged: inputs.setInputs();
             }
         TextField {
             id: t12
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             //text: "-20"
@@ -451,7 +513,7 @@ Rectangle {
         }
         TextField {
             id: r12
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             //text: "14600"
@@ -462,7 +524,7 @@ Rectangle {
         }
         TextField {
             id: t22
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             //text: "20"
@@ -473,7 +535,7 @@ Rectangle {
         }
         TextField {
             id: r22
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             //text: "2200"
@@ -484,7 +546,7 @@ Rectangle {
         }
         TextField {
             id: t32
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             //text: "80"
@@ -495,7 +557,7 @@ Rectangle {
         }
         TextField {
             id: r32
-            width: main.width / 12
+            width: main.width / 14
             height: main.height /15
             font.pixelSize: main.width / 55
             //text: "290"
@@ -504,12 +566,24 @@ Rectangle {
             onEditingFinished: inputs.setInputs()
 
         }
+        CheckBox {
+            id: checkan2100
+            width: main.width / 14
+            height: main.height /15
+            onCheckStateChanged: inputs.setInputs();
+            }
+        CheckBox {
+            id: checkan21k
+            width: main.width / 14
+            height: main.height /15
+            onCheckStateChanged: inputs.setInputs();
+            }
     }
     Component.onCompleted: {
 
     inputs.setInputs();
     }
-
+/*
     Text {
         id: explanationtext
         anchors.left: inputgrid.right
@@ -524,5 +598,6 @@ Rectangle {
         wrapMode: Text.WordWrap
         text: qsTr("Usage : Enter the Value that should be displayed at 0 V in the field Val.@ 0V and the Value that should be displayed at 5 V in the field Val @5V. The calculated values will be available in the corresponding datasource EXAnalogCalcx. Analog 0-3 can also be used for temperature sensors (Connect one side of the Variable resistance Sensor to 5 V and the other side to the AN0/1/2, also enable the 1K pullup resistor ).Set the tick for Temp. in , then  Measure the resistance of the sensor at 3 different temperatures and enter each temperature in degree celsis and enter the Temperature values in T1-T3 and the corresponding resistance in R1-R3. The output will be shown in EXanalogcalc x as temperature. The input will have to be done in degrees celsisus for calibration . The output will show in degrees celsius or fahrenheit, dependending on the Temp units selection in the main settings. ")
     }
+    */
     }
 

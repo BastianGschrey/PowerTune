@@ -10,8 +10,22 @@
 
 QVector<int>averageSpeed(0);
 QVector<int>averageRPM(0);
+QVector<int>averageexanaloginput7(0);
 int avgspeed;
 int avgrpm;
+int avgexanaloginput7;
+qreal R2 = 1430; // R2 is always Fixed ( Two resistors in line 1100 + 330 Ohms
+qreal R3 = 100;     // R2 is always Fixed ( Two resistors in line 1100 + 330 Ohms
+qreal R4 = 1000; // R2 is always Fixed ( Two resistors in line 1100 + 330 Ohms
+qreal AN0R3 = 0;
+qreal AN1R3 = 0;
+qreal AN2R3 = 0;
+qreal AN0R4 = 0;
+qreal AN1R4 = 0;
+qreal AN2R4 = 0;
+qreal Rtotalexan0; // Resistance of all internal Resistors of the EX Board for AN0
+qreal Rtotalexan1; // Resistance of all internal Resistors of the EX Board for AN1
+qreal Rtotalexan2; // Resistance of all internal Resistors of the EX Board for AN2
 qreal AN00;
 qreal AN05;
 qreal AN10;
@@ -54,8 +68,6 @@ qreal EXAN75;
 qreal ResistanceEXAN0;
 qreal ResistanceEXAN1;
 qreal ResistanceEXAN2;
-qreal VoltageDividerR1 = 330;
-qreal VoltageDividerR3 = 1430;
 int EXsteinhart0; //Flag to use Steinhart/hart for Analog input 0
 int EXsteinhart1; //Flag to use Steinhart/hart for Analog input 1
 int EXsteinhart2; //Flag to use Steinhart/hart for Analog input 2
@@ -556,10 +568,12 @@ void DashBoard::setAnalogVal(const qreal &A00,const qreal &A05,const qreal &A10,
     AN100 = A100;
     AN105 = A105;
 
+
     //qDebug()<< "AN75 " <<AN75;
 }
-void DashBoard::setEXAnalogVal(const qreal &EXA00,const qreal &EXA05,const qreal &EXA10,const qreal &EXA15,const qreal &EXA20,const qreal &EXA25,const qreal &EXA30,const qreal &EXA35,const qreal &EXA40,const qreal &EXA45,const qreal &EXA50,const qreal &EXA55,const qreal &EXA60,const qreal &EXA65,const qreal &EXA70,const qreal &EXA75, const int &steinhartcalc0on, const int &steinhartcalc1on, const int &steinhartcalc2on)
+void DashBoard::setEXAnalogVal(const qreal &EXA00,const qreal &EXA05,const qreal &EXA10,const qreal &EXA15,const qreal &EXA20,const qreal &EXA25,const qreal &EXA30,const qreal &EXA35,const qreal &EXA40,const qreal &EXA45,const qreal &EXA50,const qreal &EXA55,const qreal &EXA60,const qreal &EXA65,const qreal &EXA70,const qreal &EXA75, const int &steinhartcalc0on, const int &steinhartcalc1on, const int &steinhartcalc2on,const int &AN0R3VAL,const int &AN0R4VAL,const int &AN1R3VAL,const int &AN1R4VAL,const int &AN2R3VAL,const int &AN2R4VAL,const int &AN7damping)
 {
+
     EXAN00 = EXA00;
     EXAN05 = EXA05;
     EXAN10 = EXA10;
@@ -579,7 +593,69 @@ void DashBoard::setEXAnalogVal(const qreal &EXA00,const qreal &EXA05,const qreal
     EXsteinhart0 = steinhartcalc0on;
     EXsteinhart1 = steinhartcalc1on;
     EXsteinhart2 = steinhartcalc2on;
-    //qDebug() <<"Values :" <<EXsteinhart0 << EXsteinhart1 << EXsteinhart2;
+
+    // Calculating the Boad internal resistance of the Voltage divider
+    // EX Analog 0
+    if (AN0R3VAL !=0 && AN0R4VAL !=0)
+    {
+      Rtotalexan0 = 1/((1/R2)+(1/R3)+(1/R4));
+    }
+    if (AN0R3VAL ==0 && AN0R4VAL !=0)
+    {
+      Rtotalexan0 =  (R2*R4)/(R2+R4);
+    }
+    if (AN0R3VAL !=0 && AN0R4VAL ==0)
+    {
+      Rtotalexan0 =  (R2*R3)/(R2+R3);
+    }
+    if (AN0R3VAL ==0 && AN0R4VAL ==0)
+    {
+      Rtotalexan0 = R2;
+    }
+    // EX Analog 1
+    if (AN1R3VAL !=0 && AN1R4VAL !=0)
+    {
+      Rtotalexan1 = 1/((1/R2)+(1/R3)+(1/R4));
+    }
+    if (AN1R3VAL ==0 && AN1R4VAL !=0)
+    {
+      Rtotalexan1 =  (R2*R4)/(R2+R4);
+    }
+    if (AN1R3VAL !=0 && AN1R4VAL ==0)
+    {
+      Rtotalexan1 =  (R2*R3)/(R2+R3);
+    }
+    if (AN1R3VAL ==0 && AN1R4VAL ==0)
+    {
+      Rtotalexan1 = R2;
+    }
+    // EX Analog 2
+    if (AN2R3VAL !=0 && AN2R4VAL !=0)
+    {
+      Rtotalexan2 = 1/((1/R2)+(1/R3)+(1/R4));
+    }
+    if (AN2R3VAL ==0 && AN2R4VAL !=0)
+    {
+      Rtotalexan2 =  (R2*R4)/(R2+R4);
+    }
+    if (AN2R3VAL !=0 && AN2R4VAL ==0)
+    {
+      Rtotalexan2 =  (R2*R3)/(R2+R3);
+    }
+    if (AN2R3VAL ==0 && AN2R4VAL ==0)
+    {
+      Rtotalexan2 = R2;
+    }
+    qDebug() <<"Damping factor :" <<AN7damping ;
+
+/*
+    qDebug() <<"///////////////////////////////////////////////////////////// :" ;
+    qDebug() <<AN0R3VAL<<AN0R4VAL<<AN1R3VAL<<AN1R4VAL<<AN2R3VAL<<AN2R4VAL ;
+     qDebug() <<"RTotal AN0 :" <<Rtotalexan0 ;
+     qDebug() <<"RTotal AN1 :" <<Rtotalexan1 ;
+     qDebug() <<"RTotal AN2 :" <<Rtotalexan2 ;
+    qDebug() <<"///////////////////////////////////////////////////////////// :" ;
+*/
 
 }
 
@@ -2820,7 +2896,19 @@ void DashBoard::setsmoothspeed(const int &smoothspeed)
     //qDebug()<<"SmoothSpeed" << m_smoothrpm;
     emit smoothspeedChanged(smoothspeed);
 }
-
+/*
+void DashBoard::setsmoothspeed(const int &smoothspeed)
+{
+    if (m_smoothexAnalogInput7 == smoothspeed)
+        return;
+    if (smoothspeed != 0)
+    {m_smoothspeed = smoothspeed+1;}
+    else {m_smoothspeed = smoothspeed;}
+    averageSpeed.resize(m_smoothspeed);
+    //qDebug()<<"SmoothSpeed" << m_smoothrpm;
+    emit smoothspeedChanged(smoothspeed);
+}
+*/
 void DashBoard::setgearcalc1(const int &gearcalc1)
 {
     if (m_gearcalc1 == gearcalc1)
@@ -3148,15 +3236,49 @@ void DashBoard::setEXAnalogInput0(const qreal &EXAnalogInput0)
     }
     else
     {
-    //Calculate the resistance of a potential NTC at the Analog Input Whereby input voltage is 5V and R1 = 1000 Ohm
+ /*
+  * Voltage Divider Circuit for Easier understanding
+  * Is our Sensor thats connected to 5V and PIN 24
+  * R2 is fixed
+  * R3 is user Selectable ( 100 /1000 Ohm or no resistor)
+
+                  |  Vin (+5V)
+                  |
+                 | |
+                 | | R1 (Sensor with Variable Resistance)
+                 | |
+                  |
+                  |-----------------------------------------------------------------o Voltage Measuring Point
+             ---------------------o EX Analog input 0 (PIN24)
+             |         |         |
+             |		    /          /
+             |		   /  Jumper  / Jumper
+             |		   |         |
+            | |       | |       | |
+    R2	    | |       | |  R3   | |  R4
+  1430 Ω	| |		  | | 100 Ω | | 1000 Ω
+             |         |         |
+             |         |         |
+             ---------------------
+                  |-----------------------------------------------------------------o Voltage Measuring Point
+                  |
+                -----   GND
+                 ---
+                  -
+
+We already know the Values of Rw and R3 as well as Vin , now we need to calculate the Resistance of the sensor R1
+*/
+    //Calculate the resistance of a potential NTC at the Analog Input Whereby input voltage is 5V
+    //Rtotal is the total Value of R2 / R3 / R4 in parallel
     //qreal Rtotal = (EXAnalogInput0 * VoltageDividerR1)/(5 - EXAnalogInput0);
     //R2 and R3 are in parallel
+    //ResistanceEXAN0 = R1 (Sensor Resistance)
+    //EXAnalogInput0 = Measured Voltage
 
-    int R2 =1430;
-    int R3 =1000;
-    ResistanceEXAN0 = ((((R2*R3) / (R2+R3))*(5-EXAnalogInput0)) /EXAnalogInput0) ;
-    //qDebug() <<"R1  :" << ResistanceEXAN0;
-    qreal tempK = 1/(A0+(B0*log(ResistanceEXAN0)) + C0* pow(log(ResistanceEXAN0),3))-273.15;
+
+    ResistanceEXAN0 = (Rtotalexan0 *(5-EXAnalogInput0))/EXAnalogInput0; // Calculating the Resistance of the Sensor R3
+    //qDebug() <<"Sensor Ohms   :" << ResistanceEXAN0;
+    qreal tempK = 1/(A0+(B0*log(ResistanceEXAN0)) + C0* pow(log(ResistanceEXAN0),3))-273.15; // Determine Temperature based on R3 Value with Steinhart Hart Formula
 
     if (m_units == "metric")
     { setEXAnalogCalc0(tempK);}
@@ -3179,13 +3301,7 @@ void DashBoard::setEXAnalogInput1(const qreal &EXAnalogInput1)
     else
     {
 
-   // qreal Rtotal = (((1430*1000)/2430)*(5 - EXAnalogInput1))/EXAnalogInput1;
-    //ResistanceEXAN1 = Rtotal - ((1430*1000)/(1430+1000));
-    //R2 and R3 are in parallel
-
-    int R2 =1430;
-    int R3 =1000;
-    ResistanceEXAN1 = ((((R2*R3) / (R2+R3))*(5-EXAnalogInput1)) /EXAnalogInput1) ;
+    ResistanceEXAN1 = (Rtotalexan1 *(5-EXAnalogInput1))/EXAnalogInput1; // Calculating the Resistance of the Sensor R1
     qreal tempK = 1/(A1+(B1*log(ResistanceEXAN1)) + C1* pow(log(ResistanceEXAN1),3))-273.15;
     if (m_units == "metric")
     { setEXAnalogCalc1(tempK);}
@@ -3204,15 +3320,9 @@ void DashBoard::setEXAnalogInput2(const qreal &EXAnalogInput2)
     {
     setEXAnalogCalc2(((EXAN25-AN20)*0.2)*EXAnalogInput2+EXAN20);
     }
-    //Calculate the resistance of a potential NTC at the Analog Input Whereby input voltage is 5V and R1 = 1000 Ohm
     else
     {
-
-    //R2 and R3 are in parallel
-
-    int R2 =1430;
-    int R3 =1000;
-    ResistanceEXAN2 = ((((R2*R3) / (R2+R3))*(5-EXAnalogInput2)) /EXAnalogInput2) ;
+    ResistanceEXAN2 = (Rtotalexan2 *(5-EXAnalogInput2))/EXAnalogInput2; // Calculating the Resistance of the Sensor R1
     qreal tempK = 1/(A2+(B2*log(ResistanceEXAN2)) + C2* pow(log(ResistanceEXAN2),3))-273.15;
     if (m_units == "metric")
     { setEXAnalogCalc2(tempK);}
@@ -3257,8 +3367,22 @@ void DashBoard::setEXAnalogInput7(const qreal &EXAnalogInput7)
     if (m_EXAnalogInput7 == EXAnalogInput7)
         return;
     m_EXAnalogInput7 = EXAnalogInput7;
+    if (m_smoothexAnalogInput7 != 0)
+    {
+        averageexanaloginput7.removeFirst();
+        averageexanaloginput7.append(m_EXAnalogInput7);
+        //qDebug() << "Vector Speed " << averageSpeed;
+        avgexanaloginput7 = 0;
+        for (int i = 0; i <= m_smoothexAnalogInput7-1; i++){avgexanaloginput7+= averageexanaloginput7[i];}
+        m_EXAnalogInput7 = avgexanaloginput7/m_smoothexAnalogInput7;
+        // qDebug() << "Average Speed " << m_speed;
+
+
+    }
+
     emit EXAnalogInput7Changed(EXAnalogInput7);
     setEXAnalogCalc7(((EXAN75-EXAN70)*0.2)*EXAnalogInput7+EXAN70);
+
 }
 void DashBoard::setEXAnalogCalc0(const qreal &EXAnalogCalc0)
 {
@@ -4452,6 +4576,7 @@ int DashBoard::knockwarn() const {return m_knockwarn; }
 qreal DashBoard::boostwarn() const {return m_boostwarn; }
 int DashBoard::smoothrpm() const {return m_smoothrpm; }
 int DashBoard::smoothspeed() const {return m_smoothspeed; }
+//int DashBoard::smoothexAnalogInput7() const {return m_smoothexAnalogInput7; }
 int DashBoard::gearcalc1() const {return m_gearcalc1; }
 int DashBoard::gearcalc2() const {return m_gearcalc2; }
 int DashBoard::gearcalc3() const {return m_gearcalc3; }

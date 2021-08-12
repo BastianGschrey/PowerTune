@@ -579,7 +579,7 @@ Quick1.TabView {
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                             Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                         }
-                        Text  { text: " V 1.95y " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: " V 1.95z " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 /*
                         Slider {
                             id:brightness
@@ -901,7 +901,7 @@ Quick1.TabView {
                         width: dashselector.width / 5
                         height: dashselector.height /15
                         font.pixelSize: dashselector.width / 55
-                        model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Dyno","Mediaplayer","Screen Toggle","Drag Timer"]
+                        model: ["Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Mediaplayer","Screen Toggle","Drag Timer"]
                         //currentIndex: 1
                         //onCurrentIndexChanged:{select2.selDash2() }
                         visible: Dashboard.Visibledashes >1
@@ -1100,7 +1100,7 @@ Quick1.TabView {
                         if (dash4.currentIndex == "8") {fourthPageLoader.source = "qrc:/Gauges/Mediaplayer.qml"};
                         if (dash4.currentIndex == "9") {fourthPageLoader.source = "qrc:/Gauges/Screentoggle.qml"};
                         if (dash4.currentIndex == "10") {fourthPageLoader.source = "qrc:/Gauges/SpeedMeasurements.qml"};
-
+"Main Dash","GPS", "Laptimer", "PowerFC Sensors","User Dash 1","User Dash 2","User Dash 3","G-Force","Mediaplayer","Screen Toggle","Drag Timer"
                     }
                     Component.onCompleted: tabView.currentIndex = 2 // opens the 3rd tab
                 }
