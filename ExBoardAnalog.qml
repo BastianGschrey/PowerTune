@@ -288,7 +288,8 @@ Rectangle {
             {
             //console.log("QML Damping"+an7dampingfactor.text)
             //,const int &AN0R3VAL,const int &AN0R4VAL,const int &AN1R3VAL,const int &AN1R4VAL,const int &AN2R3VAL,const int &AN2R4VAL
-            Dashboard.setEXAnalogVal(ex00.text,ex05.text,ex10.text,ex15.text,ex20.text,ex25.text,ex30.text,ex35.text,ex40.text,ex45.text,ex50.text,ex55.text,ex60.text,ex65.text,ex70.text,ex75.text,checkan0ntc.checkState,checkan1ntc.checkState,checkan2ntc.checkState,checkan0100.checkState,checkan01k.checkState,checkan1100.checkState,checkan11k.checkState,checkan2100.checkState,checkan21k.checkState,an7dampingfactor.text)
+            Dashboard.setsmootexAnalogInput7(an7dampingfactor.text);
+            Dashboard.setEXAnalogVal(ex00.text,ex05.text,ex10.text,ex15.text,ex20.text,ex25.text,ex30.text,ex35.text,ex40.text,ex45.text,ex50.text,ex55.text,ex60.text,ex65.text,ex70.text,ex75.text,checkan0ntc.checkState,checkan1ntc.checkState,checkan2ntc.checkState,checkan0100.checkState,checkan01k.checkState,checkan1100.checkState,checkan11k.checkState,checkan2100.checkState,checkan21k.checkState)
             Dashboard.setSteinhartcalc(t10.text,t20.text,t30.text,r10.text,r20.text,r30.text,t11.text,t21.text,t31.text,r11.text,r21.text,r31.text,t12.text,t22.text,t32.text,r12.text,r22.text,r32.text)
             }
         }

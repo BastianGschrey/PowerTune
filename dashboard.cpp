@@ -10,10 +10,10 @@
 
 QVector<int>averageSpeed(0);
 QVector<int>averageRPM(0);
-QVector<int>averageexanaloginput7(0);
+QVector<qreal>averageexanaloginput7(0);
 int avgspeed;
 int avgrpm;
-int avgexanaloginput7;
+qreal avgexanaloginput7;
 qreal R2 = 1430; // R2 is always Fixed ( Two resistors in line 1100 + 330 Ohms
 qreal R3 = 100;     // R2 is always Fixed ( Two resistors in line 1100 + 330 Ohms
 qreal R4 = 1000; // R2 is always Fixed ( Two resistors in line 1100 + 330 Ohms
@@ -365,6 +365,7 @@ DashBoard::DashBoard(QObject *parent)
     ,  m_boostwarn(999)
     ,  m_smoothrpm(0)
     ,  m_smoothspeed(0)
+    ,  m_smoothexAnalogInput7(0)
     ,  m_gearcalc1(0)
     ,  m_gearcalc2(0)
     ,  m_gearcalc3(0)
@@ -571,7 +572,7 @@ void DashBoard::setAnalogVal(const qreal &A00,const qreal &A05,const qreal &A10,
 
     //qDebug()<< "AN75 " <<AN75;
 }
-void DashBoard::setEXAnalogVal(const qreal &EXA00,const qreal &EXA05,const qreal &EXA10,const qreal &EXA15,const qreal &EXA20,const qreal &EXA25,const qreal &EXA30,const qreal &EXA35,const qreal &EXA40,const qreal &EXA45,const qreal &EXA50,const qreal &EXA55,const qreal &EXA60,const qreal &EXA65,const qreal &EXA70,const qreal &EXA75, const int &steinhartcalc0on, const int &steinhartcalc1on, const int &steinhartcalc2on,const int &AN0R3VAL,const int &AN0R4VAL,const int &AN1R3VAL,const int &AN1R4VAL,const int &AN2R3VAL,const int &AN2R4VAL,const int &AN7damping)
+void DashBoard::setEXAnalogVal(const qreal &EXA00,const qreal &EXA05,const qreal &EXA10,const qreal &EXA15,const qreal &EXA20,const qreal &EXA25,const qreal &EXA30,const qreal &EXA35,const qreal &EXA40,const qreal &EXA45,const qreal &EXA50,const qreal &EXA55,const qreal &EXA60,const qreal &EXA65,const qreal &EXA70,const qreal &EXA75, const int &steinhartcalc0on, const int &steinhartcalc1on, const int &steinhartcalc2on,const int &AN0R3VAL,const int &AN0R4VAL,const int &AN1R3VAL,const int &AN1R4VAL,const int &AN2R3VAL,const int &AN2R4VAL)
 {
 
     EXAN00 = EXA00;
@@ -646,7 +647,7 @@ void DashBoard::setEXAnalogVal(const qreal &EXA00,const qreal &EXA05,const qreal
     {
       Rtotalexan2 = R2;
     }
-    qDebug() <<"Damping factor :" <<AN7damping ;
+
 
 /*
     qDebug() <<"///////////////////////////////////////////////////////////// :" ;
@@ -2896,19 +2897,20 @@ void DashBoard::setsmoothspeed(const int &smoothspeed)
     //qDebug()<<"SmoothSpeed" << m_smoothrpm;
     emit smoothspeedChanged(smoothspeed);
 }
-/*
-void DashBoard::setsmoothspeed(const int &smoothspeed)
+
+void DashBoard::setsmootexAnalogInput7(const int &smoothexAnalogInput7)
 {
-    if (m_smoothexAnalogInput7 == smoothspeed)
+    qDebug()<<"Smootg" << smoothexAnalogInput7;
+    if (m_smoothexAnalogInput7 == smoothexAnalogInput7)
         return;
-    if (smoothspeed != 0)
-    {m_smoothspeed = smoothspeed+1;}
-    else {m_smoothspeed = smoothspeed;}
-    averageSpeed.resize(m_smoothspeed);
+    if (smoothexAnalogInput7 != 0)
+    {m_smoothexAnalogInput7 = smoothexAnalogInput7+1;}
+    else {m_smoothexAnalogInput7 = smoothexAnalogInput7;}
+    averageexanaloginput7.resize(m_smoothexAnalogInput7);
     //qDebug()<<"SmoothSpeed" << m_smoothrpm;
-    emit smoothspeedChanged(smoothspeed);
+    emit smootexAnalogInput7Changed(smoothexAnalogInput7);
 }
-*/
+
 void DashBoard::setgearcalc1(const int &gearcalc1)
 {
     if (m_gearcalc1 == gearcalc1)
@@ -3367,21 +3369,20 @@ void DashBoard::setEXAnalogInput7(const qreal &EXAnalogInput7)
     if (m_EXAnalogInput7 == EXAnalogInput7)
         return;
     m_EXAnalogInput7 = EXAnalogInput7;
+    //qDebug() << "Smooth ? " << m_smoothexAnalogInput7;
     if (m_smoothexAnalogInput7 != 0)
     {
         averageexanaloginput7.removeFirst();
         averageexanaloginput7.append(m_EXAnalogInput7);
-        //qDebug() << "Vector Speed " << averageSpeed;
+        //qDebug() << "averageexanaloginput7 " << averageexanaloginput7;
         avgexanaloginput7 = 0;
         for (int i = 0; i <= m_smoothexAnalogInput7-1; i++){avgexanaloginput7+= averageexanaloginput7[i];}
         m_EXAnalogInput7 = avgexanaloginput7/m_smoothexAnalogInput7;
-        // qDebug() << "Average Speed " << m_speed;
-
-
     }
 
-    emit EXAnalogInput7Changed(EXAnalogInput7);
-    setEXAnalogCalc7(((EXAN75-EXAN70)*0.2)*EXAnalogInput7+EXAN70);
+    emit EXAnalogInput7Changed(m_EXAnalogInput7);
+    setEXAnalogCalc7(((EXAN75-EXAN70)*0.2)*m_EXAnalogInput7+EXAN70);
+
 
 }
 void DashBoard::setEXAnalogCalc0(const qreal &EXAnalogCalc0)
@@ -4576,7 +4577,7 @@ int DashBoard::knockwarn() const {return m_knockwarn; }
 qreal DashBoard::boostwarn() const {return m_boostwarn; }
 int DashBoard::smoothrpm() const {return m_smoothrpm; }
 int DashBoard::smoothspeed() const {return m_smoothspeed; }
-//int DashBoard::smoothexAnalogInput7() const {return m_smoothexAnalogInput7; }
+int DashBoard::smootexAnalogInput7() const {return m_smoothexAnalogInput7; }
 int DashBoard::gearcalc1() const {return m_gearcalc1; }
 int DashBoard::gearcalc2() const {return m_gearcalc2; }
 int DashBoard::gearcalc3() const {return m_gearcalc3; }

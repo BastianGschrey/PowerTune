@@ -10,6 +10,7 @@ static {
 
 
 SOURCES += main.cpp \
+    Extender.cpp \
     dashboard.cpp \
     downloadmanager.cpp \
     iomapdata.cpp \
@@ -40,6 +41,7 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
+    Extender.h \
     dashboard.h \
     downloadmanager.h \
     iomapdata.h \

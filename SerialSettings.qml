@@ -14,6 +14,7 @@ Quick1.TabView {
     anchors.fill: parent
 
     property int lastdashamount
+
     DLM
     {
         id:downloadManager
@@ -82,7 +83,7 @@ Quick1.TabView {
             property  int test1: 0
             property  int connected: 0
             property  var gpscom
-
+            property int hexstring;
             Item {
                 id: powerTuneSettings
                 Settings {
@@ -114,6 +115,7 @@ Quick1.TabView {
                     //property alias protocol : protocol.currentIndex
                     property alias smoothingrpm : smoothrpm.currentIndex
                     property alias smoothingspeed : smoothspeed.currentIndex
+                    property alias extendercanbase: baseadresstext.text
 
 
                 }
@@ -414,6 +416,7 @@ Quick1.TabView {
                         spacing: windowbackround.width / 150
                         anchors.top :parent.top
                         anchors.topMargin: parent.height / 20
+                        id:middlegrid
                         Button {
                             id: connectButton
                             text: "Connect"
@@ -579,111 +582,130 @@ Quick1.TabView {
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                             Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                         }
-                        Text  { text: " V 1.95z " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
-/*
-                        Slider {
-                            id:brightness
-                            width: windowbackround.width / 5
-                            height: windowbackround.height /15
-                            stepSize: 5
-                            from: 20
-                            to: 255
-                            value: Dashboard.Brightness
-                            visible: Dashboard.screen
-                            Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
-                            onPositionChanged: Connect.setSreenbrightness(brightness.value);
-                        }
-*/
-                        Grid {
-                            visible: { (ecuSelect.currentIndex != "1") ? false: true; }
-                            rows: 10
-                            columns: 4
-                            spacing: windowbackround.width / 150
-                            //Just a spacer for now still need to do it properly
-                            Text  { text: "";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "";font.pixelSize: windowbackround.width / 55}
-                            //Spacer end
+                        Text  { text: " V 1.96 " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
 
-                            Text  { text: "";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "0V";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "5V";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "Name";font.pixelSize: windowbackround.width / 55}
-                            Text  { text: "    ";font.pixelSize: windowbackround.width / 55}
-                            TextField {
-                                id: an1V0
-                                width: windowbackround.width / 10
-                                height: windowbackround.height /15
-                                font.pixelSize: windowbackround.width / 55
-                                //validator: DoubleValidator {bottom: -1000.0; top: 1000.0;notation : DoubleValidator.StandardNotation ; decimals : 1}
-                                inputMethodHints: Qt.ImhFormattedNumbersOnly
-                                placeholderText: qsTr("9")
-                            }
-                            TextField {
-                                id: an2V5
-                                width: windowbackround.width / 10
-                                height: windowbackround.height /15
-                                font.pixelSize: windowbackround.width / 55
-                                // validator: DoubleValidator {bottom: -1000.0; top: 1000.0;notation : DoubleValidator.StandardNotation ; decimals : 1}
-                                inputMethodHints: Qt.ImhFormattedNumbersOnly
-                                placeholderText: qsTr("16")
-                            }
-
-                            TextField {
-                                id: unitaux1
-                                width: windowbackround.width / 10
-                                height: windowbackround.height /15
-                                font.pixelSize: windowbackround.width / 55
-                                placeholderText: qsTr("AFR")
-                            }
-                            Text  { text: "AN1-2";font.pixelSize: windowbackround.width / 55}
-                            TextField {
-                                id: an3V0
-                                width: windowbackround.width / 10
-                                height: windowbackround.height /15
-                                font.pixelSize: windowbackround.width / 55
-                                //validator: DoubleValidator {bottom: -1000.0; top: 1000.0;notation : DoubleValidator.StandardNotation ; decimals : 1}
-                                inputMethodHints: Qt.ImhFormattedNumbersOnly
-                                placeholderText: qsTr("0")
-
-                            }
-                            TextField {
-                                id: an4V5
-                                width: windowbackround.width / 10
-                                height: windowbackround.height /15
-                                font.pixelSize: windowbackround.width / 55
-                                //validator: DoubleValidator {bottom: -1000.0; top: 1000.0;notation : DoubleValidator.StandardNotation ; decimals : 1}
-                                inputMethodHints: Qt.ImhFormattedNumbersOnly
-                                placeholderText: qsTr("5")
-                            }
-                            TextField {
-                                id: unitaux2
-                                width: windowbackround.width / 10
-                                height: windowbackround.height /15
-                                font.pixelSize: windowbackround.width / 55
-                                placeholderText: qsTr("AFR")
-                            }
-                            Text  { text: "AN3-4";font.pixelSize: windowbackround.width / 55}
-                        }
                     }
+                    Grid {
+                        rows: 5
+                        columns:1
+                        spacing: windowbackround.width / 150
+                        anchors.top :parent.top
+                        anchors.topMargin: parent.height / 20
+
+                        Text  { text: "     CAN Extender";color: "white";font.pixelSize: windowbackround.width / 55}
+                        Text  { text: "      base adress ";color: "white";font.pixelSize: windowbackround.width / 55}
+                        Text  { text: "       (decimal) :";color: "white";font.pixelSize: windowbackround.width / 55}
+                        TextField {
+                            id: baseadresstext
+                            enabled: connectButton.enabled == false ? false : true
+                            width: windowbackround.width /5
+                            height: windowbackround.height /15
+                            font.pixelSize: windowbackround.width / 55
+                            validator: IntValidator {bottom: 0; top: 4000;}
+                            inputMethodHints: Qt.ImhFormattedNumbersOnly
+                            placeholderText: qsTr("1024")
+                            onTextChanged: hexstring = baseadresstext.text;
+                        }
+                        Text  { text: "      HEX: 0x"+(hexstring+0x1000).toString(16).substr(-3).toUpperCase();color: "white";font.pixelSize: windowbackround.width / 55}
+
+                }
+
+                }
+
+                Grid {
+                    visible: { (ecuSelect.currentIndex != "1") ? false: true; }
+                    rows: 3
+                    columns: 4
+                    spacing: windowbackround.width / 150
+                    x:350
+                    y:290
+                  //  anchors.right: windowbackround.right
+                 //   anchors.bottom: windowbackround.bottom
+  /*                  //Just a spacer for now still need to do it properly
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    //Spacer end
+*/
+
+                    Text  { text: "";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "0V";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "5V";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "Name";font.pixelSize: windowbackround.width / 55}
+                    Text  { text: "    ";font.pixelSize: windowbackround.width / 55}
+                    TextField {
+                        id: an1V0
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
+                        //validator: DoubleValidator {bottom: -1000.0; top: 1000.0;notation : DoubleValidator.StandardNotation ; decimals : 1}
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
+                        placeholderText: qsTr("9")
+                    }
+                    TextField {
+                        id: an2V5
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
+                        // validator: DoubleValidator {bottom: -1000.0; top: 1000.0;notation : DoubleValidator.StandardNotation ; decimals : 1}
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
+                        placeholderText: qsTr("16")
+                    }
+
+                    TextField {
+                        id: unitaux1
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
+                        placeholderText: qsTr("AFR")
+                    }
+                    Text  { text: "AN1-2";font.pixelSize: windowbackround.width / 55}
+                    TextField {
+                        id: an3V0
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
+                        //validator: DoubleValidator {bottom: -1000.0; top: 1000.0;notation : DoubleValidator.StandardNotation ; decimals : 1}
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
+                        placeholderText: qsTr("0")
+
+                    }
+                    TextField {
+                        id: an4V5
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
+                        //validator: DoubleValidator {bottom: -1000.0; top: 1000.0;notation : DoubleValidator.StandardNotation ; decimals : 1}
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
+                        placeholderText: qsTr("5")
+                    }
+                    TextField {
+                        id: unitaux2
+                        width: windowbackround.width / 10
+                        height: windowbackround.height /15
+                        font.pixelSize: windowbackround.width / 55
+                        placeholderText: qsTr("AFR")
+                    }
+                    Text  { text: "AN3-4";font.pixelSize: windowbackround.width / 55}
                 }
             }
 
             //Functions
+
             Item {
                 //Function to automatically connect at Startup , function is called from COmbobox Serialname component.oncompleted
                 id: autoconnect
@@ -757,7 +779,7 @@ Quick1.TabView {
                 id: functconnect
                 function connectfunc()
                 {
-                    Connect.openConnection(serialName.currentText, ecuSelect.currentIndex ,weight.currentText);
+                    Connect.openConnection(serialName.currentText, ecuSelect.currentIndex ,baseadresstext.text);
                     Connect.setOdometer(odometer.text);
                     Connect.setWeight(weight.text);
                     Apexi.calculatorAux(an1V0.text,an2V5.text,an3V0.text,an4V5.text,unitaux1.text,unitaux2.text);

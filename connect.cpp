@@ -24,6 +24,7 @@
 #include "AdaptronicSelect.h"
 #include "Apexi.h"
 #include "dashboard.h"
+#include "Extender.h"
 #include "serialport.h"
 #include "appsettings.h"
 #include "gopro.h"
@@ -48,6 +49,7 @@
 int ecu; //0=apex, 1=adaptronic;2= OBD; 3= Dicktator ECU
 int logging; // 0 Logging off , 1 Logging to file
 int connectclicked =0;
+int canbaseadress;
 QByteArray checksumhex;
 QByteArray recvchecksumhex;
 QString selectedPort;
@@ -68,7 +70,8 @@ Connect::Connect(QObject *parent) :
     m_datalogger(Q_NULLPTR),
     m_calculations(Q_NULLPTR),
     m_arduino(Q_NULLPTR),
-    m_wifiscanner(Q_NULLPTR)
+    m_wifiscanner(Q_NULLPTR),
+    m_extender(Q_NULLPTR)
 
 {
 
@@ -85,6 +88,7 @@ Connect::Connect(QObject *parent) :
     m_calculations = new calculations(m_dashBoard, this);
     m_arduino = new Arduino(m_dashBoard, this);
     m_wifiscanner = new WifiScanner(m_dashBoard, this);
+    m_extender = new Extender(m_dashBoard, this);
    // m_wifiscanner = new WifScanner(this);
     QString mPath = "/";
     // DIRECTORIES
@@ -116,6 +120,8 @@ Connect::Connect(QObject *parent) :
     engine->rootContext()->setContextProperty("Apexi", m_apexi);
     engine->rootContext()->setContextProperty("Arduino", m_arduino);
     engine->rootContext()->setContextProperty("Wifiscanner", m_wifiscanner);
+    engine->rootContext()->setContextProperty("CANExtender", m_extender);
+
 
 
 }
@@ -161,6 +167,7 @@ void Connect::setrpm(const int &dash1,const int &dash2,const int &dash3)
     m_dashBoard->setrpmstyle1(dash1);
     m_dashBoard->setrpmstyle2(dash2);
     m_dashBoard->setrpmstyle3(dash3);
+
 }
 void Connect::checkifraspberrypi()
 {
@@ -1067,13 +1074,18 @@ void Connect::LiveReqMsg(const int &val1, const int &val2, const int &val3, cons
     process->waitForFinished(100); // 10 minutes time before timeout
 
 }
-void Connect::openConnection(const QString &portName, const int &ecuSelect)
+void Connect::openConnection(const QString &portName, const int &ecuSelect,const int &canbase)
 {
     ecu = ecuSelect;
     selectedPort = portName;
+    canbaseadress = canbase;
 //model: [ "CAN","PowerFC","Consult","OBD2"]
 //model: [ "CAN","PowerFC","Consult","OBD2"]
     //UDP receiver
+
+    m_extender->openCAN(canbaseadress);
+
+
     if (ecuSelect == 0)
     {
         m_udpreceiver->startreceiver();
