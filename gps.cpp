@@ -107,6 +107,7 @@ void GPS::openConnection(const QString &portName,const QString &Baud)
 
 void GPS::removeNMEAmsg()
 {
+    setGPS10HZ(); //as a backup
     //disables all the NMEA mesages that we don't need ( we only need RMC and  GGA)
     setGPSOnly();
     m_dashboard->setgpsFIXtype("Disable messages");
@@ -164,7 +165,7 @@ void GPS::closeConnection1()
     m_serialport->close();
     initialized =1;
     m_dashboard->setgpsFIXtype("close serial");
-    openConnection(GPSPort,"115200");
+    (GPSPort,"115200");
 
 }
 
