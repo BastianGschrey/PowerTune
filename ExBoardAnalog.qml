@@ -28,6 +28,7 @@ Rectangle {
             property alias ex60save : ex60.text
             property alias ex65save : ex65.text
             property alias ex70save : ex70.text
+            property alias ex75save : ex75.text
             property alias checkan0ntcsave  : checkan0ntc.checkState
             property alias checkan1ntcsave  : checkan1ntc.checkState
             property alias checkan2ntcsave  : checkan2ntc.checkState
