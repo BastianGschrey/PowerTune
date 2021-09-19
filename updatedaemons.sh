@@ -49,6 +49,8 @@ sudo pkill WolfEMS
 sudo pkill GMCANOBD
 sudo pkill genericcan
 sudo pkill FTCAN20
+sudo pkill Delta
+sudo pkill BigNET
 
 echo "Removing previous Versions"
 
@@ -91,6 +93,8 @@ sudo rm /home/pi/daemons/WolfEMS
 sudo rm /home/pi/daemons/GMCANOBD
 sudo rm /home/pi/genericcan
 sudo rm /home/pi/FTCAN20
+sudo rm /home/pi/Delta
+sudo rm /home/pi/BigNET
 
 echo "Updating Daemons"
 cp -r /home/pi/src/daemons/. /home/pi/daemons/
