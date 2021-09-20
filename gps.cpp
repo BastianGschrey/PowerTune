@@ -165,7 +165,7 @@ void GPS::closeConnection1()
     m_serialport->close();
     initialized =1;
     m_dashboard->setgpsFIXtype("close serial");
-    (GPSPort,"115200");
+    openConnection(GPSPort,"115200");
 
 }
 
