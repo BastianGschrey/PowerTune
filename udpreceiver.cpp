@@ -26,7 +26,7 @@ void udpreceiver::startreceiver()
     udpSocket->bind(45454, QUdpSocket::ShareAddress);
     connect(udpSocket, SIGNAL(readyRead()),
             this, SLOT(processPendingDatagrams()));
-    // qDebug()<< "UDP CONNECETED";
+    qDebug()<< "UDP CONNECETED";
 }
 
 void udpreceiver::closeConnection()

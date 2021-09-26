@@ -18,11 +18,11 @@
 QVector<int>averagehz1(0);
 qreal avghz1;
 qreal test1;
-int canstartadress;
-int adress1;
-int adress2;
-int adress3;
-int adress4;
+quint32 canstartadress;
+quint32 adress1;
+quint32 adress2;
+quint32 adress3;
+quint32 adress4;
 int statusmask = 128;
 int frequencymask = 127;
 
@@ -47,8 +47,8 @@ void Extender::openCAN(const int &ExtenderBaseID)
 {
 
     canstartadress = ExtenderBaseID;
-    qDebug() << "CAN Start Adress :" << canstartadress;
-    qDebug() << "Opening CANbus ";
+   // qDebug() << "CAN Start Adress :" << canstartadress;
+   // qDebug() << "Opening CANbus ";
     adress1 = canstartadress + 1;
     adress2 = canstartadress + 2;
     adress3 = canstartadress + 3;
