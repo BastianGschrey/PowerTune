@@ -1400,7 +1400,7 @@ ListModel {
         divisor : "1"
     }
     ListElement {
-        sourcename:"lowbeam"
+        sourcename:"lowBeam"
         defaultsymbol: ""
         titlename:"Lowbeam"
         decimalpoints : "0"
