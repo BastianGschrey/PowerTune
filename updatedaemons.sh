@@ -52,6 +52,7 @@ sudo pkill FTCAN20
 sudo pkill Delta
 sudo pkill BigNET
 sudo pkill R35
+sudo pkill Prado
 
 echo "Removing previous Versions"
 
@@ -97,6 +98,8 @@ sudo rm /home/pi/FTCAN20
 sudo rm /home/pi/Delta
 sudo rm /home/pi/BigNET
 sudo rm /home/pi/R35
+sudo rm /home/pi/Prado
+
 echo "Updating Daemons"
 cp -r /home/pi/src/daemons/. /home/pi/daemons/
 cp /home/pi/src/*.sh /home/pi/
