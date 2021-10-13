@@ -33,6 +33,14 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal speed READ speed WRITE setSpeed NOTIFY speedChanged)
     Q_PROPERTY(qreal Iscvduty READ Iscvduty WRITE setIscvduty NOTIFY iscvdutyChanged)
     Q_PROPERTY(qreal O2volt READ O2volt WRITE setO2volt NOTIFY o2voltChanged)
+     Q_PROPERTY(qreal Cyl1_O2_Corr READ Cyl1_O2_Corr WRITE setCyl1_O2_Corr NOTIFY Cyl1_O2_CorrChanged)
+     Q_PROPERTY(qreal Cyl2_O2_Corr READ Cyl2_O2_Corr WRITE setCyl2_O2_Corr NOTIFY Cyl2_O2_CorrChanged)
+     Q_PROPERTY(qreal Cyl3_O2_Corr READ Cyl3_O2_Corr WRITE setCyl3_O2_Corr NOTIFY Cyl3_O2_CorrChanged)
+     Q_PROPERTY(qreal Cyl4_O2_Corr READ Cyl4_O2_Corr WRITE setCyl4_O2_Corr NOTIFY Cyl4_O2_CorrChanged)
+     Q_PROPERTY(qreal Cyl5_O2_Corr READ Cyl5_O2_Corr WRITE setCyl5_O2_Corr NOTIFY Cyl5_O2_CorrChanged)
+     Q_PROPERTY(qreal Cyl6_O2_Corr READ Cyl6_O2_Corr WRITE setCyl6_O2_Corr NOTIFY Cyl6_O2_CorrChanged)
+     Q_PROPERTY(qreal Cyl7_O2_Corr READ Cyl7_O2_Corr WRITE setCyl7_O2_Corr NOTIFY Cyl7_O2_CorrChanged)
+     Q_PROPERTY(qreal Cyl8_O2_Corr READ Cyl8_O2_Corr WRITE setCyl8_O2_Corr NOTIFY Cyl8_O2_CorrChanged)
     Q_PROPERTY(qreal na1 READ na1 WRITE setna1 NOTIFY na1Changed)
     Q_PROPERTY(qreal Secinjpulse READ Secinjpulse WRITE setSecinjpulse NOTIFY secinjpulseChanged)
     Q_PROPERTY(qreal na2 READ na2 WRITE setna2 NOTIFY na2Changed)
@@ -54,6 +62,8 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal BoostDuty READ BoostDuty WRITE setBoostDuty NOTIFY boostDutyChanged)
     Q_PROPERTY(qreal MAFactivity READ MAFactivity WRITE setMAFactivity NOTIFY mAFactivityChanged)
     Q_PROPERTY(qreal O2volt_2 READ O2volt_2 WRITE setO2volt_2 NOTIFY o2volt_2Changed)
+
+
 
     // Sensor Voltage
     Q_PROPERTY(qreal sens1 READ sens1 WRITE setsens1 NOTIFY sens1Changed)
@@ -143,6 +153,15 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal MAP2 READ MAP2 WRITE setMAP2 NOTIFY mAP2Changed)
     Q_PROPERTY(qreal AUXT READ AUXT WRITE setAUXT NOTIFY aUXTChanged)
     Q_PROPERTY(qreal AFR READ AFR WRITE setAFR NOTIFY aFRChanged)
+    Q_PROPERTY(qreal AFRcyl1 READ AFRcyl1 WRITE setAFRcyl1 NOTIFY AFRcyl1Changed)
+    Q_PROPERTY(qreal AFRcyl2 READ AFRcyl2 WRITE setAFRcyl2 NOTIFY AFRcyl2Changed)
+    Q_PROPERTY(qreal AFRcyl3 READ AFRcyl3 WRITE setAFRcyl3 NOTIFY AFRcyl3Changed)
+    Q_PROPERTY(qreal AFRcyl4 READ AFRcyl4 WRITE setAFRcyl4 NOTIFY AFRcyl4Changed)
+    Q_PROPERTY(qreal AFRcyl5 READ AFRcyl5 WRITE setAFRcyl5 NOTIFY AFRcyl5Changed)
+    Q_PROPERTY(qreal AFRcyl6 READ AFRcyl6 WRITE setAFRcyl6 NOTIFY AFRcyl6Changed)
+    Q_PROPERTY(qreal AFRcyl7 READ AFRcyl7 WRITE setAFRcyl7 NOTIFY AFRcyl7Changed)
+    Q_PROPERTY(qreal AFRcyl8 READ AFRcyl8 WRITE setAFRcyl8 NOTIFY AFRcyl6Changed)
+
     Q_PROPERTY(qreal TPS READ TPS WRITE setTPS NOTIFY tPSChanged)
     Q_PROPERTY(qreal IdleValue READ IdleValue WRITE setIdleValue NOTIFY idleValueChanged)
     Q_PROPERTY(qreal MVSS READ MVSS WRITE setMVSS NOTIFY mVSSChanged)
@@ -159,6 +178,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal LAMBDA READ LAMBDA WRITE setLAMBDA NOTIFY lAMBDAChanged)
     Q_PROPERTY(qreal LAMBDATarget READ LAMBDATarget WRITE setLAMBDATarget NOTIFY lAMBDATargetChanged)
     Q_PROPERTY(qreal FuelPress READ FuelPress WRITE setFuelPress NOTIFY fuelPressChanged)
+    Q_PROPERTY(qreal GearOilPress READ GearOilPress WRITE setGearOilPress NOTIFY GearOilPressChanged)
 
     //GPS Strings
 
@@ -573,6 +593,14 @@ class DashBoard : public QObject
     void setSpeed(const qreal &speed);
     void setIscvduty (const qreal &Iscvduty );
     void setO2volt(const qreal &O2volt);
+    void setCyl1_O2_Corr(const qreal &Cyl1_O2_Corr);
+    void setCyl2_O2_Corr(const qreal &Cyl2_O2_Corr);
+    void setCyl3_O2_Corr(const qreal &Cyl3_O2_Corr);
+    void setCyl4_O2_Corr(const qreal &Cyl4_O2_Corr);
+    void setCyl5_O2_Corr(const qreal &Cyl5_O2_Corr);
+    void setCyl6_O2_Corr(const qreal &Cyl6_O2_Corr);
+    void setCyl7_O2_Corr(const qreal &Cyl7_O2_Corr);
+    void setCyl8_O2_Corr(const qreal &Cyl8_O2_Corr);
     void setna1(const qreal &na1);
     void setSecinjpulse(const qreal &Secinjpulse);
     void setna2(const qreal &na2);
@@ -710,6 +738,14 @@ class DashBoard : public QObject
     void setMAP2(const qreal &MAP2);
     void setAUXT(const qreal &AUXT);
     void setAFR(const qreal &AFR);
+    void setAFRcyl1(const qreal &AFRcyl1);
+    void setAFRcyl2(const qreal &AFRcyl2);
+    void setAFRcyl3(const qreal &AFRcyl3);
+    void setAFRcyl4(const qreal &AFRcyl4);
+    void setAFRcyl5(const qreal &AFRcyl5);
+    void setAFRcyl6(const qreal &AFRcyl6);
+    void setAFRcyl7(const qreal &AFRcyl7);
+    void setAFRcyl8(const qreal &AFRcyl8);
     void setTPS(const qreal &TPS);
     void setIdleValue(const qreal &IdleValue);
     void setMVSS(const qreal &MVSS);
@@ -726,7 +762,7 @@ class DashBoard : public QObject
     void setLAMBDA(const qreal &LAMBDA);
     void setLAMBDATarget(const qreal &LAMBDATarget);
     void setFuelPress(const qreal &FuelPress);
-
+    void setGearOilPress(const qreal &GearOilPress);
 
     //qsensors
     void setaccelx(const qreal &accelx);
@@ -1083,6 +1119,14 @@ class DashBoard : public QObject
     qreal BatteryV() const;
     qreal Iscvduty() const;
     qreal O2volt() const;
+    qreal Cyl1_O2_Corr() const;
+    qreal Cyl2_O2_Corr() const;
+    qreal Cyl3_O2_Corr() const;
+    qreal Cyl4_O2_Corr() const;
+    qreal Cyl5_O2_Corr() const;
+    qreal Cyl6_O2_Corr() const;
+    qreal Cyl7_O2_Corr() const;
+    qreal Cyl8_O2_Corr() const;
     qreal na1() const;
     qreal Secinjpulse() const;
     qreal na2() const;
@@ -1215,6 +1259,14 @@ class DashBoard : public QObject
     qreal MAP2() const;
     qreal AUXT() const;
     qreal AFR() const;
+    qreal AFRcyl1() const;
+    qreal AFRcyl2() const;
+    qreal AFRcyl3() const;
+    qreal AFRcyl4() const;
+    qreal AFRcyl5() const;
+    qreal AFRcyl6() const;
+    qreal AFRcyl7() const;
+    qreal AFRcyl8() const;
     qreal TPS() const;
     qreal IdleValue() const;
     qreal MVSS() const;
@@ -1231,6 +1283,7 @@ class DashBoard : public QObject
     qreal LAMBDA() const;
     qreal LAMBDATarget() const;
     qreal FuelPress() const;
+    qreal GearOilPress() const;
 
     //qsensors
 
@@ -1585,6 +1638,14 @@ signals:
     void batteryVChanged(qreal BatteryV);
     void iscvdutyChanged(qreal Iscvduty);
     void o2voltChanged(qreal O2volt);
+    void Cyl1_O2_CorrChanged(qreal Cyl1_O2_Corr);
+    void Cyl2_O2_CorrChanged(qreal Cyl2_O2_Corr);
+    void Cyl3_O2_CorrChanged(qreal Cyl3_O2_Corr);
+    void Cyl4_O2_CorrChanged(qreal Cyl4_O2_Corr);
+    void Cyl5_O2_CorrChanged(qreal Cyl5_O2_Corr);
+    void Cyl6_O2_CorrChanged(qreal Cyl6_O2_Corr);
+    void Cyl7_O2_CorrChanged(qreal Cyl7_O2_Corr);
+    void Cyl8_O2_CorrChanged(qreal Cyl8_O2_Corr);
     void na1Changed(qreal na1);
     void secinjpulseChanged(qreal Secinjpulse);
     void na2Changed(qreal na2);
@@ -1716,6 +1777,14 @@ signals:
     void mAP2Changed(qreal MAP2);
     void aUXTChanged(qreal AUXT);
     void aFRChanged(qreal AFR);
+    void AFRcyl1Changed(qreal AFRcyl1);
+    void AFRcyl2Changed(qreal AFRcyl2);
+    void AFRcyl3Changed(qreal AFRcyl3);
+    void AFRcyl4Changed(qreal AFRcyl4);
+    void AFRcyl5Changed(qreal AFRcyl5);
+    void AFRcyl6Changed(qreal AFRcyl6);
+    void AFRcyl7Changed(qreal AFRcyl7);
+    void AFRcyl8Changed(qreal AFRcyl8);
     void tPSChanged(qreal TPS);
     void idleValueChanged(qreal IdleValue);
     void mVSSChanged(qreal MVSS);
@@ -1732,6 +1801,8 @@ signals:
     void lAMBDAChanged(qreal LAMBDA);
     void lAMBDATargetChanged(qreal LAMBDATarget);
     void fuelPressChanged(qreal FuelPress);
+    void GearOilPressChanged(qreal GearOilPress);
+
 
     void accelxChanged(qreal accelx);
     void accelyChanged(qreal accely);
@@ -2081,6 +2152,14 @@ private:
     qreal m_speed;
     qreal m_Iscvduty;
     qreal m_O2volt;
+    qreal m_Cyl1_O2_Corr;
+    qreal m_Cyl2_O2_Corr;
+    qreal m_Cyl3_O2_Corr;
+    qreal m_Cyl4_O2_Corr;
+    qreal m_Cyl5_O2_Corr;
+    qreal m_Cyl6_O2_Corr;
+    qreal m_Cyl7_O2_Corr;
+    qreal m_Cyl8_O2_Corr;
     qreal m_na1;
     qreal m_Secinjpulse;
     qreal m_na2;
@@ -2199,6 +2278,14 @@ private:
     qreal m_MAP2;
     qreal m_AUXT;
     qreal m_AFR;
+    qreal m_AFRcyl1;
+    qreal m_AFRcyl2;
+    qreal m_AFRcyl3;
+    qreal m_AFRcyl4;
+    qreal m_AFRcyl5;
+    qreal m_AFRcyl6;
+    qreal m_AFRcyl7;
+    qreal m_AFRcyl8;
     qreal m_TPS;
     qreal m_IdleValue;
     qreal m_MVSS;
@@ -2215,6 +2302,8 @@ private:
     qreal m_LAMBDA;
     qreal m_LAMBDATarget;
     qreal m_FuelPress;
+    qreal m_GearOilPress;
+
 
     // GPS
 

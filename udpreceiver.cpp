@@ -778,7 +778,7 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setAnalog10(Value);
             break;
         case 271:
-            //Gearbox Oil Pressure
+            m_dashboard->setGearOilPress(Value);
             break;
         case 272:
             //Injection Stage 3 Duty Cycle
@@ -1184,6 +1184,32 @@ void udpreceiver::processPendingDatagrams()
         case 915:
             m_dashboard->setEXAnalogInput7(Value/1000);
             break;
+//Bigstuff Extra
+        case 916:
+            m_dashboard->setAFRcyl1(Value);
+            break;
+        case 917:
+            m_dashboard->setAFRcyl2(Value);
+            break;
+        case 918:
+            m_dashboard->setAFRcyl3(Value);
+            break;
+        case 919:
+            m_dashboard->setAFRcyl4(Value);
+            break;
+        case 920:
+            m_dashboard->setAFRcyl5(Value);
+            break;
+        case 921:
+            m_dashboard->setAFRcyl6(Value);
+            break;
+        case 922:
+            m_dashboard->setAFRcyl7(Value);
+            break;
+        case 923:
+            m_dashboard->setAFRcyl8(Value);
+            break;
+
         case 999:
             break;
         default:

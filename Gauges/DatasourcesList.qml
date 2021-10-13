@@ -376,6 +376,91 @@ ListModel {
         stepsize : "5"
         divisor : "1"
     }
+
+    ListElement {
+        sourcename:"AFRcyl1"
+        defaultsymbol: "A/F"
+        titlename:"AFR CYL 1"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "20"
+        stepsize : "5"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"AFRcyl2"
+        defaultsymbol: "A/F"
+        titlename:"AFR CYL 2"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "20"
+        stepsize : "5"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"AFRcyl3"
+        defaultsymbol: "A/F"
+        titlename:"AFR CYL 3"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "20"
+        stepsize : "5"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"AFRcyl4"
+        defaultsymbol: "A/F"
+        titlename:"AFR CYL 4"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "20"
+        stepsize : "5"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"AFRcyl5"
+        defaultsymbol: "A/F"
+        titlename:"AFR CYL 5"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "20"
+        stepsize : "5"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"AFRcyl6"
+        defaultsymbol: "A/F"
+        titlename:"AFR CYL 6"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "20"
+        stepsize : "5"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"AFRcyl7"
+        defaultsymbol: "A/F"
+        titlename:"AFR CYL 7"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "20"
+        stepsize : "5"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"AFRcyl8"
+        defaultsymbol: "A/F"
+        titlename:"AFR CYL 8"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "20"
+        stepsize : "5"
+        divisor : "1"
+    }
+
+
+
+
     ListElement {
         sourcename:"airtempensor2"
         defaultsymbol: "°C"
@@ -1297,6 +1382,15 @@ ListModel {
         decimalpoints : "0"
         maxvalue : "1"
         stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"GearOilPress"
+        defaultsymbol: "kPa"
+        titlename:"Gear Oil Pres."
+        decimalpoints : "0"
+        maxvalue : "400"
+        stepsize : "100"
         divisor : "1"
     }
 

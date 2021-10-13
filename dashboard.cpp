@@ -121,7 +121,14 @@ DashBoard::DashBoard(QObject *parent)
     , m_BoostDuty(0)
     , m_MAFactivity(0)
     , m_O2volt_2(0)
-
+    , m_Cyl1_O2_Corr(0)
+    , m_Cyl2_O2_Corr(0)
+    , m_Cyl3_O2_Corr(0)
+    , m_Cyl4_O2_Corr(0)
+    , m_Cyl5_O2_Corr(0)
+    , m_Cyl6_O2_Corr(0)
+    , m_Cyl7_O2_Corr(0)
+    , m_Cyl8_O2_Corr(0)
 
     //Boost
 
@@ -209,6 +216,14 @@ DashBoard::DashBoard(QObject *parent)
     , m_MAP2(0)
     , m_AUXT(0)
     , m_AFR(0)
+    , m_AFRcyl1(0)
+    , m_AFRcyl2(0)
+    , m_AFRcyl3(0)
+    , m_AFRcyl4(0)
+    , m_AFRcyl5(0)
+    , m_AFRcyl6(0)
+    , m_AFRcyl7(0)
+    , m_AFRcyl8(0)
     , m_TPS(0)
     , m_IdleValue(0)
     , m_MVSS(0)
@@ -225,6 +240,7 @@ DashBoard::DashBoard(QObject *parent)
     , m_LAMBDA(0)
     , m_LAMBDATarget(0)
     , m_FuelPress(0)
+    , m_GearOilPress(0)
 
     //GPS Strings
     , m_gpsTime ("0")
@@ -913,6 +929,63 @@ void DashBoard::setO2volt(const qreal &O2volt)
         return;
     m_O2volt = O2volt;
     emit o2voltChanged(O2volt);
+}
+
+void DashBoard::setCyl1_O2_Corr(const qreal &Cyl1_O2_Corr)
+{
+    if (m_Cyl1_O2_Corr == Cyl1_O2_Corr)
+        return;
+    m_Cyl1_O2_Corr = Cyl1_O2_Corr;
+    emit Cyl1_O2_CorrChanged(Cyl1_O2_Corr);
+}
+void DashBoard::setCyl2_O2_Corr(const qreal &Cyl2_O2_Corr)
+{
+    if (m_Cyl2_O2_Corr == Cyl2_O2_Corr)
+        return;
+    m_Cyl2_O2_Corr = Cyl2_O2_Corr;
+    emit Cyl2_O2_CorrChanged(Cyl2_O2_Corr);
+}
+void DashBoard::setCyl3_O2_Corr(const qreal &Cyl3_O2_Corr)
+{
+    if (m_Cyl3_O2_Corr == Cyl3_O2_Corr)
+        return;
+    m_Cyl3_O2_Corr = Cyl3_O2_Corr;
+    emit Cyl3_O2_CorrChanged(Cyl3_O2_Corr);
+}
+void DashBoard::setCyl4_O2_Corr(const qreal &Cyl4_O2_Corr)
+{
+    if (m_Cyl4_O2_Corr == Cyl4_O2_Corr)
+        return;
+    m_Cyl4_O2_Corr = Cyl4_O2_Corr;
+    emit Cyl4_O2_CorrChanged(Cyl4_O2_Corr);
+}
+void DashBoard::setCyl5_O2_Corr(const qreal &Cyl5_O2_Corr)
+{
+    if (m_Cyl5_O2_Corr == Cyl5_O2_Corr)
+        return;
+    m_Cyl5_O2_Corr = Cyl5_O2_Corr;
+    emit Cyl5_O2_CorrChanged(Cyl5_O2_Corr);
+}
+void DashBoard::setCyl6_O2_Corr(const qreal &Cyl6_O2_Corr)
+{
+    if (m_Cyl6_O2_Corr == Cyl6_O2_Corr)
+        return;
+    m_Cyl6_O2_Corr = Cyl6_O2_Corr;
+    emit Cyl6_O2_CorrChanged(Cyl6_O2_Corr);
+}
+void DashBoard::setCyl7_O2_Corr(const qreal &Cyl7_O2_Corr)
+{
+    if (m_Cyl7_O2_Corr == Cyl7_O2_Corr)
+        return;
+    m_Cyl7_O2_Corr = Cyl7_O2_Corr;
+    emit Cyl7_O2_CorrChanged(Cyl7_O2_Corr);
+}
+void DashBoard::setCyl8_O2_Corr(const qreal &Cyl8_O2_Corr)
+{
+    if (m_Cyl8_O2_Corr == Cyl8_O2_Corr)
+        return;
+    m_Cyl8_O2_Corr = Cyl8_O2_Corr;
+    emit Cyl8_O2_CorrChanged(Cyl8_O2_Corr);
 }
 void DashBoard::setna1(const qreal &na1)
 {
@@ -1754,6 +1827,64 @@ void DashBoard::setAFR(const qreal &AFR)
     m_AFR = AFR;
     emit aFRChanged(AFR);
 }
+void DashBoard::setAFRcyl1(const qreal &AFRcyl1)
+{
+    if (m_AFRcyl1 == AFRcyl1)
+        return;
+    m_AFRcyl1 = AFRcyl1;
+    emit AFRcyl1Changed(AFRcyl1);
+}
+void DashBoard::setAFRcyl2(const qreal &AFRcyl2)
+{
+    if (m_AFRcyl2 == AFRcyl2)
+        return;
+    m_AFRcyl2 = AFRcyl2;
+    emit AFRcyl2Changed(AFRcyl2);
+}
+void DashBoard::setAFRcyl3(const qreal &AFRcyl3)
+{
+    if (m_AFRcyl3 == AFRcyl3)
+        return;
+    m_AFRcyl3 = AFRcyl3;
+    emit AFRcyl3Changed(AFRcyl3);
+}
+void DashBoard::setAFRcyl4(const qreal &AFRcyl4)
+{
+    if (m_AFRcyl4 == AFRcyl4)
+        return;
+    m_AFRcyl4 = AFRcyl4;
+    emit AFRcyl4Changed(AFRcyl4);
+}
+void DashBoard::setAFRcyl5(const qreal &AFRcyl5)
+{
+    if (m_AFRcyl5 == AFRcyl5)
+        return;
+    m_AFRcyl5 = AFRcyl5;
+    emit AFRcyl5Changed(AFRcyl5);
+}
+void DashBoard::setAFRcyl6(const qreal &AFRcyl6)
+{
+    if (m_AFRcyl6 == AFRcyl6)
+        return;
+    m_AFRcyl6 = AFRcyl6;
+    emit AFRcyl6Changed(AFRcyl6);
+}
+void DashBoard::setAFRcyl7(const qreal &AFRcyl7)
+{
+    if (m_AFRcyl7 == AFRcyl7)
+        return;
+    m_AFRcyl7 = AFRcyl7;
+    emit AFRcyl7Changed(AFRcyl7);
+}
+void DashBoard::setAFRcyl8(const qreal &AFRcyl8)
+{
+    if (m_AFRcyl8 == AFRcyl8)
+        return;
+    m_AFRcyl8 = AFRcyl8;
+    emit AFRcyl8Changed(AFRcyl8);
+}
+
+
 
 void DashBoard::setTPS(const qreal &TPS)
 {
@@ -1892,7 +2023,16 @@ void DashBoard::setFuelPress(const qreal &FuelPress)
     {m_FuelPress = FuelPress * 0.145038;}
     emit fuelPressChanged(FuelPress);
 }
-
+void DashBoard::setGearOilPress(const qreal &GearOilPress)
+{
+    if(m_GearOilPress == GearOilPress)
+        return;
+    if (m_pressureunits == "metric")
+    { m_GearOilPress = GearOilPress;}
+    if (m_pressureunits == "imperial")
+    {m_GearOilPress = GearOilPress * 0.145038;}
+    emit GearOilPressChanged(GearOilPress);
+}
 
 //Qsensors
 void DashBoard::setaccelx(const qreal &accelx)
@@ -4296,6 +4436,14 @@ qreal DashBoard::BatteryV() const { return m_BatteryV; }
 qreal DashBoard::speed() const { return m_speed; }
 qreal DashBoard::Iscvduty() const { return m_Iscvduty; }
 qreal DashBoard::O2volt() const { return m_O2volt; }
+qreal DashBoard::Cyl1_O2_Corr() const { return m_Cyl1_O2_Corr; }
+qreal DashBoard::Cyl2_O2_Corr() const { return m_Cyl2_O2_Corr; }
+qreal DashBoard::Cyl3_O2_Corr() const { return m_Cyl3_O2_Corr; }
+qreal DashBoard::Cyl4_O2_Corr() const { return m_Cyl4_O2_Corr; }
+qreal DashBoard::Cyl5_O2_Corr() const { return m_Cyl5_O2_Corr; }
+qreal DashBoard::Cyl6_O2_Corr() const { return m_Cyl6_O2_Corr; }
+qreal DashBoard::Cyl7_O2_Corr() const { return m_Cyl7_O2_Corr; }
+qreal DashBoard::Cyl8_O2_Corr() const { return m_Cyl8_O2_Corr; }
 qreal DashBoard::na1() const { return m_na1; }
 qreal DashBoard::Secinjpulse() const { return m_Secinjpulse; }
 qreal DashBoard::na2() const { return m_na2; }
@@ -4427,6 +4575,14 @@ qreal DashBoard::MAP() const { return m_MAP; }
 qreal DashBoard::MAP2() const { return m_MAP2; }
 qreal DashBoard::AUXT() const { return m_AUXT; }
 qreal DashBoard::AFR() const { return m_AFR; }
+qreal DashBoard::AFRcyl1() const { return m_AFRcyl1; }
+qreal DashBoard::AFRcyl2() const { return m_AFRcyl2; }
+qreal DashBoard::AFRcyl3() const { return m_AFRcyl3; }
+qreal DashBoard::AFRcyl4() const { return m_AFRcyl4; }
+qreal DashBoard::AFRcyl5() const { return m_AFRcyl5; }
+qreal DashBoard::AFRcyl6() const { return m_AFRcyl6; }
+qreal DashBoard::AFRcyl7() const { return m_AFRcyl7; }
+qreal DashBoard::AFRcyl8() const { return m_AFRcyl8; }
 qreal DashBoard::TPS() const { return m_TPS; }
 qreal DashBoard::IdleValue() const { return m_IdleValue; }
 qreal DashBoard::MVSS() const { return m_MVSS; }
@@ -4443,6 +4599,7 @@ qreal DashBoard::TRIM() const { return m_TRIM; }
 qreal DashBoard::LAMBDA() const { return m_LAMBDA; }
 qreal DashBoard::LAMBDATarget() const { return m_LAMBDATarget; }
 qreal DashBoard::FuelPress() const { return m_FuelPress; }
+qreal DashBoard::GearOilPress() const { return m_GearOilPress; }
 
 // Qsensors
 qreal DashBoard::accelx() const { return m_accelx; }
