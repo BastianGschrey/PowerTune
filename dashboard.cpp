@@ -216,6 +216,24 @@ DashBoard::DashBoard(QObject *parent)
     , m_MAP2(0)
     , m_AUXT(0)
     , m_AFR(0)
+    , m_AFRLEFTBANKTARGET(0)
+    , m_AFRRIGHTBANKTARGET(0)
+    //
+
+    , m_AFRLEFTBANKACTUAL(0)
+    , m_AFRRIGHTBANKACTUAL(0)
+    , m_BOOSTOFFSET(0)
+    , m_REVLIM3STEP(0)
+    , m_REVLIM2STEP(0)
+    , m_REVLIMGIGHSIDE(0)
+    , m_REVLIMBOURNOUT(0)
+    , m_LEFTBANKO2CORR(0)
+    , m_RIGHTBANKO2CORR(0)
+    , m_TRACTIONCTRLOFFSET(0)
+    , m_DRIVESHAFTOFFSET(0)
+    , m_TCCOMMAND(0)
+    , m_FSLCOMMAND(0)
+    , m_FSLINDEX(0)
     , m_AFRcyl1(0)
     , m_AFRcyl2(0)
     , m_AFRcyl3(0)
@@ -273,6 +291,7 @@ DashBoard::DashBoard(QObject *parent)
     //   ,m_RecvData("----")
     //calculations
     , m_Gear(0)
+    , m_Gearoffset(0)
     , m_GearCalculation(0)
     , m_Power(0)
     , m_Torque(0)
@@ -1827,6 +1846,134 @@ void DashBoard::setAFR(const qreal &AFR)
     m_AFR = AFR;
     emit aFRChanged(AFR);
 }
+
+void DashBoard::setAFRLEFTBANKTARGET(const qreal &AFRLEFTBANKTARGET)
+{
+    if (m_AFRLEFTBANKTARGET == AFRLEFTBANKTARGET)
+        return;
+    m_AFRLEFTBANKTARGET = AFRLEFTBANKTARGET;
+    emit AFRLEFTBANKTARGETChanged(AFRLEFTBANKTARGET);
+}
+
+void DashBoard::setAFRRIGHTBANKTARGET(const qreal &AFRRIGHTBANKTARGET)
+{
+    if (m_AFRRIGHTBANKTARGET == AFRRIGHTBANKTARGET)
+        return;
+    m_AFRRIGHTBANKTARGET = AFRRIGHTBANKTARGET;
+    emit aFRChanged(AFRRIGHTBANKTARGET);
+}
+
+void DashBoard::setAFRLEFTBANKACTUAL(const qreal &AFRLEFTBANKACTUAL)
+{
+    if (m_AFRLEFTBANKACTUAL == AFRLEFTBANKACTUAL)
+        return;
+    m_AFRLEFTBANKACTUAL = AFRLEFTBANKACTUAL;
+    emit AFRLEFTBANKACTUALChanged(AFRLEFTBANKACTUAL);
+}
+
+void DashBoard::setAFRRIGHTBANKACTUAL(const qreal &AFRRIGHTBANKACTUAL)
+{
+    if (m_AFRRIGHTBANKACTUAL == AFRRIGHTBANKACTUAL)
+        return;
+    m_AFRRIGHTBANKACTUAL = AFRRIGHTBANKACTUAL;
+    emit AFRRIGHTBANKACTUALChanged(AFRRIGHTBANKACTUAL);
+}
+
+void DashBoard::setBOOSTOFFSET(const qreal &BOOSTOFFSET)
+{
+    if (m_BOOSTOFFSET == BOOSTOFFSET)
+        return;
+    m_BOOSTOFFSET = BOOSTOFFSET;
+    emit BOOSTOFFSETChanged(BOOSTOFFSET);
+}
+
+void DashBoard::setREVLIM3STEP(const qreal &REVLIM3STEP)
+{
+    if (m_REVLIM3STEP == REVLIM3STEP)
+        return;
+    m_REVLIM3STEP = REVLIM3STEP;
+    emit REVLIM3STEPChanged(REVLIM3STEP);
+}
+
+void DashBoard::setREVLIM2STEP(const qreal &REVLIM2STEP)
+{
+    if (m_REVLIM2STEP == REVLIM2STEP)
+        return;
+    m_REVLIM2STEP = REVLIM2STEP;
+    emit REVLIM2STEPChanged(REVLIM2STEP);
+}
+
+void DashBoard::setREVLIMGIGHSIDE(const qreal &REVLIMGIGHSIDE)
+{
+    if (m_REVLIMGIGHSIDE == REVLIMGIGHSIDE)
+        return;
+    m_REVLIMGIGHSIDE = REVLIMGIGHSIDE;
+    emit REVLIMGIGHSIDEChanged(REVLIMGIGHSIDE);
+}
+
+void DashBoard::setREVLIMBOURNOUT(const qreal &REVLIMBOURNOUT)
+{
+    if (m_REVLIMBOURNOUT == REVLIMBOURNOUT)
+        return;
+    m_REVLIMBOURNOUT = REVLIMBOURNOUT;
+    emit REVLIMBOURNOUTChanged(REVLIMBOURNOUT);
+}
+
+void DashBoard::setLEFTBANKO2CORR(const qreal &LEFTBANKO2CORR)
+{
+    if (m_LEFTBANKO2CORR == LEFTBANKO2CORR)
+        return;
+    m_LEFTBANKO2CORR = LEFTBANKO2CORR;
+    emit LEFTBANKO2CORRChanged(LEFTBANKO2CORR);
+}
+
+void DashBoard::setRIGHTBANKO2CORR(const qreal &RIGHTBANKO2CORR)
+{
+    if (m_RIGHTBANKO2CORR == RIGHTBANKO2CORR)
+        return;
+    m_RIGHTBANKO2CORR = RIGHTBANKO2CORR;
+    emit RIGHTBANKO2CORRChanged(RIGHTBANKO2CORR);
+}
+
+void DashBoard::setTRACTIONCTRLOFFSET(const qreal &TRACTIONCTRLOFFSET)
+{
+    if (m_TRACTIONCTRLOFFSET == TRACTIONCTRLOFFSET)
+        return;
+    m_TRACTIONCTRLOFFSET = TRACTIONCTRLOFFSET;
+    emit TRACTIONCTRLOFFSETChanged(TRACTIONCTRLOFFSET);
+}
+void DashBoard::setDRIVESHAFTOFFSET(const qreal &DRIVESHAFTOFFSET)
+{
+    if (m_DRIVESHAFTOFFSET == DRIVESHAFTOFFSET)
+        return;
+    m_DRIVESHAFTOFFSET = DRIVESHAFTOFFSET;
+    emit DRIVESHAFTOFFSETChanged(DRIVESHAFTOFFSET);
+}
+
+void DashBoard::setTCCOMMAND(const qreal &TCCOMMAND)
+{
+    if (m_TCCOMMAND == TCCOMMAND)
+        return;
+    m_TCCOMMAND = TCCOMMAND;
+    emit TCCOMMANDChanged(TCCOMMAND);
+}
+
+void DashBoard::setFSLCOMMAND(const qreal &FSLCOMMAND)
+{
+    if (m_FSLCOMMAND == FSLCOMMAND)
+        return;
+    m_AFRcyl1 = FSLCOMMAND;
+    emit FSLCOMMANDChanged(FSLCOMMAND);
+}
+
+void DashBoard::setFSLINDEX(const qreal &FSLINDEX)
+{
+    if (m_FSLINDEX == FSLINDEX)
+        return;
+    m_FSLINDEX = FSLINDEX;
+    emit FSLINDEXChanged(FSLINDEX);
+}
+
 void DashBoard::setAFRcyl1(const qreal &AFRcyl1)
 {
     if (m_AFRcyl1 == AFRcyl1)
@@ -1834,6 +1981,7 @@ void DashBoard::setAFRcyl1(const qreal &AFRcyl1)
     m_AFRcyl1 = AFRcyl1;
     emit AFRcyl1Changed(AFRcyl1);
 }
+
 void DashBoard::setAFRcyl2(const qreal &AFRcyl2)
 {
     if (m_AFRcyl2 == AFRcyl2)
@@ -2114,6 +2262,15 @@ void DashBoard::setGear(const qreal &Gear)
     m_Gear = Gear;
     emit GearChanged(Gear);
 }
+
+void DashBoard::setGearoffset(const qreal &Gearoffset)
+{
+    if (m_Gearoffset == Gearoffset)
+        return;
+    m_Gearoffset = Gearoffset;
+    emit GearoffsetChanged(Gearoffset);
+}
+
 void DashBoard::setGearCalculation(const qreal &GearCalculation)
 {
     if (m_GearCalculation == GearCalculation)
@@ -4575,6 +4732,23 @@ qreal DashBoard::MAP() const { return m_MAP; }
 qreal DashBoard::MAP2() const { return m_MAP2; }
 qreal DashBoard::AUXT() const { return m_AUXT; }
 qreal DashBoard::AFR() const { return m_AFR; }
+qreal DashBoard::AFRLEFTBANKTARGET() const { return m_AFRLEFTBANKTARGET; }
+qreal DashBoard::AFRRIGHTBANKTARGET() const { return m_AFRRIGHTBANKTARGET; }
+qreal DashBoard::AFRLEFTBANKACTUAL() const { return m_AFRLEFTBANKACTUAL; }
+qreal DashBoard::AFRRIGHTBANKACTUAL() const { return m_AFRRIGHTBANKACTUAL; }
+qreal DashBoard::BOOSTOFFSET() const { return m_BOOSTOFFSET; }
+qreal DashBoard::REVLIM3STEP() const { return m_REVLIM3STEP; }
+qreal DashBoard::REVLIM2STEP() const { return m_REVLIM2STEP; }
+qreal DashBoard::REVLIMGIGHSIDE() const { return m_REVLIMGIGHSIDE; }
+qreal DashBoard::REVLIMBOURNOUT() const { return m_REVLIMBOURNOUT; }
+qreal DashBoard::LEFTBANKO2CORR() const { return m_LEFTBANKO2CORR; }
+qreal DashBoard::RIGHTBANKO2CORR() const { return m_RIGHTBANKO2CORR; }
+qreal DashBoard::TRACTIONCTRLOFFSET() const { return m_TRACTIONCTRLOFFSET; }
+qreal DashBoard::DRIVESHAFTOFFSET() const { return m_DRIVESHAFTOFFSET; }
+qreal DashBoard::TCCOMMAND() const { return m_TCCOMMAND; }
+qreal DashBoard::FSLCOMMAND() const { return m_FSLCOMMAND; }
+qreal DashBoard::FSLINDEX() const { return m_FSLINDEX; }
+
 qreal DashBoard::AFRcyl1() const { return m_AFRcyl1; }
 qreal DashBoard::AFRcyl2() const { return m_AFRcyl2; }
 qreal DashBoard::AFRcyl3() const { return m_AFRcyl3; }
@@ -4614,6 +4788,8 @@ qreal DashBoard::ambipress() const { return m_ambipress; }
 
 //calculations
 qreal DashBoard::Gear() const { return m_Gear; }
+qreal DashBoard::Gearoffset() const { return m_Gearoffset; }
+
 qreal DashBoard::GearCalculation() const { return m_GearCalculation; }
 qreal DashBoard::Power() const { return m_Power; }
 qreal DashBoard::Torque() const { return m_Torque; }

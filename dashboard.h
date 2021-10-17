@@ -153,6 +153,23 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal MAP2 READ MAP2 WRITE setMAP2 NOTIFY mAP2Changed)
     Q_PROPERTY(qreal AUXT READ AUXT WRITE setAUXT NOTIFY aUXTChanged)
     Q_PROPERTY(qreal AFR READ AFR WRITE setAFR NOTIFY aFRChanged)
+    Q_PROPERTY(qreal AFRLEFTBANKTARGET READ AFRLEFTBANKTARGET WRITE setAFRLEFTBANKTARGET NOTIFY AFRLEFTBANKTARGETChanged)
+    Q_PROPERTY(qreal AFRRIGHTBANKTARGET READ AFRRIGHTBANKTARGET WRITE setAFRRIGHTBANKTARGET NOTIFY AFRRIGHTBANKTARGETChanged)
+    Q_PROPERTY(qreal AFRLEFTBANKACTUAL READ AFRLEFTBANKACTUAL WRITE setAFRLEFTBANKACTUAL NOTIFY AFRLEFTBANKACTUALChanged)
+    Q_PROPERTY(qreal AFRRIGHTBANKACTUAL READ AFRRIGHTBANKACTUAL WRITE setAFRRIGHTBANKACTUAL NOTIFY AFRRIGHTBANKACTUALChanged)
+    Q_PROPERTY(qreal BOOSTOFFSET READ BOOSTOFFSET WRITE setBOOSTOFFSET NOTIFY BOOSTOFFSETChanged)
+    Q_PROPERTY(qreal REVLIM3STEP READ REVLIM3STEP WRITE setREVLIM3STEP NOTIFY REVLIM3STEPChanged)
+    Q_PROPERTY(qreal REVLIM2STEP READ REVLIM2STEP WRITE setREVLIM2STEP NOTIFY REVLIM2STEPChanged)
+    Q_PROPERTY(qreal REVLIMGIGHSIDE READ REVLIMGIGHSIDE WRITE setREVLIMGIGHSIDE NOTIFY REVLIMGIGHSIDEChanged)
+    Q_PROPERTY(qreal REVLIMBOURNOUT READ REVLIMBOURNOUT WRITE setREVLIMBOURNOUT NOTIFY REVLIMBOURNOUTChanged)
+    Q_PROPERTY(qreal LEFTBANKO2CORR READ LEFTBANKO2CORR WRITE setLEFTBANKO2CORR NOTIFY LEFTBANKO2CORRChanged)
+    Q_PROPERTY(qreal RIGHTBANKO2CORR READ RIGHTBANKO2CORR WRITE setRIGHTBANKO2CORR NOTIFY RIGHTBANKO2CORRChanged)
+    Q_PROPERTY(qreal TRACTIONCTRLOFFSET READ TRACTIONCTRLOFFSET WRITE setTRACTIONCTRLOFFSET NOTIFY TRACTIONCTRLOFFSETChanged)
+    Q_PROPERTY(qreal DRIVESHAFTOFFSET READ DRIVESHAFTOFFSET WRITE setDRIVESHAFTOFFSET NOTIFY DRIVESHAFTOFFSETChanged)
+    Q_PROPERTY(qreal TCCOMMAND READ TCCOMMAND WRITE setTCCOMMAND NOTIFY TCCOMMANDChanged)
+    Q_PROPERTY(qreal FSLCOMMAND READ FSLCOMMAND WRITE setFSLCOMMAND NOTIFY FSLCOMMANDChanged)
+    Q_PROPERTY(qreal FSLINDEX READ FSLINDEX WRITE setFSLINDEX NOTIFY FSLINDEXChanged)
+
     Q_PROPERTY(qreal AFRcyl1 READ AFRcyl1 WRITE setAFRcyl1 NOTIFY AFRcyl1Changed)
     Q_PROPERTY(qreal AFRcyl2 READ AFRcyl2 WRITE setAFRcyl2 NOTIFY AFRcyl2Changed)
     Q_PROPERTY(qreal AFRcyl3 READ AFRcyl3 WRITE setAFRcyl3 NOTIFY AFRcyl3Changed)
@@ -209,6 +226,8 @@ class DashBoard : public QObject
 
     //Calculations
     Q_PROPERTY(qreal Gear READ Gear WRITE setGear NOTIFY GearChanged)
+    Q_PROPERTY(qreal Gearoffset READ Gearoffset WRITE setGearoffset NOTIFY GearoffsetChanged)
+
     Q_PROPERTY(qreal GearCalculation READ GearCalculation WRITE setGearCalculation NOTIFY GearCalculationChanged)
 
     Q_PROPERTY(qreal Power READ Power WRITE setPower NOTIFY powerChanged)
@@ -738,6 +757,22 @@ class DashBoard : public QObject
     void setMAP2(const qreal &MAP2);
     void setAUXT(const qreal &AUXT);
     void setAFR(const qreal &AFR);
+    void setAFRLEFTBANKTARGET(const qreal &AFRLEFTBANKTARGET);
+    void setAFRRIGHTBANKTARGET(const qreal &AFRRIGHTBANKTARGET);
+    void setAFRLEFTBANKACTUAL(const qreal &AFRLEFTBANKACTUAL);
+    void setAFRRIGHTBANKACTUAL(const qreal &AFRRIGHTBANKACTUAL);
+    void setBOOSTOFFSET(const qreal &BOOSTOFFSET);
+    void setREVLIM3STEP(const qreal &REVLIM3STEP);
+    void setREVLIM2STEP(const qreal &REVLIM2STEP);
+    void setREVLIMGIGHSIDE(const qreal &REVLIMGIGHSIDE);
+    void setREVLIMBOURNOUT(const qreal &REVLIMBOURNOUT);
+    void setLEFTBANKO2CORR(const qreal &LEFTBANKO2CORR);
+    void setRIGHTBANKO2CORR(const qreal &RIGHTBANKO2CORR);
+    void setTRACTIONCTRLOFFSET(const qreal &TRACTIONCTRLOFFSET);
+    void setDRIVESHAFTOFFSET(const qreal &DRIVESHAFTOFFSET);
+    void setTCCOMMAND(const qreal &TCCOMMAND);
+    void setFSLCOMMAND(const qreal &FSLCOMMAND);
+    void setFSLINDEX(const qreal &FSLINDEX);
     void setAFRcyl1(const qreal &AFRcyl1);
     void setAFRcyl2(const qreal &AFRcyl2);
     void setAFRcyl3(const qreal &AFRcyl3);
@@ -777,6 +812,9 @@ class DashBoard : public QObject
 
     // calculations
     void setGear(const qreal &Gear);
+    void setGearoffset(const qreal &Gearoffset);
+
+
     void setGearCalculation(const qreal &GearCalculation);
     void setPower(const qreal &Power);
     void setTorque(const qreal &Torque);
@@ -1259,6 +1297,23 @@ class DashBoard : public QObject
     qreal MAP2() const;
     qreal AUXT() const;
     qreal AFR() const;
+    qreal AFRLEFTBANKTARGET() const;
+    qreal AFRRIGHTBANKTARGET() const;
+    qreal AFRLEFTBANKACTUAL() const;
+    qreal AFRRIGHTBANKACTUAL() const;
+    qreal BOOSTOFFSET() const;
+    qreal REVLIM3STEP() const;
+    qreal REVLIM2STEP() const;
+    qreal REVLIMGIGHSIDE() const;
+    qreal REVLIMBOURNOUT() const;
+    qreal LEFTBANKO2CORR() const;
+    qreal RIGHTBANKO2CORR() const;
+    qreal TRACTIONCTRLOFFSET() const;
+    qreal  DRIVESHAFTOFFSET() const;
+    qreal TCCOMMAND() const;
+    qreal FSLCOMMAND() const;
+    qreal FSLINDEX() const;
+
     qreal AFRcyl1() const;
     qreal AFRcyl2() const;
     qreal AFRcyl3() const;
@@ -1299,6 +1354,8 @@ class DashBoard : public QObject
 
     //calculations
     qreal Gear() const;
+    qreal Gearoffset() const;
+
     qreal GearCalculation() const;
     qreal Power() const;
     qreal Torque() const;
@@ -1777,6 +1834,23 @@ signals:
     void mAP2Changed(qreal MAP2);
     void aUXTChanged(qreal AUXT);
     void aFRChanged(qreal AFR);
+    void AFRLEFTBANKTARGETChanged(qreal AFRLEFTBANKTARGET);
+    void AFRRIGHTBANKTARGETChanged(qreal AFRRIGHTBANKTARGET);
+    void AFRLEFTBANKACTUALChanged(qreal AFRLEFTBANKACTUAL);
+    void AFRRIGHTBANKACTUALChanged(qreal AFRRIGHTBANKACTUAL);
+    void BOOSTOFFSETChanged(qreal BOOSTOFFSET);
+    void REVLIM3STEPChanged(qreal REVLIM3STEP);
+    void REVLIM2STEPChanged(qreal REVLIM2STEP);
+    void REVLIMGIGHSIDEChanged(qreal REVLIMGIGHSIDE);
+    void REVLIMBOURNOUTChanged(qreal REVLIMBOURNOUT);
+    void LEFTBANKO2CORRChanged(qreal LEFTBANKO2CORR);
+    void RIGHTBANKO2CORRChanged(qreal RIGHTBANKO2CORR);
+    void TRACTIONCTRLOFFSETChanged(qreal TRACTIONCTRLOFFSET);
+    void DRIVESHAFTOFFSETChanged(qreal DRIVESHAFTOFFSET);
+    void TCCOMMANDChanged(qreal TCCOMMAND);
+    void FSLCOMMANDChanged(qreal FSLCOMMAND);
+    void FSLINDEXChanged(qreal FSLINDEX);
+
     void AFRcyl1Changed(qreal AFRcyl1);
     void AFRcyl2Changed(qreal AFRcyl2);
     void AFRcyl3Changed(qreal AFRcyl3);
@@ -1816,6 +1890,8 @@ signals:
 
     // calculations
     void GearChanged(qreal Gear);
+    void GearoffsetChanged(qreal Gearoffset);
+
     void GearCalculationChanged(qreal GearCalculation);
     void powerChanged(qreal Power);
     void torqueChanged(qreal Torque);
@@ -2277,7 +2353,25 @@ private:
     qreal m_MAP;
     qreal m_MAP2;
     qreal m_AUXT;
-    qreal m_AFR;
+    qreal m_AFR;  
+    qreal m_AFRLEFTBANKTARGET;
+    qreal m_AFRRIGHTBANKTARGET;
+    //
+
+    qreal m_AFRLEFTBANKACTUAL;
+    qreal m_AFRRIGHTBANKACTUAL;
+    qreal m_BOOSTOFFSET;
+    qreal m_REVLIM3STEP;
+    qreal m_REVLIM2STEP;
+    qreal m_REVLIMGIGHSIDE;
+    qreal m_REVLIMBOURNOUT;
+    qreal m_LEFTBANKO2CORR;
+    qreal m_RIGHTBANKO2CORR;
+    qreal m_TRACTIONCTRLOFFSET;
+    qreal m_DRIVESHAFTOFFSET;
+    qreal m_TCCOMMAND;
+    qreal m_FSLCOMMAND;
+    qreal m_FSLINDEX;
     qreal m_AFRcyl1;
     qreal m_AFRcyl2;
     qreal m_AFRcyl3;
@@ -2337,6 +2431,7 @@ private:
     //calculations
 
     qreal m_Gear;
+    qreal m_Gearoffset;
     qreal m_GearCalculation;
     qreal m_Power;
     qreal m_Torque;

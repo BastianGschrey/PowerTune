@@ -6,6 +6,27 @@ ListModel {
 ///////////
 
 
+
+
+
+
+
+    ListElement {
+        titlename: "DRIVESHAFT OFFSET"
+        defaultsymbol: ""
+        sourcename:"DRIVESHAFTOFFSET"
+        supportedECU: ""
+        decimalpoints : "0" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "9"
+        stepsize : "1"
+        divisor : "100"
+    }
+
+
+
+///////////
+
     ListElement {
         titlename: "Average Fuel Economy"
         defaultsymbol: " "
@@ -376,6 +397,68 @@ ListModel {
         stepsize : "5"
         divisor : "1"
     }
+    ListElement {
+        titlename: "AFR L.BANK ACTUAL"
+        defaultsymbol: " "
+        sourcename:"AFR LBANK ACTUAL"
+        supportedECU: "A/F"
+        decimalpoints : "2" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "20"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "AFR R.BANK ACTUAL"
+        defaultsymbol: "A/F "
+        sourcename:"AFRRIGHTBANKACTUAL"
+        supportedECU: ""
+        decimalpoints : "2" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "20"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"AFRLEFTBANKTARGET"
+        defaultsymbol: "A/F"
+        titlename:"AFR L. BANK TARGET"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "20"
+        stepsize : "5"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"AFRRIGHTBANKTARGET"
+        defaultsymbol: "A/F"
+        titlename:"AFR R. BANK TARGET"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "20"
+        stepsize : "5"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"AFRLEFTBANKACTUAL"
+        defaultsymbol: "A/F"
+        titlename:"AFR R. BANK ACTUAL"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "20"
+        stepsize : "5"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"AFRRIGHTBANKACTUAL"
+        defaultsymbol: "A/F"
+        titlename:"AFR R. BANK ACTUAL"
+        supportedECU: ""
+        decimalpoints : "2"
+        maxvalue : "20"
+        stepsize : "5"
+        divisor : "1"
+    }
 
     ListElement {
         sourcename:"AFRcyl1"
@@ -594,6 +677,17 @@ ListModel {
         divisor : "1"
     }
     ListElement {
+        titlename: "BOOST OFFSET"
+        defaultsymbol: " "
+        sourcename:"BOOSTOFFSET"
+        supportedECU: ""
+        decimalpoints : "2" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "20"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
         sourcename:"BoostDuty"
         defaultsymbol: "%"
         titlename:"Boos Duty"
@@ -614,7 +708,7 @@ ListModel {
     ListElement {
         sourcename:"BoostPreskpa"
         defaultsymbol: ""
-        titlename:"Boost kPa"
+        titlename:"Linear boost"
         decimalpoints : "0"
         maxvalue : "300"
         stepsize : "20"
@@ -1210,6 +1304,29 @@ ListModel {
         //Torque Management Combined Ignition Correction
     }
     */
+
+    ListElement {
+        titlename: "FSL COMMAND"
+        defaultsymbol: ""
+        sourcename:"FSLCOMMAND"
+        supportedECU: ""
+        decimalpoints : "0" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "9"
+        stepsize : "1"
+        divisor : "100"
+    }
+    ListElement {
+        titlename: "FSL INDEX"
+        defaultsymbol: ""
+        sourcename:"FSLINDEX"
+        supportedECU: ""
+        decimalpoints : "0" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "9"
+        stepsize : "1"
+        divisor : "100"
+    }
     ListElement {
         sourcename:"flatshiftstate"
         defaultsymbol: ""
@@ -1365,6 +1482,17 @@ ListModel {
         stepsize : "1"
         divisor : "1"
     }
+    ListElement {
+        sourcename:"Gearoffset"
+        defaultsymbol: ""
+        titlename:"Gear offset"
+        decimalpoints : "0"
+        maxvalue : "5"
+        stepsize : "1"
+        divisor : "1"
+    }
+
+
     ListElement {
         sourcename:"GearCalculation"
         defaultsymbol: ""
@@ -1649,7 +1777,7 @@ ListModel {
     ListElement {
         sourcename:"knocklevlogged1"
         defaultsymbol: "dB"
-        titlename:"Knock"
+        titlename:"Knocklevel 1"
         decimalpoints : "2"
         maxvalue : "400"
         stepsize : "1"
@@ -1658,7 +1786,7 @@ ListModel {
     ListElement {
         sourcename:"knocklevlogged2"
         defaultsymbol: "dB"
-        titlename:"Knock"
+        titlename:"Knocklevel 2"
         decimalpoints : "2"
         maxvalue : "400"
         stepsize : "1"
@@ -1667,7 +1795,7 @@ ListModel {
     ListElement {
         sourcename:"knockretardbank1"
         defaultsymbol: "°"
-        titlename:"Knock"
+        titlename:"Knock restard 1"
         decimalpoints : "0"
         maxvalue : "30"
         stepsize : "1"
@@ -1676,7 +1804,7 @@ ListModel {
     ListElement {
         sourcename:"knockretardbank2"
         defaultsymbol: "°"
-        titlename:"Knock"
+        titlename:"Knock restard 2"
         decimalpoints : "0"
         maxvalue : "30"
         stepsize : "1"
@@ -1959,6 +2087,28 @@ ListModel {
         divisor : "1"
     }
     ListElement {
+        titlename: "O2 CORR R BANK "
+        defaultsymbol: "%"
+        sourcename:"RIGHTBANKO2CORR"
+        supportedECU: ""
+        decimalpoints : "1" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "100"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "O2 CORR L BANK"
+        defaultsymbol: "%"
+        sourcename:"LEFTBANKO2CORR"
+        supportedECU: ""
+        decimalpoints : "1" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "100"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
         sourcename:"Odo"
         defaultsymbol: "km"
         titlename:"Odometer"
@@ -2042,6 +2192,51 @@ ListModel {
         divisor : "1"
     }
     ListElement {
+        titlename: "REV LIM 3STEP"
+        defaultsymbol: " "
+        sourcename:"REVLIM3STEP"
+        supportedECU: ""
+        decimalpoints : "0" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "9"
+        stepsize : "1"
+        divisor : "100"
+    }
+    ListElement {
+        titlename: "REV LIM 2STEP"
+        defaultsymbol: " "
+        sourcename:"REVLIM2STEP"
+        supportedECU: ""
+        decimalpoints : "0" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "9"
+        stepsize : "1"
+        divisor : "100"
+    }
+    ListElement {
+        titlename: "REV LIM HIGHSIDE"
+        defaultsymbol: " "
+        sourcename:"REVLIMGIGHSIDE"
+        supportedECU: ""
+        decimalpoints : "0" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "9"
+        stepsize : "1"
+        divisor : "100"
+    }
+
+    ListElement {
+        titlename: "REV LIM BOURNOUT"
+        defaultsymbol: " "
+        sourcename:"REVLIMBOURNOUT"
+        supportedECU: ""
+        decimalpoints : "0" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "9"
+        stepsize : "1"
+        divisor : "100"
+    }
+    ListElement {
         sourcename:"rpm"
         defaultsymbol: "rpm"
         titlename:"RPM"
@@ -2050,6 +2245,7 @@ ListModel {
         stepsize : "1000"
         divisor : "1000"
     }
+
     ListElement {
         sourcename:"Secinjpulse"
         defaultsymbol: "ms"
@@ -2158,6 +2354,30 @@ ListModel {
         decimalpoints : "0"
         maxvalue : "100"
         stepsize : "20"
+        divisor : "1"
+    }
+
+
+    ListElement {
+        titlename: "TCS OFFSET"
+        defaultsymbol: ""
+        sourcename:"TRACTIONCTRLOFFSET"
+        supportedECU: ""
+        decimalpoints : "1" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "9"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
+        titlename: "TC COMMAND"
+        defaultsymbol: ""
+        sourcename:"TCCOMMAND"
+        supportedECU: ""
+        decimalpoints : "1" // 4 means its treated as a string
+        decimalpoints2 : "0" // 4 means its treated as a string
+        maxvalue : "9"
+        stepsize : "1"
         divisor : "1"
     }
     ListElement {

@@ -1209,6 +1209,57 @@ void udpreceiver::processPendingDatagrams()
         case 923:
             m_dashboard->setAFRcyl8(Value);
             break;
+        case 924:
+            m_dashboard->setGearoffset(Value);
+            break;
+        case 925:
+            m_dashboard->setAFRLEFTBANKTARGET(Value);
+            break;
+        case 926:
+            m_dashboard->setAFRRIGHTBANKTARGET(Value);
+            break;
+        case 927:
+            m_dashboard->setAFRLEFTBANKACTUAL(Value);
+            break;
+        case 928:
+            m_dashboard->setAFRRIGHTBANKACTUAL(Value);
+            break;
+        case 929:
+            m_dashboard->setBOOSTOFFSET(Value);
+            break;
+        case 930:
+            m_dashboard->setREVLIM3STEP(Value);
+            break;
+        case 931:
+            m_dashboard->setREVLIM2STEP(Value);
+            break;
+        case 932:
+            m_dashboard->setREVLIMGIGHSIDE(Value);
+            break;
+        case 933:
+            m_dashboard->setREVLIMBOURNOUT(Value);
+            break;
+        case 934:
+            m_dashboard->setLEFTBANKO2CORR(Value);
+            break;
+        case 935:
+            m_dashboard->setRIGHTBANKO2CORR(Value);
+            break;
+        case 936:
+            m_dashboard->setTRACTIONCTRLOFFSET(Value);
+            break;
+        case 937:
+            m_dashboard->setDRIVESHAFTOFFSET(Value);
+            break;
+        case 938:
+            m_dashboard->setTCCOMMAND(Value);
+            break;
+        case 939:
+            m_dashboard->setFSLCOMMAND(Value);
+            break;
+        case 940:
+            m_dashboard->setFSLINDEX(Value);
+            break;
 
         case 999:
             break;
