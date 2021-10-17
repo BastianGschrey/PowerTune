@@ -214,6 +214,7 @@ DashBoard::DashBoard(QObject *parent)
     //Adaptronic extra
     , m_MAP(0)
     , m_MAP2(0)
+    , m_PANVAC(0)
     , m_AUXT(0)
     , m_AFR(0)
     , m_AFRLEFTBANKTARGET(0)
@@ -1821,6 +1822,15 @@ void DashBoard::setMAP(const qreal &MAP)
     if (m_pressureunits == "imperial")
     {m_MAP = MAP * 0.145038;}
     emit mAPChanged(MAP);
+}
+
+void DashBoard::setPANVAC(const qreal &PANVAC)
+{
+    if (m_pressureunits == "metric")
+    { m_PANVAC = PANVAC;}
+    if (m_pressureunits == "imperial")
+    {m_PANVAC = PANVAC * 0.145038;}
+    emit PANVACChanged(PANVAC);
 }
 
 void DashBoard::setMAP2(const qreal &MAP2)
@@ -4729,6 +4739,7 @@ QString DashBoard::pressureunits() const { return m_pressureunits; }
 
 
 qreal DashBoard::MAP() const { return m_MAP; }
+qreal DashBoard::PANVAC() const { return m_PANVAC; }
 qreal DashBoard::MAP2() const { return m_MAP2; }
 qreal DashBoard::AUXT() const { return m_AUXT; }
 qreal DashBoard::AFR() const { return m_AFR; }

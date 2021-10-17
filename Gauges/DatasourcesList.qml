@@ -1996,6 +1996,8 @@ ListModel {
         stepsize : "100"
         divisor : "1"
     }
+
+
     ListElement {
         sourcename:"MAP2"
         defaultsymbol: "kPa"
@@ -2136,6 +2138,17 @@ ListModel {
         stepsize : "20"
         divisor : "1"
     }
+
+    ListElement {
+        sourcename:"PANVAC"
+        defaultsymbol: "kPa"
+        titlename:"PAN VAC"
+        decimalpoints : "0"
+        maxvalue : "300"
+        stepsize : "100"
+        divisor : "1"
+    }
+
     ListElement {
         sourcename:"pim"
         defaultsymbol: "kPa"

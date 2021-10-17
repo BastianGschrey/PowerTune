@@ -1260,7 +1260,9 @@ void udpreceiver::processPendingDatagrams()
         case 940:
             m_dashboard->setFSLINDEX(Value);
             break;
-
+        case 940:
+            m_dashboard->setPANVAC(Value);
+            break;
         case 999:
             break;
         default:
