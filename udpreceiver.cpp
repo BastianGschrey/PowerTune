@@ -1263,6 +1263,30 @@ void udpreceiver::processPendingDatagrams()
         case 941:
             m_dashboard->setPANVAC(Value);
             break;
+        case 942:
+            m_dashboard->setCyl1_O2_Corr(Value);
+            break;
+        case 943:
+            m_dashboard->setCyl2_O2_Corr(Value);
+            break;
+        case 944:
+            m_dashboard->setCyl3_O2_Corr(Value);
+            break;
+        case 945:
+            m_dashboard->setCyl4_O2_Corr(Value);
+            break;
+        case 946:
+            m_dashboard->setCyl5_O2_Corr(Value);
+            break;
+        case 947:
+            m_dashboard->setCyl6_O2_Corr(Value);
+            break;
+        case 948:
+            m_dashboard->setCyl7_O2_Corr(Value);
+            break;
+        case 949:
+            m_dashboard->setCyl8_O2_Corr(Value);
+            break;
         case 999:
             break;
         default:

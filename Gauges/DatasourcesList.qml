@@ -2751,6 +2751,78 @@ ListModel {
         divisor : "1"
     }
     ListElement {
+        sourcename:"Cyl1_O2_Corr"
+        defaultsymbol: ""
+        titlename:"Cyl1 O2 Corr."
+        decimalpoints : "1"
+        maxvalue : "1"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Cyl2_O2_Corr"
+        defaultsymbol: "%"
+        titlename:"Cyl2 O2 Corr."
+        decimalpoints : "1"
+        maxvalue : "1"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Cyl3_O2_Corr"
+        defaultsymbol: "%"
+        titlename:"Cyl3 O2 Corr."
+        decimalpoints : "1"
+        maxvalue : "1"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Cyl4_O2_Corr"
+        defaultsymbol: "%"
+        titlename:"Cyl4 O2 Corr."
+        decimalpoints : "1"
+        maxvalue : "1"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Cyl5_O2_Corr"
+        defaultsymbol: "%"
+        titlename:"Cyl5 O2 Corr."
+        decimalpoints : "1"
+        maxvalue : "1"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Cyl6_O2_Corr"
+        defaultsymbol: "%"
+        titlename:"Cyl6 O2 Corr."
+        decimalpoints : "1"
+        maxvalue : "1"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Cyl7_O2_Corr"
+        defaultsymbol: "%"
+        titlename:"Cyl7 O2 Corr."
+        decimalpoints : "1"
+        maxvalue : "1"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
+        sourcename:"Cyl8_O2_Corr"
+        defaultsymbol: "%"
+        titlename:"Cyl8 O2 Corr."
+        decimalpoints : "1"
+        maxvalue : "1"
+        stepsize : "10"
+        divisor : "1"
+    }
+    ListElement {
         sourcename:"DigInput1FowardSw"
         defaultsymbol: ""
         titlename:"DigInput1FowardSw"
