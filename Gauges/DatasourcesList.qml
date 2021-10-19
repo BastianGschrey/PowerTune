@@ -400,7 +400,7 @@ ListModel {
     ListElement {
         titlename: "AFR L.BANK ACTUAL"
         defaultsymbol: " "
-        sourcename:"AFR LBANK ACTUAL"
+        sourcename:"AFRLEFTBANKACTUAL"
         supportedECU: "A/F"
         decimalpoints : "2" // 4 means its treated as a string
         decimalpoints2 : "0" // 4 means its treated as a string
@@ -439,26 +439,7 @@ ListModel {
         stepsize : "5"
         divisor : "1"
     }
-    ListElement {
-        sourcename:"AFRLEFTBANKACTUAL"
-        defaultsymbol: "A/F"
-        titlename:"AFR R. BANK ACTUAL"
-        supportedECU: ""
-        decimalpoints : "2"
-        maxvalue : "20"
-        stepsize : "5"
-        divisor : "1"
-    }
-    ListElement {
-        sourcename:"AFRRIGHTBANKACTUAL"
-        defaultsymbol: "A/F"
-        titlename:"AFR R. BANK ACTUAL"
-        supportedECU: ""
-        decimalpoints : "2"
-        maxvalue : "20"
-        stepsize : "5"
-        divisor : "1"
-    }
+
 
     ListElement {
         sourcename:"AFRcyl1"
