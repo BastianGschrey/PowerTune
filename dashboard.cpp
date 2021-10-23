@@ -1972,7 +1972,7 @@ void DashBoard::setFSLCOMMAND(const qreal &FSLCOMMAND)
 {
     if (m_FSLCOMMAND == FSLCOMMAND)
         return;
-    m_AFRcyl1 = FSLCOMMAND;
+    m_FSLCOMMAND = FSLCOMMAND;
     emit FSLCOMMANDChanged(FSLCOMMAND);
 }
 
