@@ -871,12 +871,15 @@ void Connect::daemonstartup(const int &daemon)
         daemonstart = "./BigNET";
         break;
     case 45:
-        daemonstart = "./R35";
+        daemonstart = "./BigNETLamda";
         break;
     case 46:
-        daemonstart = "./Prado";
+        daemonstart = "./R35";
         break;
     case 47:
+        daemonstart = "./Prado";
+        break;
+    case 48:
         daemonstart = "./WRX2016";
         break;
     }
