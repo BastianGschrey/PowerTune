@@ -27,7 +27,7 @@ quint32 adress4;
 quint32 adress5;
 int statusmask = 128;
 int frequencymask = 127;
-int cylinders = 0;
+qreal cylinders = 0;
 
 Extender::Extender(QObject *parent)
     : QObject(parent)
@@ -45,10 +45,10 @@ Extender::Extender(DashBoard *dashboard, QObject *parent)
 Extender::~Extender()
 {
 }
-void Extender::variables(const int &Cylinder)
+void Extender::variables(const qreal &Cylinder)
 {
 
-    cylinders = Cylinder;
+    cylinders = (Cylinder/2);
     qDebug() << "cylinders " << cylinders;
 }
 void Extender::openCAN(const int &ExtenderBaseID,const int &RPMCANBaseID)
@@ -189,7 +189,7 @@ void Extender::readyToRead()
         //break;
         }
         if (frame.frameId() == adress5 && cylinders != 0) {
-                m_dashboard->setrpm(pkgpayload[0] );                                        //RPM
+                m_dashboard->setrpm(pkgpayload[0] / cylinders );                                        //RPM
 
         //break;
         }
