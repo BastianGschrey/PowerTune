@@ -50,6 +50,7 @@ int ecu; //0=apex, 1=adaptronic;2= OBD; 3= Dicktator ECU
 int logging; // 0 Logging off , 1 Logging to file
 int connectclicked =0;
 int canbaseadress;
+int rpmcanbaseadress;
 QByteArray checksumhex;
 QByteArray recvchecksumhex;
 QString selectedPort;
@@ -109,6 +110,7 @@ Connect::Connect(QObject *parent) :
     if (engine == Q_NULLPTR)
         return;
     engine->rootContext()->setContextProperty("Dashboard", m_dashBoard);
+    engine->rootContext()->setContextProperty("Extender", m_extender);
     engine->rootContext()->setContextProperty("AppSettings", m_appSettings);
     engine->rootContext()->setContextProperty("GoPro", m_gopro);
     engine->rootContext()->setContextProperty("Gps", m_gps);
@@ -120,7 +122,7 @@ Connect::Connect(QObject *parent) :
     engine->rootContext()->setContextProperty("Apexi", m_apexi);
     engine->rootContext()->setContextProperty("Arduino", m_arduino);
     engine->rootContext()->setContextProperty("Wifiscanner", m_wifiscanner);
-    engine->rootContext()->setContextProperty("CANExtender", m_extender);
+
 
 
 
@@ -1092,16 +1094,17 @@ void Connect::LiveReqMsg(const int &val1, const int &val2, const int &val3, cons
     process->waitForFinished(100); // 10 minutes time before timeout
 
 }
-void Connect::openConnection(const QString &portName, const int &ecuSelect,const int &canbase)
+void Connect::openConnection(const QString &portName, const int &ecuSelect,const int &canbase,const int &rpmcanbase)
 {
     ecu = ecuSelect;
     selectedPort = portName;
     canbaseadress = canbase;
+    rpmcanbaseadress = rpmcanbase;
 //model: [ "CAN","PowerFC","Consult","OBD2"]
 //model: [ "CAN","PowerFC","Consult","OBD2"]
     //UDP receiver
 
-    m_extender->openCAN(canbaseadress);
+    m_extender->openCAN(canbaseadress,rpmcanbaseadress);
 
 
     if (ecuSelect == 0)

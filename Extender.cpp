@@ -19,12 +19,15 @@ QVector<int>averagehz1(0);
 qreal avghz1;
 qreal test1;
 quint32 canstartadress;
+quint32 canstartadressrpm;
 quint32 adress1;
 quint32 adress2;
 quint32 adress3;
 quint32 adress4;
+quint32 adress5;
 int statusmask = 128;
 int frequencymask = 127;
+int cylinders = 0;
 
 Extender::Extender(QObject *parent)
     : QObject(parent)
@@ -42,16 +45,23 @@ Extender::Extender(DashBoard *dashboard, QObject *parent)
 Extender::~Extender()
 {
 }
+void Extender::variables(const int &Cylinder)
+{
 
-void Extender::openCAN(const int &ExtenderBaseID)
+    cylinders = Cylinder;
+    qDebug() << "cylinders " << cylinders;
+}
+void Extender::openCAN(const int &ExtenderBaseID,const int &RPMCANBaseID)
 {
 
     canstartadress = ExtenderBaseID;
+    canstartadressrpm =
    // qDebug() << "CAN Start Adress :" << canstartadress;
    // qDebug() << "Opening CANbus ";
     adress1 = canstartadress + 1;
     adress2 = canstartadress + 2;
     adress3 = canstartadress + 3;
+    adress5 = RPMCANBaseID + 1;
     if (QCanBus::instance()->plugins().contains(QStringLiteral("socketcan")))
     {
         QString errorString;
@@ -178,7 +188,11 @@ void Extender::readyToRead()
                 m_dashboard->setEXAnalogInput7(pkgpayload[3]*0.001);						          //Analog 7
         //break;
         }
+        if (frame.frameId() == adress5 && cylinders != 0) {
+                m_dashboard->setrpm(pkgpayload[0] );                                        //RPM
 
+        //break;
+        }
 
        // default:
        // break;

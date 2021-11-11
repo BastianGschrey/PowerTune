@@ -4,6 +4,7 @@
 #include <QtQml>
 #include <QFileSystemModel>
 #include "connect.h"
+#include "Extender.h"
 #include "iomapdata.h"
 #include "downloadmanager.h"
 #include <cstdio>
@@ -37,6 +38,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("IMD", new ioMapData(&engine));
     engine.rootContext()->setContextProperty("DLM", new DownloadManager(&engine));
     engine.rootContext()->setContextProperty("Connect", new Connect(&engine));
+    //engine.rootContext()->setContextProperty("CANExtender", new Extender(&engine));
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     return app.exec();
 

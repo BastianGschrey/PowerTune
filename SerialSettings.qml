@@ -84,6 +84,7 @@ Quick1.TabView {
             property  int connected: 0
             property  var gpscom
             property int hexstring;
+            property int hexstring2;
             Item {
                 id: powerTuneSettings
                 Settings {
@@ -116,6 +117,7 @@ Quick1.TabView {
                     property alias smoothingrpm : smoothrpm.currentIndex
                     property alias smoothingspeed : smoothspeed.currentIndex
                     property alias extendercanbase: baseadresstext.text
+                    property alias shiftlightcanbase: shiftlightbaseadresstext.text
 
 
                 }
@@ -587,7 +589,7 @@ Quick1.TabView {
 
                     }
                     Grid {
-                        rows: 5
+                        rows: 10
                         columns:1
                         spacing: windowbackround.width / 150
                         anchors.top :parent.top
@@ -608,6 +610,21 @@ Quick1.TabView {
                             onTextChanged: hexstring = baseadresstext.text;
                         }
                         Text  { text: "      HEX: 0x"+(hexstring+0x1000).toString(16).substr(-3).toUpperCase();color: "white";font.pixelSize: windowbackround.width / 55}
+                        Text  { text: "     Shiftlight CAN";color: "white";font.pixelSize: windowbackround.width / 55}
+                        Text  { text: "      base adress ";color: "white";font.pixelSize: windowbackround.width / 55}
+                        Text  { text: "       (decimal) :";color: "white";font.pixelSize: windowbackround.width / 55}
+                        TextField {
+                            id: shiftlightbaseadresstext
+                            enabled: connectButton.enabled == false ? false : true
+                            width: windowbackround.width /5
+                            height: windowbackround.height /15
+                            font.pixelSize: windowbackround.width / 55
+                            validator: IntValidator {bottom: 0; top: 4000;}
+                            inputMethodHints: Qt.ImhFormattedNumbersOnly
+                            placeholderText: qsTr("1024")
+                            onTextChanged: hexstring2 = shiftlightbaseadresstext.text;
+                        }
+                        Text  { text: "      HEX: 0x"+(hexstring2+0x1000).toString(16).substr(-3).toUpperCase();color: "white";font.pixelSize: windowbackround.width / 55}
 
                 }
 
@@ -779,7 +796,7 @@ Quick1.TabView {
                 id: functconnect
                 function connectfunc()
                 {
-                    Connect.openConnection(serialName.currentText, ecuSelect.currentIndex ,baseadresstext.text);
+                    Connect.openConnection(serialName.currentText, ecuSelect.currentIndex ,baseadresstext.text,shiftlightbaseadresstext.text);
                     Connect.setOdometer(odometer.text);
                     Connect.setWeight(weight.text);
                     Apexi.calculatorAux(an1V0.text,an2V5.text,an3V0.text,an4V5.text,unitaux1.text,unitaux2.text);

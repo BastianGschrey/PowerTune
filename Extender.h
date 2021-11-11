@@ -36,7 +36,8 @@ public:
 
 
 public slots:
-    void openCAN(const int &ExtenderBaseID);
+    void openCAN(const int &ExtenderBaseID,const int &RPMCANBaseID);
+     Q_INVOKABLE void variables(const int &Cylinder);
     void closeConnection();
 public:
 

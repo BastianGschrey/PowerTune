@@ -38,6 +38,8 @@ Rectangle {
             property alias checkan11Ksave   : checkan11k.checkState
             property alias checkan2100save  : checkan2100.checkState
             property alias checkan21Ksave   : checkan21k.checkState
+            property alias rpmcheckboxsave  : rpmcheckbox.checkState
+            property alias cylindercomboboxsave : cylindercombobox.currentIndex
             property alias t10save : t10.text
             property alias r10save : r10.text
             property alias t20save : t20.text
@@ -56,7 +58,8 @@ Rectangle {
             property alias r22save : r22.text
             property alias t32save : t32.text
             property alias r32save : r32.text
-            property alias an7dampingfactorsave :an7dampingfactor.text
+            property alias an7dampingfactorsave : an7dampingfactor.text
+
 
 
         }
@@ -282,7 +285,37 @@ Rectangle {
             onEditingFinished: inputs.setInputs()
 
         }
+        Text {
+            text: "RPM CAN"
+            font.pixelSize: main.width / 55;
+            color:"white"
+        }
+        CheckBox {
+            id: rpmcheckbox
+            width: main.width / 14
+            height: main.height /15
+            onCheckStateChanged: inputs.setInputs();
+            }
+        //Placeholder
+        Text {
+            text: " "
+            font.pixelSize: main.width / 55;
+            color:"white"
+        }
 
+        Text {
+            text: "Cylinders"
+            font.pixelSize: main.width / 55;
+            color:"white"
+        }
+        ComboBox {
+            id: cylindercombobox
+            visible: { (rpmcheckbox.checked == true) ? true : false; }
+            width: main.width / 14
+            height: main.height /15
+            model: ["2","3","4","6","8","12"]
+            onCurrentIndexChanged: inputs.setInputs();
+            }
         Item {
             id: inputs
             function setInputs()
@@ -292,6 +325,11 @@ Rectangle {
             Dashboard.setsmootexAnalogInput7(an7dampingfactor.text);
             Dashboard.setEXAnalogVal(ex00.text,ex05.text,ex10.text,ex15.text,ex20.text,ex25.text,ex30.text,ex35.text,ex40.text,ex45.text,ex50.text,ex55.text,ex60.text,ex65.text,ex70.text,ex75.text,checkan0ntc.checkState,checkan1ntc.checkState,checkan2ntc.checkState,checkan0100.checkState,checkan01k.checkState,checkan1100.checkState,checkan11k.checkState,checkan2100.checkState,checkan21k.checkState)
             Dashboard.setSteinhartcalc(t10.text,t20.text,t30.text,r10.text,r20.text,r30.text,t11.text,t21.text,t31.text,r11.text,r21.text,r31.text,t12.text,t22.text,t32.text,r12.text,r22.text,r32.text)
+            if(rpmcheckbox.checked == true)
+            {
+                Extender.variables(cylindercombobox.textAt(cylindercombobox.currentIndex))
+            }
+
             }
         }
     }
