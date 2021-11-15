@@ -313,7 +313,7 @@ Rectangle {
             visible: { (rpmcheckbox.checked == true) ? true : false; }
             width: main.width / 14
             height: main.height /15
-            model: ["2","3","4","6","8","12"]
+            model: ["2","3","4","5","6","8","12"]
             onCurrentIndexChanged: inputs.setInputs();
             }
         Item {

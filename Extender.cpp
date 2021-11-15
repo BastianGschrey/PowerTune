@@ -189,7 +189,7 @@ void Extender::readyToRead()
         //break;
         }
         if (frame.frameId() == adress5 && cylinders != 0) {
-                m_dashboard->setrpm(qRound(pkgpayload[0] / cylinders));                               //RPM
+                m_dashboard->setrpm(qRound((pkgpayload[0]*4) / cylinders));                               //RPM
 
         //break;
         }
