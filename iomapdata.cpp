@@ -11,13 +11,13 @@ QObject(parent)
 QGeoPath ioMapData::loadMapData(QString country, QString trackName)
 {
     //Automatically determine the platform Windows or Linux to change the paths
-        #ifdef __linux__
+    //    #ifdef __linux__
             QString path ("/home/pi/KTracks/"+ country + "/" + trackName); // Opens the embeded KML file/txt
-        #elif _WIN32
-            QString path (":/KTracks/"+ country + "/" + trackName); // Opens the embeded KML file/txt
-        #else
+    //    #elif _WIN32
+    //        QString path (":/KTracks/"+ country + "/" + trackName); // Opens the embeded KML file/txt
+    //    #else
 
-        #endif
+    //    #endif
     qDebug() << "LoadKMLData";
     QList<QString> list;
     QList<QString> spl;
@@ -100,13 +100,13 @@ QList<QString> ioMapData::getCountries()
 {
     QList<QString> list;
     //Automatically determine the platform Windows or Linux to change the paths
-        #ifdef __linux__
+    //   #ifdef __linux__
             QString path ("/home/pi/KTracks/");
-        #elif _WIN32
-            QString path (":/KTracks/");
-        #else
+    //    #elif _WIN32
+    //        QString path (":/KTracks/");
+    //    #else
 
-        #endif
+    //    #endif
 //////////
     QDir trackfolder = path;
 
