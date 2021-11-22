@@ -137,13 +137,13 @@ QList<QString> ioMapData::getCountries()
 QList<QString> ioMapData::getTracks(QString country)
 {
     //Automatically determine the platform Windows or Linux to change the paths
-        #ifdef __linux__
+       // #ifdef __linux__
             QDir directory("/home/pi/KTracks/"+country+"/");
-        #elif _WIN32
-            QDir directory(":/KTracks/"+country+"/");
-        #else
+        //#elif _WIN32
+        //    QDir directory(":/KTracks/"+country+"/");
+        //#else
 
-        #endif
+        //#endif
 
     qDebug() <<"Directory " << directory;
     QStringList trackNames = directory.entryList(QStringList(),QDir::Files);
@@ -156,13 +156,13 @@ QList<QString> ioMapData::getTracks(QString country)
 
 int ioMapData::getTrackCount(QString country)
 {
-    #ifdef __linux__
+    //#ifdef __linux__
         QDir directory("/home/pi/KTracks/"+country+"/");
-    #elif _WIN32
-        QDir directory(":/KTracks/"+country+"/");
-    #else
+    //#elif _WIN32
+      //  QDir directory(":/KTracks/"+country+"/");
+    //#else
 
-    #endif
+    //#endif
     qDebug() <<"Directory " << directory;
     QStringList images = directory.entryList(QStringList(),QDir::Files);
     return images.size();
@@ -172,13 +172,13 @@ int ioMapData::getCountryCount()
 {
 QList<QString> list;
 //Automatically determine the platform Windows or Linux to change the paths
-    #ifdef __linux__
+   // #ifdef __linux__
         QString path ("/home/pi/KTracks/");
-    #elif _WIN32
-        QString path (":/KTracks/");
-    #else
+   // #elif _WIN32
+   //     QString path (":/KTracks/");
+   // #else
 
-    #endif
+   // #endif
 
 QDir trackfolder = path;
 
@@ -205,13 +205,13 @@ QList<QString> ioMapData::getCenter(QString country, QString trackName)
     QList<QString> list;
     QList<QString> spl;
     //Automatically determine the platform Windows or Linux to change the paths
-        #ifdef __linux__
+       // #ifdef __linux__
             QString path ("/home/pi/KTracks/"+ country + "/" + trackName); // Opens the embeded KML file/txt
-        #elif _WIN32
-            QString path (":/KTracks/"+ country + "/" + trackName); // Opens the embeded KML file/txt
-        #else
+       // #elif _WIN32
+       //     QString path (":/KTracks/"+ country + "/" + trackName); // Opens the embeded KML file/txt
+       // #else
 
-        #endif
+       // #endif
 
     qDebug() << path;
     QFile inputFile(path);
@@ -250,13 +250,13 @@ QList<QString> ioMapData::getStartFinishLine(QString country, QString trackName)
     QList<QString> spl;
     QList<QString> floatList;
     //Automatically determine the platform Windows or Linux to change the paths
-        #ifdef __linux__
+     //   #ifdef __linux__
             QString path ("/home/pi/KTracks/"+country+"/"+trackName); // Opens the embeded KML file/txt
-        #elif _WIN32
-            QString path (":/KTracks/"+country+"/"+trackName); // Opens the embeded KML file/txt
-        #else
+     //    #elif _WIN32
+     //        QString path (":/KTracks/"+country+"/"+trackName); // Opens the embeded KML file/txt
+     //    #else
 
-        #endif
+     //    #endif
 
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
@@ -292,13 +292,13 @@ QList<QString> ioMapData::getSecondFinishLine(QString country, QString trackName
     QList<QString> spl;
     QList<QString> floatList;
     //Automatically determine the platform Windows or Linux to change the paths
-        #ifdef __linux__
+    //     #ifdef __linux__
             QString path ("/home/pi/KTracks/"+country+"/"+trackName); // Opens the embeded KML file/txt
-        #elif _WIN32
-            QString path (":/KTracks/"+country+"/"+trackName); // Opens the embeded KML file/txt
-        #else
+   //      #elif _WIN32
+   //          QString path (":/KTracks/"+country+"/"+trackName); // Opens the embeded KML file/txt
+   //      #else
 
-        #endif
+    //     #endif
 
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
@@ -333,13 +333,13 @@ qreal ioMapData::getZOOMLEVEL(QString country, QString trackName)
     QList<QString> list;
     QList<QString> spl;
     //Automatically determine the platform Windows or Linux to change the paths
-        #ifdef __linux__
+     //    #ifdef __linux__
             QString path ("/home/pi/KTracks/"+country+"/"+trackName); // Opens the embeded KML file/txt
-        #elif _WIN32
-            QString path (":/KTracks/"+country+"/"+trackName); // Opens the embeded KML file/txt
-        #else
+     //    #elif _WIN32
+     //        QString path (":/KTracks/"+country+"/"+trackName); // Opens the embeded KML file/txt
+     //    #else
 
-        #endif
+     //    #endif
 
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
@@ -369,13 +369,13 @@ bool ioMapData::getExistsSecondFinish(QString country, QString trackName)
     QList<QString> list;
     QList<QString> spl;
     //Automatically determine the platform Windows or Linux to change the paths
-        #ifdef __linux__
+      //   #ifdef __linux__
             QString path ("/home/pi/KTracks/"+country+"/"+trackName); // Opens the embeded KML file/txt
-        #elif _WIN32
-            QString path (":/KTracks/"+country+"/"+trackName); // Opens the embeded KML file/txt
-        #else
+     //    #elif _WIN32
+    //         QString path (":/KTracks/"+country+"/"+trackName); // Opens the embeded KML file/txt
+    //     #else
 
-        #endif
+    //     #endif
     QFile inputFile(path);
     if (inputFile.open(QIODevice::ReadOnly))
     {
@@ -400,13 +400,13 @@ bool ioMapData::getExistsSecondFinish(QString country, QString trackName)
 bool ioMapData::getTrackExists(QString country, QString trackName)
 {
     //Automatically determine the platform Windows or Linux to change the paths
-        #ifdef __linux__
+     //    #ifdef __linux__
             QDir directory("/home/pi/KTracks/"+country+"/");
-        #elif _WIN32
-            QDir directory(":/KTracks/"+country+"/");
-        #else
+     //    #elif _WIN32
+     //        QDir directory(":/KTracks/"+country+"/");
+    //     #else
 
-        #endif
+    //     #endif
 
     qDebug() <<"Directory " << directory;
     QStringList images = directory.entryList(QStringList(),QDir::Files);
