@@ -39,7 +39,7 @@ if nc -zw5 www.github.com 443; then
 # Compile PowerTune
 		cd /home/pi/building
 		echo "Compiling PowerTune ... go grab a Coffee"
-                qmake /home/pi/src
+		/opt/QT5/bin/qmake /home/pi/src
 		make -j4
 # Check if the PowerTune executable exists in the build folder
 		if [ -f /home/pi/building/PowertuneQMLGui ];then
