@@ -1287,6 +1287,15 @@ void udpreceiver::processPendingDatagrams()
         case 949:
             m_dashboard->setCyl8_O2_Corr(Value);
             break;
+        case 950:
+            m_dashboard->setRotaryTrimpot1(Value);
+            break;
+        case 951:
+            m_dashboard->setRotaryTrimpot2(Value);
+            break;
+        case 952:
+            m_dashboard->setRotaryTrimpot3(Value);
+            break;
         case 999:
             break;
         default:

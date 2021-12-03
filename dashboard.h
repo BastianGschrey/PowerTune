@@ -373,6 +373,10 @@ class DashBoard : public QObject
     Q_PROPERTY(int rpmstyle2 READ rpmstyle2 WRITE setrpmstyle2 NOTIFY rpmstyle2Changed)
     Q_PROPERTY(int rpmstyle3 READ rpmstyle3 WRITE setrpmstyle3 NOTIFY rpmstyle3Changed)
 
+    Q_PROPERTY(int RotaryTrimpot1 READ RotaryTrimpot1 WRITE setRotaryTrimpot1 NOTIFY RotaryTrimpot1Changed)
+    Q_PROPERTY(int RotaryTrimpot2 READ RotaryTrimpot2 WRITE setRotaryTrimpot2 NOTIFY RotaryTrimpot2Changed)
+    Q_PROPERTY(int RotaryTrimpot3 READ RotaryTrimpot3 WRITE setRotaryTrimpot3 NOTIFY RotaryTrimpot3Changed)
+
     Q_PROPERTY(QString Error READ Error WRITE setError NOTIFY ErrorChanged)
     Q_PROPERTY(QString autogear READ autogear WRITE setautogear NOTIFY autogearChanged)
 
@@ -936,6 +940,10 @@ class DashBoard : public QObject
     void setrpmstyle1(const int &rpmstyle1);
     void setrpmstyle2(const int &rpmstyle2);
     void setrpmstyle3(const int &rpmstyle3);
+    void setRotaryTrimpot1(const int &RotaryTrimpot1);
+    void setRotaryTrimpot2(const int &RotaryTrimpot2);
+    void setRotaryTrimpot3(const int &RotaryTrimpot3);
+
     void setError(const QString &Error);
     void setautogear(const QString &autogear);
 
@@ -1500,6 +1508,10 @@ class DashBoard : public QObject
     int rpmstyle1() const;
     int rpmstyle2() const;
     int rpmstyle3() const;
+    int RotaryTrimpot1() const;
+    int RotaryTrimpot2() const;
+    int RotaryTrimpot3() const;
+
     QString Error() const;
     QString autogear() const;
 
@@ -2032,6 +2044,10 @@ signals:
     void rpmstyle1Changed(int rpmstyle1);
     void rpmstyle2Changed(int rpmstyle2);
     void rpmstyle3Changed(int rpmstyle3);
+    void RotaryTrimpot1Changed(int RotaryTrimpot1);
+    void RotaryTrimpot2Changed(int RotaryTrimpot2);
+    void RotaryTrimpot3Changed(int RotaryTrimpot3);
+
     void ErrorChanged(QString Error);
     void autogearChanged(QString autogear);
 
@@ -2574,6 +2590,10 @@ private:
     int m_rpmstyle1;
     int m_rpmstyle2;
     int m_rpmstyle3;
+    int m_RotaryTrimpot1;
+    int m_RotaryTrimpot2;
+    int m_RotaryTrimpot3;
+
     QString m_Error;
     QString m_autogear;
 

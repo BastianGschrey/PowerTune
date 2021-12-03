@@ -3297,6 +3297,29 @@ void DashBoard::setrpmstyle3(const int &rpmstyle3)
     emit rpmstyle3Changed(rpmstyle3);
 }
 
+void DashBoard::setRotaryTrimpot1(const int &RotaryTrimpot1)
+{
+    if (m_RotaryTrimpot1 == RotaryTrimpot1)
+        return;
+    m_RotaryTrimpot1 = RotaryTrimpot1;
+    emit RotaryTrimpot1Changed(RotaryTrimpot1);
+}
+
+void DashBoard::setRotaryTrimpot2(const int &RotaryTrimpot2)
+{
+    if (m_RotaryTrimpot2 == RotaryTrimpot2)
+        return;
+    m_RotaryTrimpot2 = RotaryTrimpot2;
+    emit RotaryTrimpot2Changed(RotaryTrimpot2);
+}
+
+void DashBoard::setRotaryTrimpot3(const int &RotaryTrimpot3)
+{
+    if (m_RotaryTrimpot3 == RotaryTrimpot3)
+        return;
+    m_RotaryTrimpot3 = RotaryTrimpot3;
+    emit RotaryTrimpot3Changed(RotaryTrimpot3);
+}
 
 void DashBoard::setError(const QString &Error)
 {
@@ -4933,6 +4956,9 @@ int DashBoard::ecu() const { return m_ecu; }
 int DashBoard::rpmstyle1() const { return m_rpmstyle1; }
 int DashBoard::rpmstyle2() const { return m_rpmstyle2; }
 int DashBoard::rpmstyle3() const { return m_rpmstyle3; }
+int DashBoard::RotaryTrimpot1() const { return m_RotaryTrimpot1; }
+int DashBoard::RotaryTrimpot2() const { return m_RotaryTrimpot2; }
+int DashBoard::RotaryTrimpot3() const { return m_RotaryTrimpot3; }
 
 QString DashBoard::Error() const { return m_Error; }
 QString DashBoard::autogear() const { return m_autogear; }

@@ -2314,6 +2314,35 @@ ListModel {
     }
 
     ListElement {
+        sourcename:"RotaryTrimpot1"
+        defaultsymbol: ""
+        titlename:"Rorary Trimpot 1"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "1"
+        divisor : "1"
+    }
+
+    ListElement {
+        sourcename:"RotaryTrimpot2"
+        defaultsymbol: ""
+        titlename:"Rorary Trimpot 2"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "1"
+        divisor : "1"
+    }
+
+    ListElement {
+        sourcename:"RotaryTrimpot3"
+        defaultsymbol: ""
+        titlename:"Rorary Trimpot 3"
+        decimalpoints : "0"
+        maxvalue : "100"
+        stepsize : "1"
+        divisor : "1"
+    }
+    ListElement {
         sourcename:"Secinjpulse"
         defaultsymbol: "ms"
         titlename:"Secondary Inj. Pulse width"
