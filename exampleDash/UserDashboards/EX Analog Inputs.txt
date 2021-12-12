@@ -1,0 +1,9 @@
+Square gauge,266,119,-2,32,248,0, ,EX AnalogInput 1,false,true,false,Dashboard,EXAnalogInput1,EXAnalogInput1,10000,-20000,lightsteelblue,black,lightsteelblue,white,white,blue,25,40,0,Lato,Lato,
+Square gauge,266,119,264,32,248,0, ,EX AnalogInput 2,false,true,false,Dashboard,EXAnalogInput2,EXAnalogInput2,10000,-20000,lightsteelblue,black,lightsteelblue,white,white,blue,25,40,0,Lato,Lato,
+Square gauge,266,119,533,29,248,0, ,EX AnalogInput 3,false,true,false,Dashboard,EXAnalogInput3,EXAnalogInput3,10000,-20000,lightsteelblue,black,lightsteelblue,white,white,blue,25,40,0,Lato,Lato,
+Square gauge,266,119,-3,156,248,0, ,EX AnalogInput 4,false,true,false,Dashboard,EXAnalogInput4,EXAnalogInput4,10000,-20000,lightsteelblue,black,lightsteelblue,white,white,blue,25,40,0,Lato,Lato,
+Square gauge,266,119,265,156,248,0, ,EX AnalogInput 5,false,true,false,Dashboard,EXAnalogInput5,EXAnalogInput5,10000,-20000,lightsteelblue,black,lightsteelblue,white,white,blue,25,40,0,Lato,Lato,
+Square gauge,266,119,533,157,248,0, ,EX AnalogInput 6,false,true,false,Dashboard,EXAnalogInput6,EXAnalogInput6,10000,-20000,lightsteelblue,black,lightsteelblue,white,white,blue,25,40,0,Lato,Lato,
+Square gauge,266,119,-2,277,248,0, ,EX AnalogInput 7,false,true,false,Dashboard,EXAnalogInput7,EXAnalogInput7,10000,-20000,lightsteelblue,black,lightsteelblue,white,white,blue,25,40,0,Lato,Lato,
+Square gauge,266,119,277.6529338327091,280.91476091476096,248,3,V,EX AnalogInput 0,false,true,false,Dashboard,EXAnalogInput0,EXAnalogInput0,10000,-20000,lightsteelblue,black,lightsteelblue,white,white,blue,25,40,0,Lato,Lato,
+

@@ -1,0 +1,5 @@
+Square gauge,533,119,107.86516853932585,239.00207900207897,100,0,%,Throttle Position,false,true,false,Dashboard,TPS,TPS,10000,-20000,blue,black,blue,white,white,blue,25,40,0,Lato,Lato,
+Square gauge,266,119,2.9962546816479403,359.75051975051974,170,0,°F,ECT,false,true,false,Dashboard,Watertemp,Watertemp,10000,-20000,blue,black,blue,white,white,blue,25,40,0,Lato,Lato,
+Square gauge,266,119,265.66791510611745,359.75051975051963,15,1,V,Battery Voltage,false,true,false,Dashboard,BatteryV,BatteryV,10000,10,blue,black,blue,white,white,blue,25,40,0,Lato,Lato,
+Square gauge,266,119,529.3383270911361,359.75051975051974,50,0,PSI,Fuel Pres.,false,true,false,Dashboard,FuelPress,FuelPress,10000,10,blue,black,blue,white,white,blue,25,40,0,Lato,Lato,
+
