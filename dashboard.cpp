@@ -558,6 +558,7 @@ DashBoard::DashBoard(QObject *parent)
     , m_egtdiff()
     , m_activeboosttable()
     , m_activetunetable()
+    , m_CalibrationSelect()
 {
 
 }
@@ -3321,6 +3322,14 @@ void DashBoard::setRotaryTrimpot3(const int &RotaryTrimpot3)
     emit RotaryTrimpot3Changed(RotaryTrimpot3);
 }
 
+void DashBoard::setCalibrationSelect(const int &CalibrationSelect)
+{
+    if (m_CalibrationSelect == CalibrationSelect)
+        return;
+    m_CalibrationSelect = CalibrationSelect;
+    emit CalibrationSelectChanged(CalibrationSelect);
+}
+
 void DashBoard::setError(const QString &Error)
 {
     if (m_ecu == Error)
@@ -4959,6 +4968,7 @@ int DashBoard::rpmstyle3() const { return m_rpmstyle3; }
 int DashBoard::RotaryTrimpot1() const { return m_RotaryTrimpot1; }
 int DashBoard::RotaryTrimpot2() const { return m_RotaryTrimpot2; }
 int DashBoard::RotaryTrimpot3() const { return m_RotaryTrimpot3; }
+int DashBoard::CalibrationSelect() const { return m_CalibrationSelect; }
 
 QString DashBoard::Error() const { return m_Error; }
 QString DashBoard::autogear() const { return m_autogear; }

@@ -1296,6 +1296,9 @@ void udpreceiver::processPendingDatagrams()
         case 952:
             m_dashboard->setRotaryTrimpot3(Value);
             break;
+        case 953:
+            m_dashboard->setCalibrationSelect(Value);
+            break;
         case 999:
             break;
         default:

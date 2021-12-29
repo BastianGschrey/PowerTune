@@ -33,14 +33,14 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal speed READ speed WRITE setSpeed NOTIFY speedChanged)
     Q_PROPERTY(qreal Iscvduty READ Iscvduty WRITE setIscvduty NOTIFY iscvdutyChanged)
     Q_PROPERTY(qreal O2volt READ O2volt WRITE setO2volt NOTIFY o2voltChanged)
-     Q_PROPERTY(qreal Cyl1_O2_Corr READ Cyl1_O2_Corr WRITE setCyl1_O2_Corr NOTIFY Cyl1_O2_CorrChanged)
-     Q_PROPERTY(qreal Cyl2_O2_Corr READ Cyl2_O2_Corr WRITE setCyl2_O2_Corr NOTIFY Cyl2_O2_CorrChanged)
-     Q_PROPERTY(qreal Cyl3_O2_Corr READ Cyl3_O2_Corr WRITE setCyl3_O2_Corr NOTIFY Cyl3_O2_CorrChanged)
-     Q_PROPERTY(qreal Cyl4_O2_Corr READ Cyl4_O2_Corr WRITE setCyl4_O2_Corr NOTIFY Cyl4_O2_CorrChanged)
-     Q_PROPERTY(qreal Cyl5_O2_Corr READ Cyl5_O2_Corr WRITE setCyl5_O2_Corr NOTIFY Cyl5_O2_CorrChanged)
-     Q_PROPERTY(qreal Cyl6_O2_Corr READ Cyl6_O2_Corr WRITE setCyl6_O2_Corr NOTIFY Cyl6_O2_CorrChanged)
-     Q_PROPERTY(qreal Cyl7_O2_Corr READ Cyl7_O2_Corr WRITE setCyl7_O2_Corr NOTIFY Cyl7_O2_CorrChanged)
-     Q_PROPERTY(qreal Cyl8_O2_Corr READ Cyl8_O2_Corr WRITE setCyl8_O2_Corr NOTIFY Cyl8_O2_CorrChanged)
+    Q_PROPERTY(qreal Cyl1_O2_Corr READ Cyl1_O2_Corr WRITE setCyl1_O2_Corr NOTIFY Cyl1_O2_CorrChanged)
+    Q_PROPERTY(qreal Cyl2_O2_Corr READ Cyl2_O2_Corr WRITE setCyl2_O2_Corr NOTIFY Cyl2_O2_CorrChanged)
+    Q_PROPERTY(qreal Cyl3_O2_Corr READ Cyl3_O2_Corr WRITE setCyl3_O2_Corr NOTIFY Cyl3_O2_CorrChanged)
+    Q_PROPERTY(qreal Cyl4_O2_Corr READ Cyl4_O2_Corr WRITE setCyl4_O2_Corr NOTIFY Cyl4_O2_CorrChanged)
+    Q_PROPERTY(qreal Cyl5_O2_Corr READ Cyl5_O2_Corr WRITE setCyl5_O2_Corr NOTIFY Cyl5_O2_CorrChanged)
+    Q_PROPERTY(qreal Cyl6_O2_Corr READ Cyl6_O2_Corr WRITE setCyl6_O2_Corr NOTIFY Cyl6_O2_CorrChanged)
+    Q_PROPERTY(qreal Cyl7_O2_Corr READ Cyl7_O2_Corr WRITE setCyl7_O2_Corr NOTIFY Cyl7_O2_CorrChanged)
+    Q_PROPERTY(qreal Cyl8_O2_Corr READ Cyl8_O2_Corr WRITE setCyl8_O2_Corr NOTIFY Cyl8_O2_CorrChanged)
     Q_PROPERTY(qreal na1 READ na1 WRITE setna1 NOTIFY na1Changed)
     Q_PROPERTY(qreal Secinjpulse READ Secinjpulse WRITE setSecinjpulse NOTIFY secinjpulseChanged)
     Q_PROPERTY(qreal na2 READ na2 WRITE setna2 NOTIFY na2Changed)
@@ -376,6 +376,10 @@ class DashBoard : public QObject
     Q_PROPERTY(int RotaryTrimpot1 READ RotaryTrimpot1 WRITE setRotaryTrimpot1 NOTIFY RotaryTrimpot1Changed)
     Q_PROPERTY(int RotaryTrimpot2 READ RotaryTrimpot2 WRITE setRotaryTrimpot2 NOTIFY RotaryTrimpot2Changed)
     Q_PROPERTY(int RotaryTrimpot3 READ RotaryTrimpot3 WRITE setRotaryTrimpot3 NOTIFY RotaryTrimpot3Changed)
+
+
+    Q_PROPERTY(int CalibrationSelect READ CalibrationSelect WRITE setCalibrationSelect NOTIFY CalibrationSelectChanged)
+
 
     Q_PROPERTY(QString Error READ Error WRITE setError NOTIFY ErrorChanged)
     Q_PROPERTY(QString autogear READ autogear WRITE setautogear NOTIFY autogearChanged)
@@ -943,6 +947,7 @@ class DashBoard : public QObject
     void setRotaryTrimpot1(const int &RotaryTrimpot1);
     void setRotaryTrimpot2(const int &RotaryTrimpot2);
     void setRotaryTrimpot3(const int &RotaryTrimpot3);
+    void setCalibrationSelect(const int &CalibrationSelect);
 
     void setError(const QString &Error);
     void setautogear(const QString &autogear);
@@ -1511,6 +1516,8 @@ class DashBoard : public QObject
     int RotaryTrimpot1() const;
     int RotaryTrimpot2() const;
     int RotaryTrimpot3() const;
+    int CalibrationSelect() const;
+
 
     QString Error() const;
     QString autogear() const;
@@ -2047,6 +2054,8 @@ signals:
     void RotaryTrimpot1Changed(int RotaryTrimpot1);
     void RotaryTrimpot2Changed(int RotaryTrimpot2);
     void RotaryTrimpot3Changed(int RotaryTrimpot3);
+    void CalibrationSelectChanged(int CalibrationSelect);
+
 
     void ErrorChanged(QString Error);
     void autogearChanged(QString autogear);
@@ -2593,6 +2602,8 @@ private:
     int m_RotaryTrimpot1;
     int m_RotaryTrimpot2;
     int m_RotaryTrimpot3;
+    int m_CalibrationSelect;
+
 
     QString m_Error;
     QString m_autogear;

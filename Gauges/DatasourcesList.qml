@@ -750,6 +750,17 @@ ListModel {
         stepsize : "1"
         divisor : "1"
     }
+
+    ListElement {
+        sourcename:"CalibrationSelect"
+        defaultsymbol: ""
+        titlename:"Calibration select"
+        decimalpoints : "0"
+        maxvalue : "10"
+        stepsize : "1"
+        divisor : "1"
+    }
+
     ListElement {
         sourcename:"coolantpress"
         defaultsymbol: "kPa"
