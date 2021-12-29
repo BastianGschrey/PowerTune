@@ -887,6 +887,15 @@ void Connect::daemonstartup(const int &daemon)
     case 49:
         daemonstart = "./LifeRacing";
         break;
+    case 50:
+        daemonstart = "./DTAFast";
+        break;
+    case 51:
+        daemonstart = "./ProEFI";
+        break;
+    case 52:
+        daemonstart = "./TeslaSDU";
+        break;
     }
     QString fileName = "/home/pi/startdaemon.sh";//This will be the correct path on pi
     //QString fileName = "startdaemon.sh";//for testing on windows
