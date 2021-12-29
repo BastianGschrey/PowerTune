@@ -53,9 +53,14 @@ sudo pkill Delta
 sudo pkill BigNET
 sudo pkill R35
 sudo pkill Prado
-
+sudp pkill ProEFI
+sudo pkill TeslaSDU
+sudo pkill DTAFast
 echo "Removing previous Versions"
 
+sudo rm /home/pi/daemons/ProEFI
+sudo rm /home/pi/daemons/DTAFast
+sudo rm /home/pi/daemons/TeslaSDU
 sudo rm /home/pi/daemons/AdaptronicCANd
 sudo rm /home/pi/daemons/AEMV2d
 sudo rm /home/pi/daemons/Apexid
