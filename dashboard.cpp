@@ -1724,7 +1724,7 @@ void DashBoard::setgpsTime (const QString &gpsTime)
     emit gpsTimeChanged(gpsTime);
 }
 
-void DashBoard::setgpsAltitude(const double &gpsAltitude)
+void DashBoard::setgpsAltitude(const qreal &gpsAltitude)
 {
     if (m_gpsAltitude == gpsAltitude)
         return;
@@ -1732,7 +1732,7 @@ void DashBoard::setgpsAltitude(const double &gpsAltitude)
     emit gpsAltitudeChanged(gpsAltitude);
 }
 
-void DashBoard::setgpsLatitude(const double &gpsLatitude)
+void DashBoard::setgpsLatitude(const qreal &gpsLatitude)
 {
     if (m_gpsLatitude == gpsLatitude)
         return;
@@ -1740,7 +1740,7 @@ void DashBoard::setgpsLatitude(const double &gpsLatitude)
     emit gpsLatitudeChanged(gpsLatitude);
 }
 
-void DashBoard::setgpsLongitude(const double &gpsLongitude)
+void DashBoard::setgpsLongitude(const qreal &gpsLongitude)
 {
     if (m_gpsLongitude == gpsLongitude)
         return;
@@ -4750,9 +4750,9 @@ QString DashBoard::RunStat() const { return m_RunStat; }
 //GPS
 
 QString DashBoard::gpsTime() const { return m_gpsTime; }
-double DashBoard::gpsAltitude() const { return m_gpsAltitude; }
-double DashBoard::gpsLatitude() const { return m_gpsLatitude; }
-double DashBoard::gpsLongitude () const { return m_gpsLongitude; }
+qreal DashBoard::gpsAltitude() const { return m_gpsAltitude; }
+qreal DashBoard::gpsLatitude() const { return m_gpsLatitude; }
+qreal DashBoard::gpsLongitude () const { return m_gpsLongitude; }
 double DashBoard::gpsSpeed() const { return m_gpsSpeed; }
 int DashBoard::gpsVisibleSatelites () const { return m_gpsVisibleSatelites; }
 QString DashBoard::gpsFIXtype () const { return m_gpsFIXtype; }

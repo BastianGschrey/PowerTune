@@ -203,9 +203,9 @@ class DashBoard : public QObject
 
 
     Q_PROPERTY(QString gpsTime READ gpsTime WRITE setgpsTime NOTIFY gpsTimeChanged)
-    Q_PROPERTY(double gpsAltitude READ gpsAltitude WRITE setgpsAltitude NOTIFY gpsAltitudeChanged)
-    Q_PROPERTY(double gpsLatitude READ gpsLatitude WRITE setgpsLatitude NOTIFY gpsLatitudeChanged)
-    Q_PROPERTY(double gpsLongitude READ gpsLongitude WRITE setgpsLongitude NOTIFY gpsLongitudeChanged)
+    Q_PROPERTY(qreal gpsAltitude READ gpsAltitude WRITE setgpsAltitude NOTIFY gpsAltitudeChanged)
+    Q_PROPERTY(qreal gpsLatitude READ gpsLatitude WRITE setgpsLatitude NOTIFY gpsLatitudeChanged)
+    Q_PROPERTY(qreal gpsLongitude READ gpsLongitude WRITE setgpsLongitude NOTIFY gpsLongitudeChanged)
     Q_PROPERTY(double gpsSpeed READ gpsSpeed WRITE setgpsSpeed NOTIFY gpsSpeedChanged)
     Q_PROPERTY(int gpsVisibleSatelites READ gpsVisibleSatelites WRITE setgpsVisibleSatelites NOTIFY gpsVisibleSatelitesChanged)
     Q_PROPERTY(QString gpsFIXtype READ gpsFIXtype  WRITE setgpsFIXtype  NOTIFY gpsFIXtypeChanged)
@@ -743,9 +743,9 @@ class DashBoard : public QObject
     // GPS
 
     void setgpsTime(const QString &gpsTime);
-    void setgpsAltitude(const double &gpsAltitude);
-    void setgpsLatitude(const double &gpsLatitude);
-    void setgpsLongitude(const double &gpsLongitude);
+    void setgpsAltitude(const qreal &gpsAltitude);
+    void setgpsLatitude(const qreal &gpsLatitude);
+    void setgpsLongitude(const qreal &gpsLongitude);
     void setgpsSpeed(const double &gpsSpeed);
     void setgpsVisibleSatelites(const int &gpsVisibleSatelites);
     void setgpsFIXtype(const QString &gpsFIXtype);
@@ -1293,9 +1293,9 @@ class DashBoard : public QObject
     // GPS
 
     QString gpsTime() const;
-    double gpsAltitude() const;
-    double gpsLatitude() const;
-    double gpsLongitude() const;
+    qreal gpsAltitude() const;
+    qreal gpsLatitude() const;
+    qreal gpsLongitude() const;
     double gpsSpeed() const;
     int gpsVisibleSatelites() const;
     QString gpsFIXtype() const;
@@ -1838,9 +1838,9 @@ signals:
     // GPS
 
     void gpsTimeChanged(QString gpsTime);
-    void gpsAltitudeChanged(double gpsAltitude);
-    void gpsLatitudeChanged(double gpsLatitude);
-    void gpsLongitudeChanged(double gpsLongitude);
+    void gpsAltitudeChanged(qreal gpsAltitude);
+    void gpsLatitudeChanged(qreal gpsLatitude);
+    void gpsLongitudeChanged(qreal gpsLongitude);
     void gpsSpeedChanged(double gpsSpeed);
     void gpsVisibleSatelitesChanged(int gpsVisibleSatelites);
     void gpsFIXtypeChanged(QString gpsFIXtype);
@@ -2435,9 +2435,9 @@ private:
     // GPS
 
     QString m_gpsTime;
-    double m_gpsAltitude;
-    double m_gpsLatitude;
-    double m_gpsLongitude;
+    qreal m_gpsAltitude;
+    qreal m_gpsLatitude;
+    qreal m_gpsLongitude;
     double m_gpsSpeed;
     int m_gpsVisibleSatelites;
     QString m_gpsFIXtype;
