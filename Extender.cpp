@@ -48,7 +48,7 @@ Extender::~Extender()
 void Extender::variables(const qreal &Cylinder)
 {
 
-    cylinders = (Cylinder/4);
+    cylinders = (Cylinder/2);
     qDebug() << "cylinders " << cylinders;
 }
 void Extender::openCAN(const int &ExtenderBaseID,const int &RPMCANBaseID)
