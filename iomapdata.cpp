@@ -18,7 +18,7 @@ QGeoPath ioMapData::loadMapData(QString country, QString trackName)
     //    #else
 
     //    #endif
-    qDebug() << "LoadKMLData";
+    //qDebug() << "LoadKMLData";
     QList<QString> list;
     QList<QString> spl;
     //qDebug() << ("Open KML");
@@ -51,7 +51,7 @@ QGeoPath ioMapData::loadMapData(QString country, QString trackName)
 
 QGeoPath ioMapData::parseKML(QList<QString> list)
 {
-    qDebug() << "ParseKML";
+    //qDebug() << "ParseKML";
     QGeoPath path;
     QList<QPair<QString,QString>> locationList;
     QPair<QString,QString> tempStringHold;
@@ -113,17 +113,17 @@ QList<QString> ioMapData::getCountries()
      if (trackfolder.exists()){
 
              QDirIterator directories(path, QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
-                 qDebug() <<"List Directories";
+                 //qDebug() <<"List Directories";
              while(directories.hasNext()){
                  directories.next();
                  QString countrypathname;
                  countrypathname = directories.filePath();
-                 qDebug() << "Full Directory" << countrypathname;
+                 //qDebug() << "Full Directory" << countrypathname;
                  countrypathname.remove(0,path.length());
-                 qDebug() << "Directory" << countrypathname;
+                 //qDebug() << "Directory" << countrypathname;
                  list.append(countrypathname);
              }
- qDebug() <<"Country count" << list.size();
+ //qDebug() <<"Country count" << list.size();
  }
      else{
      list.append("No Tracks installed");
@@ -145,11 +145,11 @@ QList<QString> ioMapData::getTracks(QString country)
 
         //#endif
 
-    qDebug() <<"Directory " << directory;
+   // qDebug() <<"Directory " << directory;
     QStringList trackNames = directory.entryList(QStringList(),QDir::Files);
     foreach(QString filename, trackNames)
     {
-        qDebug()<<filename;
+        //qDebug()<<filename;
     }
     return trackNames;
 }
@@ -185,14 +185,14 @@ QDir trackfolder = path;
 if (trackfolder.exists()){
 
         QDirIterator directories(path, QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
-            qDebug() <<"List Directories";
+            //qDebug() <<"List Directories";
         while(directories.hasNext()){
             directories.next();
             QString countrypathname;
             countrypathname = directories.filePath();
-            qDebug() << "Full Directory" << countrypathname;
+            //qDebug() << "Full Directory" << countrypathname;
             countrypathname.remove(0,path.length());
-            qDebug() << "Directory" << countrypathname;
+            //qDebug() << "Directory" << countrypathname;
             list.append(countrypathname);
         }
 }
@@ -213,12 +213,12 @@ QList<QString> ioMapData::getCenter(QString country, QString trackName)
 
        // #endif
 
-    qDebug() << path;
+    //qDebug() << path;
     QFile inputFile(path);
-    qDebug() <<"start Open GetCenter";
+    //qDebug() <<"start Open GetCenter";
     if (inputFile.open(QIODevice::ReadOnly))
     {
-        qDebug() <<"Open successful GetCenter";
+        //qDebug() <<"Open successful GetCenter";
         QTextStream in(&inputFile);
         while (!in.atEnd()) // Reads line and puts it in a string + Debug output of the string
         {
@@ -232,9 +232,9 @@ QList<QString> ioMapData::getCenter(QString country, QString trackName)
 
                 returnList.append(list[0]);
                 returnList.append(list[1]);
-                qDebug()<<"ReturnList";
-                qDebug()<<returnList[0];
-                qDebug()<<returnList[1];
+               // qDebug()<<"ReturnList";
+               // qDebug()<<returnList[0];
+               // qDebug()<<returnList[1];
 
             }
 
@@ -266,7 +266,7 @@ QList<QString> ioMapData::getStartFinishLine(QString country, QString trackName)
         while (!in.atEnd()) // Reads line and puts it in a string + Debug output of the string
         {
             QString line = in.readLine();
-            qDebug() << line ;
+           // qDebug() << line ;
             if(line.contains("STARTFINISH1", Qt::CaseInsensitive))
             {
                 spl = line.split(QRegExp ("[:]"));
@@ -384,7 +384,7 @@ bool ioMapData::getExistsSecondFinish(QString country, QString trackName)
         while (!in.atEnd()) // Reads line and puts it in a string + Debug output of the string
         {
             QString line = in.readLine();
-           qDebug() << line ;
+           //qDebug() << line ;
             if(line.contains("STARTFINISH2", Qt::CaseInsensitive))
             {
                 inputFile.close();
@@ -408,7 +408,7 @@ bool ioMapData::getTrackExists(QString country, QString trackName)
 
     //     #endif
 
-    qDebug() <<"Directory " << directory;
+    //qDebug() <<"Directory " << directory;
     QStringList images = directory.entryList(QStringList(),QDir::Files);
     foreach(QString filename, images)
     {

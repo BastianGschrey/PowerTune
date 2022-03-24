@@ -1,9 +1,2 @@
-Custom
-Australia
-Canada
-Germany
-Japan
-Malaysia
-New Zealand
-South Africa
+
 USA
