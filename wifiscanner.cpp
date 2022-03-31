@@ -48,16 +48,16 @@ void WifiScanner::initializeWifiscanner()
         m_dashboard->setSerialStat(output2);
         QStringList fields = output2.split(QRegExp("[\n]"));
         foreach (const QString &str, fields) {
-            if (str.contains("SSID"))
-            {
+        //    if (str.contains("SSID"))
+         //   {
 
                 QString raw;
                 raw = str;
                 raw.replace("SSID: ","");
                 //raw.remove(QChar('"'));
-               // raw.replace("\xE2\x80\x99","'");
+                //raw.replace("\xE2\x80\x99","'");
                 result += raw;
-            }
+        //    }
         }
         qDebug() << "output 2" << result;
         m_dashboard->setwifi(result);
