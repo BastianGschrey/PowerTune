@@ -37,22 +37,16 @@ void WifiScanner::initializeWifiscanner()
     connect(process, SIGNAL(finished(int , QProcess::ExitStatus )), this, SLOT(finalize(int , QProcess::ExitStatus)));
        result.clear();
     outputline.clear();
-    //process->start("sudo /sbin/iw wlan0 scan | egrep 'SSID'");  // start the process
-    //process->waitForFinished();
-    QString prog = "sudo /sbin/iw";
-    QStringList arguments;
-    arguments << "wlan0"<<"egrep 'SSID'";
-    //QProcess proc;
-    process->start(prog , arguments);
+    process->start("sudo iw wlan0 scan | egrep 'SSID'");  // start the process
     process->waitForFinished();
-    QString output = process->readAllStandardOutput();
+
 
 
 }
 
 void WifiScanner::checkWifiIP()
 {
-
+/*
     QString prog = "sudo /sbin/iw";
     QStringList arguments;
     arguments << "wlan0"<<"egrep 'SSID'";
@@ -61,7 +55,7 @@ void WifiScanner::checkWifiIP()
     proc.waitForFinished();
     QString output = proc.readAllStandardOutput();
 
-
+*/
 
 }
 void WifiScanner::findActiveWirelesses()
