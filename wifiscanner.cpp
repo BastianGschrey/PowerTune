@@ -37,7 +37,8 @@ void WifiScanner::initializeWifiscanner()
     connect(process, SIGNAL(finished(int , QProcess::ExitStatus )), this, SLOT(finalize(int , QProcess::ExitStatus)));
        result.clear();
     outputline.clear();
-    process->start("sudo iw wlan0 scan | egrep 'SSID'");  // start the process
+    qDebug()<< "Request SSID";
+    process->start("sudo iw dev wlan0 scan | grep SSID");  // start the process
     process->waitForFinished();
 
 
