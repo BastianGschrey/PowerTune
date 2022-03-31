@@ -26,15 +26,21 @@ public:
     int foundCount;
     QNetworkConfiguration netcfg;
     QStringList wifilist;
+    QStringList WiFisList;
     QList<QNetworkConfiguration> netcfgList;
     Q_INVOKABLE void initializeWifiscanner();
     Q_INVOKABLE void setwifi(const QString &country,const QString &ssid1,const QString &psk1,const QString &ssid2,const QString &psk2);
     Q_INVOKABLE void checkWifiIP();
 
+
+
+
 public slots:
     void findActiveWirelesses();
     void readData();
     void finalize(int exitCode, QProcess::ExitStatus exitStatus);
+    void servicesChanged();
+    void interfacesChanged();
 
 private:
     QTimer *findTimer;
@@ -42,6 +48,7 @@ private:
     QNetworkSession *session;
     DashBoard *m_dashboard;
     QProcess *process;
+
 };
 
 #endif // WIFISCANNER_H
