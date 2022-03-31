@@ -31,19 +31,23 @@ WifiScanner::WifiScanner(DashBoard *dashboard, QObject *parent)
 
 void WifiScanner::initializeWifiscanner()
 {
-
+/*
     process = new QProcess(this);  // create on the heap, so it doesn't go out of scope
     connect (process, SIGNAL(readyReadStandardOutput()), this, SLOT(readData()));  // connect process signals with your code
     connect(process, SIGNAL(finished(int , QProcess::ExitStatus )), this, SLOT(finalize(int , QProcess::ExitStatus)));
        result.clear();
     outputline.clear();
+    process->start("sh", QStringList()<<"-c"<<"iw wlan0 scan |grep SSID");
+    process->waitForFinished();
+   */
+        QProcess proc2;
+        proc2.start("sh", QStringList()<<"-c"<<"iw wlan0 scan |grep SSID");
+        proc2.waitForFinished();
+        QString output2 = proc2.readAllStandardOutput();
+        qDebug() << "output" << output2;
+        m_dashboard->setSerialStat(output2);
 
-    QProcess proc;
-    proc.start("sh", QStringList()<<"-c"<<"iwconfig 2>&1 | grep ESSID");
-    proc.waitForFinished();
-    QString output = process->readAllStandardOutput();
-    qDebug()<< "Request SSID";
-    qDebug()<< output;
+
 
 }
 
