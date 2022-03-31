@@ -34,6 +34,7 @@ void WifiScanner::initializeWifiscanner()
          QTimer *timer = new QTimer(this);
        connect(timer, &QTimer::timeout, this, &WifiScanner::getconnectionStatus);
 //       timer->start(3000); // Check the status of the connection every 3 Seconds to
+    WifiScanner::getconnectionStatus(); //Temporay measure
 
     result.clear();
     QString raw;
