@@ -37,10 +37,7 @@ void WifiScanner::initializeWifiscanner()
     connect(process, SIGNAL(finished(int , QProcess::ExitStatus )), this, SLOT(finalize(int , QProcess::ExitStatus)));
        result.clear();
     outputline.clear();
-    //process->start("sudo /sbin/iw wlan0 scan | egrep 'SSID'");
-    //ifconfig wlan0 | egrep 'inet 1'
-    //process->start("ifconfig wlan0 | egrep 'inet 1'");  // start the process
-    process->start("sudo /sbin/iwlist wlan0 scan");  // start the process
+    process->start("iw wlan0 scan | egrep 'SSID'");  // start the process
     process->waitForFinished();
 
 
@@ -57,35 +54,14 @@ void WifiScanner::checkWifiIP()
     proc.start(prog , arguments);
     proc.waitForFinished();
     QString output = proc.readAllStandardOutput();
-    //m_dashBoard->setSerialStat("Rebooting");
+
 
 
 }
 void WifiScanner::findActiveWirelesses()
 {
-/*
-    //m_dashboard->setSerialStat("Currently connected WIFI:");
 
-    QProcess proc;
-    proc.start("sh", QStringList()<<"-c"<<"iwconfig 2>&1 | grep ESSID");
-    proc.waitForFinished();
-    QString output = proc.readAllStandardOutput();
-    m_dashboard->setSerialStat(output);
-    //m_dashBoard->setSerialStat("Rebooting");
-   // qDebug() << output ;
-    m_dashboard->setSerialStat("WLAN IP Adress:");
-    QProcess proc2;
-    proc2.start("sh", QStringList()<<"-c"<<"ifconfig wlan0 2>&1 | egrep 'inet 1'");
-    proc2.waitForFinished();
-    QString output2 = proc2.readAllStandardOutput();
-    m_dashboard->setSerialStat(output2);
-    m_dashboard->setSerialStat("Ethernet IP Adress:");
-    QProcess proc3;
-    proc3.start("sh", QStringList()<<"-c"<<"ifconfig eth0 2>&1 | egrep 'inet 1'");
-    proc3.waitForFinished();
-    QString output3 = proc3.readAllStandardOutput();
-    m_dashboard->setSerialStat(output3);
-*/
+    // Check IP Adresses direcly via QT
     QNetworkInterface wlan0IP = QNetworkInterface::interfaceFromName("wlan0");
     QList<QNetworkAddressEntry> entries = wlan0IP.addressEntries();
     if (!entries.isEmpty()) {
@@ -95,7 +71,6 @@ void WifiScanner::findActiveWirelesses()
         wlanip.remove(QChar(')'));
         wlanip.remove(QChar('"'));
         m_dashboard->setSerialStat("WLAN IP Adress : " + wlanip);
-       // qDebug() << "wlan0 IP" <<entry.ip();
     }
 
 
