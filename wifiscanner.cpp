@@ -7,6 +7,7 @@
 #include <QProcess>
 #include <QByteArrayMatcher>
 #include <QByteArray>
+#include <QNetworkInterface>
 
 QString outputline;
 QStringList result;
@@ -27,7 +28,20 @@ WifiScanner::WifiScanner(DashBoard *dashboard, QObject *parent)
 
 void WifiScanner::initializeWifiscanner()
 {
-
+ /*
+    QNetworkInterface wlan0IP = QNetworkInterface::interfaceFromName("wlan0");
+    QList<QNetworkAddressEntry> entries = wlan0IP.addressEntries();
+    if (!entries.isEmpty()) {
+        QNetworkAddressEntry entry = entries.first();
+        qDebug() << "wlan0 IP" <<entry.ip();
+    }
+*/
+    QNetworkInterface eth0IP = QNetworkInterface::interfaceFromName("eth0");
+    QList<QNetworkAddressEntry> entries = eth0IP.addressEntries();
+    if (!entries.isEmpty()) {
+        QNetworkAddressEntry entry = entries.first();
+        qDebug() << "etH0 IP" <<entry.ip();
+    }
     process = new QProcess(this);  // create on the heap, so it doesn't go out of scope
     connect (process, SIGNAL(readyReadStandardOutput()), this, SLOT(readData()));  // connect process signals with your code
     connect(process, SIGNAL(finished(int , QProcess::ExitStatus )), this, SLOT(finalize(int , QProcess::ExitStatus)));
