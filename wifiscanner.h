@@ -39,8 +39,7 @@ public slots:
     void findActiveWirelesses();
     void readData();
     void finalize(int exitCode, QProcess::ExitStatus exitStatus);
-    void servicesChanged();
-    void interfacesChanged();
+
 
 private:
     QTimer *findTimer;

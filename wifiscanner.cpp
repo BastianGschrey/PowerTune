@@ -12,6 +12,8 @@
 
 QString outputline;
 QStringList result;
+QString eth0ip;
+QString wlanip;
 
 WifiScanner::WifiScanner(QObject *parent)
     : QObject(parent)
@@ -47,12 +49,11 @@ void WifiScanner::initializeWifiscanner()
 
 void WifiScanner::checkWifiIP()
 {
-    //qDebug()<< " CHECK IP ";
+
     QString prog = "sudo /sbin/iwconfig";
     QStringList arguments;
     arguments << "wlan0"<<"egrep 'SSID'";
     QProcess proc;
-   // qDebug() << "calling " << prog << arguments;
     proc.start(prog , arguments);
     proc.waitForFinished();
     QString output = proc.readAllStandardOutput();
@@ -62,30 +63,9 @@ void WifiScanner::checkWifiIP()
 }
 void WifiScanner::findActiveWirelesses()
 {
+/*
     //m_dashboard->setSerialStat("Currently connected WIFI:");
-    /*
-    QNetworkConfigurationManager ncm;
-    netcfgList = ncm.allConfigurations();
-    wifilist.clear();
-    //WiFisList.clear();
-    for (auto &x : netcfgList)
-    {
-        if (x.bearerType() == QNetworkConfiguration::BearerWLAN)
-        {
-            if(x.name() == "")
-                wifilist << "Unknown(Other Network)";
-            else
-                wifilist << x.name();
 
-              qDebug() << "Type" <<x.type();
-              qDebug() << "Network found :"<<x.name();
-              qDebug() << "State :"<<x.state();
-        }
-    }
-    qDebug() << "found " << wifilist.size();
-    qDebug() << "wifi found " << wifilist[0];
-    qDebug() << "wifi found " << wifilist[1];
-    */
     QProcess proc;
     proc.start("sh", QStringList()<<"-c"<<"iwconfig 2>&1 | grep ESSID");
     proc.waitForFinished();
@@ -105,13 +85,12 @@ void WifiScanner::findActiveWirelesses()
     proc3.waitForFinished();
     QString output3 = proc3.readAllStandardOutput();
     m_dashboard->setSerialStat(output3);
-
-    qDebug() << "Query WLAN IP Adress" ;
+*/
     QNetworkInterface wlan0IP = QNetworkInterface::interfaceFromName("wlan0");
     QList<QNetworkAddressEntry> entries = wlan0IP.addressEntries();
     if (!entries.isEmpty()) {
         QNetworkAddressEntry entry = entries.first();
-        QString wlanip = entry.ip().toString();
+        wlanip = entry.ip().toString();
         wlanip.replace("QHostAddress(","");
         wlanip.remove(QChar(')'));
         wlanip.remove(QChar('"'));
@@ -119,17 +98,17 @@ void WifiScanner::findActiveWirelesses()
        // qDebug() << "wlan0 IP" <<entry.ip();
     }
 
-    qDebug() << "Query ETH IP Adress" ;
+
     QNetworkInterface eth0IP = QNetworkInterface::interfaceFromName("eth0");
     QList<QNetworkAddressEntry> test = eth0IP.addressEntries();
     if (!test.isEmpty()) {
         QNetworkAddressEntry entry2 = test.first();
-        QString eth0ip = entry2.ip().toString();
+        eth0ip = entry2.ip().toString();
         eth0ip.replace("QHostAddress(","");
         eth0ip.remove(QChar(')'));
         eth0ip.remove(QChar('"'));
         m_dashboard->setSerialStat("Ethernet IP Adress: " + eth0ip);
-        //qDebug() << "etH0 IP" <<entry2.ip();
+
     }
 
 
@@ -139,7 +118,6 @@ void WifiScanner::readData()
 {
     QString line = process->readAllStandardOutput();        // read data from console
     outputline.append(line);
-   // qDebug() << "Line :"<< line;
 }
 
 void WifiScanner::finalize(int exitCode, QProcess::ExitStatus exitStatus)
@@ -166,21 +144,10 @@ void WifiScanner::finalize(int exitCode, QProcess::ExitStatus exitStatus)
     m_dashboard->setwifi(result);
 }
 
-void WifiScanner::servicesChanged()
-{
-
-}
-
-
-void WifiScanner::interfacesChanged()
-{
-
-}
 
 void WifiScanner::setwifi(const QString &country,const QString &ssid1,const QString &psk1,const QString &ssid2,const QString &psk2)
 {
     QFile file("/etc/wpa_supplicant/wpa_supplicant.conf");
-    //QFile file("testme.txt" );
     file.remove(); //remove file if it exists to avoid appending of existing file
     if ( file.open(QIODevice::ReadWrite) )
     {
