@@ -1867,7 +1867,6 @@ Quick1.TabView {
                     onClicked: {
                                 consoleText.clear();
                                 Wifiscanner.initializeWifiscanner();
-                                Wifiscanner.findActiveWirelesses();
                                 //btnScanNetwork.enabled =false;
                         }
                 }
@@ -1956,7 +1955,7 @@ Quick1.TabView {
                     font.pixelSize: extrarect.width / 55
                     Component.onCompleted: {
 
-                        Wifiscanner.findActiveWirelesses();
+                        //Wifiscanner.findActiveWirelesses();
                         Wifiscanner.initializeWifiscanner();
                     }
                     onClicked: {

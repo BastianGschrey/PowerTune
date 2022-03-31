@@ -1,6 +1,7 @@
 #ifndef WIFISCANNER_H
 #define WIFISCANNER_H
 
+#include <QTime>
 #include <QTimer>
 #include <QList>
 #include <QInputDialog>
@@ -10,6 +11,7 @@
 #include <QNetworkConfigurationManager>
 #include <QNetworkSession>
 #include <QProcess>
+
 
     class DashBoard;
 
@@ -30,15 +32,11 @@ public:
     QList<QNetworkConfiguration> netcfgList;
     Q_INVOKABLE void initializeWifiscanner();
     Q_INVOKABLE void setwifi(const QString &country,const QString &ssid1,const QString &psk1,const QString &ssid2,const QString &psk2);
-    Q_INVOKABLE void checkWifiIP();
-
-
 
 
 public slots:
-    void findActiveWirelesses();
+    void getconnectionStatus();
     void readData();
-    void finalize(int exitCode, QProcess::ExitStatus exitStatus);
 
 
 private:

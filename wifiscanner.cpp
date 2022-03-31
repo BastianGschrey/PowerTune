@@ -31,15 +31,12 @@ WifiScanner::WifiScanner(DashBoard *dashboard, QObject *parent)
 
 void WifiScanner::initializeWifiscanner()
 {
-/*
-    process = new QProcess(this);  // create on the heap, so it doesn't go out of scope
-    connect (process, SIGNAL(readyReadStandardOutput()), this, SLOT(readData()));  // connect process signals with your code
-    connect(process, SIGNAL(finished(int , QProcess::ExitStatus )), this, SLOT(finalize(int , QProcess::ExitStatus)));
-       result.clear();
-    outputline.clear();
-    process->start("sh", QStringList()<<"-c"<<"iw wlan0 scan |grep SSID");
-    process->waitForFinished();
-   */
+         QTimer *timer = new QTimer(this);
+       connect(timer, &QTimer::timeout, this, &WifiScanner::getconnectionStatus);
+       timer->start(3000); // Check the status of the connection every 3 Seconds to
+    //connect(&findTimer, &QTimer::timeout, this, &WifiScanner::getconnectionStatus);
+// Check available SSID's on wlan0 by calling iw wlan0 scan |grep SSID
+    result.clear();
     QString raw;
         QProcess proc2;
         proc2.start("sh", QStringList()<<"-c"<<"iw wlan0 scan |grep SSID");
@@ -49,42 +46,22 @@ void WifiScanner::initializeWifiscanner()
         m_dashboard->setSerialStat(output2);
         QStringList fields = output2.split(QRegExp("[\n]"));
         foreach (const QString &str, fields) {
-        //    if (str.contains("SSID"))
-         //   {
-
-
                 raw = str;
                 raw.replace("SSID: ","");
-                raw.remove(0,1);
-                //raw.remove(QChar('"'));
-                //raw.replace("\xE2\x80\x99","'");
+                raw.remove(0,1); // Remove the white space before the SSID
                 result += raw;
-        //    }
         }
-        qDebug() << "output 2" << result;
-        m_dashboard->setwifi(result);
+        m_dashboard->setwifi(result); // Pass on wifi name list to QML Combobox
 
 
 }
 
-void WifiScanner::checkWifiIP()
+
+void WifiScanner::getconnectionStatus()
 {
-/*
-    QString prog = "sudo /sbin/iw";
-    QStringList arguments;
-    arguments << "wlan0"<<"egrep 'SSID'";
-    QProcess proc;
-    proc.start(prog , arguments);
-    proc.waitForFinished();
-    QString output = proc.readAllStandardOutput();
-
-*/
-
-}
-void WifiScanner::findActiveWirelesses()
-{
-
+// displays the wlan0 and eth0 IP adresses
     // Check IP Adresses direcly via QT
+    qDebug() << "get connection ";
     QNetworkInterface wlan0IP = QNetworkInterface::interfaceFromName("wlan0");
     QList<QNetworkAddressEntry> entries = wlan0IP.addressEntries();
     if (!entries.isEmpty()) {
@@ -95,7 +72,9 @@ void WifiScanner::findActiveWirelesses()
         wlanip.remove(QChar('"'));
         m_dashboard->setSerialStat("WLAN IP Adress : " + wlanip);
     }
-
+    else{
+        m_dashboard->setSerialStat("WLAN IP Adress: no connection");
+    }
 
     QNetworkInterface eth0IP = QNetworkInterface::interfaceFromName("eth0");
     QList<QNetworkAddressEntry> test = eth0IP.addressEntries();
@@ -106,7 +85,9 @@ void WifiScanner::findActiveWirelesses()
         eth0ip.remove(QChar(')'));
         eth0ip.remove(QChar('"'));
         m_dashboard->setSerialStat("Ethernet IP Adress: " + eth0ip);
-
+    }
+    else{
+        m_dashboard->setSerialStat("Ethernet IP Adress: no connection");
     }
 
 
@@ -118,31 +99,6 @@ void WifiScanner::readData()
     outputline.append(line);
 }
 
-void WifiScanner::finalize(int exitCode, QProcess::ExitStatus exitStatus)
-{
-    //Clean up The line which contains the SSID to only show the SSID name
-    //ESSID:"Marku\xE2\x80\x99s iPhone"==> "\xE2\x80\x99"suould be apostrophy
-    /*
-    qDebug() << outputline;
-    int i =0;
-    QStringList fields = outputline.split(QRegExp("[\n]"));
-    //Parse List and delete all items without SSID in them
-    //qDebug() << "elements :" << fields.count();
-    foreach (const QString &str, fields) {
-        if (str.contains("SSID"))
-        {
-
-            QString raw;
-            raw = str;
-            raw.remove(QChar('"'), Qt::CaseInsensitive);
-            raw.replace("\xE2\x80\x99","'");
-            raw.remove(0,26);
-            result += raw;
-        }
-    }
-    m_dashboard->setwifi(result);
-    */
-}
 
 
 void WifiScanner::setwifi(const QString &country,const QString &ssid1,const QString &psk1,const QString &ssid2,const QString &psk2)
