@@ -38,7 +38,7 @@ void WifiScanner::initializeWifiscanner()
        result.clear();
     outputline.clear();
     qDebug()<< "Request SSID";
-    process->start("sudo iw dev wlan0 scan | grep SSID");  // start the process
+    process->start("sudo iw dev wlan0 scan");  // start the process
     process->waitForFinished();
 
 
