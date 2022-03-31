@@ -37,28 +37,10 @@ void WifiScanner::initializeWifiscanner()
     connect(process, SIGNAL(finished(int , QProcess::ExitStatus )), this, SLOT(finalize(int , QProcess::ExitStatus)));
        result.clear();
     outputline.clear();
-    process->start("iw wlan0 scan | egrep 'SSID'");  // start the process
-    process->waitForFinished();
-
-
 
 }
 
 void WifiScanner::checkWifiIP()
-{
-
-    QString prog = "sudo /sbin/iw";
-    QStringList arguments;
-    arguments << "wlan0"<<"egrep 'SSID'";
-    QProcess proc;
-    proc.start(prog , arguments);
-    proc.waitForFinished();
-    QString output = proc.readAllStandardOutput();
-
-
-
-}
-void WifiScanner::findActiveWirelesses()
 {
 
     // Check IP Adresses direcly via QT
@@ -87,6 +69,20 @@ void WifiScanner::findActiveWirelesses()
     }
 
 
+
+}
+void WifiScanner::findActiveWirelesses()
+{
+
+    QString prog = "sudo /sbin/iw";
+    QStringList arguments;
+    arguments << "wlan0"<<"egrep 'SSID'";
+    QProcess proc;
+    proc.start(prog , arguments);
+    proc.waitForFinished();
+   // QString output = proc.readAllStandardOutput();
+
+
 }
 
 void WifiScanner::readData()
@@ -99,7 +95,7 @@ void WifiScanner::finalize(int exitCode, QProcess::ExitStatus exitStatus)
 {
     //Clean up The line which contains the SSID to only show the SSID name
     //ESSID:"Marku\xE2\x80\x99s iPhone"==> "\xE2\x80\x99"suould be apostrophy
-
+ qDebug() << "WIFI " << outputline;
     int i =0;
     QStringList fields = outputline.split(QRegExp("[\n]"));
     //Parse List and delete all items without SSID in them
