@@ -18,8 +18,6 @@
 class WifiScanner : public QObject
 {
     Q_OBJECT
-  //  Q_PROPERTY(QStringList m_wifilist READ m_wifilist)
-
 
 public:
 
@@ -36,11 +34,8 @@ public:
 
 public slots:
     void getconnectionStatus();
-    void readData();
-
 
 private:
-    QTimer *findTimer;
     QStandardItemModel* listModel;
     QNetworkSession *session;
     DashBoard *m_dashboard;

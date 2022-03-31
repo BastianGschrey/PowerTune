@@ -93,12 +93,6 @@ void WifiScanner::getconnectionStatus()
 
 }
 
-void WifiScanner::readData()
-{
-    QString line = process->readAllStandardOutput();        // read data from console
-    outputline.append(line);
-}
-
 
 
 void WifiScanner::setwifi(const QString &country,const QString &ssid1,const QString &psk1,const QString &ssid2,const QString &psk2)
@@ -125,5 +119,9 @@ void WifiScanner::setwifi(const QString &country,const QString &ssid1,const QStr
                 << endl;
         file.close();
     }
+    QProcess restartwifi;
+    restartwifi.start("sh", QStringList()<<"-c"<<"/etc/init.d/networking restart");
+    restartwifi.waitForFinished();
+
 }
 
