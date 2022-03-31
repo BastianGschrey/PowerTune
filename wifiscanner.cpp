@@ -39,7 +39,7 @@ void WifiScanner::initializeWifiscanner()
     outputline.clear();
     QString prog = "sudo /sbin/iw";
     QStringList arguments;
-    arguments << "wlan0" << "scan" << "grep 'SSID'";
+    arguments << "wlan0" << "scan" << "| grep 'SSID'";
     qDebug()<< "Request SSID";
    // process->start("sudo iw dev wlan0 scan | grep SSID");
     process->start(prog , arguments);  // start the process
