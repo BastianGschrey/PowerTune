@@ -40,6 +40,7 @@ void WifiScanner::initializeWifiscanner()
     process->start("sh", QStringList()<<"-c"<<"iw wlan0 scan |grep SSID");
     process->waitForFinished();
    */
+    QString raw;
         QProcess proc2;
         proc2.start("sh", QStringList()<<"-c"<<"iw wlan0 scan |grep SSID");
         proc2.waitForFinished();
@@ -51,9 +52,9 @@ void WifiScanner::initializeWifiscanner()
         //    if (str.contains("SSID"))
          //   {
 
-                QString raw;
+
                 raw = str;
-                raw.replace("SSID:  ","");
+                raw.replace("SSID: ","");
                 //raw.remove(QChar('"'));
                 //raw.replace("\xE2\x80\x99","'");
                 result += raw;
