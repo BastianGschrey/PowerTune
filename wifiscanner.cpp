@@ -53,7 +53,7 @@ void WifiScanner::initializeWifiscanner()
 
                 QString raw;
                 raw = str;
-                raw.replace("SSID: ","");
+                raw.replace("SSID:  ","");
                 //raw.remove(QChar('"'));
                 //raw.replace("\xE2\x80\x99","'");
                 result += raw;
