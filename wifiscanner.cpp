@@ -114,6 +114,7 @@ void WifiScanner::findActiveWirelesses()
         QString wlanip = entry.ip().toString();
         wlanip.replace("QHostAddress(","");
         wlanip.remove(QChar(')'));
+        wlanip.remove(QChar('"'));
         m_dashboard->setSerialStat("WLAN IP Adress : " + wlanip);
        // qDebug() << "wlan0 IP" <<entry.ip();
     }
@@ -126,6 +127,7 @@ void WifiScanner::findActiveWirelesses()
         QString eth0ip = entry2.ip().toString();
         eth0ip.replace("QHostAddress(","");
         eth0ip.remove(QChar(')'));
+        eth0ip.remove(QChar('"'));
         m_dashboard->setSerialStat("Ethernet IP Adress: " + eth0ip);
         //qDebug() << "etH0 IP" <<entry2.ip();
     }
