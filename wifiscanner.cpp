@@ -28,19 +28,21 @@ WifiScanner::WifiScanner(DashBoard *dashboard, QObject *parent)
 
 void WifiScanner::initializeWifiscanner()
 {
- /*
+
+    qDebug() << "Query WLAN IP Adress" ;
     QNetworkInterface wlan0IP = QNetworkInterface::interfaceFromName("wlan0");
     QList<QNetworkAddressEntry> entries = wlan0IP.addressEntries();
     if (!entries.isEmpty()) {
         QNetworkAddressEntry entry = entries.first();
         qDebug() << "wlan0 IP" <<entry.ip();
     }
-*/
+
+    qDebug() << "Query ETH IP Adress" ;
     QNetworkInterface eth0IP = QNetworkInterface::interfaceFromName("eth0");
-    QList<QNetworkAddressEntry> entries = eth0IP.addressEntries();
-    if (!entries.isEmpty()) {
-        QNetworkAddressEntry entry = entries.first();
-        qDebug() << "etH0 IP" <<entry.ip();
+    QList<QNetworkAddressEntry> test = eth0IP.addressEntries();
+    if (!test.isEmpty()) {
+        QNetworkAddressEntry entry2 = test.first();
+        qDebug() << "etH0 IP" <<entry2.ip();
     }
     process = new QProcess(this);  // create on the heap, so it doesn't go out of scope
     connect (process, SIGNAL(readyReadStandardOutput()), this, SLOT(readData()));  // connect process signals with your code
