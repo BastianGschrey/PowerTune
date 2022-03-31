@@ -47,7 +47,7 @@ void WifiScanner::initializeWifiscanner()
 void WifiScanner::checkWifiIP()
 {
 
-    QString prog = "sudo /sbin/iwconfig";
+    QString prog = "sudo /sbin/iw";
     QStringList arguments;
     arguments << "wlan0"<<"egrep 'SSID'";
     QProcess proc;
