@@ -33,17 +33,14 @@ void WifiScanner::initializeWifiscanner()
 {
          QTimer *timer = new QTimer(this);
        connect(timer, &QTimer::timeout, this, &WifiScanner::getconnectionStatus);
-       timer->start(3000); // Check the status of the connection every 3 Seconds to
-    //connect(&findTimer, &QTimer::timeout, this, &WifiScanner::getconnectionStatus);
-// Check available SSID's on wlan0 by calling iw wlan0 scan |grep SSID
+//       timer->start(3000); // Check the status of the connection every 3 Seconds to
+
     result.clear();
     QString raw;
         QProcess proc2;
         proc2.start("sh", QStringList()<<"-c"<<"iw wlan0 scan |grep SSID");
         proc2.waitForFinished();
         QString output2 = proc2.readAllStandardOutput();
-        qDebug() << "output" << output2;
-        m_dashboard->setSerialStat(output2);
         QStringList fields = output2.split(QRegExp("[\n]"));
         foreach (const QString &str, fields) {
                 raw = str;
@@ -119,9 +116,5 @@ void WifiScanner::setwifi(const QString &country,const QString &ssid1,const QStr
                 << endl;
         file.close();
     }
-    QProcess restartwifi;
-    restartwifi.start("sh", QStringList()<<"-c"<<"/etc/init.d/networking restart");
-    restartwifi.waitForFinished();
-
 }
 
