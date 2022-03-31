@@ -32,13 +32,13 @@ WifiScanner::WifiScanner(DashBoard *dashboard, QObject *parent)
 void WifiScanner::initializeWifiscanner()
 {
 
-    process = new QProcess(this);  // create on the heap, so it doesn't go out of scope
+    //process = new QProcess(this);  // create on the heap, so it doesn't go out of scope
     connect (process, SIGNAL(readyReadStandardOutput()), this, SLOT(readData()));  // connect process signals with your code
     connect(process, SIGNAL(finished(int , QProcess::ExitStatus )), this, SLOT(finalize(int , QProcess::ExitStatus)));
        result.clear();
     outputline.clear();
-    process->start("sudo /sbin/iw wlan0 scan | egrep 'SSID'");  // start the process
-    process->waitForFinished();
+    //process->start("sudo /sbin/iw wlan0 scan | egrep 'SSID'");  // start the process
+    //process->waitForFinished();
 
 
 
