@@ -45,7 +45,9 @@ void WifiScanner::initializeWifiscanner()
    // process->start(prog , arguments);  // start the process
     process->start("sh", QStringList()<<"-c"<<"sudo iw wlan0 scan | grep ESSID");
     process->waitForFinished();
-
+    QString output = process->readAllStandardOutput();
+    qDebug()<< "Request SSID";
+    qDebug()<< output;
 
 
 }
