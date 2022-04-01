@@ -2043,7 +2043,7 @@ Quick1.TabView {
                         label: Label {
                             text: ethernetstatus.text
                             color: "black"
-                            font.pixelSize: button.height * 0.5
+                            font.pixelSize: extrarect.width / 55
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                         }
@@ -2072,7 +2072,7 @@ Quick1.TabView {
                         label: Label {
                             text: wifistatus.text
                             color: "black"
-                            font.pixelSize: button.height * 0.5
+                            font.pixelSize: extrarect.width / 55
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                         }
