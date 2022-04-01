@@ -137,7 +137,7 @@ Connect::~Connect()
 }
 void Connect::saveDashtoFile(const QString &filename,const QString &dashstring)
 {
-         qDebug()<<"Filename" << filename + "txt";
+        // qDebug()<<"Filename" << filename + "txt";
     QString fixformat = dashstring;
     fixformat.replace(",,",", ,");
     QStringList fields = fixformat.split(QRegExp("[\r\n]"));
@@ -181,7 +181,7 @@ void Connect::checkifraspberrypi()
             QString line = in.readLine();
             bool ok;
             int val = line.toInt(&ok);
-            qDebug() <<"Bright " << val ;
+           // qDebug() <<"Bright " << val ;
             m_dashBoard->setBrightness(val);
         inputFile.close();
     }
@@ -467,7 +467,7 @@ void Connect::checkReg()
         inputFile.close();
     }
     while (i < list.length()) {
-        qDebug()<< "Read supported Consult Reg" <<list[i];
+        //qDebug()<< "Read supported Consult Reg" <<list[i];
         switch (list[i].toInt(&ok, 16))
         {
 
@@ -697,7 +697,7 @@ void Connect::checkReg()
 
 void Connect::LiveReqMsgOBD(const QString &obdpids)
 {
-    qDebug()<< "PIDS" <<obdpids;
+   // qDebug()<< "PIDS" <<obdpids;
     QString Message;
     QStringList list = obdpids.split( "," );
     //qDebug()<< "Raw list" <<list;
@@ -1329,8 +1329,8 @@ void Connect::processOutput()
 
 void Connect::updatefinished(int exitCode, QProcess::ExitStatus exitStatus)
 {
-    qDebug() << "code" <<exitCode;
-    qDebug() << "status" <<exitStatus;
+    //qDebug() << "code" <<exitCode;
+   // qDebug() << "status" <<exitStatus;
     QString fileName = "/home/pi/build/PowertuneQMLGui";
     QFile file(fileName);
     if(QFileInfo::exists(fileName))

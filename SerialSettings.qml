@@ -4,6 +4,7 @@ import QtQuick.Controls 2.1
 import Qt.labs.settings 1.0
 import QtSensors 5.0
 import QtQuick.Controls.Styles 1.4
+
 import QtMultimedia 5.8
 import "qrc:/Gauges/"
 import DLM 1.0
@@ -128,6 +129,9 @@ Quick1.TabView {
 
                 Connections{
                     target: Dashboard
+                    onWifiStatChanged:{wifistatus.text = Dashboard.WifiStat}
+                    onEthernetStatChanged:{ethernetstatus.text = Dashboard.EthernetStat}
+
                     onOdoChanged:{odometer.text = (Dashboard.Odo).toFixed(0) }
                     onTripChanged:{tripmeter.text = (Dashboard.Trip).toFixed(1) }
                     onWatertempChanged: { if (Dashboard.Watertemp > Dashboard.waterwarn) {playwarning.start()};}
@@ -584,7 +588,7 @@ Quick1.TabView {
                             onCheckedChanged: {transferSettings.sendSettings(),goproRec.rec()}
                             Component.onCompleted: tabView.currentIndex = 1; // opens the 2nd tab
                         }
-                        Text  { text: " V 1.96q " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
+                        Text  { text: " V 1.96r " + Dashboard.Platform ;color: "white";font.pixelSize: windowbackround.width / 55} //spacer
 
 
                     }
@@ -1038,22 +1042,22 @@ Quick1.TabView {
                       //Adding Dashes back
                       while (dashView.count < numberofdashes.currentIndex +2)
                       {
-                          console.log("We have currently ", dashView.count)
+                         // console.log("We have currently ", dashView.count)
                       switch (dashView.count) {
 
                           case 2: {
                               dashView.insertItem(1,secondPageLoader)
-                              console.log("add second page")
+                             // console.log("add second page")
                               break;
                           }
                           case 3: {
                               dashView.insertItem(2,thirdPageLoader)
-                              console.log("add 3rd page", dashView.count)
+                              //console.log("add 3rd page", dashView.count)
                               break;
                           }
                           case 4: {
                               dashView.insertItem(3,fourthPageLoader)
-                              console.log("add 4th page", dashView.count)
+                             // console.log("add 4th page", dashView.count)
                               break;
                           }
                       }
@@ -2022,6 +2026,49 @@ Quick1.TabView {
                     height: extrarect.height /15
 
                 }
+                Text {
+                    id: ethernetip
+                    text: "Ethernet IP adress :"
+                    font.pixelSize: extrarect.width / 55
+                    visible: true
+
+                    }
+
+                Quick1.Button {
+                    id: ethernetstatus
+                    text: Dashboard.EthernetStat
+                    width: extrarect.width / 5
+                    height: extrarect.height /15
+                    style: ButtonStyle {
+                        background: Rectangle {
+                            color: { (ethernetstatus.text == "NOT CONNECTED") ? "red": "green"; }
+                            border.width: control.activeFocus ? 2 : 1
+                            border.color: "#888"
+
+                            }
+                        }
+                    }
+
+                Text {
+                    id: wlanip
+                    text: "WLAN IP adress :"
+                    font.pixelSize: extrarect.width / 55
+                    visible: true
+
+                    }
+                Quick1.Button {
+                    id: wifistatus
+                    text: Dashboard.WifiStat
+                    width: extrarect.width / 5
+                    height: extrarect.height /15
+                    style: ButtonStyle {
+                        background: Rectangle {
+                            color: { (wifistatus.text == "NOT CONNECTED") ? "red": "green"; }
+                            border.width: control.activeFocus ? 2 : 1
+                            border.color: "#888"
+                            }
+                        }
+                    }
                 Text { text: " "
                     font.pixelSize: extrarect.width / 55 }
                 Text {
@@ -2046,7 +2093,9 @@ Quick1.TabView {
                     visible: false
                     onTextChanged: consoleText.append(downloadManager.downloadFilename);
                     }
+
 /*
+
                 Button {
                     id: develtest1
                     text: "Development dont click"

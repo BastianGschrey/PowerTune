@@ -49,7 +49,7 @@ void Extender::variables(const qreal &Cylinder)
 {
 
     cylinders = (Cylinder/2);
-    qDebug() << "cylinders " << cylinders;
+    //qDebug() << "cylinders " << cylinders;
 }
 void Extender::openCAN(const int &ExtenderBaseID,const int &RPMCANBaseID)
 {
@@ -69,16 +69,16 @@ void Extender::openCAN(const int &ExtenderBaseID,const int &RPMCANBaseID)
                                                                        QStringLiteral("can0"),&errorString);
 
         if (!m_canDevice) {
-            qDebug() << ("Error creating device");
+            //qDebug() << ("Error creating device");
             return;
         }
 
 
 
         if(m_canDevice->connectDevice()){
-            qDebug() << m_canDevice->state();
-            qDebug() << m_canDevice;
-            qDebug() << "device connected!";
+            //qDebug() << m_canDevice->state();
+           // qDebug() << m_canDevice;
+          //  qDebug() << "device connected!";
             //connect(m_canDevice,SIGNAL(framesReceived()),this,SLOT(readyToRead()));
             connect(m_canDevice, &QCanBusDevice::framesReceived, this, &Extender::readyToRead);
         }

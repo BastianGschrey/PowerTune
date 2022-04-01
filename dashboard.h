@@ -146,6 +146,8 @@ class DashBoard : public QObject
     Q_PROPERTY(QString TimeoutStat READ TimeoutStat WRITE setTimeoutStat NOTIFY timeoutStatChanged)
     Q_PROPERTY(QString RunStat READ RunStat WRITE setRunStat NOTIFY runStatChanged)
 
+    Q_PROPERTY(QString WifiStat READ WifiStat WRITE setWifiStat NOTIFY WifiStatChanged)
+    Q_PROPERTY(QString EthernetStat READ EthernetStat WRITE setEthernetStat NOTIFY EthernetStatChanged)
 
     //Adaptronic extra
 
@@ -558,8 +560,6 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal activetunetable READ activetunetable WRITE setactivetunetable NOTIFY activetunetableChanged)
 
 
-
-
     public:
     DashBoard(QObject *parent = 0);
     //Steinhart Hart
@@ -739,6 +739,9 @@ class DashBoard : public QObject
     void setRecvData(const QString &RecvData);
     void setTimeoutStat(const QString &TimeoutStat);
     void setRunStat(const QString &RunStat);
+    void setWifiStat(const QString &WifiStat);
+    void setEthernetStat(const QString &EthernetStat);
+
 
     // GPS
 
@@ -1289,6 +1292,8 @@ class DashBoard : public QObject
     QString RecvData() const;
     QString TimeoutStat() const;
     QString RunStat() const;
+    QString WifiStat() const;
+    QString EthernetStat() const;
 
     // GPS
 
@@ -1834,6 +1839,9 @@ signals:
     void recvDataChanged(QString RecvData);
     void timeoutStatChanged(QString TimeoutStat);
     void runStatChanged(QString RunStat);
+    void WifiStatChanged(QString WifiStat);
+    void EthernetStatChanged(QString EthernetStat);
+
 
     // GPS
 
@@ -2378,7 +2386,8 @@ private:
     QString m_RecvData;
     QString m_TimeoutStat;
     QString m_RunStat;
-
+    QString m_WifiStat;
+    QString m_EthernetStat;
 
     //Adaptronic extra
 

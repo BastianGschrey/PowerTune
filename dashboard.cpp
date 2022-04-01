@@ -1713,6 +1713,21 @@ void DashBoard::setRunStat(const QString &RunStat)
     emit runStatChanged(RunStat);
 }
 
+void DashBoard::setWifiStat(const QString &WifiStat)
+{
+    if (m_WifiStat == WifiStat)
+        return;
+    m_WifiStat = WifiStat;
+    emit WifiStatChanged(WifiStat);
+}
+void DashBoard::setEthernetStat(const QString &EthernetStat)
+{
+    if (m_EthernetStat == EthernetStat)
+        return;
+    m_EthernetStat = EthernetStat;
+    emit EthernetStatChanged(EthernetStat);
+}
+
 // GPS
 
 
@@ -3208,7 +3223,7 @@ void DashBoard::setsmoothspeed(const int &smoothspeed)
 
 void DashBoard::setsmootexAnalogInput7(const int &smoothexAnalogInput7)
 {
-    qDebug()<<"Smootg" << smoothexAnalogInput7;
+    //qDebug()<<"Smootg" << smoothexAnalogInput7;
     if (m_smoothexAnalogInput7 == smoothexAnalogInput7)
         return;
     if (smoothexAnalogInput7 != 0)
@@ -4745,6 +4760,10 @@ QString DashBoard::SerialStat() const { return m_SerialStat; }
 QString DashBoard::RecvData() const { return m_RecvData; }
 QString DashBoard::TimeoutStat() const { return m_TimeoutStat; }
 QString DashBoard::RunStat() const { return m_RunStat; }
+QString DashBoard::WifiStat() const { return m_WifiStat; }
+QString DashBoard::EthernetStat() const { return m_EthernetStat; }
+
+
 
 
 //GPS

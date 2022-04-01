@@ -8,7 +8,7 @@ parsegithubData::parsegithubData()
 QString pathString;
 QList<QString> parsegithubData::readTrackData()
 {
-    qDebug() <<"readTrackData";
+    //qDebug() <<"readTrackData";
     QList<QPair<QString,QString>> returnData;
 
 
@@ -56,7 +56,7 @@ QList<QString> parsegithubData::readTrackData()
 
 void parsegithubData::sortDownloadedFiles()
 {
-    qDebug() << "SortFiles";
+    //qDebug() << "SortFiles";
     QString p2String;
     QString destinationString;
 
@@ -78,24 +78,24 @@ void parsegithubData::sortDownloadedFiles()
     for(QPair<QString,QString> pair: pairs)
     {
         QFileInfo outputDir(destinationString+pair.first);
-        qDebug() <<"Output directory"<< outputDir;
+       // qDebug() <<"Output directory"<< outputDir;
         QFileInfo outputFile(destinationString+pair.first+"/"+pair.second);
-        qDebug() <<"Output file"<<outputFile;
+       // qDebug() <<"Output file"<<outputFile;
         if(!outputDir.exists())
         {
-            qDebug() <<"Create Directory";
+           // qDebug() <<"Create Directory";
             dir.mkpath(destinationString+pair.first);
         }
 
         if(outputFile.exists())
         {
-            qDebug() << "removing !!!! " ;
+            //qDebug() << "removing !!!! " ;
             dir.remove(destinationString+pair.first+"/"+pair.second);
         }
-        qDebug() << "CopyString " << p2String+pair.second << " TO " << destinationString+pair.first+"/" + pair.second;
+       // qDebug() << "CopyString " << p2String+pair.second << " TO " << destinationString+pair.first+"/" + pair.second;
         //QFile::copy(p2String+pair.second, destinationString+pair.first+"/" + pair.second);
         if(!QFile::copy(p2String+pair.second, destinationString+pair.first+"/" + pair.second)){
-                      qDebug() << "Copy Failure!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"; // Still need to do something here in case copy fails
+                     // qDebug() << "Copy Failure!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"; // Still need to do something here in case copy fails
               }
         //remove original files after they been copied
         QFile::remove(p2String+pair.second);

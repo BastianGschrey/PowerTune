@@ -33,7 +33,7 @@ void WifiScanner::initializeWifiscanner()
 {
          QTimer *timer = new QTimer(this);
        connect(timer, &QTimer::timeout, this, &WifiScanner::getconnectionStatus);
-//       timer->start(3000); // Check the status of the connection every 3 Seconds to
+      timer->start(3000); // Check the status of the connection every 3 Seconds to
     WifiScanner::getconnectionStatus(); //Temporay measure
 
     result.clear();
@@ -46,7 +46,7 @@ void WifiScanner::initializeWifiscanner()
         foreach (const QString &str, fields) {
                 raw = str;
                 raw.replace("SSID: ","");
-                raw.replace("\xe2\x80\x99","'");  //for some reason ' is shown as \xe2\x80\x99
+                //raw.replace("\xe2\x80\x99","'");  //for some reason ' is shown as \xe2\x80\x99
                 raw.remove(0,1); // Remove the white space before the SSID
                 result += raw;
         }
@@ -60,7 +60,8 @@ void WifiScanner::getconnectionStatus()
 {
 // displays the wlan0 and eth0 IP adresses
     // Check IP Adresses direcly via QT
-    qDebug() << "get connection ";
+//qDebug()<< "TIMER";
+
     QNetworkInterface wlan0IP = QNetworkInterface::interfaceFromName("wlan0");
     QList<QNetworkAddressEntry> entries = wlan0IP.addressEntries();
     if (!entries.isEmpty()) {
@@ -69,10 +70,17 @@ void WifiScanner::getconnectionStatus()
         wlanip.replace("QHostAddress(","");
         wlanip.remove(QChar(')'));
         wlanip.remove(QChar('"'));
-        m_dashboard->setSerialStat("WLAN IP Adress : " + wlanip);
+        if (m_dashboard->WifiStat() != wlanip)
+        {
+        m_dashboard->setWifiStat(wlanip);
+        }
     }
     else{
-        m_dashboard->setSerialStat("WLAN IP Adress: no connection");
+        if (m_dashboard->WifiStat() != "NOT CONNECTED")
+        {
+           m_dashboard->setWifiStat("NOT CONNECTED");
+
+        }
     }
 
     QNetworkInterface eth0IP = QNetworkInterface::interfaceFromName("eth0");
@@ -83,16 +91,20 @@ void WifiScanner::getconnectionStatus()
         eth0ip.replace("QHostAddress(","");
         eth0ip.remove(QChar(')'));
         eth0ip.remove(QChar('"'));
-        m_dashboard->setSerialStat("Ethernet IP Adress: " + eth0ip);
+        if (m_dashboard->EthernetStat() != eth0ip)
+        {
+         m_dashboard->setEthernetStat(eth0ip);
+        }
     }
     else{
-        m_dashboard->setSerialStat("Ethernet IP Adress: no connection");
-    }
+        if (m_dashboard->EthernetStat() != "NOT CONNECTED")
+        {
+            m_dashboard->setEthernetStat("NOT CONNECTED");
 
-
+        }
 }
 
-
+}
 
 void WifiScanner::setwifi(const QString &country,const QString &ssid1,const QString &psk1,const QString &ssid2,const QString &psk2)
 {
