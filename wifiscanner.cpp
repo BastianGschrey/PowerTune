@@ -46,6 +46,7 @@ void WifiScanner::initializeWifiscanner()
         foreach (const QString &str, fields) {
                 raw = str;
                 raw.replace("SSID: ","");
+                raw.replace("\xe2\x80\x99","'");  //for some reason ' is shown as \xe2\x80\x99
                 raw.remove(0,1); // Remove the white space before the SSID
                 result += raw;
         }
