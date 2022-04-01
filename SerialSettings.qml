@@ -1865,7 +1865,7 @@ Quick1.TabView {
                     id: btnScanNetwork
                    // visible: false
                     text: "Scan WIFI"
-                    width: extrarect.width / 4
+                    width: extrarect.width / 5
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
                     onClicked: {
@@ -1879,7 +1879,7 @@ Quick1.TabView {
                 ComboBox {
                     id: wificountrycbx
                     //visible: false
-                    width: extrarect.width / 4
+                    width: extrarect.width / 5
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
                     model: wificountrynames
@@ -1891,7 +1891,7 @@ Quick1.TabView {
                 ComboBox {
                     id: wifilistbox
                     //visible: false
-                    width: extrarect.width / 4
+                    width: extrarect.width / 5
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
                     model: Dashboard.wifi
@@ -1914,7 +1914,7 @@ Quick1.TabView {
                 TextField {
                     id: pw1
                     placeholderText: qsTr("Passphrase")
-                    width: extrarect.width / 4
+                    width: extrarect.width / 5
                     font.pixelSize: extrarect.width / 55 }
                 /*
                 Text { text: "Wifi 2 :"
@@ -1923,7 +1923,7 @@ Quick1.TabView {
                 ComboBox {
                     id: wifilistbox2
                     //visible: false
-                    width: extrarect.width / 4
+                    width: extrarect.width / 5
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
                     model: Dashboard.wifi
@@ -1945,7 +1945,7 @@ Quick1.TabView {
                 TextField {
                     id: pw2
                     placeholderText: qsTr("Passphrase")
-                    width: extrarect.width / 4
+                    width: extrarect.width / 5
                     font.pixelSize: extrarect.width / 55 }*/
 
                 Text { text: " "
@@ -1954,7 +1954,7 @@ Quick1.TabView {
                 Button {
                     id: applyWifiSettings
                     text: "Connect WIFI"
-                    width: extrarect.width / 4
+                    width: extrarect.width / 5
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
                     Component.onCompleted: {
@@ -1974,7 +1974,7 @@ Quick1.TabView {
                 Button {
                     id: updateBtn
                     text: "Update"
-                    width: extrarect.width / 4
+                    width: extrarect.width / 5
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
                     onClicked: {
@@ -1990,7 +1990,7 @@ Quick1.TabView {
                 Button {
                     id: develtest
                     text: "Restart daemon"
-                    width: extrarect.width / 4
+                    width: extrarect.width / 5
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
 
@@ -2006,7 +2006,7 @@ Quick1.TabView {
                 Button {
                     id: trackUpdate
                     text: "Update Tracks"
-                    width: extrarect.width / 4
+                    width: extrarect.width / 5
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
                     onClicked: {
@@ -2022,7 +2022,7 @@ Quick1.TabView {
                     font.pixelSize: extrarect.width / 55 }
                 Quick1.ProgressBar {
                     id: downloadprogress
-                    width: extrarect.width / 4
+                    width: extrarect.width / 5
                     height: extrarect.height /15
 
                 }
@@ -2037,9 +2037,16 @@ Quick1.TabView {
                 Quick1.Button {
                     id: ethernetstatus
                     text: Dashboard.EthernetStat
-                    width: extrarect.width / 4
+                    width: extrarect.width / 5
                     height: extrarect.height /15
                     style: ButtonStyle {
+                        label: Label {
+                            text: ethernetstatus.text
+                            color: "black"
+                            font.pixelSize: button.height * 0.5
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
                         background: Rectangle {
                             color: { (ethernetstatus.text == "NOT CONNECTED") ? "red": "green"; }
                             border.width: control.activeFocus ? 2 : 1
@@ -2059,9 +2066,16 @@ Quick1.TabView {
                 Quick1.Button {
                     id: wifistatus
                     text: Dashboard.WifiStat
-                    width: extrarect.width / 4
+                    width: extrarect.width / 5
                     height: extrarect.height /15
                     style: ButtonStyle {
+                        label: Label {
+                            text: wifistatus.text
+                            color: "black"
+                            font.pixelSize: button.height * 0.5
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
                         background: Rectangle {
                             color: { (wifistatus.text == "NOT CONNECTED") ? "red": "green"; }
                             border.width: control.activeFocus ? 2 : 1
@@ -2099,7 +2113,7 @@ Quick1.TabView {
                 Button {
                     id: develtest1
                     text: "Development dont click"
-                    width: extrarect.width / 4
+                    width: extrarect.width / 5
                     height: extrarect.height /15
                     font.pixelSize: extrarect.width / 55
                     onClicked: Connect.canbitratesetup(0)
