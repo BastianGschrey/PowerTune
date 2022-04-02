@@ -137,7 +137,7 @@ void Extender::readyToRead()
         //case adress1:
            if (frame.frameId() == adress1) {
             // ON / Off Status :
-/*
+
                m_dashboard->setEXDigitalInput1((byte0 & statusmask)>0);				  //Digital Input 0
                 m_dashboard->setEXDigitalInput2((byte1 & statusmask)>0);				  //Digital Input 1
                 m_dashboard->setEXDigitalInput3((byte2 & statusmask)>0);	       		  //Digital Input 2
@@ -146,7 +146,7 @@ void Extender::readyToRead()
                 m_dashboard->setEXDigitalInput6((byte5 & statusmask)>0);				  //Digital Input 5
                 m_dashboard->setEXDigitalInput7((byte6 & statusmask)>0);				  //Digital Input 6
                 m_dashboard->setEXDigitalInput8((byte7 & statusmask)>0);				  //Digital Input 7
-*/
+/*
             // Frequency Counter :
 
                 m_dashboard->setEXDigitalInput1((byte0 & frequencymask)*16.6*30);				  //Digital Input 0
@@ -172,7 +172,7 @@ void Extender::readyToRead()
             m_dashboard->setEXDigitalInput1((avghz1/10)*16.6*30);
             //qDebug() << "Test  :" << test1;
 
-
+*/
 }
         //case 0x402:
         if (frame.frameId() == adress2) {
