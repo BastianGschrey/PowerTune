@@ -108,7 +108,22 @@ void WifiScanner::getconnectionStatus()
 
 void WifiScanner::setwifi(const QString &country,const QString &ssid1,const QString &psk1,const QString &ssid2,const QString &psk2)
 {
-    QFile file("/etc/wpa_supplicant/wpa_supplicant.conf");
+
+    //Check where the wpa_supplicant file is located !
+    QString path = "/etc/wpa_supplicant/";
+    QString filepath;
+    if (QFileInfo::exists(path))
+    {
+        filepath = "/etc/wpa_supplicant/wpa_supplicant.conf";
+
+    }
+    else
+    {
+        filepath = "/etc/wpa_supplicant.conf";
+    }
+
+    ///
+    QFile file(filepath);
     file.remove(); //remove file if it exists to avoid appending of existing file
     if ( file.open(QIODevice::ReadWrite) )
     {

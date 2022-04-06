@@ -900,28 +900,33 @@ void Connect::daemonstartup(const int &daemon)
         daemonstart = "./NeuroBasic";
         break;
     }
+
+    ///////
+
     QString fileName = "/home/pi/startdaemon.sh";//This will be the correct path on pi
     //QString fileName = "startdaemon.sh";//for testing on windows
     QFile mFile(fileName);
-    mFile.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text);
-    QTextStream out(&mFile);
-    out << "#!/bin/sh"
-        << endl
-        << "sudo ifdown can0"
-        << endl
-        << "sudo ifup can0"
-        << endl
-        << "#PLMS Consult Cable drivers"
-        << endl
-        << "sudo modprobe ftdi_sio"
-        << endl
-        << "sudo sh -c 'echo \"0403 c7d9\" > /sys/bus/usb-serial/drivers/ftdi_sio/new_id'"
-        << endl
-        << "cd /home/pi/daemons"
-        << endl
-        << daemonstart
-        << endl;
-    mFile.close();
+
+        mFile.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text);
+        QTextStream out(&mFile);
+        out << "#!/bin/sh"
+            << endl
+            << "sudo ifdown can0"
+            << endl
+            << "sudo ifup can0"
+            << endl
+            << "#PLMS Consult Cable drivers"
+            << endl
+            << "sudo modprobe ftdi_sio"
+            << endl
+            << "sudo sh -c 'echo \"0403 c7d9\" > /sys/bus/usb-serial/drivers/ftdi_sio/new_id'"
+            << endl
+            << "cd /home/pi/daemons"
+            << endl
+            << daemonstart
+            << endl;
+        mFile.close();
+
 
     //Reboot the PI for settings to take Effect
    // m_dashBoard->setSerialStat("Rebooting ");
@@ -949,37 +954,82 @@ void Connect::canbitratesetup(const int &cansetting)
     QString fileName = "/etc/network/interfaces";
     QFile mFile(fileName);
     mFile.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text);
-    QTextStream out(&mFile);
-    out << "# interfaces(5) file used by ifup(8) and ifdown(8)"
-        << endl
-        << "# Please note that this file is written to be used with dhcpcd"
-        << endl
-        << "# For static IP, consult /etc/dhcpcd.conf and 'man dhcpcd.conf'"
-        << endl
-        << "# Include files from /etc/network/interfaces.d:"
-        << endl
-        << "source-directory /etc/network/interfaces.d"
-        << endl
-        << "#Automatically start CAN Interface"
-        << endl
-        << "auto can0"
-        << endl
-        << "iface can0 can static"
-        << endl
-        << "bitrate " << canbitrate
-        << endl;
 
-    /*
-# interfaces(5) file used by ifup(8) and ifdown(8)
-# Please note that this file is written to be used with dhcpcd
-# For static IP, consult /etc/dhcpcd.conf and 'man dhcpcd.conf'
-# Include files from /etc/network/interfaces.d:
-source-directory /etc/network/interfaces.d
-#Automatically start CAN Interface
-auto can0
-iface can0 can static
-bitrate 1000000
-*/
+    QString path = "/etc/wpa_supplicant/";
+
+    if (QFileInfo::exists(path))
+    {
+        QTextStream out(&mFile);
+        out << "# interfaces(5) file used by ifup(8) and ifdown(8)"
+            << endl
+            << "# Please note that this file is written to be used with dhcpcd"
+            << endl
+            << "# For static IP, consult /etc/dhcpcd.conf and 'man dhcpcd.conf'"
+            << endl
+            << "# Include files from /etc/network/interfaces.d:"
+            << endl
+            << "source-directory /etc/network/interfaces.d"
+            << endl
+            << "#Automatically start CAN Interface"
+            << endl
+            << "auto can0"
+            << endl
+            << "iface can0 can static"
+            << endl
+            << "bitrate " << canbitrate
+            << endl;
+    }
+    else
+    {
+        //Custo Yocto image
+
+        QTextStream out(&mFile);
+        out << "#!/bin/sh"
+            << endl
+            << "# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)"
+            << endl
+            <<"# The loopback interface"
+              << endl
+            <<"auto lo"
+             << endl
+            <<"iface lo inet loopback"
+            << endl
+            <<"# Wireless interfaces"
+            << endl
+            << "auto wlan0"
+            << endl
+            <<"    iface wlan0 inet dhcp"
+            << endl
+            <<"    wireless_mode managed"
+            << endl
+            << "   wireless_essid any"
+            << endl
+            << "   wpa-driver wext"
+            << endl
+            <<"    wpa-conf /etc/wpa_supplicant.conf"
+            << endl
+            <<"    iface atml0 inet dhcp"
+            << endl
+            <<"# Wired or wireless interfaces"
+            << endl
+            <<"auto eth0"
+            << endl
+            <<"    iface eth0 inet dhcp"
+            << endl
+            <<"# Automatically start CAN Interface"
+            << endl
+            <<"    auto can0"
+            << endl
+            <<"   iface can0 inet manual"
+            << endl
+            <<"    pre-up /sbin/ip link set can0 type can bitrate "<< canbitrate
+            << endl
+            <<"    up /sbin/ifconfig can0 up"
+            << endl
+            <<"    down /sbin/ifconfig can0 down"
+            << endl;
+
+    }
 
 
 
