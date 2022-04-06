@@ -127,10 +127,31 @@ void WifiScanner::setwifi(const QString &country,const QString &ssid1,const QStr
     file.remove(); //remove file if it exists to avoid appending of existing file
     if ( file.open(QIODevice::ReadWrite) )
     {
+        if (QFileInfo::exists(path))
+        {
+            QTextStream out(&file);
+
+            out     << "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" << "\r\n"
+                    << "update_config=1" << "\r\n"
+                    << "country="+country << "\r\n"
+                    << "#Primary WIFI" << "\r\n"
+                    << "network={" << "\r\n"
+                    << "ssid=" << "\"" << ssid1 << "\"" << "\r\n"
+                    << "psk=" << "\"" << psk1  << "\"" << "\r\n"
+                    << "}" << "\r\n"
+                       // << "#Secondary WIFI" << "\r\n"
+                       // << "network={" << "\r\n"
+                       // << "ssid="<< "\"" << ssid2 << "\"" << "\r\n"
+                       // << "psk=" << "\"" << psk2 << "\"" << "\r\n"
+                       // << "}" << "\r\n"
+                    << endl;
+            file.close();
+        }
+        else
+        {
         QTextStream out(&file);
 
-        out     << "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" << "\r\n"
-                << "update_config=1" << "\r\n"
+        out     << "update_config=1" << "\r\n"
                 << "country="+country << "\r\n"
                 << "#Primary WIFI" << "\r\n"
                 << "network={" << "\r\n"
@@ -144,6 +165,7 @@ void WifiScanner::setwifi(const QString &country,const QString &ssid1,const QStr
                    // << "}" << "\r\n"
                 << endl;
         file.close();
+        }
     }
 }
 
