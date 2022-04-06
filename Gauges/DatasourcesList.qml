@@ -1588,6 +1588,16 @@ ListModel {
     }
 
     ListElement {
+        sourcename:"genericoutput1"
+        defaultsymbol: ""
+        titlename:"Generic out 1"
+        decimalpoints : "0"
+        maxvalue : "400"
+        stepsize : "100"
+        divisor : "1"
+    }
+
+    ListElement {
         sourcename:"gpsAltitude"
         defaultsymbol: "m"
         titlename:"GPS Altitude"

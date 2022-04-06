@@ -608,6 +608,7 @@ void udpreceiver::processPendingDatagrams()
             break;
         case 190:
             //Generic Output 1 Duty Cycl
+            m_dashboard->setgenericoutput1(Value);
             break;
         case 191:
             //Fuel Level

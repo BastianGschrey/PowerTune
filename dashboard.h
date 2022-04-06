@@ -558,7 +558,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal egtdiff READ egtdiff WRITE setegtdiff NOTIFY egtdiffChanged)
     Q_PROPERTY(qreal activeboosttable READ activeboosttable WRITE setactiveboosttable NOTIFY activeboosttableChanged)
     Q_PROPERTY(qreal activetunetable READ activetunetable WRITE setactivetunetable NOTIFY activetunetableChanged)
-
+    Q_PROPERTY(qreal genericoutput1 READ genericoutput1 WRITE setgenericoutput1 NOTIFY genericoutput1Changed)
 
     public:
     DashBoard(QObject *parent = 0);
@@ -1151,6 +1151,8 @@ class DashBoard : public QObject
     void setactiveboosttable(const qreal &activeboosttable);
     void setactivetunetable(const qreal &activetunetable);
 
+    void setgenericoutput1(const qreal &genericoutput1);
+
     qreal Odo() const;
 
     //Tripmeter
@@ -1698,6 +1700,8 @@ class DashBoard : public QObject
     qreal egtdiff()const;
     qreal activeboosttable()const;
     qreal activetunetable()const;
+    qreal genericoutput1()const;
+
 signals:
 
     //Odometer
@@ -2239,6 +2243,8 @@ signals:
     void egtdiffChanged(qreal egtdiff);
     void activeboosttableChanged(qreal activeboosttable);
     void activetunetableChanged(qreal activetunetable);
+    void genericoutput1Changed(qreal genericoutput1);
+
 private:
     // Odometer
 
@@ -2788,6 +2794,8 @@ private:
     qreal m_egtdiff;
     qreal m_activeboosttable;
     qreal m_activetunetable;
+    qreal m_genericoutput1;
+
 };
 
 #endif // DASHBOARD_H

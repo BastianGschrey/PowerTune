@@ -558,6 +558,7 @@ DashBoard::DashBoard(QObject *parent)
     , m_egtdiff()
     , m_activeboosttable()
     , m_activetunetable()
+    , m_genericoutput1()
     , m_CalibrationSelect()
 {
 
@@ -4624,6 +4625,15 @@ void DashBoard::setlostsynccount(const qreal &lostsynccount)
         m_activetunetable = activetunetable;
         emit activetunetableChanged(activetunetable);
     }
+    void DashBoard::setgenericoutput1(const qreal &genericoutput1)
+    {
+        if(m_genericoutput1 == genericoutput1)
+            return;
+        m_genericoutput1 = genericoutput1;
+        emit genericoutput1Changed(genericoutput1);
+    }
+
+
 // Odometer
 qreal DashBoard::Odo() const { return m_Odo; }
 
@@ -5163,3 +5173,5 @@ qreal DashBoard::lostsynccount() const {return m_lostsynccount;}
 qreal DashBoard::egtdiff() const {return m_egtdiff;}
 qreal DashBoard::activeboosttable() const {return m_activeboosttable;}
 qreal DashBoard::activetunetable() const {return m_activetunetable;}
+qreal DashBoard::genericoutput1() const {return m_genericoutput1;}
+
