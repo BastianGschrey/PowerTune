@@ -1041,7 +1041,7 @@ Item {
             }
             if(userDash.children[i].information === "Bar gauge"){
                 ////console.log("Save Bar");
-                gaugelist.append({"type": userDash.children[i].title,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"maxvalue":userDash.children[i].maxvalue,"decplace":userDash.children[i].decimalpoints,"unit":userDash.children[i].gaugename,"id":userDash.children[i].title,"valuepropertymain":userDash.children[i].mainvaluename,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow,"info":userDash.children[i].information,"minval":userDash.children[i].minvalue})
+                gaugelist.append({"type": userDash.children[i].title,"width":userDash.children[i].width,"height":userDash.children[i].height,"x":userDash.children[i].x,"y":userDash.children[i].y,"maxvalue":userDash.children[i].maxvalue,"decplace":userDash.children[i].decimalpoints,"unit":userDash.children[i].gaugename,"id":userDash.children[i].title,"valuepropertymain":userDash.children[i].mainvaluename,"warnvaluehigh":userDash.children[i].warnvaluehigh,"warnvaluelow":userDash.children[i].warnvaluelow,"info":userDash.children[i].information,"minvalue":userDash.children[i].minvalue})
 
             }
             if(userDash.children[i].information === "gauge image"){
