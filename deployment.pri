@@ -3,7 +3,7 @@ unix:!android {
         qnx {
             target.path = /tmp/$${TARGET}/bin
         } else {
-            target.path = /opt/$${TARGET}/bin
+            target.path = /opt/PowerTune/
         }
         export(target.path)
     }
