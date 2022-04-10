@@ -53,7 +53,7 @@ sudo pkill Delta
 sudo pkill BigNET
 sudo pkill R35
 sudo pkill Prado
-sudp pkill ProEFI
+sudo pkill ProEFI
 sudo pkill TeslaSDU
 sudo pkill DTAFast
 echo "Removing previous Versions"
