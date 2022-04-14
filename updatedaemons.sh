@@ -1,12 +1,12 @@
 #!/bin/sh
 echo "Disable System Logs"
-cd /home/pi/src
+cd /home/pi/srcofficial
 ./fixlog.sh
 echo "Install fonts"
-cd /home/pi/src/fonts
+cd /home/pi/srcofficial/fonts
 sudo cp *.* /usr/local/share/fonts
 echo "Fetching latest Daemons"
-cd /home/pi/src
+cd /home/pi/srcofficial
 git pull
 cd
 echo "Killing all  Daemons"
@@ -106,5 +106,5 @@ sudo rm /home/pi/R35
 sudo rm /home/pi/Prado
 
 echo "Updating Daemons"
-cp -r /home/pi/src/daemons/. /home/pi/daemons/
-cp /home/pi/src/*.sh /home/pi/
+cp -r /home/pi/srcofficial/daemons/. /home/pi/daemons/
+cp /home/pi/srcofficial/*.sh /home/pi/
