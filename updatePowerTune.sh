@@ -95,6 +95,8 @@ if nc -zw5 www.github.com 443; then
 # Check if the PowerTune executable exists in the build folder
 		if [ -f /home/pi/building/PowertuneQMLGui ];then
 		echo "Successfully compiled"
+	        sudo rm -r /home/pi/src
+                mv /home/pi/srcofficial /home/pi/src
 		mv /home/pi/building /home/pi/build
 		sudo reboot
 		else
