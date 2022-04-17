@@ -106,5 +106,5 @@ sudo rm /home/pi/R35
 sudo rm /home/pi/Prado
 
 echo "Updating Daemons"
-cp -r /home/pi/srcofficial/daemons/. /home/pi/daemons/
-cp /home/pi/srcofficial/*.sh /home/pi/
+cp -r /home/pi/src/daemons/. /home/pi/daemons/
+cp /home/pi/src/*.sh /home/pi/
