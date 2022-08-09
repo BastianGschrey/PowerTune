@@ -64,7 +64,7 @@ if nc -zw5 www.github.com 443; then
 		echo "Create source directory and clone PowerTune Repo"
 		mkdir /home/pi/srcofficial
 		git clone https://github.com/PowerTuneDigital/PowerTuneDigitalOfficial.git /home/pi/srcofficial  
-		cd srcsrcofficial
+		cd srcofficial
 		./updatedaemons.sh
 		./updateUserDashboards.sh
 		fi
